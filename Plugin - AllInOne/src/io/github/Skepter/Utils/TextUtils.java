@@ -11,8 +11,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -252,5 +255,21 @@ public class TextUtils {
 	public static String title(final String s) {
 		final String str = ChatColor.AQUA + "--" + ChatColor.BLUE + "[" + ChatColor.AQUA + s + ChatColor.BLUE + "]" + ChatColor.AQUA + "--";
 		return center(str);
+	}
+	
+	/**
+	 * 
+	 * @param str
+	 * @param tag - <tag>(.+?)</tag>
+	 * @return
+	 */
+	public static List<String> getTagValues(final String str, final String beginTag, final String endTag) {
+		Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
+	    final List<String> tagValues = new ArrayList<String>();
+	    final Matcher matcher = regexTag.matcher(str);
+	    while (matcher.find()) {
+	        tagValues.add(matcher.group(1));
+	    }
+	    return tagValues;
 	}
 }

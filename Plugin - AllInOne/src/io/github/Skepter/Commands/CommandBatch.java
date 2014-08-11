@@ -1,5 +1,7 @@
 package io.github.Skepter.Commands;
 
+import java.util.Arrays;
+
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -7,6 +9,14 @@ import io.github.Skepter.Utils.TextUtils;
 
 import org.bukkit.entity.Player;
 
+/**
+ * Batch command - designed to run a specific command multiple times.
+ * Technically a 'for loop emulator' for Minecraft, but designed to be more
+ * advanced
+ * 
+ * @author Skepter
+ * 
+ */
 public class CommandBatch {
 
 	public CommandBatch(final CommandFramework framework) {
@@ -21,7 +31,7 @@ public class CommandBatch {
 			player.sendMessage("[i=NUMBER] = the number to start from, cannot use [i] in same command");
 			player.sendMessage("[i=NUMBER:INCREMENT] = the number to start from and the amount to increment it by");
 
-			//massive tut
+			// massive tut
 		}
 		int amount = 1;
 		try {
@@ -42,10 +52,32 @@ public class CommandBatch {
 			}
 			return;
 		}
+		
 		/* If it contains [i=#] but doesn't contain [i] */
 		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]"))) {
-
+			final String between = TextUtils.stringBetween(s, "[i=", "]");
+			int timesToRun = 1;
+			int increment = 1;
+			if (between.contains(":")) {
+				final String[] arr = between.split(":");
+				timesToRun = Math.abs(Integer.parseInt(arr[0]));
+				increment = Integer.parseInt(arr[1]);
+			} else {
+				try {
+					timesToRun = Math.abs(Integer.parseInt(between));
+				} catch (final NumberFormatException e) {
+					timesToRun = 1;
+				}
+			}
+			//TextUtils
+			/*
+			 * public static void main(String[] args) {
+	    final String str = "<tag>apple</tag><b>hello</b><tag>orange</tag><tag>pear</tag>";
+	    System.out.println(Arrays.toString(getTagValues(str, "<tag>", "</tag>").toArray())); // Prints [apple, orange, pear]
+	}
+			 */
 		}
+		
 		if ((s.contains("[i=") && s.contains("]")) || s.contains("[i]")) {
 			final String between = TextUtils.stringBetween(s, "[i=", "]");
 			int timesToRun = 1;
@@ -64,7 +96,7 @@ public class CommandBatch {
 			int count = timesToRun;
 			for (int i = timesToRun; i < amount * increment; i += increment) {
 				String cmd = "";
-				final String cmdToRun = s.replace("[i=" + between + "]", String.valueOf(i)); //test this out - error appeared here
+				final String cmdToRun = s.replace("[i=" + between + "]", String.valueOf(i)); // Nav
 				if (s.contains("[i]") && s.contains("[i=") && s.contains(":")) {
 					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(count++));
 				} else if (s.contains("[i]")) {
