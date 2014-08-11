@@ -59,7 +59,7 @@ public class CommandChestSearch {
 					}
 				}
 			}
-			player.sendMessage(AllInOne.instance().ttlc + "Located " + (locatedChests.size()) + " chests");
+			player.sendMessage(AllInOne.instance().title + "Located " + (locatedChests.size()) + " chests");
 			for(final Location loc : locatedChests) {
 				player.sendMessage(TextUtils.subTitle("X: " + loc.getX() + " Y: " + loc.getY() + " Z: " + loc.getZ()));
 			}

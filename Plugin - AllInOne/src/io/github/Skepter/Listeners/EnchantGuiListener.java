@@ -26,7 +26,7 @@ public class EnchantGuiListener implements Listener {
 				final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 				player.getItemInHand().addUnsafeEnchantments(eMap);
 				player.closeInventory();
-				player.sendMessage(AllInOne.instance().ttlc + "You successfully enchanted your item in your hand");
+				player.sendMessage(AllInOne.instance().title + "You successfully enchanted your item in your hand");
 			} else if (event.getSlot() == 53) {
 				player.openInventory(EnchantmentInventories.page1()); // page 2
 			} else if (event.getSlot() == 52) {

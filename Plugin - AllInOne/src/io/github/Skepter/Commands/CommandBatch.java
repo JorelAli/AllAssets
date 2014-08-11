@@ -5,9 +5,6 @@ import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.TextUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.entity.Player;
 
 /** Batch command - designed to run a specific command multiple times.
@@ -28,7 +25,7 @@ public class CommandBatch {
 			player.sendMessage("[i] = the number in which the time is being run at (i.e. the iteration number)");
 			player.sendMessage("[i=NUMBER] = the number to start from, cannot use [i] in same command");
 			player.sendMessage("[i=NUMBER:INCREMENT] = the number to start from and the amount to increment it by");
-
+			return;
 			// massive tut
 		}
 		int amount = 1;
@@ -56,9 +53,12 @@ public class CommandBatch {
 
 			for (int i = 1; i < amount; i++) {
 				//				List<String> tagValues = new ArrayList<String>();
+				int beginInt = 1;
+				int increment = 1;
+				player.sendMessage("beginInt: " + beginInt);
+				player.sendMessage("increment: " + increment);
+				//you wanat to replace the str...
 				for (String str : TextUtils.getTagValues(s, "[i=", "]")) {
-					int beginInt = 1;
-					int increment = 1;
 					if (str.contains(":")) {
 						final String[] arr = str.split(":");
 						beginInt = Math.abs(Integer.parseInt(arr[0]));
@@ -73,6 +73,7 @@ public class CommandBatch {
 					player.performCommand(s.replace("[i=" + str + "]", String.valueOf(((i - 1) * increment) + beginInt)));
 					//					tagValues.add("[i=" + str + "]");
 				}
+
 				//				for(String str : tagValues) {
 				//					//can't do that since it has to be dumped into the playerPerformCommand (calculated there)
 				//					//parse it into the 's'

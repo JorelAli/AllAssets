@@ -4,12 +4,9 @@ import io.github.Skepter.AllInOne;
 
 public class ConfigHandler {
 
-	private static SimpleConfigManager manager;
-	private static SimpleConfig config;
-	private static SimpleConfigManager managerMessages;
-	private static SimpleConfig messages;
-	private static SimpleConfigManager managerFeatures;
-	private static SimpleConfig features;
+	private static SimpleConfigManager manager, managerMessages,
+			managerFeatures;
+	private static SimpleConfig config, messages, features;
 
 	public ConfigHandler() {
 		manager = new SimpleConfigManager(AllInOne.instance());
@@ -21,33 +18,35 @@ public class ConfigHandler {
 	}
 
 	private static void createConfig() {
-		final String[] header = { AllInOne.instance().ttl, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
+		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
 
 		config = manager.getNewConfig("config.yml", header);
 
 		config.set("maxLogAmount", "20", "The maximum amount of logs to store temporarily");
 		config.set("afkProtect", "true", "Prevents players from getting hurt by mobs when AFK");
+		//does it not like that 'm' in perform?
 		config.set("bindRight", "true", "Performs action with a right click (set to false to perform action with left click)");
 		config.set("useIPInformation", "false", "Allows ");
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
+		config.set("joinAction", "null", new String[] { "The effect to have when a player joins" });
 		config.saveConfig();
 	}
-	
+
 	private static void createMessages() {
-		final String[] header = { AllInOne.instance().ttl, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
-	
+		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
+
 		messages = managerMessages.getNewConfig("messages.yml", header);
-		
+
 		messages.set("placeholder", "hi");
 		messages.saveConfig();
 	}
-	
+
 	private static void createFeatures() {
-		final String[] header = { AllInOne.instance().ttl, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
-	
+		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
+
 		features = managerFeatures.getNewConfig("features.yml", header);
-		
-		features.set("AFK", "true", new String[] {"Commands", "Enable commands by setting the value to true", "Disable commands by setting the value to false"});
+
+		features.set("AFK", "true", new String[] { "Commands", "Enable commands by setting the value to true", "Disable commands by setting the value to false" });
 		features.set("AllInOne", "true");
 		features.set("Back", "true");
 		features.set("Balance", "true");
@@ -79,8 +78,8 @@ public class ConfigHandler {
 		features.set("Tp", "true");
 		features.set("Tphere", "true");
 		features.set("Worlds", "true");
-		
-		features.set("AntiHyperlink", "true", new String[] {"Listeners", "Actions which occur on events can be disabled here"});
+
+		features.set("AntiHyperlink", "true", new String[] { "Listeners", "Actions which occur on events can be disabled here" });
 		features.set("AntiSwear", "true");
 		features.set("ChatColor", "true");
 		features.set("PlayerTranslator", "true", "Changes {player} into the specified player");
@@ -91,13 +90,14 @@ public class ConfigHandler {
 		features.set("DeathCount", "true");
 		features.set("InstantDeathRespawn", "false");
 		features.set("AntiIllegalItems", "true");
+		//add more modifiers to modify the mechanics of the game
+		//e.g. amount of exp mobs drop when killed, drop probability, spawning probability (perhaps?) (e.g. increase prob. spawn zombie+chicken
 		features.set("FlyBreakSpeedModifier", "true", "Break blocks at normal speed when flying on survival");
-		
-		features.set("Instant eating", "false", new String[] {"Instants", "Instantly carry out actions"});
+
+		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
 		features.set("Instant bows", "false");
 		features.saveConfig();
 	}
-	
 
 	public static SimpleConfig getConfig() {
 		if (config != null) {
@@ -107,7 +107,7 @@ public class ConfigHandler {
 			return config;
 		}
 	}
-	
+
 	public static SimpleConfig getMessages() {
 		if (messages != null) {
 			return messages;
@@ -116,7 +116,7 @@ public class ConfigHandler {
 			return messages;
 		}
 	}
-	
+
 	public static SimpleConfig features() {
 		if (features != null) {
 			return features;

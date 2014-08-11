@@ -21,11 +21,11 @@ public class CommandFly {
 			if (player.getAllowFlight()) {
 				player.setAllowFlight(false);
 				player.setFlying(false);
-				player.sendMessage(AllInOne.instance().ttlc + "Flying disabled");
+				player.sendMessage(AllInOne.instance().title + "Flying disabled");
 				return;
 			} else {
 				player.setAllowFlight(true);
-				player.sendMessage(AllInOne.instance().ttlc + "Flying enabled");
+				player.sendMessage(AllInOne.instance().title + "Flying enabled");
 				return;
 			}
 		} else if (args.getArgs().length == 1) {
@@ -34,11 +34,11 @@ public class CommandFly {
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
 					player.setFlying(false);
-					target.sendMessage(AllInOne.instance().ttlc + "Flying disabled");
+					target.sendMessage(AllInOne.instance().title + "Flying disabled");
 					return;
 				} else {
 					target.setAllowFlight(true);
-					target.sendMessage(AllInOne.instance().ttlc + "Flying enabled");
+					target.sendMessage(AllInOne.instance().title + "Flying enabled");
 					return;
 				}
 			}				

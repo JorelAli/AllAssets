@@ -22,22 +22,22 @@ public class CommandTime {
 		case 1:
 			try {
 				player.setPlayerTime(Long.parseLong(args.getArgs()[0]), false);
-				player.sendMessage(AllInOne.instance().ttlc + "Time set to " + args.getArgs()[0]);
+				player.sendMessage(AllInOne.instance().title + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					player.getWorld().setTime(1000);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to day");
+					player.sendMessage(AllInOne.instance().title + "Time set to day");
 				case "midday":
 					player.getWorld().setTime(6000);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to midday");
+					player.sendMessage(AllInOne.instance().title + "Time set to midday");
 				case "night":
 					player.getWorld().setTime(14000);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to night");
+					player.sendMessage(AllInOne.instance().title + "Time set to night");
 				case "midnight":
 					player.getWorld().setTime(18000);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to midnight");
+					player.sendMessage(AllInOne.instance().title + "Time set to midnight");
 				}
 				return;
 			}
@@ -49,21 +49,21 @@ public class CommandTime {
 	public void onCommandDay(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		player.getWorld().setThunderDuration(1000);
-		player.sendMessage(AllInOne.instance().ttlc + "Time set to day");
+		player.sendMessage(AllInOne.instance().title + "Time set to day");
 	}
 	
 	@CommandHandler(name = "midday", permission = "AllInOne.time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
 	public void onCommandMidday(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		player.getWorld().setThunderDuration(6000);
-		player.sendMessage(AllInOne.instance().ttlc + "Time set to midday");
+		player.sendMessage(AllInOne.instance().title + "Time set to midday");
 	}
 	
 	@CommandHandler(name = "night", permission = "AllInOne.time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
 	public void onCommandNight(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		player.getWorld().setThunderDuration(14000);
-		player.sendMessage(AllInOne.instance().ttlc + "Time set to night");
+		player.sendMessage(AllInOne.instance().title + "Time set to night");
 	}
 
 	
@@ -71,7 +71,7 @@ public class CommandTime {
 	public void onCommandMidnight(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		player.getWorld().setThunderDuration(18000);
-		player.sendMessage(AllInOne.instance().ttlc + "Time set to midnight");
+		player.sendMessage(AllInOne.instance().title + "Time set to midnight");
 	}
 
 	

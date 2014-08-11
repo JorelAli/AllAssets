@@ -40,10 +40,10 @@ public class CommandAllInOne {
 
 	@CommandHandler(name = "allinone.reload", aliases = { "aio.reload" }, permission = "AllInOne.allinone", description = "Reloads entire plugin", usage = "Use <command>")
 	public void reload(final CommandArgs args) {
-		args.getSender().sendMessage(AllInOne.instance().ttlc + "Reloading...");
+		args.getSender().sendMessage(AllInOne.instance().title + "Reloading...");
 		final Timer timer = new Timer();
 		final File pluginFile = new File(AllInOne.instance().getDataFolder().getParent() + File.separator + "AllInOne-" + AllInOne.instance().getDescription().getVersion() + ".jar");
-		final String cachedTitle = AllInOne.instance().ttlc;
+		final String cachedTitle = AllInOne.instance().title;
 		timer.schedule(new TimerTask() {
 
 			@Override

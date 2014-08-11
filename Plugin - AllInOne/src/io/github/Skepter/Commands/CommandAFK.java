@@ -24,10 +24,10 @@ public class CommandAFK implements Listener {
 		final Player player = args.getPlayer();
 		final User user = new User(player);
 		if (!user.isAFK()) {
-			Bukkit.broadcastMessage(AllInOne.instance().ttlc + player.getName() + " is now AFK");
+			Bukkit.broadcastMessage(AllInOne.instance().title + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
-			Bukkit.broadcastMessage(AllInOne.instance().ttlc + player.getName() + " is no longer AFK");
+			Bukkit.broadcastMessage(AllInOne.instance().title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
@@ -50,7 +50,7 @@ public class CommandAFK implements Listener {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if (user.isAFK()) {
-			Bukkit.broadcastMessage(AllInOne.instance().ttlc + player.getName() + " is no longer AFK");
+			Bukkit.broadcastMessage(AllInOne.instance().title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 	}

@@ -17,7 +17,7 @@ public class CommandBalance {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (AllInOne.instance().hasVault) {
-			player.sendMessage(AllInOne.instance().ttlc + "Balance: " + AllInOne.instance().economy.getBalance(player.getName()));
+			player.sendMessage(AllInOne.instance().title + "Balance: " + AllInOne.instance().economy.getBalance(player.getName()));
 		} else {
 			ErrorUtils.pluginNotFound(player, "Vault");
 		}

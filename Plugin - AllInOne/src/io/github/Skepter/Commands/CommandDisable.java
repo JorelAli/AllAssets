@@ -17,7 +17,7 @@ public class CommandDisable {
 	public void onCommand(final CommandArgs args) {
 		try {
 			Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(args.getArgs()[0]));
-			args.getSender().sendMessage(AllInOne.instance().ttlc + "Plugin disabled successfully");
+			args.getSender().sendMessage(AllInOne.instance().title + "Plugin disabled successfully");
 		} catch (final Exception e) {
 			ErrorUtils.pluginNotFound(args.getSender(), args.getArgs()[0]);
 		}

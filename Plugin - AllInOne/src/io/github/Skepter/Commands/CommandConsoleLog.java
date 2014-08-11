@@ -23,10 +23,10 @@ public class CommandConsoleLog {
 		final Player player = args.getPlayer();
 		if(players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			player.sendMessage(AllInOne.instance().ttlc + "You are no longer viewing the console");
+			player.sendMessage(AllInOne.instance().title + "You are no longer viewing the console");
 		} else {
 			players.add(player.getUniqueId());
-			player.sendMessage(AllInOne.instance().ttlc + "You are now viewing the console");
+			player.sendMessage(AllInOne.instance().title + "You are now viewing the console");
 		}
 	}
 

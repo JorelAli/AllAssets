@@ -46,7 +46,7 @@ public class CommandBind implements Listener {
 		lore.add(s);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		player.sendMessage(AllInOne.instance().ttlc + "Successfully added " + s + " to your item!");
+		player.sendMessage(AllInOne.instance().title + "Successfully added " + s + " to your item!");
 		return;
 	}
 
@@ -59,7 +59,7 @@ public class CommandBind implements Listener {
 		lore.remove((Integer.parseInt(args.getArgs()[0]) - 1)); //put check here & debug on error
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		player.sendMessage(AllInOne.instance().ttlc + "Successfully removed " + " to your item!");
+		player.sendMessage(AllInOne.instance().title + "Successfully removed " + " to your item!");
 		return;
 	}
 

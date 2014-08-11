@@ -21,12 +21,12 @@ public class CommandWeather {
 			case "downfall":
 			case "rain":
 				player.setPlayerWeather(WeatherType.DOWNFALL);
-				player.sendMessage(AllInOne.instance().ttlc + "Weather set to downfall");
+				player.sendMessage(AllInOne.instance().title + "Weather set to downfall");
 			case "clear":
 			case "sun":
 			case "day":
 				player.setPlayerWeather(WeatherType.CLEAR);
-				player.sendMessage(AllInOne.instance().ttlc + "Weather set to clear");
+				player.sendMessage(AllInOne.instance().title + "Weather set to clear");
 			}
 		}
 		return;

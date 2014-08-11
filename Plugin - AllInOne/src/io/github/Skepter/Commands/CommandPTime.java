@@ -20,22 +20,22 @@ public class CommandPTime {
 		if(args.getArgs().length == 1) {
 			try {
 				player.setPlayerTime(Long.parseLong(args.getArgs()[0]), false);
-				player.sendMessage(AllInOne.instance().ttlc + "Time set to " + args.getArgs()[0]);
+				player.sendMessage(AllInOne.instance().title + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
 				switch(args.getArgs()[0].toLowerCase()) {
 				case "day":
 					player.setPlayerTime(1000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to day");
+					player.sendMessage(AllInOne.instance().title + "Time set to day");
 				case "midday":
 					player.setPlayerTime(6000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to midday");
+					player.sendMessage(AllInOne.instance().title + "Time set to midday");
 				case "night":
 					player.setPlayerTime(14000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to night");
+					player.sendMessage(AllInOne.instance().title + "Time set to night");
 				case "midnight":
 					player.setPlayerTime(18000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to midnight");
+					player.sendMessage(AllInOne.instance().title + "Time set to midnight");
 				case "reset":
 				case "normal:":
 					player.resetPlayerTime();
@@ -52,27 +52,27 @@ public class CommandPTime {
 			}
 			try {
 				target.setPlayerTime(Long.parseLong(args.getArgs()[1]), false);
-				player.sendMessage(AllInOne.instance().ttlc + args.getArgs()[0] + "'s time set to " + args.getArgs()[1]);
-				target.sendMessage(AllInOne.instance().ttl + player.getName() + " set your time to " + args.getArgs()[1]);
+				player.sendMessage(AllInOne.instance().title + args.getArgs()[0] + "'s time set to " + args.getArgs()[1]);
+				target.sendMessage(AllInOne.instance().titleNoColor + player.getName() + " set your time to " + args.getArgs()[1]);
 				return;
 			} catch (final NumberFormatException e) {
 				switch(args.getArgs()[0].toLowerCase()) {
 				case "day":
 					target.setPlayerTime(1000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to day");
-					target.sendMessage(AllInOne.instance().ttl + player.getName() + " set your time to day");
+					player.sendMessage(AllInOne.instance().title + "Time set to day");
+					target.sendMessage(AllInOne.instance().titleNoColor + player.getName() + " set your time to day");
 				case "midday":
 					target.setPlayerTime(6000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to midday");
-					target.sendMessage(AllInOne.instance().ttl + player.getName() + " set your time to midday");
+					player.sendMessage(AllInOne.instance().title + "Time set to midday");
+					target.sendMessage(AllInOne.instance().titleNoColor + player.getName() + " set your time to midday");
 				case "night":
 					target.setPlayerTime(14000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to night");
-					target.sendMessage(AllInOne.instance().ttl + player.getName() + " set your time to night");
+					player.sendMessage(AllInOne.instance().title + "Time set to night");
+					target.sendMessage(AllInOne.instance().titleNoColor + player.getName() + " set your time to night");
 				case "midnight":
 					target.setPlayerTime(18000, false);
-					player.sendMessage(AllInOne.instance().ttlc + "Time set to midnight");
-					target.sendMessage(AllInOne.instance().ttl + player.getName() + " set your time to midnight");
+					player.sendMessage(AllInOne.instance().title + "Time set to midnight");
+					target.sendMessage(AllInOne.instance().titleNoColor + player.getName() + " set your time to midnight");
 				case "reset":
 				case "normal:":
 					target.resetPlayerTime();

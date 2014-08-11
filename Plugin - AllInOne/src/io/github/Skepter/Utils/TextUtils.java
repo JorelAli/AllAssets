@@ -158,7 +158,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllInOne.instance().ttlc + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow)) {
 			sender.sendMessage(s);
 		}
@@ -198,14 +198,14 @@ public class TextUtils {
 		}
 
 		if (pageNumberToShow == maxPage) {
-			player.sendMessage(AllInOne.instance().ttlc + "Showing page " + a + pageNumberToShow + g + "/" + a + maxPage);
+			player.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + maxPage);
 			for (final String s : textData.subList(textData.size() - k, textData.size())) {
 				player.sendMessage(s);
 			}
 			return;
 		}
 
-		player.sendMessage(AllInOne.instance().ttlc + "Showing page " + a + pageNumberToShow + g + "/" + a + maxPage);
+		player.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + maxPage);
 		for (final String s : pages.get(pageNumberToShow)) {
 			player.sendMessage(s);
 		}

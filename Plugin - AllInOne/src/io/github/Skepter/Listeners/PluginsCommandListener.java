@@ -29,7 +29,7 @@ public class PluginsCommandListener implements Listener {
 			if (event.getPlayer().hasPermission("AllInOne.plugins")) {
 				event.setCancelled(true);
 				event.getPlayer().sendMessage(TextUtils.title("Plugins"));
-				event.getPlayer().sendMessage(AllInOne.instance().ttlc + "There are currently " + (Bukkit.getPluginManager().getPlugins().length - 1) + " plugins:");
+				event.getPlayer().sendMessage(AllInOne.instance().title + "There are currently " + (Bukkit.getPluginManager().getPlugins().length - 1) + " plugins:");
 				final List<String> pluginList = new ArrayList<String>();
 				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
 					if(ConfigHandler.features().getBoolean("PluginsShowAuthors")) {

@@ -17,7 +17,7 @@ public class CommandEnable {
 	public void onCommand(final CommandArgs args) {
 		try {
 			Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(args.getArgs()[0]));
-			args.getSender().sendMessage(AllInOne.instance().ttlc + "Plugin enabled successfully");
+			args.getSender().sendMessage(AllInOne.instance().title + "Plugin enabled successfully");
 		} catch (final Exception e) {
 			ErrorUtils.pluginNotFound(args.getSender(), args.getArgs()[0]);
 		}

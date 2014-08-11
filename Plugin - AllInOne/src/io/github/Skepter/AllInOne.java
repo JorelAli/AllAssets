@@ -78,7 +78,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Skepter */
 
 // something like WE with /replace <block> <radius>
-// Possible BUSTER
 // onJoinAction - fireworks, command etc.
 // firework interface like Enchant - use For loops to generate it
 
@@ -103,14 +102,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 //change enchant screen to enchanted book!
 public class AllInOne extends JavaPlugin {
 
-	public String ttlc = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllInOne" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
-	public String ttl = "[AllInOne] ";
-	public String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllInOne" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
-	public String c = ChatColor.AQUA + "";
+	public final String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllInOne" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
+	public final String titleNoColor = "[AllInOne] ";
+	public final String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllInOne" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
+	public final String houseStyleColor = ChatColor.AQUA + "";
 	public boolean hasVault = false;
 	public Economy economy = null;
 	public Map<UUID, Long> tempTimeMap;
-
 
 	public CommandFramework framework;
 
@@ -121,7 +119,7 @@ public class AllInOne extends JavaPlugin {
 		//uugh, if it runs at startup, how can we hook into vault?
 		//has to run at startup for that log feature...
 		getLogger().info("+---------------------------------+");
-		getLogger().info(ttl + "Initializing AllInOne version " + getDescription().getVersion());
+		getLogger().info(titleNoColor + "Initializing AllInOne version " + getDescription().getVersion());
 		getLogger().info("AllInOne, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 		((org.apache.logging.log4j.core.Logger) LogManager.getRootLogger()).addFilter(new LogListener(this));
 		tempTimeMap = new HashMap<UUID, Long>();
@@ -202,11 +200,11 @@ public class AllInOne extends JavaPlugin {
 		r(new ConsoleSayListener());
 
 		if (Bukkit.getPluginManager().getPlugin("Vault") == null || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
-			getLogger().warning(ttl + "Vault not found, so some features may not be available");
+			getLogger().warning(titleNoColor + "Vault not found, so some features may not be available");
 		} else {
 			hasVault = true;
 			setupEconomy();
-			getLogger().info(ttl + "Vault has been found and hooked into successfully");
+			getLogger().info(titleNoColor + "Vault has been found and hooked into successfully");
 		}
 
 		UUIDData.reloadDataFile();
@@ -224,8 +222,8 @@ public class AllInOne extends JavaPlugin {
 			e.printStackTrace();
 		}
 		
-		getLogger().info(ttl + "AllInOne has been enabled successfully");
-		Bukkit.broadcast(ttlc + "Plugin reloaded!", "AllInOne.allinone");
+		getLogger().info(titleNoColor + "AllInOne has been enabled successfully");
+		Bukkit.broadcast(title + "Plugin reloaded!", "AllInOne.allinone");
 		getLogger().info("+---------------------------------+");
 	}
 
@@ -238,12 +236,14 @@ public class AllInOne extends JavaPlugin {
 		CommandConsoleLog.players.clear();
 		Bukkit.getServer().getScheduler().cancelTasks(this);
 		try {
-			JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
+			if(!tempTimeMap.isEmpty()) {
+				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
+			}
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		PlayerData.saveAllPlayers();
-		getLogger().info(ttl + getDescription().getVersion() + " has been disabled successfully");
+		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
 	}
 
 	public static AllInOne instance() {

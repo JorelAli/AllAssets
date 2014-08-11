@@ -61,7 +61,7 @@ public class PlayerListener implements Listener {
 		AllInOne.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 		
 		final Long l = user.getTotalTimePlayed();
-		event.getPlayer().sendMessage(AllInOne.instance().ttlc + "Total time played: " + TimeUnit.MILLISECONDS.toDays(l) + " days " + TimeUnit.MILLISECONDS.toHours(l) + " hours " + TimeUnit.MILLISECONDS.toMinutes(l) + " minutes " + TimeUnit.MILLISECONDS.toSeconds(l) + " seconds");
+		event.getPlayer().sendMessage(AllInOne.instance().title + "Total time played: " + TimeUnit.MILLISECONDS.toDays(l) + " days " + TimeUnit.MILLISECONDS.toHours(l) + " hours " + TimeUnit.MILLISECONDS.toMinutes(l) + " minutes " + TimeUnit.MILLISECONDS.toSeconds(l) + " seconds");
 		
 		//AllInOne.instance().ghostUtils.addPlayer(event.getPlayer());
 		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
@@ -105,7 +105,7 @@ public class PlayerListener implements Listener {
 
 		if(ConfigHandler.features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
-			user.getPlayer().sendMessage(AllInOne.instance().ttlc + "You have died " + user.getDeathCount() + " times!");
+			user.getPlayer().sendMessage(AllInOne.instance().title + "You have died " + user.getDeathCount() + " times!");
 		}
 		
 		if (ConfigHandler.features().getBoolean("DeathSigns")) {
