@@ -137,15 +137,15 @@ public class TextUtils {
 
 	public static <K> void paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
-		
+
 		final ChatColor a = ChatColor.AQUA;
 		final ChatColor g = ChatColor.WHITE;
-		
-		if(pageNumberToShow == 0 || pageNumberToShow < 0) {
+
+		if (pageNumberToShow == 0 || pageNumberToShow < 0) {
 			ErrorUtils.error(sender, "That number is too small!");
 			return;
 		}
-		
+
 		final int amountOfPages = textData.size() / pageSize;
 		final int amountOfLinesOfExtraData = textData.size() % pageSize;
 		pages.put(1, textData.subList(0, pageSize));
@@ -157,7 +157,7 @@ public class TextUtils {
 			ErrorUtils.error(sender, "That number is too large!");
 			return;
 		}
-		
+
 		sender.sendMessage(AllInOne.instance().ttlc + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow)) {
 			sender.sendMessage(s);
@@ -168,8 +168,8 @@ public class TextUtils {
 	/** Pagination. Sends data to a player in an organised format
 	 * 
 	 * @param player - The player to send the data to
-	 * @param textData - The List which contains the data. Each element
-	 * in the string is a new line
+	 * @param textData - The List which contains the data. Each element in the
+	 * string is a new line
 	 * @param pageSize - The size of the amount of data to send. (Use 10 if
 	 * unsure)
 	 * @param pageNumberToShow - The number of the page to show to the player.
@@ -179,12 +179,12 @@ public class TextUtils {
 
 		final ChatColor a = ChatColor.AQUA;
 		final ChatColor g = ChatColor.WHITE;
-		
-		if(pageNumberToShow == 0 || pageNumberToShow < 0) {
+
+		if (pageNumberToShow == 0 || pageNumberToShow < 0) {
 			ErrorUtils.error(player, "That number is too small!");
 			return;
 		}
-		
+
 		final int maxPage = textData.size() / pageSize;
 		final int k = textData.size() % pageSize;
 
@@ -211,7 +211,7 @@ public class TextUtils {
 		}
 		return;
 	}
-	
+
 	public static String stringBetween(final String overallString, final String firstString, final int index) {
 		final String s = overallString.substring(overallString.indexOf(firstString) + firstString.length(), index);
 		return s;
@@ -251,25 +251,22 @@ public class TextUtils {
 		arr.add("porn");
 		return arr;
 	}
-	
+
 	public static String title(final String s) {
 		final String str = ChatColor.AQUA + "--" + ChatColor.BLUE + "[" + ChatColor.AQUA + s + ChatColor.BLUE + "]" + ChatColor.AQUA + "--";
 		return center(str);
 	}
-	
-	/**
-	 * 
-	 * @param str
+
+	/** @param str
 	 * @param tag - <tag>(.+?)</tag>
-	 * @return
-	 */
+	 * @return */
 	public static List<String> getTagValues(final String str, final String beginTag, final String endTag) {
 		Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
-	    final List<String> tagValues = new ArrayList<String>();
-	    final Matcher matcher = regexTag.matcher(str);
-	    while (matcher.find()) {
-	        tagValues.add(matcher.group(1));
-	    }
-	    return tagValues;
+		final List<String> tagValues = new ArrayList<String>();
+		final Matcher matcher = regexTag.matcher(str);
+		while (matcher.find()) {
+			tagValues.add(matcher.group(1));
+		}
+		return tagValues;
 	}
 }

@@ -1,7 +1,5 @@
 package io.github.Skepter.Commands;
 
-import java.util.Arrays;
-
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -55,20 +53,32 @@ public class CommandBatch {
 		
 		/* If it contains [i=#] but doesn't contain [i] */
 		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]"))) {
-			final String between = TextUtils.stringBetween(s, "[i=", "]");
-			int timesToRun = 1;
-			int increment = 1;
-			if (between.contains(":")) {
-				final String[] arr = between.split(":");
-				timesToRun = Math.abs(Integer.parseInt(arr[0]));
-				increment = Integer.parseInt(arr[1]);
-			} else {
-				try {
-					timesToRun = Math.abs(Integer.parseInt(between));
-				} catch (final NumberFormatException e) {
-					timesToRun = 1;
+			for(String str : TextUtils.getTagValues(s, "[i=", "]")) {
+				int beginInt = 1;
+				int increment = 1;
+				if(str.contains(":")) {
+					final String[] arr = str.split(":");
+					beginInt = Math.abs(Integer.parseInt(arr[0]));
+					increment = Integer.parseInt(arr[1]);
 				}
+				//when running the for loop to execute the commands
+				//make everything proportional to [i]
 			}
+//			
+//			final String between = TextUtils.stringBetween(s, "[i=", "]");
+//			int timesToRun = 1; //this isn't the times to run?! this is the beginning integer!
+//			int increment = 1;
+//			if (between.contains(":")) {
+//				final String[] arr = between.split(":");
+//				timesToRun = Math.abs(Integer.parseInt(arr[0]));
+//				increment = Integer.parseInt(arr[1]);
+//			} else {
+//				try {
+//					timesToRun = Math.abs(Integer.parseInt(between));
+//				} catch (final NumberFormatException e) {
+//					timesToRun = 1;
+//				}
+//			}
 			//TextUtils
 			/*
 			 * public static void main(String[] args) {
