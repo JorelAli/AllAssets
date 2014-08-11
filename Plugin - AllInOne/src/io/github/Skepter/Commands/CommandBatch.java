@@ -5,16 +5,16 @@ import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.entity.Player;
 
-/**
- * Batch command - designed to run a specific command multiple times.
+/** Batch command - designed to run a specific command multiple times.
  * Technically a 'for loop emulator' for Minecraft, but designed to be more
  * advanced
  * 
- * @author Skepter
- * 
- */
+ * @author Skepter */
 public class CommandBatch {
 
 	public CommandBatch(final CommandFramework framework) {
@@ -50,78 +50,107 @@ public class CommandBatch {
 			}
 			return;
 		}
-		
+
 		/* If it contains [i=#] but doesn't contain [i] */
 		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]"))) {
-			for(String str : TextUtils.getTagValues(s, "[i=", "]")) {
-				int beginInt = 1;
-				int increment = 1;
-				if(str.contains(":")) {
-					final String[] arr = str.split(":");
-					beginInt = Math.abs(Integer.parseInt(arr[0]));
-					increment = Integer.parseInt(arr[1]);
+
+			for (int i = 1; i < amount; i++) {
+				//				List<String> tagValues = new ArrayList<String>();
+				for (String str : TextUtils.getTagValues(s, "[i=", "]")) {
+					int beginInt = 1;
+					int increment = 1;
+					if (str.contains(":")) {
+						final String[] arr = str.split(":");
+						beginInt = Math.abs(Integer.parseInt(arr[0]));
+						increment = Integer.parseInt(arr[1]);
+					} else {
+						try {
+							beginInt = Math.abs(Integer.parseInt(str));
+						} catch (final NumberFormatException e) {
+							beginInt = 1;
+						}
+					}
+					player.performCommand(s.replace("[i=" + str + "]", String.valueOf(((i - 1) * increment) + beginInt)));
+					//					tagValues.add("[i=" + str + "]");
 				}
-				//when running the for loop to execute the commands
-				//make everything proportional to [i]
+				//				for(String str : tagValues) {
+				//					//can't do that since it has to be dumped into the playerPerformCommand (calculated there)
+				//					//parse it into the 's'
+				//				}
+				//				player.performCommand(s.replace("[i]", String.valueOf(i)));
 			}
-//			
-//			final String between = TextUtils.stringBetween(s, "[i=", "]");
-//			int timesToRun = 1; //this isn't the times to run?! this is the beginning integer!
-//			int increment = 1;
-//			if (between.contains(":")) {
-//				final String[] arr = between.split(":");
-//				timesToRun = Math.abs(Integer.parseInt(arr[0]));
-//				increment = Integer.parseInt(arr[1]);
-//			} else {
-//				try {
-//					timesToRun = Math.abs(Integer.parseInt(between));
-//				} catch (final NumberFormatException e) {
-//					timesToRun = 1;
-//				}
-//			}
-			//TextUtils
+
 			/*
-			 * public static void main(String[] args) {
-	    final String str = "<tag>apple</tag><b>hello</b><tag>orange</tag><tag>pear</tag>";
-	    System.out.println(Arrays.toString(getTagValues(str, "<tag>", "</tag>").toArray())); // Prints [apple, orange, pear]
-	}
+			 * if [i=3:5]
+			 * for loop [i] = 1 and has to be proportional to 3+5
+			 * so: 1 = 3
+			 *     2 = 3+5 = 8
+			 *     3 = 3+5+5 = 13
+			 * 	   
+			 *     (i - 1 * 5) + 3
+			 *     ((i-1) * increment) + beginInt
+			 * 
 			 */
+			//when running the for loop to execute the commands
+			//make everything proportional to [i]
 		}
-		
-		if ((s.contains("[i=") && s.contains("]")) || s.contains("[i]")) {
-			final String between = TextUtils.stringBetween(s, "[i=", "]");
-			int timesToRun = 1;
-			int increment = 1;
-			if (between.contains(":")) {
-				final String[] arr = between.split(":");
-				timesToRun = Math.abs(Integer.parseInt(arr[0]));
-				increment = Integer.parseInt(arr[1]);
-			} else {
-				try {
-					timesToRun = Math.abs(Integer.parseInt(between));
-				} catch (final NumberFormatException e) {
-					timesToRun = 1;
-				}
-			}
-			int count = timesToRun;
-			for (int i = timesToRun; i < amount * increment; i += increment) {
-				String cmd = "";
-				final String cmdToRun = s.replace("[i=" + between + "]", String.valueOf(i)); // Nav
-				if (s.contains("[i]") && s.contains("[i=") && s.contains(":")) {
-					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(count++));
-				} else if (s.contains("[i]")) {
-					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(i));
-				} else {
-					cmd = cmd + cmdToRun;
-				}
-				player.performCommand(cmd);
-			}
-			return;
-		} else {
-			for (int i = 1; i < amount + 1; i++) {
-				player.performCommand(s);
-			}
-			return;
+		//			
+		//			final String between = TextUtils.stringBetween(s, "[i=", "]");
+		//			int timesToRun = 1; //this isn't the times to run?! this is the beginning integer!
+		//			int increment = 1;
+		//			if (between.contains(":")) {
+		//				final String[] arr = between.split(":");
+		//				timesToRun = Math.abs(Integer.parseInt(arr[0]));
+		//				increment = Integer.parseInt(arr[1]);
+		//			} else {
+		//				try {
+		//					timesToRun = Math.abs(Integer.parseInt(between));
+		//				} catch (final NumberFormatException e) {
+		//					timesToRun = 1;
+		//				}
+		//			}
+		//TextUtils
+		/*
+		 * public static void main(String[] args) {
+		final String str = "<tag>apple</tag><b>hello</b><tag>orange</tag><tag>pear</tag>";
+		System.out.println(Arrays.toString(getTagValues(str, "<tag>", "</tag>").toArray())); // Prints [apple, orange, pear]
 		}
+		 */
+
+		//		if ((s.contains("[i=") && s.contains("]")) || s.contains("[i]")) {
+		//			final String between = TextUtils.stringBetween(s, "[i=", "]");
+		//			int timesToRun = 1;
+		//			int increment = 1;
+		//			if (between.contains(":")) {
+		//				final String[] arr = between.split(":");
+		//				timesToRun = Math.abs(Integer.parseInt(arr[0]));
+		//				increment = Integer.parseInt(arr[1]);
+		//			} else {
+		//				try {
+		//					timesToRun = Math.abs(Integer.parseInt(between));
+		//				} catch (final NumberFormatException e) {
+		//					timesToRun = 1;
+		//				}
+		//			}
+		//			int count = timesToRun;
+		//			for (int i = timesToRun; i < amount * increment; i += increment) {
+		//				String cmd = "";
+		//				final String cmdToRun = s.replace("[i=" + between + "]", String.valueOf(i)); // Nav
+		//				if (s.contains("[i]") && s.contains("[i=") && s.contains(":")) {
+		//					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(count++));
+		//				} else if (s.contains("[i]")) {
+		//					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(i));
+		//				} else {
+		//					cmd = cmd + cmdToRun;
+		//				}
+		//				player.performCommand(cmd);
+		//			}
+		//			return;
+		//		} else {
+		//			for (int i = 1; i < amount + 1; i++) {
+		//				player.performCommand(s);
+		//			}
+		//			return;
+		//		}
 	}
 }
