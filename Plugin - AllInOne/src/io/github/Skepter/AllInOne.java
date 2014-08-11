@@ -99,7 +99,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 // add messages after commands (e.g. you successfully set the time to day etc.)
 //delete plugin command (command that deletes plugins) + questioner
 //how many unique players
-//change enchant screen to enchanted book!
 public class AllInOne extends JavaPlugin {
 
 	public final String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllInOne" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";

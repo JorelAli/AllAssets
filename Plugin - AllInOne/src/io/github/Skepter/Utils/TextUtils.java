@@ -11,9 +11,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -260,7 +260,7 @@ public class TextUtils {
 	/** @param str
 	 * @param tag - <tag>(.+?)</tag>
 	 * @return */
-	public static List<String> getTagValues(final String str, final String beginTag, final String endTag) {
+	public static List<String> multipleStringBetween(final String str, final String beginTag, final String endTag) {
 		Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
 		final List<String> tagValues = new ArrayList<String>();
 		final Matcher matcher = regexTag.matcher(str);
@@ -268,5 +268,10 @@ public class TextUtils {
 			tagValues.add(matcher.group(1));
 		}
 		return tagValues;
+	}
+	
+	public static String formatDate(long l) {
+		TimeUnit.MILLISECONDS.toDays(l);
+		return "";
 	}
 }

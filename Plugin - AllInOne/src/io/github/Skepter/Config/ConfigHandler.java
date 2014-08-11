@@ -28,7 +28,6 @@ public class ConfigHandler {
 		config.set("bindRight", "true", "Performs action with a right click (set to false to perform action with left click)");
 		config.set("useIPInformation", "false", "Allows ");
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
-		config.set("joinAction", "null", new String[] { "The effect to have when a player joins" });
 		config.saveConfig();
 	}
 
@@ -71,7 +70,9 @@ public class ConfigHandler {
 		features.set("PluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		features.set("PTime", "true");
 		features.set("PWeather", "true");
+//		work on this feature more - still a bit buggy and kinda unreliable
 		features.set("Reload", "true"); //default to FALSE when actually exported
+		
 		features.set("Set", "true");
 		features.set("SignEdit", "true");
 		features.set("Time", "true"); //includes day/midday/night/midnight etc.
@@ -94,8 +95,13 @@ public class ConfigHandler {
 		//e.g. amount of exp mobs drop when killed, drop probability, spawning probability (perhaps?) (e.g. increase prob. spawn zombie+chicken
 		features.set("FlyBreakSpeedModifier", "true", "Break blocks at normal speed when flying on survival");
 
+		//may remove in the future unless more instants come into play.
 		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
 		features.set("Instant bows", "false");
+		
+		features.set("JoinActions", "true", new String[] {"Join Actions", "Actions to be carried out when a player joins"});
+		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
+		features.set("TotalTime", "true", "Display the total time the player has played on the server for");
 		features.saveConfig();
 	}
 

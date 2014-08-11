@@ -41,38 +41,50 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class PlayerListener implements Listener {
-		
+
+	//ensure that if the plugin was added WHEN the player is ALREADY online
+	//some data will not be initialized, so ensure that data is fixed and run for each player online.
+	
 	@EventHandler
 	public void onJoin(final PlayerJoinEvent event) {
 		AllInOne.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
-		
+
 		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
 		user.setUUID(event.getPlayer().getUniqueId());
-		if(!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
+		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
 			final List<String> ips = user.IPs();
-			if(!ips.isEmpty()) {
+			if (!ips.isEmpty()) {
 				CommandLog.addOtherLog(event.getPlayer().getName() + " joined with a new IP");
 			}
 			ips.add(event.getPlayer().getAddress().getHostName());
 			user.setIPs(ips);
 		}
-		
+
 		AllInOne.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
-		
 		final Long l = user.getTotalTimePlayed();
-		event.getPlayer().sendMessage(AllInOne.instance().title + "Total time played: " + TimeUnit.MILLISECONDS.toDays(l) + " days " + TimeUnit.MILLISECONDS.toHours(l) + " hours " + TimeUnit.MILLISECONDS.toMinutes(l) + " minutes " + TimeUnit.MILLISECONDS.toSeconds(l) + " seconds");
-		
+		if (ConfigHandler.features().getBoolean("JoinActions")) {
+			if (ConfigHandler.features().getBoolean("UniquePlayers"))
+				event.getPlayer().sendMessage(AllInOne.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
+			if (ConfigHandler.features().getBoolean("TotalTime")) {
+				long days = TimeUnit.MILLISECONDS.toDays(l);
+				long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
+				long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
+				long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
+				event.getPlayer().sendMessage(AllInOne.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
+			}
+		}
+
 		//AllInOne.instance().ghostUtils.addPlayer(event.getPlayer());
 		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
-//		SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
-//		board.blankLine();
-//		board.add("Error Logs", 0);
-//		board.add("Spam Logs", 0);
-//		board.build();
-//		board.send(event.getPlayer());
+		//		SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
+		//		board.blankLine();
+		//		board.add("Error Logs", 0);
+		//		board.add("Spam Logs", 0);
+		//		board.build();
+		//		board.send(event.getPlayer());
 	}
-	
+
 	@EventHandler
 	public void onQuit(final PlayerQuitEvent event) {
 		event.getPlayer().resetPlayerTime();
@@ -81,20 +93,20 @@ public class PlayerListener implements Listener {
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
 		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllInOne.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
 	}
-	
+
 	@EventHandler
 	public void onTeleport(final PlayerTeleportEvent event) {
 		final User user = new User(event.getPlayer());
 		user.setLastLoc(event.getFrom());
 	}
-	
+
 	@EventHandler
 	public void onEvent(final PlayerJoinEvent event) {
 		UUIDData.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
 		UUIDData.saveDataFile();
 		return;
 	}
-	
+
 	@EventHandler
 	public void onDeath(final PlayerDeathEvent event) {
 		final User user = new User(event.getEntity());
@@ -103,11 +115,11 @@ public class PlayerListener implements Listener {
 		final Inventory inv = event.getEntity().getInventory();
 		user.setLastInventory(InventorySerializer.toString(inv));
 
-		if(ConfigHandler.features().getBoolean("DeathCount")) {
+		if (ConfigHandler.features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
 			user.getPlayer().sendMessage(AllInOne.instance().title + "You have died " + user.getDeathCount() + " times!");
 		}
-		
+
 		if (ConfigHandler.features().getBoolean("DeathSigns")) {
 			final Location loc = event.getEntity().getLocation();
 			// if(player canBuild in the location loc)
@@ -119,9 +131,9 @@ public class PlayerListener implements Listener {
 			sign.setLine(2, new SimpleDateFormat("MMM W").format(new Date()));
 			sign.setLine(3, new SimpleDateFormat("hh:mm a").format(new Date()));
 			sign.update();
-			
+
 			final BlockPlaceEvent blockEvent = new BlockPlaceEvent(sign.getBlock(), sign.getBlock().getState(), sign.getBlock().getRelative(BlockFace.DOWN), null, user.getPlayer(), false);
-			if(blockEvent.canBuild()) {
+			if (blockEvent.canBuild()) {
 				blockEvent.setCancelled(true);
 			}
 			Bukkit.getServer().getPluginManager().callEvent(blockEvent);
@@ -160,7 +172,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(final PlayerDeathEvent event) {
-		if(ConfigHandler.features().getBoolean("InstantDeathRespawn")) {
+		if (ConfigHandler.features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllInOne.instance(), new Runnable() {
 
@@ -182,20 +194,20 @@ public class PlayerListener implements Listener {
 						t.printStackTrace();
 					}
 				}
-				
+
 			}, 1L);
 		}
 	}
-	
+
 	@EventHandler
 	public void creativeEnderpearl(final PlayerInteractEvent event) {
-		if(ConfigHandler.features().getBoolean("CreativeEnderpearl")) {
-			if(event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL)) {
+		if (ConfigHandler.features().getBoolean("CreativeEnderpearl")) {
+			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL)) {
 				event.getPlayer().launchProjectile(EnderPearl.class);
 			}
-		}	
+		}
 	}
-	
+
 	public void getPing(final Player player) {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllInOne.instance(), new Runnable() {
 			@Override
@@ -210,13 +222,13 @@ public class PlayerListener implements Listener {
 			}
 		}, 1L);
 	}
-	
+
 	/*
 	 *   public int getPing(Player player) {
-    CraftPlayer pingc = (CraftPlayer)player;
-    EntityPlayer pinge = pingc.getHandle();
-    return pinge.ping;
-  }
+	CraftPlayer pingc = (CraftPlayer)player;
+	EntityPlayer pinge = pingc.getHandle();
+	return pinge.ping;
+	}
 
 	 */
 }
