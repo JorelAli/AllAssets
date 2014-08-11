@@ -1,0 +1,6 @@
+name: AllInOne
+main: io.github.Skepter.AllInOne
+version: 1.0
+description: A plugin which has everything a server requires
+author: Skepter
+load: STARTUP

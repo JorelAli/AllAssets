@@ -1,0 +1,28 @@
+package io.github.Skepter.Commands;
+
+import io.github.Skepter.AllInOne;
+import io.github.Skepter.Commands.CommandFramework.CommandArgs;
+import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Users.User;
+
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+
+public class CommandBack {
+
+	public CommandBack(final CommandFramework framework) {
+		framework.registerCommands(this);
+	}
+
+	@CommandHandler(name = "back", aliases = { "lastloc" }, permission = "AllInOne.back", description = "Teleports you to your last location", usage = "Use <command>")
+	public void onCommand(final CommandArgs args) {
+		final Player player = args.getPlayer();
+		final User user = new User(player);
+		final Location l = player.getLocation();
+		player.teleport(user.getLastLoc());
+		user.setLastLoc(l);
+		player.sendMessage(AllInOne.instance().ttlc + "Teleported to your last location");
+		return;
+	}
+
+}

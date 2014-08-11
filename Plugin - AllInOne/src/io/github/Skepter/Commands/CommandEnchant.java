@@ -1,0 +1,48 @@
+package io.github.Skepter.Commands;
+
+import io.github.Skepter.Commands.CommandFramework.CommandArgs;
+import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Utils.EnchantmentInventories;
+
+import org.bukkit.entity.Player;
+
+public class CommandEnchant {
+
+	public CommandEnchant(final CommandFramework framework) {
+		framework.registerCommands(this);
+	}
+
+	@CommandHandler(name = "enchant", permission = "AllInOne.enchant", description = "Enchants an item", usage = "Use <command>")
+	public void onCommand(final CommandArgs args) {
+		final Player player = args.getPlayer();
+		player.openInventory(EnchantmentInventories.page1());
+		// Inventory inv2 = Bukkit.createInventory(null, 63,
+		// "Enchant - page 2");
+		// Inventory inv3 = Bukkit.createInventory(null, 63,
+		// "Enchant - page 3");
+		// Inventory inv4 = Bukkit.createInventory(null, 63,
+		// "Enchant - page 4");
+		// player.sendMessage(AllInOne.ttlc +
+		// "Teleported to your last location");
+		return;
+	}
+}
+
+/*
+ * Protection 1-4 Armour FireProtection 1-4 Armour Thorns 1-3 Armour
+ * BlastProtection 1-4 Armour ProjProtection 1-4 Armour Respiration 1-3 Helmet
+ * AquaAffinity 1 Helmet FeatherFalling 1-4 Boots
+ * 
+ * Sharpness 1-5 Sword/Axe Smite 1-5 Sword/Axe BaneOfArthropods 1-5 Sword/Axe
+ * Knock back 1-2 Sword Fire Aspect 1-2 Sword Looting 1-3 Sword
+ * 
+ * Efficiency 1-5 Pick/Shovel/Axe/Shears Silk Touch 1 Pick/Shovel/Axe/Shears
+ * Fortune 1-3 Pick/Shovel/Axe Unbreaking 1-3 Pick/Shovel/Axe/Shears
+ * Sword/FishingRod/Bow Hoe/Flint-Steel/CarrotStick
+ * 
+ * Power 1-5 Bow Punch 1-2 Bow Flame 1 Bow Infinity 1 Bow
+ * 
+ * Luck of the Sea 1-3 FishingRod Lure 1-3 FishingRod
+ * 
+ * 24 enchantments (4x6 enchantments - doublechest size)
+ */
