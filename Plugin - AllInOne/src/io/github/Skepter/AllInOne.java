@@ -101,25 +101,27 @@ import org.bukkit.plugin.java.JavaPlugin;
 //how many unique players
 public class AllInOne extends JavaPlugin {
 
+	/* These will be in the messages.yml (when I feel ready to do so) */
 	public final String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllInOne" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
 	public final String titleNoColor = "[AllInOne] ";
 	public final String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllInOne" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
 	public final String houseStyleColor = ChatColor.AQUA + "";
+
 	public boolean hasVault = false;
 	public Economy economy = null;
-	public Map<UUID, Long> tempTimeMap;
-
 	public CommandFramework framework;
+
+	public Map<UUID, Long> tempTimeMap;
 
 	//public GhostFactory ghostFactory;
 
 	@Override
 	public void onEnable() {
-		//uugh, if it runs at startup, how can we hook into vault?
-		//has to run at startup for that log feature...
 		getLogger().info("+---------------------------------+");
 		getLogger().info(titleNoColor + "Initializing AllInOne version " + getDescription().getVersion());
+		/* Some names will be removed - depends on whatever is in the Libs package */
 		getLogger().info("AllInOne, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
+		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) LogManager.getRootLogger()).addFilter(new LogListener(this));
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
@@ -128,6 +130,8 @@ public class AllInOne extends JavaPlugin {
 		//ghostFactory = new GhostFactory(this);
 		framework.registerCommands(this);
 
+		/** This is the features.yml file which enables/disables features
+		 * according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.instance().features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
@@ -175,7 +179,7 @@ public class AllInOne extends JavaPlugin {
 			r(new CommandSet(framework)); /* Finish */
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
-		if(ConfigHandler.instance().features().getBoolean("Time")) {
+		if (ConfigHandler.instance().features().getBoolean("Time")) {
 			new CommandTime(framework);
 		}
 		if (ConfigHandler.instance().features().getBoolean("Tp"))
@@ -212,16 +216,17 @@ public class AllInOne extends JavaPlugin {
 			data.getDataFile().set(p.getName(), p.getUniqueId().toString());
 		}
 
+		/* Start TPS counter */
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 100L, 1L);
-		
+
 		try {
-			if(new File(getDataFolder(), "tempTimeMap.bin").exists()) {
-				JavaUtils.load(new File(getDataFolder(), "tempTimeMap.bin"));				
+			if (new File(getDataFolder(), "tempTimeMap.bin").exists()) {
+				JavaUtils.load(new File(getDataFolder(), "tempTimeMap.bin"));
 			}
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		getLogger().info(titleNoColor + "AllInOne has been enabled successfully");
 		Bukkit.broadcast(title + "Plugin reloaded!", "AllInOne.allinone");
 		getLogger().info("+---------------------------------+");
@@ -236,7 +241,7 @@ public class AllInOne extends JavaPlugin {
 		CommandConsoleLog.players.clear();
 		Bukkit.getServer().getScheduler().cancelTasks(this);
 		try {
-			if(!tempTimeMap.isEmpty()) {
+			if (!tempTimeMap.isEmpty()) {
 				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
 			}
 		} catch (final Exception e) {
