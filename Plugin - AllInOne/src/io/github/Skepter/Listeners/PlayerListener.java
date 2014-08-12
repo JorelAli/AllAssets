@@ -63,10 +63,10 @@ public class PlayerListener implements Listener {
 
 		AllInOne.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 		final Long l = user.getTotalTimePlayed();
-		if (ConfigHandler.features().getBoolean("JoinActions")) {
-			if (ConfigHandler.features().getBoolean("UniquePlayers"))
+		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
+			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(AllInOne.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
-			if (ConfigHandler.features().getBoolean("TotalTime")) {
+			if (ConfigHandler.instance().features().getBoolean("TotalTime")) {
 				long days = TimeUnit.MILLISECONDS.toDays(l);
 				long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
 				long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
@@ -116,12 +116,12 @@ public class PlayerListener implements Listener {
 		final Inventory inv = event.getEntity().getInventory();
 		user.setLastInventory(InventorySerializer.toString(inv));
 
-		if (ConfigHandler.features().getBoolean("DeathCount")) {
+		if (ConfigHandler.instance().features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
 			user.getPlayer().sendMessage(AllInOne.instance().title + "You have died " + user.getDeathCount() + " times!");
 		}
 
-		if (ConfigHandler.features().getBoolean("DeathSigns")) {
+		if (ConfigHandler.instance().features().getBoolean("DeathSigns")) {
 			final Location loc = event.getEntity().getLocation();
 			// if(player canBuild in the location loc)
 			loc.getBlock().setType(Material.AIR);
@@ -162,7 +162,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onMove(final PlayerMoveEvent event) {
-		if (ConfigHandler.features().getBoolean("FlyBreakSpeedModifier")) {
+		if (ConfigHandler.instance().features().getBoolean("FlyBreakSpeedModifier")) {
 			if (event.getPlayer().isFlying() && event.getPlayer().getAllowFlight() && !event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
 				event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100000, 18));
 			} else {
@@ -173,7 +173,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(final PlayerDeathEvent event) {
-		if (ConfigHandler.features().getBoolean("InstantDeathRespawn")) {
+		if (ConfigHandler.instance().features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllInOne.instance(), new Runnable() {
 
@@ -202,7 +202,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void creativeEnderpearl(final PlayerInteractEvent event) {
-		if (ConfigHandler.features().getBoolean("CreativeEnderpearl")) {
+		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl")) {
 			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL)) {
 				event.getPlayer().launchProjectile(EnderPearl.class);
 			}

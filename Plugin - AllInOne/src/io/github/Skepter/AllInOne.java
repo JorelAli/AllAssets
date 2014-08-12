@@ -129,70 +129,70 @@ public class AllInOne extends JavaPlugin {
 		framework.registerCommands(this);
 
 		getLogger().info("Initializing commands according to features.yml");
-		if (ConfigHandler.features().getBoolean("AFK"))
+		if (ConfigHandler.instance().features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
-		if (ConfigHandler.features().getBoolean("AllInOne"))
+		if (ConfigHandler.instance().features().getBoolean("AllInOne"))
 			new CommandAllInOne(framework);
-		if (ConfigHandler.features().getBoolean("Back"))
+		if (ConfigHandler.instance().features().getBoolean("Back"))
 			new CommandBack(framework);
-		if (ConfigHandler.features().getBoolean("Batch"))
+		if (ConfigHandler.instance().features().getBoolean("Batch"))
 			new CommandBatch(framework);
-		if (ConfigHandler.features().getBoolean("Bind"))
+		if (ConfigHandler.instance().features().getBoolean("Bind"))
 			r(new CommandBind(framework));
-		if (ConfigHandler.features().getBoolean("ChestSearch"))
+		if (ConfigHandler.instance().features().getBoolean("ChestSearch"))
 			new CommandChestSearch(framework);
-		if (ConfigHandler.features().getBoolean("Clear"))
+		if (ConfigHandler.instance().features().getBoolean("Clear"))
 			new CommandClear(framework);
-		if (ConfigHandler.features().getBoolean("ClearChat"))
+		if (ConfigHandler.instance().features().getBoolean("ClearChat"))
 			new CommandClearchat(framework);
-		if (ConfigHandler.features().getBoolean("ConsoleLog"))
+		if (ConfigHandler.instance().features().getBoolean("ConsoleLog"))
 			new CommandConsoleLog(framework);
-		if (ConfigHandler.features().getBoolean("Debug"))
+		if (ConfigHandler.instance().features().getBoolean("Debug"))
 			new CommandDebug(framework);
-		if (ConfigHandler.features().getBoolean("Disable"))
+		if (ConfigHandler.instance().features().getBoolean("Disable"))
 			new CommandDisable(framework);
-		if (ConfigHandler.features().getBoolean("Enchant"))
+		if (ConfigHandler.instance().features().getBoolean("Enchant"))
 			new CommandEnchant(framework);
-		if (ConfigHandler.features().getBoolean("Enable"))
+		if (ConfigHandler.instance().features().getBoolean("Enable"))
 			new CommandEnable(framework);
-		if (ConfigHandler.features().getBoolean("ForceChat"))
+		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
-		if (ConfigHandler.features().getBoolean("Fly"))
+		if (ConfigHandler.instance().features().getBoolean("Fly"))
 			new CommandFly(framework);
-		if (ConfigHandler.features().getBoolean("Launch"))
+		if (ConfigHandler.instance().features().getBoolean("Launch"))
 			new CommandLaunch(framework);
-		if (ConfigHandler.features().getBoolean("Log"))
+		if (ConfigHandler.instance().features().getBoolean("Log"))
 			new CommandLog(framework);
-		//if (ConfigHandler.features().getBoolean("Ghost"))
+		//if (ConfigHandler.instance().features().getBoolean("Ghost"))
 		//new CommandGhost(framework);
-		if (ConfigHandler.features().getBoolean("Oplist"))
+		if (ConfigHandler.instance().features().getBoolean("Oplist"))
 			new CommandOplist(framework);
-		if (ConfigHandler.features().getBoolean("PTime"))
+		if (ConfigHandler.instance().features().getBoolean("PTime"))
 			new CommandPTime(framework);
-		if (ConfigHandler.features().getBoolean("PWeather"))
+		if (ConfigHandler.instance().features().getBoolean("PWeather"))
 			new CommandPWeather(framework);
-		if (ConfigHandler.features().getBoolean("Set"))
+		if (ConfigHandler.instance().features().getBoolean("Set"))
 			r(new CommandSet(framework)); /* Finish */
-		if (ConfigHandler.features().getBoolean("SignEdit"))
+		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
-		if(ConfigHandler.features().getBoolean("Time")) {
+		if(ConfigHandler.instance().features().getBoolean("Time")) {
 			new CommandTime(framework);
 		}
-		if (ConfigHandler.features().getBoolean("Tp"))
+		if (ConfigHandler.instance().features().getBoolean("Tp"))
 			new CommandTp(framework);
-		if (ConfigHandler.features().getBoolean("Worlds")) {
+		if (ConfigHandler.instance().features().getBoolean("Worlds")) {
 			new CommandWorlds(framework);
 		}
 
 		/* Listeners */
-		if (ConfigHandler.features().getBoolean("Enchant"))
+		if (ConfigHandler.instance().features().getBoolean("Enchant"))
 			r(new EnchantGuiListener());
 		r(new ChatListener());
 		r(new SignListener());
 		r(new PlayerListener());
-		if (ConfigHandler.features().getBoolean("Plugins"))
+		if (ConfigHandler.instance().features().getBoolean("Plugins"))
 			r(new PluginsCommandListener());
-		if (ConfigHandler.features().getBoolean("Reload"))
+		if (ConfigHandler.instance().features().getBoolean("Reload"))
 			r(new ReloadCommandListener());
 
 		// r(new SLP_MOTD());
@@ -206,9 +206,10 @@ public class AllInOne extends JavaPlugin {
 			getLogger().info(titleNoColor + "Vault has been found and hooked into successfully");
 		}
 
-		UUIDData.reloadDataFile();
+		UUIDData data = new UUIDData();
+		data.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers()) {
-			UUIDData.getDataFile().set(p.getName(), p.getUniqueId().toString());
+			data.getDataFile().set(p.getName(), p.getUniqueId().toString());
 		}
 
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 100L, 1L);
