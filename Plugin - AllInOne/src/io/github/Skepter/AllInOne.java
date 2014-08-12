@@ -132,6 +132,9 @@ public class AllInOne extends JavaPlugin {
 
 		/** This is the features.yml file which enables/disables features
 		 * according to the users will */
+		
+		
+		//add ping & put it into ConfigHandler
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.instance().features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
