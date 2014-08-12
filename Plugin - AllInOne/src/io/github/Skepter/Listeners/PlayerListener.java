@@ -102,8 +102,9 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onEvent(final PlayerJoinEvent event) {
-		UUIDData.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
-		UUIDData.saveDataFile();
+		UUIDData data = new UUIDData();
+		data.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
+		data.saveDataFile();
 		return;
 	}
 

@@ -17,6 +17,9 @@ public class PlayerUtils {
 		return null;
 	}
 
+	//cache data from the world data files and install them into the UUID map
+	//ensure that duplicates are NOT added!
+	
 	public static Player getPlayerFromString(final String string) {
 		for (final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
 			if (p.getName().equals(string)) {

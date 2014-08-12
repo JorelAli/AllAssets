@@ -10,24 +10,27 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class UUIDData {
 
-	private static FileConfiguration dataFile = null;
-	private static File dataFileFile = null;
+	public UUIDData() {
+	}
 	
-	public static void reloadDataFile() {
+	private FileConfiguration dataFile = null;
+	private File dataFileFile = null;
+	
+	public void reloadDataFile() {
 		if (dataFileFile == null) {
 			dataFileFile = new java.io.File(AllInOne.instance().getDataFolder(), "UUIDMap.yml");
 		}
 		dataFile = YamlConfiguration.loadConfiguration(dataFileFile);
 	}
 
-	public static FileConfiguration getDataFile() {
+	public FileConfiguration getDataFile() {
 		if (dataFile == null) {
 			reloadDataFile();
 		}
 		return dataFile;
 	}
 
-	public static void saveDataFile() {
+	public void saveDataFile() {
 		if (dataFile == null || dataFileFile == null) {
 			return;
 		}
