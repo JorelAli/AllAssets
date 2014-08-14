@@ -21,6 +21,7 @@ import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Commands.CommandOplist;
 import io.github.Skepter.Commands.CommandPTime;
 import io.github.Skepter.Commands.CommandPWeather;
+import io.github.Skepter.Commands.CommandPing;
 import io.github.Skepter.Commands.CommandSet;
 import io.github.Skepter.Commands.CommandSignEdit;
 import io.github.Skepter.Commands.CommandTime;
@@ -132,8 +133,7 @@ public class AllInOne extends JavaPlugin {
 
 		/** This is the features.yml file which enables/disables features
 		 * according to the users will */
-		
-		
+
 		//add ping & put it into ConfigHandler
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.instance().features().getBoolean("AFK"))
@@ -174,6 +174,8 @@ public class AllInOne extends JavaPlugin {
 		//new CommandGhost(framework);
 		if (ConfigHandler.instance().features().getBoolean("Oplist"))
 			new CommandOplist(framework);
+		if (ConfigHandler.instance().features().getBoolean("Ping"))
+			new CommandPing(framework);
 		if (ConfigHandler.instance().features().getBoolean("PTime"))
 			new CommandPTime(framework);
 		if (ConfigHandler.instance().features().getBoolean("PWeather"))
@@ -182,14 +184,12 @@ public class AllInOne extends JavaPlugin {
 			r(new CommandSet(framework)); /* Finish */
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
-		if (ConfigHandler.instance().features().getBoolean("Time")) {
+		if (ConfigHandler.instance().features().getBoolean("Time"))
 			new CommandTime(framework);
-		}
 		if (ConfigHandler.instance().features().getBoolean("Tp"))
 			new CommandTp(framework);
-		if (ConfigHandler.instance().features().getBoolean("Worlds")) {
+		if (ConfigHandler.instance().features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
-		}
 
 		/* Listeners */
 		if (ConfigHandler.instance().features().getBoolean("Enchant"))

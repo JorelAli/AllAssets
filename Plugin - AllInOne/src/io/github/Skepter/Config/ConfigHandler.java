@@ -75,6 +75,7 @@ public class ConfigHandler {
 		features.set("Launch", "true");
 		features.set("Log", "true");
 		features.set("Oplist", "true");
+		features.set("Ping", "true");
 		features.set("Plugins", "true");
 		features.set("PluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		features.set("PTime", "true");
