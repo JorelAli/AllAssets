@@ -1,0 +1,179 @@
+Project notes:
+
+StaffChat feature 
+
+
+Potion GUI
+dump cosmetic features - heads/block head/trails etc.
+
+whena  palyer joins, tell them when they last joined
+when a player joins, tell them which players left/were on recently
+AFKMEssage - send a message to a person when they are no longer afk
+
+Commands:
+//Ascend/Descend
+Command:up
+Command:down
+Command:tp
+Command:tpa
+Command:tpahere
+Command:tpall
+Command:tpaall
+Command:tptoggle
+Command:back
+Command:go
+Command:world
+Command:worlds
+Command:tpaccept
+Command:tpdeny
+Command:tppos
+Command:spawn
+Command:setspawn
+Command:warp
+Command:setwarp
+Command:home
+Command:sethome
+Command:delhome
+
+Command:fly
+Command:gmc
+Command:gms
+Command:gma
+Command:gamemode
+Command:set
+
+Command:w
+Command:rules
+Command:check
+Command:afk
+Command:seen
+Command:suicide
+Command:lookup
+Command:furnace
+Command:workbench
+Command:vanish
+Command:rvanish
+Command:jail
+Command:unjail
+Command:mute
+Command:unmute
+Command:kick
+Command:ban
+Command:tempban
+Command:banip
+Command:nick
+Command:remove
+Command:painting (sets painting)
+Command:clear (inv)
+Command:motd (show motd)
+Command:setmotd (set motd)
+Command:setServermotd (setListings motd)
+Command:xp
+Command:level
+Command:worldGenerationCommands - tree etc..?
+Command:chearchat
+Command:broadcast
+Command:forcechat
+Command:head
+Command:oplist
+Command:rename
+Command:signedit
+Command:cook
+Command:socialspy (seemessages, seemsg)
+Command:su (console - non-OP)
+Command:list (debug.txt)
+Command:erase
+Command:give
+Command:enchant
+(opp.txt etc.)
+Command:payall
+Command:pay
+Command:take
+Command:set <balance>
+Command:bal
+Command:baltop
+
+Command:ignite
+Command:extinguish
+Command:launch (projectile)
+Command:hat
+Command:near
+Command:kill
+Command:killall (mobs)
+Command:bind
+Command:unbind
+Command:infinite (toggle)
+Command:spawnentity
+Command:freeze
+Command:unfreeze
+
+Command:help
+Command:info (simple info from a yml file)
+Command:aio
+Command:helpop
+Command:item
+Command:online
+Command:player (who, whois)
+
+Command:debug
+Command:log
+
+Command:ignore (darkGray messages)
+Command:mail
+Command:me
+Command:msg
+Command:reply
+
+Command:invsee
+Command:enderchest
+Command:repair
+Command:repairall
+Command:kit (create, delete, kitName)
+
+Command:time
+Command:playertime (check ptime!)
+
+Command:weather (tab)
+Command:pweather (tab)
+
+Command:break
+Command:spawner
+
+Command:stop
+*/
+
+/*
+Listeners:
+antiswear
+anticaps
+antiswear signs
+color chat
+color signs
+voidListener
+doubleJump (config)
+buy / sell signs
+tabComplete for UUID's and playernames
+player login from another location
+*
+
+Icon = chest with items going inside it somehow -.-
+
+- SET <health|hunger|speed|flyspeed|jump (height)|attack (strength)|balance> <data|player> <<data>>
+
+- CHECK <health|hunger|speed|flyspeed|jump|attack|balance|totalplay|ignorelist>
+- LOOKUP (sets player into lookup mode - run again to toggle. clicking a block shows who owns it (logblock hook))
+
+== Administraction actions ==
+- KICK <player> (sets default message to 'You have been kicked by %player%')
+- KICK <player> <reason> (sets message as 'You have been kicked by %player% for %reason%')( - I18N)
+- BAN <player> <reason> (reason is MANDATORY) (sets message as 'You have been banned by %player% for %reason%')( - I18N)
+- TEMPBAN <player> <time> (t:##s|m|h|d) <reason> (sets message as 'You have been banned by %player% for %time% for %reason%')
+- BANIP <player|ip>
+- SEEMESSAGES|SEEMSG|SOCIALSPY (toggles socialspy)
+
+- ERASE <player> (kicks the player, then deletes their file - cannot be undone, only for CONSOLE use only!)
+
+== Operator powers ==
+- GIVE <player|item> <<item>> <<<itemID>>> <<<crazy stuff such as the color codes etc>>>>>
+- ENCHANT (opens up a GUI for enchanting which has items with their enchantments - click to enchant it)
+

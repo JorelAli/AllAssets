@@ -29,6 +29,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -44,7 +47,7 @@ public class PlayerListener implements Listener {
 
 	//ensure that if the plugin was added WHEN the player is ALREADY online
 	//some data will not be initialized, so ensure that data is fixed and run for each player online.
-	
+
 	@EventHandler
 	public void onJoin(final PlayerJoinEvent event) {
 		AllInOne.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
@@ -92,6 +95,14 @@ public class PlayerListener implements Listener {
 		final User user = new User(event.getPlayer());
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
 		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllInOne.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
+	}
+
+	/* Hopefully, if they click that slot, it places the item on their head :D */
+	@EventHandler
+	public void blockHeads(final InventoryClickEvent event) {
+		//armor slot = 5
+		if (event.getAction().equals(InventoryAction.PLACE_ONE) && event.getSlot() == 5 && event.getInventory().getType().equals(InventoryType.PLAYER))
+			event.getInventory().setItem(5, event.getCurrentItem());
 	}
 
 	@EventHandler
