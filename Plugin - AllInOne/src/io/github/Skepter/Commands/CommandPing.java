@@ -14,7 +14,7 @@ public class CommandPing {
 	@CommandHandler(name = "ping", permission = "AllInOne.ping", description = "Shows your ping", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final User user = new User(args.getPlayer());
-		user.getPlayer().sendMessage(AllInOne.instance().title + "Your ping is " + user.getPing());
+		user.getPlayer().sendMessage(AllInOne.instance().title + "Your ping is " + user.getPing() + "ms");
 		return;
 	}
 }

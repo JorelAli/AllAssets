@@ -148,7 +148,7 @@ public class TextUtils {
 
 		final int amountOfPages = textData.size() / pageSize;
 		final int amountOfLinesOfExtraData = textData.size() % pageSize;
-		pages.put(1, textData.subList(0, pageSize));
+		pages.put(1, textData.subList(0, pageSize - 1));
 		for (int i = 2; i < amountOfPages; i++) {
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
 		}
@@ -269,7 +269,7 @@ public class TextUtils {
 		}
 		return tagValues;
 	}
-	
+
 	public static String formatDate(final long l) {
 		TimeUnit.MILLISECONDS.toDays(l);
 		return "";
