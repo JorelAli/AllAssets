@@ -12,7 +12,6 @@ public class ConfigHandler {
 	public ConfigHandler() {
 		if (manager == null)
 			manager = new SimpleConfigManager(AllInOne.instance());
-
 		if (managerMessages == null)
 			managerMessages = new SimpleConfigManager(AllInOne.instance());
 		if (managerFeatures == null)
@@ -20,6 +19,7 @@ public class ConfigHandler {
 		createConfig();
 		createMessages();
 		createFeatures();
+		instance = this;
 	}
 	
 	public static ConfigHandler instance() {
