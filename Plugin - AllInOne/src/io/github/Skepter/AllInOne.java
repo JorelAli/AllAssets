@@ -125,7 +125,7 @@ public class AllInOne extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
-		getLogger().info(titleNoColor + "Initializing AllInOne version " + getDescription().getVersion());
+		getLogger().info("Initializing AllInOne version " + getDescription().getVersion());
 		/* Some names will be removed - depends on whatever is in the Libs package */
 		getLogger().info("AllInOne, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 		/* A method of dealing with console errors and stuff ... I hope */
@@ -135,13 +135,13 @@ public class AllInOne extends JavaPlugin {
 		new ConfigHandler();
 
 		if (Bukkit.getPluginManager().getPlugin("Vault") == null || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
-			getLogger().warning(titleNoColor + "Vault not found, so some features may not be available");
+			getLogger().warning("Vault not found, so some features may not be available");
 		} else {
 			hasVault = true;
 			setupEconomy();
 			setupChat();
 			setupPermissions();
-			getLogger().info(titleNoColor + "Vault has been found and hooked into successfully");
+			getLogger().info("Vault has been found and hooked into successfully");
 		}
 
 		//ghostFactory = new GhostFactory(this);
