@@ -52,7 +52,9 @@ public class CommandAllInOne {
 	public void reload(final CommandArgs args) {
 		args.getSender().sendMessage(AllInOne.instance().title + "Reloading...");
 		final Timer timer = new Timer();
-		final File pluginFile = new File(AllInOne.instance().getDataFolder().getParent() + File.separator + "AllInOne-" + AllInOne.instance().getDescription().getVersion() + ".jar");
+		/* We're currently in dev and dev file name isn't the same as the released name */
+		final File devPluginFile = new File(AllInOne.instance().getDataFolder().getParent() + File.separator + "AllInOne.jar");
+//		final File pluginFile = new File(AllInOne.instance().getDataFolder().getParent() + File.separator + "AllInOne-" + AllInOne.instance().getDescription().getVersion() + ".jar");
 		final String cachedTitle = AllInOne.instance().title;
 		timer.schedule(new TimerTask() {
 
@@ -60,7 +62,7 @@ public class CommandAllInOne {
 			public void run() {
 				try {
 					args.getSender().sendMessage(cachedTitle + "AllInOne successfully reloaded");
-					Bukkit.getPluginManager().loadPlugin(pluginFile);
+					Bukkit.getPluginManager().loadPlugin(devPluginFile);
 					//Bukkit.getPluginManager().enablePlugin(AllInOne.instance());
 				} catch (final UnknownDependencyException | InvalidPluginException | InvalidDescriptionException e) {
 					e.printStackTrace();

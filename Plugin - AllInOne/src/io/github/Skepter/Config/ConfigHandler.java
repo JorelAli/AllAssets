@@ -37,6 +37,7 @@ public class ConfigHandler {
 		config.set("bindRight", "true", "Performs action with a right click (set to false to perform action with left click)");
 		config.set("useIPInformation", "false", "Allows ");
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
+		config.set("multiCommandSeparator", "|", "The separator used in multi-commands");
 		config.saveConfig();
 	}
 
@@ -102,6 +103,7 @@ public class ConfigHandler {
 		features.set("DeathCount", "true");
 		features.set("InstantDeathRespawn", "false");
 		features.set("AntiIllegalItems", "true");
+		features.set("MultiCommands", "true", "Allows you to execute multiple commands");
 		// add more modifiers to modify the mechanics of the game
 		// e.g. amount of exp mobs drop when killed, drop probability, spawning
 		// probability (perhaps?) (e.g. increase prob. spawn zombie+chicken
@@ -117,7 +119,7 @@ public class ConfigHandler {
 		features.saveConfig();
 	}
 
-	public SimpleConfig getConfig() {
+	public SimpleConfig config() {
 		if (config != null) {
 			return config;
 		} else {

@@ -34,6 +34,7 @@ import io.github.Skepter.Listeners.ChatListener;
 import io.github.Skepter.Listeners.ConsoleSayListener;
 import io.github.Skepter.Listeners.EnchantGuiListener;
 import io.github.Skepter.Listeners.LogListener;
+import io.github.Skepter.Listeners.MultiCommandListener;
 import io.github.Skepter.Listeners.PlayerListener;
 import io.github.Skepter.Listeners.PluginsCommandListener;
 import io.github.Skepter.Listeners.ReloadCommandListener;
@@ -89,17 +90,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 // except admin
 
 // run multiple commands - | seperator - config available
-
-/*
- * TDL: add pluginCommands to AIO command commandBack line 
- * line 38 fix deathCount being said twice 
-	sort out speed - 1 = max.
- */
-
-//sort out switch statements on strings and use toLowerCase to make it case safe
+// set command
+// sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
-//delete plugin command (command that deletes plugins) + questioner
-//how many unique players
+// delete plugin command (command that deletes plugins) + questioner
+// command allinone pluginFile instead of devPluginFile
+// how many unique players
+// plugin config manager thingy
 public class AllInOne extends JavaPlugin {
 
 	/* These will be in the messages.yml (when I feel ready to do so) */
@@ -201,6 +198,8 @@ public class AllInOne extends JavaPlugin {
 			r(new PluginsCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("Reload"))
 			r(new ReloadCommandListener());
+		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
+			r(new MultiCommandListener());
 
 		// r(new SLP_MOTD());
 		r(new ConsoleSayListener());
