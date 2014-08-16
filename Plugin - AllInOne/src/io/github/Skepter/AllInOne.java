@@ -3,6 +3,7 @@ package io.github.Skepter;
 import io.github.Skepter.Commands.CommandAFK;
 import io.github.Skepter.Commands.CommandAllInOne;
 import io.github.Skepter.Commands.CommandBack;
+import io.github.Skepter.Commands.CommandBalance;
 import io.github.Skepter.Commands.CommandBatch;
 import io.github.Skepter.Commands.CommandBind;
 import io.github.Skepter.Commands.CommandChestSearch;
@@ -124,6 +125,14 @@ public class AllInOne extends JavaPlugin {
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
 		new ConfigHandler();
+		
+		if (Bukkit.getPluginManager().getPlugin("Vault") == null || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
+			getLogger().warning(titleNoColor + "Vault not found, so some features may not be available");
+		} else {
+			hasVault = true;
+			setupEconomy();
+			getLogger().info(titleNoColor + "Vault has been found and hooked into successfully");
+		}
 
 		//ghostFactory = new GhostFactory(this);
 		framework.registerCommands(this);
@@ -139,6 +148,8 @@ public class AllInOne extends JavaPlugin {
 			new CommandAllInOne(framework);
 		if (ConfigHandler.instance().features().getBoolean("Back"))
 			new CommandBack(framework);
+		if (ConfigHandler.instance().features().getBoolean("Balance") && hasVault)
+			new CommandBalance(framework);
 		if (ConfigHandler.instance().features().getBoolean("Batch"))
 			new CommandBatch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Bind"))
@@ -203,14 +214,6 @@ public class AllInOne extends JavaPlugin {
 
 		// r(new SLP_MOTD());
 		r(new ConsoleSayListener());
-
-		if (Bukkit.getPluginManager().getPlugin("Vault") == null || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
-			getLogger().warning(titleNoColor + "Vault not found, so some features may not be available");
-		} else {
-			hasVault = true;
-			setupEconomy();
-			getLogger().info(titleNoColor + "Vault has been found and hooked into successfully");
-		}
 
 		UUIDData data = new UUIDData();
 		data.reloadDataFile();
