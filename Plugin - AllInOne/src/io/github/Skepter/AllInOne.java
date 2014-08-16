@@ -90,13 +90,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 // A way to mute a player which stops all other chat being sent to that player
 // except admin
 
-// run multiple commands - | seperator - config available
 // set command
 // sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
 // delete plugin command (command that deletes plugins) + questioner
 // command allinone pluginFile instead of devPluginFile
 // how many unique players
+// close the classloader when deleting plugins & run system.gc to clean it up
+// Deleting plugins is much harder than I thought...
 // plugin config manager thingy
 public class AllInOne extends JavaPlugin {
 
