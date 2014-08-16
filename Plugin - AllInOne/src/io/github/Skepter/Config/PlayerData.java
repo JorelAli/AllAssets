@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class PlayerData {
 	private FileConfiguration fileConfiguration;
 	private final AllInOne plugin = AllInOne.instance();
 
-	public PlayerData(final Player player) {
+	public PlayerData(final OfflinePlayer player) {
 		uuid = player.getUniqueId().toString();
 		dataFile = new File(plugin.getDataFolder() + File.separator + "Players", uuid + ".yml");
 	}

@@ -3,7 +3,9 @@ package io.github.Skepter.Config;
 import io.github.Skepter.AllInOne;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -42,6 +44,14 @@ public class UUIDData {
 		} catch (final java.io.IOException ex) {
 			AllInOne.instance().getLogger().log(Level.SEVERE, "Could not save data to " + dataFileFile, ex);
 		}
+	}
+	
+	public List<UUID> getValues() {
+		List<UUID> uuidList = new ArrayList<UUID>();
+		for(String s : getDataFile().getKeys(true)) {
+			uuidList.add(UUID.fromString(getDataFile().getString(s)));
+		}
+		return uuidList;
 	}
 
 	/**

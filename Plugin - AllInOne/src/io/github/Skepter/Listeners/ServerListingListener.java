@@ -5,7 +5,9 @@ import io.github.Skepter.Users.User;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,9 +19,10 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void ping(final ServerListPingEvent event) {
 		final String search = compileInetAddress(event.getAddress());
-		for(final User user : User.getAllUsers()) {
-			if(getLastIP(user).contains(search)) {
-				final UUIDData data = new UUIDData();
+		final UUIDData data = new UUIDData();
+		for (UUID u : data.getValues()) {
+			User user = new User(Bukkit.getOfflinePlayer(u));
+			if (getLastIP(user).contains(search)) {
 				event.setMotd(ChatColor.AQUA + "Welcome to the server " + data.getReversedUUIDMap().get(user.getUUID()) + "! You have joined " + user.getJoinCount() + " times!");
 				return;
 			}
@@ -36,7 +39,9 @@ public class ServerListingListener implements Listener {
 	}
 
 	private String getLastIP(final User user) {
-		return user.IPs().get(user.IPs().size() - 1);
+		if (!user.IPs().isEmpty())
+			return user.IPs().get(user.IPs().size() - 1);
+		return null;
 	}
 
 	private String compileInetAddress(final InetAddress address) {

@@ -7,7 +7,6 @@ import io.github.Skepter.Serializer.LocationSerializer;
 import io.github.Skepter.Utils.PlayerUtils;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +26,17 @@ public class User implements IUser {
 		player = p;
 		playerData = new PlayerData(player);
 	}
+	
+	/**
+	 * Remember that when using this method the following are impossible:
+	 * Getting the ping
+	 * Setting the last Location
+	 * Setting the last waypoint etc.
+	 * @param p
+	 */
+	public User(final OfflinePlayer p) {
+		playerData = new PlayerData(p);
+	}
 
 	public User(final String s) {
 		try {
@@ -38,24 +48,16 @@ public class User implements IUser {
 
 	public User(final UUID u) {
 		try {
-			for (final Player p : Bukkit.getOnlinePlayers()) {
-				final UUID pu = p.getUniqueId();
-				if (u.equals(pu)) {
-					player = p;
+			for (final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
+				if (u.equals(p.getUniqueId())) {
+					player = (Player) p;
 					break;
 				}
 			}
 		} catch (final Exception e) {
+			Bukkit.getLogger().warning("Error trying to get uuid!");
 		}
 		playerData = new PlayerData(player);
-	}
-	
-	public static List<User> getAllUsers() {
-		final List<User> userList = new ArrayList<User>();
-		for(final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
-			userList.add(new User(p.getUniqueId()));
-		}
-		return userList;
 	}
 	
 	public int getPing() {
