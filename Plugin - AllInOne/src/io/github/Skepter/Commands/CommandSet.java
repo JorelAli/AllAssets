@@ -32,9 +32,9 @@ public class CommandSet implements Listener {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		} else if (args.getArgs().length == 2) {
-			int arg1 = 0;
+			double arg1 = 0;
 			try {
-				arg1 = Integer.parseInt(args.getArgs()[1]);
+				arg1 = Double.parseDouble(args.getArgs()[1]);
 			} catch (final NumberFormatException e) {
 				ErrorUtils.notAnInteger(player);
 				return;
@@ -51,16 +51,16 @@ public class CommandSet implements Listener {
 				player.setHealth(arg1);
 				return;
 			case "hunger":
-				player.setFoodLevel(arg1);
+				player.setFoodLevel((int) arg1);
 				return;
 			case "speed":
-				player.setWalkSpeed(arg1);
+				player.setWalkSpeed((float) arg1);
 				return;
 			case "flyspeed":
-				player.setFlySpeed(arg1);
+				player.setFlySpeed((float) arg1);
 				return;
 			case "jump":
-				jump.put(player.getUniqueId(), arg1);
+				jump.put(player.getUniqueId(), (int) arg1);
 				return;
 			case "attack":
 				attack.put(player.getUniqueId(), Darg1);

@@ -13,7 +13,7 @@ public class MultiCommandListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onCommand(final PlayerCommandPreprocessEvent event) {
 		if (event.getMessage().startsWith("/") && event.getMessage().contains(ConfigHandler.instance().config().getString("multiCommandSeparator"))) {
-			String[] commands = event.getMessage().split(ConfigHandler.instance().config().getString("multiCommandSeparator"));
+			final String[] commands = event.getMessage().split(ConfigHandler.instance().config().getString("multiCommandSeparator"));
 			for (String command : commands) {
 				if (!command.startsWith("/"))
 					command = "/" + command;

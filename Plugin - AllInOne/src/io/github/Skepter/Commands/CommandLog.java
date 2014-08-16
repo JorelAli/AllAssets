@@ -22,7 +22,7 @@ public class CommandLog {
 
 	public CommandLog(final CommandFramework framework) {
 		framework.registerCommands(this);
-		max = ConfigHandler.config().getInt("maxLogAmount");
+		max = ConfigHandler.instance().config().getInt("maxLogAmount");
 	}
 
 	@CommandHandler(name = "log", permission = "AllInOne.log", description = "Shows log information", usage = "Use <command>")

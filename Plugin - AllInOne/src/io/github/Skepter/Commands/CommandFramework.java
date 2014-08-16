@@ -151,7 +151,7 @@ public class CommandFramework {
 		commandMap.put(label.toLowerCase(), entry);
 		if (command.isListed()) {
 			/* Because listing every single alias as well as commands is stupid. */
-			for (String s : command.aliases()) {
+			for (final String s : command.aliases()) {
 				if (!s.equals(command.name()))
 					continue;
 				pluginCommands.add(ChatColor.BLUE + " /" + label.toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());//Nav

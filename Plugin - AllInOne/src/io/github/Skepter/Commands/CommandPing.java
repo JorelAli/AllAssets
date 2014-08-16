@@ -17,5 +17,4 @@ public class CommandPing {
 		user.getPlayer().sendMessage(AllInOne.instance().title + "Your ping is " + user.getPing());
 		return;
 	}
-
 }

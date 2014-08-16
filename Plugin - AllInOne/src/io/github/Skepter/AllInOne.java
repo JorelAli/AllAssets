@@ -4,6 +4,7 @@ import io.github.Skepter.Commands.CommandAFK;
 import io.github.Skepter.Commands.CommandAllInOne;
 import io.github.Skepter.Commands.CommandBack;
 import io.github.Skepter.Commands.CommandBalance;
+import io.github.Skepter.Commands.CommandBalancetop;
 import io.github.Skepter.Commands.CommandBatch;
 import io.github.Skepter.Commands.CommandBind;
 import io.github.Skepter.Commands.CommandChestSearch;
@@ -39,6 +40,7 @@ import io.github.Skepter.Listeners.MultiCommandListener;
 import io.github.Skepter.Listeners.PlayerListener;
 import io.github.Skepter.Listeners.PluginsCommandListener;
 import io.github.Skepter.Listeners.ReloadCommandListener;
+import io.github.Skepter.Listeners.ServerListingListener;
 import io.github.Skepter.Listeners.SignListener;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.JavaUtils;
@@ -48,7 +50,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.permission.Permission;
 
 import org.apache.logging.log4j.LogManager;
 import org.bukkit.Bukkit;
@@ -99,6 +103,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // close the classloader when deleting plugins & run system.gc to clean it up
 // Deleting plugins is much harder than I thought...
 // plugin config manager thingy
+// I'm sorry everyone who doesn't speak English. It's an English plugin.
 public class AllInOne extends JavaPlugin {
 
 	/* These will be in the messages.yml (when I feel ready to do so) */
@@ -109,6 +114,8 @@ public class AllInOne extends JavaPlugin {
 
 	public boolean hasVault = false;
 	public Economy economy = null;
+	public Permission permission = null;
+	public Chat chat = null;
 	public CommandFramework framework;
 
 	public Map<UUID, Long> tempTimeMap;
@@ -126,12 +133,14 @@ public class AllInOne extends JavaPlugin {
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
 		new ConfigHandler();
-		
+
 		if (Bukkit.getPluginManager().getPlugin("Vault") == null || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
 			getLogger().warning(titleNoColor + "Vault not found, so some features may not be available");
 		} else {
 			hasVault = true;
 			setupEconomy();
+			setupChat();
+			setupPermissions();
 			getLogger().info(titleNoColor + "Vault has been found and hooked into successfully");
 		}
 
@@ -149,8 +158,6 @@ public class AllInOne extends JavaPlugin {
 			new CommandAllInOne(framework);
 		if (ConfigHandler.instance().features().getBoolean("Back"))
 			new CommandBack(framework);
-		if (ConfigHandler.instance().features().getBoolean("Balance") && hasVault)
-			new CommandBalance(framework);
 		if (ConfigHandler.instance().features().getBoolean("Batch"))
 			new CommandBatch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Bind"))
@@ -200,12 +207,27 @@ public class AllInOne extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
 
+		/* Glad I remembered what my uncle said
+		 * Something along the lines of doing things once and not tonnes of times.
+		 * If I didn't remember that, I'd be checking hasVault for every single
+		 * command which requires it. And that's a lot. */
+		if (hasVault) {
+			if (ConfigHandler.instance().features().getBoolean("Balance"))
+				new CommandBalance(framework);
+			if (ConfigHandler.instance().features().getBoolean("Balancetop"))
+				new CommandBalancetop(framework);
+		}
+
 		/* Listeners */
 		if (ConfigHandler.instance().features().getBoolean("Enchant"))
 			r(new EnchantGuiListener());
 		r(new ChatListener());
 		r(new SignListener());
 		r(new PlayerListener());
+		
+		if (ConfigHandler.instance().features().getBoolean("ConsoleSay"))
+			r(new ConsoleSayListener());
+		
 		if (ConfigHandler.instance().features().getBoolean("Plugins"))
 			r(new PluginsCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("Reload"))
@@ -213,10 +235,10 @@ public class AllInOne extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
 
-		// r(new SLP_MOTD());
-		r(new ConsoleSayListener());
+		/* Put into features.yml */
+		r(new ServerListingListener());
 
-		UUIDData data = new UUIDData();
+		final UUIDData data = new UUIDData();
 		data.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers()) {
 			data.getDataFile().set(p.getName(), p.getUniqueId().toString());
@@ -273,5 +295,22 @@ public class AllInOne extends JavaPlugin {
 		}
 
 		return (economy != null);
+	}
+
+	private boolean setupPermissions() {
+		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+		if (permissionProvider != null) {
+			permission = permissionProvider.getProvider();
+		}
+		return (permission != null);
+	}
+
+	private boolean setupChat() {
+		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+		if (chatProvider != null) {
+			chat = chatProvider.getProvider();
+		}
+
+		return (chat != null);
 	}
 }

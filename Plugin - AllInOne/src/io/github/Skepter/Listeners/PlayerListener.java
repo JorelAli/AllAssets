@@ -67,10 +67,10 @@ public class PlayerListener implements Listener {
 			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(AllInOne.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.instance().features().getBoolean("TotalTime")) {
-				long days = TimeUnit.MILLISECONDS.toDays(l);
-				long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
-				long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
-				long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
+				final long days = TimeUnit.MILLISECONDS.toDays(l);
+				final long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
+				final long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
+				final long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
 				event.getPlayer().sendMessage(AllInOne.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
 			}
 		}
@@ -102,7 +102,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onEvent(final PlayerJoinEvent event) {
-		UUIDData data = new UUIDData();
+		final UUIDData data = new UUIDData();
 		data.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
 		data.saveDataFile();
 		return;

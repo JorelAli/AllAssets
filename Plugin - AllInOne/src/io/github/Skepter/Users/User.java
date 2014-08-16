@@ -7,11 +7,13 @@ import io.github.Skepter.Serializer.LocationSerializer;
 import io.github.Skepter.Utils.PlayerUtils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -46,6 +48,14 @@ public class User implements IUser {
 		} catch (final Exception e) {
 		}
 		playerData = new PlayerData(player);
+	}
+	
+	public static List<User> getAllUsers() {
+		final List<User> userList = new ArrayList<User>();
+		for(final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
+			userList.add(new User(p.getUniqueId()));
+		}
+		return userList;
 	}
 	
 	public int getPing() {

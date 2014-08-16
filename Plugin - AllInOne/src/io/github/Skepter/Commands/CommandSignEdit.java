@@ -26,7 +26,7 @@ public class CommandSignEdit {
 				if (player.getTargetBlock(null, 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(null, 256).getType().equals(Material.WALL_SIGN)) {
 					final Sign sign = (Sign) player.getTargetBlock(null, 256).getState();
 					final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
-					sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, ConfigHandler.features().getBoolean("ChatColor") ? ChatColor.translateAlternateColorCodes('&', s.substring(0, s.length() - 1)) : s.substring(0, s.length() - 1));
+					sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, ConfigHandler.instance().features().getBoolean("ChatColor") ? ChatColor.translateAlternateColorCodes('&', s.substring(0, s.length() - 1)) : s.substring(0, s.length() - 1));
 					sign.update();
 
 				}

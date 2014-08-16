@@ -4,7 +4,6 @@ import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.YesNoConversation;
 
-import org.bukkit.Bukkit;
 import org.bukkit.conversations.BooleanPrompt;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
@@ -28,19 +27,19 @@ public class CommandDeletePlugin {
 	private class DeletePluginPrompt extends BooleanPrompt {
 
 		@Override
-		public Prompt acceptInput(ConversationContext context, String string) {
+		public Prompt acceptInput(final ConversationContext context, final String string) {
 			
 			return null;
 		}
 
 		@Override
-		public String getPromptText(ConversationContext context) {
+		public String getPromptText(final ConversationContext context) {
 			context.getForWhom().sendRawMessage(YesNoConversation.getPromptText());
 			return null;
 		}
 
 		@Override
-		protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
+		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 			return null;
 		}
 	}

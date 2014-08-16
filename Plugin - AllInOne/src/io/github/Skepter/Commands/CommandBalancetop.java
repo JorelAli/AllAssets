@@ -32,7 +32,7 @@ public class CommandBalancetop {
 			return;
 		}
 		/* I'm certain that there's a MUCH MORE simple method of doing this -.- */
-		Map<String, Double> map = new HashMap<String, Double>();
+		final Map<String, Double> map = new HashMap<String, Double>();
 		for (final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
 			map.put(p.getName(), AllInOne.instance().economy.getBalance(p.getName()));
 		}
@@ -40,7 +40,7 @@ public class CommandBalancetop {
 		final TreeMap<String, Double> sortedMap = new TreeMap<String, Double>(bvc);
 		sortedMap.putAll(map);
 		player.sendMessage(TextUtils.title("Top balances"));
-		List<String> balanceList = new ArrayList<String>();
+		final List<String> balanceList = new ArrayList<String>();
 		for (final Entry<String, Double> e : sortedMap.entrySet()) {
 			balanceList.add(AllInOne.instance().houseStyleColor + e.getKey() + ": " + e.getValue());
 		}

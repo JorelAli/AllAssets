@@ -58,7 +58,7 @@ public class CommandBatch {
 				player.sendMessage("beginInt: " + beginInt);
 				player.sendMessage("increment: " + increment);
 				//you wanat to replace the str...
-				for (String str : TextUtils.multipleStringBetween(s, "[i=", "]")) {
+				for (final String str : TextUtils.multipleStringBetween(s, "[i=", "]")) {
 					if (str.contains(":")) {
 						final String[] arr = str.split(":");
 						beginInt = Math.abs(Integer.parseInt(arr[0]));

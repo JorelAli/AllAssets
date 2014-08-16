@@ -10,9 +10,9 @@ import org.bukkit.conversations.ConversationFactory;
 
 public class YesNoConversation {
 
-	public YesNoConversation(CommandSender sender, BooleanPrompt prompt) {
+	public YesNoConversation(final CommandSender sender, final BooleanPrompt prompt) {
 		if (sender instanceof Conversable) {
-			ConversationFactory conversationFactory = new ConversationFactory(AllInOne.instance()).withModality(true).withFirstPrompt(prompt).withEscapeSequence("/quit").withTimeout(10);
+			final ConversationFactory conversationFactory = new ConversationFactory(AllInOne.instance()).withModality(true).withFirstPrompt(prompt).withEscapeSequence("/quit").withTimeout(10);
 			conversationFactory.buildConversation((Conversable) sender).begin();
 		}
 	}

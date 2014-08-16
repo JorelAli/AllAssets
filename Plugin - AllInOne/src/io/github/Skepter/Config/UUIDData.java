@@ -3,6 +3,9 @@ package io.github.Skepter.Config;
 import io.github.Skepter.AllInOne;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,10 +15,10 @@ public class UUIDData {
 
 	public UUIDData() {
 	}
-	
+
 	private FileConfiguration dataFile = null;
 	private File dataFileFile = null;
-	
+
 	public void reloadDataFile() {
 		if (dataFileFile == null) {
 			dataFileFile = new java.io.File(AllInOne.instance().getDataFolder(), "UUIDMap.yml");
@@ -39,5 +42,28 @@ public class UUIDData {
 		} catch (final java.io.IOException ex) {
 			AllInOne.instance().getLogger().log(Level.SEVERE, "Could not save data to " + dataFileFile, ex);
 		}
+	}
+
+	/**
+	 * @return Playername: UUID
+	 */
+	public Map<String, UUID> getUUIDMap() {
+		final Map<String, UUID> uuidMap = new HashMap<String, UUID>();
+		final Map<String, Object> objectMap = getDataFile().getValues(false);
+		for(final Map.Entry<String, Object> entry : objectMap.entrySet()){
+			uuidMap.put(entry.getKey(), (UUID) entry.getValue());
+		}
+		return uuidMap;
+	}
+	
+	/**
+	 * @return UUID: PlayerName
+	 */
+	public Map<UUID, String> getReversedUUIDMap() {
+		final Map<UUID, String> reversedMap = new HashMap<UUID, String>();
+		for(final Map.Entry<String, UUID> entry : getUUIDMap().entrySet()){
+			reversedMap.put(entry.getValue(), entry.getKey());
+		}
+		return reversedMap;
 	}
 }

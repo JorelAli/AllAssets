@@ -16,13 +16,13 @@ public class ChatListener implements Listener {
 	@EventHandler
 	public void onHyperlinkPost(final AsyncPlayerChatEvent event) {
 		final Player p = event.getPlayer();
-		if (ConfigHandler.features().getBoolean("AntiHyperlink")) {
+		if (ConfigHandler.instance().features().getBoolean("AntiHyperlink")) {
 			if (TextUtils.isHyperlink(event.getMessage()) && !p.hasPermission("AllInOne.hyperlink")) {
 				CommandLog.addChatLog(ChatColor.BLUE + p.getName() + ChatColor.WHITE + " tried to post a link: " + ChatColor.BLUE + event.getMessage());
 				event.setCancelled(true);
 			}
 		}
-		if(ConfigHandler.features().getBoolean("AntiSwear")) {
+		if(ConfigHandler.instance().features().getBoolean("AntiSwear")) {
 			if ((TextUtils.containsSwear(event.getMessage()) || TextUtils.containsSwear(event.getMessage())) && !p.hasPermission("AllInOne.swear")) {
 				CommandLog.addChatLog(ChatColor.BLUE + p.getName() + ChatColor.WHITE + " tried to swear: " + ChatColor.BLUE + event.getMessage());
 				event.setCancelled(true);
@@ -32,7 +32,7 @@ public class ChatListener implements Listener {
 
 	@EventHandler
 	public void color(final AsyncPlayerChatEvent event) {
-		if(ConfigHandler.features().getBoolean("ChatColor")) {
+		if(ConfigHandler.instance().features().getBoolean("ChatColor")) {
 			if (event.getPlayer().hasPermission("AllInOne.chatColor")) {
 				event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 			}
@@ -41,7 +41,7 @@ public class ChatListener implements Listener {
 
 	@EventHandler
 	public void translatePlayer(final AsyncPlayerChatEvent event) {
-		if(ConfigHandler.features().getBoolean("PlayerTranslator")) {
+		if(ConfigHandler.instance().features().getBoolean("PlayerTranslator")) {
 			if (event.getMessage().contains("{player}") && event.getPlayer().hasPermission("AllInOne.playerChat")) {
 				event.setCancelled(true);
 				if (event.getPlayer().hasPermission("AllInOne.chatColor")) {

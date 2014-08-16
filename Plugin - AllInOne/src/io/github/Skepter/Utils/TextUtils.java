@@ -261,7 +261,7 @@ public class TextUtils {
 	 * @param tag - <tag>(.+?)</tag>
 	 * @return */
 	public static List<String> multipleStringBetween(final String str, final String beginTag, final String endTag) {
-		Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
+		final Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
 		final List<String> tagValues = new ArrayList<String>();
 		final Matcher matcher = regexTag.matcher(str);
 		while (matcher.find()) {
@@ -270,7 +270,7 @@ public class TextUtils {
 		return tagValues;
 	}
 	
-	public static String formatDate(long l) {
+	public static String formatDate(final long l) {
 		TimeUnit.MILLISECONDS.toDays(l);
 		return "";
 	}

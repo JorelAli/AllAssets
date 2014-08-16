@@ -38,7 +38,7 @@ public class CommandAFK implements Listener {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player) event.getEntity();
 			final User user = new User(player);
-			if (ConfigHandler.config().getBoolean("afkProtect") && user.isAFK()) {
+			if (ConfigHandler.instance().config().getBoolean("afkProtect") && user.isAFK()) {
 				event.setDamage(0.0D);
 				event.setCancelled(false);
 			}

@@ -29,10 +29,10 @@ public class CommandAllInOne {
 		/* Don't forget to remove me! */
 		final User user = new User(args.getPlayer());
 		final Long l = user.getTotalTimePlayed();
-		long days = TimeUnit.MILLISECONDS.toDays(l);
-		long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
-		long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
-		long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
+		final long days = TimeUnit.MILLISECONDS.toDays(l);
+		final long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
+		final long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
+		final long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
 		args.getPlayer().sendMessage(AllInOne.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
 		return;
 	}
