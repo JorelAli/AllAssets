@@ -3,7 +3,6 @@ package io.github.Skepter.Listeners;
 import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Users.User;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -18,12 +17,11 @@ public class ServerListingListener implements Listener {
 
 	@EventHandler
 	public void ping(final ServerListPingEvent event) {
-		final String search = compileInetAddress(event.getAddress());
 		final UUIDData data = new UUIDData();
 		for (UUID u : data.getValues()) {
 			User user = new User(Bukkit.getOfflinePlayer(u));
-			if (getLastIP(user).contains(search)) {
-				event.setMotd(ChatColor.AQUA + "Welcome to the server " + data.getReversedUUIDMap().get(user.getUUID()) + "! You have joined " + user.getJoinCount() + " times!");
+			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
+				event.setMotd(ChatColor.AQUA + "Welcome " + data.getReversedUUIDMap().get(user.getUUID()) + "! You have joined " + user.getJoinCount() + " times!");
 				return;
 			}
 		}
@@ -31,7 +29,7 @@ public class ServerListingListener implements Listener {
 
 	@EventHandler
 	public void login(final AsyncPlayerPreLoginEvent event) {
-		final String save = compileInetAddress(event.getAddress());
+		final String save = event.getAddress().toString().substring(1, event.getAddress().toString().length());
 		final User user = new User(event.getName());
 		final ArrayList<String> s = new ArrayList<String>();
 		s.add(save);
@@ -42,9 +40,5 @@ public class ServerListingListener implements Listener {
 		if (!user.IPs().isEmpty())
 			return user.IPs().get(user.IPs().size() - 1);
 		return null;
-	}
-
-	private String compileInetAddress(final InetAddress address) {
-		return address.toString().substring(1).replace(".", "_");
 	}
 }

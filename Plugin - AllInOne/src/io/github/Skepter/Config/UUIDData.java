@@ -61,7 +61,7 @@ public class UUIDData {
 		final Map<String, UUID> uuidMap = new HashMap<String, UUID>();
 		final Map<String, Object> objectMap = getDataFile().getValues(false);
 		for(final Map.Entry<String, Object> entry : objectMap.entrySet()){
-			uuidMap.put(entry.getKey(), (UUID) entry.getValue());
+			uuidMap.put(entry.getKey(), UUID.fromString(String.valueOf(entry.getValue())));
 		}
 		return uuidMap;
 	}
