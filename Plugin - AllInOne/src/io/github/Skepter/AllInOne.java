@@ -88,8 +88,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 // onJoinAction - fireworks, command etc.
 // firework interface like Enchant - use For loops to generate it
 
-// custom beacon?
-
 // Explore the ResourceBundle for setting Locale
 // A way to mute a player which stops all other chat being sent to that player
 // except admin
@@ -104,6 +102,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // Deleting plugins is much harder than I thought...
 // plugin config manager thingy
 // I'm sorry everyone who doesn't speak English. It's an English plugin.
+// built in announcer
 public class AllInOne extends JavaPlugin {
 
 	/* These will be in the messages.yml (when I feel ready to do so) */

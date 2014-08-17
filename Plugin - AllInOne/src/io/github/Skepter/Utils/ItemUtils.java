@@ -1,7 +1,10 @@
 package io.github.Skepter.Utils;
 
+import java.util.Arrays;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtils {
 
@@ -51,6 +54,20 @@ public class ItemUtils {
 		} else {
 			return false;
 		}
+	}
+	
+	public static ItemStack setDisplayName(final ItemStack itemStack, String name) {
+		ItemMeta meta = itemStack.getItemMeta();
+		meta.setDisplayName(name);
+		itemStack.setItemMeta(meta);
+		return itemStack;
+	}
+	
+	public static ItemStack setLore(final ItemStack itemStack, String[] lore) {
+		ItemMeta meta = itemStack.getItemMeta();
+		meta.setLore(Arrays.asList(lore));
+		itemStack.setItemMeta(meta);
+		return itemStack;
 	}
 
 }
