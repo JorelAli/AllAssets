@@ -1,0 +1,1 @@
+This is the builds folder, where you are able to download the latest builds of AIO.
