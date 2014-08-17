@@ -64,7 +64,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** AllInOne plugin, version 1.0
+/** AllInOne plugin, version 0.1
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -98,9 +98,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 // delete plugin command (command that deletes plugins) + questioner
 // command allinone pluginFile instead of devPluginFile
 // how many unique players
+
+/* May remove this in the end -.- */
 // close the classloader when deleting plugins & run system.gc to clean it up
 // Deleting plugins is much harder than I thought...
+
 // plugin config manager thingy
+
 // I'm sorry everyone who doesn't speak English. It's an English plugin.
 // built in announcer
 public class AllInOne extends JavaPlugin {
@@ -143,6 +147,7 @@ public class AllInOne extends JavaPlugin {
 			getLogger().info("Vault has been found and hooked into successfully");
 		}
 
+		/* GhostFactory temporarily disabled since it made an error somewhere -.- */
 		//ghostFactory = new GhostFactory(this);
 		framework.registerCommands(this);
 

@@ -135,7 +135,7 @@ public class TextUtils {
 		return ChatColor.BLUE + "[" + ChatColor.AQUA + s + ChatColor.BLUE + "]";
 	}
 
-	public static <K> void paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
+	public static void paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
 		final ChatColor a = ChatColor.AQUA;
@@ -148,7 +148,13 @@ public class TextUtils {
 
 		final int amountOfPages = textData.size() / pageSize;
 		final int amountOfLinesOfExtraData = textData.size() % pageSize;
-		pages.put(1, textData.subList(0, pageSize - 1));
+
+		/* error could appear here -.- */
+		if (textData.size() < pageSize)
+			pages.put(1, textData);
+		else
+			pages.put(1, textData.subList(0, pageSize - 1));
+
 		for (int i = 2; i < amountOfPages; i++) {
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
 		}
@@ -159,21 +165,13 @@ public class TextUtils {
 		}
 
 		sender.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
-		for (final String s : pages.get(pageNumberToShow)) {
+		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
-		}
 		return;
 	}
 
-	/** Pagination. Sends data to a player in an organised format
-	 * 
-	 * @param player - The player to send the data to
-	 * @param textData - The List which contains the data. Each element in the
-	 * string is a new line
-	 * @param pageSize - The size of the amount of data to send. (Use 10 if
-	 * unsure)
-	 * @param pageNumberToShow - The number of the page to show to the player.
-	 * Normally defined in a command with an argument number */
+	/* One of these pagination ones are deprecated and I can't remember which one! */
+	@Deprecated
 	public static void paginate(final Player player, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
@@ -270,6 +268,8 @@ public class TextUtils {
 		return tagValues;
 	}
 
+	/*TODO */
+	@Deprecated
 	public static String formatDate(final long l) {
 		TimeUnit.MILLISECONDS.toDays(l);
 		return "";

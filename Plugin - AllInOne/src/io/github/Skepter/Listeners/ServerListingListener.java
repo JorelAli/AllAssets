@@ -21,6 +21,7 @@ public class ServerListingListener implements Listener {
 		for (UUID u : data.getValues()) {
 			User user = new User(Bukkit.getOfflinePlayer(u));
 			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
+				/* Dump this into Messages.yml */
 				event.setMotd(ChatColor.AQUA + "Welcome " + data.getReversedUUIDMap().get(user.getUUID()) + "! You have joined " + user.getJoinCount() + " times!");
 				return;
 			}
