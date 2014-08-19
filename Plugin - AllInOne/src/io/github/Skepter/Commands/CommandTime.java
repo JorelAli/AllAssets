@@ -53,28 +53,32 @@ public class CommandTime {
 	@CommandHandler(name = "day", permission = "AllInOne.time", description = "Sets the time to day", usage = "Use <command>", isListed = false)
 	public void onCommandDay(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		player.getWorld().setThunderDuration(1000);
+		for (final World world : Bukkit.getWorlds())
+			world.setTime(1000);
 		player.sendMessage(AllInOne.instance().title + "Time set to day");
 	}
 
 	@CommandHandler(name = "midday", permission = "AllInOne.time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
 	public void onCommandMidday(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		player.getWorld().setThunderDuration(6000);
+		for (final World world : Bukkit.getWorlds())
+			world.setTime(6000);
 		player.sendMessage(AllInOne.instance().title + "Time set to midday");
 	}
 
 	@CommandHandler(name = "night", permission = "AllInOne.time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
 	public void onCommandNight(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		player.getWorld().setThunderDuration(14000);
+		for (final World world : Bukkit.getWorlds())
+			world.setTime(14000);
 		player.sendMessage(AllInOne.instance().title + "Time set to night");
 	}
 
 	@CommandHandler(name = "midnight", permission = "AllInOne.time", description = "Sets the time to midnight", usage = "Use <command>", isListed = false)
 	public void onCommandMidnight(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		player.getWorld().setThunderDuration(18000);
+		for (final World world : Bukkit.getWorlds())
+			world.setTime(18000);
 		player.sendMessage(AllInOne.instance().title + "Time set to midnight");
 	}
 
