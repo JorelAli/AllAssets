@@ -9,6 +9,7 @@ These builds are 'for experimental purposes' and SHOULD NOT be used on a proper 
 The builds are allowed for these purposes (and these only!):
 * Experimenting with the plugin (and getting to know it)
 * Seeing the code in action
+
 These builds are NOT to be used for these purposes:
 * Distribution (so you can't give it to other people, but you can give them the link)
 * Making money from it (So you can't sell it to other people, it's FREE FOR ALL)
