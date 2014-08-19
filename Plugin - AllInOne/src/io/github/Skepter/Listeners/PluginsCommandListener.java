@@ -31,36 +31,28 @@ public class PluginsCommandListener implements Listener {
 				event.getPlayer().sendMessage(TextUtils.title("Plugins"));
 				event.getPlayer().sendMessage(AllInOne.instance().title + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
 				final List<String> pluginList = new ArrayList<String>();
-				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
+				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 					if(ConfigHandler.instance().features().getBoolean("PluginsShowAuthors")) {
 						String authors = "";
-						for (final String s : plugin.getDescription().getAuthors()) {
+						for (final String s : plugin.getDescription().getAuthors())
 							authors = authors + s + ", ";
-						}
-						if(authors.length() != 0) {
+						if(authors.length() != 0)
 							authors = authors.substring(0, authors.length() - 2);
-						} else {
+						else
 							authors = "undefined";
-						}
-						if (plugin.isEnabled()) {
+						if (plugin.isEnabled())
 							pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);
-						} else {
+						else
 							pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);
-						}
-					} else {
-						if (plugin.isEnabled()) {
-							pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
-						} else {
-							pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
-						}
-					}
-				}
+					} else if (plugin.isEnabled())
+						pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
+					else
+						pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
 				Collections.sort(pluginList);
 				for (final String s : pluginList) {
 					final String[] str = s.split("\n");
-					for (final String m : str) {
+					for (final String m : str)
 						event.getPlayer().sendMessage(m);
-					}
 				}
 
 			}

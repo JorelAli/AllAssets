@@ -7,7 +7,7 @@ public class TPS implements Runnable {
 
 	public static double getTPSperc() {
 		final double tps = TPS.getTPS();
-	    final double lag = Math.round((1.0D - tps / 20.0D) * 100.0D);
+	    final double lag = Math.round((1.0D - (tps / 20.0D)) * 100.0D);
 	    return lag;
 	}
 	
@@ -16,9 +16,8 @@ public class TPS implements Runnable {
 	}
 
 	public static double getTPS(final int ticks) {
-		if (TICK_COUNT < ticks) {
+		if (TICK_COUNT < ticks)
 			return 20.0D;
-		}
 		final int target = (TICK_COUNT - 1 - ticks) % TICKS.length;
 		final long elapsed = System.currentTimeMillis() - TICKS[target];
 
@@ -26,7 +25,7 @@ public class TPS implements Runnable {
 	}
 
 	public static long getElapsed(final int tickID) {
-		if (TICK_COUNT - tickID >= TICKS.length) {
+		if ((TICK_COUNT - tickID) >= TICKS.length) {
 		}
 
 		final long time = TICKS[(tickID % TICKS.length)];

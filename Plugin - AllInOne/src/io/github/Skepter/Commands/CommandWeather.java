@@ -16,7 +16,7 @@ public class CommandWeather {
 	@CommandHandler(name = "weather", permission = "AllInOne.weather", description = "Sets the world weather", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(args.getArgs().length == 1) {
+		if(args.getArgs().length == 1)
 			switch(args.getArgs()[0].toLowerCase()) {
 			case "downfall":
 			case "rain":
@@ -28,7 +28,6 @@ public class CommandWeather {
 				player.setPlayerWeather(WeatherType.CLEAR);
 				player.sendMessage(AllInOne.instance().title + "Weather set to clear");
 			}
-		}
 		return;
 	}
 

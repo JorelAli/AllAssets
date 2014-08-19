@@ -10,13 +10,11 @@ public class MathUtils {
 	 * @return true/false depending if it is or is not
 	 */
 	public static boolean between(final int i, final int min, final int max) {
-		for (int x = min; min < max; x++) {
-			if (x == i) {
+		for (int x = min; min < max; x++)
+			if (x == i)
 				return true;
-			} else {
+			else
 				continue;
-			}
-		}
 		return false;
 	}
 
@@ -28,9 +26,8 @@ public class MathUtils {
 	 */
 	public static double round(final double d, final int n) {
 		final StringBuilder b = new StringBuilder("1");
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
 			b.append("0");
-		}
 		final int dbl = Integer.valueOf(b.toString());
 		final double result = Math.round(d * dbl) / dbl;
 		return result;

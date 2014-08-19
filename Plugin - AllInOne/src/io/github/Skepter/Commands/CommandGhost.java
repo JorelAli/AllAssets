@@ -16,7 +16,7 @@ public class CommandGhost {
 
 	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "AllInOne.ghost", description = "Allows you to turn into a ghost", usage = "Use <command>")
 	public void command(final CommandArgs args) {
-		Player player = args.getPlayer();
+		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {
 			if (AllInOne.instance().ghostFactory.isGhost(player)) {
 				AllInOne.instance().ghostFactory.setGhost(player, false);
@@ -28,7 +28,7 @@ public class CommandGhost {
 				return;
 			}
 		} else if (args.getArgs().length == 1) {
-			Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
 			if (AllInOne.instance().ghostFactory.isGhost(target)) {
 				AllInOne.instance().ghostFactory.setGhost(target, false);
 				target.sendMessage(AllInOne.instance().title + "Ghost mode disabled");

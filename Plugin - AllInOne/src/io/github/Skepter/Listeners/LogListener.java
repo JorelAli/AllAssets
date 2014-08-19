@@ -77,39 +77,37 @@ public class LogListener implements Filter {
 	@Override
 	public Result filter(final LogEvent event) {
 		final String msg1 = event.getMessage().toString();
-		final String msg = msg1.substring(22, msg1.length() -1);
-		for(final UUID u : CommandConsoleLog.players) {
+		final String msg = msg1.substring(22, msg1.length() - 1);
+		for (final UUID u : CommandConsoleLog.players)
 			Bukkit.getPlayer(u).sendMessage(ChatColor.BLUE + "[" + ChatColor.AQUA + "Console" + ChatColor.BLUE + "]" + ChatColor.WHITE + " " + ChatColor.GRAY + msg);
-		}
-		if (msg.contains("Error occurred while enabling") && msg.contains("(Is it up to date?)")) {
-			final String result = TextUtils.stringBetween(msg, "Error occurred while enabling", "(Is it up to date?)");
-			// String result =
-			// msg.substring(msg.indexOf("Error occurred while enabling") +
-			// 30, msg.indexOf("(Is it up to date?)") - 1);
-			CommandLog.addErrorLog("Enabling error: " + result);
-		}
-		if (msg.contains("Could not load") && msg.contains("in folder")) {
-			CommandLog.addErrorLog("Loading error: " + msg);
-		}
-		for (final String s : javaExceptions) {
-			if (msg.contains(s)) {
+		//		if (msg.contains("Error occurred while enabling") && msg.contains("(Is it up to date?)")) {
+		//			final String result = TextUtils.stringBetween(msg, "Error occurred while enabling", "(Is it up to date?)");
+		//			// String result =
+		//			// msg.substring(msg.indexOf("Error occurred while enabling") +
+		//			// 30, msg.indexOf("(Is it up to date?)") - 1);
+		//			CommandLog.addErrorLog("Enabling error: " + result);
+		//		}
+		//		if (msg.contains("Could not load") && msg.contains("in folder")) {
+		//			CommandLog.addErrorLog("Loading error: " + msg);
+		//		}
+		if (msg.contains("at ") && msg.contains(".java:"))
+			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
+				return null;
+			else
+				CommandLog.addErrorLog(msg.replace(TextUtils.stringBetween(msg, "(", ")"), AllInOne.instance().houseStyleColor + TextUtils.stringBetween(msg, "(", ")") + ChatColor.RESET));
+		for (final String s : javaExceptions)
+			if (msg.contains(s))
 				CommandLog.addErrorLog(msg);
-			}
-		}
-		for (final String s : bukkitExceptions) {
-			if (msg.contains(s)) {
+		for (final String s : bukkitExceptions)
+			if (msg.contains(s))
 				CommandLog.addErrorLog(msg);
-			}
-		}
 		return null;
 	}
 
 	public static void notifyPlayers(final String s) {
-		for (final Player p : Bukkit.getOnlinePlayers()) {
-			if (p.hasPermission("AllInOne.notify")) {
+		for (final Player p : Bukkit.getOnlinePlayers())
+			if (p.hasPermission("AllInOne.notify"))
 				p.sendMessage(s);
-			}
-		}
 	}
 
 	@Override

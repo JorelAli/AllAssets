@@ -30,28 +30,25 @@ public class PlayerData {
 	}
 
 	public FileConfiguration getPlayerData() {
-		if (fileConfiguration == null) {
+		if (fileConfiguration == null)
 			reloadPlayerData();
-		}
 		return fileConfiguration;
 	}
 
 	public void savePlayerData() {
-		if (fileConfiguration == null || dataFile == null) {
+		if ((fileConfiguration == null) || (dataFile == null))
 			return;
-		} else {
+		else
 			try {
 				getPlayerData().save(dataFile);
 			} catch (final IOException ex) {
 				Bukkit.getLogger().log(Level.SEVERE, "Error saving player data file!");
 			}
-		}
 	}
 
 	public void saveDefaultPlayerData() {
-		if (dataFile.exists()) {
+		if (dataFile.exists())
 			return;
-		}
 		dataFile.getParentFile().mkdirs();
 		try {
 			dataFile.createNewFile();

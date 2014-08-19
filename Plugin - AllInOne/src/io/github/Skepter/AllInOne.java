@@ -139,9 +139,9 @@ public class AllInOne extends JavaPlugin {
 		framework = new CommandFramework(this);
 		new ConfigHandler();
 
-		if (Bukkit.getPluginManager().getPlugin("Vault") == null || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
+		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled())
 			getLogger().warning("Vault not found, so some features may not be available");
-		} else {
+		else {
 			hasVault = true;
 			setupEconomy();
 			setupChat();
@@ -245,17 +245,15 @@ public class AllInOne extends JavaPlugin {
 
 		final UUIDData data = new UUIDData();
 		data.reloadDataFile();
-		for (final Player p : Bukkit.getOnlinePlayers()) {
+		for (final Player p : Bukkit.getOnlinePlayers())
 			data.getDataFile().set(p.getName(), p.getUniqueId().toString());
-		}
 
 		/* Start TPS counter */
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 100L, 1L);
 
 		try {
-			if (new File(getDataFolder(), "tempTimeMap.bin").exists()) {
+			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
 				JavaUtils.load(new File(getDataFolder(), "tempTimeMap.bin"));
-			}
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -274,9 +272,8 @@ public class AllInOne extends JavaPlugin {
 		CommandConsoleLog.players.clear();
 		Bukkit.getServer().getScheduler().cancelTasks(this);
 		try {
-			if (!tempTimeMap.isEmpty()) {
+			if (!tempTimeMap.isEmpty())
 				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
-			}
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -295,26 +292,23 @@ public class AllInOne extends JavaPlugin {
 
 	private boolean setupEconomy() {
 		final RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-		if (economyProvider != null) {
+		if (economyProvider != null)
 			economy = economyProvider.getProvider();
-		}
 
 		return (economy != null);
 	}
 
 	private boolean setupPermissions() {
 		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-		if (permissionProvider != null) {
+		if (permissionProvider != null)
 			permission = permissionProvider.getProvider();
-		}
 		return (permission != null);
 	}
 
 	private boolean setupChat() {
 		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
-		if (chatProvider != null) {
+		if (chatProvider != null)
 			chat = chatProvider.getProvider();
-		}
 
 		return (chat != null);
 	}

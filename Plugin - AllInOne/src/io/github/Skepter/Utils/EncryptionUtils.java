@@ -12,20 +12,18 @@ public class EncryptionUtils {
 	public byte[] cipherText = null;;
 
 	public EncryptionUtils(final String key, final String stringToEncrypt, final byte[] bytesToDecrypt) {
-		if(encryptionKey != null) {
+		if(encryptionKey != null)
 			encryptionKey = key;
-		}
 		s = stringToEncrypt;
 		cipherText = bytesToDecrypt;
 	}
 	
 	public byte[] encrypt() throws Exception {
-		if(!(s.length() % 16 == 0)) {
-			final int amountToAdd = (16 - s.length() % 16);
+		if(!((s.length() % 16) == 0)) {
+			final int amountToAdd = (16 - (s.length() % 16));
 			String spaces = "";
-			for(int i = 0; i < amountToAdd; i++) {
+			for(int i = 0; i < amountToAdd; i++)
 				spaces = spaces + " ";
-			}
 			s = s + spaces;
 		}
 		final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");

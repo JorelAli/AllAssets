@@ -20,9 +20,8 @@ public class CommandForceChat {
 			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
 			final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
 			target.chat(s);
-		} else {
+		} else
 			ErrorUtils.notEnoughArguments(args.getPlayer());
-		}
 		return;
 	}
 

@@ -18,8 +18,8 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void ping(final ServerListPingEvent event) {
 		final UUIDData data = new UUIDData();
-		for (UUID u : data.getValues()) {
-			User user = new User(Bukkit.getOfflinePlayer(u));
+		for (final UUID u : data.getValues()) {
+			final User user = new User(Bukkit.getOfflinePlayer(u));
 			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 				/* Dump this into Messages.yml */
 				event.setMotd(ChatColor.AQUA + "Welcome " + data.getReversedUUIDMap().get(user.getUUID()) + "! You have joined " + user.getJoinCount() + " times!");

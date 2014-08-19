@@ -16,14 +16,12 @@ public class CommandClearchat {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {
-			for (int i = 0; i < 120; i++) {
+			for (int i = 0; i < 120; i++)
 				player.sendMessage("");
-			}
 			return;
 		} else if (args.getArgs()[0].equalsIgnoreCase("all")) {
-			for (int i = 0; i < 120; i++) {
+			for (int i = 0; i < 120; i++)
 				Bukkit.broadcastMessage("");
-			}
 			return;
 		}
 	}

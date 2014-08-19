@@ -92,7 +92,7 @@ public abstract class ReflectionUtilsDarkBlade {
 	}
  
 	public static Class<?> getClass(final String name, final DynamicPackage pack, final String subPackage) throws Exception {
-		return Class.forName(pack + (subPackage != null && subPackage.length() > 0 ? "." + subPackage : "") + "." + name);
+		return Class.forName(pack + ((subPackage != null) && (subPackage.length() > 0) ? "." + subPackage : "") + "." + name);
 	}
  
 	public static Class<?> getClass(final String name, final DynamicPackage pack) throws Exception {

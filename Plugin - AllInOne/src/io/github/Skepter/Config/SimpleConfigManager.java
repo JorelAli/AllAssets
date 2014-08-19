@@ -39,9 +39,8 @@ public class SimpleConfigManager {
 		if (!file.exists()) {
 			this.prepareFile(filePath);
 
-			if (header != null && header.length != 0) {
+			if ((header != null) && (header.length != 0))
 				this.setHeader(file, header);
-			}
 
 		}
 
@@ -70,23 +69,20 @@ public class SimpleConfigManager {
 	 */
 	private File getConfigFile(final String file) {
 
-		if (file.isEmpty() || file == null) {
+		if (file.isEmpty() || (file == null))
 			return null;
-		}
 
 		File configFile;
 
 		if (file.contains("/")) {
 
-			if (file.startsWith("/")) {
+			if (file.startsWith("/"))
 				configFile = new File(plugin.getDataFolder() + file.replace("/", File.separator));
-			} else {
+			else
 				configFile = new File(plugin.getDataFolder() + File.separator + file.replace("/", File.separator));
-			}
 
-		} else {
+		} else
 			configFile = new File(plugin.getDataFolder(), file);
-		}
 
 		return configFile;
 
@@ -103,17 +99,15 @@ public class SimpleConfigManager {
 
 		final File file = this.getConfigFile(filePath);
 
-		if (file.exists()) {
+		if (file.exists())
 			return;
-		}
 
 		try {
 			file.getParentFile().mkdirs();
 			file.createNewFile();
 
-			if (resource != null && !resource.isEmpty()) {
+			if ((resource != null) && !resource.isEmpty())
 				this.copyResource(plugin.getResource(resource), file);
-			}
 
 		} catch (final IOException e) {
 			e.printStackTrace();
@@ -139,27 +133,24 @@ public class SimpleConfigManager {
 	 */
 	public void setHeader(final File file, final String[] header) {
 
-		if (!file.exists()) {
+		if (!file.exists())
 			return;
-		}
 
 		try {
 			String currentLine;
 			final StringBuilder config = new StringBuilder("");
 			final BufferedReader reader = new BufferedReader(new FileReader(file));
 
-			while ((currentLine = reader.readLine()) != null) {
+			while ((currentLine = reader.readLine()) != null)
 				config.append(currentLine + "\n");
-			}
 
 			reader.close();
 			config.append("# +----------------------------------------------------+ #\n");
 
 			for (final String line : header) {
 
-				if (line.length() > 50) {
+				if (line.length() > 50)
 					continue;
-				}
 
 				final int lenght = (50 - line.length()) / 2;
 				final StringBuilder finalLine = new StringBuilder(line);
@@ -171,9 +162,8 @@ public class SimpleConfigManager {
 					finalLine.reverse();
 				}
 
-				if (line.length() % 2 != 0) {
+				if ((line.length() % 2) != 0)
 					finalLine.append(" ");
-				}
 
 				config.append("# < " + finalLine.toString() + " > #\n");
 
@@ -201,9 +191,8 @@ public class SimpleConfigManager {
 	 */
 	public InputStream getConfigContent(final File file) {
 
-		if (!file.exists()) {
+		if (!file.exists())
 			return null;
-		}
 
 		try {
 			int commentNum = 0;
@@ -215,18 +204,14 @@ public class SimpleConfigManager {
 			final StringBuilder whole = new StringBuilder("");
 			final BufferedReader reader = new BufferedReader(new FileReader(file));
 
-			while ((currentLine = reader.readLine()) != null) {
-
+			while ((currentLine = reader.readLine()) != null)
 				if (currentLine.startsWith("#")) {
 					addLine = currentLine.replaceFirst("#", pluginName + "_COMMENT_" + commentNum + ":");
 					whole.append(addLine + "\n");
 					commentNum++;
 
-				} else {
+				} else
 					whole.append(currentLine + "\n");
-				}
-
-			}
 
 			final String config = whole.toString();
 			final InputStream configStream = new ByteArrayInputStream(config.getBytes(Charset.forName("UTF-8")));
@@ -250,9 +235,8 @@ public class SimpleConfigManager {
 	 */
 	private int getCommentsNum(final File file) {
 
-		if (!file.exists()) {
+		if (!file.exists())
 			return 0;
-		}
 
 		try {
 			int comments = 0;
@@ -260,13 +244,9 @@ public class SimpleConfigManager {
 
 			final BufferedReader reader = new BufferedReader(new FileReader(file));
 
-			while ((currentLine = reader.readLine()) != null) {
-
-				if (currentLine.startsWith("#")) {
+			while ((currentLine = reader.readLine()) != null)
+				if (currentLine.startsWith("#"))
 					comments++;
-				}
-
-			}
 
 			reader.close();
 			return comments;
@@ -297,8 +277,7 @@ public class SimpleConfigManager {
 		final String[] lines = configString.split("\n");
 		final StringBuilder config = new StringBuilder("");
 
-		for (final String line : lines) {
-
+		for (final String line : lines)
 			if (line.startsWith(this.getPluginName() + "_COMMENT")) {
 				final String comment = "#" + line.trim().substring(line.indexOf(":") + 1);
 
@@ -331,17 +310,15 @@ public class SimpleConfigManager {
 
 					String normalComment;
 
-					if (comment.startsWith("# ' ")) {
+					if (comment.startsWith("# ' "))
 						normalComment = comment.substring(0, comment.length() - 1).replaceFirst("# ' ", "# ");
-					} else {
+					else
 						normalComment = comment;
-					}
 
-					if (lastLine == 0) {
+					if (lastLine == 0)
 						config.append(normalComment + "\n");
-					} else if (lastLine == 1) {
+					else if (lastLine == 1)
 						config.append("\n" + normalComment + "\n");
-					}
 
 					lastLine = 0;
 
@@ -351,8 +328,6 @@ public class SimpleConfigManager {
 				config.append(line + "\n");
 				lastLine = 1;
 			}
-
-		}
 
 		return config.toString();
 
@@ -399,9 +374,8 @@ public class SimpleConfigManager {
 			int lenght;
 			final byte[] buf = new byte[1024];
 
-			while ((lenght = resource.read(buf)) > 0) {
+			while ((lenght = resource.read(buf)) > 0)
 				out.write(buf, 0, lenght);
-			}
 
 			out.close();
 			resource.close();

@@ -17,7 +17,7 @@ public class CommandPTime {
 	@CommandHandler(name = "ptime", aliases = { "playertime" }, permission = "AllInOne.ptime", description = "Sets your time", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(args.getArgs().length == 1) {
+		if(args.getArgs().length == 1)
 			try {
 				player.setPlayerTime(Long.parseLong(args.getArgs()[0]), false);
 				player.sendMessage(AllInOne.instance().title + "Time set to " + args.getArgs()[0]);
@@ -42,7 +42,6 @@ public class CommandPTime {
 				}
 				return;
 			}
-		}
 		if(args.getArgs().length == 2) {
 			Player target = null;
 			try {

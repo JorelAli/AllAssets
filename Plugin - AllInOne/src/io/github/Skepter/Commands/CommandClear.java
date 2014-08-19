@@ -18,23 +18,21 @@ public class CommandClear {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if(ConfigHandler.instance().config().getBoolean("clearArmor")) {
-			if(args.getArgs().length == 0) {
+			if(args.getArgs().length == 0)
 				player.getInventory().clear();
-			} else if(args.getArgs().length == 1) {
+			else if(args.getArgs().length == 1) {
 				final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
 				target.getInventory().clear();
 			}
-		} else {
-			if(args.getArgs().length == 0) {
-				final ItemStack[] temp = player.getInventory().getArmorContents();
-				player.getInventory().clear();
-				player.getInventory().setArmorContents(temp);
-			} else if(args.getArgs().length == 1) {
-				final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
-				final ItemStack[] temp = target.getInventory().getArmorContents();
-				target.getInventory().clear();
-				target.getInventory().setArmorContents(temp);
-			}
+		} else if(args.getArgs().length == 0) {
+			final ItemStack[] temp = player.getInventory().getArmorContents();
+			player.getInventory().clear();
+			player.getInventory().setArmorContents(temp);
+		} else if(args.getArgs().length == 1) {
+			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+			final ItemStack[] temp = target.getInventory().getArmorContents();
+			target.getInventory().clear();
+			target.getInventory().setArmorContents(temp);
 		}
 		return;
 	}

@@ -30,44 +30,38 @@ public class CommandLog {
 		final Player player = args.getPlayer();
 
 		player.sendMessage(TextUtils.title("Error logs"));
-		for (final String s : errorLog) {
+		for (final String s : errorLog)
 			player.sendMessage(s);
-		}
 		player.sendMessage(TextUtils.title("Chat logs"));
-		for (final String s : chatLog) {
+		for (final String s : chatLog)
 			player.sendMessage(s);
-		}
 		player.sendMessage(TextUtils.title("Other logs"));
-		for (final String s : otherLog) {
+		for (final String s : otherLog)
 			player.sendMessage(s);
-		}
 	}
 
 	public static void addChatLog(final String s) {
 		final LogEvent event = new LogEvent(s, LogType.CHAT);
 		Bukkit.getServer().getPluginManager().callEvent(event);
 		chatLog.add(s);
-		if (chatLog.size() == max) {
+		if (chatLog.size() == max)
 			chatLog.remove(1);
-		}
 	}
 
 	public static void addErrorLog(final String s) {
 		final LogEvent event = new LogEvent(s, LogType.ERROR);
 		Bukkit.getServer().getPluginManager().callEvent(event);
 		errorLog.add(s);
-		if (errorLog.size() == max) {
+		if (errorLog.size() == max)
 			errorLog.remove(1);
-		}
 	}
 
 	public static void addOtherLog(final String s) {
 		final LogEvent event = new LogEvent(s, LogType.OTHER);
 		Bukkit.getServer().getPluginManager().callEvent(event);
 		otherLog.add(s);
-		if (otherLog.size() == max) {
+		if (otherLog.size() == max)
 			otherLog.remove(1);
-		}
 	}
 
 }

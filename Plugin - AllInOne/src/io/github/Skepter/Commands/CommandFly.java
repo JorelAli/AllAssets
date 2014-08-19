@@ -30,7 +30,7 @@ public class CommandFly {
 			}
 		} else if (args.getArgs().length == 1) {
 			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
-			if(target != null) {
+			if(target != null)
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
 					player.setFlying(false);
@@ -40,8 +40,7 @@ public class CommandFly {
 					target.setAllowFlight(true);
 					target.sendMessage(AllInOne.instance().title + "Flying enabled");
 					return;
-				}
-			}				
+				}				
 		} else {
 			ErrorUtils.tooManyArguments(player);
 			return;

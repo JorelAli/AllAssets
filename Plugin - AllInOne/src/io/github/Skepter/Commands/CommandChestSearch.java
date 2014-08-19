@@ -39,30 +39,23 @@ public class CommandChestSearch {
 			//of placed chests. or hook into LWC or something
 			
 			final ArrayList<Chest> chests = new ArrayList<Chest>();
-			for(final Chunk chunk : player.getWorld().getLoadedChunks()) {
-				for(final BlockState e : chunk.getTileEntities()) {
-					if(e instanceof Chest) {
+			for(final Chunk chunk : player.getWorld().getLoadedChunks())
+				for(final BlockState e : chunk.getTileEntities())
+					if(e instanceof Chest)
 						chests.add((Chest) e);
-					}
-				}
-			}
 			final ArrayList<Location> locatedChests = new ArrayList<Location>();
-			for(final Chest chest : chests) {
+			for(final Chest chest : chests)
 				if(args.getArgs()[0].equalsIgnoreCase("hand")) {
-					if(chest.getInventory().containsAtLeast(player.getItemInHand(), 1)) {
+					if(chest.getInventory().containsAtLeast(player.getItemInHand(), 1))
 						locatedChests.add(chest.getLocation());
-					}
 				} else if(StringUtils.isNumeric(args.getArgs()[0])) {
 					final int i = Integer.parseInt(args.getArgs()[0]);
-					if(chest.getInventory().containsAtLeast(new ItemStack(i), 1)) {
+					if(chest.getInventory().containsAtLeast(new ItemStack(i), 1))
 						locatedChests.add(chest.getLocation());
-					}
 				}
-			}
 			player.sendMessage(AllInOne.instance().title + "Located " + (locatedChests.size()) + " chests");
-			for(final Location loc : locatedChests) {
+			for(final Location loc : locatedChests)
 				player.sendMessage(TextUtils.subTitle("X: " + loc.getX() + " Y: " + loc.getY() + " Z: " + loc.getZ()));
-			}
 		}
 	}
 }

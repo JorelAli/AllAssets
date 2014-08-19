@@ -66,25 +66,17 @@ public class CommandBind implements Listener {
 	@EventHandler
 	public void onInteract(final PlayerInteractEvent event) {
 		if (ConfigHandler.instance().config().getBoolean("bindRight")) {
-			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 				performAction(event.getPlayer());
-			}
-		} else {
-			if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-				performAction(event.getPlayer());
-			}
-		}
+		} else if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+			performAction(event.getPlayer());
 	}
 
 	private void performAction(final Player player) {
-		if (player.getItemInHand().hasItemMeta()) {
-			if(player.getItemInHand().getItemMeta().hasLore()) {
-				for (final String s : player.getItemInHand().getItemMeta().getLore()) {
-					if (s.startsWith("/")) {
+		if (player.getItemInHand().hasItemMeta())
+			if(player.getItemInHand().getItemMeta().hasLore())
+				for (final String s : player.getItemInHand().getItemMeta().getLore())
+					if (s.startsWith("/"))
 						player.performCommand(s.substring(1));
-					}
-				}
-			}
-		}
 	}
 }

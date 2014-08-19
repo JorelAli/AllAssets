@@ -75,12 +75,11 @@ public class DeshtsExperienceUtils {
 	private static void initLookupTables(final int maxLevel) {
 		xpTotalToReachLevel = new int[maxLevel];
 
-		for (int i = 0; i < xpTotalToReachLevel.length; i++) {
+		for (int i = 0; i < xpTotalToReachLevel.length; i++)
 			xpTotalToReachLevel[i] = 
-					i >= 30 ? (int) (3.5 * i * i - 151.5 * i + 2220) :
-						i >= 16 ? (int) (1.5 * i * i - 29.5 * i + 360) : 
+					i >= 30 ? (int) (((3.5 * i * i) - (151.5 * i)) + 2220) :
+						i >= 16 ? (int) (((1.5 * i * i) - (29.5 * i)) + 360) : 
 							17 * i;
-		}
 	}
 
 	/**
@@ -99,7 +98,7 @@ public class DeshtsExperienceUtils {
 		while (curExp <= exp) {
 			curExp += incr;
 			level++;
-			incr += (level % 2 == 0) ? 3 : 4;
+			incr += ((level % 2) == 0) ? 3 : 4;
 		}
 		return level;
 	}
@@ -112,9 +111,8 @@ public class DeshtsExperienceUtils {
 	 */
 	public Player getPlayer() {
 		final Player p = player.get();
-		if (p == null) {
+		if (p == null)
 			throw new IllegalStateException("Player " + playerName + " is not online");
-		}
 		return p;
 	}
 
@@ -166,15 +164,13 @@ public class DeshtsExperienceUtils {
 		final int newLvl = getLevelForExp(xp);
 
 		// Increment level
-		if (curLvl != newLvl) {
+		if (curLvl != newLvl)
 			player.setLevel(newLvl);
-		}
 		// Increment total experience - this should force the server to send an update packet
-		if (xp > base) {
-			player.setTotalExperience(player.getTotalExperience() + xp - (int)base);
-		}
+		if (xp > base)
+			player.setTotalExperience((player.getTotalExperience() + xp) - (int)base);
 
-		final double pct = (base - getXpForLevel(newLvl) + amt) / (getXpNeededToLevelUp(newLvl));
+		final double pct = ((base - getXpForLevel(newLvl)) + amt) / (getXpNeededToLevelUp(newLvl));
 		player.setExp((float) pct);
 	}
 
@@ -232,9 +228,8 @@ public class DeshtsExperienceUtils {
 	 * @throws IllegalArgumentException if the given XP is less than 0
 	 */
 	public int getLevelForExp(final int exp) {
-		if (exp <= 0) {
+		if (exp <= 0)
 			return 0;
-		}
 		if (exp > xpTotalToReachLevel[xpTotalToReachLevel.length - 1]) {
 			// need to extend the lookup tables
 			final int newMax = calculateLevelForExp(exp) * 2;
@@ -254,7 +249,7 @@ public class DeshtsExperienceUtils {
 	 */
 	public int getXpNeededToLevelUp(final int level) {
 		Validate.isTrue(level >= 0, "Level may not be negative.");
-		return level > 30 ? 62 + (level - 30) * 7 : level >= 16 ? 17 + (level - 15) * 3 : 17;
+		return level > 30 ? 62 + ((level - 30) * 7) : level >= 16 ? 17 + ((level - 15) * 3) : 17;
 	}
 
 	/**
@@ -265,10 +260,9 @@ public class DeshtsExperienceUtils {
 	 * @throws IllegalArgumentException if the level is less than 0 or greater than the current hard maximum
 	 */
 	public int getXpForLevel(final int level) {
-		Validate.isTrue(level >= 0 && level <= hardMaxLevel, "Invalid level " + level + "(must be in range 0.." + hardMaxLevel + ")");
-		if (level >= xpTotalToReachLevel.length) {
+		Validate.isTrue((level >= 0) && (level <= hardMaxLevel), "Invalid level " + level + "(must be in range 0.." + hardMaxLevel + ")");
+		if (level >= xpTotalToReachLevel.length)
 			initLookupTables(level * 2);
-		}
 		return xpTotalToReachLevel[level];
 	}
 }

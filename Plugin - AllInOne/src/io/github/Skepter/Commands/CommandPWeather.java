@@ -17,7 +17,7 @@ public class CommandPWeather {
 	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "AllInOne.pweather", description = "Sets your weather", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(args.getArgs().length == 1) {
+		if(args.getArgs().length == 1)
 			switch(args.getArgs()[0].toLowerCase()) {
 			case "downfall":
 			case "rain":
@@ -30,7 +30,6 @@ public class CommandPWeather {
 			case "normal":
 				player.resetPlayerWeather();
 			}
-		}
 		if(args.getArgs().length == 2) {
 			Player target = null;
 			try {

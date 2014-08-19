@@ -48,12 +48,11 @@ public class User implements IUser {
 
 	public User(final UUID u) {
 		try {
-			for (final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
+			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 				if (u.equals(p.getUniqueId())) {
 					player = (Player) p;
 					break;
 				}
-			}
 		} catch (final Exception e) {
 			Bukkit.getLogger().warning("Error trying to get uuid!");
 		}

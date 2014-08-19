@@ -134,14 +134,13 @@ public class ReflectionUtils {
 			try {
 				final Class[] classes = new Class[types.length];
 				int i = 0;
-				for (final Object e : types) {
+				for (final Object e : types)
 					if (e instanceof Class)
 						classes[i++] = (Class) e;
 					else if (e instanceof RefClass)
 						classes[i++] = ((RefClass) e).getRealClass();
 					else
 						classes[i++] = e.getClass();
-				}
 				try {
 					return new RefMethod(clazz.getMethod(name, classes));
 				} catch (final NoSuchMethodException ignored) {
@@ -165,14 +164,13 @@ public class ReflectionUtils {
 			try {
 				final Class[] classes = new Class[types.length];
 				int i = 0;
-				for (final Object e : types) {
+				for (final Object e : types)
 					if (e instanceof Class)
 						classes[i++] = (Class) e;
 					else if (e instanceof RefClass)
 						classes[i++] = ((RefClass) e).getRealClass();
 					else
 						classes[i++] = e.getClass();
-				}
 				try {
 					return new RefConstructor(clazz.getConstructor(classes));
 				} catch (final NoSuchMethodException ignored) {
@@ -195,14 +193,13 @@ public class ReflectionUtils {
 		public RefMethod findMethod(final Object... types) {
 			final Class[] classes = new Class[types.length];
 			int t = 0;
-			for (final Object e : types) {
+			for (final Object e : types)
 				if (e instanceof Class)
 					classes[t++] = (Class) e;
 				else if (e instanceof RefClass)
 					classes[t++] = ((RefClass) e).getRealClass();
 				else
 					classes[t++] = e.getClass();
-			}
 			final List<Method> methods = new ArrayList<>();
 			Collections.addAll(methods, clazz.getMethods());
 			Collections.addAll(methods, clazz.getDeclaredMethods());
@@ -232,13 +229,10 @@ public class ReflectionUtils {
 			final List<Method> methods = new ArrayList<>();
 			Collections.addAll(methods, clazz.getMethods());
 			Collections.addAll(methods, clazz.getDeclaredMethods());
-			for (final Method m : methods) {
-				for (final String name : names) {
-					if (m.getName().equals(name)) {
+			for (final Method m : methods)
+				for (final String name : names)
+					if (m.getName().equals(name))
 						return new RefMethod(m);
-					}
-				}
-			}
 			throw new RuntimeException("no such method");
 		}
 
@@ -270,11 +264,9 @@ public class ReflectionUtils {
 			final List<Method> methods = new ArrayList<>();
 			Collections.addAll(methods, clazz.getMethods());
 			Collections.addAll(methods, clazz.getDeclaredMethods());
-			for (final Method m : methods) {
-				if (type.equals(m.getReturnType())) {
+			for (final Method m : methods)
+				if (type.equals(m.getReturnType()))
 					return new RefMethod(m);
-				}
-			}
 			throw new RuntimeException("no such method");
 		}
 
@@ -291,10 +283,9 @@ public class ReflectionUtils {
 			final List<Constructor> constructors = new ArrayList<>();
 			Collections.addAll(constructors, clazz.getConstructors());
 			Collections.addAll(constructors, clazz.getDeclaredConstructors());
-			for (final Constructor m : constructors) {
+			for (final Constructor m : constructors)
 				if (m.getParameterTypes().length == number)
 					return new RefConstructor(m);
-			}
 			throw new RuntimeException("no such constructor");
 		}
 
@@ -347,11 +338,9 @@ public class ReflectionUtils {
 			final List<Field> fields = new ArrayList<>();
 			Collections.addAll(fields, clazz.getFields());
 			Collections.addAll(fields, clazz.getDeclaredFields());
-			for (final Field f : fields) {
-				if (type.equals(f.getType())) {
+			for (final Field f : fields)
+				if (type.equals(f.getType()))
 					return new RefField(f);
-				}
-			}
 			throw new RuntimeException("no such field");
 		}
 	}

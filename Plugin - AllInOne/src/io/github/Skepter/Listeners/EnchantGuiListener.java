@@ -19,20 +19,18 @@ public class EnchantGuiListener implements Listener {
 		final Player player = (Player) event.getWhoClicked();
 		switch (event.getInventory().getName()) {
 		case "Enchant - Armor":
-			if (!event.getAction().equals(InventoryAction.PICKUP_ONE)) {
+			if (!event.getAction().equals(InventoryAction.PICKUP_ONE))
 				event.setCancelled(true);
-			}
-			if ((event.getSlot() != 52 || event.getSlot() != 53)) {
+			if (((event.getSlot() != 52) || (event.getSlot() != 53))) {
 				final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 				player.getItemInHand().addUnsafeEnchantments(eMap);
 				player.closeInventory();
 				player.sendMessage(AllInOne.instance().title + "You successfully enchanted your item in your hand");
-			} else if (event.getSlot() == 53) {
+			} else if (event.getSlot() == 53)
 				player.openInventory(EnchantmentInventories.page1()); // page 2
-			} else if (event.getSlot() == 52) {
+			else if (event.getSlot() == 52)
 				player.openInventory(EnchantmentInventories.page1()); // page 2
 				//page 4
-			}
 		}
 	}
 }

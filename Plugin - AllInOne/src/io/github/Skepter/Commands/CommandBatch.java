@@ -42,16 +42,14 @@ public class CommandBatch {
 		final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
 		/* If it only contains [i] */
 		if (s.contains("[i]") && !(s.contains("[i="))) {
-			for (int i = 1; i < amount + 1; i++) {
+			for (int i = 1; i < (amount + 1); i++)
 				player.performCommand(s.replace("[i]", String.valueOf(i)));
-			}
 			return;
 		}
 
 		/* If it contains [i=#] but doesn't contain [i] */
-		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]"))) {
-
-			for (int i = 1; i < amount; i++) {
+		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]")))
+		 for (int i = 1; i < amount; i++) {
 				//				List<String> tagValues = new ArrayList<String>();
 				int beginInt = 1;
 				int increment = 1;
@@ -63,13 +61,12 @@ public class CommandBatch {
 						final String[] arr = str.split(":");
 						beginInt = Math.abs(Integer.parseInt(arr[0]));
 						increment = Integer.parseInt(arr[1]);
-					} else {
+					} else
 						try {
 							beginInt = Math.abs(Integer.parseInt(str));
 						} catch (final NumberFormatException e) {
 							beginInt = 1;
 						}
-					}
 					player.performCommand(s.replace("[i=" + str + "]", String.valueOf(((i - 1) * increment) + beginInt)));
 					//					tagValues.add("[i=" + str + "]");
 				}
@@ -80,43 +77,6 @@ public class CommandBatch {
 				//				}
 				//				player.performCommand(s.replace("[i]", String.valueOf(i)));
 			}
-
-			/*
-			 * if [i=3:5]
-			 * for loop [i] = 1 and has to be proportional to 3+5
-			 * so: 1 = 3
-			 *     2 = 3+5 = 8
-			 *     3 = 3+5+5 = 13
-			 * 	   
-			 *     (i - 1 * 5) + 3
-			 *     ((i-1) * increment) + beginInt
-			 * 
-			 */
-			//when running the for loop to execute the commands
-			//make everything proportional to [i]
-		}
-		//			
-		//			final String between = TextUtils.stringBetween(s, "[i=", "]");
-		//			int timesToRun = 1; //this isn't the times to run?! this is the beginning integer!
-		//			int increment = 1;
-		//			if (between.contains(":")) {
-		//				final String[] arr = between.split(":");
-		//				timesToRun = Math.abs(Integer.parseInt(arr[0]));
-		//				increment = Integer.parseInt(arr[1]);
-		//			} else {
-		//				try {
-		//					timesToRun = Math.abs(Integer.parseInt(between));
-		//				} catch (final NumberFormatException e) {
-		//					timesToRun = 1;
-		//				}
-		//			}
-		//TextUtils
-		/*
-		 * public static void main(String[] args) {
-		final String str = "<tag>apple</tag><b>hello</b><tag>orange</tag><tag>pear</tag>";
-		System.out.println(Arrays.toString(getTagValues(str, "<tag>", "</tag>").toArray())); // Prints [apple, orange, pear]
-		}
-		 */
 
 		//		if ((s.contains("[i=") && s.contains("]")) || s.contains("[i]")) {
 		//			final String between = TextUtils.stringBetween(s, "[i=", "]");

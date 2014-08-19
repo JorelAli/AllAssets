@@ -22,7 +22,7 @@ public class CommandSignEdit {
 	public void command(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length > 1) {
-			if (TextUtils.isInteger(args.getArgs()[0])) {
+			if (TextUtils.isInteger(args.getArgs()[0]))
 				if (player.getTargetBlock(null, 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(null, 256).getType().equals(Material.WALL_SIGN)) {
 					final Sign sign = (Sign) player.getTargetBlock(null, 256).getState();
 					final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
@@ -30,15 +30,13 @@ public class CommandSignEdit {
 					sign.update();
 
 				}
-			}
 		} else if (TextUtils.isInteger(args.getArgs()[0])) {
 			if (player.getTargetBlock(null, 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(null, 256).getType().equals(Material.WALL_SIGN)) {
 				final Sign sign = (Sign) player.getTargetBlock(null, 256).getState();
 				sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, "");
 				sign.update();
 			}
-		} else {
+		} else
 			ErrorUtils.wrongConstruction(player, "/signedit <line number> <text>");
-		}
 	}
 }

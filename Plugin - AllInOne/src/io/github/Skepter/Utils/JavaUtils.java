@@ -68,12 +68,10 @@ public class JavaUtils {
 
 			while (true) {
 				jarEntry = jarFile.getNextJarEntry();
-				if (jarEntry == null) {
+				if (jarEntry == null)
 					break;
-				}
-				if ((jarEntry.getName().startsWith(packageName)) && (jarEntry.getName().endsWith(".class"))) {
+				if ((jarEntry.getName().startsWith(packageName)) && (jarEntry.getName().endsWith(".class")))
 					classes.add(jarEntry.getName().replaceAll("/", "\\."));
-				}
 			}
 			jarFile.close();
 		} catch (final Exception e) {

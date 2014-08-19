@@ -34,22 +34,20 @@ public class CommandBalancetop {
 		}
 		/* I'm certain that there's a MUCH MORE simple method of doing this -.- */
 		final Map<String, Double> map = new HashMap<String, Double>();
-		for (final OfflinePlayer p : Bukkit.getOfflinePlayers()) {
+		for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 			map.put(p.getName(), AllInOne.instance().economy.getBalance(p.getName()));
-		}
 		final ValueComparator bvc = new ValueComparator(map);
 		final TreeMap<String, Double> sortedMap = new TreeMap<String, Double>(bvc);
 		sortedMap.putAll(map);
 		player.sendMessage(TextUtils.title("Top balances"));
 		final List<String> balanceList = new ArrayList<String>();
-		for (final Entry<String, Double> e : sortedMap.entrySet()) {
+		for (final Entry<String, Double> e : sortedMap.entrySet())
 			balanceList.add(AllInOne.instance().houseStyleColor + e.getKey() + ": " + e.getValue());
-		}
 		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);
 			return;
 		}
-		TextUtils.paginate((CommandSender) player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
+		TextUtils.paginate(player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
 	}
 
 	class ValueComparator implements Comparator<String> {
@@ -62,11 +60,10 @@ public class CommandBalancetop {
 
 		@Override
 		public int compare(final String a, final String b) {
-			if (base.get(a) >= base.get(b)) {
+			if (base.get(a) >= base.get(b))
 				return -1;
-			} else {
+			else
 				return 1;
-			}
 		}
 	}
 }

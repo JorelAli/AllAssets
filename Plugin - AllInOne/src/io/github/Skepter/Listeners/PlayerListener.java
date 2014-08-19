@@ -57,9 +57,8 @@ public class PlayerListener implements Listener {
 		user.setUUID(event.getPlayer().getUniqueId());
 		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
 			final List<String> ips = user.IPs();
-			if (!ips.isEmpty()) {
+			if (!ips.isEmpty())
 				CommandLog.addOtherLog(event.getPlayer().getName() + " joined with a new IP");
-			}
 			ips.add(event.getPlayer().getAddress().getHostName());
 			user.setIPs(ips);
 		}
@@ -101,7 +100,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
 		//armor slot = 5
-		if (event.getAction().equals(InventoryAction.PLACE_ONE) && event.getSlot() == 5 && event.getInventory().getType().equals(InventoryType.PLAYER))
+		if (event.getAction().equals(InventoryAction.PLACE_ONE) && (event.getSlot() == 5) && event.getInventory().getType().equals(InventoryType.PLAYER))
 			event.getInventory().setItem(5, event.getCurrentItem());
 	}
 
@@ -145,9 +144,8 @@ public class PlayerListener implements Listener {
 			sign.update();
 
 			final BlockPlaceEvent blockEvent = new BlockPlaceEvent(sign.getBlock(), sign.getBlock().getState(), sign.getBlock().getRelative(BlockFace.DOWN), null, user.getPlayer(), false);
-			if (blockEvent.canBuild()) {
+			if (blockEvent.canBuild())
 				blockEvent.setCancelled(true);
-			}
 			Bukkit.getServer().getPluginManager().callEvent(blockEvent);
 		}
 	}
@@ -156,30 +154,25 @@ public class PlayerListener implements Listener {
 	public void onSwitchItem(final PlayerItemHeldEvent event) {
 		final Player player = event.getPlayer();
 		final ItemStack i = player.getInventory().getItem(event.getNewSlot());
-		if (i == null || i.getType() == Material.AIR) {
+		if ((i == null) || (i.getType() == Material.AIR))
 			return;
-		}
 		//Work on this TODO
 		final Set<Entry<Enchantment, Integer>> entrySet = i.getEnchantments().entrySet();
-		for (final Entry<Enchantment, Integer> e : entrySet) {
-			if (e.getValue() > 5) {
+		for (final Entry<Enchantment, Integer> e : entrySet)
+			if (e.getValue() > 5)
 				if (!player.hasPermission("AllInOne.illegalitems")) {
 					player.setItemInHand(null);
 					CommandLog.addOtherLog(ChatColor.BLUE + player.getName() + ChatColor.WHITE + " had an illegal item!");
 				}
-			}
-		}
 	}
 
 	@EventHandler
 	public void onMove(final PlayerMoveEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("FlyBreakSpeedModifier")) {
-			if (event.getPlayer().isFlying() && event.getPlayer().getAllowFlight() && !event.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+		if (ConfigHandler.instance().features().getBoolean("FlyBreakSpeedModifier"))
+			if (event.getPlayer().isFlying() && event.getPlayer().getAllowFlight() && !event.getPlayer().getGameMode().equals(GameMode.CREATIVE))
 				event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100000, 18));
-			} else {
+			else
 				event.getPlayer().removePotionEffect(PotionEffectType.FAST_DIGGING);
-			}
-		}
 	}
 
 	@EventHandler
@@ -195,11 +188,9 @@ public class PlayerListener implements Listener {
 						Object packet = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".PacketPlayInClientCommand").newInstance();
 						final Class<?> enumClass = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".EnumClientCommand");
 
-						for (final Object ob : enumClass.getEnumConstants()) {
-							if (ob.toString().equals("PERFORM_RESPAWN")) {
+						for (final Object ob : enumClass.getEnumConstants())
+							if (ob.toString().equals("PERFORM_RESPAWN"))
 								packet = packet.getClass().getConstructor(enumClass).newInstance(ob);
-							}
-						}
 						final Object con = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
 						con.getClass().getMethod("a", packet.getClass()).invoke(con, packet);
 					} catch (final Throwable t) {
@@ -213,11 +204,9 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void creativeEnderpearl(final PlayerInteractEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl")) {
-			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL)) {
+		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl"))
+			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
-			}
-		}
 	}
 
 	public void getPing(final Player player) {

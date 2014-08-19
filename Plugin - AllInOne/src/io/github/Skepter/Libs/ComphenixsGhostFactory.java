@@ -43,9 +43,8 @@ public class ComphenixsGhostFactory {
         ghostTeam = board.getTeam(GHOST_TEAM_NAME);
      
         // Create a new ghost team if needed
-        if (ghostTeam == null) {
-            ghostTeam = board.registerNewTeam(GHOST_TEAM_NAME);
-        }
+        if (ghostTeam == null)
+			ghostTeam = board.registerNewTeam(GHOST_TEAM_NAME);
         // Thanks to Rprrr for noticing a bug here
         ghostTeam.setCanSeeFriendlyInvisibles(true);
     }
@@ -57,10 +56,10 @@ public class ComphenixsGhostFactory {
                 for (final OfflinePlayer member : getMembers()) {
                     final Player player = member.getPlayer();
  
-                    if (player != null) {
-                        // Update invisibility effect
+                    if (player != null)
+						// Update invisibility effect
                         setGhost(player, isGhost(player));
-                    } else {
+					else {
                         ghosts.remove(member.getName());
                         ghostTeam.removePlayer(member);
                     }
@@ -73,11 +72,9 @@ public class ComphenixsGhostFactory {
     * Remove all existing player members and ghosts.
     */
     public void clearMembers() {
-        if (ghostTeam != null) {
-            for (final OfflinePlayer player : getMembers()) {
-                ghostTeam.removePlayer(player);
-            }
-        }
+        if (ghostTeam != null)
+			for (final OfflinePlayer player : getMembers())
+				ghostTeam.removePlayer(player);
     }
  
     /**
@@ -98,7 +95,7 @@ public class ComphenixsGhostFactory {
     * @return TRUE if it is, FALSE otherwise.
     */
     public boolean isGhost(final Player player) {
-        return player != null && hasPlayer(player) && ghosts.contains(player.getName());
+        return (player != null) && hasPlayer(player) && ghosts.contains(player.getName());
     }
  
     /**
@@ -136,9 +133,8 @@ public class ComphenixsGhostFactory {
     */
     public void removePlayer(final Player player) {
         validateState();
-        if (ghostTeam.removePlayer(player)) {
-            player.removePotionEffect(PotionEffectType.INVISIBILITY);
-        }
+        if (ghostTeam.removePlayer(player))
+			player.removePotionEffect(PotionEffectType.INVISIBILITY);
     }
  
     /**
@@ -150,11 +146,9 @@ public class ComphenixsGhostFactory {
         final Set<OfflinePlayer> players = new HashSet<OfflinePlayer>(ghostTeam.getPlayers());
      
         // Remove all non-ghost players
-        for (final Iterator<OfflinePlayer> it = players.iterator(); it.hasNext(); ) {
-            if (!ghosts.contains(it.next().getName())) {
-                it.remove();
-            }
-        }
+        for (final Iterator<OfflinePlayer> it = players.iterator(); it.hasNext(); )
+			if (!ghosts.contains(it.next().getName()))
+				it.remove();
         return toArray(players);
     }
  
@@ -168,11 +162,10 @@ public class ComphenixsGhostFactory {
     }
  
     private OfflinePlayer[] toArray(final Set<OfflinePlayer> players) {
-        if (players != null) {
-            return players.toArray(new OfflinePlayer[0]);
-        } else {
-            return EMPTY_PLAYERS;
-        }
+        if (players != null)
+			return players.toArray(new OfflinePlayer[0]);
+		else
+			return EMPTY_PLAYERS;
     }
  
     public void close() {
@@ -188,8 +181,7 @@ public class ComphenixsGhostFactory {
     }
  
     private void validateState() {
-        if (closed) {
-            throw new IllegalStateException("Ghost factory has closed. Cannot reuse instances.");
-        }
+        if (closed)
+			throw new IllegalStateException("Ghost factory has closed. Cannot reuse instances.");
     }
 }

@@ -125,27 +125,27 @@ public class ConfigHandler {
 	}
 
 	public SimpleConfig config() {
-		if (config != null) {
+		if (config != null)
 			return config;
-		} else {
+		else {
 			createConfig();
 			return config;
 		}
 	}
 
 	public SimpleConfig getMessages() {
-		if (messages != null) {
+		if (messages != null)
 			return messages;
-		} else {
+		else {
 			createMessages();
 			return messages;
 		}
 	}
 
 	public SimpleConfig features() {
-		if (features != null) {
+		if (features != null)
 			return features;
-		} else {
+		else {
 			createFeatures();
 			return features;
 		}

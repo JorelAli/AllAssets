@@ -28,7 +28,7 @@ public class CommandSet implements Listener {
 	@CommandHandler(name = "set", permission = "AllInOne.set", description = "Sets data for a player", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if (args.getArgs().length == 0 || args.getArgs().length == 1) {
+		if ((args.getArgs().length == 0) || (args.getArgs().length == 1)) {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		} else if (args.getArgs().length == 2) {
@@ -66,12 +66,11 @@ public class CommandSet implements Listener {
 				attack.put(player.getUniqueId(), Darg1);
 				return;
 			case "balance":
-				if(AllInOne.instance().hasVault) {
+				if(AllInOne.instance().hasVault)
 					AllInOne.instance().economy.depositPlayer(player.getName(), Darg1);
 					//send balance
-				} else {
+				else
 					ErrorUtils.vaultNotFound(player);
-				}
 				return;
 			}
 		} else if (args.getArgs().length == 3) {
@@ -98,9 +97,8 @@ public class CommandSet implements Listener {
 	public void onAttack(final EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Player) {
 			final Player player = (Player) event.getDamager();
-			if(attack.containsKey(player.getUniqueId())) {
+			if(attack.containsKey(player.getUniqueId()))
 				event.setDamage(attack.get(player.getUniqueId()));
-			}
 		}
 	}
 }

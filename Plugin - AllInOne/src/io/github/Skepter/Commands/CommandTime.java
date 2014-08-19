@@ -42,9 +42,8 @@ public class CommandTime {
 					time = 18000;
 					player.sendMessage(AllInOne.instance().title + "Time set to midnight");
 				}
-				for (World world : Bukkit.getWorlds()) {
+				for (final World world : Bukkit.getWorlds())
 					world.setTime(time);
-				}
 				return;
 			}
 		}

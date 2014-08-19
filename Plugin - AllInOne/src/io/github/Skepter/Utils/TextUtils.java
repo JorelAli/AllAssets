@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -36,22 +37,19 @@ public class TextUtils {
 	}
 
 	private static String center(final String text) {
-		final int spaces = (int) Math.round((80 - 1.4 * ChatColor.stripColor(text).length()) / 2);
+		final int spaces = (int) Math.round((80 - (1.4 * ChatColor.stripColor(text).length())) / 2);
 		String s = "";
-		for (int i = 0; i < spaces; i++) {
+		for (int i = 0; i < spaces; i++)
 			s = s + " ";
-		}
 		return s + text;
 	}
 
 	public static boolean containsSwear(final String s) {
 		final String s00 = ChatColor.stripColor(s);
 		final String s0 = s00.toLowerCase();
-		for (final String str : swearWords()) {
-			if (s0.contains(str)) {
+		for (final String str : swearWords())
+			if (s0.contains(str))
 				return true;
-			}
-		}
 		return false;
 	}
 
@@ -68,25 +66,22 @@ public class TextUtils {
 		final StringBuilder sb = new StringBuilder();
 		int cp;
 		try {
-			while ((cp = rd.read()) != -1) {
+			while ((cp = rd.read()) != -1)
 				sb.append((char) cp);
-			}
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 		final String response = sb.toString();
-		if (response.contains("true")) {
+		if (response.contains("true"))
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 
 	public static String[] getMsgFromArgs(final String[] args, final int indexBegin, final int indexEnd) {
 		final List<String> list = new ArrayList<String>();
-		for (int i = indexBegin; i < indexEnd; i++) {
+		for (int i = indexBegin; i < indexEnd; i++)
 			list.add(args[i]);
-		}
 		final String[] array = new String[list.size()];
 		int index = 0;
 		for (final Object value : list) {
@@ -106,11 +101,9 @@ public class TextUtils {
 		arr.add(".com");
 		arr.add("bit.ly");
 		arr.add(".net");
-		for (final String str : arr) {
-			if (s0.contains(str)) {
+		for (final String str : arr)
+			if (s0.contains(str))
 				return true;
-			}
-		}
 		return false;
 	}
 
@@ -125,9 +118,8 @@ public class TextUtils {
 
 	public static String join(final String[] arr, final String seperator) {
 		String s = "";
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < arr.length; i++)
 			s = s + arr[i] + seperator;
-		}
 		return s;
 	}
 
@@ -141,7 +133,7 @@ public class TextUtils {
 		final ChatColor a = ChatColor.AQUA;
 		final ChatColor g = ChatColor.WHITE;
 
-		if (pageNumberToShow == 0 || pageNumberToShow < 0) {
+		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
 			ErrorUtils.error(sender, "That number is too small!");
 			return;
 		}
@@ -155,9 +147,8 @@ public class TextUtils {
 		else
 			pages.put(1, textData.subList(0, pageSize - 1));
 
-		for (int i = 2; i < amountOfPages; i++) {
+		for (int i = 2; i < amountOfPages; i++)
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
-		}
 		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
 		if (pageNumberToShow > amountOfPages) {
 			ErrorUtils.error(sender, "That number is too large!");
@@ -172,14 +163,15 @@ public class TextUtils {
 
 	/* One of these pagination ones are deprecated and I can't remember which one! */
 	public static void paginate(final CommandSender sender, final Set<String> data, final int pageSize, final int pageNumberToShow) {
-		List<String> textData = new ArrayList<String>();
+		final List<String> textData = new ArrayList<String>();
 		textData.addAll(data);
+		Collections.sort(textData);
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
 		final ChatColor a = ChatColor.AQUA;
 		final ChatColor g = ChatColor.WHITE;
 
-		if (pageNumberToShow == 0 || pageNumberToShow < 0) {
+		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
 			ErrorUtils.error(sender, "That number is too small!");
 			return;
 		}
@@ -193,9 +185,8 @@ public class TextUtils {
 		else
 			pages.put(1, textData.subList(0, pageSize - 1));
 
-		for (int i = 2; i < amountOfPages; i++) {
+		for (int i = 2; i < amountOfPages; i++)
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
-		}
 		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
 		if (pageNumberToShow > amountOfPages) {
 			ErrorUtils.error(sender, "That number is too large!");
@@ -260,9 +251,8 @@ public class TextUtils {
 		final Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
 		final List<String> tagValues = new ArrayList<String>();
 		final Matcher matcher = regexTag.matcher(str);
-		while (matcher.find()) {
+		while (matcher.find())
 			tagValues.add(matcher.group(1));
-		}
 		return tagValues;
 	}
 

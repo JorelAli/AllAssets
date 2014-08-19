@@ -42,29 +42,25 @@ public class MkreminsFancifulMessageUtils {
 
 	public MkreminsFancifulMessageUtils text(final String text) {
 		final MessagePart latest = latest();
-		if (latest.hasText()) {
+		if (latest.hasText())
 			throw new IllegalStateException("text for this message part is already set");
-		}
 		latest.text = text;
 		dirty = true;
 		return this;
 	}
 
 	public MkreminsFancifulMessageUtils color(final ChatColor color) {
-		if (!color.isColor()) {
+		if (!color.isColor())
 			throw new IllegalArgumentException(color.name() + " is not a color");
-		}
 		latest().color = color;
 		dirty = true;
 		return this;
 	}
 
 	public MkreminsFancifulMessageUtils style(final ChatColor... styles) {
-		for (final ChatColor style : styles) {
-			if (!style.isFormat()) {
+		for (final ChatColor style : styles)
+			if (!style.isFormat())
 				throw new IllegalArgumentException(style.name() + " is not a style");
-			}
-		}
 		latest().styles.addAll(Arrays.asList(styles));
 		dirty = true;
 		return this;
@@ -179,46 +175,41 @@ public class MkreminsFancifulMessageUtils {
 	}
 
 	public MkreminsFancifulMessageUtils tooltip(final String... lines) {
-		if (lines.length == 1) {
+		if (lines.length == 1)
 			onHover("show_text", lines[0]);
-		} else {
+		else
 			itemTooltip(makeMultilineTooltip(lines));
-		}
 		return this;
 	}
 
 	public MkreminsFancifulMessageUtils then(final Object obj) {
-		if (!latest().hasText()) {
+		if (!latest().hasText())
 			throw new IllegalStateException("previous message part has no text");
-		}
 		messageParts.add(new MessagePart(obj.toString()));
 		dirty = true;
 		return this;
 	}
 
 	public MkreminsFancifulMessageUtils then() {
-		if (!latest().hasText()) {
+		if (!latest().hasText())
 			throw new IllegalStateException("previous message part has no text");
-		}
 		messageParts.add(new MessagePart());
 		dirty = true;
 		return this;
 	}
 
 	public String toJSONString() {
-		if (!dirty && jsonString != null) {
+		if (!dirty && (jsonString != null))
 			return jsonString;
-		}
 		final StringWriter string = new StringWriter();
 		final JsonWriter json = new JsonWriter(string);
 		try {
-			if (messageParts.size() == 1) {
+			if (messageParts.size() == 1)
 				latest().writeJson(json);
-			} else {
+			else {
 				json.beginObject().name("text").value("").name("extra").beginArray();
-				for (final MessagePart part : messageParts) {
+				for (final MessagePart part : messageParts)
 					part.writeJson(json);
-				}
 				json.endArray().endObject();
 				json.close();
 			}
@@ -243,16 +234,14 @@ public class MkreminsFancifulMessageUtils {
 	}
 
 	public void send(final Iterable<Player> players) {
-		for (final Player player : players) {
+		for (final Player player : players)
 			send(player);
-		}
 	}
 
 	public String toOldMessageFormat() {
 		final StringBuilder result = new StringBuilder();
-		for (final MessagePart part : messageParts) {
+		for (final MessagePart part : messageParts)
 			result.append(part.color).append(part.text);
-		}
 		return result.toString();
 	}
 

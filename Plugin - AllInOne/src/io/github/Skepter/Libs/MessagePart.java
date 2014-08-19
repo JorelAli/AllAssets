@@ -38,20 +38,18 @@ final class MessagePart {
 				}
 				json.name(styleName).value(true);
 			}
-			if (clickActionName != null && clickActionData != null) {
+			if ((clickActionName != null) && (clickActionData != null))
 				json.name("clickEvent")
 					.beginObject()
 					.name("action").value(clickActionName)
 					.name("value").value(clickActionData)
 					.endObject();
-			}
-			if (hoverActionName != null && hoverActionData != null) {
+			if ((hoverActionName != null) && (hoverActionData != null))
 				json.name("hoverEvent")
 					.beginObject()
 					.name("action").value(hoverActionName)
 					.name("value").value(hoverActionData)
 					.endObject();
-			}
 			return json.endObject();
 		} catch(final Exception e){
 			e.printStackTrace();

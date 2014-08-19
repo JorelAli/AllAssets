@@ -40,13 +40,12 @@ public class CommandDebug {
 		final CommandSender sender = args.getSender();
 		String strTps = "";
 		final double tps = MathUtils.round(TPS.getTPS(), 2);
-		if (tps > 18 || tps == 18) {
+		if ((tps > 18) || (tps == 18))
 			strTps = ChatColor.GREEN + String.valueOf(tps);
-		} else if (tps > 13 && tps < 18) {
+		else if ((tps > 13) && (tps < 18))
 			strTps = ChatColor.YELLOW + String.valueOf(tps);
-		} else if (tps < 13 || tps == 13) {
+		else if ((tps < 13) || (tps == 13))
 			strTps = ChatColor.RED + String.valueOf(tps);
-		}
 
 		sender.sendMessage(TextUtils.title("Debug"));
 		sender.sendMessage("Server uptime: " + EssentialsDateUtils.formatDateDiff(ManagementFactory.getRuntimeMXBean().getStartTime()));
@@ -59,13 +58,12 @@ public class CommandDebug {
 		final CommandSender sender = args.getSender();
 		String strTps = "";
 		final double tps = MathUtils.round(TPS.getTPS(), 2);
-		if (tps > 18 || tps == 18) {
+		if ((tps > 18) || (tps == 18))
 			strTps = ChatColor.GREEN + String.valueOf(tps);
-		} else if (tps > 13 && tps < 18) {
+		else if ((tps > 13) && (tps < 18))
 			strTps = ChatColor.YELLOW + String.valueOf(tps);
-		} else if (tps < 13 || tps == 13) {
+		else if ((tps < 13) || (tps == 13))
 			strTps = ChatColor.RED + String.valueOf(tps);
-		}
 
 		sender.sendMessage(TextUtils.title("Full debug info"));
 		sender.sendMessage(" Server uptime: " + EssentialsDateUtils.formatDateDiff(ManagementFactory.getRuntimeMXBean().getStartTime()));
@@ -75,24 +73,19 @@ public class CommandDebug {
 		sender.sendMessage(" Items:");
 		for (final World w : Bukkit.getWorlds()) {
 			int i = 0;
-			for (final Entity e : w.getEntities()) {
-				if (e instanceof Item) {
+			for (final Entity e : w.getEntities())
+				if (e instanceof Item)
 					i++;
-				}
-			}
 			sender.sendMessage(" " + w.getName() + ": " + i + " items / " + w.getEntities().size() + " entities");
 		}
 		int i = 0;
 		int en = 0;
-		for (final World w : Bukkit.getWorlds()) {
-			for (final Entity e : w.getEntities()) {
-				if (e instanceof Item) {
+		for (final World w : Bukkit.getWorlds())
+			for (final Entity e : w.getEntities())
+				if (e instanceof Item)
 					i++;
-				} else {
+				else
 					en++;
-				}
-			}
-		}
 		final int all = i + en;
 		sender.sendMessage(" " + i + " items out of " + all + " overall entities");
 		sender.sendMessage("");
@@ -108,11 +101,10 @@ public class CommandDebug {
 		sender.sendMessage(" Java version: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("java.version"));
 		sender.sendMessage("");
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("Bukkit"));
-		if (Bukkit.getVersion().toLowerCase().contains("spigot")) {
+		if (Bukkit.getVersion().toLowerCase().contains("spigot"))
 			sender.sendMessage(" Bukkit system: Spigot");
-		} else {
+		else
 			sender.sendMessage(" Bukkit system: CraftBukkit");
-		}
 		sender.sendMessage(" Suitable for Minecraft version " + TextUtils.stringBetween(Bukkit.getVersion(), "(MC: ", ")"));
 		sender.sendMessage(" Using API version " + Bukkit.getBukkitVersion());
 		sender.sendMessage("");
@@ -122,43 +114,38 @@ public class CommandDebug {
 			public void run() {
 				final HashMap<String, Integer> rawData = new HashMap<String, Integer>();
 				final Plugin[] tmp = Bukkit.getPluginManager().getPlugins();
-				for (int ij = 0; ij < Bukkit.getPluginManager().getPlugins().length; ++ij) {
+				for (int ij = 0; ij < Bukkit.getPluginManager().getPlugins().length; ++ij)
 					try {
 						rawData.put(tmp[ij].getName(), 0);
 					} catch (final Exception e) {
 					}
-				}
 				for (final BukkitTask bt : Bukkit.getScheduler().getPendingTasks()) {
 					final String name = bt.getOwner().getName();
 					int count = 1;
 					if (rawData.containsKey(name)) {
 						count = rawData.get(name) + 1;
 						rawData.put(name, count);
-					} else {
+					} else
 						rawData.put(name, count);
-					}
 				}
 				final LinkedList<ThreadCount> linkedList = new LinkedList<ThreadCount>();
-				for (final String key : rawData.keySet()) {
+				for (final String key : rawData.keySet())
 					linkedList.add(new ThreadCount(key, rawData.get(key)));
-				}
 				Collections.sort(linkedList, new ThreadCount("nullData", 0));
 				int total = 0;
 				sender.sendMessage(ChatColor.BLUE + "Threads     Plugins");
 				for (final ThreadCount threads : linkedList) {
 					total += threads.count;
-					if (threads.count == 0) {
+					if (threads.count == 0)
 						continue;
-					}
-					if (threads.count < 10) {
+					if (threads.count < 10)
 						sender.sendMessage("    " + threads.count + "          " + threads.name);
-					} else if (threads.count < 100) {
+					else if (threads.count < 100)
 						sender.sendMessage(ChatColor.RED + "" + threads.count + "         " + threads.name);
-					} else if (threads.count < 500) {
+					else if (threads.count < 500)
 						sender.sendMessage(ChatColor.DARK_RED + "    " + threads.count + "        " + threads.name);
-					} else {
+					else
 						sender.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "    " + threads.count + "        " + threads.name);
-					}
 				}
 				sender.sendMessage(ChatColor.AQUA + "    " + total + "          Total");
 			}
@@ -181,19 +168,17 @@ public class CommandDebug {
 	public void rClean(final CommandArgs args) {
 		if (taskID == 0) {
 			int length = 0;
-			if (args.getArgs().length == 1 && TextUtils.isInteger(args.getArgs()[0])) {
+			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
 				length = Integer.parseInt(args.getArgs()[0]);
-			}
 			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllInOne.instance(), new Runnable() {
 				@Override
 				public void run() {
 					System.gc();
 				}
-			}, 0, 20 * length == 0 ? 30 : length).getTaskId();
+			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
 			args.getSender().sendMessage(AllInOne.instance().title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
-		} else {
+		} else
 			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
-		}
 	}
 
 	@CommandHandler(name = "debug.ram", permission = "AllInOne.debug", description = "Displays RAM information", usage = "Use <command>")
@@ -219,7 +204,7 @@ public class CommandDebug {
 		list.add("full");
 		list.add("ram");
 		list.add("clean");
-		list.add("dir");
+//		list.add("dir");
 		return list;
 	}
 
@@ -236,9 +221,8 @@ public class CommandDebug {
 		public int compare(final ThreadCount a, final ThreadCount b) {
 			if (a.count > b.count)
 				return 1;
-			if (a.count == b.count) {
+			if (a.count == b.count)
 				return 0;
-			}
 			return -1;
 		}
 	}

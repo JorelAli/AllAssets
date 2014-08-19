@@ -9,11 +9,10 @@ public class ConsoleSayListener implements Listener {
 	@EventHandler
 	public void onServerCommand(final ServerCommandEvent event) {
 		String cmd = event.getCommand();
-		if (cmd.startsWith("/")) {
+		if (cmd.startsWith("/"))
 			cmd = cmd.substring(1);
-		} else {
+		else
 			cmd = "say " + cmd;
-		}
 		event.setCommand(cmd);
 	}
 }

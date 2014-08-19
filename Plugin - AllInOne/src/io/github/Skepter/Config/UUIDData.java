@@ -22,23 +22,20 @@ public class UUIDData {
 	private File dataFileFile = null;
 
 	public void reloadDataFile() {
-		if (dataFileFile == null) {
+		if (dataFileFile == null)
 			dataFileFile = new java.io.File(AllInOne.instance().getDataFolder(), "UUIDMap.yml");
-		}
 		dataFile = YamlConfiguration.loadConfiguration(dataFileFile);
 	}
 
 	public FileConfiguration getDataFile() {
-		if (dataFile == null) {
+		if (dataFile == null)
 			reloadDataFile();
-		}
 		return dataFile;
 	}
 
 	public void saveDataFile() {
-		if (dataFile == null || dataFileFile == null) {
+		if ((dataFile == null) || (dataFileFile == null))
 			return;
-		}
 		try {
 			getDataFile().save(dataFileFile);
 		} catch (final java.io.IOException ex) {
@@ -47,10 +44,9 @@ public class UUIDData {
 	}
 	
 	public List<UUID> getValues() {
-		List<UUID> uuidList = new ArrayList<UUID>();
-		for(String s : getDataFile().getKeys(true)) {
+		final List<UUID> uuidList = new ArrayList<UUID>();
+		for(final String s : getDataFile().getKeys(true))
 			uuidList.add(UUID.fromString(getDataFile().getString(s)));
-		}
 		return uuidList;
 	}
 
@@ -60,9 +56,8 @@ public class UUIDData {
 	public Map<String, UUID> getUUIDMap() {
 		final Map<String, UUID> uuidMap = new HashMap<String, UUID>();
 		final Map<String, Object> objectMap = getDataFile().getValues(false);
-		for(final Map.Entry<String, Object> entry : objectMap.entrySet()){
+		for(final Map.Entry<String, Object> entry : objectMap.entrySet())
 			uuidMap.put(entry.getKey(), UUID.fromString(String.valueOf(entry.getValue())));
-		}
 		return uuidMap;
 	}
 	
@@ -71,9 +66,8 @@ public class UUIDData {
 	 */
 	public Map<UUID, String> getReversedUUIDMap() {
 		final Map<UUID, String> reversedMap = new HashMap<UUID, String>();
-		for(final Map.Entry<String, UUID> entry : getUUIDMap().entrySet()){
+		for(final Map.Entry<String, UUID> entry : getUUIDMap().entrySet())
 			reversedMap.put(entry.getValue(), entry.getKey());
-		}
 		return reversedMap;
 	}
 }

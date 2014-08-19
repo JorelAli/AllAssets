@@ -19,9 +19,9 @@ public class ReloadCommandListener implements Listener {
 			if (event.getPlayer().hasPermission("AllInOne.reload")) {
 				event.setCancelled(true);
 				if(event.getMessage().split(" ").length == 2) {
-					if(event.getMessage().split(" ")[1].equalsIgnoreCase("server")) {
+					if(event.getMessage().split(" ")[1].equalsIgnoreCase("server"))
 						Bukkit.reload();
-					} else {
+					else {
 						if(event.getMessage().split(" ")[1].equalsIgnoreCase("AllInOne")) {
 							ErrorUtils.error(event.getPlayer(), "You cannot reload AllInOne. Use /allinone reload instead");
 							return;
@@ -34,9 +34,8 @@ public class ReloadCommandListener implements Listener {
 							ErrorUtils.pluginNotFound(event.getPlayer(), event.getMessage().split(" ")[1]);
 						}
 					}
-				} else {
+				} else
 					ErrorUtils.error(event.getPlayer(), "Please specify a plugin to reload, or use /reload server to reload the server");
-				}
 			}
 		default:
 			return;

@@ -22,18 +22,17 @@ public class Plo124sIPUtils {
 
 	public static String ipToTime(final String ip) {
 		int offset = 0;
-		if (ipStorage.containsKey(ip)) {
+		if (ipStorage.containsKey(ip))
 			offset = Integer.parseInt((String) ipStorage.get(ip).get("timeZone"));
-		} else {
+		else {
 			final String url = "http://api.ipinfodb.com/v3/ip-city/?key=d7859a91e5346872d0378a2674821fbd60bc07ed63684c3286c083198f024138&ip=" + ip + "&format=json";
 			final JSONObject object = stringToJSON(getUrlSource(url));
 			final String timezone = (String) object.get("timeZone");
-			if (timezone != null && timezone.length() > 3) {
+			if ((timezone != null) && (timezone.length() > 3)) {
 				offset = Integer.parseInt(timezone.substring(0, timezone.length() - 3));
 				ipStorage.put(ip, object);
-			} else {
+			} else
 				return "Error: Cannot parse time";
-			}
 		}
 		final Calendar time = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		time.add(Calendar.HOUR_OF_DAY, offset);
@@ -48,9 +47,9 @@ public class Plo124sIPUtils {
 
 	public static String getCityName(final String ip) {
 		JSONObject obj = null;
-		if (ipStorage.containsKey(ip)) {
+		if (ipStorage.containsKey(ip))
 			obj = ipStorage.get(ip);
-		} else {
+		else {
 			final String url = "http://api.ipinfodb.com/v3/ip-city/?key=d7859a91e5346872d0378a2674821fbd60bc07ed63684c3286c083198f024138&ip=" + ip + "&format=json";
 			final JSONObject object = stringToJSON(getUrlSource(url));
 			obj = object;
@@ -61,9 +60,9 @@ public class Plo124sIPUtils {
 
 	public static String getStateName(final String ip) {
 		JSONObject obj = null;
-		if (ipStorage.containsKey(ip)) {
+		if (ipStorage.containsKey(ip))
 			obj = ipStorage.get(ip);
-		} else {
+		else {
 			final String url = "http://api.ipinfodb.com/v3/ip-city/?key=d7859a91e5346872d0378a2674821fbd60bc07ed63684c3286c083198f024138&ip=" + ip + "&format=json";
 			final JSONObject object = stringToJSON(getUrlSource(url));
 			obj = object;
@@ -74,26 +73,25 @@ public class Plo124sIPUtils {
 
 	public static String getCountryName(final String ip) {
 		JSONObject obj = null;
-		if (ipStorage.containsKey(ip)) {
+		if (ipStorage.containsKey(ip))
 			obj = ipStorage.get(ip);
-		} else {
+		else {
 			final String url = "http://api.ipinfodb.com/v3/ip-city/?key=d7859a91e5346872d0378a2674821fbd60bc07ed63684c3286c083198f024138&ip=" + ip + "&format=json";
 			final JSONObject object = stringToJSON(getUrlSource(url));
 			obj = object;
 			ipStorage.put(ip, object);
 		}
 		String country = (String) obj.get("countryName");
-		if (country.contains(",")) {
+		if (country.contains(","))
 			country = country.split(",")[0];
-		}
 		return country;
 	}
 
 	public static String getCountryCode(final String ip) {
 		JSONObject obj = null;
-		if (ipStorage.containsKey(ip)) {
+		if (ipStorage.containsKey(ip))
 			obj = ipStorage.get(ip);
-		} else {
+		else {
 			final String url = "http://api.ipinfodb.com/v3/ip-city/?key=d7859a91e5346872d0378a2674821fbd60bc07ed63684c3286c083198f024138&ip=" + ip + "&format=json";
 			final JSONObject object = stringToJSON(getUrlSource(url));
 			obj = object;
