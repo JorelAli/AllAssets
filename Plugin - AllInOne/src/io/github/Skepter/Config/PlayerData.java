@@ -36,6 +36,7 @@ public class PlayerData {
 	}
 
 	public void savePlayerData() {
+		getPlayerData().getValues(false);
 		if ((fileConfiguration == null) || (dataFile == null))
 			return;
 		else

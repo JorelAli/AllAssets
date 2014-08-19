@@ -66,7 +66,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** AllInOne plugin, version 0.1
+/* AllInOne plugin, version 0.1
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
