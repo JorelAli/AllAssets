@@ -109,6 +109,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 // I'm sorry everyone who doesn't speak English. It's an English plugin.
 // built in announcer
+
+//color customisation -
+//normalColor: 9
+//emphasisColor: b
+//@ajcozzo
+
+//recent players command - like seen, but for recent players
+//still able to tp when they're offline
+//do erm YesNo conversation for payments etc. (/pay
+//friend list to find friends etc.
 public class AllInOne extends JavaPlugin {
 
 	/* These will be in the messages.yml (when I feel ready to do so) */
