@@ -150,12 +150,12 @@ public class CommandFramework {
 		final Entry<Method, Object> entry = new AbstractMap.SimpleEntry<Method, Object>(m, obj);
 		commandMap.put(label.toLowerCase(), entry);
 		if (command.isListed()) {
-			/* Because listing every single alias as well as commands is stupid. */
-			for (final String s : command.aliases()) {
-				if (!s.equals(command.name()))
-					continue;
-				pluginCommands.add(ChatColor.BLUE + " /" + label.toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());//Nav
-			}
+			//			for (final String s : command.aliases()) {
+			//				if (!s.equals(command.name()))
+			//					continue;
+			pluginCommands.add(ChatColor.BLUE + " /" + command.name().toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());//Nav
+			//			pluginCommands.add(ChatColor.BLUE + " /" + label.toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());//Nav
+			//			}
 		}
 		final String cmdLabel = label.replace(".", ",").split(",")[0].toLowerCase();
 		if (map.getCommand(cmdLabel) == null) {

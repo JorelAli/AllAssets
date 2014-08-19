@@ -16,6 +16,7 @@ import java.util.TreeMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandBalancetop {
@@ -27,7 +28,7 @@ public class CommandBalancetop {
 	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "AllInOne.balancetop", description = "Displays the top balances", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(args.getArgs().length != 1) {
+		if (args.getArgs().length != 1) {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		}
@@ -44,11 +45,11 @@ public class CommandBalancetop {
 		for (final Entry<String, Double> e : sortedMap.entrySet()) {
 			balanceList.add(AllInOne.instance().houseStyleColor + e.getKey() + ": " + e.getValue());
 		}
-		if(!TextUtils.isInteger(args.getArgs()[0])) {
+		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);
 			return;
 		}
-		TextUtils.paginate(player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
+		TextUtils.paginate((CommandSender) player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
 	}
 
 	class ValueComparator implements Comparator<String> {

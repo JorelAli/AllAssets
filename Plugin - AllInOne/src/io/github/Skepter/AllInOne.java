@@ -18,6 +18,7 @@ import io.github.Skepter.Commands.CommandEnchant;
 import io.github.Skepter.Commands.CommandFly;
 import io.github.Skepter.Commands.CommandForceChat;
 import io.github.Skepter.Commands.CommandFramework;
+import io.github.Skepter.Commands.CommandGhost;
 import io.github.Skepter.Commands.CommandLaunch;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Commands.CommandOplist;
@@ -32,6 +33,7 @@ import io.github.Skepter.Commands.CommandWorlds;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.PlayerData;
 import io.github.Skepter.Config.UUIDData;
+import io.github.Skepter.Libs.ComphenixsGhostFactory;
 import io.github.Skepter.Listeners.ChatListener;
 import io.github.Skepter.Listeners.ConsoleSayListener;
 import io.github.Skepter.Listeners.EnchantGuiListener;
@@ -123,7 +125,7 @@ public class AllInOne extends JavaPlugin {
 
 	public Map<UUID, Long> tempTimeMap;
 
-	//public GhostFactory ghostFactory;
+	public ComphenixsGhostFactory ghostFactory;
 
 	@Override
 	public void onEnable() {
@@ -147,8 +149,7 @@ public class AllInOne extends JavaPlugin {
 			getLogger().info("Vault has been found and hooked into successfully");
 		}
 
-		/* GhostFactory temporarily disabled since it made an error somewhere -.- */
-		//ghostFactory = new GhostFactory(this);
+		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
 
 		/** This is the features.yml file which enables/disables features
@@ -190,8 +191,8 @@ public class AllInOne extends JavaPlugin {
 			new CommandLaunch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Log"))
 			new CommandLog(framework);
-		//if (ConfigHandler.instance().features().getBoolean("Ghost"))
-		//new CommandGhost(framework);
+		if (ConfigHandler.instance().features().getBoolean("Ghost"))
+			new CommandGhost(framework);
 		if (ConfigHandler.instance().features().getBoolean("Oplist"))
 			new CommandOplist(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ping"))
@@ -228,10 +229,10 @@ public class AllInOne extends JavaPlugin {
 		r(new ChatListener());
 		r(new SignListener());
 		r(new PlayerListener());
-		
+
 		if (ConfigHandler.instance().features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
-		
+
 		if (ConfigHandler.instance().features().getBoolean("Plugins"))
 			r(new PluginsCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("Reload"))
