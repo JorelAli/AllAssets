@@ -1,6 +1,6 @@
 Builds
 ======
-This is the builds folder, where you are able to download the latest builds of AIO. In order to download a build of AIO, right click the AllInOne.jar file and click 'save as'.
+This is the builds folder, where you are able to download the latest builds of AIO. In order to download a build of AIO, right click the AllInOne.jar file and click 'Save link as'.
 That's pretty much it xD There will always be only 1 file in here (since it's still in dev stage) and yeah. pretty much. Just look for those commits to see if a new AllInOne.jar file has been uploaded since it is likely to have some patched bugs
 
 Disclaimer (or whatever you call it)
