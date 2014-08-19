@@ -3,4 +3,4 @@ main: io.github.Skepter.AllInOne
 version: 0.1
 description: A plugin which has everything a server requires
 author: Skepter
-load: STARTUP
+#load: STARTUP

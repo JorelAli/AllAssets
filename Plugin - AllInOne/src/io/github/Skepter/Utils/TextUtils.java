@@ -13,13 +13,13 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class TextUtils {
 
@@ -171,42 +171,40 @@ public class TextUtils {
 	}
 
 	/* One of these pagination ones are deprecated and I can't remember which one! */
-	@Deprecated
-	public static void paginate(final Player player, final List<String> textData, final int pageSize, final int pageNumberToShow) {
+	public static void paginate(final CommandSender sender, final Set<String> data, final int pageSize, final int pageNumberToShow) {
+		List<String> textData = new ArrayList<String>();
+		textData.addAll(data);
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
 		final ChatColor a = ChatColor.AQUA;
 		final ChatColor g = ChatColor.WHITE;
 
 		if (pageNumberToShow == 0 || pageNumberToShow < 0) {
-			ErrorUtils.error(player, "That number is too small!");
+			ErrorUtils.error(sender, "That number is too small!");
 			return;
 		}
 
-		final int maxPage = textData.size() / pageSize;
-		final int k = textData.size() % pageSize;
+		final int amountOfPages = textData.size() / pageSize;
+		final int amountOfLinesOfExtraData = textData.size() % pageSize;
 
-		for (int i = 1; i < maxPage; i++) {
+		/* error could appear here -.- */
+		if (textData.size() < pageSize)
+			pages.put(1, textData);
+		else
+			pages.put(1, textData.subList(0, pageSize - 1));
+
+		for (int i = 2; i < amountOfPages; i++) {
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
 		}
-
-		if (pageNumberToShow > maxPage) {
-			ErrorUtils.error(player, "That number is too large!");
+		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
+		if (pageNumberToShow > amountOfPages) {
+			ErrorUtils.error(sender, "That number is too large!");
 			return;
 		}
 
-		if (pageNumberToShow == maxPage) {
-			player.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + maxPage);
-			for (final String s : textData.subList(textData.size() - k, textData.size())) {
-				player.sendMessage(s);
-			}
-			return;
-		}
-
-		player.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + maxPage);
-		for (final String s : pages.get(pageNumberToShow)) {
-			player.sendMessage(s);
-		}
+		sender.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		for (final String s : pages.get(pageNumberToShow))
+			sender.sendMessage(s);
 		return;
 	}
 
