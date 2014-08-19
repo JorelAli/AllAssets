@@ -5,10 +5,11 @@ That's pretty much it xD There will always be only 1 file in here (since it's st
 
 Disclaimer (or whatever you call it)
 ------------------------------------
-These builds are 'for experimental purposes' and SHOULD NOT be used on a proper server.
+These builds are 'for experimental purposes' and should be used at your own risk. I am NOT liable for any damage this causes to your server.
 The builds are allowed for these purposes (and these only!):
 * Experimenting with the plugin (and getting to know it)
 * Seeing the code in action
+* Getting a free early build before the actual thing comes out so you can use it on your server like amoniuszko20
 
 These builds are NOT to be used for these purposes:
 * Distribution (so you can't give it to other people, but you can give them the link)
