@@ -1,6 +1,5 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -64,13 +63,6 @@ public class CommandSet implements Listener {
 				return;
 			case "attack":
 				attack.put(player.getUniqueId(), Darg1);
-				return;
-			case "balance":
-				if(AllInOne.instance().hasVault)
-					AllInOne.instance().economy.depositPlayer(player.getName(), Darg1);
-					//send balance
-				else
-					ErrorUtils.vaultNotFound(player);
 				return;
 			}
 		} else if (args.getArgs().length == 3) {

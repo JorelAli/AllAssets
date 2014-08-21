@@ -41,10 +41,6 @@ public class ErrorUtils {
 		player.sendMessage(AllInOne.instance().error + target + " has turned teleporting off");
 	}
 	
-	public static void vaultNotFound(final Player player) {
-		player.sendMessage(AllInOne.instance().error + "Vault was not found so that action cannot be done");
-	}
-	
 	public static void wrongConstruction(final Player player, final String construction) {
 		player.sendMessage(AllInOne.instance().error + "Wrong construction, use the format: " + construction);
 	}
