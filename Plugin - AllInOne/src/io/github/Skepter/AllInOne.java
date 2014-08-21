@@ -119,6 +119,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 //still able to tp when they're offline
 //do erm YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
+
+//TODO: Rename entire plugin since the name has already been taken D:
 public class AllInOne extends JavaPlugin {
 
 	/* These will be in the messages.yml (when I feel ready to do so) */
