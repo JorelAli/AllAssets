@@ -19,6 +19,7 @@ import io.github.Skepter.Commands.CommandFly;
 import io.github.Skepter.Commands.CommandForceChat;
 import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandGhost;
+import io.github.Skepter.Commands.CommandInventory;
 import io.github.Skepter.Commands.CommandLaunch;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Commands.CommandOplist;
@@ -155,9 +156,7 @@ public class AllInOne extends JavaPlugin {
 			getLogger().warning("Vault not found, so some features may not be available");
 		else {
 			hasVault = true;
-			setupEconomy();
-			setupChat();
-			setupPermissions();
+			setupVault();
 			getLogger().info("Vault has been found and hooked into successfully");
 		}
 
@@ -205,6 +204,8 @@ public class AllInOne extends JavaPlugin {
 			new CommandLog(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ghost"))
 			new CommandGhost(framework);
+		if(ConfigHandler.instance().features().getBoolean("Inventory"))
+			new CommandInventory(framework);
 		if (ConfigHandler.instance().features().getBoolean("Oplist"))
 			new CommandOplist(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ping"))
@@ -302,26 +303,15 @@ public class AllInOne extends JavaPlugin {
 		return framework.handleCommand(sender, label, command, args);
 	}
 
-	private boolean setupEconomy() {
+	private void setupVault() {
 		final RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null)
 			economy = economyProvider.getProvider();
-
-		return (economy != null);
-	}
-
-	private boolean setupPermissions() {
 		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
 		if (permissionProvider != null)
 			permission = permissionProvider.getProvider();
-		return (permission != null);
-	}
-
-	private boolean setupChat() {
 		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
 		if (chatProvider != null)
 			chat = chatProvider.getProvider();
-
-		return (chat != null);
 	}
 }
