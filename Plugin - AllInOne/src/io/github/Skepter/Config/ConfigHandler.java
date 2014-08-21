@@ -4,9 +4,12 @@ import io.github.Skepter.AllInOne;
 
 public class ConfigHandler {
 
-	private SimpleConfigManager manager, managerMessages,
-			managerFeatures;
-	private SimpleConfig config, messages, features;
+	private SimpleConfigManager manager;
+	private static SimpleConfigManager managerMessages;
+	private SimpleConfigManager managerFeatures;
+	private SimpleConfig config;
+	private static SimpleConfig messages;
+	private SimpleConfig features;
 	private static ConfigHandler instance;
 
 	public ConfigHandler() {
@@ -43,12 +46,13 @@ public class ConfigHandler {
 		config.saveConfig();
 	}
 
-	private void createMessages() {
+	private static void createMessages() {
 		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
 
 		messages = managerMessages.getNewConfig("messages.yml", header);
 
-		messages.set("placeholder", "hi");
+		messages.set("cantEnchant", "You cannot enchant that item!", "Error messages");
+		messages.set("notANumber", "That is not a number!");
 		messages.saveConfig();
 	}
 
@@ -133,12 +137,12 @@ public class ConfigHandler {
 		}
 	}
 
-	public SimpleConfig getMessages() {
+	public static String getMsg(String msg) {
 		if (messages != null)
-			return messages;
+			return messages.getString(msg);
 		else {
 			createMessages();
-			return messages;
+			return messages.getString(msg);
 		}
 	}
 

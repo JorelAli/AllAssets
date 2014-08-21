@@ -1,6 +1,7 @@
 package io.github.Skepter.Utils;
 
 import io.github.Skepter.AllInOne;
+import io.github.Skepter.Config.ConfigHandler;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -8,7 +9,8 @@ import org.bukkit.entity.Player;
 public class ErrorUtils {
 
 	public static void cantEnchant(final Player player) {
-		player.sendMessage(AllInOne.instance().error + "You cannot enchant that item!");
+		ConfigHandler.instance();
+		player.sendMessage(AllInOne.instance().error + ConfigHandler.getMsg("cantEnchant"));
 	}
 
 	public static void error(final CommandSender sender, final String msg) {
@@ -16,7 +18,7 @@ public class ErrorUtils {
 	}
 
 	public static void notAnInteger(final Player player) {
-		player.sendMessage(AllInOne.instance().error + "That is not a number!");
+		player.sendMessage(AllInOne.instance().error + ConfigHandler.getMsg("notANumber"));
 	}
 
 	public static void notEnoughArguments(final Player player) {
