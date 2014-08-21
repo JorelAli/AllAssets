@@ -24,5 +24,7 @@ public class CommandInventory {
 			}
 		}
 		return;
+		//TODO editable system so it can/cannot be edited.
+		//set inv name to <playername>'s Inventory
 	}
 }
