@@ -1,4 +1,4 @@
-AllInOne
+AllAssets
 ========
 
 A plugin which does everything a server would ever possibly need.
