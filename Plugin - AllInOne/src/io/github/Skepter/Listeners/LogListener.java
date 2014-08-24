@@ -22,7 +22,7 @@ public class LogListener implements Filter {
 	ArrayList<String> javaExceptions;
 	ArrayList<String> bukkitExceptions;
 
-	public LogListener(final AllAssets allInOne) {
+	public LogListener(final AllAssets allAssets) {
 		javaExceptions = new ArrayList<String>();
 		bukkitExceptions = new ArrayList<String>();
 
@@ -106,7 +106,7 @@ public class LogListener implements Filter {
 
 	public static void notifyPlayers(final String s) {
 		for (final Player p : Bukkit.getOnlinePlayers())
-			if (p.hasPermission("AllInOne.notify"))
+			if (p.hasPermission("AllAssets.notify"))
 				p.sendMessage(s);
 	}
 

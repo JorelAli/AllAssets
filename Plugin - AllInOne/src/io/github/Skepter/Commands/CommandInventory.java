@@ -13,7 +13,7 @@ public class CommandInventory {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "inventory", aliases = { "invsee", "inv" }, permission = "AllInOne.inventory", description = "Views a players inventory", usage = "Use <command>")
+	@CommandHandler(name = "inventory", aliases = { "invsee", "inv" }, permission = "inventory", description = "Views a players inventory", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 1) {

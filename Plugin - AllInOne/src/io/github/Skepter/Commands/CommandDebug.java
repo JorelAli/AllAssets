@@ -35,7 +35,7 @@ public class CommandDebug {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "debug", permission = "AllInOne.debug", description = "Show server data", usage = "Use <command>")
+	@CommandHandler(name = "debug", permission = "debug", description = "Show server data", usage = "Use <command>")
 	public void command(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		String strTps = "";
@@ -53,7 +53,7 @@ public class CommandDebug {
 		return;
 	}
 
-	@CommandHandler(name = "debug.full", permission = "AllInOne.debug", description = "Show server data", usage = "Use <command>")
+	@CommandHandler(name = "debug.full", permission = "debug", description = "Show server data", usage = "Use <command>")
 	public void full(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		String strTps = "";
@@ -152,7 +152,7 @@ public class CommandDebug {
 		});
 	}
 
-	@CommandHandler(name = "debug.clean", permission = "AllInOne.debug", description = "Cleans garbage collection", usage = "Use <command>")
+	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection", usage = "Use <command>")
 	public void clean(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		final long totalRamPre = Runtime.getRuntime().totalMemory() / 1024 / 1024;
@@ -164,7 +164,7 @@ public class CommandDebug {
 		sender.sendMessage("You now have " + totalRamPost + "MB from " + totalRamPre + "MB in total, by freeing " + (freeRamPost - freeRamPre) + "MB");
 	}
 
-	@CommandHandler(name = "debug.rclean", permission = "AllInOne.debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
+	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
 	public void rClean(final CommandArgs args) {
 		if (taskID == 0) {
 			int length = 0;
@@ -181,7 +181,7 @@ public class CommandDebug {
 			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
 	}
 
-	@CommandHandler(name = "debug.ram", permission = "AllInOne.debug", description = "Displays RAM information", usage = "Use <command>")
+	@CommandHandler(name = "debug.ram", permission = "debug", description = "Displays RAM information", usage = "Use <command>")
 	public void ram(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		sender.sendMessage(TextUtils.title("RAM"));
@@ -191,7 +191,7 @@ public class CommandDebug {
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
 
-	@CommandHandler(name = "debug.error", permission = "AllInOne.debug", description = "Creates an error", usage = "Use <command>")
+	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
 	public void error(final CommandArgs args) {
 		final String[] arr = { "bob", "mark" };
 		final String s = arr[4];

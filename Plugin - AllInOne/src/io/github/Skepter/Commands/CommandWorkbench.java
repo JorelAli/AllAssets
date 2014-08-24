@@ -9,7 +9,7 @@ public class CommandWorkbench {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "workbench", aliases = { "wb" }, permission = "AllInOne.workbench", description = "Shows your ping", usage = "Use <command>")
+	@CommandHandler(name = "workbench", aliases = { "wb" }, permission = "workbench", description = "Shows your ping", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		args.getPlayer().openWorkbench(null, true);
 		return;

@@ -62,7 +62,7 @@ public class ConfigHandler {
 		features = managerFeatures.getNewConfig("features.yml", header);
 
 		features.set("AFK", "true", new String[] { "Commands", "Enable commands by setting the value to true", "Disable commands by setting the value to false" });
-		features.set("AllInOne", "true");
+		features.set("AllAssets", "true");
 		features.set("Back", "true");
 		features.set("Balance", "true");
 		features.set("Balancetop", "true");

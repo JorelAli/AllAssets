@@ -14,7 +14,7 @@ public class CommandGhost {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "AllInOne.ghost", description = "Allows you to turn into a ghost", usage = "Use <command>")
+	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "ghost", description = "Allows you to turn into a ghost", usage = "Use <command>")
 	public void command(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {

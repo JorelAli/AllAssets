@@ -22,7 +22,7 @@ public class CommandAllAssets {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "allassets", aliases = { "aa" }, permission = "AllAssets.allassets", description = "Shows help & stuff", usage = "Use <command>")
+	@CommandHandler(name = "allassets", aliases = { "aa" }, permission = "allassets", description = "Shows help & stuff", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		args.getSender().sendMessage("/allassets commands - shows a list of commands");
 		args.getSender().sendMessage("/allassets reload - reloads the entire plugin");

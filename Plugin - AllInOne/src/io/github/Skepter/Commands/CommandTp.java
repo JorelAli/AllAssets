@@ -14,7 +14,7 @@ public class CommandTp {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "AllInOne.tp", description = "Teleport to another user", usage = "Use <command>")
+	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {

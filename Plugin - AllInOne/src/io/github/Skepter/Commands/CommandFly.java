@@ -14,7 +14,7 @@ public class CommandFly {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "AllInOne.fly", description = "Allows you to fly", usage = "Use <command>")
+	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly", usage = "Use <command>")
 	public void command(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {

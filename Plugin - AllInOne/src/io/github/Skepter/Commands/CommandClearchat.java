@@ -12,7 +12,7 @@ public class CommandClearchat {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "clearchat", aliases = { "cc" }, permission = "AllInOne.clearchat", description = "Clears the chat", usage = "Use <command>")
+	@CommandHandler(name = "clearchat", aliases = { "cc" }, permission = "clearchat", description = "Clears the chat", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {

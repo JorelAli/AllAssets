@@ -77,7 +77,7 @@ public class PlayerListener implements Listener {
 			}
 		}
 
-		//AllInOne.instance().ghostUtils.addPlayer(event.getPlayer());
+		//AllAssets.instance().ghostUtils.addPlayer(event.getPlayer());
 		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
 		//		SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
 		//		board.blankLine();
@@ -160,7 +160,7 @@ public class PlayerListener implements Listener {
 		final Set<Entry<Enchantment, Integer>> entrySet = i.getEnchantments().entrySet();
 		for (final Entry<Enchantment, Integer> e : entrySet)
 			if (e.getValue() > 5)
-				if (!player.hasPermission("AllInOne.illegalitems")) {
+				if (!player.hasPermission("AllAssets.illegalitems")) {
 					player.setItemInHand(null);
 					CommandLog.addOtherLog(ChatColor.BLUE + player.getName() + ChatColor.WHITE + " had an illegal item!");
 				}

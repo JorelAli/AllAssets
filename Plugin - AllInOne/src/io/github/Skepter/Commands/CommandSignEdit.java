@@ -18,7 +18,7 @@ public class CommandSignEdit {
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "AllInOne.signedit", description = "Allows you to edit signs", usage = "Use <command>")
+	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "signedit", description = "Allows you to edit signs", usage = "Use <command>")
 	public void command(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length > 1) {

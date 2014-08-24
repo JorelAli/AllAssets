@@ -18,7 +18,7 @@ public class CommandBatch {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "batch", permission = "AllInOne.batch", description = "Run a command multiple times", usage = "Use <command>")
+	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {

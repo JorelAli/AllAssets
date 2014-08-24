@@ -13,7 +13,7 @@ public class CommandWeather {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "weather", permission = "AllInOne.weather", description = "Sets the world weather", usage = "Use <command>")
+	@CommandHandler(name = "weather", permission = "weather", description = "Sets the world weather", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if(args.getArgs().length == 1)

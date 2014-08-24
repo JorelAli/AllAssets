@@ -12,7 +12,7 @@ public class CommandBalance {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "balance", aliases = { "bal" }, permission = "AllInOne.balance", description = "Displays your balance", usage = "Use <command>")
+	@CommandHandler(name = "balance", aliases = { "bal" }, permission = "balance", description = "Displays your balance", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		//other balance
 		final Player player = args.getPlayer();

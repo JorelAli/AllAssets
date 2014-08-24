@@ -24,7 +24,7 @@ public class CommandSet implements Listener {
 	// - SET <health/hunger/speed/flyspeed/jump (height)/attack
 	// (strength)/balance> <data/player> <<data>>
 
-	@CommandHandler(name = "set", permission = "AllInOne.set", description = "Sets data for a player", usage = "Use <command>")
+	@CommandHandler(name = "set", permission = "set", description = "Sets data for a player", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if ((args.getArgs().length == 0) || (args.getArgs().length == 1)) {

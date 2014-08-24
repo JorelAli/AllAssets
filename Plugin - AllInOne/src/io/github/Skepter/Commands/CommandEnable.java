@@ -13,7 +13,7 @@ public class CommandEnable {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "enable", permission = "AllInOne.enable", description = "Enables a plugin", usage = "Use <command>")
+	@CommandHandler(name = "enable", permission = "enable", description = "Enables a plugin", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		try {
 			Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(args.getArgs()[0]));

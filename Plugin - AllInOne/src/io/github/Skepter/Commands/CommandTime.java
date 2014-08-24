@@ -15,7 +15,7 @@ public class CommandTime {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "time", permission = "AllInOne.time", description = "Sets the world time", usage = "Use <command>")
+	@CommandHandler(name = "time", permission = "time", description = "Sets the world time", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		switch (args.getArgs().length) {
@@ -50,7 +50,7 @@ public class CommandTime {
 		return;
 	}
 
-	@CommandHandler(name = "day", permission = "AllInOne.time", description = "Sets the time to day", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "day", permission = "time", description = "Sets the time to day", usage = "Use <command>", isListed = false)
 	public void onCommandDay(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
@@ -58,7 +58,7 @@ public class CommandTime {
 		player.sendMessage(AllAssets.instance().title + "Time set to day");
 	}
 
-	@CommandHandler(name = "midday", permission = "AllInOne.time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "midday", permission = "time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
 	public void onCommandMidday(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
@@ -66,7 +66,7 @@ public class CommandTime {
 		player.sendMessage(AllAssets.instance().title + "Time set to midday");
 	}
 
-	@CommandHandler(name = "night", permission = "AllInOne.time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "night", permission = "time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
 	public void onCommandNight(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
@@ -74,7 +74,7 @@ public class CommandTime {
 		player.sendMessage(AllAssets.instance().title + "Time set to night");
 	}
 
-	@CommandHandler(name = "midnight", permission = "AllInOne.time", description = "Sets the time to midnight", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "midnight", permission = "time", description = "Sets the time to midnight", usage = "Use <command>", isListed = false)
 	public void onCommandMidnight(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())

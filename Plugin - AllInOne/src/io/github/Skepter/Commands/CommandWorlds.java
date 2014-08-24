@@ -14,7 +14,7 @@ public class CommandWorlds {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "worlds", aliases = { "ws" }, permission = "AllInOne.worlds", description = "Shows a list of all of the worlds", usage = "Use <command>")
+	@CommandHandler(name = "worlds", aliases = { "ws" }, permission = "worlds", description = "Shows a list of all of the worlds", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		sender.sendMessage(TextUtils.title("Worlds"));

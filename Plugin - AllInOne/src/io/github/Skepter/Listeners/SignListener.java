@@ -25,7 +25,7 @@ public class SignListener implements Listener{
 	
 	@EventHandler
 	public void color(final SignChangeEvent event) {
-		if(event.getPlayer().hasPermission("AllInOne.signColor"))
+		if(event.getPlayer().hasPermission("AllAssets.signColor"))
 			for(int i = 0; i < 3; i++) {
 				final String s = event.getLine(i);
 				final String str = ChatColor.translateAlternateColorCodes('&', s);

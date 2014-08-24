@@ -14,7 +14,7 @@ public class CommandPWeather {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "AllInOne.pweather", description = "Sets your weather", usage = "Use <command>")
+	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "pweather", description = "Sets your weather", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if(args.getArgs().length == 1)

@@ -24,7 +24,7 @@ public class CommandBalancetop {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "AllInOne.balancetop", description = "Displays the top balances", usage = "Use <command>")
+	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "balancetop", description = "Displays the top balances", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length != 1) {

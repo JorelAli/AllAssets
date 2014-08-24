@@ -100,7 +100,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
 // delete plugin command (command that deletes plugins) + questioner
-// command allinone pluginFile instead of devPluginFile
+// command allassets pluginFile instead of devPluginFile
 // how many unique players
 
 /* May remove this in the end -.- */
@@ -275,7 +275,7 @@ public class AllAssets extends JavaPlugin {
 		}
 
 		getLogger().info(titleNoColor + "AllAssets has been enabled successfully");
-		Bukkit.broadcast(title + "Plugin reloaded!", "AllAssets.allinone");
+		Bukkit.broadcast(title + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
 	}
 

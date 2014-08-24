@@ -16,14 +16,14 @@ public class ReloadCommandListener implements Listener {
 		final String cmd = event.getMessage().split(" ")[0].replace("/", "").toLowerCase();
 		switch (cmd) {
 		case "reload":
-			if (event.getPlayer().hasPermission("AllInOne.reload")) {
+			if (event.getPlayer().hasPermission("AllAssets.reload")) {
 				event.setCancelled(true);
 				if(event.getMessage().split(" ").length == 2) {
 					if(event.getMessage().split(" ")[1].equalsIgnoreCase("server"))
 						Bukkit.reload();
 					else {
-						if(event.getMessage().split(" ")[1].equalsIgnoreCase("AllInOne")) {
-							ErrorUtils.error(event.getPlayer(), "You cannot reload AllInOne. Use /allinone reload instead");
+						if(event.getMessage().split(" ")[1].equalsIgnoreCase("AllAssets")) {
+							ErrorUtils.error(event.getPlayer(), "You cannot reload AllAssets. Use /allassets reload instead");
 							return;
 						}
 						try {

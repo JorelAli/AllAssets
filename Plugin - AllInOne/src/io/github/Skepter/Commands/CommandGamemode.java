@@ -14,24 +14,24 @@ public class CommandGamemode {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "gamemode", aliases = { "gm" }, permission = "AllInOne.gamemode", description = "Changes your gamemode", usage = "Use <command>")
+	@CommandHandler(name = "gamemode", aliases = { "gm" }, permission = "gamemode", description = "Changes your gamemode", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		if (args.getArgs().length == 1)
 			doGameMode(args.getPlayer(), args.getArgs()[0]);
 		return;
 	}
 
-	@CommandHandler(name = "gms", permission = "AllInOne.gamemode", description = "Changes your gamemode to survival", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "gms", permission = "gamemode", description = "Changes your gamemode to survival", usage = "Use <command>", isListed = false)
 	public void onGms(final CommandArgs args) {
 		doGameMode(args.getPlayer(), "survival");
 	}
 	
-	@CommandHandler(name = "gmc", permission = "AllInOne.gamemode", description = "Changes your gamemode to creative", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "gmc", permission = "gamemode", description = "Changes your gamemode to creative", usage = "Use <command>", isListed = false)
 	public void onGmc(final CommandArgs args) {
 		doGameMode(args.getPlayer(), "creative");
 	}
 	
-	@CommandHandler(name = "gma", permission = "AllInOne.gamemode", description = "Changes your gamemode to adventure", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "gma", permission = "gamemode", description = "Changes your gamemode to adventure", usage = "Use <command>", isListed = false)
 	public void onGma(final CommandArgs args) {
 		doGameMode(args.getPlayer(), "adventure");
 	}

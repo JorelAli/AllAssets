@@ -12,18 +12,10 @@ public class CommandEnchant {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "enchant", permission = "AllInOne.enchant", description = "Enchants an item", usage = "Use <command>")
+	@CommandHandler(name = "enchant", permission = "enchant", description = "Enchants an item", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		player.openInventory(EnchantmentInventories.page1());
-		// Inventory inv2 = Bukkit.createInventory(null, 63,
-		// "Enchant - page 2");
-		// Inventory inv3 = Bukkit.createInventory(null, 63,
-		// "Enchant - page 3");
-		// Inventory inv4 = Bukkit.createInventory(null, 63,
-		// "Enchant - page 4");
-		// player.sendMessage(AllInOne.ttlc +
-		// "Teleported to your last location");
 		return;
 	}
 }

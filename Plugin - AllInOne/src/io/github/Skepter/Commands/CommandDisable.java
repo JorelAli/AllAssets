@@ -13,7 +13,7 @@ public class CommandDisable {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "disable", permission = "AllInOne.disable", description = "Disables a plugin", usage = "Use <command>")
+	@CommandHandler(name = "disable", permission = "disable", description = "Disables a plugin", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		try {
 			Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(args.getArgs()[0]));

@@ -14,7 +14,7 @@ public class CommandClear {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "AllInOne.clear", description = "Clears your inventory", usage = "Use <command>")
+	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "clear", description = "Clears your inventory", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if(ConfigHandler.instance().config().getBoolean("clearArmor")) {

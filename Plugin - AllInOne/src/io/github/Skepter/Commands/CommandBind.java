@@ -23,14 +23,14 @@ public class CommandBind implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "bind", permission = "AllInOne.bind", description = "Binds a command to an item", usage = "Use <command>")
+	@CommandHandler(name = "bind", permission = "bind", description = "Binds a command to an item", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		// Player player = args.getPlayer();
 		/* Display help */
 		// if.......... yeah that kinda stuff return;
 	}
 
-	@CommandHandler(name = "bind.add", permission = "AllInOne.bind", description = "Adds a command to the binded item", usage = "Use <command>")
+	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item", usage = "Use <command>")
 	public void addBind(final CommandArgs args) {
 		final Player player = args.getPlayer();
 
@@ -50,7 +50,7 @@ public class CommandBind implements Listener {
 		return;
 	}
 
-	@CommandHandler(name = "bind.remove", permission = "AllInOne.bind", description = "Removes a command to the binded item", usage = "Use <command>")
+	@CommandHandler(name = "bind.remove", permission = "bind", description = "Removes a command to the binded item", usage = "Use <command>")
 	public void removeBind(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		final ItemStack item = player.getItemInHand();

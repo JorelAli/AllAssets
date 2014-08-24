@@ -21,7 +21,7 @@ public class CommandOplist {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "AllInOne.oplist", description = "Lists the players that have op", usage = "Use <command>")
+	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "oplist", description = "Lists the players that have op", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		final Set<OfflinePlayer> ops = Bukkit.getOperators();

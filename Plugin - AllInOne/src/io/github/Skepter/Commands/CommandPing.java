@@ -11,7 +11,7 @@ public class CommandPing {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "ping", permission = "AllInOne.ping", description = "Shows your ping", usage = "Use <command>")
+	@CommandHandler(name = "ping", permission = "ping", description = "Shows your ping", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final User user = new User(args.getPlayer());
 		user.getPlayer().sendMessage(AllAssets.instance().title + "Your ping is " + user.getPing() + "ms");

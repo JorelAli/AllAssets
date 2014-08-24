@@ -14,7 +14,7 @@ public class CommandBack {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "back", aliases = { "lastloc" }, permission = "AllInOne.back", description = "Teleports you to your last location", usage = "Use <command>")
+	@CommandHandler(name = "back", aliases = { "lastloc" }, permission = "back", description = "Teleports you to your last location", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		final User user = new User(player);

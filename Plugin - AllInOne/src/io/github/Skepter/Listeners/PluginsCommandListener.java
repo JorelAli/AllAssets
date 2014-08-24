@@ -26,7 +26,7 @@ public class PluginsCommandListener implements Listener {
 		case "plugins":
 		case "plugin":
 		case "?":
-			if (event.getPlayer().hasPermission("AllInOne.plugins")) {
+			if (event.getPlayer().hasPermission("AllAssets.plugins")) {
 				event.setCancelled(true);
 				event.getPlayer().sendMessage(TextUtils.title("Plugins"));
 				event.getPlayer().sendMessage(AllAssets.instance().title + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");

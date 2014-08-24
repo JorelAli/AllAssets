@@ -80,7 +80,7 @@ public class CommandFramework {
 			if (commandMap.containsKey(cmdLabel)) {
 				final Entry<Method, Object> entry = commandMap.get(cmdLabel);
 				final CommandHandler command = entry.getKey().getAnnotation(CommandHandler.class);
-				if (!sender.hasPermission(command.permission())) {
+				if (!sender.hasPermission("AllAssets." + command.permission().toLowerCase())) { //Nav
 					sender.sendMessage(command.noPerm());
 					return true;
 				}

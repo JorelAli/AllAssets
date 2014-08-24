@@ -25,7 +25,7 @@ public class CommandLog {
 		max = ConfigHandler.instance().config().getInt("maxLogAmount");
 	}
 
-	@CommandHandler(name = "log", permission = "AllInOne.log", description = "Shows log information", usage = "Use <command>")
+	@CommandHandler(name = "log", permission = "log", description = "Shows log information", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 

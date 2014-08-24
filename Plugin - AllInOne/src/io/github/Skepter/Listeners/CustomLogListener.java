@@ -15,7 +15,7 @@ public class CustomLogListener implements Listener {
 	public void onHyperlinkPost(final LogEvent event) {
 		if(event.getLogType().equals(LogType.ERROR))
 			for(final Player p : Bukkit.getOnlinePlayers())
-				if(p.hasPermission("AllInOne.log"))
+				if(p.hasPermission("AllAssets.log"))
 					ErrorUtils.error(p, "An error appeared in the log: " + event.getMessage());
 	}
 }

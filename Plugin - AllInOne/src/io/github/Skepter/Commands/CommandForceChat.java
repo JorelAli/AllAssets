@@ -14,7 +14,7 @@ public class CommandForceChat {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "forcechat", aliases = { "fc" }, permission = "AllInOne.forcechat", description = "Force a player to say something", usage = "Use <command>")
+	@CommandHandler(name = "forcechat", aliases = { "fc" }, permission = "forcechat", description = "Force a player to say something", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		if(args.getArgs().length > 0) {
 			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
