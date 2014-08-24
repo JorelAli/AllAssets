@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -17,7 +17,7 @@ public class CommandDisable {
 	public void onCommand(final CommandArgs args) {
 		try {
 			Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(args.getArgs()[0]));
-			args.getSender().sendMessage(AllInOne.instance().title + "Plugin disabled successfully");
+			args.getSender().sendMessage(AllAssets.instance().title + "Plugin disabled successfully");
 		} catch (final Exception e) {
 			ErrorUtils.pluginNotFound(args.getSender(), args.getArgs()[0]);
 		}

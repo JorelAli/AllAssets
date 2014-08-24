@@ -1,6 +1,6 @@
 package io.github.Skepter.Users;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Config.PlayerData;
 import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Serializer.LocationSerializer;
@@ -61,7 +61,7 @@ public class User implements IUser {
 	
 	public int getPing() {
 		/* Delay it by 1 tick for accurate results */
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllInOne.instance(), new Runnable() {
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 			@Override
 			public void run() {
 				try {

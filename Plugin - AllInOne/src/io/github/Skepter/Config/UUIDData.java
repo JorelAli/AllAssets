@@ -1,6 +1,6 @@
 package io.github.Skepter.Config;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class UUIDData {
 
 	public void reloadDataFile() {
 		if (dataFileFile == null)
-			dataFileFile = new java.io.File(AllInOne.instance().getDataFolder(), "UUIDMap.yml");
+			dataFileFile = new java.io.File(AllAssets.instance().getDataFolder(), "UUIDMap.yml");
 		dataFile = YamlConfiguration.loadConfiguration(dataFileFile);
 	}
 
@@ -39,7 +39,7 @@ public class UUIDData {
 		try {
 			getDataFile().save(dataFileFile);
 		} catch (final java.io.IOException ex) {
-			AllInOne.instance().getLogger().log(Level.SEVERE, "Could not save data to " + dataFileFile, ex);
+			AllAssets.instance().getLogger().log(Level.SEVERE, "Could not save data to " + dataFileFile, ex);
 		}
 	}
 	

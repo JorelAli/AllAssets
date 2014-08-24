@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -24,23 +24,23 @@ public class CommandTime {
 		case 1:
 			try {
 				player.setPlayerTime(Long.parseLong(args.getArgs()[0]), false);
-				player.sendMessage(AllInOne.instance().title + "Time set to " + args.getArgs()[0]);
+				player.sendMessage(AllAssets.instance().title + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
 				int time = 0;
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					time = 1000;
-					player.sendMessage(AllInOne.instance().title + "Time set to day");
+					player.sendMessage(AllAssets.instance().title + "Time set to day");
 				case "midday":
 					time = 6000;
-					player.sendMessage(AllInOne.instance().title + "Time set to midday");
+					player.sendMessage(AllAssets.instance().title + "Time set to midday");
 				case "night":
 					time = 14000;
-					player.sendMessage(AllInOne.instance().title + "Time set to night");
+					player.sendMessage(AllAssets.instance().title + "Time set to night");
 				case "midnight":
 					time = 18000;
-					player.sendMessage(AllInOne.instance().title + "Time set to midnight");
+					player.sendMessage(AllAssets.instance().title + "Time set to midnight");
 				}
 				for (final World world : Bukkit.getWorlds())
 					world.setTime(time);
@@ -55,7 +55,7 @@ public class CommandTime {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(1000);
-		player.sendMessage(AllInOne.instance().title + "Time set to day");
+		player.sendMessage(AllAssets.instance().title + "Time set to day");
 	}
 
 	@CommandHandler(name = "midday", permission = "AllInOne.time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
@@ -63,7 +63,7 @@ public class CommandTime {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(6000);
-		player.sendMessage(AllInOne.instance().title + "Time set to midday");
+		player.sendMessage(AllAssets.instance().title + "Time set to midday");
 	}
 
 	@CommandHandler(name = "night", permission = "AllInOne.time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
@@ -71,7 +71,7 @@ public class CommandTime {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(14000);
-		player.sendMessage(AllInOne.instance().title + "Time set to night");
+		player.sendMessage(AllAssets.instance().title + "Time set to night");
 	}
 
 	@CommandHandler(name = "midnight", permission = "AllInOne.time", description = "Sets the time to midnight", usage = "Use <command>", isListed = false)
@@ -79,7 +79,7 @@ public class CommandTime {
 		final Player player = args.getPlayer();
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(18000);
-		player.sendMessage(AllInOne.instance().title + "Time set to midnight");
+		player.sendMessage(AllAssets.instance().title + "Time set to midnight");
 	}
 
 }

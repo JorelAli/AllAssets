@@ -1,6 +1,6 @@
 package io.github.Skepter.Listeners;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandConsoleLog;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Utils.TextUtils;
@@ -22,7 +22,7 @@ public class LogListener implements Filter {
 	ArrayList<String> javaExceptions;
 	ArrayList<String> bukkitExceptions;
 
-	public LogListener(final AllInOne allInOne) {
+	public LogListener(final AllAssets allInOne) {
 		javaExceptions = new ArrayList<String>();
 		bukkitExceptions = new ArrayList<String>();
 
@@ -94,7 +94,7 @@ public class LogListener implements Filter {
 			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 				return null;
 			else
-				CommandLog.addErrorLog(msg.replace(TextUtils.stringBetween(msg, "(", ")"), AllInOne.instance().houseStyleColor + TextUtils.stringBetween(msg, "(", ")") + ChatColor.RESET));
+				CommandLog.addErrorLog(msg.replace(TextUtils.stringBetween(msg, "(", ")"), AllAssets.instance().houseStyleColor + TextUtils.stringBetween(msg, "(", ")") + ChatColor.RESET));
 		for (final String s : javaExceptions)
 			if (msg.contains(s))
 				CommandLog.addErrorLog(msg);

@@ -1,6 +1,6 @@
 package io.github.Skepter.Utils;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -12,13 +12,13 @@ public class YesNoConversation {
 
 	public YesNoConversation(final CommandSender sender, final BooleanPrompt prompt) {
 		if (sender instanceof Conversable) {
-			final ConversationFactory conversationFactory = new ConversationFactory(AllInOne.instance()).withModality(true).withFirstPrompt(prompt).withEscapeSequence("/quit").withTimeout(10);
+			final ConversationFactory conversationFactory = new ConversationFactory(AllAssets.instance()).withModality(true).withFirstPrompt(prompt).withEscapeSequence("/quit").withTimeout(10);
 			conversationFactory.buildConversation((Conversable) sender).begin();
 		}
 	}
 
 	public static String getPromptText() {
-		return AllInOne.instance().title + "Are you sure you want to do that? Use " + ChatColor.GREEN + "/yes " + AllInOne.instance().houseStyleColor + "to continue or " + ChatColor.RED + "/no " + AllInOne.instance().houseStyleColor + "to cancel";
+		return AllAssets.instance().title + "Are you sure you want to do that? Use " + ChatColor.GREEN + "/yes " + AllAssets.instance().houseStyleColor + "to continue or " + ChatColor.RED + "/no " + AllAssets.instance().houseStyleColor + "to cancel";
 	}
 
 	/* Example of a BooleanPrompt*/

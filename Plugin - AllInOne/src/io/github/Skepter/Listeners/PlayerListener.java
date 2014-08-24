@@ -1,6 +1,6 @@
 package io.github.Skepter.Listeners;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
@@ -50,7 +50,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onJoin(final PlayerJoinEvent event) {
-		AllInOne.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
+		AllAssets.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
 
 		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
@@ -63,17 +63,17 @@ public class PlayerListener implements Listener {
 			user.setIPs(ips);
 		}
 
-		AllInOne.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
+		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 		final Long l = user.getTotalTimePlayed();
 		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
 			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
-				event.getPlayer().sendMessage(AllInOne.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
+				event.getPlayer().sendMessage(AllAssets.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.instance().features().getBoolean("TotalTime")) {
 				final long days = TimeUnit.MILLISECONDS.toDays(l);
 				final long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
 				final long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
 				final long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
-				event.getPlayer().sendMessage(AllInOne.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
+				event.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
 			}
 		}
 
@@ -93,7 +93,7 @@ public class PlayerListener implements Listener {
 		event.getPlayer().resetPlayerWeather();
 		final User user = new User(event.getPlayer());
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
-		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllInOne.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
+		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
 	}
 
 	/* Hopefully, if they click that slot, it places the item on their head :D */
@@ -128,7 +128,7 @@ public class PlayerListener implements Listener {
 
 		if (ConfigHandler.instance().features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
-			user.getPlayer().sendMessage(AllInOne.instance().title + "You have died " + user.getDeathCount() + " times!");
+			user.getPlayer().sendMessage(AllAssets.instance().title + "You have died " + user.getDeathCount() + " times!");
 		}
 
 		if (ConfigHandler.instance().features().getBoolean("DeathSigns")) {
@@ -179,7 +179,7 @@ public class PlayerListener implements Listener {
 	public void onPlayerDeath(final PlayerDeathEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllInOne.instance(), new Runnable() {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 
 				@Override
 				public void run() {
@@ -210,7 +210,7 @@ public class PlayerListener implements Listener {
 	}
 
 	public void getPing(final Player player) {
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllInOne.instance(), new Runnable() {
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 			@Override
 			public void run() {
 				try {

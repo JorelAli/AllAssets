@@ -1,6 +1,6 @@
 package io.github.Skepter.Config;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandLog;
 
 import java.io.File;
@@ -18,7 +18,7 @@ public class PlayerData {
 	private final String uuid;
 	private final File dataFile;
 	private FileConfiguration fileConfiguration;
-	private final AllInOne plugin = AllInOne.instance();
+	private final AllAssets plugin = AllAssets.instance();
 
 	public PlayerData(final OfflinePlayer player) {
 		uuid = player.getUniqueId().toString();

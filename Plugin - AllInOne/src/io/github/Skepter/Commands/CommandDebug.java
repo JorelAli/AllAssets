@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Commands.CommandFramework.Completer;
@@ -109,7 +109,7 @@ public class CommandDebug {
 		sender.sendMessage(" Using API version " + Bukkit.getBukkitVersion());
 		sender.sendMessage("");
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("Threads"));
-		Bukkit.getScheduler().runTaskAsynchronously(AllInOne.instance(), new Runnable() {
+		Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
 			@Override
 			public void run() {
 				final HashMap<String, Integer> rawData = new HashMap<String, Integer>();
@@ -170,13 +170,13 @@ public class CommandDebug {
 			int length = 0;
 			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
 				length = Integer.parseInt(args.getArgs()[0]);
-			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllInOne.instance(), new Runnable() {
+			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(), new Runnable() {
 				@Override
 				public void run() {
 					System.gc();
 				}
 			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
-			args.getSender().sendMessage(AllInOne.instance().title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
+			args.getSender().sendMessage(AllAssets.instance().title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
 		} else
 			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
 	}

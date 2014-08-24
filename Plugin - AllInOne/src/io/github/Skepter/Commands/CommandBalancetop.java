@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -34,14 +34,14 @@ public class CommandBalancetop {
 		/* I'm certain that there's a MUCH MORE simple method of doing this -.- */
 		final Map<String, Double> map = new HashMap<String, Double>();
 		for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
-			map.put(p.getName(), AllInOne.instance().economy.getBalance(p.getName()));
+			map.put(p.getName(), AllAssets.instance().economy.getBalance(p.getName()));
 		final ValueComparator bvc = new ValueComparator(map);
 		final TreeMap<String, Double> sortedMap = new TreeMap<String, Double>(bvc);
 		sortedMap.putAll(map);
 		player.sendMessage(TextUtils.title("Top balances"));
 		final List<String> balanceList = new ArrayList<String>();
 		for (final Entry<String, Double> e : sortedMap.entrySet())
-			balanceList.add(AllInOne.instance().houseStyleColor + e.getKey() + ": " + e.getValue());
+			balanceList.add(AllAssets.instance().houseStyleColor + e.getKey() + ": " + e.getValue());
 		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);
 			return;

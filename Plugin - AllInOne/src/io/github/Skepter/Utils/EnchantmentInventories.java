@@ -1,6 +1,6 @@
 package io.github.Skepter.Utils;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,11 +65,11 @@ public class EnchantmentInventories {
 		map.put(14, aquaaffinity);
 
 		final ItemStack nextPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(nextPage, AllInOne.instance().houseStyleColor + "Next Page");
+		ItemUtils.setDisplayName(nextPage, AllAssets.instance().houseStyleColor + "Next Page");
 
 
 		final ItemStack previousPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(previousPage, AllInOne.instance().houseStyleColor + "Previous Page");
+		ItemUtils.setDisplayName(previousPage, AllAssets.instance().houseStyleColor + "Previous Page");
 		
 		map.put(52, previousPage);
 		map.put(53, nextPage);

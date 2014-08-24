@@ -1,6 +1,6 @@
 package io.github.Skepter.Utils;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -155,7 +155,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllAssets.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return;
@@ -193,7 +193,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllInOne.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllAssets.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return;

@@ -1,6 +1,6 @@
 package io.github.Skepter.Config;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,12 +16,12 @@ import java.nio.charset.Charset;
 
 public class SimpleConfigManager {
 
-	private final AllInOne plugin;
+	private final AllAssets plugin;
 
 	/**
 	 * Manage custom configurations and files
 	 */
-	public SimpleConfigManager(final AllInOne plugin) {
+	public SimpleConfigManager(final AllAssets plugin) {
 		this.plugin = plugin;
 	}
 

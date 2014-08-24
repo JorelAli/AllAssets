@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Users.User;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.PlayerUtils;
@@ -25,7 +25,7 @@ public class CommandTphere implements CommandExecutor {
 			final User user = new User(target);
 			user.setLastLoc(); // can tp check
 			target.teleport(player);
-			player.sendMessage(AllInOne.instance().title + "Teleported " + args[0] + "to you");
+			player.sendMessage(AllAssets.instance().title + "Teleported " + args[0] + "to you");
 			return true;
 
 		}

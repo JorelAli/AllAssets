@@ -1,6 +1,6 @@
 package io.github.Skepter.Utils;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Users.User;
 
 import java.io.BufferedReader;
@@ -56,7 +56,7 @@ public class UUIDFetch {
 								}
 							}
 
-						}.runTask(AllInOne.instance());
+						}.runTask(AllAssets.instance());
 					}
 					in.close();
 
@@ -64,7 +64,7 @@ public class UUIDFetch {
 				} catch (IOException e) {
 				}
 			}
-		}.runTaskAsynchronously(AllInOne.instance());
+		}.runTaskAsynchronously(AllAssets.instance());
 	}
 
 	private void setup(String uuid, String playerName) {

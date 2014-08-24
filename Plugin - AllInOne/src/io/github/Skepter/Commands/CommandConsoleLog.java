@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 
@@ -23,10 +23,10 @@ public class CommandConsoleLog {
 		final Player player = args.getPlayer();
 		if(players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			player.sendMessage(AllInOne.instance().title + "You are no longer viewing the console");
+			player.sendMessage(AllAssets.instance().title + "You are no longer viewing the console");
 		} else {
 			players.add(player.getUniqueId());
-			player.sendMessage(AllInOne.instance().title + "You are now viewing the console");
+			player.sendMessage(AllAssets.instance().title + "You are now viewing the console");
 		}
 	}
 

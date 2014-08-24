@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 
@@ -16,6 +16,6 @@ public class CommandBalance {
 	public void onCommand(final CommandArgs args) {
 		//other balance
 		final Player player = args.getPlayer();
-		player.sendMessage(AllInOne.instance().title + "Balance: " + AllInOne.instance().economy.getBalance(player.getName()));
+		player.sendMessage(AllAssets.instance().title + "Balance: " + AllAssets.instance().economy.getBalance(player.getName()));
 	}
 }

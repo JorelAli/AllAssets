@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 
@@ -21,12 +21,12 @@ public class CommandWeather {
 			case "downfall":
 			case "rain":
 				player.setPlayerWeather(WeatherType.DOWNFALL);
-				player.sendMessage(AllInOne.instance().title + "Weather set to downfall");
+				player.sendMessage(AllAssets.instance().title + "Weather set to downfall");
 			case "clear":
 			case "sun":
 			case "day":
 				player.setPlayerWeather(WeatherType.CLEAR);
-				player.sendMessage(AllInOne.instance().title + "Weather set to clear");
+				player.sendMessage(AllAssets.instance().title + "Weather set to clear");
 			}
 		return;
 	}

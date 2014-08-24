@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
@@ -19,15 +19,15 @@ public class CommandAFK implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "afk", permission = "AllInOne.afk", description = "Sets your status as away from keyboard", usage = "Use <command>")
+	@CommandHandler(name = "afk", permission = "AllAssets.afk", description = "Sets your status as away from keyboard", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		final User user = new User(player);
 		if (!user.isAFK()) {
-			Bukkit.broadcastMessage(AllInOne.instance().title + player.getName() + " is now AFK");
+			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
-			Bukkit.broadcastMessage(AllInOne.instance().title + player.getName() + " is no longer AFK");
+			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
@@ -50,7 +50,7 @@ public class CommandAFK implements Listener {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if (user.isAFK()) {
-			Bukkit.broadcastMessage(AllInOne.instance().title + player.getName() + " is no longer AFK");
+			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 	}

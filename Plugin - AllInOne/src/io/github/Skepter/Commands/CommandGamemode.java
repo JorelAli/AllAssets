@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.TextUtils;
@@ -38,7 +38,7 @@ public class CommandGamemode {
 	
 	private void doGameMode(Player player, String s) {
 		player.setGameMode(parseGameMode(s));
-		player.sendMessage(AllInOne.instance().title + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name()));
+		player.sendMessage(AllAssets.instance().title + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name()));
 	}
 
 	private GameMode parseGameMode(String s) {

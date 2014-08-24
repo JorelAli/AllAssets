@@ -1,6 +1,6 @@
 package io.github.Skepter.Listeners;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Utils.EnchantmentInventories;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class EnchantGuiListener implements Listener {
 				final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 				player.getItemInHand().addUnsafeEnchantments(eMap);
 				player.closeInventory();
-				player.sendMessage(AllInOne.instance().title + "You successfully enchanted your item in your hand");
+				player.sendMessage(AllAssets.instance().title + "You successfully enchanted your item in your hand");
 			} else if (event.getSlot() == 53)
 				player.openInventory(EnchantmentInventories.page1()); // page 2
 			else if (event.getSlot() == 52)

@@ -1,6 +1,6 @@
 package io.github.Skepter.Config;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 import java.io.File;
 import java.io.InputStream;
@@ -21,7 +21,7 @@ public class SimpleConfig {
 	private FileConfiguration config;
 
 	@SuppressWarnings("deprecation")
-	public SimpleConfig(final InputStream configStream, final File configFile, final int comments, final AllInOne plugin) {
+	public SimpleConfig(final InputStream configStream, final File configFile, final int comments, final AllAssets plugin) {
 		this.comments = comments;
 		this.manager = new SimpleConfigManager(plugin);
 

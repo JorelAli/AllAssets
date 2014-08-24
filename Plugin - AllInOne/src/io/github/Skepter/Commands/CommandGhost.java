@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
@@ -18,24 +18,24 @@ public class CommandGhost {
 	public void command(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		if (args.getArgs().length == 0) {
-			if (AllInOne.instance().ghostFactory.isGhost(player)) {
-				AllInOne.instance().ghostFactory.setGhost(player, false);
-				player.sendMessage(AllInOne.instance().title + "Ghost mode disabled");
+			if (AllAssets.instance().ghostFactory.isGhost(player)) {
+				AllAssets.instance().ghostFactory.setGhost(player, false);
+				player.sendMessage(AllAssets.instance().title + "Ghost mode disabled");
 				return;
 			} else {
-				AllInOne.instance().ghostFactory.setGhost(player, true);
-				player.sendMessage(AllInOne.instance().title + "Ghost mode enabled");
+				AllAssets.instance().ghostFactory.setGhost(player, true);
+				player.sendMessage(AllAssets.instance().title + "Ghost mode enabled");
 				return;
 			}
 		} else if (args.getArgs().length == 1) {
 			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
-			if (AllInOne.instance().ghostFactory.isGhost(target)) {
-				AllInOne.instance().ghostFactory.setGhost(target, false);
-				target.sendMessage(AllInOne.instance().title + "Ghost mode disabled");
+			if (AllAssets.instance().ghostFactory.isGhost(target)) {
+				AllAssets.instance().ghostFactory.setGhost(target, false);
+				target.sendMessage(AllAssets.instance().title + "Ghost mode disabled");
 				return;
 			} else {
-				AllInOne.instance().ghostFactory.setGhost(target, true);
-				target.sendMessage(AllInOne.instance().title + "Ghost mode enabled");
+				AllAssets.instance().ghostFactory.setGhost(target, true);
+				target.sendMessage(AllAssets.instance().title + "Ghost mode enabled");
 				return;
 			}
 		} else {

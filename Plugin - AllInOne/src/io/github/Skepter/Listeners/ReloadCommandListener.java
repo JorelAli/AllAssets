@@ -1,6 +1,6 @@
 package io.github.Skepter.Listeners;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Utils.ErrorUtils;
 
 import org.bukkit.Bukkit;
@@ -29,7 +29,7 @@ public class ReloadCommandListener implements Listener {
 						try {
 							Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(event.getMessage().split(" ")[1]));
 							Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(event.getMessage().split(" ")[1]));
-							event.getPlayer().sendMessage(AllInOne.instance().title + event.getMessage().split(" ")[1] + " successfully reloaded");
+							event.getPlayer().sendMessage(AllAssets.instance().title + event.getMessage().split(" ")[1] + " successfully reloaded");
 						} catch (final Exception e) {
 							ErrorUtils.pluginNotFound(event.getPlayer(), event.getMessage().split(" ")[1]);
 						}

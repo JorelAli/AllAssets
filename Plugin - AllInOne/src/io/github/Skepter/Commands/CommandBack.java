@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Users.User;
@@ -21,7 +21,7 @@ public class CommandBack {
 		final Location l = player.getLocation();
 		player.teleport(user.getLastLoc());
 		user.setLastLoc(l);
-		player.sendMessage(AllInOne.instance().title + "Teleported to your last location");
+		player.sendMessage(AllAssets.instance().title + "Teleported to your last location");
 		return;
 	}
 

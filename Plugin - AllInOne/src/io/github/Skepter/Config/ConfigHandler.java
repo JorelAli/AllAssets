@@ -1,6 +1,6 @@
 package io.github.Skepter.Config;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 
 public class ConfigHandler {
 
@@ -14,11 +14,11 @@ public class ConfigHandler {
 
 	public ConfigHandler() {
 		if (manager == null)
-			manager = new SimpleConfigManager(AllInOne.instance());
+			manager = new SimpleConfigManager(AllAssets.instance());
 		if (managerMessages == null)
-			managerMessages = new SimpleConfigManager(AllInOne.instance());
+			managerMessages = new SimpleConfigManager(AllAssets.instance());
 		if (managerFeatures == null)
-			managerFeatures = new SimpleConfigManager(AllInOne.instance());
+			managerFeatures = new SimpleConfigManager(AllAssets.instance());
 		createConfig();
 		createMessages();
 		createFeatures();
@@ -30,7 +30,7 @@ public class ConfigHandler {
 	}
 
 	private void createConfig() {
-		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
+		final String[] header = { AllAssets.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
 
 		config = manager.getNewConfig("config.yml", header);
 
@@ -47,7 +47,7 @@ public class ConfigHandler {
 	}
 
 	private static void createMessages() {
-		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
+		final String[] header = { AllAssets.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
 
 		messages = managerMessages.getNewConfig("messages.yml", header);
 
@@ -57,7 +57,7 @@ public class ConfigHandler {
 	}
 
 	private void createFeatures() {
-		final String[] header = { AllInOne.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
+		final String[] header = { AllAssets.instance().titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
 		features = managerFeatures.getNewConfig("features.yml", header);
 

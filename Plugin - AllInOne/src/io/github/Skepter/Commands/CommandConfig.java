@@ -1,6 +1,6 @@
 package io.github.Skepter.Commands;
 
-import io.github.Skepter.AllInOne;
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
@@ -31,11 +31,11 @@ public class CommandConfig {
 		case 1:
 			switch (args.getArgs()[0].toLowerCase()) {
 			case "list":
-				args.getSender().sendMessage(AllInOne.instance().title + "Config, Features");
+				args.getSender().sendMessage(AllAssets.instance().title + "Config, Features");
 			case "view":
 				args.getSender().sendMessage(TextUtils.title("Config"));
 				for (String key : ConfigHandler.instance().config().getKeys()) {
-					args.getSender().sendMessage(AllInOne.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
+					args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
 				}
 			}
 			return;
@@ -45,12 +45,12 @@ public class CommandConfig {
 				case "config":
 					args.getSender().sendMessage(TextUtils.title("Config"));
 					for (String key : ConfigHandler.instance().config().getKeys()) {
-						args.getSender().sendMessage(AllInOne.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
+						args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
 					}
 				case "features":
 					args.getSender().sendMessage(TextUtils.title("Features"));
 					for (String key : ConfigHandler.instance().features().getKeys()) {
-						args.getSender().sendMessage(AllInOne.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().features().get(key)));
+						args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().features().get(key)));
 					}
 				}
 			}
