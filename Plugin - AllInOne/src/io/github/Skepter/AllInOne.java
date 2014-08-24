@@ -18,6 +18,7 @@ import io.github.Skepter.Commands.CommandEnchant;
 import io.github.Skepter.Commands.CommandFly;
 import io.github.Skepter.Commands.CommandForceChat;
 import io.github.Skepter.Commands.CommandFramework;
+import io.github.Skepter.Commands.CommandGamemode;
 import io.github.Skepter.Commands.CommandGhost;
 import io.github.Skepter.Commands.CommandInventory;
 import io.github.Skepter.Commands.CommandLaunch;
@@ -198,14 +199,16 @@ public class AllInOne extends JavaPlugin {
 			new CommandForceChat(framework);
 		if (ConfigHandler.instance().features().getBoolean("Fly"))
 			new CommandFly(framework);
-		if (ConfigHandler.instance().features().getBoolean("Launch"))
-			new CommandLaunch(framework);
-		if (ConfigHandler.instance().features().getBoolean("Log"))
-			new CommandLog(framework);
+		if (ConfigHandler.instance().features().getBoolean("Gamemode"))
+			new CommandGamemode(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ghost"))
 			new CommandGhost(framework);
 		if(ConfigHandler.instance().features().getBoolean("Inventory"))
 			new CommandInventory(framework);
+		if (ConfigHandler.instance().features().getBoolean("Launch"))
+			new CommandLaunch(framework);
+		if (ConfigHandler.instance().features().getBoolean("Log"))
+			new CommandLog(framework);
 		if (ConfigHandler.instance().features().getBoolean("Oplist"))
 			new CommandOplist(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ping"))
