@@ -1,10 +1,10 @@
 package io.github.Skepter.Commands;
 
+import io.github.Skepter.API.LogEvent;
+import io.github.Skepter.API.LogEvent.LogType;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
-import io.github.Skepter.Events.LogEvent;
-import io.github.Skepter.Events.LogEvent.LogType;
 import io.github.Skepter.Utils.TextUtils;
 
 import java.util.ArrayList;

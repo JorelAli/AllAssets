@@ -1,11 +1,13 @@
 package io.github.Skepter.Listeners;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
+import io.github.Skepter.Libs.SimpleScoreboard;
 import io.github.Skepter.Serializer.InventorySerializer;
-import io.github.Skepter.Users.User;
+import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.MathUtils;
 
 import java.text.SimpleDateFormat;
@@ -71,15 +73,16 @@ public class PlayerListener implements Listener {
 				event.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
 			}
 		}
+		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
-		//AllAssets.instance().ghostUtils.addPlayer(event.getPlayer());
 		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
-		//		SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
-		//		board.blankLine();
-		//		board.add("Error Logs", 0);
-		//		board.add("Spam Logs", 0);
-		//		board.build();
-		//		board.send(event.getPlayer());
+		SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
+		board.add("Error Logs", 0);
+		board.add("Spam Logs", 0);
+		board.add("Current TPS", new Double(TPS.getTPS()).intValue());
+		//current staff online
+		board.build();
+		board.send(event.getPlayer());
 	}
 
 	@EventHandler
@@ -88,7 +91,8 @@ public class PlayerListener implements Listener {
 		event.getPlayer().resetPlayerWeather();
 		final User user = new User(event.getPlayer());
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
-		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
+		if (AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId()) != null)
+			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
 	}
 
 	/* Hopefully, if they click that slot, it places the item on their head :D */

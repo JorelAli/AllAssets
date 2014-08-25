@@ -1,7 +1,7 @@
 package io.github.Skepter.Utils;
 
 import io.github.Skepter.AllAssets;
-import io.github.Skepter.Users.User;
+import io.github.Skepter.API.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;

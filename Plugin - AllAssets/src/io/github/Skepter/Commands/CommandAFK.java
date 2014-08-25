@@ -1,10 +1,10 @@
 package io.github.Skepter.Commands;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
-import io.github.Skepter.Users.User;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

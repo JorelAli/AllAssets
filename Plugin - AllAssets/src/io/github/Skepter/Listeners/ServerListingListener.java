@@ -1,7 +1,7 @@
 package io.github.Skepter.Listeners;
 
+import io.github.Skepter.API.User;
 import io.github.Skepter.Config.UUIDData;
-import io.github.Skepter.Users.User;
 
 import java.util.ArrayList;
 import java.util.UUID;

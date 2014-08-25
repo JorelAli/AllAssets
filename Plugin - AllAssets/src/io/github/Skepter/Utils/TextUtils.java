@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +36,7 @@ public class TextUtils {
 		return s2;
 	}
 
+	/** Centers text */
 	private static String center(final String text) {
 		final int spaces = (int) Math.round((80 - (1.4 * ChatColor.stripColor(text).length())) / 2);
 		String s = "";
@@ -43,6 +45,10 @@ public class TextUtils {
 		return s + text;
 	}
 
+	/** Checks if a string contains s
+	 * 
+	 * @param s
+	 * @return */
 	public static boolean containsSwear(final String s) {
 		final String s00 = ChatColor.stripColor(s);
 		final String s0 = s00.toLowerCase();
@@ -91,18 +97,28 @@ public class TextUtils {
 	}
 
 	public static boolean isHyperlink(final String s) {
-		final String s00 = ChatColor.stripColor(s);
-		final String s0 = s00.toLowerCase();
-		final ArrayList<String> arr = new ArrayList<String>();
-		arr.add("http");
-		arr.add("://");
-		arr.add("www.");
-		arr.add(".com");
-		arr.add("bit.ly");
-		arr.add(".net");
-		for (final String str : arr)
-			if (s0.contains(str))
-				return true;
+		final String strippedColor = ChatColor.stripColor(s);
+		final String s0 = strippedColor.toLowerCase();
+		Pattern p = Pattern.compile("[^.]+[.][^.]+");
+		Scanner scanner = new Scanner(s0);
+		while (scanner.hasNext()) {
+			if (scanner.hasNext(p)) {
+				String possibleUrl = scanner.next(p);
+				if (!possibleUrl.contains("://")) {
+					possibleUrl = "http://" + possibleUrl;
+				}
+
+				try {
+					new URL(possibleUrl);
+					return true;
+				} catch (MalformedURLException e) {
+					continue;
+				}
+			} else {
+				scanner.next();
+			}
+		}
+		scanner.close();
 		return false;
 	}
 

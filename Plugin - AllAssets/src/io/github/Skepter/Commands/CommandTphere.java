@@ -1,7 +1,7 @@
 package io.github.Skepter.Commands;
 
 import io.github.Skepter.AllAssets;
-import io.github.Skepter.Users.User;
+import io.github.Skepter.API.User;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.PlayerUtils;
 

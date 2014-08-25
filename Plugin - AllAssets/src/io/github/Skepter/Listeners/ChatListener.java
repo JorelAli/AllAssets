@@ -22,7 +22,7 @@ public class ChatListener implements Listener {
 				event.setCancelled(true);
 			}
 		if(ConfigHandler.instance().features().getBoolean("AntiSwear"))
-			if ((TextUtils.containsSwear(event.getMessage()) || TextUtils.containsSwear(event.getMessage())) && !p.hasPermission("AllAssets.swear")) {
+			if ((TextUtils.containsSwear(event.getMessage()) || TextUtils.containsSwearUsingFilter(event.getMessage())) && !p.hasPermission("AllAssets.swear")) {
 				CommandLog.addChatLog(ChatColor.BLUE + p.getName() + ChatColor.WHITE + " tried to swear: " + ChatColor.BLUE + event.getMessage());
 				event.setCancelled(true);
 			}
