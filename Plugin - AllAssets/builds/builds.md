@@ -1,7 +1,12 @@
 Builds
 ======
-This is the builds folder, where you are able to download the latest builds of AIO. In order to download a build of AIO, right click the AllInOne.jar file and click 'Save link as'.
-That's pretty much it xD There will always be only 1 file in here (since it's still in dev stage) and yeah. pretty much. Just look for those commits to see if a new AllInOne.jar file has been uploaded since it is likely to have some patched bugs
+This is the builds folder, where you are able to download the latest builds of AllAssets. In order to download a build of AllAssets, right click the AllAssets.zip file and click 'Save link as'.
+That's pretty much it xD There will always be only 1 file in here (since it's still in dev stage) and yeah. pretty much. Just look for those commits to see if a new AllAssets.zip file has been uploaded since it is likely to have some patched bugs.
+
+Each AllAssets.zip file contains:
+* AllAssets.jar - this is the file which you place inside the /plugins/ folder of your server
+* Changelog.txt - this shows the differences from each new version and the possible bugs which it contains
+* Disclaimer.txt - the data shown below
 
 Disclaimer (or whatever you call it)
 ------------------------------------
