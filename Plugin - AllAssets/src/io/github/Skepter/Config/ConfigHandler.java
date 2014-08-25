@@ -68,6 +68,7 @@ public class ConfigHandler {
 		features.set("Balancetop", "true");
 		features.set("Batch", "true");
 		features.set("Bind", "true");
+		features.set("Butcher", "true");
 		features.set("ChestSearch", "true");
 		features.set("Clear", "true");
 		features.set("ClearChat", "true");

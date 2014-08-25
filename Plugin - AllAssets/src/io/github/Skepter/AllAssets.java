@@ -7,6 +7,7 @@ import io.github.Skepter.Commands.CommandBalance;
 import io.github.Skepter.Commands.CommandBalancetop;
 import io.github.Skepter.Commands.CommandBatch;
 import io.github.Skepter.Commands.CommandBind;
+import io.github.Skepter.Commands.CommandButcher;
 import io.github.Skepter.Commands.CommandChestSearch;
 import io.github.Skepter.Commands.CommandClear;
 import io.github.Skepter.Commands.CommandClearchat;
@@ -177,6 +178,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandBatch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Bind"))
 			r(new CommandBind(framework));
+		if (ConfigHandler.instance().features().getBoolean("Butcher"))
+			new CommandButcher(framework);
 		if (ConfigHandler.instance().features().getBoolean("ChestSearch"))
 			new CommandChestSearch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Clear"))
