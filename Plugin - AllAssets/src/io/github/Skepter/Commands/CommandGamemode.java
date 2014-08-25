@@ -38,7 +38,7 @@ public class CommandGamemode {
 	
 	private void doGameMode(Player player, String s) {
 		player.setGameMode(parseGameMode(s));
-		player.sendMessage(AllAssets.instance().title + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name()));
+		player.sendMessage(AllAssets.instance().title + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name().toLowerCase()));
 	}
 
 	private GameMode parseGameMode(String s) {

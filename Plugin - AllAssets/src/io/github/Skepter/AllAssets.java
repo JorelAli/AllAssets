@@ -189,8 +189,10 @@ public class AllAssets extends JavaPlugin {
 			new CommandDebug(framework);
 		if (ConfigHandler.instance().features().getBoolean("Disable"))
 			new CommandDisable(framework);
-		if (ConfigHandler.instance().features().getBoolean("Enchant"))
+		if (ConfigHandler.instance().features().getBoolean("Enchant")) {
 			new CommandEnchant(framework);
+			r(new EnchantGuiListener());
+		}
 		if (ConfigHandler.instance().features().getBoolean("Enable"))
 			new CommandEnable(framework);
 		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
@@ -201,7 +203,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandGamemode(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ghost"))
 			new CommandGhost(framework);
-		if(ConfigHandler.instance().features().getBoolean("Inventory"))
+		if (ConfigHandler.instance().features().getBoolean("Inventory"))
 			new CommandInventory(framework);
 		if (ConfigHandler.instance().features().getBoolean("Launch"))
 			new CommandLaunch(framework);
@@ -211,10 +213,14 @@ public class AllAssets extends JavaPlugin {
 			new CommandOplist(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ping"))
 			new CommandPing(framework);
+		if (ConfigHandler.instance().features().getBoolean("Plugins"))
+			r(new PluginsCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("PTime"))
 			new CommandPTime(framework);
 		if (ConfigHandler.instance().features().getBoolean("PWeather"))
 			new CommandPWeather(framework);
+		if (ConfigHandler.instance().features().getBoolean("Reload"))
+			r(new ReloadCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("Set"))
 			r(new CommandSet(framework)); /* Finish */
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
@@ -226,10 +232,9 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
 
-		/* Glad I remembered what my uncle said
-		 * Something along the lines of doing things once and not tonnes of times.
-		 * If I didn't remember that, I'd be checking hasVault for every single
-		 * command which requires it. And that's a lot. */
+		/* Vault commands. Only loads them if Vault is enabled so that:
+		 * [1] Unused commands aren't loaded
+		 * [2] It's pointless having commands which don't work */
 		if (hasVault) {
 			if (ConfigHandler.instance().features().getBoolean("Balance"))
 				new CommandBalance(framework);
@@ -238,25 +243,18 @@ public class AllAssets extends JavaPlugin {
 		}
 
 		/* Listeners */
-		if (ConfigHandler.instance().features().getBoolean("Enchant"))
-			r(new EnchantGuiListener());
 		r(new ChatListener());
 		r(new SignListener());
 		r(new PlayerListener());
-
 		if (ConfigHandler.instance().features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
-
-		if (ConfigHandler.instance().features().getBoolean("Plugins"))
-			r(new PluginsCommandListener());
-		if (ConfigHandler.instance().features().getBoolean("Reload"))
-			r(new ReloadCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
 
 		/* Put into features.yml */
 		r(new ServerListingListener());
 
+		/* Update UUIDData file */
 		final UUIDData data = new UUIDData();
 		data.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers())
@@ -265,6 +263,7 @@ public class AllAssets extends JavaPlugin {
 		/* Start TPS counter */
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 100L, 1L);
 
+		/* Update tempTimeMap.bin file */
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
 				JavaUtils.load(new File(getDataFolder(), "tempTimeMap.bin"));

@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -254,12 +253,5 @@ public class TextUtils {
 		while (matcher.find())
 			tagValues.add(matcher.group(1));
 		return tagValues;
-	}
-
-	/*TODO */
-	@Deprecated
-	public static String formatDate(final long l) {
-		TimeUnit.MILLISECONDS.toDays(l);
-		return "";
 	}
 }

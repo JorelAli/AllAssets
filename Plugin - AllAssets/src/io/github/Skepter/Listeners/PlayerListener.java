@@ -6,13 +6,13 @@ import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Users.User;
+import io.github.Skepter.Utils.MathUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -64,16 +64,11 @@ public class PlayerListener implements Listener {
 		}
 
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
-		final Long l = user.getTotalTimePlayed();
 		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
 			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(AllAssets.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.instance().features().getBoolean("TotalTime")) {
-				final long days = TimeUnit.MILLISECONDS.toDays(l);
-				final long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
-				final long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
-				final long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
-				event.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
+				event.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
 			}
 		}
 

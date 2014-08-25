@@ -4,7 +4,6 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Commands.CommandFramework.Completer;
-import io.github.Skepter.Libs.EssentialsDateUtils;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.MathUtils;
@@ -48,7 +47,7 @@ public class CommandDebug {
 			strTps = ChatColor.RED + String.valueOf(tps);
 
 		sender.sendMessage(TextUtils.title("Debug"));
-		sender.sendMessage("Server uptime: " + EssentialsDateUtils.formatDateDiff(ManagementFactory.getRuntimeMXBean().getStartTime()));
+		sender.sendMessage("Server uptime: " + MathUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
 		sender.sendMessage("Server TPS: " + strTps);
 		return;
 	}
@@ -66,7 +65,7 @@ public class CommandDebug {
 			strTps = ChatColor.RED + String.valueOf(tps);
 
 		sender.sendMessage(TextUtils.title("Full debug info"));
-		sender.sendMessage(" Server uptime: " + EssentialsDateUtils.formatDateDiff(ManagementFactory.getRuntimeMXBean().getStartTime()));
+		sender.sendMessage(" Server uptime: " + MathUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
 		sender.sendMessage(" Server TPS: " + strTps);
 		sender.sendMessage("");
 		sender.sendMessage(" Worlds loaded: " + Bukkit.getWorlds().size());
