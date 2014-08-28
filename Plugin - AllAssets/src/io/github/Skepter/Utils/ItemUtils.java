@@ -49,14 +49,14 @@ public class ItemUtils {
 		else
 			return false;
 	}
-	
+
 	public static ItemStack setDisplayName(final ItemStack itemStack, final String name) {
 		final ItemMeta meta = itemStack.getItemMeta();
 		meta.setDisplayName(name);
 		itemStack.setItemMeta(meta);
 		return itemStack;
 	}
-	
+
 	public static ItemStack setLore(final ItemStack itemStack, final String[] lore) {
 		final ItemMeta meta = itemStack.getItemMeta();
 		meta.setLore(Arrays.asList(lore));

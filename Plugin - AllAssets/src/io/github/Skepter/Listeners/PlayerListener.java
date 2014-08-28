@@ -69,20 +69,20 @@ public class PlayerListener implements Listener {
 		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
 			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(AllAssets.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
-			if (ConfigHandler.instance().features().getBoolean("TotalTime")) {
+			if (ConfigHandler.instance().features().getBoolean("TotalTime"))
 				event.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
-			}
 		}
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
 		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
-		SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
+		final SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
+		board.add("Current TPS", TPS.getTPSAsInt());
 		board.add("Error Logs", 0);
 		board.add("Spam Logs", 0);
-		board.add("Current TPS", new Double(TPS.getTPS()).intValue());
 		//current staff online
 		board.build();
 		board.send(event.getPlayer());
+		SimpleScoreboard.scoreboardMap.put(event.getPlayer().getUniqueId(), board);
 	}
 
 	@EventHandler

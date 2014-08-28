@@ -58,7 +58,7 @@ public class JavaUtils {
 		return ((int) (value * 1000) / 10.0); // returns a percentage value with
 											  // 1 decimal point precision
 	}
-	
+
 	public static List<String> getClassNamesInPackage(final String jarName, String packageName) {
 		final ArrayList<String> classes = new ArrayList<String>();
 		packageName = packageName.replaceAll("\\.", "/");
@@ -79,7 +79,7 @@ public class JavaUtils {
 		}
 		return classes;
 	}
-	
+
 	public static void save(final Object obj, final File file) throws Exception {
 		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true));
 		oos.writeObject(obj);

@@ -4,6 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Commands.CommandFramework.Completer;
+import io.github.Skepter.Libs.TabText;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.MathUtils;
@@ -197,13 +198,27 @@ public class CommandDebug {
 		Bukkit.broadcastMessage(s);
 	}
 
+	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
+	public void test(final CommandArgs args) {
+		String multilineString = "Plugin                        `Thread\n";
+
+		multilineString += "AllInOne`30\n";
+		multilineString += "Essentials`491";
+		final TabText tt = new TabText(multilineString);
+		tt.setPageHeight(10); // set page height and get number of pages
+		tt.setTabs(16, 22, 20); // horizontal tabs positions
+		tt.sortByFields(-2, 1); // sort by second column descending, then by first
+		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
+		Bukkit.broadcastMessage(printedText);
+	}
+
 	@Completer(name = "debug")
 	public List<String> testCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();
 		list.add("full");
 		list.add("ram");
 		list.add("clean");
-//		list.add("dir");
+		//		list.add("dir");
 		return list;
 	}
 

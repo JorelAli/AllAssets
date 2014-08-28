@@ -42,31 +42,27 @@ public class UUIDData {
 			AllAssets.instance().getLogger().log(Level.SEVERE, "Could not save data to " + dataFileFile, ex);
 		}
 	}
-	
+
 	public List<UUID> getValues() {
 		final List<UUID> uuidList = new ArrayList<UUID>();
-		for(final String s : getDataFile().getKeys(true))
+		for (final String s : getDataFile().getKeys(true))
 			uuidList.add(UUID.fromString(getDataFile().getString(s)));
 		return uuidList;
 	}
 
-	/**
-	 * @return Playername: UUID
-	 */
+	/** @return Playername: UUID */
 	public Map<String, UUID> getUUIDMap() {
 		final Map<String, UUID> uuidMap = new HashMap<String, UUID>();
 		final Map<String, Object> objectMap = getDataFile().getValues(false);
-		for(final Map.Entry<String, Object> entry : objectMap.entrySet())
+		for (final Map.Entry<String, Object> entry : objectMap.entrySet())
 			uuidMap.put(entry.getKey(), UUID.fromString(String.valueOf(entry.getValue())));
 		return uuidMap;
 	}
-	
-	/**
-	 * @return UUID: PlayerName
-	 */
+
+	/** @return UUID: PlayerName */
 	public Map<UUID, String> getReversedUUIDMap() {
 		final Map<UUID, String> reversedMap = new HashMap<UUID, String>();
-		for(final Map.Entry<String, UUID> entry : getUUIDMap().entrySet())
+		for (final Map.Entry<String, UUID> entry : getUUIDMap().entrySet())
 			reversedMap.put(entry.getValue(), entry.getKey());
 		return reversedMap;
 	}

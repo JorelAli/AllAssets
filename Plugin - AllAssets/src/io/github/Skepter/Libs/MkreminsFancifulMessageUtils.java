@@ -1,4 +1,5 @@
 package io.github.Skepter.Libs;
+
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class MkreminsFancifulMessageUtils {
 	private final Class<?> nmsTagCompound = Reflection.getNMSClass("NBTTagCompound");
 	private final Class<?> nmsPacketPlayOutChat = Reflection.getNMSClass("PacketPlayOutChat");
 	private final Class<?> nmsAchievement = Reflection.getNMSClass("Achievement");
-//	private Class<?> nmsStatistic = Reflection.getNMSClass("Statistic");
+	//	private Class<?> nmsStatistic = Reflection.getNMSClass("Statistic");
 	private final Class<?> nmsItemStack = Reflection.getNMSClass("ItemStack");
 
 	private final Class<?> obcStatistic = Reflection.getOBCClass("CraftStatistic");
@@ -171,7 +172,7 @@ public class MkreminsFancifulMessageUtils {
 	}
 
 	public MkreminsFancifulMessageUtils tooltip(final List<String> lines) {
-		return tooltip((String[])lines.toArray());
+		return tooltip((String[]) lines.toArray());
 	}
 
 	public MkreminsFancifulMessageUtils tooltip(final String... lines) {
@@ -221,7 +222,7 @@ public class MkreminsFancifulMessageUtils {
 		return jsonString;
 	}
 
-	public void send(final Player player){
+	public void send(final Player player) {
 		try {
 			final Object handle = Reflection.getHandle(player);
 			final Object connection = Reflection.getField(handle.getClass(), "playerConnection").get(handle);

@@ -13,6 +13,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener implements Listener {
 
+	//line length is around 42 characters
+
 	@EventHandler
 	public void onHyperlinkPost(final AsyncPlayerChatEvent event) {
 		final Player p = event.getPlayer();
@@ -21,7 +23,7 @@ public class ChatListener implements Listener {
 				CommandLog.addChatLog(ChatColor.BLUE + p.getName() + ChatColor.WHITE + " tried to post a link: " + ChatColor.BLUE + event.getMessage());
 				event.setCancelled(true);
 			}
-		if(ConfigHandler.instance().features().getBoolean("AntiSwear"))
+		if (ConfigHandler.instance().features().getBoolean("AntiSwear"))
 			if ((TextUtils.containsSwear(event.getMessage()) || TextUtils.containsSwearUsingFilter(event.getMessage())) && !p.hasPermission("AllAssets.swear")) {
 				CommandLog.addChatLog(ChatColor.BLUE + p.getName() + ChatColor.WHITE + " tried to swear: " + ChatColor.BLUE + event.getMessage());
 				event.setCancelled(true);
@@ -30,14 +32,14 @@ public class ChatListener implements Listener {
 
 	@EventHandler
 	public void color(final AsyncPlayerChatEvent event) {
-		if(ConfigHandler.instance().features().getBoolean("ChatColor"))
+		if (ConfigHandler.instance().features().getBoolean("ChatColor"))
 			if (event.getPlayer().hasPermission("AllAssets.chatColor"))
 				event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 	}
 
 	@EventHandler
 	public void translatePlayer(final AsyncPlayerChatEvent event) {
-		if(ConfigHandler.instance().features().getBoolean("PlayerTranslator"))
+		if (ConfigHandler.instance().features().getBoolean("PlayerTranslator"))
 			if (event.getMessage().contains("{player}") && event.getPlayer().hasPermission("AllAssets.playerChat")) {
 				event.setCancelled(true);
 				if (event.getPlayer().hasPermission("AllAssets.chatColor"))

@@ -23,13 +23,13 @@ public class EnchantmentInventories {
 			is.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, i);
 			map.put(i - 1, is);
 		}
-		
+
 		for (int i = 5; i < 8; i++) {
 			final ItemStack is = new ItemStack(Material.IRON_BOOTS);
 			is.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, i + 1);
 			map.put(i, is);
 		}
-		
+
 		for (int i = 9; i < 12; i++) {
 			final ItemStack is = new ItemStack(Material.IRON_CHESTPLATE);
 			is.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, i + 1);
@@ -53,7 +53,7 @@ public class EnchantmentInventories {
 			is.addUnsafeEnchantment(Enchantment.OXYGEN, i + 1);
 			map.put(i, is);
 		}
-		
+
 		for (int i = 45; i < 47; i++) {
 			final ItemStack is = new ItemStack(Material.IRON_CHESTPLATE);
 			is.addUnsafeEnchantment(Enchantment.THORNS, i + 1);
@@ -67,10 +67,9 @@ public class EnchantmentInventories {
 		final ItemStack nextPage = new ItemStack(Material.ARROW, 1);
 		ItemUtils.setDisplayName(nextPage, AllAssets.instance().houseStyleColor + "Next Page");
 
-
 		final ItemStack previousPage = new ItemStack(Material.ARROW, 1);
 		ItemUtils.setDisplayName(previousPage, AllAssets.instance().houseStyleColor + "Previous Page");
-		
+
 		map.put(52, previousPage);
 		map.put(53, nextPage);
 

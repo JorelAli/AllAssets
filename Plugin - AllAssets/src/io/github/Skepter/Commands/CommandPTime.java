@@ -17,13 +17,13 @@ public class CommandPTime {
 	@CommandHandler(name = "ptime", aliases = { "playertime" }, permission = "ptime", description = "Sets your time", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(args.getArgs().length == 1)
+		if (args.getArgs().length == 1)
 			try {
 				player.setPlayerTime(Long.parseLong(args.getArgs()[0]), false);
 				player.sendMessage(AllAssets.instance().title + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
-				switch(args.getArgs()[0].toLowerCase()) {
+				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					player.setPlayerTime(1000, false);
 					player.sendMessage(AllAssets.instance().title + "Time set to day");
@@ -42,7 +42,7 @@ public class CommandPTime {
 				}
 				return;
 			}
-		if(args.getArgs().length == 2) {
+		if (args.getArgs().length == 2) {
 			Player target = null;
 			try {
 				target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
@@ -55,7 +55,7 @@ public class CommandPTime {
 				target.sendMessage(AllAssets.instance().titleNoColor + player.getName() + " set your time to " + args.getArgs()[1]);
 				return;
 			} catch (final NumberFormatException e) {
-				switch(args.getArgs()[0].toLowerCase()) {
+				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					target.setPlayerTime(1000, false);
 					player.sendMessage(AllAssets.instance().title + "Time set to day");

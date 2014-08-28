@@ -8,6 +8,7 @@ import io.github.Skepter.Serializer.LocationSerializer;
 import io.github.Skepter.Utils.PlayerUtils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,18 +28,18 @@ public class User implements IUser {
 		player = p;
 		playerData = new PlayerData(player);
 	}
-	
-	/**
-	 * Remember that when using this method the following are impossible:
-	 * Getting the ping
-	 * Setting the last Location
-	 * Setting the last waypoint etc.
-	 * @param p
-	 */
+
+	/** Remember that when using this method the following are impossible:
+	 * Getting the ping Setting the last Location Setting the last waypoint etc.
+	 * 
+	 * @param p */
 	public User(final OfflinePlayer p) {
 		playerData = new PlayerData(p);
 	}
 
+	/** Risky.... very risky. If the player isn't online, then it's risky...
+	 * 
+	 * @param s */
 	public User(final String s) {
 		try {
 			player = PlayerUtils.getPlayerFromString(s);
@@ -59,7 +60,7 @@ public class User implements IUser {
 		}
 		playerData = new PlayerData(player);
 	}
-	
+
 	public int getPing() {
 		/* Delay it by 1 tick for accurate results */
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
@@ -76,7 +77,7 @@ public class User implements IUser {
 		}, 1L);
 		return ping;
 	}
-	
+
 	public String getLanguage(final Player p) {
 		try {
 			final Object nmsPlayer = p.getClass().getMethod("getHandle").invoke(p);
@@ -84,7 +85,7 @@ public class User implements IUser {
 			field.setAccessible(true);
 			final String language = (String) field.get(nmsPlayer);
 			final String lang = language.toLowerCase();
-			switch(lang) {
+			switch (lang) {
 			case "de_de":
 				return "de";
 			case "sv_se":
@@ -98,6 +99,13 @@ public class User implements IUser {
 			return "en";
 		}
 		return "en";
+	}
+
+	public static List<User> userList() {
+		final List<User> userList = new ArrayList<User>();
+		for (final String s : PlayerUtils.getAllOfflinePlayerNames())
+			userList.add(new User(s));
+		return userList;
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class CommandBatch {
 
 		/* If it contains [i=#] but doesn't contain [i] */
 		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]")))
-		 for (int i = 1; i < amount; i++) {
+			for (int i = 1; i < amount; i++) {
 				//				List<String> tagValues = new ArrayList<String>();
 				int beginInt = 1;
 				int increment = 1;

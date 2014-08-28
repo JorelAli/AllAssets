@@ -18,7 +18,7 @@ public class CommandWorlds {
 	public void onCommand(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		sender.sendMessage(TextUtils.title("Worlds"));
-		for(final World w : Bukkit.getWorlds())
+		for (final World w : Bukkit.getWorlds())
 			sender.sendMessage(w.getName());
 		return;
 	}

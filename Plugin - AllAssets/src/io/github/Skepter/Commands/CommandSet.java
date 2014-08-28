@@ -72,24 +72,24 @@ public class CommandSet implements Listener {
 		return;
 	}
 
-//	@EventHandler
-//	public void onJump(PlayerMoveEvent event) {
-//		Block block, control;
-//		Vector dir = event.getPlayer().getVelocity().setY(2);
-//		if (event.getTo().getY() > event.getFrom().getY()) {
-//			block = event.getPlayer().getWorld().getBlockAt(new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY() + 2, event.getTo().getZ()));
-//			control = event.getPlayer().getWorld().getBlockAt(new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY() - 2, event.getTo().getZ()));
-//			if (!(block.getType() != Material.AIR || control.getType() == Material.AIR)) {
-//				event.getPlayer().setVelocity(dir);
-//			}
-//		}
-//	}
+	//	@EventHandler
+	//	public void onJump(PlayerMoveEvent event) {
+	//		Block block, control;
+	//		Vector dir = event.getPlayer().getVelocity().setY(2);
+	//		if (event.getTo().getY() > event.getFrom().getY()) {
+	//			block = event.getPlayer().getWorld().getBlockAt(new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY() + 2, event.getTo().getZ()));
+	//			control = event.getPlayer().getWorld().getBlockAt(new Location(event.getPlayer().getWorld(), event.getTo().getX(), event.getTo().getY() - 2, event.getTo().getZ()));
+	//			if (!(block.getType() != Material.AIR || control.getType() == Material.AIR)) {
+	//				event.getPlayer().setVelocity(dir);
+	//			}
+	//		}
+	//	}
 
 	@EventHandler
 	public void onAttack(final EntityDamageByEntityEvent event) {
 		if (event.getDamager() instanceof Player) {
 			final Player player = (Player) event.getDamager();
-			if(attack.containsKey(player.getUniqueId()))
+			if (attack.containsKey(player.getUniqueId()))
 				event.setDamage(attack.get(player.getUniqueId()));
 		}
 	}

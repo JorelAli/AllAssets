@@ -9,16 +9,22 @@ import org.bukkit.inventory.Inventory;
 
 public abstract interface IUser {
 
+	/** Gets the last location of a player */
 	public abstract Location getLastLoc();
 
+	/** Sets the last location for a player at their current location */
 	public abstract void setLastLoc();
 
+	/** Sets the last location for a player at a specific location */
 	public abstract void setLastLoc(Location loc);
 
+	/** Gets a home location from the home name */
 	public abstract Location getHome(String name);
 
+	/** Sets a home as the specified location and name */
 	public abstract void setHome(Location loc, String name);
 
+	/** Gets a waypoint from a specific location */
 	public abstract Location getWaypoint(Location loc);
 
 	public abstract void setWaypoint(Location loc);
@@ -51,9 +57,11 @@ public abstract interface IUser {
 
 	public abstract void setDeathCount(int i);
 
+	/** Gets the amount of times a player has joined */
 	public abstract int getJoinCount();
 
-	public abstract void setJoinCount(int i);
+	/** Sets the amount of times a player has joined */
+	public abstract void setJoinCount(int joinCount);
 
 	public abstract List<String> IPs();
 

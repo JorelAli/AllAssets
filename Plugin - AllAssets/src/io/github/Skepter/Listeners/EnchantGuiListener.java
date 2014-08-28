@@ -30,7 +30,7 @@ public class EnchantGuiListener implements Listener {
 				player.openInventory(EnchantmentInventories.page1()); // page 2
 			else if (event.getSlot() == 52)
 				player.openInventory(EnchantmentInventories.page1()); // page 2
-				//page 4
+			//page 4
 		}
 	}
 }

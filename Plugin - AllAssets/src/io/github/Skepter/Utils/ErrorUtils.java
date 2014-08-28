@@ -36,11 +36,11 @@ public class ErrorUtils {
 	public static void tooManyArguments(final Player player) {
 		player.sendMessage(AllAssets.instance().error + "Too many arguments - use /help <command>!");
 	}
-	
+
 	public static void tptoggle(final Player player, final String target) {
 		player.sendMessage(AllAssets.instance().error + target + " has turned teleporting off");
 	}
-	
+
 	public static void wrongConstruction(final Player player, final String construction) {
 		player.sendMessage(AllAssets.instance().error + "Wrong construction, use the format: " + construction);
 	}

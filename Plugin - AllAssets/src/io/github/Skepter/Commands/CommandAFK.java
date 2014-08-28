@@ -49,7 +49,7 @@ public class CommandAFK implements Listener {
 	public void onMove(final PlayerMoveEvent event) {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
-		if (user.isAFK()) {
+		if ((event.getFrom().distanceSquared(event.getTo()) > 1) && user.isAFK()) {
 			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}

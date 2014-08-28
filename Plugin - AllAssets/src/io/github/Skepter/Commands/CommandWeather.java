@@ -16,8 +16,8 @@ public class CommandWeather {
 	@CommandHandler(name = "weather", permission = "weather", description = "Sets the world weather", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(args.getArgs().length == 1)
-			switch(args.getArgs()[0].toLowerCase()) {
+		if (args.getArgs().length == 1)
+			switch (args.getArgs()[0].toLowerCase()) {
 			case "downfall":
 			case "rain":
 				player.setPlayerWeather(WeatherType.DOWNFALL);

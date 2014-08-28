@@ -15,13 +15,13 @@ public class CommandConsoleLog {
 	public CommandConsoleLog(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
-	
+
 	public static List<UUID> players = new ArrayList<UUID>();
 
 	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(players.contains(player.getUniqueId())) {
+		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
 			player.sendMessage(AllAssets.instance().title + "You are no longer viewing the console");
 		} else {

@@ -34,36 +34,31 @@ public class CommandConfig {
 				args.getSender().sendMessage(AllAssets.instance().title + "Config, Features");
 			case "view":
 				args.getSender().sendMessage(TextUtils.title("Config"));
-				for (String key : ConfigHandler.instance().config().getKeys()) {
+				for (final String key : ConfigHandler.instance().config().getKeys())
 					args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
-				}
 			}
 			return;
 		case 2:
-			if(args.getArgs()[0].equalsIgnoreCase("view")) {
-				switch(args.getArgs()[1].toLowerCase()) {
+			if (args.getArgs()[0].equalsIgnoreCase("view"))
+				switch (args.getArgs()[1].toLowerCase()) {
 				case "config":
 					args.getSender().sendMessage(TextUtils.title("Config"));
-					for (String key : ConfigHandler.instance().config().getKeys()) {
+					for (final String key : ConfigHandler.instance().config().getKeys())
 						args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
-					}
 				case "features":
 					args.getSender().sendMessage(TextUtils.title("Features"));
-					for (String key : ConfigHandler.instance().features().getKeys()) {
+					for (final String key : ConfigHandler.instance().features().getKeys())
 						args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().features().get(key)));
-					}
 				}
-			}
 			return;
 		case 4:
-			if(args.getArgs()[0].equalsIgnoreCase("set")) {
-				switch(args.getArgs()[1].toLowerCase()) {
+			if (args.getArgs()[0].equalsIgnoreCase("set"))
+				switch (args.getArgs()[1].toLowerCase()) {
 				case "config":
 					//what if they want to do a string........... use underscores?
 				case "features":
-					
+
 				}
-			}
 		}
 		return;
 	}

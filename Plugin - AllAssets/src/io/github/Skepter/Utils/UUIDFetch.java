@@ -19,29 +19,28 @@ import org.bukkit.craftbukkit.libs.com.google.gson.JsonParser;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-/**
- * Custom UUID Fetcher (written by me :D)
- * @author Skepter
- */
+/** Custom UUID Fetcher (written by me :D)
+ * 
+ * @author Skepter */
 public class UUIDFetch {
 
 	private String playerName;
 	private UUID uuid;
 	private static Map<UUID, String> map = new HashMap<UUID, String>();
-	
+
 	public UUIDFetch(final String name, final boolean cache) {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				try {
-					URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
+					final URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
 
-					BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+					final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 					String str;
 					while ((str = in.readLine()) != null) {
-						JsonParser parser = new JsonParser();
-						Object o = parser.parse(str);
-						JsonObject jObject = (JsonObject) o;
+						final JsonParser parser = new JsonParser();
+						final Object o = parser.parse(str);
+						final JsonObject jObject = (JsonObject) o;
 
 						final String uuid = jObject.get("id").getAsString();
 						final String playerName = jObject.get("name").getAsString();
@@ -49,30 +48,29 @@ public class UUIDFetch {
 
 							@Override
 							public void run() {
-								if(cache) {
+								if (cache)
 									cacheSetup(uuid, playerName);
-								} else {
+								else
 									setup(uuid, playerName);
-								}
 							}
 
 						}.runTask(AllAssets.instance());
 					}
 					in.close();
 
-				} catch (MalformedURLException e) {
-				} catch (IOException e) {
+				} catch (final MalformedURLException e) {
+				} catch (final IOException e) {
 				}
 			}
 		}.runTaskAsynchronously(AllAssets.instance());
 	}
 
-	private void setup(String uuid, String playerName) {
+	private void setup(final String uuid, final String playerName) {
 		this.uuid = UUID.fromString(uuid);
 		this.playerName = playerName;
 	}
-	
-	private void cacheSetup(String uuid, String playerName) {
+
+	private void cacheSetup(final String uuid, final String playerName) {
 		map.put(UUID.fromString(uuid), playerName);
 	}
 
@@ -83,21 +81,20 @@ public class UUIDFetch {
 	public UUID getUUID() {
 		return uuid;
 	}
-	
+
 	public Player getPlayer() {
 		return Bukkit.getPlayer(uuid);
 	}
-	
+
 	public User getUser() {
 		return new User(uuid);
 	}
-	
+
 	public static void cacheData() {
-		for(OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+		for (final OfflinePlayer player : Bukkit.getOfflinePlayers())
 			new UUIDFetch(player.getName(), true);
-		}
 	}
-	
+
 	public static Map<UUID, String> getCacheData() {
 		return map;
 	}

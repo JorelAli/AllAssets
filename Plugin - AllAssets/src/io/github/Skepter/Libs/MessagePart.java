@@ -1,4 +1,5 @@
 package io.github.Skepter.Libs;
+
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
@@ -9,14 +10,15 @@ final class MessagePart {
 	ChatColor color = ChatColor.WHITE;
 	ArrayList<ChatColor> styles = new ArrayList<ChatColor>();
 	String clickActionName = null, clickActionData = null,
-		   hoverActionName = null, hoverActionData = null;
+			hoverActionName = null, hoverActionData = null;
 	String text = null;
 
 	MessagePart(final String text) {
 		this.text = text;
 	}
 
-	MessagePart() {}
+	MessagePart() {
+	}
 
 	boolean hasText() {
 		return text != null;
@@ -30,28 +32,23 @@ final class MessagePart {
 				String styleName;
 				switch (style) {
 				case MAGIC:
-					styleName = "obfuscated"; break;
+					styleName = "obfuscated";
+					break;
 				case UNDERLINE:
-					styleName = "underlined"; break;
+					styleName = "underlined";
+					break;
 				default:
-					styleName = style.name().toLowerCase(); break;
+					styleName = style.name().toLowerCase();
+					break;
 				}
 				json.name(styleName).value(true);
 			}
 			if ((clickActionName != null) && (clickActionData != null))
-				json.name("clickEvent")
-					.beginObject()
-					.name("action").value(clickActionName)
-					.name("value").value(clickActionData)
-					.endObject();
+				json.name("clickEvent").beginObject().name("action").value(clickActionName).name("value").value(clickActionData).endObject();
 			if ((hoverActionName != null) && (hoverActionData != null))
-				json.name("hoverEvent")
-					.beginObject()
-					.name("action").value(hoverActionName)
-					.name("value").value(hoverActionData)
-					.endObject();
+				json.name("hoverEvent").beginObject().name("action").value(hoverActionName).name("value").value(hoverActionData).endObject();
 			return json.endObject();
-		} catch(final Exception e){
+		} catch (final Exception e) {
 			e.printStackTrace();
 			return json;
 		}

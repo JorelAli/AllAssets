@@ -24,7 +24,7 @@ public class ConfigHandler {
 		createFeatures();
 		instance = this;
 	}
-	
+
 	public static ConfigHandler instance() {
 		return instance;
 	}
@@ -125,9 +125,9 @@ public class ConfigHandler {
 		features.set("JoinActions", "true", new String[] { "Join Actions", "Actions to be carried out when a player joins" });
 		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
 		features.set("TotalTime", "true", "Display the total time the player has played on the server for");
-		
-		features.set("BlockHeads", "true", new String[] {"Cosmetics", "Cosmetic features to comply with the EULA"});
-		features.set("StaffChat", "true", new String[] {"Staff chat system - see config to configure it"});
+
+		features.set("BlockHeads", "true", new String[] { "Cosmetics", "Cosmetic features to comply with the EULA" });
+		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
 		features.saveConfig();
 	}
 
@@ -140,7 +140,7 @@ public class ConfigHandler {
 		}
 	}
 
-	public static String getMsg(String msg) {
+	public static String getMsg(final String msg) {
 		if (messages != null)
 			return messages.getString(msg);
 		else {

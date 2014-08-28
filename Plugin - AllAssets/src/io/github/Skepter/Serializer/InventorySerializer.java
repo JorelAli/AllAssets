@@ -1,4 +1,5 @@
 package io.github.Skepter.Serializer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -6,10 +7,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
- 
+
 public final class InventorySerializer {
-	private InventorySerializer() {}
- 
+	private InventorySerializer() {
+	}
+
 	public static String toString(final Inventory i) {
 		final YamlConfiguration configuration = new YamlConfiguration();
 		configuration.set("Title", i.getTitle());
@@ -21,7 +23,7 @@ public final class InventorySerializer {
 		}
 		return Base64Coder.encodeString(configuration.saveToString());
 	}
- 
+
 	public static Inventory fromString(final String s) {
 		final YamlConfiguration configuration = new YamlConfiguration();
 		try {

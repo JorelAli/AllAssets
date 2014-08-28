@@ -30,7 +30,7 @@ public class CommandLaunch {
 	@CommandHandler(name = "launch", permission = "launch", description = "Launches a projectile", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
-		if(!(args.getArgs().length == 1))
+		if (!(args.getArgs().length == 1))
 			ErrorUtils.notEnoughArguments(player);
 		switch (args.getArgs()[0].toLowerCase()) {
 		case "arrow":

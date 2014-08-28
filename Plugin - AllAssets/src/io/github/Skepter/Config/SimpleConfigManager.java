@@ -18,20 +18,16 @@ public class SimpleConfigManager {
 
 	private final AllAssets plugin;
 
-	/**
-	 * Manage custom configurations and files
-	 */
+	/** Manage custom configurations and files */
 	public SimpleConfigManager(final AllAssets plugin) {
 		this.plugin = plugin;
 	}
 
-	/**
-	 * Get new configuration with header
+	/** Get new configuration with header
 	 * 
 	 * @param filePath - Path to file
 	 * 
-	 * @return - New SimpleConfig
-	 */
+	 * @return - New SimpleConfig */
 	public SimpleConfig getNewConfig(final String filePath, final String[] header) {
 
 		final File file = this.getConfigFile(filePath);
@@ -49,24 +45,20 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Get new configuration
+	/** Get new configuration
 	 * 
 	 * @param filePath - Path to file
 	 * 
-	 * @return - New SimpleConfig
-	 */
+	 * @return - New SimpleConfig */
 	public SimpleConfig getNewConfig(final String filePath) {
 		return this.getNewConfig(filePath, null);
 	}
 
-	/**
-	 * Get configuration file from string
+	/** Get configuration file from string
 	 * 
 	 * @param file - File path
 	 * 
-	 * @return - New file object
-	 */
+	 * @return - New file object */
 	private File getConfigFile(final String file) {
 
 		if (file.isEmpty() || (file == null))
@@ -88,13 +80,11 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Create new file for config and copy resource into it
+	/** Create new file for config and copy resource into it
 	 * 
 	 * @param file - Path to file
 	 * 
-	 * @param resource - Resource to copy
-	 */
+	 * @param resource - Resource to copy */
 	public void prepareFile(final String filePath, final String resource) {
 
 		final File file = this.getConfigFile(filePath);
@@ -115,22 +105,18 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Create new file for config without resource
+	/** Create new file for config without resource
 	 * 
-	 * @param file - File to create
-	 */
+	 * @param file - File to create */
 	public void prepareFile(final String filePath) {
 		this.prepareFile(filePath, null);
 	}
 
-	/**
-	 * Adds header block to config
+	/** Adds header block to config
 	 * 
 	 * @param file - Config file
 	 * 
-	 * @param header - Header lines
-	 */
+	 * @param header - Header lines */
 	public void setHeader(final File file, final String[] header) {
 
 		if (!file.exists())
@@ -182,13 +168,11 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Read file and make comments SnakeYAML friendly
+	/** Read file and make comments SnakeYAML friendly
 	 * 
 	 * @param filePath - Path to file
 	 * 
-	 * @return - File as Input Stream
-	 */
+	 * @return - File as Input Stream */
 	public InputStream getConfigContent(final File file) {
 
 		if (!file.exists())
@@ -226,13 +210,11 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Get comments from file
+	/** Get comments from file
 	 * 
 	 * @param file - File
 	 * 
-	 * @return - Comments number
-	 */
+	 * @return - Comments number */
 	private int getCommentsNum(final File file) {
 
 		if (!file.exists())
@@ -258,13 +240,11 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Get config content from file
+	/** Get config content from file
 	 * 
 	 * @param filePath - Path to file
 	 * 
-	 * @return - readied file
-	 */
+	 * @return - readied file */
 	public InputStream getConfigContent(final String filePath) {
 		return this.getConfigContent(this.getConfigFile(filePath));
 	}
@@ -283,10 +263,8 @@ public class SimpleConfigManager {
 
 				if (comment.startsWith("# +-")) {
 
-					/**
-					 * If header line = 0 then it is header start, if it's equal
-					 * to 1 it's the end of header
-					 */
+					/** If header line = 0 then it is header start, if it's equal
+					 * to 1 it's the end of header */
 
 					if (headerLine == 0) {
 						config.append(comment + "\n");
@@ -304,9 +282,7 @@ public class SimpleConfigManager {
 
 				} else {
 
-					/**
-					 * Last line = 0 - Comment Last line = 1 - Normal path
-					 */
+					/** Last line = 0 - Comment Last line = 1 - Normal path */
 
 					String normalComment;
 
@@ -333,13 +309,11 @@ public class SimpleConfigManager {
 
 	}
 
-	/**
-	 * Saves configuration to file
+	/** Saves configuration to file
 	 * 
 	 * @param configString - Config string
 	 * 
-	 * @param file - Config file
-	 */
+	 * @param file - Config file */
 	public void saveConfig(final String configString, final File file) {
 		final String configuration = this.prepareConfigString(configString);
 
@@ -359,13 +333,11 @@ public class SimpleConfigManager {
 		return plugin.getDescription().getName();
 	}
 
-	/**
-	 * Copy resource from Input Stream to file
+	/** Copy resource from Input Stream to file
 	 * 
 	 * @param resource - Resource from .jar
 	 * 
-	 * @param file - File to write
-	 */
+	 * @param file - File to write */
 	private void copyResource(final InputStream resource, final File file) {
 
 		try {

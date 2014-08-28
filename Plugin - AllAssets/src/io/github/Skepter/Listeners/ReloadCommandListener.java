@@ -18,11 +18,11 @@ public class ReloadCommandListener implements Listener {
 		case "reload":
 			if (event.getPlayer().hasPermission("AllAssets.reload")) {
 				event.setCancelled(true);
-				if(event.getMessage().split(" ").length == 2) {
-					if(event.getMessage().split(" ")[1].equalsIgnoreCase("server"))
+				if (event.getMessage().split(" ").length == 2) {
+					if (event.getMessage().split(" ")[1].equalsIgnoreCase("server"))
 						Bukkit.reload();
 					else {
-						if(event.getMessage().split(" ")[1].equalsIgnoreCase("AllAssets")) {
+						if (event.getMessage().split(" ")[1].equalsIgnoreCase("AllAssets")) {
 							ErrorUtils.error(event.getPlayer(), "You cannot reload AllAssets. Use /allassets reload instead");
 							return;
 						}

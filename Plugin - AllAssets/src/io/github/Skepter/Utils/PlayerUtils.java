@@ -1,5 +1,7 @@
 package io.github.Skepter.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -16,8 +18,15 @@ public class PlayerUtils {
 	}
 
 	//cache data from the world data files and install them into the UUID map
-	//ensure that duplicates are NOT added!
-	
+	//ensure that duplicates are NOT added! (use a set)
+
+	public static List<String> getAllOfflinePlayerNames() {
+		final List<String> playerNames = new ArrayList<String>();
+		for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
+			playerNames.add(p.getName());
+		return playerNames;
+	}
+
 	public static Player getPlayerFromString(final String string) {
 		for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 			if (p.getName().equals(string))
@@ -31,7 +40,7 @@ public class PlayerUtils {
 				return p.getName();
 		return null;
 	}
-	
+
 	public static boolean isOnline(final String player) {
 		for (final Player p : Bukkit.getOnlinePlayers())
 			if (p.getName().equals(player))

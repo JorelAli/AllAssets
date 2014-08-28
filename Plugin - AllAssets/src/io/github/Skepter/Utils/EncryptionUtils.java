@@ -5,24 +5,24 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionUtils {
-	
+
 	final private String IV = "SqkZQJd3xO6z5vc4";
 	private String encryptionKey = "8czoa6Ytk0uPYP6G";
 	private String s = "";
 	public byte[] cipherText = null;;
 
 	public EncryptionUtils(final String key, final String stringToEncrypt, final byte[] bytesToDecrypt) {
-		if(encryptionKey != null)
+		if (encryptionKey != null)
 			encryptionKey = key;
 		s = stringToEncrypt;
 		cipherText = bytesToDecrypt;
 	}
-	
+
 	public byte[] encrypt() throws Exception {
-		if(!((s.length() % 16) == 0)) {
+		if (!((s.length() % 16) == 0)) {
 			final int amountToAdd = (16 - (s.length() % 16));
 			String spaces = "";
-			for(int i = 0; i < amountToAdd; i++)
+			for (int i = 0; i < amountToAdd; i++)
 				spaces = spaces + " ";
 			s = s + spaces;
 		}

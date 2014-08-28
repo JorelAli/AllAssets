@@ -22,7 +22,7 @@ public class YesNoConversation {
 	}
 
 	/* Example of a BooleanPrompt*/
-	
+
 	//	private class YesNoPrompt extends BooleanPrompt {
 	//
 	//		@Override

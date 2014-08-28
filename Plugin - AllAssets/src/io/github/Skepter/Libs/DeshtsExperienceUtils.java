@@ -1,22 +1,25 @@
 package io.github.Skepter.Libs;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 
-/**
- * @author desht
- *
+/** @author desht
+ * 
  * Adapted from ExperienceUtils code originally in ScrollingMenuSign.
  * 
- * Credit to nisovin (http://forums.bukkit.org/threads/experienceutils-make-giving-taking-exp-a-bit-more-intuitive.54450/#post-1067480)
- * for an implementation that avoids the problems of getTotalExperience(), which doesn't work properly after a player has enchanted something.
+ * Credit to nisovin
+ * (http://forums.bukkit.org/threads/experienceutils-make-giving
+ * -taking-exp-a-bit-more-intuitive.54450/#post-1067480) for an implementation
+ * that avoids the problems of getTotalExperience(), which doesn't work properly
+ * after a player has enchanted something.
  * 
- * Credit to comphenix for further contributions:
- * See http://forums.bukkit.org/threads/ExperienceUtils-was-experienceutils-make-giving-taking-exp-a-bit-more-intuitive.54450/page-3#post-1273622
- * 
- */
+ * Credit to comphenix for further contributions: See
+ * http://forums.bukkit.org/threads
+ * /ExperienceUtils-was-experienceutils-make-giving
+ * -taking-exp-a-bit-more-intuitive.54450/page-3#post-1273622 */
 public class DeshtsExperienceUtils {
 	// this is to stop the lookup table growing without control
 	private static int hardMaxLevel = 100000;
@@ -32,64 +35,51 @@ public class DeshtsExperienceUtils {
 		initLookupTables(25);
 	}
 
-	/**
-	 * Create a new ExperienceUtils for the given player.
+	/** Create a new ExperienceUtils for the given player.
 	 * 
 	 * @param player the player for this ExperienceUtils object
-	 * @throws IllegalArgumentException if the player is null
-	 */
+	 * @throws IllegalArgumentException if the player is null */
 	public DeshtsExperienceUtils(final Player player) {
-		if (player!=null) {
-		this.player = new WeakReference<Player>(player);
-		this.playerName = player.getName();
-		}
-		else {
+		if (player != null) {
+			this.player = new WeakReference<Player>(player);
+			this.playerName = player.getName();
+		} else {
 			this.player = null;
 			this.playerName = "";
 		}
 	}
 
-	/**
-	 * Get the current hard max level for which calculations will be done.
-	 *
-	 * @return the current hard max level
-	 */
+	/** Get the current hard max level for which calculations will be done.
+	 * 
+	 * @return the current hard max level */
 	public static int getHardMaxLevel() {
 		return hardMaxLevel;
 	}
 
-	/**
-	 * Set the current hard max level for which calculations will be done.
-	 *
-	 * @param hardMaxLevel the new hard max level
-	 */
+	/** Set the current hard max level for which calculations will be done.
+	 * 
+	 * @param hardMaxLevel the new hard max level */
 	public static void setHardMaxLevel(final int hardMaxLevel) {
 		DeshtsExperienceUtils.hardMaxLevel = hardMaxLevel;
 	}
 
-	/**
-	 * Initialize the XP lookup table. See http://minecraft.gamepedia.com/Experience
-	 *
-	 * @param maxLevel The highest level handled by the lookup tables
-	 */
+	/** Initialize the XP lookup table. See
+	 * http://minecraft.gamepedia.com/Experience
+	 * 
+	 * @param maxLevel The highest level handled by the lookup tables */
 	private static void initLookupTables(final int maxLevel) {
 		xpTotalToReachLevel = new int[maxLevel];
 
 		for (int i = 0; i < xpTotalToReachLevel.length; i++)
-			xpTotalToReachLevel[i] = 
-					i >= 30 ? (int) (((3.5 * i * i) - (151.5 * i)) + 2220) :
-						i >= 16 ? (int) (((1.5 * i * i) - (29.5 * i)) + 360) : 
-							17 * i;
+			xpTotalToReachLevel[i] = i >= 30 ? (int) (((3.5 * i * i) - (151.5 * i)) + 2220) : i >= 16 ? (int) (((1.5 * i * i) - (29.5 * i)) + 360) : 17 * i;
 	}
 
-	/**
-	 * Calculate the level that the given XP quantity corresponds to, without
+	/** Calculate the level that the given XP quantity corresponds to, without
 	 * using the lookup tables. This is needed if getLevelForExp() is called
 	 * with an XP quantity beyond the range of the existing lookup tables.
 	 * 
 	 * @param exp
-	 * @return
-	 */
+	 * @return */
 	private static int calculateLevelForExp(final int exp) {
 		int level = 0;
 		int curExp = 7; // level 1
@@ -103,12 +93,10 @@ public class DeshtsExperienceUtils {
 		return level;
 	}
 
-	/**
-	 * Get the Player associated with this ExperienceUtils.
+	/** Get the Player associated with this ExperienceUtils.
 	 * 
 	 * @return the Player object
-	 * @throws IllegalStateException if the player is no longer online
-	 */
+	 * @throws IllegalStateException if the player is no longer online */
 	public Player getPlayer() {
 		final Player p = player.get();
 		if (p == null)
@@ -116,42 +104,34 @@ public class DeshtsExperienceUtils {
 		return p;
 	}
 
-	/**
-	 * Adjust the player's XP by the given amount in an intelligent fashion.
+	/** Adjust the player's XP by the given amount in an intelligent fashion.
 	 * Works around some of the non-intuitive behaviour of the basic Bukkit
 	 * player.giveExp() method.
 	 * 
-	 * @param amt Amount of XP, may be negative
-	 */
+	 * @param amt Amount of XP, may be negative */
 	public void changeExp(final int amt) {
 		changeExp((double) amt);
 	}
 
-	/**
-	 * Adjust the player's XP by the given amount in an intelligent fashion.
+	/** Adjust the player's XP by the given amount in an intelligent fashion.
 	 * Works around some of the non-intuitive behaviour of the basic Bukkit
 	 * player.giveExp() method.
 	 * 
-	 * @param amt Amount of XP, may be negative
-	 */
+	 * @param amt Amount of XP, may be negative */
 	public void changeExp(final double amt) {
 		setExp(getCurrentFractionalXP(), amt);
 	}
 
-	/**
-	 * Set the player's experience
+	/** Set the player's experience
 	 * 
-	 * @param amt Amount of XP, should not be negative
-	 */
+	 * @param amt Amount of XP, should not be negative */
 	public void setExp(final int amt) {
 		setExp(0, amt);
 	}
 
-	/**
-	 * Set the player's fractional experience.
+	/** Set the player's fractional experience.
 	 * 
-	 * @param amt Amount of XP, should not be negative
-	 */
+	 * @param amt Amount of XP, should not be negative */
 	public void setExp(final double amt) {
 		setExp(0, amt);
 	}
@@ -168,17 +148,15 @@ public class DeshtsExperienceUtils {
 			player.setLevel(newLvl);
 		// Increment total experience - this should force the server to send an update packet
 		if (xp > base)
-			player.setTotalExperience((player.getTotalExperience() + xp) - (int)base);
+			player.setTotalExperience((player.getTotalExperience() + xp) - (int) base);
 
 		final double pct = ((base - getXpForLevel(newLvl)) + amt) / (getXpNeededToLevelUp(newLvl));
 		player.setExp((float) pct);
 	}
 
-	/**
-	 * Get the player's current XP total.
+	/** Get the player's current XP total.
 	 * 
-	 * @return the player's total XP
-	 */
+	 * @return the player's total XP */
 	public int getCurrentExp() {
 		final Player player = getPlayer();
 
@@ -187,11 +165,9 @@ public class DeshtsExperienceUtils {
 		return cur;
 	}
 
-	/**
-	 * Get the player's current fractional XP.
+	/** Get the player's current fractional XP.
 	 * 
-	 * @return The player's total XP with fractions.
-	 */
+	 * @return The player's total XP with fractions. */
 	private double getCurrentFractionalXP() {
 		final Player player = getPlayer();
 
@@ -200,33 +176,27 @@ public class DeshtsExperienceUtils {
 		return cur;
 	}
 
-	/**
-	 * Checks if the player has the given amount of XP.
+	/** Checks if the player has the given amount of XP.
 	 * 
 	 * @param amt The amount to check for.
-	 * @return true if the player has enough XP, false otherwise
-	 */
+	 * @return true if the player has enough XP, false otherwise */
 	public boolean hasExp(final int amt) {
 		return getCurrentExp() >= amt;
 	}
 
-	/**
-	 * Checks if the player has the given amount of fractional XP.
+	/** Checks if the player has the given amount of fractional XP.
 	 * 
 	 * @param amt The amount to check for.
-	 * @return true if the player has enough XP, false otherwise
-	 */
+	 * @return true if the player has enough XP, false otherwise */
 	public boolean hasExp(final double amt) {
 		return getCurrentFractionalXP() >= amt;
 	}
 
-	/**
-	 * Get the level that the given amount of XP falls within.
+	/** Get the level that the given amount of XP falls within.
 	 * 
 	 * @param exp the amount to check for
 	 * @return the level that a player with this amount total XP would be
-	 * @throws IllegalArgumentException if the given XP is less than 0
-	 */
+	 * @throws IllegalArgumentException if the given XP is less than 0 */
 	public int getLevelForExp(final int exp) {
 		if (exp <= 0)
 			return 0;
@@ -240,25 +210,23 @@ public class DeshtsExperienceUtils {
 		return pos < 0 ? -pos - 2 : pos;
 	}
 
-	/**
-	 * Retrieves the amount of experience the experience bar can hold at the given level.
-	 *
+	/** Retrieves the amount of experience the experience bar can hold at the
+	 * given level.
+	 * 
 	 * @param level the level to check
 	 * @return the amount of experience at this level in the level bar
-	 * @throws IllegalArgumentException if the level is less than 0
-	 */
+	 * @throws IllegalArgumentException if the level is less than 0 */
 	public int getXpNeededToLevelUp(final int level) {
 		Validate.isTrue(level >= 0, "Level may not be negative.");
 		return level > 30 ? 62 + ((level - 30) * 7) : level >= 16 ? 17 + ((level - 15) * 3) : 17;
 	}
 
-	/**
-	 * Return the total XP needed to be the given level.
+	/** Return the total XP needed to be the given level.
 	 * 
 	 * @param level The level to check for.
 	 * @return The amount of XP needed for the level.
-	 * @throws IllegalArgumentException if the level is less than 0 or greater than the current hard maximum
-	 */
+	 * @throws IllegalArgumentException if the level is less than 0 or greater
+	 * than the current hard maximum */
 	public int getXpForLevel(final int level) {
 		Validate.isTrue((level >= 0) && (level <= hardMaxLevel), "Invalid level " + level + "(must be in range 0.." + hardMaxLevel + ")");
 		if (level >= xpTotalToReachLevel.length)

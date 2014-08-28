@@ -37,19 +37,20 @@ public class MathUtils {
 
 	/** Formats date. Currently (other methods haven't been tested), it can
 	 * format it in the format of 'you have played since <time>'
+	 * 
 	 * @param date - The long date in milliseconds
 	 * @return the formatted date in String form */
-	public static String formatDate(long date) {
+	public static String formatDate(final long date) {
 		final long days = TimeUnit.MILLISECONDS.toDays(date);
 		final long hours = TimeUnit.MILLISECONDS.toHours(date) - (days * 86400);
 		final long minutes = TimeUnit.MILLISECONDS.toMinutes(date) - (days * 86400) - (hours * 3600);
 		final long seconds = TimeUnit.MILLISECONDS.toSeconds(date) - (days * 86400) - (hours * 3600) - (minutes * 60);
 		return days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
 	}
-	
-	public static String formatDateAtASpecificPointInTime(long dateTime) {
-		Date date = new Date();
-		long l =  date.getTime() - dateTime;
+
+	public static String formatDateAtASpecificPointInTime(final long dateTime) {
+		final Date date = new Date();
+		final long l = date.getTime() - dateTime;
 		return formatDate(l);
 	}
 }

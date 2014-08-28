@@ -99,25 +99,22 @@ public class TextUtils {
 	public static boolean isHyperlink(final String s) {
 		final String strippedColor = ChatColor.stripColor(s);
 		final String s0 = strippedColor.toLowerCase();
-		Pattern p = Pattern.compile("[^.]+[.][^.]+");
-		Scanner scanner = new Scanner(s0);
-		while (scanner.hasNext()) {
+		final Pattern p = Pattern.compile("[^.]+[.][^.]+");
+		final Scanner scanner = new Scanner(s0);
+		while (scanner.hasNext())
 			if (scanner.hasNext(p)) {
 				String possibleUrl = scanner.next(p);
-				if (!possibleUrl.contains("://")) {
+				if (!possibleUrl.contains("://"))
 					possibleUrl = "http://" + possibleUrl;
-				}
 
 				try {
 					new URL(possibleUrl);
 					return true;
-				} catch (MalformedURLException e) {
+				} catch (final MalformedURLException e) {
 					continue;
 				}
-			} else {
+			} else
 				scanner.next();
-			}
-		}
 		scanner.close();
 		return false;
 	}
@@ -269,5 +266,17 @@ public class TextUtils {
 		while (matcher.find())
 			tagValues.add(matcher.group(1));
 		return tagValues;
+	}
+
+	public static String replace(final String input, final int startindex, final int endindex, final String replacement) {
+		final String first = input.substring(0, startindex);
+		final String end = input.substring(endindex);
+		return first + replacement + end;
+	}
+
+	public static boolean hasColorCode(final String s) {
+		if (s.contains("\u00A7"))
+			return true;
+		return false;
 	}
 }

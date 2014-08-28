@@ -7,10 +7,14 @@ public class TPS implements Runnable {
 
 	public static double getTPSperc() {
 		final double tps = TPS.getTPS();
-	    final double lag = Math.round((1.0D - (tps / 20.0D)) * 100.0D);
-	    return lag;
+		final double lag = Math.round((1.0D - (tps / 20.0D)) * 100.0D);
+		return lag;
 	}
-	
+
+	public static int getTPSAsInt() {
+		return new Double(getTPS()).intValue();
+	}
+
 	public static double getTPS() {
 		return getTPS(100);
 	}

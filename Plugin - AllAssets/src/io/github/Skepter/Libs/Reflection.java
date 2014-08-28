@@ -1,4 +1,5 @@
 package io.github.Skepter.Libs;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -54,8 +55,7 @@ public class Reflection {
 		}
 	}
 
-	public static Method getMethod(final Class<?> clazz, final String name,
-			final Class<?>... args) {
+	public static Method getMethod(final Class<?> clazz, final String name, final Class<?>... args) {
 		for (final Method m : clazz.getMethods())
 			if (m.getName().equals(name) && ((args.length == 0) || ClassListEqual(args, m.getParameterTypes()))) {
 				m.setAccessible(true);

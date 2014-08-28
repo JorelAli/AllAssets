@@ -50,7 +50,10 @@ import io.github.Skepter.Listeners.SignListener;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.JavaUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -83,6 +86,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @BukkitDev Desht - ExperienceUtils
  * @BukkitDev DPOHVAR - ReflectionUtils
  * @BukkitDev RainoBot97 - SimpleScoreboard
+ * @idkwho - TabText
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  * 
@@ -91,7 +95,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 // something like WE with /replace <block> <radius>
 // onJoinAction - fireworks, command etc.
-// firework interface like Enchant - use For loops to generate it
+// firework interface like Enchant - use For loops to generate it (similar to enchant inv)
 
 // Explore the ResourceBundle for setting Locale
 // A way to mute a player which stops all other chat being sent to that player
@@ -100,13 +104,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 // set command
 // sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
-// delete plugin command (command that deletes plugins) + questioner
 // command allassets pluginFile instead of devPluginFile
 // how many unique players
-
-/* May remove this in the end -.- */
-// close the classloader when deleting plugins & run system.gc to clean it up
-// Deleting plugins is much harder than I thought...
 
 // plugin config manager thingy
 
@@ -122,9 +121,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 //still able to tp when they're offline
 //do erm YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
+
 public class AllAssets extends JavaPlugin {
 
-	/* These will be in the messages.yml (when I feel ready to do so) */
+	/* These will be in messages.yml (Don't hardcode them - people get pissed if you do that Skepter -.-) */
 	public final String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
 	public final String titleNoColor = "[AllAssets] ";
 	public final String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
@@ -144,14 +144,29 @@ public class AllAssets extends JavaPlugin {
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
 		getLogger().info("Initializing AllAssets version " + getDescription().getVersion());
+
 		/* Some names will be removed - depends on whatever is in the Libs package */
 		getLogger().info("AllAssets, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
+
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) LogManager.getRootLogger()).addFilter(new LogListener(this));
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
-		new ConfigHandler();
 
+		/* It's risky having tabbed data - so instead of throwing errors, get the
+		 * users to sort it out when the plugin begins. Seems nice and simple :) */
+		new ConfigHandler();
+		try {
+			if (Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
+				getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab on line " + checkYamlFiles().split(":")[2] + "!");
+				getPluginLoader().disablePlugin(this);
+			}
+		} catch (final IOException e) {
+			getLogger().warning("There was an error checking data files for errors. Don't worry :)");
+		}
+
+		/* Used to check if vault is available. If not, then disable the vault-specific commands
+		 * such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled())
 			getLogger().warning("Vault not found, so some features may not be available");
 		else {
@@ -166,7 +181,6 @@ public class AllAssets extends JavaPlugin {
 		/** This is the features.yml file which enables/disables features
 		 * according to the users will */
 
-		//add ping & put it into ConfigHandler
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.instance().features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
@@ -254,7 +268,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
 
-		/* Put into features.yml */
+		// Put into features.yml
 		r(new ServerListingListener());
 
 		/* Update UUIDData file */
@@ -279,8 +293,28 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("+---------------------------------+");
 	}
 
+	/* Writing getServer().... etc. is too much work :S */
 	private void r(final Listener l) {
 		getServer().getPluginManager().registerEvents(l, this);
+	}
+
+	/* Used to check for tabs in configuration files */
+	private String checkYamlFiles() throws IOException {
+		final File[] files = new File[] { new File(getDataFolder(), "config.yml"), new File(getDataFolder(), "features.yml"), new File(getDataFolder(), "messages.yml") };
+		for (final File file : files) {
+			final BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line;
+			int count = 0;
+			while ((line = reader.readLine()) != null) {
+				count++;
+				if (line.contains("\t")) {
+					reader.close();
+					return "false:" + file.getName() + ":" + count;
+				}
+			}
+			reader.close();
+		}
+		return "true";
 	}
 
 	@Override

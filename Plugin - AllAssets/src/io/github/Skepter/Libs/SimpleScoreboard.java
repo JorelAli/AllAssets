@@ -1,8 +1,11 @@
 package io.github.Skepter.Libs;
+
 import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -20,10 +23,13 @@ import com.google.common.collect.Maps;
 public class SimpleScoreboard {
 
 	private final Scoreboard scoreboard;
+	private Objective obj;
 
 	private String title;
 	private final Map<String, Integer> scores;
 	private final List<Team> teams;
+
+	public static Map<UUID, SimpleScoreboard> scoreboardMap = new HashMap<UUID, SimpleScoreboard>();
 
 	public SimpleScoreboard(final String title) {
 		this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -70,7 +76,7 @@ public class SimpleScoreboard {
 
 	@SuppressWarnings("deprecation")
 	public void build() {
-		final Objective obj = scoreboard.registerNewObjective((title.length() > 16 ? title.substring(0, 15) : title), "dummy");
+		obj = scoreboard.registerNewObjective((title.length() > 16 ? title.substring(0, 15) : title), "dummy");
 		obj.setDisplayName(title);
 		obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 
@@ -102,6 +108,36 @@ public class SimpleScoreboard {
 	public void send(final Player... players) {
 		for (final Player p : players)
 			p.setScoreboard(scoreboard);
+	}
+
+	@SuppressWarnings("deprecation")
+	public void update(final String text, final Integer score) {
+		if (scores.containsKey(text)) {
+			scores.put(text, score);
+			for (final Team t : teams)
+				if (t.getName() == text)
+					t.unregister();
+
+			final Map.Entry<Team, String> team = createTeam(text);
+			final OfflinePlayer player = Bukkit.getOfflinePlayer(team.getValue());
+			if (team.getKey() != null)
+				team.getKey().addPlayer(player);
+			obj.getScore(player).setScore(score);
+
+		}
+	}
+
+	/** Custom update method that updates it for a specific player
+	 * 
+	 * @param player - the player to update the board to
+	 * @param text - the text to update
+	 * @param score - the int to set the score as */
+	public static void update(final String text, final Integer score, final Player... players) {
+		for (final Player player : players) {
+			final SimpleScoreboard board = scoreboardMap.get(player.getUniqueId());
+			board.update(text, score);
+			board.send(player);
+		}
 	}
 
 }
