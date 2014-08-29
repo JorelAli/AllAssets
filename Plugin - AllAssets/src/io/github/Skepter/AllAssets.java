@@ -50,10 +50,7 @@ import io.github.Skepter.Listeners.SignListener;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.JavaUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -71,7 +68,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 /* AllAssets plugin, version 0.1
  * 
@@ -154,23 +150,12 @@ public class AllAssets extends JavaPlugin {
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
 
-		/* It's risky having tabbed data - so instead of throwing errors, get the
-		 * users to sort it out when the plugin begins. Seems nice and simple :) */
 		new ConfigHandler();
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				try {
-					if (!Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
-						getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab on line " + checkYamlFiles().split(":")[2] + "!");
-						getPluginLoader().disablePlugin(AllAssets.instance());
-					}
-				} catch (final IOException e) {
-					getLogger().warning("There was an error checking data files for errors. Don't worry :)");
-				}
-			}
-		}.runTaskAsynchronously(this);
-
+		if (!this.isEnabled()) {
+			getLogger().info("+---------------------------------+");
+			return;
+		}
+			
 		/* Used to check if vault is available. If not, then disable the vault-specific commands
 		 * such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled())
@@ -302,25 +287,6 @@ public class AllAssets extends JavaPlugin {
 	/* Writing getServer().... etc. is too much work :S */
 	private void r(final Listener l) {
 		getServer().getPluginManager().registerEvents(l, this);
-	}
-
-	/* Used to check for tabs in configuration files */
-	private String checkYamlFiles() throws IOException {
-		final File[] files = new File[] { new File(getDataFolder(), "config.yml"), new File(getDataFolder(), "features.yml"), new File(getDataFolder(), "messages.yml") };
-		for (final File file : files) {
-			final BufferedReader reader = new BufferedReader(new FileReader(file));
-			String line;
-			int count = 0;
-			while ((line = reader.readLine()) != null) {
-				count++;
-				if (line.contains("\t")) {
-					reader.close();
-					return "false:" + file.getName() + ":" + count;
-				}
-			}
-			reader.close();
-		}
-		return "true:null:null";
 	}
 
 	@Override

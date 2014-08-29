@@ -113,6 +113,7 @@ public class ConfigHandler {
 		features.set("InstantDeathRespawn", "false");
 		features.set("AntiIllegalItems", "true");
 		features.set("MultiCommands", "true", "Allows you to execute multiple commands");
+		features.set("Anyleash", "true", "Allows you to put leads on any mob");
 		// add more modifiers to modify the mechanics of the game
 		// e.g. amount of exp mobs drop when killed, drop probability, spawning
 		// probability (perhaps?) (e.g. increase prob. spawn zombie+chicken

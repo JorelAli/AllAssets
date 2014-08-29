@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 public class CustomLogListener implements Listener {
 
 	@EventHandler
-	public void onHyperlinkPost(final LogEvent event) {
+	public void logError(final LogEvent event) {
 		if (event.getLogType().equals(LogType.ERROR))
 			for (final Player p : Bukkit.getOnlinePlayers())
 				if (p.hasPermission("AllAssets.log"))

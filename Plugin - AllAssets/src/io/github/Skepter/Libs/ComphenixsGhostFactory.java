@@ -7,6 +7,7 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -32,7 +33,11 @@ public class ComphenixsGhostFactory {
 
 	public ComphenixsGhostFactory(final Plugin plugin) {
 		// Initialize
-		createTask(plugin);
+		try {
+			createTask(plugin);
+		} catch (IllegalPluginAccessException e) {
+			Bukkit.getPluginManager().disablePlugin(plugin);
+		}
 		createGetTeam();
 	}
 
@@ -48,7 +53,7 @@ public class ComphenixsGhostFactory {
 		ghostTeam.setCanSeeFriendlyInvisibles(true);
 	}
 
-	private void createTask(final Plugin plugin) {
+	private void createTask(final Plugin plugin) throws IllegalPluginAccessException {
 		task = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
 			@Override
 			public void run() {

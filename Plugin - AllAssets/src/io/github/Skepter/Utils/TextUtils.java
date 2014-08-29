@@ -65,7 +65,7 @@ public class TextUtils {
 		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 		} catch (final IOException e) {
-			e.printStackTrace();
+			return false;
 		}
 		final BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
 		final StringBuilder sb = new StringBuilder();

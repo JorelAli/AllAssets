@@ -1,5 +1,7 @@
 package io.github.Skepter.Commands;
 
+import io.github.Skepter.AllAssets;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -36,12 +38,17 @@ import org.bukkit.plugin.SimplePluginManager;
 /** Command Framework - CommandFramework <br>
  * The main command framework class used for controlling the framework.
  * 
- * @author minnymin3 */
+ * @author minnymin3
+ * 
+ * Some features have been added/modified for the use of AllAssets However,
+ * minnymin3 deserves pretty much all of the credit since he (or she) wrote the
+ * majority of the class. */
 public class CommandFramework {
 
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
 	private CommandMap map;
 	private final Plugin plugin;
+	private static final String noPerm = AllAssets.instance().error + "You do not have permission to perform that action";
 	public static Set<String> pluginCommands = new HashSet<String>();
 
 	/** Initializes the command framework and sets up the command maps
@@ -81,7 +88,7 @@ public class CommandFramework {
 				final Entry<Method, Object> entry = commandMap.get(cmdLabel);
 				final CommandHandler command = entry.getKey().getAnnotation(CommandHandler.class);
 				if (!sender.hasPermission("AllAssets." + command.permission().toLowerCase())) { //Nav
-					sender.sendMessage(command.noPerm());
+					sender.sendMessage(noPerm);
 					return true;
 				}
 				try {
@@ -216,12 +223,6 @@ public class CommandFramework {
 		 * 
 		 * @return */
 		public String permission() default "";
-
-		/** The message sent to the player when they do not have permission to
-		 * execute it
-		 * 
-		 * @return */
-		public String noPerm() default "You do not have permission to perform that action";
 
 		/** A list of alternate names that the command is executed under. See
 		 * name() for details on how names work

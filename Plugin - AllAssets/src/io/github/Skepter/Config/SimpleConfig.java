@@ -2,13 +2,17 @@ package io.github.Skepter.Config;
 
 import io.github.Skepter.AllAssets;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,13 +24,46 @@ public class SimpleConfig {
 	private final File file;
 	private FileConfiguration config;
 
-	@SuppressWarnings("deprecation")
 	public SimpleConfig(final InputStream configStream, final File configFile, final int comments, final AllAssets plugin) {
 		this.comments = comments;
 		this.manager = new SimpleConfigManager(plugin);
 
 		this.file = configFile;
+
+		/* Custom check to find tabs in config files */
+		try {
+			if (Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
+				AllAssets.instance().getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab  " + checkYamlFiles().split(":")[2] + "!");
+				Bukkit.getPluginManager().disablePlugin(plugin);
+			} else {
+				loadConfig(configStream);
+			}
+		} catch (final IOException e) {
+			e.printStackTrace();
+			//AllAssets.instance().getLogger().warning("There was an error checking data files for errors. Don't worry :)");
+			//loadConfig(configStream);
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	private void loadConfig(final InputStream configStream) {
 		this.config = YamlConfiguration.loadConfiguration(configStream);
+	}
+
+	/* Used to check for tabs in configuration files */
+	private String checkYamlFiles() throws IOException {
+		final BufferedReader reader = new BufferedReader(new FileReader(file));
+		String line;
+		int count = 0;
+		while ((line = reader.readLine()) != null) {
+			count++;
+			if (line.contains("\t")) {
+				reader.close();
+				return "true:" + file.getName() + ":" + count;
+			}
+		}
+		reader.close();
+		return "false:null:null";
 	}
 
 	public Object get(final String path) {
@@ -354,11 +391,13 @@ public class SimpleConfig {
 	}
 
 	public void set(final String path, final Object value, final String comment) {
+		if (config == null) {
+			return;
+		}
 		if (!this.config.contains(path)) {
 			this.config.set(manager.getPluginName() + "_COMMENT_" + comments, " " + comment);
 			comments++;
 		}
-
 		this.config.set(path, value);
 
 	}
@@ -387,6 +426,9 @@ public class SimpleConfig {
 	}
 
 	public void saveConfig() {
+		if (config == null) {
+			return;
+		}
 		final String config = this.config.saveToString();
 		manager.saveConfig(config, this.file);
 

@@ -189,13 +189,4 @@ public class PlayerListener implements Listener {
 			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
 	}
-
-	/*
-	 *   public int getPing(Player player) {
-	CraftPlayer pingc = (CraftPlayer)player;
-	EntityPlayer pinge = pingc.getHandle();
-	return pinge.ping;
-	}
-
-	 */
 }
