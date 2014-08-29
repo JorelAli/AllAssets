@@ -24,11 +24,22 @@ public class CommandWeather {
 				player.sendMessage(AllAssets.instance().title + "Weather set to downfall");
 			case "clear":
 			case "sun":
-			case "day":
 				player.setPlayerWeather(WeatherType.CLEAR);
 				player.sendMessage(AllAssets.instance().title + "Weather set to clear");
 			}
 		return;
+	}
+	
+	@CommandHandler(name = "sun", permission = "weather", description = "Sets the weather to sun", usage = "Use <command>", isListed = false)
+	public void onCommandSun(final CommandArgs args) {
+		args.getPlayer().setPlayerWeather(WeatherType.CLEAR);
+		args.getPlayer().sendMessage(AllAssets.instance().title + "Weather set to clear");
+	}
+	
+	@CommandHandler(name = "rain", permission = "weather", description = "Sets the weather to rain", usage = "Use <command>", isListed = false)
+	public void onCommandRain(final CommandArgs args) {
+		args.getPlayer().setPlayerWeather(WeatherType.DOWNFALL);
+		args.getPlayer().sendMessage(AllAssets.instance().title + "Weather set to downfall");
 	}
 
 }
