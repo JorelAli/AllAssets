@@ -1,5 +1,7 @@
 package io.github.Skepter.Utils;
 
+import io.github.Skepter.Misc.EnchantGlow;
+
 import java.util.Arrays;
 
 import org.bukkit.Material;
@@ -64,4 +66,8 @@ public class ItemUtils {
 		return itemStack;
 	}
 
+	public static ItemStack addGlow(final ItemStack itemStack) {
+		EnchantGlow.addGlow(itemStack, "");
+		return itemStack;
+	}
 }

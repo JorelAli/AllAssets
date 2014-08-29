@@ -71,6 +71,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /* AllAssets plugin, version 0.1
  * 
@@ -121,7 +122,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 //still able to tp when they're offline
 //do erm YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
-
+//leashmod :D
 public class AllAssets extends JavaPlugin {
 
 	/* These will be in messages.yml (Don't hardcode them - people get pissed if you do that Skepter -.-) */
@@ -156,14 +157,19 @@ public class AllAssets extends JavaPlugin {
 		/* It's risky having tabbed data - so instead of throwing errors, get the
 		 * users to sort it out when the plugin begins. Seems nice and simple :) */
 		new ConfigHandler();
-		try {
-			if (Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
-				getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab on line " + checkYamlFiles().split(":")[2] + "!");
-				getPluginLoader().disablePlugin(this);
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				try {
+					if (!Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
+						getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab on line " + checkYamlFiles().split(":")[2] + "!");
+						getPluginLoader().disablePlugin(AllAssets.instance());
+					}
+				} catch (final IOException e) {
+					getLogger().warning("There was an error checking data files for errors. Don't worry :)");
+				}
 			}
-		} catch (final IOException e) {
-			getLogger().warning("There was an error checking data files for errors. Don't worry :)");
-		}
+		}.runTaskAsynchronously(this);
 
 		/* Used to check if vault is available. If not, then disable the vault-specific commands
 		 * such as /balance etc. */
@@ -314,7 +320,7 @@ public class AllAssets extends JavaPlugin {
 			}
 			reader.close();
 		}
-		return "true";
+		return "true:null:null";
 	}
 
 	@Override

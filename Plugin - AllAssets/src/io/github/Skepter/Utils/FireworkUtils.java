@@ -13,20 +13,13 @@ import org.bukkit.inventory.meta.FireworkMeta;
 public class FireworkUtils {
 
 	public static void spawnRandomFirework(final Location loc) {
-		final Firework fw = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
-		final FireworkMeta fwm = fw.getFireworkMeta();
-		Type type = Type.BALL;
-		final int pick = new Random().nextInt(Type.values().length);
-		type = Type.values()[pick];
-		final int r1i = new Random().nextInt(17) + 1;
-		final int r2i = new Random().nextInt(17) + 1;
-		final Color c1 = getColor(r1i);
-		final Color c2 = getColor(r2i);
-		final FireworkEffect effect = FireworkEffect.builder().flicker(new Random().nextBoolean()).withColor(c1).withFade(c2).with(type).trail(new Random().nextBoolean()).build();
-		fwm.addEffect(effect);
-		final int rp = new Random().nextInt(2) + 1;
-		fwm.setPower(rp);
-		fw.setFireworkMeta(fwm);
+		final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+		final FireworkMeta fireworkMeta = firework.getFireworkMeta();
+		Random random = new Random();
+		final FireworkEffect effect = FireworkEffect.builder().flicker(random.nextBoolean()).withColor(getColor(random.nextInt(17) + 1)).withFade(getColor(random.nextInt(17) + 1)).with(Type.values()[random.nextInt(Type.values().length)]).trail(random.nextBoolean()).build();
+		fireworkMeta.addEffect(effect);
+		fireworkMeta.setPower(random.nextInt(2) + 1);
+		firework.setFireworkMeta(fireworkMeta);
 	}
 
 	private static Color getColor(final int i) {

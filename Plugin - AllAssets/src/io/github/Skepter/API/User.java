@@ -5,6 +5,7 @@ import io.github.Skepter.Config.PlayerData;
 import io.github.Skepter.Misc.IUser;
 import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Serializer.LocationSerializer;
+import io.github.Skepter.Tasks.PingTask;
 import io.github.Skepter.Utils.PlayerUtils;
 
 import java.lang.reflect.Field;
@@ -22,7 +23,7 @@ public class User implements IUser {
 
 	Player player;
 	PlayerData playerData;
-	static int ping;
+	public static int ping;
 
 	public User(final Player p) {
 		player = p;
@@ -63,18 +64,7 @@ public class User implements IUser {
 
 	public int getPing() {
 		/* Delay it by 1 tick for accurate results */
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-			@Override
-			public void run() {
-				try {
-					final Object nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
-					final int ping = (int) nmsPlayer.getClass().getField("ping").get(nmsPlayer);
-					User.ping = ping;
-				} catch (final Throwable t) {
-					t.printStackTrace();
-				}
-			}
-		}, 1L);
+		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new PingTask(player), 1L);
 		return ping;
 	}
 

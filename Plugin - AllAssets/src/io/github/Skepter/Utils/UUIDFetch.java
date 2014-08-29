@@ -2,75 +2,35 @@ package io.github.Skepter.Utils;
 
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.API.User;
+import io.github.Skepter.Tasks.UUIDFetchTask;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.craftbukkit.libs.com.google.gson.JsonObject;
-import org.bukkit.craftbukkit.libs.com.google.gson.JsonParser;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 /** Custom UUID Fetcher (written by me :D)
  * 
  * @author Skepter */
 public class UUIDFetch {
 
-	private String playerName;
-	private UUID uuid;
+	private static String playerName;
+	private static UUID uuid;
 	private static Map<UUID, String> map = new HashMap<UUID, String>();
 
 	public UUIDFetch(final String name, final boolean cache) {
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				try {
-					final URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
-
-					final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-					String str;
-					while ((str = in.readLine()) != null) {
-						final JsonParser parser = new JsonParser();
-						final Object o = parser.parse(str);
-						final JsonObject jObject = (JsonObject) o;
-
-						final String uuid = jObject.get("id").getAsString();
-						final String playerName = jObject.get("name").getAsString();
-						new BukkitRunnable() {
-
-							@Override
-							public void run() {
-								if (cache)
-									cacheSetup(uuid, playerName);
-								else
-									setup(uuid, playerName);
-							}
-
-						}.runTask(AllAssets.instance());
-					}
-					in.close();
-
-				} catch (final MalformedURLException e) {
-				} catch (final IOException e) {
-				}
-			}
-		}.runTaskAsynchronously(AllAssets.instance());
+		Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new UUIDFetchTask(name, cache));
 	}
 
-	private void setup(final String uuid, final String playerName) {
-		this.uuid = UUID.fromString(uuid);
-		this.playerName = playerName;
+	public static void setup(final String uuid, final String playerName) {
+		UUIDFetch.uuid = UUID.fromString(uuid);
+		UUIDFetch.playerName = playerName;
 	}
 
-	private void cacheSetup(final String uuid, final String playerName) {
+	public static void cacheSetup(final String uuid, final String playerName) {
 		map.put(UUID.fromString(uuid), playerName);
 	}
 

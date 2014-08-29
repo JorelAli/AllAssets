@@ -7,6 +7,7 @@ import io.github.Skepter.Commands.CommandFramework.Completer;
 import io.github.Skepter.Libs.TabText;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.ErrorUtils;
+import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.MathUtils;
 import io.github.Skepter.Utils.TextUtils;
 
@@ -191,6 +192,7 @@ public class CommandDebug {
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
 
+	//will be removed in future
 	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
 	public void error(final CommandArgs args) {
 		final String[] arr = { "bob", "mark" };
@@ -198,6 +200,7 @@ public class CommandDebug {
 		Bukkit.broadcastMessage(s);
 	}
 
+	//will be removed in future
 	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
 	public void test(final CommandArgs args) {
 		String multilineString = "Plugin                        `Thread\n";
@@ -210,6 +213,8 @@ public class CommandDebug {
 		tt.sortByFields(-2, 1); // sort by second column descending, then by first
 		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
 		Bukkit.broadcastMessage(printedText);
+
+		args.getPlayer().setItemInHand(ItemUtils.addGlow(args.getPlayer().getItemInHand()));
 	}
 
 	@Completer(name = "debug")

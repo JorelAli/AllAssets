@@ -7,6 +7,7 @@ import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.SimpleScoreboard;
 import io.github.Skepter.Serializer.InventorySerializer;
+import io.github.Skepter.Tasks.InstantRespawnTask;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.MathUtils;
 
@@ -178,26 +179,7 @@ public class PlayerListener implements Listener {
 	public void onPlayerDeath(final PlayerDeathEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
-				@Override
-				public void run() {
-					try {
-						final Object nmsPlayer = p.getClass().getMethod("getHandle").invoke(p);
-						Object packet = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".PacketPlayInClientCommand").newInstance();
-						final Class<?> enumClass = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".EnumClientCommand");
-
-						for (final Object ob : enumClass.getEnumConstants())
-							if (ob.toString().equals("PERFORM_RESPAWN"))
-								packet = packet.getClass().getConstructor(enumClass).newInstance(ob);
-						final Object con = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
-						con.getClass().getMethod("a", packet.getClass()).invoke(con, packet);
-					} catch (final Throwable t) {
-						t.printStackTrace();
-					}
-				}
-
-			}, 1L);
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new InstantRespawnTask(p), 1L);
 		}
 	}
 
@@ -206,21 +188,6 @@ public class PlayerListener implements Listener {
 		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl"))
 			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
-	}
-
-	public void getPing(final Player player) {
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-			@Override
-			public void run() {
-				try {
-					final Object nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
-					final int ping = (int) nmsPlayer.getClass().getField("ping").get(nmsPlayer);
-					System.out.println(ping);
-				} catch (final Throwable t) {
-					t.printStackTrace();
-				}
-			}
-		}, 1L);
 	}
 
 	/*
