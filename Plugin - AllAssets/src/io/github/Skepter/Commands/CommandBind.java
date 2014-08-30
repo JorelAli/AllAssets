@@ -4,6 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
+import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.TextUtils;
 
@@ -34,21 +35,21 @@ public class CommandBind implements Listener {
 	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item", usage = "Use <command>")
 	public void addBind(final CommandArgs args) {
 		final Player player = args.getPlayer();
-
 		final ItemStack item = player.getItemInHand();
 		final ItemMeta meta = item.getItemMeta();
-		if (!meta.hasLore()) {
-			final List<String> lore = new ArrayList<String>();
-			meta.setLore(lore);
-		}
+		if (!meta.hasLore())
+			meta.setLore(new ArrayList<String>());
 		final List<String> lore = meta.getLore();
 		final String[] command = TextUtils.getMsgFromArgs(args.getArgs(), 0, args.getArgs().length);
 		final String s = "/" + TextUtils.join(command, " ");
 		lore.add(s);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		ItemUtils.addGlow(item);
-		player.sendMessage(AllAssets.instance().title + "Successfully added " + s + " to your item!");
+		try {
+			ItemUtils.addGlow(item);
+		} catch (Exception e) {
+		}
+		player.sendMessage(AllAssets.instance().title + "Successfully added " + s + "to your item!");
 		return;
 	}
 
@@ -58,21 +59,36 @@ public class CommandBind implements Listener {
 		final ItemStack item = player.getItemInHand();
 		final ItemMeta meta = item.getItemMeta();
 		final List<String> lore = meta.getLore();
+		if (!TextUtils.isInteger(args.getArgs()[0])) {
+			ErrorUtils.notAnInteger(player);
+			return;
+		}
 		String s = lore.get(Integer.parseInt(args.getArgs()[0]) - 1);
-		lore.remove((Integer.parseInt(args.getArgs()[0]) - 1)); //put check here & debug on error
+		lore.remove((Integer.parseInt(args.getArgs()[0]) - 1));
 		meta.setLore(lore);
 		item.setItemMeta(meta);
+		if (!containsCommand(item))
+			ItemUtils.removeGlow(item);
 		player.sendMessage(AllAssets.instance().title + "Successfully removed " + s + " from your item!");
 		return;
 	}
 
 	@EventHandler
 	public void onInteract(final PlayerInteractEvent event) {
-		if (ConfigHandler.instance().config().getBoolean("bindRight")) {
+		if (ConfigHandler.instance().config().getBoolean("bindRight"))
 			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 				performAction(event.getPlayer());
-		} else if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
-			performAction(event.getPlayer());
+			else if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+				performAction(event.getPlayer());
+	}
+
+	private boolean containsCommand(final ItemStack itemStack) {
+		if (itemStack.hasItemMeta())
+			if (itemStack.getItemMeta().hasLore())
+				for (final String s : itemStack.getItemMeta().getLore())
+					if (s.startsWith("/"))
+						return true;
+		return false;
 	}
 
 	private void performAction(final Player player) {

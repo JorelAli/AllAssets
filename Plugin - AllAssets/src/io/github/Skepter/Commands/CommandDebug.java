@@ -217,6 +217,13 @@ public class CommandDebug {
 		args.getPlayer().setItemInHand(ItemUtils.addGlow(args.getPlayer().getItemInHand()));
 	}
 
+	@CommandHandler(name = "debug.test1", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
+	public void test1(final CommandArgs args) {
+		for (Entity e : args.getPlayer().getNearbyEntities(150, 150, 150)) {
+			e.teleport(args.getPlayer());
+		}
+	}
+
 	@Completer(name = "debug")
 	public List<String> testCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();

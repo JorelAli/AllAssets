@@ -33,6 +33,10 @@ public class CommandNear {
 				ErrorUtils.notAnInteger(player);
 		}
 		List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
+		if (entities.isEmpty()) {
+			player.sendMessage(AllAssets.instance().title + "No nearby entities could be found!");
+			return;
+		}
 		Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
 		while (entities.iterator().hasNext()) {
 			Entity entity = entities.iterator().next();

@@ -66,6 +66,9 @@ public class CommandLaunch {
 		case "witherskull":
 			player.launchProjectile(WitherSkull.class);
 			break;
+		case "bluewitherskull":
+			((WitherSkull) player.launchProjectile(WitherSkull.class)).setCharged(true);
+			break;
 		default:
 			break;
 		}
@@ -85,6 +88,7 @@ public class CommandLaunch {
 		list.add("thrownexpbottle");
 		list.add("thrownpotion");
 		list.add("witherskull");
+		list.add("bluewitherskull");
 		return list;
 	}
 

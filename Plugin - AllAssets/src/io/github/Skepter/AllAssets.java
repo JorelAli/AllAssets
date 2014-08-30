@@ -240,6 +240,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandTime(framework);
 		if (ConfigHandler.instance().features().getBoolean("Tp"))
 			new CommandTp(framework);
+		if (ConfigHandler.instance().features().getBoolean("Weather"))
+			new CommandWeather(framework);
 		if (ConfigHandler.instance().features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
 

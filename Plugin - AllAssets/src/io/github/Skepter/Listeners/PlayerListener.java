@@ -9,13 +9,12 @@ import io.github.Skepter.Libs.SimpleScoreboard;
 import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Tasks.InstantRespawnTask;
 import io.github.Skepter.Tasks.TPS;
+import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.MathUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,8 +23,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,6 +34,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -45,6 +45,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
@@ -157,13 +158,13 @@ public class PlayerListener implements Listener {
 		if ((i == null) || (i.getType() == Material.AIR))
 			return;
 		//Work on this TODO
-		final Set<Entry<Enchantment, Integer>> entrySet = i.getEnchantments().entrySet();
-		for (final Entry<Enchantment, Integer> e : entrySet)
-			if (e.getValue() > 5)
-				if (!player.hasPermission("AllAssets.illegalitems")) {
-					player.setItemInHand(null);
-					CommandLog.addOtherLog(ChatColor.BLUE + player.getName() + ChatColor.WHITE + " had an illegal item!");
-				}
+		//		final Set<Entry<Enchantment, Integer>> entrySet = i.getEnchantments().entrySet();
+		//		for (final Entry<Enchantment, Integer> e : entrySet)
+		//			if (e.getValue() > 5)
+		//				if (!player.hasPermission("AllAssets.illegalitems")) {
+		//					player.setItemInHand(null);
+		//					CommandLog.addOtherLog(ChatColor.BLUE + player.getName() + ChatColor.WHITE + " had an illegal item!");
+		//				}
 	}
 
 	@EventHandler
@@ -186,7 +187,22 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void creativeEnderpearl(final PlayerInteractEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl"))
-			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getItem().getType().equals(Material.ENDER_PEARL))
+			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
+	}
+
+	@EventHandler
+	public void onLeash(final PlayerInteractEntityEvent event) {
+		if (ConfigHandler.instance().features().getBoolean("AnyLeash"))
+			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && event.getRightClicked() instanceof LivingEntity) {
+				event.setCancelled(true);
+				new BukkitRunnable() {
+					@Override
+					public void run() {
+						if (!((LivingEntity) event.getRightClicked()).setLeashHolder(event.getPlayer()))
+							ErrorUtils.error(event.getPlayer(), "You cannot put a leash on that mob");
+					}
+				}.runTaskLater(AllAssets.instance(), 1L);
+			}
 	}
 }
