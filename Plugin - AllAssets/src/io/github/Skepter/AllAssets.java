@@ -302,10 +302,10 @@ public class AllAssets extends JavaPlugin {
 		try {
 			if (!tempTimeMap.isEmpty())
 				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
+			PlayerData.saveAllPlayers();
 		} catch (final Exception e) {
-			e.printStackTrace();
+		//	e.printStackTrace();
 		}
-		PlayerData.saveAllPlayers(); //error appears here Nav
 		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
 	}
 
