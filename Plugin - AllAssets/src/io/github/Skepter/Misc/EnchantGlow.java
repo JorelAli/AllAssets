@@ -66,8 +66,12 @@ public class EnchantGlow extends EnchantmentWrapper {
 
 	public static void addGlow(ItemStack item, String name) {
 		Enchantment glow = getGlow(name);
-
 		item.addEnchantment(glow, 1);
+	}
+
+	public static void removeGlow(ItemStack item) {
+		Enchantment glow = getGlow(name);
+		item.removeEnchantment(glow);
 	}
 
 }

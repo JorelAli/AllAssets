@@ -4,6 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
+import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.TextUtils;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class CommandBind implements Listener {
 		lore.add(s);
 		meta.setLore(lore);
 		item.setItemMeta(meta);
+		ItemUtils.addGlow(item);
 		player.sendMessage(AllAssets.instance().title + "Successfully added " + s + " to your item!");
 		return;
 	}
@@ -56,10 +58,11 @@ public class CommandBind implements Listener {
 		final ItemStack item = player.getItemInHand();
 		final ItemMeta meta = item.getItemMeta();
 		final List<String> lore = meta.getLore();
+		String s = lore.get(Integer.parseInt(args.getArgs()[0]) - 1);
 		lore.remove((Integer.parseInt(args.getArgs()[0]) - 1)); //put check here & debug on error
 		meta.setLore(lore);
 		item.setItemMeta(meta);
-		player.sendMessage(AllAssets.instance().title + "Successfully removed " + " to your item!");
+		player.sendMessage(AllAssets.instance().title + "Successfully removed " + s + " from your item!");
 		return;
 	}
 

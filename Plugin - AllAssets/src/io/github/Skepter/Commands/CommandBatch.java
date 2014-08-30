@@ -40,6 +40,14 @@ public class CommandBatch {
 			return;
 		}
 		final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
+		
+		/* If it doesn't contain [i] or [i=#] */
+		if (!(s.contains("[i]")) && !(s.contains("[i="))) {
+			for (int i = 1; i < (amount + 1); i++)
+				player.performCommand(s);
+			return;
+		}
+		
 		/* If it only contains [i] */
 		if (s.contains("[i]") && !(s.contains("[i="))) {
 			for (int i = 1; i < (amount + 1); i++)

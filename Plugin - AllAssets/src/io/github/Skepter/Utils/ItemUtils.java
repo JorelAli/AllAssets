@@ -70,4 +70,9 @@ public class ItemUtils {
 		EnchantGlow.addGlow(itemStack, "");
 		return itemStack;
 	}
+	
+	public static ItemStack removeGlow(final ItemStack itemStack) {
+		EnchantGlow.removeGlow(itemStack);
+		return itemStack;
+	}
 }
