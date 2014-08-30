@@ -18,11 +18,13 @@ public class CommandButcher {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		int count = 0;
-		for (final Entity entity : player.getWorld().getEntities())
+		while (player.getWorld().getEntities().iterator().hasNext()){
+			Entity entity = player.getWorld().getEntities().iterator().next();
 			if (entity instanceof LivingEntity) {
-				entity.remove(); //ends up locking thread or something...
+				entity.remove();
 				count++;
 			}
+		}
 		player.sendMessage(AllAssets.instance().title + count + " entities removed");
 		//butcher mobs/animals/npc/villagers/<animalName>
 		return;
