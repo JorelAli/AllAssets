@@ -33,6 +33,7 @@ import io.github.Skepter.Commands.CommandSet;
 import io.github.Skepter.Commands.CommandSignEdit;
 import io.github.Skepter.Commands.CommandTime;
 import io.github.Skepter.Commands.CommandTp;
+import io.github.Skepter.Commands.CommandWeather;
 import io.github.Skepter.Commands.CommandWorlds;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.PlayerData;
