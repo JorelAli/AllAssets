@@ -302,7 +302,7 @@ public class AllAssets extends JavaPlugin {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		PlayerData.saveAllPlayers();
+		PlayerData.saveAllPlayers(); //error appears here Nav
 		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
 	}
 

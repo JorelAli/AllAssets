@@ -5,11 +5,10 @@ import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.TextUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -26,27 +25,29 @@ public class CommandNear {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		List<Entity> entities = player.getNearbyEntities(256, 256, 256);
-		List<LivingEntity> livingEntities = new ArrayList<LivingEntity>();
-		for (Entity entity : entities)
-			if (entity instanceof LivingEntity)
-				livingEntities.add((LivingEntity) entity);
-		Map<EntityType, Integer> map = new HashMap<EntityType, Integer>();
-		for (LivingEntity entity : livingEntities) {
+		Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
+		while (entities.iterator().hasNext()) {
+			Entity entity = entities.iterator().next();
 			if (entity instanceof Player)
 				continue;
-			map.put(entity.getType(), map.get(entity.getType()) + 1);
-			livingEntities.remove(entity);
+			if (entity instanceof LivingEntity) {
+				map.put(entity.getType(), map.get(entity.getType()) == null ? 1 : map.get(entity.getType()) + 1);
+				entities.remove(entity);
+			} else
+				entities.remove(entity);
 		}
 		player.sendMessage(TextUtils.title("Nearby entities"));
 		for (Entry<EntityType, Integer> entry : map.entrySet()) {
+			if (map.isEmpty())
+				player.sendMessage(AllAssets.instance().houseStyleColor + "There are no nearby entities");
 			if (entry.getValue() == 0)
 				continue;
 			player.sendMessage(AllAssets.instance().houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase()) + ": " + entry.getValue());
 		}
 		player.sendMessage(TextUtils.title("Nearby players"));
-		if (livingEntities.isEmpty())
+		if (entities.isEmpty())
 			player.sendMessage(AllAssets.instance().houseStyleColor + "There are no nearby players");
-		for (LivingEntity entity : livingEntities) {
+		for (Entity entity : entities) {
 			Player target = (Player) entity;
 			player.sendMessage(AllAssets.instance().houseStyleColor + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
 

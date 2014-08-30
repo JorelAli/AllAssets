@@ -3,7 +3,6 @@ package io.github.Skepter.Listeners;
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandConsoleLog;
 import io.github.Skepter.Commands.CommandLog;
-import io.github.Skepter.Utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -93,8 +92,8 @@ public class LogListener implements Filter {
 		if (msg.contains("at ") && msg.contains(".java:"))
 			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 				return null;
-			else
-				CommandLog.addErrorLog(msg.replace(TextUtils.stringBetween(msg, "(", ")"), AllAssets.instance().houseStyleColor + TextUtils.stringBetween(msg, "(", ")") + ChatColor.RESET));
+//			else
+//				CommandLog.addErrorLog(msg.replace(TextUtils.stringBetween(msg, "(", ")"), AllAssets.instance().houseStyleColor + TextUtils.stringBetween(msg, "(", ")") + ChatColor.RESET));
 		for (final String s : javaExceptions)
 			if (msg.contains(s))
 				CommandLog.addErrorLog(msg);
