@@ -4,6 +4,8 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 
+import java.util.Iterator;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -18,8 +20,9 @@ public class CommandButcher {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		int count = 0;
-		while (player.getWorld().getEntities().iterator().hasNext()){
-			Entity entity = player.getWorld().getEntities().iterator().next();
+		Iterator<Entity> iterator = player.getWorld().getEntities().iterator();
+		while (iterator.hasNext()){
+			Entity entity = iterator.next();
 			if (entity instanceof LivingEntity) {
 				entity.remove();
 				count++;

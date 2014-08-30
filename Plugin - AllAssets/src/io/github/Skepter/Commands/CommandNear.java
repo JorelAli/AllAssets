@@ -26,8 +26,8 @@ public class CommandNear {
 	public void onCommand(final CommandArgs args) {
 		final Player player = args.getPlayer();
 		int distance = 200;
-		if(args.getArgs().length == 1) {
-			if(TextUtils.isInteger(args.getArgs()[0]))
+		if (args.getArgs().length == 1) {
+			if (TextUtils.isInteger(args.getArgs()[0]))
 				distance = Integer.parseInt(args.getArgs()[0]);
 			else
 				ErrorUtils.notAnInteger(player);
@@ -52,13 +52,12 @@ public class CommandNear {
 				player.sendMessage(AllAssets.instance().houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase()) + ": " + entry.getValue());
 			}
 		}
-		if (entities.isEmpty())
-			return;
-		player.sendMessage(TextUtils.title("Nearby players"));
-		for (Entity entity : entities) {
-			Player target = (Player) entity;
-			player.sendMessage(AllAssets.instance().houseStyleColor + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
-
+		if (!entities.isEmpty()) {
+			player.sendMessage(TextUtils.title("Nearby players"));
+			for (Entity entity : entities) {
+				Player target = (Player) entity;
+				player.sendMessage(AllAssets.instance().houseStyleColor + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
+			}
 		}
 	}
 }
