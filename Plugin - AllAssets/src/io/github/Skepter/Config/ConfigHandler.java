@@ -84,6 +84,7 @@ public class ConfigHandler {
 		features.set("Inventory", "true");
 		features.set("Launch", "true");
 		features.set("Log", "true");
+		features.set("Near", "true");
 		features.set("Oplist", "true");
 		features.set("Ping", "true");
 		features.set("Plugins", "true");

@@ -24,6 +24,7 @@ import io.github.Skepter.Commands.CommandGhost;
 import io.github.Skepter.Commands.CommandInventory;
 import io.github.Skepter.Commands.CommandLaunch;
 import io.github.Skepter.Commands.CommandLog;
+import io.github.Skepter.Commands.CommandNear;
 import io.github.Skepter.Commands.CommandOplist;
 import io.github.Skepter.Commands.CommandPTime;
 import io.github.Skepter.Commands.CommandPWeather;
@@ -217,6 +218,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandLaunch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Log"))
 			new CommandLog(framework);
+		if (ConfigHandler.instance().features().getBoolean("Near"))
+			new CommandNear(framework);
 		if (ConfigHandler.instance().features().getBoolean("Oplist"))
 			new CommandOplist(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ping"))
