@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 public class CommandLog {
 
@@ -27,17 +26,15 @@ public class CommandLog {
 
 	@CommandHandler(name = "log", permission = "log", description = "Shows log information", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
-
-		player.sendMessage(TextUtils.title("Error logs"));
+		args.getSender().sendMessage(TextUtils.title("Error logs"));
 		for (final String s : errorLog)
-			player.sendMessage(s);
-		player.sendMessage(TextUtils.title("Chat logs"));
+			args.getSender().sendMessage(s);
+		args.getSender().sendMessage(TextUtils.title("Chat logs"));
 		for (final String s : chatLog)
-			player.sendMessage(s);
-		player.sendMessage(TextUtils.title("Other logs"));
+			args.getSender().sendMessage(s);
+		args.getSender().sendMessage(TextUtils.title("Other logs"));
 		for (final String s : otherLog)
-			player.sendMessage(s);
+			args.getSender().sendMessage(s);
 	}
 
 	public static void addChatLog(final String s) {

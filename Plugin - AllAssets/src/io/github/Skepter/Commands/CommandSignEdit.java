@@ -20,7 +20,13 @@ public class CommandSignEdit {
 	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "signedit", description = "Allows you to edit signs", usage = "Use <command>")
 	public void command(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length > 1) {
 			if (TextUtils.isInteger(args.getArgs()[0]))
 				if (player.getTargetBlock(null, 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(null, 256).getType().equals(Material.WALL_SIGN)) {

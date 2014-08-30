@@ -21,7 +21,7 @@ public class CommandForceChat {
 			final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
 			target.chat(s);
 		} else
-			ErrorUtils.notEnoughArguments(args.getPlayer());
+			ErrorUtils.notEnoughArguments(args.getSender());
 		return;
 	}
 

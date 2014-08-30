@@ -1,7 +1,6 @@
 package io.github.Skepter.Commands;
 
 import io.github.Skepter.AllAssets;
-import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.TextUtils;
@@ -9,7 +8,6 @@ import io.github.Skepter.Utils.TextUtils;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.InvalidDescriptionException;
@@ -26,14 +24,6 @@ public class CommandAllAssets {
 	public void onCommand(final CommandArgs args) {
 		args.getSender().sendMessage("/allassets commands - shows a list of commands");
 		args.getSender().sendMessage("/allassets reload - reloads the entire plugin");
-		/* Don't forget to remove me! */
-		final User user = new User(args.getPlayer());
-		final Long l = user.getTotalTimePlayed();
-		final long days = TimeUnit.MILLISECONDS.toDays(l);
-		final long hours = TimeUnit.MILLISECONDS.toHours(l) - (days * 60 * 60 * 24);
-		final long minutes = TimeUnit.MILLISECONDS.toMinutes(l) - (days * 60 * 60 * 24) - (hours * 60 * 60);
-		final long seconds = TimeUnit.MILLISECONDS.toSeconds(l) - (days * 60 * 60 * 24) - (hours * 60 * 60) - (minutes * 60);
-		args.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds");
 		return;
 	}
 

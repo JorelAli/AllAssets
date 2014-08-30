@@ -13,7 +13,6 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 
 public class CommandOplist {
 
@@ -23,7 +22,6 @@ public class CommandOplist {
 
 	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "oplist", description = "Lists the players that have op", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
 		final Set<OfflinePlayer> ops = Bukkit.getOperators();
 		final ArrayList<String> operators = new ArrayList<String>();
 		for (final OfflinePlayer s : ops)
@@ -35,13 +33,13 @@ public class CommandOplist {
 				operators.add(offlinePlayerName);
 			}
 		Collections.sort(operators);
-		player.sendMessage(TextUtils.title("Operators"));
+		args.getSender().sendMessage(TextUtils.title("Operators"));
 		for (final String s : operators) {
 			final String u = PlayerUtils.getPlayernameFromUUID(UUID.fromString(s));
 			if (PlayerUtils.isOnline(u))
-				player.sendMessage(ChatColor.GREEN + "[Online] " + ChatColor.WHITE + u + " (" + s + ")");
+				args.getSender().sendMessage(ChatColor.GREEN + "[Online] " + ChatColor.WHITE + u + " (" + s + ")");
 			else
-				player.sendMessage(ChatColor.RED + "[Offline] " + ChatColor.WHITE + (u == null ? "Couldn't find username" : u) + " (" + s + ")");
+				args.getSender().sendMessage(ChatColor.RED + "[Offline] " + ChatColor.WHITE + (u == null ? "Couldn't find username" : u) + " (" + s + ")");
 		}
 
 	}

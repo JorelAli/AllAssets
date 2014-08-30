@@ -16,7 +16,13 @@ public class CommandTp {
 
 	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 0) {
 			// help page?
 			ErrorUtils.notEnoughArguments(player);

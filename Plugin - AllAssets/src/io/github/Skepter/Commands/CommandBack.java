@@ -4,6 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Utils.ErrorUtils;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -16,7 +17,13 @@ public class CommandBack {
 
 	@CommandHandler(name = "back", aliases = { "lastloc" }, permission = "back", description = "Teleports you to your last location", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		final User user = new User(player);
 		final Location l = player.getLocation();
 		player.teleport(user.getLastLoc());

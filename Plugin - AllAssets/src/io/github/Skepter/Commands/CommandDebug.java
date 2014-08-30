@@ -25,6 +25,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -214,13 +215,27 @@ public class CommandDebug {
 		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
 		Bukkit.broadcastMessage(printedText);
 
-		args.getPlayer().setItemInHand(ItemUtils.addGlow(args.getPlayer().getItemInHand()));
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+		player.setItemInHand(ItemUtils.addGlow(player.getItemInHand()));
 	}
 
 	@CommandHandler(name = "debug.test1", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
-		for (Entity e : args.getPlayer().getNearbyEntities(150, 150, 150)) {
-			e.teleport(args.getPlayer());
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+		for (Entity e : player.getNearbyEntities(150, 150, 150)) {
+			e.teleport(player);
 		}
 	}
 

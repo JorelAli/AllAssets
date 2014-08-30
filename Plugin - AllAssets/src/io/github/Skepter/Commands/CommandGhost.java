@@ -16,7 +16,13 @@ public class CommandGhost {
 
 	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "ghost", description = "Allows you to turn into a ghost", usage = "Use <command>")
 	public void command(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 0) {
 			if (AllAssets.instance().ghostFactory.isGhost(player)) {
 				AllAssets.instance().ghostFactory.setGhost(player, false);

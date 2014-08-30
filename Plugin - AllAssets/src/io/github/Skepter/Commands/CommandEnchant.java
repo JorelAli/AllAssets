@@ -3,6 +3,7 @@ package io.github.Skepter.Commands;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.EnchantmentInventories;
+import io.github.Skepter.Utils.ErrorUtils;
 
 import org.bukkit.entity.Player;
 
@@ -14,7 +15,13 @@ public class CommandEnchant {
 
 	@CommandHandler(name = "enchant", permission = "enchant", description = "Enchants an item", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		player.openInventory(EnchantmentInventories.page1());
 		return;
 	}

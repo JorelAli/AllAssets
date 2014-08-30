@@ -3,6 +3,7 @@ package io.github.Skepter.Commands;
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Utils.ErrorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,13 @@ public class CommandConsoleLog {
 
 	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
 			player.sendMessage(AllAssets.instance().title + "You are no longer viewing the console");

@@ -20,7 +20,13 @@ public class CommandBatch {
 
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 0) {
 			player.sendMessage("[i] = the number in which the time is being run at (i.e. the iteration number)");
 			player.sendMessage("[i=NUMBER] = the number to start from, cannot use [i] in same command");

@@ -3,6 +3,7 @@ package io.github.Skepter.Commands;
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.TextUtils;
 
 import java.util.ArrayList;
@@ -25,7 +26,13 @@ public class CommandChestSearch {
 	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "chestsearch", aliases = { "csearch" }, permission = "chestsearch", description = "Search for items in chests", usage = "Use <command>")
 	public void command(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 0) {
 			player.sendMessage(TextUtils.title("Chest search"));
 			player.sendMessage("Use chest search to find items in chests in the world");

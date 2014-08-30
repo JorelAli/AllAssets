@@ -24,7 +24,13 @@ public class CommandNear {
 
 	@CommandHandler(name = "near", permission = "near", description = "Shows entities near to you", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		int distance = 200;
 		if (args.getArgs().length == 1) {
 			if (TextUtils.isInteger(args.getArgs()[0]))

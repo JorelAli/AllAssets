@@ -444,11 +444,11 @@ public class CommandFramework {
 			return sender instanceof Player;
 		}
 
-		public Player getPlayer() {
+		public Player getPlayer() throws Exception {
 			if (sender instanceof Player)
 				return (Player) sender;
 			else
-				return null;
+				throw new NullPointerException();
 		}
 	}
 }

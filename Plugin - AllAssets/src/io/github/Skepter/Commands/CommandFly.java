@@ -16,7 +16,13 @@ public class CommandFly {
 
 	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly", usage = "Use <command>")
 	public void command(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 0) {
 			if (player.getAllowFlight()) {
 				player.setAllowFlight(false);

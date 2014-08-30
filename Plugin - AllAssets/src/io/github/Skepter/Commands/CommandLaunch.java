@@ -29,7 +29,13 @@ public class CommandLaunch {
 
 	@CommandHandler(name = "launch", permission = "launch", description = "Launches a projectile", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (!(args.getArgs().length == 1))
 			ErrorUtils.notEnoughArguments(player);
 		switch (args.getArgs()[0].toLowerCase()) {

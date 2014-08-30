@@ -3,6 +3,7 @@ package io.github.Skepter.Commands;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Config.ConfigHandler;
+import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.PlayerUtils;
 
 import org.bukkit.entity.Player;
@@ -16,7 +17,13 @@ public class CommandClear {
 
 	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "clear", description = "Clears your inventory", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (ConfigHandler.instance().config().getBoolean("clearArmor")) {
 			if (args.getArgs().length == 0)
 				player.getInventory().clear();

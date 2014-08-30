@@ -15,7 +15,13 @@ public class CommandInventory {
 
 	@CommandHandler(name = "inventory", aliases = { "invsee", "inv" }, permission = "inventory", description = "Views a players inventory", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 1)
 			try {
 				player.openInventory(PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]).getInventory());

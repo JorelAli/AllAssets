@@ -26,7 +26,13 @@ public class CommandSet implements Listener {
 
 	@CommandHandler(name = "set", permission = "set", description = "Sets data for a player", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if ((args.getArgs().length == 0) || (args.getArgs().length == 1)) {
 			ErrorUtils.notEnoughArguments(player);
 			return;

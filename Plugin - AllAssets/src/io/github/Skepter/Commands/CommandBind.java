@@ -34,7 +34,13 @@ public class CommandBind implements Listener {
 
 	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item", usage = "Use <command>")
 	public void addBind(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		final ItemStack item = player.getItemInHand();
 		final ItemMeta meta = item.getItemMeta();
 		if (!meta.hasLore())
@@ -55,7 +61,13 @@ public class CommandBind implements Listener {
 
 	@CommandHandler(name = "bind.remove", permission = "bind", description = "Removes a command to the binded item", usage = "Use <command>")
 	public void removeBind(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		final ItemStack item = player.getItemInHand();
 		final ItemMeta meta = item.getItemMeta();
 		final List<String> lore = meta.getLore();

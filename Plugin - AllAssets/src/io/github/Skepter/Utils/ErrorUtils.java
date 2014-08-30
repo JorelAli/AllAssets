@@ -17,12 +17,12 @@ public class ErrorUtils {
 		sender.sendMessage(AllAssets.instance().error + msg);
 	}
 
-	public static void notAnInteger(final Player player) {
-		player.sendMessage(AllAssets.instance().error + ConfigHandler.getMsg("notANumber"));
+	public static void notAnInteger(final CommandSender commandSender) {
+		commandSender.sendMessage(AllAssets.instance().error + ConfigHandler.getMsg("notANumber"));
 	}
 
-	public static void notEnoughArguments(final Player player) {
-		player.sendMessage(AllAssets.instance().error + "Not enough arguments - use /help <command>!");
+	public static void notEnoughArguments(final CommandSender commandSender) {
+		commandSender.sendMessage(AllAssets.instance().error + "Not enough arguments - use /help <command>!");
 	}
 
 	public static void playerNotFound(final Player player, final String target) {
@@ -43,5 +43,9 @@ public class ErrorUtils {
 
 	public static void wrongConstruction(final Player player, final String construction) {
 		player.sendMessage(AllAssets.instance().error + "Wrong construction, use the format: " + construction);
+	}
+	
+	public static void playerOnly(final CommandSender sender) {
+		sender.sendMessage(AllAssets.instance().error + "You must be ingame in order to use that command");
 	}
 }

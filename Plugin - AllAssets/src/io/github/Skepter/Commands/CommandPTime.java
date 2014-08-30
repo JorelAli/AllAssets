@@ -16,7 +16,13 @@ public class CommandPTime {
 
 	@CommandHandler(name = "ptime", aliases = { "playertime" }, permission = "ptime", description = "Sets your time", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Player player = args.getPlayer();
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 1)
 			try {
 				player.setPlayerTime(Long.parseLong(args.getArgs()[0]), false);

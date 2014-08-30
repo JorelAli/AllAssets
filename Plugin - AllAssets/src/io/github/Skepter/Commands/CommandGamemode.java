@@ -3,6 +3,7 @@ package io.github.Skepter.Commands;
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.TextUtils;
 
 import org.bukkit.GameMode;
@@ -16,24 +17,52 @@ public class CommandGamemode {
 
 	@CommandHandler(name = "gamemode", aliases = { "gm" }, permission = "gamemode", description = "Changes your gamemode", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
 		if (args.getArgs().length == 1)
-			doGameMode(args.getPlayer(), args.getArgs()[0]);
+			doGameMode(player, args.getArgs()[0]);
 		return;
 	}
 
 	@CommandHandler(name = "gms", permission = "gamemode", description = "Changes your gamemode to survival", usage = "Use <command>", isListed = false)
 	public void onGms(final CommandArgs args) {
-		doGameMode(args.getPlayer(), "survival");
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+		doGameMode(player, "survival");
 	}
 
 	@CommandHandler(name = "gmc", permission = "gamemode", description = "Changes your gamemode to creative", usage = "Use <command>", isListed = false)
 	public void onGmc(final CommandArgs args) {
-		doGameMode(args.getPlayer(), "creative");
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+		doGameMode(player, "creative");
 	}
 
 	@CommandHandler(name = "gma", permission = "gamemode", description = "Changes your gamemode to adventure", usage = "Use <command>", isListed = false)
 	public void onGma(final CommandArgs args) {
-		doGameMode(args.getPlayer(), "adventure");
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+		doGameMode(player, "adventure");
 	}
 
 	private void doGameMode(final Player player, final String s) {
