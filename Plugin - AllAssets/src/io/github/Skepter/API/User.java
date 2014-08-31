@@ -244,17 +244,6 @@ public class User implements IUser {
 	}
 
 	@Override
-	public UUID getUUID() {
-		return UUID.fromString(playerData.getPlayerData().getString("uuid"));
-	}
-
-	@Override
-	public void setUUID(final UUID uuid) {
-		playerData.getPlayerData().set("uuid", uuid.toString());
-		playerData.savePlayerData();
-	}
-
-	@Override
 	public void setAFK(final boolean afk) {
 		playerData.getPlayerData().set("afk", afk);
 		playerData.savePlayerData();

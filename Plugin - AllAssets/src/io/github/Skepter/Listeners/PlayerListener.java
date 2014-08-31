@@ -56,9 +56,12 @@ public class PlayerListener implements Listener {
 	public void onJoin(final PlayerJoinEvent event) {
 		AllAssets.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
 
+		final UUIDData data = new UUIDData();
+		data.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
+		data.saveDataFile();
+		
 		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
-		user.setUUID(event.getPlayer().getUniqueId());
 		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
 			final List<String> ips = user.IPs();
 			if (!ips.isEmpty())
@@ -110,15 +113,7 @@ public class PlayerListener implements Listener {
 		final User user = new User(event.getPlayer());
 		user.setLastLoc(event.getFrom());
 	}
-
-	@EventHandler
-	public void onEvent(final PlayerJoinEvent event) {
-		final UUIDData data = new UUIDData();
-		data.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
-		data.saveDataFile();
-		return;
-	}
-
+	
 	@EventHandler
 	public void onDeath(final PlayerDeathEvent event) {
 		final User user = new User(event.getEntity());

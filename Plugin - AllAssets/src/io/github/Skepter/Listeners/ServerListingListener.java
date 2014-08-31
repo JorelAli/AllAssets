@@ -22,7 +22,7 @@ public class ServerListingListener implements Listener {
 			final User user = new User(Bukkit.getOfflinePlayer(u));
 			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 				/* Dump this into Messages.yml */
-				event.setMotd(ChatColor.AQUA + "Welcome " + data.getReversedUUIDMap().get(user.getUUID()) + "! You have joined " + user.getJoinCount() + " times!");
+				event.setMotd(ChatColor.AQUA + "Welcome " + data.getReversedUUIDMap().get(user.getPlayer().getUniqueId()) + "! You have joined " + user.getJoinCount() + " times!");
 				return;
 			}
 		}
