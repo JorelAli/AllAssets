@@ -103,8 +103,8 @@ public class PlayerListener implements Listener {
 	/* Hopefully, if they click that slot, it places the item on their head :D */
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
-		if (event.isLeftClick() || event.isRightClick()) {
-			if (event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME)) {
+		if (event.isLeftClick() || event.isRightClick())
+			if (event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
 				if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING)) {
 					event.getWhoClicked().getInventory().setHelmet(event.getCursor());
 					new BukkitRunnable() {
@@ -114,8 +114,6 @@ public class PlayerListener implements Listener {
 						}
 					}.runTaskLater(AllAssets.instance(), 1L);
 				}
-			}
-		}
 	}
 
 	@EventHandler
@@ -196,7 +194,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onLeash(final PlayerInteractEntityEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("AnyLeash"))
-			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && event.getRightClicked() instanceof LivingEntity) {
+			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && (event.getRightClicked() instanceof LivingEntity)) {
 				event.setCancelled(true);
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new AnyLeashTask(event.getPlayer(), event.getRightClicked()), 1L);
 			}

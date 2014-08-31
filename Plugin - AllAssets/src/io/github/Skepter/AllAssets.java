@@ -303,7 +303,7 @@ public class AllAssets extends JavaPlugin {
 		if (!tempTimeMap.isEmpty())
 			try {
 				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		PlayerData.saveAllPlayers();

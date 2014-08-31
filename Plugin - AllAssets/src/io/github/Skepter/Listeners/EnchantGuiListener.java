@@ -48,12 +48,12 @@ public class EnchantGuiListener implements Listener {
 		}
 	}
 
-	private void doEnchant(Player player, InventoryClickEvent event, int size) {
+	private void doEnchant(final Player player, final InventoryClickEvent event, final int size) {
 		if (!event.getAction().equals(InventoryAction.PICKUP_ONE))
 			event.setCancelled(true);
-		if (event.getSlot() == -999 || event.getInventory().getItem(event.getSlot()) == null)
+		if ((event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 			return;
-		if (((event.getSlot() != size - 2) || (event.getSlot() != size - 1))) {
+		if (((event.getSlot() != (size - 2)) || (event.getSlot() != (size - 1)))) {
 			final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 			player.getItemInHand().addUnsafeEnchantments(eMap);
 			player.closeInventory();

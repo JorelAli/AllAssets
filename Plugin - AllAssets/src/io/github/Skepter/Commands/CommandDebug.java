@@ -218,7 +218,7 @@ public class CommandDebug {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
@@ -230,13 +230,12 @@ public class CommandDebug {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		for (Entity e : player.getNearbyEntities(150, 150, 150)) {
+		for (final Entity e : player.getNearbyEntities(150, 150, 150))
 			e.teleport(player);
-		}
 	}
 
 	@Completer(name = "debug")

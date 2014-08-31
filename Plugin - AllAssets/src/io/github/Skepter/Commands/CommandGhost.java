@@ -19,7 +19,7 @@ public class CommandGhost {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}

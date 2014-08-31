@@ -15,7 +15,7 @@ public class FireworkUtils {
 	public static void spawnRandomFirework(final Location loc) {
 		final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
 		final FireworkMeta fireworkMeta = firework.getFireworkMeta();
-		Random random = new Random();
+		final Random random = new Random();
 		final FireworkEffect effect = FireworkEffect.builder().flicker(random.nextBoolean()).withColor(getColor(random.nextInt(17) + 1)).withFade(getColor(random.nextInt(17) + 1)).with(Type.values()[random.nextInt(Type.values().length)]).trail(random.nextBoolean()).build();
 		fireworkMeta.addEffect(effect);
 		fireworkMeta.setPower(random.nextInt(2) + 1);

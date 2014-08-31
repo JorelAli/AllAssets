@@ -16,7 +16,7 @@ public class ReloadCommandListener implements Listener {
 		final String cmd = event.getMessage().split(" ")[0].replace("/", "").toLowerCase();
 		if (cmd.equals("reload") && event.getPlayer().hasPermission("AllAssets.reload")) {
 			event.setCancelled(true);
-			String[] args = event.getMessage().split(" ");
+			final String[] args = event.getMessage().split(" ");
 			if (args.length == 1) {
 				Bukkit.reload();
 				event.getPlayer().sendMessage(AllAssets.instance().title + "Reload complete");

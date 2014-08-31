@@ -20,7 +20,7 @@ public class CommandWeather {
 			Player player = null;
 			try {
 				player = args.getPlayer();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			if (args.getArgs().length == 1)
 				switch (args.getArgs()[0].toLowerCase()) {
@@ -44,20 +44,20 @@ public class CommandWeather {
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "downfall":
 				case "rain":
-					for (World world : Bukkit.getWorlds()) {
+					for (final World world : Bukkit.getWorlds()) {
 						world.setStorm(true);
 						world.setThundering(false);
 						args.getSender().sendMessage(AllAssets.instance().title + "Weather set to downfall");
 					}
 				case "clear":
 				case "sun":
-					for (World world : Bukkit.getWorlds()) {
+					for (final World world : Bukkit.getWorlds()) {
 						world.setStorm(false);
 						world.setThundering(false);
 						args.getSender().sendMessage(AllAssets.instance().title + "Weather set to clear");
 					}
 				case "thunder":
-					for (World world : Bukkit.getWorlds()) {
+					for (final World world : Bukkit.getWorlds()) {
 						world.setThundering(true);
 						args.getSender().sendMessage(AllAssets.instance().title + "Weather set to thunder");
 					}
@@ -73,18 +73,17 @@ public class CommandWeather {
 			Player player = null;
 			try {
 				player = args.getPlayer();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			player.getWorld().setStorm(false);
 			player.getWorld().setThundering(false);
 			player.sendMessage(AllAssets.instance().title + "Weather set to clear");
-		} else {
-			for (World world : Bukkit.getWorlds()) {
+		} else
+			for (final World world : Bukkit.getWorlds()) {
 				world.setStorm(false);
 				world.setThundering(false);
 				args.getSender().sendMessage(AllAssets.instance().title + "Weather set to clear");
 			}
-		}
 	}
 
 	@CommandHandler(name = "rain", permission = "weather", description = "Sets the weather to rain", usage = "Use <command>", isListed = false)
@@ -93,18 +92,17 @@ public class CommandWeather {
 			Player player = null;
 			try {
 				player = args.getPlayer();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			player.getWorld().setStorm(true);
 			player.getWorld().setThundering(false);
 			player.sendMessage(AllAssets.instance().title + "Weather set to downfall");
-		} else {
-			for (World world : Bukkit.getWorlds()) {
+		} else
+			for (final World world : Bukkit.getWorlds()) {
 				world.setStorm(true);
 				world.setThundering(false);
 				args.getSender().sendMessage(AllAssets.instance().title + "Weather set to downfall");
 			}
-		}
 	}
 
 	@CommandHandler(name = "thunder", permission = "weather", description = "Sets the weather to thunder", usage = "Use <command>", isListed = false)
@@ -113,16 +111,15 @@ public class CommandWeather {
 			Player player = null;
 			try {
 				player = args.getPlayer();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 			}
 			player.getWorld().setThundering(true);
 			player.sendMessage(AllAssets.instance().title + "Weather set to thunder");
-		} else {
-			for (World world : Bukkit.getWorlds()) {
+		} else
+			for (final World world : Bukkit.getWorlds()) {
 				world.setThundering(true);
 				args.getSender().sendMessage(AllAssets.instance().title + "Weather set to thunder");
 			}
-		}
 	}
 
 }

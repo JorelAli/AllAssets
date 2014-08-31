@@ -17,7 +17,7 @@ public class CommandClearchat {
 			for (int i = 0; i < 120; i++)
 				args.getSender().sendMessage("");
 			return;
-		} else if (args.getArgs().length == 1 && args.getArgs()[0].equalsIgnoreCase("all")) {
+		} else if ((args.getArgs().length == 1) && args.getArgs()[0].equalsIgnoreCase("all")) {
 			for (int i = 0; i < 120; i++)
 				Bukkit.broadcastMessage("");
 			return;

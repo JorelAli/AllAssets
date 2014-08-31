@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 
 public class AnyLeashTask implements Runnable {
 
-	private Player player;
+	private final Player player;
 	private LivingEntity entity;
-	public AnyLeashTask(final Player player, Entity entity) {
+	public AnyLeashTask(final Player player, final Entity entity) {
 		this.player = player;
 		if(entity instanceof LivingEntity)
 			this.entity = (LivingEntity) entity;

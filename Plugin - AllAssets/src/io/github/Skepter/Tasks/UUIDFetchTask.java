@@ -13,8 +13,8 @@ import org.bukkit.craftbukkit.libs.com.google.gson.JsonParser;
 
 public class UUIDFetchTask implements Runnable {
 
-	private String name;
-	private boolean cache;
+	private final String name;
+	private final boolean cache;
 
 	public UUIDFetchTask(final String name, final boolean cache) {
 		this.name = name;

@@ -32,7 +32,7 @@ public class CommandLaunch {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
@@ -73,7 +73,7 @@ public class CommandLaunch {
 			player.launchProjectile(WitherSkull.class);
 			break;
 		case "bluewitherskull":
-			((WitherSkull) player.launchProjectile(WitherSkull.class)).setCharged(true);
+			player.launchProjectile(WitherSkull.class).setCharged(true);
 			break;
 		default:
 			break;

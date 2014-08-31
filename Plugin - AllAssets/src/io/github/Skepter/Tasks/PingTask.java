@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public class PingTask implements Runnable {
 
-	private Player player;
+	private final Player player;
 	public PingTask(final Player player) {
 		this.player = player;
 	}

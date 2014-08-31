@@ -35,9 +35,8 @@ public class SimpleConfig {
 			if (Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
 				AllAssets.instance().getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab  " + checkYamlFiles().split(":")[2] + "!");
 				Bukkit.getPluginManager().disablePlugin(plugin);
-			} else {
+			} else
 				loadConfig(configStream);
-			}
 		} catch (final IOException e) {
 			e.printStackTrace();
 			//AllAssets.instance().getLogger().warning("There was an error checking data files for errors. Don't worry :)");
@@ -391,9 +390,8 @@ public class SimpleConfig {
 	}
 
 	public void set(final String path, final Object value, final String comment) {
-		if (config == null) {
+		if (config == null)
 			return;
-		}
 		if (!this.config.contains(path)) {
 			this.config.set(manager.getPluginName() + "_COMMENT_" + comments, " " + comment);
 			comments++;
@@ -426,9 +424,8 @@ public class SimpleConfig {
 	}
 
 	public void saveConfig() {
-		if (config == null) {
+		if (config == null)
 			return;
-		}
 		final String config = this.config.saveToString();
 		manager.saveConfig(config, this.file);
 

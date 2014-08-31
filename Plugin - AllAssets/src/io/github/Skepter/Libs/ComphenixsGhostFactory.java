@@ -35,7 +35,7 @@ public class ComphenixsGhostFactory {
 		// Initialize
 		try {
 			createTask(plugin);
-		} catch (IllegalPluginAccessException e) {
+		} catch (final IllegalPluginAccessException e) {
 			Bukkit.getPluginManager().disablePlugin(plugin);
 		}
 		createGetTeam();

@@ -13,17 +13,17 @@ public class EnchantGlow extends EnchantmentWrapper {
 
 	static String name;
 
-	public EnchantGlow(int id) {
+	public EnchantGlow(final int id) {
 		super(id);
 	}
 
 	@Override
-	public boolean canEnchantItem(ItemStack item) {
+	public boolean canEnchantItem(final ItemStack item) {
 		return true;
 	}
 
 	@Override
-	public boolean conflictsWith(Enchantment other) {
+	public boolean conflictsWith(final Enchantment other) {
 		return false;
 	}
 
@@ -47,15 +47,15 @@ public class EnchantGlow extends EnchantmentWrapper {
 		return 1;
 	}
 
-	public static Enchantment getGlow(String cname) {
+	public static Enchantment getGlow(final String cname) {
 		if (glow != null)
 			return glow;
 
 		try {
-			Field f = Enchantment.class.getDeclaredField("acceptingNew");
+			final Field f = Enchantment.class.getDeclaredField("acceptingNew");
 			f.setAccessible(true);
 			f.set(null, true);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		name = cname;
@@ -64,13 +64,13 @@ public class EnchantGlow extends EnchantmentWrapper {
 		return glow;
 	}
 
-	public static void addGlow(ItemStack item, String name) {
-		Enchantment glow = getGlow(name);
+	public static void addGlow(final ItemStack item, final String name) {
+		final Enchantment glow = getGlow(name);
 		item.addEnchantment(glow, 1);
 	}
 
-	public static void removeGlow(ItemStack item) {
-		Enchantment glow = getGlow(name);
+	public static void removeGlow(final ItemStack item) {
+		final Enchantment glow = getGlow(name);
 		item.removeEnchantment(glow);
 	}
 

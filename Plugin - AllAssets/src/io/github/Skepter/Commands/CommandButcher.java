@@ -25,8 +25,8 @@ public class CommandButcher {
 	public void onCommand(final CommandArgs args) {
 		boolean lightning, passive, hostile;
 		lightning = passive = hostile = false;
-		if (args.getArgs().length > 0) {
-			for (String s : args.getArgs()) {
+		if (args.getArgs().length > 0)
+			for (final String s : args.getArgs()) {
 				if (s.contains("-l"))
 					lightning = true;
 				if (s.contains("-p"))
@@ -34,19 +34,18 @@ public class CommandButcher {
 				if (s.contains("-h"))
 					hostile = true;
 			}
-		}
 		int count = 0;
 		if (args.isPlayer()) {
 			Player player = null;
 			try {
 				player = args.getPlayer();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				ErrorUtils.playerOnly(args.getSender());
 			}
-			Iterator<Entity> iterator = player.getWorld().getEntities().iterator();
+			final Iterator<Entity> iterator = player.getWorld().getEntities().iterator();
 			while (iterator.hasNext()) {
-				Entity entity = (Entity) iterator.next();
-				if (entity instanceof LivingEntity && !(entity instanceof Player)) {
+				final Entity entity = iterator.next();
+				if ((entity instanceof LivingEntity) && !(entity instanceof Player)) {
 					if (passive)
 						if (entity instanceof Monster)
 							continue;
@@ -60,12 +59,12 @@ public class CommandButcher {
 				}
 			}
 			player.sendMessage(AllAssets.instance().title + count + " entities removed");
-		} else {
-			for (World world : Bukkit.getWorlds()) {
-				Iterator<Entity> iterator = world.getEntities().iterator();
+		} else
+			for (final World world : Bukkit.getWorlds()) {
+				final Iterator<Entity> iterator = world.getEntities().iterator();
 				while (iterator.hasNext()) {
-					Entity entity = (Entity) iterator.next();
-					if (entity instanceof LivingEntity && !(entity instanceof Player)) {
+					final Entity entity = iterator.next();
+					if ((entity instanceof LivingEntity) && !(entity instanceof Player)) {
 						if (passive)
 							if (entity instanceof Monster)
 								continue;
@@ -80,8 +79,6 @@ public class CommandButcher {
 				}
 				args.getSender().sendMessage(AllAssets.instance().title + count + " entities removed from " + world.getName());
 			}
-
-		}
 		return;
 	}
 

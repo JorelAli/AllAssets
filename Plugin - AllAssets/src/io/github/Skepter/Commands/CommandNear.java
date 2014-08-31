@@ -27,25 +27,24 @@ public class CommandNear {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
 		int distance = 200;
-		if (args.getArgs().length == 1) {
+		if (args.getArgs().length == 1)
 			if (TextUtils.isInteger(args.getArgs()[0]))
 				distance = Integer.parseInt(args.getArgs()[0]);
 			else
 				ErrorUtils.notAnInteger(player);
-		}
-		List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
+		final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
 		if (entities.isEmpty()) {
 			player.sendMessage(AllAssets.instance().title + "No nearby entities could be found!");
 			return;
 		}
-		Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
+		final Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
 		while (entities.iterator().hasNext()) {
-			Entity entity = entities.iterator().next();
+			final Entity entity = entities.iterator().next();
 			if (entity instanceof Player)
 				continue;
 			if (entity instanceof LivingEntity) {
@@ -57,7 +56,7 @@ public class CommandNear {
 		if (!map.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby entities"));
 			int count = 0;
-			for (Entry<EntityType, Integer> entry : map.entrySet()) {
+			for (final Entry<EntityType, Integer> entry : map.entrySet()) {
 				if (entry.getValue() == 0)
 					continue;
 				player.sendMessage(AllAssets.instance().houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase()) + ": " + entry.getValue());
@@ -67,8 +66,8 @@ public class CommandNear {
 		}
 		if (!entities.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby players"));
-			for (Entity entity : entities) {
-				Player target = (Player) entity;
+			for (final Entity entity : entities) {
+				final Player target = (Player) entity;
 				player.sendMessage(AllAssets.instance().houseStyleColor + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
 			}
 		}

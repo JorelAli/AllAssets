@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 public class InstantRespawnTask implements Runnable {
 
-	private Player player;
+	private final Player player;
 	public InstantRespawnTask(final Player player) {
 		this.player = player;
 	}
@@ -16,11 +16,11 @@ public class InstantRespawnTask implements Runnable {
 			Object packet = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".PacketPlayInClientCommand").newInstance();
 			final Class<?> enumClass = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".EnumClientCommand");
 
-			for (final Object ob : enumClass.getEnumConstants())
-				if (ob.toString().equals("PERFORM_RESPAWN"))
-					packet = packet.getClass().getConstructor(enumClass).newInstance(ob);
-			final Object con = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
-			con.getClass().getMethod("a", packet.getClass()).invoke(con, packet);
+			for (final Object object : enumClass.getEnumConstants())
+				if (object.toString().equals("PERFORM_RESPAWN"))
+					packet = packet.getClass().getConstructor(enumClass).newInstance(object);
+			final Object connection = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
+			connection.getClass().getMethod("a", packet.getClass()).invoke(connection, packet);
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}

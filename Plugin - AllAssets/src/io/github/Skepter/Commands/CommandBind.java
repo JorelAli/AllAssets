@@ -37,7 +37,7 @@ public class CommandBind implements Listener {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
@@ -53,7 +53,7 @@ public class CommandBind implements Listener {
 		item.setItemMeta(meta);
 		try {
 			ItemUtils.addGlow(item);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 		player.sendMessage(AllAssets.instance().title + "Successfully added " + s + "to your item!");
 		return;
@@ -64,7 +64,7 @@ public class CommandBind implements Listener {
 		Player player = null;
 		try {
 			player = args.getPlayer();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
@@ -75,7 +75,7 @@ public class CommandBind implements Listener {
 			ErrorUtils.notAnInteger(player);
 			return;
 		}
-		String s = lore.get(Integer.parseInt(args.getArgs()[0]) - 1);
+		final String s = lore.get(Integer.parseInt(args.getArgs()[0]) - 1);
 		lore.remove((Integer.parseInt(args.getArgs()[0]) - 1));
 		meta.setLore(lore);
 		item.setItemMeta(meta);
