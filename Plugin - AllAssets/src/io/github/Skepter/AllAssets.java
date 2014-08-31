@@ -243,7 +243,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("Weather"))
 			new CommandWeather(framework);
 		if (ConfigHandler.instance().features().getBoolean("Worlds"))
-			new CommandWorlds(framework);
+			new CommandWorlds(framework);		
 
 		/* Vault commands. Only loads them if Vault is enabled so that:
 		 * [1] Unused commands aren't loaded

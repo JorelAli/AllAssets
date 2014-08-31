@@ -21,6 +21,9 @@ public class EnchantGuiListener implements Listener {
 		case "Enchant - Armor":
 			if (!event.getAction().equals(InventoryAction.PICKUP_ONE))
 				event.setCancelled(true);
+			if(event.getSlot() == -999) {
+				return;
+			}
 			if (((event.getSlot() != 52) || (event.getSlot() != 53))) {
 				final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 				player.getItemInHand().addUnsafeEnchantments(eMap);
