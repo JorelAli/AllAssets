@@ -103,25 +103,17 @@ public class PlayerListener implements Listener {
 	/* Hopefully, if they click that slot, it places the item on their head :D */
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
-		//armor slot = 5
 		if (event.isLeftClick() || event.isRightClick()) {
-			if (event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
+			if (event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME)) {
 				if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING)) {
-					event.setCancelled(true);
-					event.getView().close();
-					//final ItemStack is = new ItemStack(event.getCurrentItem().getType(), 1);
+					event.getWhoClicked().getInventory().setHelmet(event.getCursor());
 					new BukkitRunnable() {
 						@Override
 						public void run() {
-							event.getWhoClicked().getInventory().setHelmet(new ItemStack(Material.DIAMOND_BLOCK));
+							event.getWhoClicked().setItemOnCursor(null);
 						}
-						
-					}.runTaskLater(AllAssets.instance(), 10L);
-					System.out.println("hi");
+					}.runTaskLater(AllAssets.instance(), 1L);
 				}
-			if ((event.getSlot() == 5) && event.getInventory().getType().equals(InventoryType.PLAYER)) {
-				event.setCancelled(true);
-				event.getWhoClicked().getInventory().setHelmet(event.getCurrentItem());
 			}
 		}
 	}
