@@ -61,7 +61,6 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
-import org.apache.logging.log4j.LogManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -148,16 +147,13 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("AllAssets, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 
 		/* A method of dealing with console errors and stuff ... I hope */
-		((org.apache.logging.log4j.core.Logger) LogManager.getRootLogger()).addFilter(new LogListener(this));
+		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener(this));
+
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
 
 		new ConfigHandler();
-		if (!this.isEnabled()) {
-			getLogger().info("+---------------------------------+");
-			return;
-		}
-			
+
 		/* Used to check if vault is available. If not, then disable the vault-specific commands
 		 * such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled())
@@ -299,13 +295,14 @@ public class AllAssets extends JavaPlugin {
 	public void onDisable() {
 		CommandConsoleLog.players.clear();
 		Bukkit.getServer().getScheduler().cancelTasks(this);
-		try {
-			if (!tempTimeMap.isEmpty())
+
+		if (!tempTimeMap.isEmpty())
+			try {
 				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
-			PlayerData.saveAllPlayers();
-		} catch (final Exception e) {
-		//	e.printStackTrace();
-		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		PlayerData.saveAllPlayers();
 		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
 	}
 

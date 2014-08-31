@@ -100,6 +100,7 @@ public class ConfigHandler {
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Tp", "true");
 		features.set("Tphere", "true");
+		features.set("Weather", "true");
 		features.set("Worlds", "true");
 
 		features.set("AntiHyperlink", "true", new String[] { "Listeners", "Actions which occur on events can be disabled here" });

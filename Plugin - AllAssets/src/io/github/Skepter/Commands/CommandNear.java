@@ -56,11 +56,14 @@ public class CommandNear {
 		}
 		if (!map.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby entities"));
+			int count = 0;
 			for (Entry<EntityType, Integer> entry : map.entrySet()) {
 				if (entry.getValue() == 0)
 					continue;
 				player.sendMessage(AllAssets.instance().houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase()) + ": " + entry.getValue());
+				count += entry.getValue();
 			}
+			player.sendMessage(AllAssets.instance().houseStyleColor + "Total nearby entities: " + count);
 		}
 		if (!entities.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby players"));
