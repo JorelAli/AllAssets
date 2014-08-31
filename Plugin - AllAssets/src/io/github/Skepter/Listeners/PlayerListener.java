@@ -7,9 +7,9 @@ import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.SimpleScoreboard;
 import io.github.Skepter.Serializer.InventorySerializer;
+import io.github.Skepter.Tasks.AnyLeashTask;
 import io.github.Skepter.Tasks.InstantRespawnTask;
 import io.github.Skepter.Tasks.TPS;
-import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.MathUtils;
 
 import java.text.SimpleDateFormat;
@@ -45,7 +45,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
@@ -122,6 +121,11 @@ public class PlayerListener implements Listener {
 		final Inventory inv = event.getEntity().getInventory();
 		user.setLastInventory(InventorySerializer.toString(inv));
 
+		if (ConfigHandler.instance().features().getBoolean("InstantDeathRespawn")) {
+			final Player p = event.getEntity();
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new InstantRespawnTask(p), 1L);
+		}
+		
 		if (ConfigHandler.instance().features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
 			user.getPlayer().sendMessage(AllAssets.instance().title + "You have died " + user.getDeathCount() + " times!");
@@ -172,14 +176,6 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerDeath(final PlayerDeathEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("InstantDeathRespawn")) {
-			final Player p = event.getEntity();
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new InstantRespawnTask(p), 1L);
-		}
-	}
-
-	@EventHandler
 	public void creativeEnderpearl(final PlayerInteractEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl"))
 			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL))
@@ -191,13 +187,7 @@ public class PlayerListener implements Listener {
 		if (ConfigHandler.instance().features().getBoolean("AnyLeash"))
 			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && event.getRightClicked() instanceof LivingEntity) {
 				event.setCancelled(true);
-				new BukkitRunnable() {
-					@Override
-					public void run() {
-						if (!((LivingEntity) event.getRightClicked()).setLeashHolder(event.getPlayer()))
-							ErrorUtils.error(event.getPlayer(), "You cannot put a leash on that mob");
-					}
-				}.runTaskLater(AllAssets.instance(), 1L);
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new AnyLeashTask(event.getPlayer(), event.getRightClicked()), 1L);
 			}
 	}
 }
