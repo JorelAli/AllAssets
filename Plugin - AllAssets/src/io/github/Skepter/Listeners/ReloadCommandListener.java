@@ -14,31 +14,27 @@ public class ReloadCommandListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onCommand(final PlayerCommandPreprocessEvent event) {
 		final String cmd = event.getMessage().split(" ")[0].replace("/", "").toLowerCase();
-		switch (cmd) {
-		case "reload":
-			if (event.getPlayer().hasPermission("AllAssets.reload")) {
-				event.setCancelled(true);
-				if (event.getMessage().split(" ").length == 2) {
-					if (event.getMessage().split(" ")[1].equalsIgnoreCase("server"))
-						Bukkit.reload();
-					else {
-						if (event.getMessage().split(" ")[1].equalsIgnoreCase("AllAssets")) {
-							ErrorUtils.error(event.getPlayer(), "You cannot reload AllAssets. Use /allassets reload instead");
-							return;
-						}
-						try {
-							Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(event.getMessage().split(" ")[1]));
-							Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(event.getMessage().split(" ")[1]));
-							event.getPlayer().sendMessage(AllAssets.instance().title + event.getMessage().split(" ")[1] + " successfully reloaded");
-						} catch (final Exception e) {
-							ErrorUtils.pluginNotFound(event.getPlayer(), event.getMessage().split(" ")[1]);
-						}
-					}
-				} else
-					ErrorUtils.error(event.getPlayer(), "Please specify a plugin to reload, or use /reload server to reload the server");
+		if (cmd.equals("reload") && event.getPlayer().hasPermission("AllAssets.reload")) {
+			event.setCancelled(true);
+			String[] args = event.getMessage().split(" ");
+			if (args.length == 1) {
+				Bukkit.reload();
+				event.getPlayer().sendMessage(AllAssets.instance().title + "Reload complete");
+				return;
 			}
-		default:
-			return;
+			if (args.length == 2) {
+				if (args[1].equalsIgnoreCase("AllAssets")) {
+					ErrorUtils.error(event.getPlayer(), "You cannot reload AllAssets. Use /allassets reload instead");
+					return;
+				}
+				try {
+					Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(args[1]));
+					Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(args[1]));
+					event.getPlayer().sendMessage(AllAssets.instance().title + args[1] + " successfully reloaded");
+				} catch (final Exception e) {
+					ErrorUtils.pluginNotFound(event.getPlayer(), args[1]);
+				}
+			}
 		}
 	}
 }

@@ -29,6 +29,7 @@ import io.github.Skepter.Commands.CommandOplist;
 import io.github.Skepter.Commands.CommandPTime;
 import io.github.Skepter.Commands.CommandPWeather;
 import io.github.Skepter.Commands.CommandPing;
+import io.github.Skepter.Commands.CommandRename;
 import io.github.Skepter.Commands.CommandSet;
 import io.github.Skepter.Commands.CommandSignEdit;
 import io.github.Skepter.Commands.CommandTime;
@@ -229,6 +230,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandPWeather(framework);
 		if (ConfigHandler.instance().features().getBoolean("Reload"))
 			r(new ReloadCommandListener());
+		if (ConfigHandler.instance().features().getBoolean("Rename"))
+			new CommandRename(framework);
 		if (ConfigHandler.instance().features().getBoolean("Set"))
 			r(new CommandSet(framework)); /* Finish */
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))

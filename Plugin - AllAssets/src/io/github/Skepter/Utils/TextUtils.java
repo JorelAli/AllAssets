@@ -95,6 +95,10 @@ public class TextUtils {
 		}
 		return array;
 	}
+	
+    public static String getMsgStringFromArgs(final String[] args, final int indexBegin, final int indexEnd) {
+    	return TextUtils.join(TextUtils.getMsgFromArgs(args, indexBegin, indexEnd), " ");
+    }
 
 	public static boolean isHyperlink(final String s) {
 		final String strippedColor = ChatColor.stripColor(s);
