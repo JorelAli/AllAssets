@@ -106,7 +106,6 @@ public class ConfigHandler {
 		features.set("AntiHyperlink", "true", new String[] { "Listeners", "Actions which occur on events can be disabled here" });
 		features.set("AntiSwear", "true");
 		features.set("ChatColor", "true");
-		features.set("PlayerTranslator", "true", "Changes {player} into the specified player");
 		features.set("ConsoleSay", "false", "Allows the console to speak in chat without having to use /say");
 		features.set("Log", "true", "Disabling this prevents logging information in the log command");
 		features.set("CreativeEnderpearl", "true");

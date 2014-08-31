@@ -4,7 +4,6 @@ import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Utils.TextUtils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,17 +34,5 @@ public class ChatListener implements Listener {
 		if (ConfigHandler.instance().features().getBoolean("ChatColor"))
 			if (event.getPlayer().hasPermission("AllAssets.chatColor"))
 				event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
-	}
-
-	@EventHandler
-	public void translatePlayer(final AsyncPlayerChatEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("PlayerTranslator"))
-			if (event.getMessage().contains("{player}") && event.getPlayer().hasPermission("AllAssets.playerChat")) {
-				event.setCancelled(true);
-				if (event.getPlayer().hasPermission("AllAssets.chatColor"))
-					event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
-				for (final Player p : Bukkit.getOnlinePlayers())
-					p.sendMessage(event.getMessage().replace("{player}", p.getName()));
-			}
 	}
 }
