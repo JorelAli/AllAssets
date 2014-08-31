@@ -81,7 +81,7 @@ public class CommandBind implements Listener {
 		item.setItemMeta(meta);
 		if (!containsCommand(item))
 			ItemUtils.removeGlow(item);
-		player.sendMessage(AllAssets.instance().title + "Successfully removed " + s + " from your item!");
+		player.sendMessage(AllAssets.instance().title + "Successfully removed " + s + "from your item!");
 		return;
 	}
 

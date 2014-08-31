@@ -45,6 +45,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
@@ -58,7 +59,7 @@ public class PlayerListener implements Listener {
 		final UUIDData data = new UUIDData();
 		data.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
 		data.saveDataFile();
-		
+
 		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
 		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
@@ -103,8 +104,26 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
 		//armor slot = 5
-		if (event.getAction().equals(InventoryAction.PLACE_ONE) && (event.getSlot() == 5) && event.getInventory().getType().equals(InventoryType.PLAYER))
-			event.getInventory().setItem(5, event.getCurrentItem());
+		if (event.isLeftClick() || event.isRightClick()) {
+			if (event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
+				if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING)) {
+					event.setCancelled(true);
+					event.getView().close();
+					//final ItemStack is = new ItemStack(event.getCurrentItem().getType(), 1);
+					new BukkitRunnable() {
+						@Override
+						public void run() {
+							event.getWhoClicked().getInventory().setHelmet(new ItemStack(Material.DIAMOND_BLOCK));
+						}
+						
+					}.runTaskLater(AllAssets.instance(), 10L);
+					System.out.println("hi");
+				}
+			if ((event.getSlot() == 5) && event.getInventory().getType().equals(InventoryType.PLAYER)) {
+				event.setCancelled(true);
+				event.getWhoClicked().getInventory().setHelmet(event.getCurrentItem());
+			}
+		}
 	}
 
 	@EventHandler
@@ -112,7 +131,7 @@ public class PlayerListener implements Listener {
 		final User user = new User(event.getPlayer());
 		user.setLastLoc(event.getFrom());
 	}
-	
+
 	@EventHandler
 	public void onDeath(final PlayerDeathEvent event) {
 		final User user = new User(event.getEntity());
@@ -125,7 +144,7 @@ public class PlayerListener implements Listener {
 			final Player p = event.getEntity();
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new InstantRespawnTask(p), 1L);
 		}
-		
+
 		if (ConfigHandler.instance().features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
 			user.getPlayer().sendMessage(AllAssets.instance().title + "You have died " + user.getDeathCount() + " times!");
