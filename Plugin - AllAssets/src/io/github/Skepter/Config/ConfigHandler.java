@@ -95,7 +95,6 @@ public class ConfigHandler {
 		features.set("Reload", "true"); // default to FALSE when actually
 										// exported
 		features.set("Rename", "true");
-		features.set("Set", "true");
 		features.set("SignEdit", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Tp", "true");

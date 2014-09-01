@@ -1,12 +1,13 @@
 package io.github.Skepter;
 
-import io.github.Skepter.Commands.CommandAFK;
+import io.github.Skepter.CommandListeners.CommandAFK;
+import io.github.Skepter.CommandListeners.CommandBind;
+import io.github.Skepter.CommandListeners.CommandEnchant;
 import io.github.Skepter.Commands.CommandAllAssets;
 import io.github.Skepter.Commands.CommandBack;
 import io.github.Skepter.Commands.CommandBalance;
 import io.github.Skepter.Commands.CommandBalancetop;
 import io.github.Skepter.Commands.CommandBatch;
-import io.github.Skepter.Commands.CommandBind;
 import io.github.Skepter.Commands.CommandButcher;
 import io.github.Skepter.Commands.CommandChestSearch;
 import io.github.Skepter.Commands.CommandClear;
@@ -15,7 +16,6 @@ import io.github.Skepter.Commands.CommandConsoleLog;
 import io.github.Skepter.Commands.CommandDebug;
 import io.github.Skepter.Commands.CommandDisable;
 import io.github.Skepter.Commands.CommandEnable;
-import io.github.Skepter.Commands.CommandEnchant;
 import io.github.Skepter.Commands.CommandFly;
 import io.github.Skepter.Commands.CommandForceChat;
 import io.github.Skepter.Commands.CommandFramework;
@@ -30,7 +30,6 @@ import io.github.Skepter.Commands.CommandPTime;
 import io.github.Skepter.Commands.CommandPWeather;
 import io.github.Skepter.Commands.CommandPing;
 import io.github.Skepter.Commands.CommandRename;
-import io.github.Skepter.Commands.CommandSet;
 import io.github.Skepter.Commands.CommandSignEdit;
 import io.github.Skepter.Commands.CommandTime;
 import io.github.Skepter.Commands.CommandTp;
@@ -234,8 +233,6 @@ public class AllAssets extends JavaPlugin {
 			r(new ReloadCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("Rename"))
 			new CommandRename(framework);
-		if (ConfigHandler.instance().features().getBoolean("Set"))
-			r(new CommandSet(framework)); /* Finish */
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
 		if (ConfigHandler.instance().features().getBoolean("Time"))
