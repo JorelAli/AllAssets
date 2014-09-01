@@ -19,7 +19,7 @@ public class YesNoConversation {
 
 	public static String getPromptText() {
 		AllAssets.instance();
-		return AllAssets.title + "Are you sure you want to do that? Use " + ChatColor.GREEN + "/yes " + AllAssets.instance().houseStyleColor + "to continue or " + ChatColor.RED + "/no " + AllAssets.instance().houseStyleColor + "to cancel";
+		return AllAssets.title + "Are you sure you want to do that? Use " + ChatColor.GREEN + "/yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "/no " + AllAssets.houseStyleColor + "to cancel";
 	}
 
 	/* Example of a BooleanPrompt*/

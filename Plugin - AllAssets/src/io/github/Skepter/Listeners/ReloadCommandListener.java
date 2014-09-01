@@ -19,7 +19,7 @@ public class ReloadCommandListener implements Listener {
 			final String[] args = event.getMessage().split(" ");
 			if (args.length == 1) {
 				Bukkit.reload();
-				event.getPlayer().sendMessage(AllAssets.instance().title + "Reload complete");
+				event.getPlayer().sendMessage(AllAssets.title + "Reload complete");
 				return;
 			}
 			if (args.length == 2) {
@@ -30,7 +30,7 @@ public class ReloadCommandListener implements Listener {
 				try {
 					Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(args[1]));
 					Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(args[1]));
-					event.getPlayer().sendMessage(AllAssets.instance().title + args[1] + " successfully reloaded");
+					event.getPlayer().sendMessage(AllAssets.title + args[1] + " successfully reloaded");
 				} catch (final Exception e) {
 					ErrorUtils.pluginNotFound(event.getPlayer(), args[1]);
 				}

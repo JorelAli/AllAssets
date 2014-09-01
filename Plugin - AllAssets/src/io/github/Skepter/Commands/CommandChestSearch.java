@@ -60,7 +60,7 @@ public class CommandChestSearch {
 					if (chest.getInventory().containsAtLeast(new ItemStack(i), 1))
 						locatedChests.add(chest.getLocation());
 				}
-			player.sendMessage(AllAssets.instance().title + "Located " + (locatedChests.size()) + " chests");
+			player.sendMessage(AllAssets.title + "Located " + (locatedChests.size()) + " chests");
 			for (final Location loc : locatedChests)
 				player.sendMessage(TextUtils.subTitle("X: " + loc.getX() + " Y: " + loc.getY() + " Z: " + loc.getZ()));
 		}

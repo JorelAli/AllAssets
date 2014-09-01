@@ -55,7 +55,7 @@ public class CommandBind implements Listener {
 			ItemUtils.addGlow(item);
 		} catch (final Exception e) {
 		}
-		player.sendMessage(AllAssets.instance().title + "Successfully added " + s + "to your item!");
+		player.sendMessage(AllAssets.title + "Successfully added " + s + "to your item!");
 		return;
 	}
 
@@ -81,7 +81,7 @@ public class CommandBind implements Listener {
 		item.setItemMeta(meta);
 		if (!containsCommand(item))
 			ItemUtils.removeGlow(item);
-		player.sendMessage(AllAssets.instance().title + "Successfully removed " + s + "from your item!");
+		player.sendMessage(AllAssets.title + "Successfully removed " + s + "from your item!");
 		return;
 	}
 

@@ -48,7 +48,7 @@ public class CommandFramework {
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
 	private CommandMap map;
 	private final Plugin plugin;
-	private static final String noPerm = AllAssets.instance().error + "You do not have permission to perform that action";
+	private static final String noPerm = AllAssets.error + "You do not have permission to perform that action";
 	public static Set<String> pluginCommands = new HashSet<String>();
 
 	/** Initializes the command framework and sets up the command maps

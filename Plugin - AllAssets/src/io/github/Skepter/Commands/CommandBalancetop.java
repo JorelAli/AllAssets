@@ -47,7 +47,7 @@ public class CommandBalancetop {
 		player.sendMessage(TextUtils.title("Top balances"));
 		final List<String> balanceList = new ArrayList<String>();
 		for (final Entry<String, Double> e : sortedMap.entrySet())
-			balanceList.add(AllAssets.instance().houseStyleColor + e.getKey() + ": " + e.getValue());
+			balanceList.add(AllAssets.houseStyleColor + e.getKey() + ": " + e.getValue());
 		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);
 			return;

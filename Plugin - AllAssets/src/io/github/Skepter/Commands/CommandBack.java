@@ -28,7 +28,7 @@ public class CommandBack {
 		final Location l = player.getLocation();
 		player.teleport(user.getLastLoc());
 		user.setLastLoc(l);
-		player.sendMessage(AllAssets.instance().title + "Teleported to your last location");
+		player.sendMessage(AllAssets.title + "Teleported to your last location");
 		return;
 	}
 

@@ -27,11 +27,11 @@ public class CommandFly {
 			if (player.getAllowFlight()) {
 				player.setAllowFlight(false);
 				player.setFlying(false);
-				player.sendMessage(AllAssets.instance().title + "Flying disabled");
+				player.sendMessage(AllAssets.title + "Flying disabled");
 				return;
 			} else {
 				player.setAllowFlight(true);
-				player.sendMessage(AllAssets.instance().title + "Flying enabled");
+				player.sendMessage(AllAssets.title + "Flying enabled");
 				return;
 			}
 		} else if (args.getArgs().length == 1) {
@@ -40,11 +40,11 @@ public class CommandFly {
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
 					player.setFlying(false);
-					target.sendMessage(AllAssets.instance().title + "Flying disabled");
+					target.sendMessage(AllAssets.title + "Flying disabled");
 					return;
 				} else {
 					target.setAllowFlight(true);
-					target.sendMessage(AllAssets.instance().title + "Flying enabled");
+					target.sendMessage(AllAssets.title + "Flying enabled");
 					return;
 				}
 		} else {

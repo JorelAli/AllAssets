@@ -29,7 +29,7 @@ public class PluginsCommandListener implements Listener {
 			if (event.getPlayer().hasPermission("AllAssets.plugins")) {
 				event.setCancelled(true);
 				event.getPlayer().sendMessage(TextUtils.title("Plugins"));
-				event.getPlayer().sendMessage(AllAssets.instance().title + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
+				event.getPlayer().sendMessage(AllAssets.title + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
 				final List<String> pluginList = new ArrayList<String>();
 				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 					if (ConfigHandler.instance().features().getBoolean("PluginsShowAuthors")) {

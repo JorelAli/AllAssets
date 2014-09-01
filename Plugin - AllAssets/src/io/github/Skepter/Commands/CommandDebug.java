@@ -179,7 +179,7 @@ public class CommandDebug {
 					System.gc();
 				}
 			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
-			args.getSender().sendMessage(AllAssets.instance().title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
+			args.getSender().sendMessage(AllAssets.title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
 		} else
 			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
 	}
@@ -238,7 +238,7 @@ public class CommandDebug {
 				conflict++;
 			}
 		}
-		args.getSender().sendMessage(AllAssets.instance().title + "There were " + conflict + " commands that conflicted.");
+		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted.");
 	}
 
 	@Completer(name = "debug")

@@ -73,9 +73,9 @@ public class PlayerListener implements Listener {
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
 			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
-				event.getPlayer().sendMessage(AllAssets.instance().title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
+				event.getPlayer().sendMessage(AllAssets.title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.instance().features().getBoolean("TotalTime"))
-				event.getPlayer().sendMessage(AllAssets.instance().title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
+				event.getPlayer().sendMessage(AllAssets.title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
 		}
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
@@ -137,7 +137,7 @@ public class PlayerListener implements Listener {
 
 		if (ConfigHandler.instance().features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
-			user.getPlayer().sendMessage(AllAssets.instance().title + "You have died " + user.getDeathCount() + " times!");
+			user.getPlayer().sendMessage(AllAssets.title + "You have died " + user.getDeathCount() + " times!");
 		}
 
 		if (ConfigHandler.instance().features().getBoolean("DeathSigns")) {

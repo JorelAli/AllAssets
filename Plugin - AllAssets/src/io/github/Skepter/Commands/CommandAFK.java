@@ -31,10 +31,12 @@ public class CommandAFK implements Listener {
 		}
 		final User user = new User(player);
 		if (!user.isAFK()) {
-			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is now AFK");
+			AllAssets.instance();
+			Bukkit.broadcastMessage(AllAssets.title + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
-			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is no longer AFK");
+			AllAssets.instance();
+			Bukkit.broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
@@ -57,7 +59,8 @@ public class CommandAFK implements Listener {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if ((event.getFrom().distanceSquared(event.getTo()) > 1) && user.isAFK()) {
-			Bukkit.broadcastMessage(AllAssets.instance().title + player.getName() + " is no longer AFK");
+			AllAssets.instance();
+			Bukkit.broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 	}

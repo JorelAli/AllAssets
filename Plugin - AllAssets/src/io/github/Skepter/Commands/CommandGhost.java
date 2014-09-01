@@ -26,22 +26,22 @@ public class CommandGhost {
 		if (args.getArgs().length == 0) {
 			if (AllAssets.instance().ghostFactory.isGhost(player)) {
 				AllAssets.instance().ghostFactory.setGhost(player, false);
-				player.sendMessage(AllAssets.instance().title + "Ghost mode disabled");
+				player.sendMessage(AllAssets.title + "Ghost mode disabled");
 				return;
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(player, true);
-				player.sendMessage(AllAssets.instance().title + "Ghost mode enabled");
+				player.sendMessage(AllAssets.title + "Ghost mode enabled");
 				return;
 			}
 		} else if (args.getArgs().length == 1) {
 			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
 			if (AllAssets.instance().ghostFactory.isGhost(target)) {
 				AllAssets.instance().ghostFactory.setGhost(target, false);
-				target.sendMessage(AllAssets.instance().title + "Ghost mode disabled");
+				target.sendMessage(AllAssets.title + "Ghost mode disabled");
 				return;
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(target, true);
-				target.sendMessage(AllAssets.instance().title + "Ghost mode enabled");
+				target.sendMessage(AllAssets.title + "Ghost mode enabled");
 				return;
 			}
 		} else {

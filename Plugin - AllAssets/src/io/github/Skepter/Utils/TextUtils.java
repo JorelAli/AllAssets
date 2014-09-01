@@ -171,7 +171,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllAssets.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllAssets.title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return;
@@ -209,7 +209,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllAssets.instance().title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllAssets.title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return;

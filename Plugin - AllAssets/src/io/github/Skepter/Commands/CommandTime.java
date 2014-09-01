@@ -26,23 +26,23 @@ public class CommandTime {
 				if(!TextUtils.isInteger(args.getArgs()[0]))
 					ErrorUtils.notAnInteger(args.getSender());
 				time = Integer.parseInt(args.getArgs()[0]);
-				args.getSender().sendMessage(AllAssets.instance().title + "Time set to " + args.getArgs()[0]);
+				args.getSender().sendMessage(AllAssets.title + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
 				
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					time = 1000;
-					args.getSender().sendMessage(AllAssets.instance().title + "Time set to day");
+					args.getSender().sendMessage(AllAssets.title + "Time set to day");
 				case "midday":
 					time = 6000;
-					args.getSender().sendMessage(AllAssets.instance().title + "Time set to midday");
+					args.getSender().sendMessage(AllAssets.title + "Time set to midday");
 				case "night":
 					time = 14000;
-					args.getSender().sendMessage(AllAssets.instance().title + "Time set to night");
+					args.getSender().sendMessage(AllAssets.title + "Time set to night");
 				case "midnight":
 					time = 18000;
-					args.getSender().sendMessage(AllAssets.instance().title + "Time set to midnight");
+					args.getSender().sendMessage(AllAssets.title + "Time set to midnight");
 				}
 			}
 			for (final World world : Bukkit.getWorlds())
@@ -56,28 +56,28 @@ public class CommandTime {
 	public void onCommandDay(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(1000);
-		args.getSender().sendMessage(AllAssets.instance().title + "Time set to day");
+		args.getSender().sendMessage(AllAssets.title + "Time set to day");
 	}
 
 	@CommandHandler(name = "midday", permission = "time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
 	public void onCommandMidday(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(6000);
-		args.getSender().sendMessage(AllAssets.instance().title + "Time set to midday");
+		args.getSender().sendMessage(AllAssets.title + "Time set to midday");
 	}
 
 	@CommandHandler(name = "night", permission = "time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
 	public void onCommandNight(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(14000);
-		args.getSender().sendMessage(AllAssets.instance().title + "Time set to night");
+		args.getSender().sendMessage(AllAssets.title + "Time set to night");
 	}
 
 	@CommandHandler(name = "midnight", permission = "time", description = "Sets the time to midnight", usage = "Use <command>", isListed = false)
 	public void onCommandMidnight(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(18000);
-		args.getSender().sendMessage(AllAssets.instance().title + "Time set to midnight");
+		args.getSender().sendMessage(AllAssets.title + "Time set to midnight");
 	}
 
 }

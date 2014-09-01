@@ -126,9 +126,9 @@ public class AllAssets extends JavaPlugin {
 
 	/* These will be in messages.yml (Don't hardcode them - people get pissed if you do that Skepter -.-) */
 	public final static String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
-	public final String titleNoColor = "[AllAssets] ";
-	public final String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
-	public final String houseStyleColor = ChatColor.AQUA + "";
+	public final static String titleNoColor = "[AllAssets] ";
+	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
+	public final static String houseStyleColor = ChatColor.AQUA + "";
 
 	public boolean hasVault = false;
 	public Economy economy = null;

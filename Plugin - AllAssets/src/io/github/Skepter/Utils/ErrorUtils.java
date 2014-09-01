@@ -10,42 +10,42 @@ public class ErrorUtils {
 
 	public static void cantEnchant(final Player player) {
 		ConfigHandler.instance();
-		player.sendMessage(AllAssets.instance().error + ConfigHandler.getMsg("cantEnchant"));
+		player.sendMessage(AllAssets.error + ConfigHandler.getMsg("cantEnchant"));
 	}
 
 	public static void error(final CommandSender sender, final String msg) {
-		sender.sendMessage(AllAssets.instance().error + msg);
+		sender.sendMessage(AllAssets.error + msg);
 	}
 
 	public static void notAnInteger(final CommandSender commandSender) {
-		commandSender.sendMessage(AllAssets.instance().error + ConfigHandler.getMsg("notANumber"));
+		commandSender.sendMessage(AllAssets.error + ConfigHandler.getMsg("notANumber"));
 	}
 
 	public static void notEnoughArguments(final CommandSender commandSender) {
-		commandSender.sendMessage(AllAssets.instance().error + "Not enough arguments - use /help <command>!");
+		commandSender.sendMessage(AllAssets.error + "Not enough arguments - use /help <command>!");
 	}
 
 	public static void playerNotFound(final Player player, final String target) {
-		player.sendMessage(AllAssets.instance().error + target + " is offline");
+		player.sendMessage(AllAssets.error + target + " is offline");
 	}
 
 	public static void pluginNotFound(final CommandSender player, final String plugin) {
-		player.sendMessage(AllAssets.instance().error + "Couldn't find the plugin " + plugin + "!");
+		player.sendMessage(AllAssets.error + "Couldn't find the plugin " + plugin + "!");
 	}
 
 	public static void tooManyArguments(final Player player) {
-		player.sendMessage(AllAssets.instance().error + "Too many arguments - use /help <command>!");
+		player.sendMessage(AllAssets.error + "Too many arguments - use /help <command>!");
 	}
 
 	public static void tptoggle(final Player player, final String target) {
-		player.sendMessage(AllAssets.instance().error + target + " has turned teleporting off");
+		player.sendMessage(AllAssets.error + target + " has turned teleporting off");
 	}
 
 	public static void wrongConstruction(final Player player, final String construction) {
-		player.sendMessage(AllAssets.instance().error + "Wrong construction, use the format: " + construction);
+		player.sendMessage(AllAssets.error + "Wrong construction, use the format: " + construction);
 	}
 	
 	public static void playerOnly(final CommandSender sender) {
-		sender.sendMessage(AllAssets.instance().error + "You must be ingame in order to use that command");
+		sender.sendMessage(AllAssets.error + "You must be ingame in order to use that command");
 	}
 }

@@ -57,7 +57,7 @@ public class EnchantGuiListener implements Listener {
 			final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 			player.getItemInHand().addUnsafeEnchantments(eMap);
 			player.closeInventory();
-			player.sendMessage(AllAssets.instance().title + "You successfully enchanted your item in your hand");
+			player.sendMessage(AllAssets.title + "You successfully enchanted your item in your hand");
 		}
 	}
 }

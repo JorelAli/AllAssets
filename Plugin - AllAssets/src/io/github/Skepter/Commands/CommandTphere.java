@@ -25,7 +25,7 @@ public class CommandTphere implements CommandExecutor {
 			final User user = new User(target);
 			user.setLastLoc(); // can tp check
 			target.teleport(player);
-			player.sendMessage(AllAssets.instance().title + "Teleported " + args[0] + "to you");
+			player.sendMessage(AllAssets.title + "Teleported " + args[0] + "to you");
 			return true;
 
 		}

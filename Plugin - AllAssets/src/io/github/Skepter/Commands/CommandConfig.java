@@ -31,11 +31,11 @@ public class CommandConfig {
 		case 1:
 			switch (args.getArgs()[0].toLowerCase()) {
 			case "list":
-				args.getSender().sendMessage(AllAssets.instance().title + "Config, Features");
+				args.getSender().sendMessage(AllAssets.title + "Config, Features");
 			case "view":
 				args.getSender().sendMessage(TextUtils.title("Config"));
 				for (final String key : ConfigHandler.instance().config().getKeys())
-					args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
+					args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
 			}
 			return;
 		case 2:
@@ -44,11 +44,11 @@ public class CommandConfig {
 				case "config":
 					args.getSender().sendMessage(TextUtils.title("Config"));
 					for (final String key : ConfigHandler.instance().config().getKeys())
-						args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
+						args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().config().get(key)));
 				case "features":
 					args.getSender().sendMessage(TextUtils.title("Features"));
 					for (final String key : ConfigHandler.instance().features().getKeys())
-						args.getSender().sendMessage(AllAssets.instance().houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().features().get(key)));
+						args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.instance().features().get(key)));
 				}
 			return;
 		case 4:
