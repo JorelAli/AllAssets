@@ -23,6 +23,7 @@ public class LocationUtils {
 
 			}
 		}
+		//nearbyEntities zombies etc.
 		return false;
 	}
 

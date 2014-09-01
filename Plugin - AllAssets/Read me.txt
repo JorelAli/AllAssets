@@ -1,0 +1,10 @@
+If you need help getting started, you have come to the right place! This little document will show how to use this plugin to its fullest and hope you have the best server you could possibly have!
+
+=== Installation ===
+To install from the .zip version, open the AllAssets.zip file and extract the .jar file. Then, place this file inside your /plugins/ directory.
+
+Q: I don't see a /plugins/ directory!
+A: If you don't see a plugins directory, start up your server and it should generate. If it does not generate, please use CraftBukkit (this does not work on Vanilla Minecraft).
+
+=== Usage ===
+//usage
