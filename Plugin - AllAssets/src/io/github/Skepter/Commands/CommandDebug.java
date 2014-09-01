@@ -18,7 +18,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,6 +26,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -226,11 +226,19 @@ public class CommandDebug {
 		player.setItemInHand(ItemUtils.addGlow(player.getItemInHand()));
 	}
 
-	@CommandHandler(name = "debug.test1", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
-		for(Entry<String, String[]> entry : Bukkit.getServer().getCommandAliases().entrySet()) {
-			System.out.println(entry.getKey() + ": " + entry.getValue().toString());
+		int conflict = 0;
+		for (final HelpTopic cmdLabel : Bukkit.getServer().getHelpMap().getHelpTopics()) {
+			final String s = cmdLabel.getName();
+			if (s.contains(":")) {
+				if (s.contains("allassets:") || s.contains("bukkit:") || s.contains("minecraft:"))
+					continue;
+				args.getSender().sendMessage(s);
+				conflict++;
+			}
 		}
+		args.getSender().sendMessage(AllAssets.instance().title + "There were " + conflict + " commands that conflicted.");
 	}
 
 	@Completer(name = "debug")

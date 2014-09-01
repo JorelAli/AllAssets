@@ -43,8 +43,9 @@ public class CommandAllAssets {
 		final Timer timer = new Timer();
 		/* We're currently in dev and dev file name isn't the same as the released name */
 		final File devPluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets.jar");
+		AllAssets.instance();
 		//		final File pluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets-" + AllAssets.instance().getDescription().getVersion() + ".jar");
-		final String cachedTitle = AllAssets.instance().title;
+		final String cachedTitle = AllAssets.title;
 		timer.schedule(new TimerTask() {
 
 			@Override
