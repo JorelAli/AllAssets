@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -227,15 +228,9 @@ public class CommandDebug {
 
 	@CommandHandler(name = "debug.test1", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		for(Entry<String, String[]> entry : Bukkit.getServer().getCommandAliases().entrySet()) {
+			System.out.println(entry.getKey() + ": " + entry.getValue().toString());
 		}
-		for (final Entity e : player.getNearbyEntities(150, 150, 150))
-			e.teleport(player);
 	}
 
 	@Completer(name = "debug")

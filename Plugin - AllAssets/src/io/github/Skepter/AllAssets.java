@@ -149,7 +149,7 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("AllAssets, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 
 		if (!new File(getDataFolder(), "Read me.txt").exists())
-			saveResource("Read me.text", false);
+			saveResource("Read me.txt", false);
 
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener(this));

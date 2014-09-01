@@ -11,8 +11,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener implements Listener {
 
-	//line length is around 42 characters
-
 	@EventHandler
 	public void onHyperlinkPost(final AsyncPlayerChatEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("AntiHyperlink"))
