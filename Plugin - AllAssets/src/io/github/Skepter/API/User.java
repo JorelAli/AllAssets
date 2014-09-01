@@ -57,7 +57,7 @@ public class User implements IUser {
 					break;
 				}
 		} catch (final Exception e) {
-			Bukkit.getLogger().warning("Error trying to get uuid!");
+			AllAssets.instance().getLogger().warning("Error trying to get uuid!");
 		}
 		playerData = new PlayerData(player);
 	}

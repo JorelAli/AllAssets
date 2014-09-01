@@ -99,6 +99,7 @@ public class SimpleConfigManager {
 			if ((resource != null) && !resource.isEmpty())
 				this.copyResource(plugin.getResource(resource), file);
 
+			plugin.getLogger().info("Creating new file " + filePath);
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

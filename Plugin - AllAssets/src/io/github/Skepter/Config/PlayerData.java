@@ -43,7 +43,7 @@ public class PlayerData {
 			try {
 				getPlayerData().save(dataFile);
 			} catch (final IOException ex) {
-				Bukkit.getLogger().log(Level.SEVERE, "Error saving player data file!");
+				AllAssets.instance().getLogger().log(Level.SEVERE, "Error saving player data file!");
 			}
 	}
 

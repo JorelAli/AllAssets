@@ -42,7 +42,6 @@ import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.ComphenixsGhostFactory;
 import io.github.Skepter.Listeners.ChatListener;
 import io.github.Skepter.Listeners.ConsoleSayListener;
-import io.github.Skepter.Listeners.EnchantGuiListener;
 import io.github.Skepter.Listeners.LogListener;
 import io.github.Skepter.Listeners.MultiCommandListener;
 import io.github.Skepter.Listeners.PlayerListener;
@@ -124,20 +123,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 //pluginShowAuthors from features.yml should be in config
 public class AllAssets extends JavaPlugin {
 
-	/* These will be in messages.yml (Don't hardcode them - people get pissed if you do that Skepter -.-) */
+	/* Messages - shouldn't really be here but meh -.- */
 	public final static String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
 	public final static String titleNoColor = "[AllAssets] ";
 	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
 	public final static String houseStyleColor = ChatColor.AQUA + "";
 
+	/* Vault stuff */
 	public boolean hasVault = false;
 	public Economy economy = null;
 	public Permission permission = null;
 	public Chat chat = null;
+	
+	/* Other stuff */
 	public CommandFramework framework;
-
 	public Map<UUID, Long> tempTimeMap;
-
 	public ComphenixsGhostFactory ghostFactory;
 
 	@Override
@@ -174,7 +174,6 @@ public class AllAssets extends JavaPlugin {
 
 		/** This is the features.yml file which enables/disables features
 		 * according to the users will */
-
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.instance().features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
@@ -201,8 +200,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("Disable"))
 			new CommandDisable(framework);
 		if (ConfigHandler.instance().features().getBoolean("Enchant")) {
-			new CommandEnchant(framework);
-			r(new EnchantGuiListener());
+			r(new CommandEnchant(framework));
 		}
 		if (ConfigHandler.instance().features().getBoolean("Enable"))
 			new CommandEnable(framework);
