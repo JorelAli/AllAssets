@@ -1,5 +1,7 @@
 package io.github.Skepter.Tasks;
 
+import io.github.Skepter.Utils.ReflectionUtils;
+
 import org.bukkit.entity.Player;
 
 public class JSONMessageTask implements Runnable {
@@ -17,15 +19,10 @@ public class JSONMessageTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			final Object nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
-			final Object connection = nmsPlayer.getClass().getField("playerConnection").get(nmsPlayer);
-			final Object chatSerializer = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".ChatSerializer").newInstance();
-			Object serializedString = chatSerializer.getClass().getMethod("a", String.class).invoke(chatSerializer, string);
-			final Class<?> iChatBaseComponentClass = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".IChatBaseComponent");
-			final Class<?> packetClass = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".Packet");
-			Object packet = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".PacketPlayOutChat").newInstance();
-			packet = packet.getClass().getConstructor(iChatBaseComponentClass).newInstance(serializedString);
-			connection.getClass().getMethod("sendPacket", packetClass).invoke(connection, packet);
+			ReflectionUtils utils = new ReflectionUtils(player);
+			Object packet = utils.emptyPacketPlayOutChat;
+			packet = packet.getClass().getConstructor(utils.iChatBaseComponentClass).newInstance(utils.chatSerialize(string));
+			utils.getConnection.getClass().getMethod("sendPacket", utils.packetClass).invoke(utils.getConnection, packet);
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}

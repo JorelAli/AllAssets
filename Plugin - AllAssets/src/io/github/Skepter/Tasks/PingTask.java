@@ -1,6 +1,7 @@
 package io.github.Skepter.Tasks;
 
 import io.github.Skepter.API.User;
+import io.github.Skepter.Utils.ReflectionUtils;
 
 import org.bukkit.entity.Player;
 
@@ -14,9 +15,7 @@ public class PingTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			final Object nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
-			final int ping = (int) nmsPlayer.getClass().getField("ping").get(nmsPlayer);
-			User.ping = ping;
+			User.ping = new ReflectionUtils(player).ping;
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}
