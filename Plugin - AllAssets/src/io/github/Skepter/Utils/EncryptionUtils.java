@@ -9,10 +9,10 @@ public class EncryptionUtils {
 	final private String IV = "SqkZQJd3xO6z5vc4";
 	private String encryptionKey = "8czoa6Ytk0uPYP6G";
 	private String s = "";
-	public byte[] cipherText = null;;
+	public byte[] cipherText = null;
 
 	public EncryptionUtils(final String key, final String stringToEncrypt, final byte[] bytesToDecrypt) {
-		if (encryptionKey != null)
+		if (encryptionKey == null)
 			encryptionKey = key;
 		s = stringToEncrypt;
 		cipherText = bytesToDecrypt;

@@ -18,7 +18,6 @@ public class YesNoConversation {
 	}
 
 	public static String getPromptText() {
-		AllAssets.instance();
 		return AllAssets.title + "Are you sure you want to do that? Use " + ChatColor.GREEN + "/yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "/no " + AllAssets.houseStyleColor + "to cancel";
 	}
 

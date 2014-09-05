@@ -21,6 +21,7 @@ import javax.management.ReflectionException;
 
 public class JavaUtils {
 
+	/** Makes Bytes readable (converts to KB, MB etc.) */
 	public static String humanReadableByteCount(final long bytes, final boolean si) {
 		final int unit = si ? 1000 : 1024;
 		if (bytes < unit)
@@ -30,6 +31,7 @@ public class JavaUtils {
 		return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
 	}
 
+	/** Gets the CPU load */
 	public static double getProcessCpuLoad() {
 		final MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 		ObjectName name = null;
@@ -52,13 +54,12 @@ public class JavaUtils {
 		final Double value = (Double) att.getValue();
 
 		if (value == -1.0)
-			return Double.NaN; // usually takes a couple of seconds before we
-							   // get real values
+			return Double.NaN;
 
-		return ((int) (value * 1000) / 10.0); // returns a percentage value with
-											  // 1 decimal point precision
+		return ((int) (value * 1000) / 10.0);
 	}
 
+	/** Gets all of the class names from a specific package name */
 	public static List<String> getClassNamesInPackage(final String jarName, String packageName) {
 		final ArrayList<String> classes = new ArrayList<String>();
 		packageName = packageName.replaceAll("\\.", "/");
@@ -80,6 +81,7 @@ public class JavaUtils {
 		return classes;
 	}
 
+	/** Saves an object to a file */
 	public static void save(final Object obj, final File file) throws Exception {
 		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true));
 		oos.writeObject(obj);
@@ -87,6 +89,7 @@ public class JavaUtils {
 		oos.close();
 	}
 
+	/** Loads an object from a file */
 	public static Object load(final File file) throws Exception {
 		final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 		final Object result = ois.readObject();
