@@ -5,6 +5,7 @@ import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Commands.CommandFramework.Completer;
 import io.github.Skepter.Libs.TabText;
+import io.github.Skepter.Tasks.JSONMessageTask;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.ItemUtils;
@@ -224,6 +225,15 @@ public class CommandDebug {
 			return;
 		}
 		player.setItemInHand(ItemUtils.addGlow(player.getItemInHand()));
+	}
+	
+	@CommandHandler(name = "debug.test2", permission = "debug", description = "Tests the JSONMEssageTask", usage = "Use <command>", isListed = false)
+	public void test2(final CommandArgs args) {
+		try {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new JSONMessageTask(args.getPlayer(), JSONMessageTask.testString));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
