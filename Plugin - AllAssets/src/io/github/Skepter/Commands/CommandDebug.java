@@ -107,6 +107,10 @@ public class CommandDebug {
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("Bukkit"));
 		if (Bukkit.getVersion().toLowerCase().contains("spigot"))
 			sender.sendMessage(" Bukkit system: Spigot");
+		else if(Bukkit.getVersion().toLowerCase().contains("mcpc"))
+			sender.sendMessage(" Bukkit system: MCPC");
+		else if(Bukkit.getVersion().toLowerCase().contains("forge"))
+			sender.sendMessage(" Bukkit system: Forge");
 		else
 			sender.sendMessage(" Bukkit system: CraftBukkit");
 		sender.sendMessage(" Suitable for Minecraft version " + TextUtils.stringBetween(Bukkit.getVersion(), "(MC: ", ")"));
