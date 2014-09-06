@@ -233,14 +233,15 @@ public class CommandDebug {
 
 	@CommandHandler(name = "debug.test2", permission = "debug", description = "Tests the JSONMEssageTask", usage = "Use <command>", isListed = false)
 	public void test2(final CommandArgs args) {
-		final Player player;
 		try {
-			player = args.getPlayer();
-			ReflectionUtils utils = new ReflectionUtils(player);
-			utils.entityHuman.getClass().getSuperclass().getSuperclass().getField("height").setFloat(utils.entityHuman, 0.5F);
+			new ReflectionUtils(args.getPlayer());
+			ReflectionUtils utils = new ReflectionUtils(args.getPlayer());
+			utils.entityHumanClass.getSuperclass().getSuperclass().getField("height").setFloat(utils.nmsPlayer, 0.1F);
 			System.out.println("set height to 0.5");
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
+		} catch (final Exception t) {
+			System.out.println(t.getMessage());
+			for(StackTraceElement e : t.getStackTrace())
+				System.out.println(e);
 			return;
 		}
 		

@@ -1,7 +1,7 @@
 package io.github.Skepter.Reflection;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -19,8 +19,6 @@ public class ReflectionUtils {
 	final public Object nmsPlayer;
 	final public Object getConnection;
 	final public Object craftServer;
-	final public Object craftWorld;
-	final public Object entityHuman;
 
 	/** Fields */
 	final public int ping;
@@ -33,47 +31,48 @@ public class ReflectionUtils {
 	final public Object worldServer;
 
 	/** Classes */
+	final public Class<?> craftWorldClass;
 	final public Class<?> iChatBaseComponentClass;
 	final public Class<?> packetClass;
 	final public Class<?> enumClientCommandClass;
 	final public Class<?> gameProfileClass;
-	final public Class<?> minecraftServer;
-	final public Class<?> minecraftWorld;
+	final public Class<?> minecraftServerClass;
+	final public Class<?> nmsWorldClass;
+	final public Class<?> entityHumanClass;
 
 	/** Object classes */
 	final public Object emptyPacketPlayOutChat;
 	final public Object emptyChatSerializer;
 	final public Object emptyPacketPlayInClientCommand;
 
-	public ReflectionUtils(Player player) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException, InstantiationException, NoSuchFieldException {
+	public ReflectionUtils(Player player) throws Exception {
 		this.player = player;
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
+		entityHumanClass = nmsPlayer.getClass().getSuperclass();
 		getConnection = getField(nmsPlayer, "playerConnection");
 		craftServer = Bukkit.getServer();
-		craftWorld = player.getWorld().getClass();
+		craftWorldClass = player.getWorld().getClass();
 
 		ping = (int) getField(nmsPlayer, "ping");
 		locale = (String) getPrivateField(nmsPlayer, "locale");
 
 		dedicatedServer = getPrivateField(craftServer, "console");
-		worldServer = craftWorld.getClass().getMethod("getHandle").invoke(craftWorld);
+		worldServer = craftWorldClass.getMethod("getHandle").invoke(player.getWorld());
 		packageName = dedicatedServer.getClass().getPackage().getName();
 
 		packetClass = Class.forName(packageName + ".Packet");
 		iChatBaseComponentClass = Class.forName(packageName + ".IChatBaseComponent");
 		enumClientCommandClass = Class.forName(packageName + ".EnumClientCommand");
-		gameProfileClass = Class.forName(new ReflectionUtils(player).authLibPackageName + ".GameProfile");
-		minecraftServer = dedicatedServer.getClass().getSuperclass();
-		minecraftWorld = worldServer.getClass().getSuperclass();
+		gameProfileClass = Class.forName(authLibPackageName + ".GameProfile");
+		minecraftServerClass = dedicatedServer.getClass().getSuperclass();
+		nmsWorldClass = worldServer.getClass().getSuperclass();
 
-		entityHuman = Class.forName(packageName + ".EntityHuman").getConstructor(minecraftWorld, gameProfileClass).newInstance(worldServer, GameProfile.getGameProfile(player));
-		
 		emptyPacketPlayOutChat = Class.forName(packageName + ".PacketPlayOutChat").newInstance();
 		emptyChatSerializer = Class.forName(packageName + ".ChatSerializer").newInstance();
 		emptyPacketPlayInClientCommand = Class.forName(packageName + ".PacketPlayInClientCommand").newInstance();
 	}
 
-	public Object chatSerialize(String string) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public Object chatSerialize(String string) throws Exception {
 		return emptyChatSerializer.getClass().getMethod("a", String.class).invoke(emptyChatSerializer, string);
 	}
 
@@ -84,14 +83,18 @@ public class ReflectionUtils {
 		throw new NullPointerException();
 	}
 
-	public Object getPrivateField(Object object, String fieldName) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public Object getPrivateField(Object object, String fieldName) throws Exception {
 		final Field field = object.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
 		return field.get(object);
 	}
 
-	public Object getField(Object object, String fieldName) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public Object getField(Object object, String fieldName) throws Exception {
 		return object.getClass().getDeclaredField(fieldName).get(object);
+	}
+
+	public Object getGameProfile() throws Exception {
+		return gameProfileClass.getConstructor(UUID.class, String.class).newInstance(player.getUniqueId(), player.getName());
 	}
 
 }
