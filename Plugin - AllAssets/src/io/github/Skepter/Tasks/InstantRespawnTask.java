@@ -1,6 +1,6 @@
 package io.github.Skepter.Tasks;
 
-import io.github.Skepter.Utils.ReflectionUtils;
+import io.github.Skepter.Reflection.ReflectionUtils;
 
 import org.bukkit.entity.Player;
 

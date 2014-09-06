@@ -3,11 +3,11 @@ package io.github.Skepter.API;
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Config.PlayerData;
 import io.github.Skepter.Misc.IUser;
+import io.github.Skepter.Reflection.ReflectionUtils;
 import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Serializer.LocationSerializer;
 import io.github.Skepter.Tasks.PingTask;
 import io.github.Skepter.Utils.PlayerUtils;
-import io.github.Skepter.Utils.ReflectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
