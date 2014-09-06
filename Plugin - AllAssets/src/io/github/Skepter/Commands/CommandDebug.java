@@ -4,21 +4,27 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Commands.CommandFramework.Completer;
+import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.TabText;
-import io.github.Skepter.Tasks.JSONMessageTask;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.MathUtils;
+import io.github.Skepter.Utils.ReflectionUtils;
 import io.github.Skepter.Utils.TextUtils;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -29,6 +35,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 public class CommandDebug {
@@ -107,9 +114,9 @@ public class CommandDebug {
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("Bukkit"));
 		if (Bukkit.getVersion().toLowerCase().contains("spigot"))
 			sender.sendMessage(" Bukkit system: Spigot");
-		else if(Bukkit.getVersion().toLowerCase().contains("mcpc"))
+		else if (Bukkit.getVersion().toLowerCase().contains("mcpc"))
 			sender.sendMessage(" Bukkit system: MCPC");
-		else if(Bukkit.getVersion().toLowerCase().contains("forge"))
+		else if (Bukkit.getVersion().toLowerCase().contains("forge"))
 			sender.sendMessage(" Bukkit system: Forge");
 		else
 			sender.sendMessage(" Bukkit system: CraftBukkit");
@@ -230,14 +237,43 @@ public class CommandDebug {
 		}
 		player.setItemInHand(ItemUtils.addGlow(player.getItemInHand()));
 	}
-	
+
 	@CommandHandler(name = "debug.test2", permission = "debug", description = "Tests the JSONMEssageTask", usage = "Use <command>", isListed = false)
 	public void test2(final CommandArgs args) {
+		final Player player;
 		try {
-			Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new JSONMessageTask(args.getPlayer(), JSONMessageTask.testString));
-		} catch (Exception e) {
-			e.printStackTrace();
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
 		}
+		System.out.println("UUID from UniqueID from Player: " + player.getUniqueId().toString());
+		UUIDData data = new UUIDData();
+		for(Entry<String, UUID> entry : data.getUUIDMap().entrySet()) 
+			if(entry.getKey().equals(player.getName()))
+				System.out.println("UUID from UUIDData file: " + entry.getValue());
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				try {
+					String argument = player.getName();
+					ReflectionUtils utils = new ReflectionUtils(player);
+					Constructor<?> constructor = Class.forName(utils.packageName + ".UserCache").getConstructor(utils.minecraftServer, File.class);
+					Object usercache = constructor.newInstance(utils.dedicatedServer, new File("usercache.json"));
+					Method method = usercache.getClass().getDeclaredMethod("a", utils.minecraftServer, String.class);
+					method.setAccessible(true);
+					Object gameProfile = method.invoke(usercache, utils.dedicatedServer, argument);
+					UUID uuid = (UUID) utils.getPrivateField(gameProfile, "id");
+					System.out.println("Reflection UUID from UserCache: " + uuid.toString());
+				} catch (Throwable t) {
+					System.out.println(t.getMessage());
+					for (StackTraceElement e : t.getStackTrace()) {
+						System.out.println(e);
+					}
+				}
+			}
+		}.runTaskAsynchronously(AllAssets.instance());
+
 	}
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)

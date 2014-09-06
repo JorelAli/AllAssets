@@ -7,8 +7,8 @@ import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Serializer.LocationSerializer;
 import io.github.Skepter.Tasks.PingTask;
 import io.github.Skepter.Utils.PlayerUtils;
+import io.github.Skepter.Utils.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -31,9 +31,7 @@ public class User implements IUser {
 	}
 
 	/** Remember that when using this method the following are impossible:
-	 * Getting the ping Setting the last Location Setting the last waypoint etc.
-	 * 
-	 * @param p */
+	 * Getting the ping Setting the last Location Setting the last waypoint etc. */
 	public User(final OfflinePlayer p) {
 		playerData = new PlayerData(p);
 	}
@@ -70,12 +68,7 @@ public class User implements IUser {
 
 	public String getLanguage(final Player p) {
 		try {
-			final Object nmsPlayer = p.getClass().getMethod("getHandle").invoke(p);
-			final Field field = nmsPlayer.getClass().getDeclaredField("locale");
-			field.setAccessible(true);
-			final String language = (String) field.get(nmsPlayer);
-			final String lang = language.toLowerCase();
-			switch (lang) {
+			switch (new ReflectionUtils(p).locale.toLowerCase()) {
 			case "de_de":
 				return "de";
 			case "sv_se":
@@ -252,6 +245,18 @@ public class User implements IUser {
 	@Override
 	public boolean isAFK() {
 		return playerData.getPlayerData().getBoolean("afk");
+	}
+
+	@Override
+	public List<UUID> getFriendList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFriendList() {
+		// TODO Auto-generated method stub
+
 	}
 
 	/*

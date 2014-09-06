@@ -119,7 +119,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 //do erm YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
 //a way to parse PARTS  of a player's name in commands
-//pluginShowAuthors from features.yml should be in config
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */

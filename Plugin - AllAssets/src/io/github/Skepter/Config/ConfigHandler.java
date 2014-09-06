@@ -42,6 +42,7 @@ public class ConfigHandler {
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
 		config.set("multiCommandSeparator", "|", "The separator used in multi-commands");
 		config.set("staffChat", "'[&bStaff&f] <message>'", "The prefix for the staff chat");
+		config.set("PluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 
 		config.saveConfig();
 	}
@@ -88,7 +89,6 @@ public class ConfigHandler {
 		features.set("Oplist", "true");
 		features.set("Ping", "true");
 		features.set("Plugins", "true");
-		features.set("PluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		features.set("PTime", "true");
 		features.set("PWeather", "true");
 		// work on this feature more - still a bit buggy and kinda unreliable

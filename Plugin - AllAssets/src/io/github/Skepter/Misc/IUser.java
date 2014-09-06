@@ -1,6 +1,7 @@
 package io.github.Skepter.Misc;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -69,5 +70,9 @@ public abstract interface IUser {
 	public abstract void setAFK(boolean afk);
 
 	public abstract boolean isAFK();
+	
+	public abstract List<UUID> getFriendList();
+	
+	public abstract void setFriendList();
 
 }
