@@ -3,6 +3,7 @@ package io.github.Skepter;
 import io.github.Skepter.CommandListeners.CommandAFK;
 import io.github.Skepter.CommandListeners.CommandBind;
 import io.github.Skepter.CommandListeners.CommandEnchant;
+import io.github.Skepter.CommandListeners.CommandGod;
 import io.github.Skepter.Commands.CommandAllAssets;
 import io.github.Skepter.Commands.CommandBack;
 import io.github.Skepter.Commands.CommandBalance;
@@ -24,6 +25,7 @@ import io.github.Skepter.Commands.CommandGhost;
 import io.github.Skepter.Commands.CommandInventory;
 import io.github.Skepter.Commands.CommandLaunch;
 import io.github.Skepter.Commands.CommandLog;
+import io.github.Skepter.Commands.CommandNMSGod;
 import io.github.Skepter.Commands.CommandNear;
 import io.github.Skepter.Commands.CommandOplist;
 import io.github.Skepter.Commands.CommandPTime;
@@ -132,7 +134,7 @@ public class AllAssets extends JavaPlugin {
 	public Economy economy = null;
 	public Permission permission = null;
 	public Chat chat = null;
-	
+
 	/* Other stuff */
 	public CommandFramework framework;
 	public Map<UUID, Long> tempTimeMap;
@@ -210,6 +212,11 @@ public class AllAssets extends JavaPlugin {
 			new CommandGamemode(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ghost"))
 			new CommandGhost(framework);
+		if (ConfigHandler.instance().features().getBoolean("God"))
+			if (ConfigHandler.instance().config().getBoolean("useNMSGod"))
+				new CommandNMSGod(framework);
+			else
+				r(new CommandGod(framework));
 		if (ConfigHandler.instance().features().getBoolean("Inventory"))
 			new CommandInventory(framework);
 		if (ConfigHandler.instance().features().getBoolean("Launch"))

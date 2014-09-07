@@ -48,4 +48,8 @@ public class ErrorUtils {
 	public static void playerOnly(final CommandSender sender) {
 		sender.sendMessage(AllAssets.error + "You must be ingame in order to use that command");
 	}
+	
+	public static void generalCommandError(final CommandSender sender) {
+		sender.sendMessage(AllAssets.error + "There was an error while executing the command");
+	}
 }

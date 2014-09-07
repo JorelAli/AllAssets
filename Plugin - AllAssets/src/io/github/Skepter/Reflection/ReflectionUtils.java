@@ -23,6 +23,7 @@ public class ReflectionUtils {
 	/** Fields */
 	final public int ping;
 	final public String locale;
+	final public Object abilities;
 
 	/** Misc & other objects */
 	final public String packageName;
@@ -66,6 +67,7 @@ public class ReflectionUtils {
 		gameProfileClass = Class.forName(authLibPackageName + ".GameProfile");
 		minecraftServerClass = dedicatedServer.getClass().getSuperclass();
 		nmsWorldClass = worldServer.getClass().getSuperclass();
+		abilities = entityHumanClass.getField("abilities").get(nmsPlayer);
 
 		emptyPacketPlayOutChat = Class.forName(packageName + ".PacketPlayOutChat").newInstance();
 		emptyChatSerializer = Class.forName(packageName + ".ChatSerializer").newInstance();

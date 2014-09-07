@@ -42,7 +42,8 @@ public class ConfigHandler {
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
 		config.set("multiCommandSeparator", "|", "The separator used in multi-commands");
 		config.set("staffChat", "'[&bStaff&f] <message>'", "The prefix for the staff chat");
-		config.set("PluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
+		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
+		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
 
 		config.saveConfig();
 	}
@@ -82,6 +83,7 @@ public class ConfigHandler {
 		features.set("ForceChat", "true");
 		features.set("Gamemode", "true");
 		features.set("Ghost", "true");
+		features.set("God", "true");
 		features.set("Inventory", "true");
 		features.set("Launch", "true");
 		features.set("Log", "true");
