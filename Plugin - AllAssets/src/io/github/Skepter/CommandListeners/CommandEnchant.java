@@ -4,7 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
-import io.github.Skepter.Utils.EnchantmentInventories;
+import io.github.Skepter.Misc.EnchantmentInventories;
 import io.github.Skepter.Utils.ErrorUtils;
 
 import java.util.Map;

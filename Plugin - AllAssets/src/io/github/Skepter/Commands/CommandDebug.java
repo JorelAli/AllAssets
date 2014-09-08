@@ -7,7 +7,6 @@ import io.github.Skepter.Commands.CommandFramework.Completer;
 import io.github.Skepter.Libs.TabText;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.ErrorUtils;
-import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.MathUtils;
 import io.github.Skepter.Utils.TextUtils;
 
@@ -16,8 +15,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,7 +26,6 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -33,7 +33,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class CommandDebug {
 
 	int taskID = 0;
-
+	
 	public CommandDebug(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
@@ -198,7 +198,7 @@ public class CommandDebug {
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
 
-	//will be removed in future
+	/* Used to debug the Log feature */
 	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
 	public void error(final CommandArgs args) {
 		final String[] arr = { "bob", "mark" };
@@ -207,7 +207,7 @@ public class CommandDebug {
 	}
 
 	//will be removed in future
-	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
 	public void test(final CommandArgs args) {
 		String multilineString = "Plugin                        `Thread\n";
 
@@ -219,30 +219,26 @@ public class CommandDebug {
 		tt.sortByFields(-2, 1); // sort by second column descending, then by first
 		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
 		Bukkit.broadcastMessage(printedText);
-
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		player.setItemInHand(ItemUtils.addGlow(player.getItemInHand()));
 	}
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
 		int conflict = 0;
+		Set<String> conflictingPlugins = new HashSet<String>();
 		for (final HelpTopic cmdLabel : Bukkit.getServer().getHelpMap().getHelpTopics()) {
 			final String s = cmdLabel.getName();
 			if (s.contains(":")) {
 				if (s.contains("allassets:") || s.contains("bukkit:") || s.contains("minecraft:"))
 					continue;
 				args.getSender().sendMessage(s);
+				conflictingPlugins.add(s.split(":")[0]);
 				conflict++;
 			}
 		}
-		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted.");
+		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted. Conflicting plugins:");
+		for (String s : conflictingPlugins)
+			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
+
 	}
 
 	@Completer(name = "debug")
@@ -251,7 +247,6 @@ public class CommandDebug {
 		list.add("full");
 		list.add("ram");
 		list.add("clean");
-		//		list.add("dir");
 		return list;
 	}
 

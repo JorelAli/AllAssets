@@ -121,6 +121,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 //do erm YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
 //a way to parse PARTS  of a player's name in commands
+//check oplist
+//play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */
@@ -273,10 +275,9 @@ public class AllAssets extends JavaPlugin {
 		r(new ServerListingListener());
 
 		/* Update UUIDData file */
-		final UUIDData data = new UUIDData();
-		data.reloadDataFile();
+		UUIDData.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers())
-			data.getDataFile().set(p.getName(), p.getUniqueId().toString());
+			UUIDData.setData(p);
 
 		/* Start TPS counter */
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new TPS(), 100L, 1L);

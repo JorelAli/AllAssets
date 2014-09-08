@@ -56,9 +56,7 @@ public class PlayerListener implements Listener {
 	public void onJoin(final PlayerJoinEvent event) {
 		AllAssets.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
 
-		final UUIDData data = new UUIDData();
-		data.getDataFile().set(event.getPlayer().getName(), event.getPlayer().getUniqueId().toString());
-		data.saveDataFile();
+		UUIDData.setData(event.getPlayer());
 
 		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);

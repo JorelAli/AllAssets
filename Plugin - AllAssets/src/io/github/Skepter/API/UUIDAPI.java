@@ -17,8 +17,7 @@ public class UUIDAPI {
 	 * @return The player object from their name
 	 * @throws NullPointerException if they are not in the UUIDMap */
 	public static Player getPlayer(final String playerName) throws NullPointerException {
-		final UUIDData data = new UUIDData();
-		for (final Entry<String, UUID> entry : data.getUUIDMap().entrySet())
+		for (final Entry<String, UUID> entry : UUIDData.getUUIDMap().entrySet())
 			if (playerName.toLowerCase().equals(entry.getKey().toLowerCase()))
 				return Bukkit.getPlayer(entry.getValue());
 		throw new NullPointerException();

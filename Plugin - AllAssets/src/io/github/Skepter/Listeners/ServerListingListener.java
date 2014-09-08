@@ -17,12 +17,11 @@ public class ServerListingListener implements Listener {
 
 	@EventHandler
 	public void ping(final ServerListPingEvent event) {
-		final UUIDData data = new UUIDData();
-		for (final UUID u : data.getValues()) {
+		for (final UUID u : UUIDData.getValues()) {
 			final User user = new User(Bukkit.getOfflinePlayer(u));
 			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 				/* Dump this into Messages.yml */
-				event.setMotd(ChatColor.AQUA + "Welcome " + data.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId()) + "! You have joined " + user.getJoinCount() + " times!");
+				event.setMotd(ChatColor.AQUA + "Welcome " + UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId()) + "! You have joined " + user.getJoinCount() + " times!");
 				return;
 			}
 		}
