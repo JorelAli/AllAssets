@@ -13,4 +13,4 @@ Also desgined to be as light weight as possible (compared to Essentials) and sup
 
 Compiling
 ---------
-If you want to compile it... Well, I'm gonna make a folder later where you can download the pre-releases of it, but BE WARNED, it may be REALLY buggy!
+Not allowed. You could do it if you want to, but I prefer you'd use the AllAssets.jar file inside the /builds/ folder
