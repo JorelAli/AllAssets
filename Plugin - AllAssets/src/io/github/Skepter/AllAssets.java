@@ -50,6 +50,7 @@ import io.github.Skepter.Listeners.PluginsCommandListener;
 import io.github.Skepter.Listeners.ReloadCommandListener;
 import io.github.Skepter.Listeners.ServerListingListener;
 import io.github.Skepter.Listeners.SignListener;
+import io.github.Skepter.Listeners.SkeletonArrowListener;
 import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.JavaUtils;
 
@@ -118,10 +119,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 //recent players command - like seen, but for recent players
 //still able to tp when they're offline
-//do erm YesNo conversation for payments etc. (/pay
+//do YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
 //a way to parse PARTS  of a player's name in commands
-//check oplist
 //play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
 public class AllAssets extends JavaPlugin {
 
@@ -270,7 +270,10 @@ public class AllAssets extends JavaPlugin {
 			r(new ConsoleSayListener());
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
-
+		if(ConfigHandler.instance().features().getBoolean("PickupSkeletonArrows"))
+			r(new SkeletonArrowListener());
+		
+		
 		// Put into features.yml
 		r(new ServerListingListener());
 

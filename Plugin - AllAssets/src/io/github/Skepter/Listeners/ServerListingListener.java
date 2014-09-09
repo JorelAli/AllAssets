@@ -1,6 +1,7 @@
 package io.github.Skepter.Listeners;
 
 import io.github.Skepter.API.User;
+import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
 
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class ServerListingListener implements Listener {
 		for (final UUID u : UUIDData.getValues()) {
 			final User user = new User(Bukkit.getOfflinePlayer(u));
 			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
-				/* Dump this into Messages.yml */
-				event.setMotd(ChatColor.AQUA + "Welcome " + UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId()) + "! You have joined " + user.getJoinCount() + " times!");
+				final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
+				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 				return;
 			}
 		}

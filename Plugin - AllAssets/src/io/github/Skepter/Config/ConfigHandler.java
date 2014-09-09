@@ -55,6 +55,7 @@ public class ConfigHandler {
 
 		messages.set("cantEnchant", "You cannot enchant that item!", "Error messages");
 		messages.set("notANumber", "That is not a number!");
+		messages.set("serverListMOTD", "'&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'");
 		messages.saveConfig();
 	}
 
@@ -116,6 +117,7 @@ public class ConfigHandler {
 		features.set("AntiIllegalItems", "true");
 		features.set("MultiCommands", "true", "Allows you to execute multiple commands");
 		features.set("AnyLeash", "true", "Allows you to put leads on any mob");
+		features.set("PickupSkeletonArrows", "false", "Allows you to pick up skeleton arrows");
 		// add more modifiers to modify the mechanics of the game
 		// e.g. amount of exp mobs drop when killed, drop probability, spawning
 		// probability (perhaps?) (e.g. increase prob. spawn zombie+chicken
