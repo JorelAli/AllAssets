@@ -4,9 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Commands.CommandFramework.Completer;
-import io.github.Skepter.Libs.TabText;
 import io.github.Skepter.Tasks.TPS;
-import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.MathUtils;
 import io.github.Skepter.Utils.TextUtils;
 
@@ -171,22 +169,23 @@ public class CommandDebug {
 		sender.sendMessage("You now have " + totalRamPost + "MB from " + totalRamPre + "MB in total, by freeing " + (freeRamPost - freeRamPre) + "MB");
 	}
 
-	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
-	public void rClean(final CommandArgs args) {
-		if (taskID == 0) {
-			int length = 0;
-			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
-				length = Integer.parseInt(args.getArgs()[0]);
-			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(), new Runnable() {
-				@Override
-				public void run() {
-					System.gc();
-				}
-			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
-			args.getSender().sendMessage(AllAssets.title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
-		} else
-			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
-	}
+	/* Not been fully tested yet */
+//	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
+//	public void rClean(final CommandArgs args) {
+//		if (taskID == 0) {
+//			int length = 0;
+//			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
+//				length = Integer.parseInt(args.getArgs()[0]);
+//			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(), new Runnable() {
+//				@Override
+//				public void run() {
+//					System.gc();
+//				}
+//			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
+//			args.getSender().sendMessage(AllAssets.title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
+//		} else
+//			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
+//	}
 
 	@CommandHandler(name = "debug.ram", permission = "debug", description = "Displays RAM information", usage = "Use <command>")
 	public void ram(final CommandArgs args) {
@@ -199,27 +198,27 @@ public class CommandDebug {
 	}
 
 	/* Used to debug the Log feature */
-	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
-	public void error(final CommandArgs args) {
-		final String[] arr = { "bob", "mark" };
-		final String s = arr[4];
-		Bukkit.broadcastMessage(s);
-	}
+//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
+//	public void error(final CommandArgs args) {
+//		final String[] arr = { "bob", "mark" };
+//		final String s = arr[4];
+//		Bukkit.broadcastMessage(s);
+//	}
 
 	//will be removed in future
-	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
-	public void test(final CommandArgs args) {
-		String multilineString = "Plugin                        `Thread\n";
-
-		multilineString += "AllInOne`30\n";
-		multilineString += "Essentials`491";
-		final TabText tt = new TabText(multilineString);
-		tt.setPageHeight(10); // set page height and get number of pages
-		tt.setTabs(16, 22, 20); // horizontal tabs positions
-		tt.sortByFields(-2, 1); // sort by second column descending, then by first
-		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
-		Bukkit.broadcastMessage(printedText);
-	}
+//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
+//	public void test(final CommandArgs args) {
+//		String multilineString = "Plugin                        `Thread\n";
+//
+//		multilineString += "AllInOne`30\n";
+//		multilineString += "Essentials`491";
+//		final TabText tt = new TabText(multilineString);
+//		tt.setPageHeight(10); // set page height and get number of pages
+//		tt.setTabs(16, 22, 20); // horizontal tabs positions
+//		tt.sortByFields(-2, 1); // sort by second column descending, then by first
+//		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
+//		Bukkit.broadcastMessage(printedText);
+//	}
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
