@@ -44,7 +44,7 @@ public class ConfigHandler {
 		config.set("staffChat", "'[&bStaff&f] <message>'", "The prefix for the staff chat");
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
-
+		
 		config.saveConfig();
 	}
 
@@ -118,6 +118,7 @@ public class ConfigHandler {
 		features.set("MultiCommands", "true", "Allows you to execute multiple commands");
 		features.set("AnyLeash", "true", "Allows you to put leads on any mob");
 		features.set("PickupSkeletonArrows", "false", "Allows you to pick up skeleton arrows");
+		features.set("ServerListMOTDCustomisation", "true");
 		// add more modifiers to modify the mechanics of the game
 		// e.g. amount of exp mobs drop when killed, drop probability, spawning
 		// probability (perhaps?) (e.g. increase prob. spawn zombie+chicken

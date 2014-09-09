@@ -270,12 +270,10 @@ public class AllAssets extends JavaPlugin {
 			r(new ConsoleSayListener());
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
-		if(ConfigHandler.instance().features().getBoolean("PickupSkeletonArrows"))
+		if (ConfigHandler.instance().features().getBoolean("PickupSkeletonArrows"))
 			r(new SkeletonArrowListener());
-		
-		
-		// Put into features.yml
-		r(new ServerListingListener());
+		if (ConfigHandler.instance().features().getBoolean("ServerListMOTDCustomisation"))
+			r(new ServerListingListener());
 
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();
