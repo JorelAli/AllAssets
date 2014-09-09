@@ -125,7 +125,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 //play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
 
 /**
- * Things NOT to export when releasing Alpha version
+ * - Things NOT to export when releasing Alpha version -
  * Permissions
  * ExperienceUtils
  * ItemNames
@@ -136,6 +136,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * TabText
  * Resources
  * Builds
+ * 
+ * 
  */
 public class AllAssets extends JavaPlugin {
 
