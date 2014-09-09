@@ -41,7 +41,7 @@ public class ConfigHandler {
 		config.set("useIPInformation", "false", "Allows ");
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
 		config.set("multiCommandSeparator", "|", "The separator used in multi-commands");
-		config.set("staffChat", "'[&bStaff&f] <message>'", "The prefix for the staff chat");
+//		config.set("staffChat", "'[&bStaff&f] <message>'", "The prefix for the staff chat");
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
 		
@@ -125,15 +125,15 @@ public class ConfigHandler {
 		features.set("FlyBreakSpeedModifier", "true", "Break blocks at normal speed when flying on survival");
 
 		// may remove in the future unless more instants come into play.
-		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
-		features.set("Instant bows", "false");
+//		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
+//		features.set("Instant bows", "false");
 
-		features.set("JoinActions", "true", new String[] { "Join Actions", "Actions to be carried out when a player joins" });
-		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
-		features.set("TotalTime", "true", "Display the total time the player has played on the server for");
+//		features.set("JoinActions", "true", new String[] { "Join Actions", "Actions to be carried out when a player joins" });
+//		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
+//		features.set("TotalTime", "true", "Display the total time the player has played on the server for");
 
 		features.set("BlockHeads", "true", new String[] { "Cosmetics", "Cosmetic features to comply with the EULA" });
-		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
+//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
 		features.saveConfig();
 	}
 

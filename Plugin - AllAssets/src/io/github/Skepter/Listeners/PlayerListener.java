@@ -101,9 +101,8 @@ public class PlayerListener implements Listener {
 	/* Hopefully, if they click that slot, it places the item on their head :D */
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
-		if (event.isLeftClick() || event.isRightClick())
-			if (event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
-				if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING)) {
+		if ((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))		
+				if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && ConfigHandler.instance().features().getBoolean("BlockHeads")) {
 					event.getWhoClicked().getInventory().setHelmet(event.getCursor());
 					new BukkitRunnable() {
 						@Override
