@@ -101,7 +101,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 // A way to mute a player which stops all other chat being sent to that player
 // except admin
 
-// set command
 // sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
 // command allassets pluginFile instead of devPluginFile
