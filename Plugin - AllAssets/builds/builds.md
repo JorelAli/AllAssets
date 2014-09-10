@@ -1,6 +1,6 @@
 Builds
 ======
-This is the builds folder, where you are able to download the latest builds of AllAssets. 
+This is the builds folder, where you are able to download the latest builds of AllAssets. PLEASE NOTE: Some of the classes have been used from OTHER libraries and I have not yet finished the legal implications. Therefore, distribution apart from this website is 100% COMPLETELY FORBIDDEN for you may be breaking legal acts which can cause pretty bad stuff in the future.
 
 Jar file
 --------
@@ -17,13 +17,19 @@ Each AllAssets.zip file contains:
 * Changelog.txt - this shows the differences from each new version and the possible bugs which it contains
 * Disclaimer.txt - the data shown below
 
-Disclaimer (or whatever you call it)
-------------------------------------
+Disclaimer - normal builds
+--------------------------
+These are builds which have been announced on Enjin or my website. You are free to experiment and view the source code as well as put it on whatever server you want.
+
+Distribution, selling or claiming it as your own is COMPLETELY forbidden - if anyone is caught doing so, AllAssets may be taken down to prevent further copyright theft.
+
+Disclaimer - unannounced builds
+-------------------------------
 These builds are 'for experimental purposes' and should be used at your own risk. I am NOT liable for any damage this causes to your server.
 The builds are allowed for these purposes (and these only!):
 * Experimenting with the plugin (and getting to know it)
 * Seeing the code in action
-* Getting a free early build before the actual thing comes out so you can use it on your server like amoniuszko20
+* Getting a free early build before the actual thing comes out so you can use it on your server
 
 These builds are NOT to be used for these purposes:
 * Distribution (so you can't give it to other people, but you can give them the link)
