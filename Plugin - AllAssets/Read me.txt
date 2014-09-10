@@ -71,3 +71,9 @@ PickupSkeletonArrows
 ServerListMOTDCustomisation
 FlyBreakSpeedModifier
 BlockHeads
+
+=== Other ===
+If you encounter errors, please send Skepter the error in the format of:
+* What you were trying to do (e.g. run /batch command)
+* What happened (e.g. error in console, nothing happens)
+* If there was an error in the console, please send the ENTIRE error log (not the whole server log, the error log. I need it to fix errors) 
