@@ -1,6 +1,15 @@
 Builds
 ======
-This is the builds folder, where you are able to download the latest builds of AllAssets. In order to download a build of AllAssets, right click the AllAssets.zip file and click 'Save link as'.
+This is the builds folder, where you are able to download the latest builds of AllAssets. 
+
+Jar file
+--------
+In order to download a build of AllAssets, right click the AllAssets.jar file and click 'Save link as'.
+Then go ahead and put it in your /plugins/ folder and you're set to go :)
+
+Zip file
+--------
+In order to download a build of AllAssets, right click the AllAssets.zip file and click 'Save link as'.
 That's pretty much it xD There will always be only 1 file in here (since it's still in dev stage) and yeah. pretty much. Just look for those commits to see if a new AllAssets.zip file has been uploaded since it is likely to have some patched bugs.
 
 Each AllAssets.zip file contains:
