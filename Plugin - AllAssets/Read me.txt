@@ -6,5 +6,68 @@ To install from the .zip version, open the AllAssets.zip file and extract the .j
 Q: I don't see a /plugins/ directory!
 A: If you don't see a plugins directory, start up your server and it should generate. If it does not generate, please use CraftBukkit (this does not work on Vanilla Minecraft).
 
-=== Usage ===
-//usage
+=== Usage (Configuration) ===
+To use the configuration system, there are 2 files - config.yml, messages.yml and features.yml. 
+
+Config.yml is mainly based on adjusting small values and adding variability to the plugin. For example, if you don't want to clear armor when you use the /clear command, you can set it to 'false' under 'clearArmor'
+
+Messages.yml is for adjusting text messages. For example you can change the error message when you cannot enchant a specific item.
+
+Features.yml is for enabling and disabling certain features in the plugin. For example, if you didn't want the /ConsoleLog command (at all), you can set it to false in the Features.yml and it will be COMPLETELY removed (the command will not even be loaded and thus will come up as an unknown command).
+
+=== Usage (Commands) ===
+* /allassets commands - shows a list of commands
+
+=== Features ===
+All of the features available in the plugin (AllAssets 0.2) is shown below:
+AFK
+Back
+Balance
+BalanceTop
+Batch
+Bind
+Butcher
+ChestSearch
+Clear
+ClearChat
+ConsoleLog
+Debug
+Disable
+Enable
+Enchant
+Fly
+ForceChat
+GameMode
+Ghost
+God
+Inventory
+Launch
+Log
+Near
+OpList
+Ping
+Plugins
+PTime
+PWeather
+Reload (disabled by default)
+Rename
+SignEdit
+Tp
+Weather
+Worlds
+
+AntiHyperlinks
+AntiSwearing
+ChatColor
+ConsoleSay - lets you chat in the console like a normal player
+Log
+CreativeEnderpearl
+DeathSigns
+DeathCount
+InstantDeathRespawn
+MultiCommands
+AnyLeash
+PickupSkeletonArrows
+ServerListMOTDCustomisation
+FlyBreakSpeedModifier
+BlockHeads

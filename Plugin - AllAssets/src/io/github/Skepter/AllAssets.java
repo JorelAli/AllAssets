@@ -134,9 +134,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Reflections (All of the Libs)
  * TabText
  * Resources
- * Builds
- * 
- * 
+ * Builds 
  */
 public class AllAssets extends JavaPlugin {
 

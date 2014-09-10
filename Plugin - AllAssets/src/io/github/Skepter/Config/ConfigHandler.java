@@ -101,7 +101,7 @@ public class ConfigHandler {
 		features.set("SignEdit", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Tp", "true");
-		features.set("Tphere", "true");
+//		features.set("Tphere", "true");
 		features.set("Weather", "true");
 		features.set("Worlds", "true");
 
@@ -114,7 +114,7 @@ public class ConfigHandler {
 		features.set("DeathSigns", "false");
 		features.set("DeathCount", "true");
 		features.set("InstantDeathRespawn", "false");
-		features.set("AntiIllegalItems", "true");
+//		features.set("AntiIllegalItems", "true");
 		features.set("MultiCommands", "true", "Allows you to execute multiple commands");
 		features.set("AnyLeash", "true", "Allows you to put leads on any mob");
 		features.set("PickupSkeletonArrows", "false", "Allows you to pick up skeleton arrows");
