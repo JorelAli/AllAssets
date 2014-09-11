@@ -26,7 +26,7 @@ public class ReflectionUtils {
 	final public Object abilities;
 
 	/** Misc & other objects */
-	final public String packageName;
+	final private String packageName;
 	final public String authLibPackageName = "net.minecraft.util.com.mojang.authlib";
 	final public Object dedicatedServer;
 	final public Object worldServer;
@@ -46,7 +46,7 @@ public class ReflectionUtils {
 	final public Object emptyChatSerializer;
 	final public Object emptyPacketPlayInClientCommand;
 
-	public ReflectionUtils(Player player) throws Exception {
+	public ReflectionUtils(final Player player) throws Exception {
 		this.player = player;
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
 		entityHumanClass = nmsPlayer.getClass().getSuperclass();
@@ -61,42 +61,46 @@ public class ReflectionUtils {
 		worldServer = craftWorldClass.getMethod("getHandle").invoke(player.getWorld());
 		packageName = dedicatedServer.getClass().getPackage().getName();
 
-		packetClass = Class.forName(packageName + ".Packet");
-		iChatBaseComponentClass = Class.forName(packageName + ".IChatBaseComponent");
-		enumClientCommandClass = Class.forName(packageName + ".EnumClientCommand");
+		packetClass = getNMSClass("Packet");
+		iChatBaseComponentClass = getNMSClass("IChatBaseComponent");
+		enumClientCommandClass = getNMSClass("EnumClientCommand");
 		gameProfileClass = Class.forName(authLibPackageName + ".GameProfile");
 		minecraftServerClass = dedicatedServer.getClass().getSuperclass();
 		nmsWorldClass = worldServer.getClass().getSuperclass();
 		abilities = entityHumanClass.getField("abilities").get(nmsPlayer);
 
-		emptyPacketPlayOutChat = Class.forName(packageName + ".PacketPlayOutChat").newInstance();
-		emptyChatSerializer = Class.forName(packageName + ".ChatSerializer").newInstance();
-		emptyPacketPlayInClientCommand = Class.forName(packageName + ".PacketPlayInClientCommand").newInstance();
+		emptyPacketPlayOutChat = getNMSClass("PacketPlayOutChat").newInstance();
+		emptyChatSerializer = getNMSClass("ChatSerializer").newInstance();
+		emptyPacketPlayInClientCommand = getNMSClass("PacketPlayInClientCommand").newInstance();
 	}
 
-	public Object chatSerialize(String string) throws Exception {
+	public Object chatSerialize(final String string) throws Exception {
 		return emptyChatSerializer.getClass().getMethod("a", String.class).invoke(emptyChatSerializer, string);
 	}
 
-	public Object getEnum(Class<?> enumClass, String enumName) throws NullPointerException {
+	public Object getEnum(final Class<?> enumClass, final String enumName) throws NullPointerException {
 		for (final Object object : enumClass.getEnumConstants())
 			if (object.toString().equals(enumName))
 				return object;
 		throw new NullPointerException();
 	}
 
-	public Object getPrivateField(Object object, String fieldName) throws Exception {
+	public Object getPrivateField(final Object object, final String fieldName) throws Exception {
 		final Field field = object.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
 		return field.get(object);
 	}
 
-	public Object getField(Object object, String fieldName) throws Exception {
+	public Object getField(final Object object, final String fieldName) throws Exception {
 		return object.getClass().getDeclaredField(fieldName).get(object);
 	}
 
 	public Object getGameProfile() throws Exception {
 		return gameProfileClass.getConstructor(UUID.class, String.class).newInstance(player.getUniqueId(), player.getName());
+	}
+	
+	public Class<?> getNMSClass(String className) throws ClassNotFoundException {
+		return(Class.forName(packageName + "." + className));
 	}
 
 }

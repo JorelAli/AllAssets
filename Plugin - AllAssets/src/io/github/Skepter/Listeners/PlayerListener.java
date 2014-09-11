@@ -10,11 +10,13 @@ import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Tasks.AnyLeashTask;
 import io.github.Skepter.Tasks.InstantRespawnTask;
 import io.github.Skepter.Tasks.TPS;
+import io.github.Skepter.Utils.FireworkUtils;
 import io.github.Skepter.Utils.MathUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -74,6 +76,9 @@ public class PlayerListener implements Listener {
 				event.getPlayer().sendMessage(AllAssets.title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.instance().features().getBoolean("TotalTime"))
 				event.getPlayer().sendMessage(AllAssets.title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
+			if (ConfigHandler.instance().features().getBoolean("FireworkOnJoin"))
+				for (int i = 0; i < new Random().nextInt(5); i++)
+					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());
 		}
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
@@ -101,16 +106,16 @@ public class PlayerListener implements Listener {
 	/* Hopefully, if they click that slot, it places the item on their head :D */
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
-		if ((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))		
-				if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && ConfigHandler.instance().features().getBoolean("BlockHeads")) {
-					event.getWhoClicked().getInventory().setHelmet(event.getCursor());
-					new BukkitRunnable() {
-						@Override
-						public void run() {
-							event.getWhoClicked().setItemOnCursor(null);
-						}
-					}.runTaskLater(AllAssets.instance(), 1L);
-				}
+		if (((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE)) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
+			if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && ConfigHandler.instance().features().getBoolean("BlockHeads")) {
+				event.getWhoClicked().getInventory().setHelmet(event.getCursor());
+				new BukkitRunnable() {
+					@Override
+					public void run() {
+						event.getWhoClicked().setItemOnCursor(null);
+					}
+				}.runTaskLater(AllAssets.instance(), 1L);
+			}
 	}
 
 	@EventHandler

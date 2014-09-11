@@ -25,7 +25,7 @@ public class CommandNMSGod {
 		}
 		try {
 			new ReflectionUtils(args.getPlayer());
-			ReflectionUtils utils = new ReflectionUtils(args.getPlayer());
+			final ReflectionUtils utils = new ReflectionUtils(args.getPlayer());
 			if (utils.abilities.getClass().getField("isInvulnerable").getBoolean(utils.abilities)) {
 				utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, false);
 				player.sendMessage(AllAssets.title + "You suddenly feel much more vunerable");

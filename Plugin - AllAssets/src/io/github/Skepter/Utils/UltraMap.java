@@ -18,7 +18,7 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 
 	}
 
-	public void put(A key, B value1, C value2, D value3, E value4, F value5) {
+	public void put(final A key, final B value1, final C value2, final D value3, final E value4, final F value5) {
 		//check CURRENT values to allow for custom 'overlapping'
 		map.put(key, Arrays.asList(new Object[] { value1, value2, value3, value4, value5 }));
 		return;
@@ -34,21 +34,20 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 
 	/** I hear you like lists, so I made you a list of lists */
 	public List<List<Object>> values() {
-		List<List<Object>> list = new ArrayList<List<Object>>();
-		for (Object key : keySet()) {
+		final List<List<Object>> list = new ArrayList<List<Object>>();
+		for (final Object key : keySet())
 			list.add(map.get(key));
-		}
 		return list;
 	}
 
-	public void remove(A key) {
+	public void remove(final A key) {
 		map.remove(key);
 		return;
 	}
 
 	/** Value limit = 5 */
-	public Object get(A key, int value) {
-		if (value > 5 || value == 0)
+	public Object get(final A key, final int value) {
+		if ((value > 5) || (value == 0))
 			return null;
 		else
 			return map.get(key).get(value - 1);

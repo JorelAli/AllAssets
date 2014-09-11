@@ -223,7 +223,7 @@ public class CommandDebug {
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
 		int conflict = 0;
-		Set<String> conflictingPlugins = new HashSet<String>();
+		final Set<String> conflictingPlugins = new HashSet<String>();
 		for (final HelpTopic cmdLabel : Bukkit.getServer().getHelpMap().getHelpTopics()) {
 			final String s = cmdLabel.getName();
 			if (s.contains(":")) {
@@ -235,7 +235,7 @@ public class CommandDebug {
 			}
 		}
 		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted. Conflicting plugins:");
-		for (String s : conflictingPlugins)
+		for (final String s : conflictingPlugins)
 			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
 
 	}

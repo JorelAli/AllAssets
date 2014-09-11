@@ -9,8 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 public final class InventorySerializer {
-	private InventorySerializer() {
-	}
 
 	public static String toString(final Inventory i) {
 		final YamlConfiguration configuration = new YamlConfiguration();

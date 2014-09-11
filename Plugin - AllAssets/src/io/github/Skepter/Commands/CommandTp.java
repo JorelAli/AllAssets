@@ -1,5 +1,6 @@
 package io.github.Skepter.Commands;
 
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
@@ -24,7 +25,6 @@ public class CommandTp {
 			return;
 		}
 		if (args.getArgs().length == 0) {
-			// help page?
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		}
@@ -35,6 +35,7 @@ public class CommandTp {
 			final User target = new User(t);
 			if (target.canTp()) {
 				player.teleport(t);
+				player.sendMessage(AllAssets.title + "Successfully teleported to " + t.getName());
 				return;
 			} else {
 				ErrorUtils.tptoggle(player, args.getArgs()[0]);

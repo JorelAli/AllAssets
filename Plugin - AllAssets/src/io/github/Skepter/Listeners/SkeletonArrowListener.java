@@ -18,10 +18,10 @@ public class SkeletonArrowListener implements Listener {
 			return;
 		final Arrow arrow = (Arrow) entity;
 		try {
-			Object object = arrow.getClass().getMethod("getHandle").invoke(arrow);
-			Field field = object.getClass().getField("fromPlayer");
+			final Object object = arrow.getClass().getMethod("getHandle").invoke(arrow);
+			final Field field = object.getClass().getField("fromPlayer");
 			field.setInt(object, 1);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return;
 		}
 	}

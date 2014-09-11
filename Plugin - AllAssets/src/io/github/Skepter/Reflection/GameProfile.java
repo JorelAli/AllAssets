@@ -8,17 +8,17 @@ import org.bukkit.entity.Player;
 
 public class GameProfile {
 	
-	private String name;
-	private UUID id;
+	private final String name;
+	private final UUID id;
 	
 	/** Gets the UUID of a player from the UserCache.json file
 	 * Not reliable compared to .getUniqueID and UUIDData file */
-	public GameProfile(Player player) throws Exception {
-		ReflectionUtils utils = new ReflectionUtils(player);
-		Object usercache = Class.forName(utils.packageName + ".UserCache").getConstructor(utils.minecraftServerClass, File.class).newInstance(utils.dedicatedServer, new File("usercache.json"));
-		Method method = usercache.getClass().getDeclaredMethod("a", utils.minecraftServerClass, String.class);
+	public GameProfile(final Player player) throws Exception {
+		final ReflectionUtils utils = new ReflectionUtils(player);
+		final Object usercache = utils.getNMSClass("UserCache").getConstructor(utils.minecraftServerClass, File.class).newInstance(utils.dedicatedServer, new File("usercache.json"));
+		final Method method = usercache.getClass().getDeclaredMethod("a", utils.minecraftServerClass, String.class);
 		method.setAccessible(true);
-		Object gameProfile = method.invoke(usercache, utils.dedicatedServer, player.getName());
+		final Object gameProfile = method.invoke(usercache, utils.dedicatedServer, player.getName());
 		id = (UUID) utils.getPrivateField(gameProfile, "id");
 		name = player.getName();
 	}

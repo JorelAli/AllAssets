@@ -15,7 +15,7 @@ public class InstantRespawnTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			ReflectionUtils utils = new ReflectionUtils(player);
+			final ReflectionUtils utils = new ReflectionUtils(player);
 			Object packet = utils.emptyPacketPlayInClientCommand;
 			packet = packet.getClass().getConstructor(utils.enumClientCommandClass).newInstance(utils.getEnum(utils.enumClientCommandClass, "PERFORM_RESPAWN"));
 			utils.getConnection.getClass().getMethod("a", packet.getClass()).invoke(utils.getConnection, packet);

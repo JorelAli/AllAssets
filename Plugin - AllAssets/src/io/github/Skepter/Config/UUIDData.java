@@ -35,7 +35,7 @@ public class UUIDData {
 		return dataFile;
 	}
 
-	public static void setData(Player player) {
+	public static void setData(final Player player) {
 		getDataFile().set(player.getName(), player.getUniqueId().toString());
 		saveDataFile();
 	}

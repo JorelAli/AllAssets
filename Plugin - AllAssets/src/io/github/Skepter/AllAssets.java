@@ -33,8 +33,10 @@ import io.github.Skepter.Commands.CommandPWeather;
 import io.github.Skepter.Commands.CommandPing;
 import io.github.Skepter.Commands.CommandRename;
 import io.github.Skepter.Commands.CommandSignEdit;
+import io.github.Skepter.Commands.CommandStaffChat;
 import io.github.Skepter.Commands.CommandTime;
 import io.github.Skepter.Commands.CommandTp;
+import io.github.Skepter.Commands.CommandTphere;
 import io.github.Skepter.Commands.CommandWeather;
 import io.github.Skepter.Commands.CommandWorlds;
 import io.github.Skepter.Config.ConfigHandler;
@@ -123,19 +125,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 //a way to parse PARTS  of a player's name in commands
 //play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
 
-/**
- * - Things NOT to export when releasing Alpha version -
- * Permissions
- * ExperienceUtils
- * ItemNames
- * MessagePart
- * Fanciful
- * IPUtils
- * Reflections (All of the Libs)
- * TabText
- * Resources
- * Builds 
- */
+/* - Things NOT to export when releasing Alpha version - Permissions
+ * ExperienceUtils ItemNames MessagePart Fanciful IPUtils Reflections (All of
+ * the Libs) TabText Resources Builds */
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */
@@ -174,11 +166,12 @@ public class AllAssets extends JavaPlugin {
 
 		new ConfigHandler();
 
-		/* Used to check if vault is available. If not, then disable the vault-specific commands
-		 * such as /balance etc. */
-		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled())
+		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
+		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
 			getLogger().warning("Vault not found, so some features may not be available");
-		else {
+			/* I put this here because if the plugin reloads, it may be set to true, however the owner of a server could have removed vault, thus some features would crash */
+			hasVault = false;
+		} else {
 			hasVault = true;
 			setupVault();
 			getLogger().info("Vault has been found and hooked into successfully");
@@ -187,8 +180,7 @@ public class AllAssets extends JavaPlugin {
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
 
-		/** This is the features.yml file which enables/disables features
-		 * according to the users will */
+		/* This is the features.yml file which enables/disables features according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.instance().features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
@@ -214,9 +206,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandDebug(framework);
 		if (ConfigHandler.instance().features().getBoolean("Disable"))
 			new CommandDisable(framework);
-		if (ConfigHandler.instance().features().getBoolean("Enchant")) {
+		if (ConfigHandler.instance().features().getBoolean("Enchant"))
 			r(new CommandEnchant(framework));
-		}
 		if (ConfigHandler.instance().features().getBoolean("Enable"))
 			new CommandEnable(framework);
 		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
@@ -256,10 +247,14 @@ public class AllAssets extends JavaPlugin {
 			new CommandRename(framework);
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
+		if (ConfigHandler.instance().features().getBoolean("StaffChat"))
+			r(new CommandStaffChat(framework));
 		if (ConfigHandler.instance().features().getBoolean("Time"))
 			new CommandTime(framework);
 		if (ConfigHandler.instance().features().getBoolean("Tp"))
 			new CommandTp(framework);
+		if (ConfigHandler.instance().features().getBoolean("Tphere"))
+			new CommandTphere(framework);
 		if (ConfigHandler.instance().features().getBoolean("Weather"))
 			new CommandWeather(framework);
 		if (ConfigHandler.instance().features().getBoolean("Worlds"))
