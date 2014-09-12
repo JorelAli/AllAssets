@@ -13,3 +13,14 @@ Coming in the next release features (not completed yet)
 
 Coming in the next release features (completed)
 -----------------------------------------------
+
+Bugs to fix
+-----------
+
+* Add tag to AFK players
+* Error using /AllAssets reload
+* BalanceTop and Balance vault check needs to be upgraded to check for actual economy (or supply custom economy)
+* Add confirmation message to /batch and /bind
+
+Patched Bugs
+------------
