@@ -21,6 +21,15 @@ Bugs to fix
 * Error using /AllAssets reload
 * BalanceTop and Balance vault check needs to be upgraded to check for actual economy (or supply custom economy)
 * Add confirmation message to /batch and /bind
+* Add tile entities to /near
+* Need to work on a /help page
 
 Patched Bugs
 ------------
+
+* Fix Enchant bugs
+* Added other entities to /near
+* Fix empty OpList
+* Fix messed up /ping
+* Fixed /time, /weather, /ptime and /pweather not working
+* Fixed /tp issue with default setting messing it up
