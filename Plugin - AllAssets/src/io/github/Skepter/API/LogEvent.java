@@ -33,7 +33,7 @@ public class LogEvent extends Event {
 	}
 
 	public static enum LogType {
-		CHAT, ERROR, OTHER
+		CHAT, ERROR, OTHER, GRIEF
 	};
 
 	@Override

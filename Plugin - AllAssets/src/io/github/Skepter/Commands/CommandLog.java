@@ -17,6 +17,7 @@ public class CommandLog {
 	private static List<String> chatLog = new ArrayList<String>();
 	private static List<String> errorLog = new ArrayList<String>();
 	private static List<String> otherLog = new ArrayList<String>();
+	private static List<String> griefLog = new ArrayList<String>();
 	private static int max = 0;
 
 	public CommandLog(final CommandFramework framework) {
@@ -37,6 +38,32 @@ public class CommandLog {
 			args.getSender().sendMessage(s);
 	}
 
+	public static void addLog(final String s, final LogType type) {
+		final LogEvent event = new LogEvent(s, type);
+		List<String> log = null;
+		switch (type) {
+		case CHAT:
+			log = chatLog;
+			break;
+		case ERROR:
+			log = errorLog;
+			break;
+		case GRIEF:
+			log = griefLog;
+			break;
+		case OTHER:
+		default:
+			log = otherLog;
+			break;
+		}
+		Bukkit.getServer().getPluginManager().callEvent(event);
+		log.add(s);
+		if (log.size() == max)
+			log.remove(1);
+
+	}
+
+	@Deprecated
 	public static void addChatLog(final String s) {
 		final LogEvent event = new LogEvent(s, LogType.CHAT);
 		Bukkit.getServer().getPluginManager().callEvent(event);
@@ -45,6 +72,7 @@ public class CommandLog {
 			chatLog.remove(1);
 	}
 
+	@Deprecated
 	public static void addErrorLog(final String s) {
 		final LogEvent event = new LogEvent(s, LogType.ERROR);
 		Bukkit.getServer().getPluginManager().callEvent(event);
@@ -53,6 +81,7 @@ public class CommandLog {
 			errorLog.remove(1);
 	}
 
+	@Deprecated
 	public static void addOtherLog(final String s) {
 		final LogEvent event = new LogEvent(s, LogType.OTHER);
 		Bukkit.getServer().getPluginManager().callEvent(event);

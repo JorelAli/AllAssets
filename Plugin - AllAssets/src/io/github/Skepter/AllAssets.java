@@ -74,7 +74,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/* AllAssets plugin, version 0.1
+/* AllAssets plugin, version 0.2
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -98,7 +98,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // something like WE with /replace <block> <radius>
 // onJoinAction - fireworks, command etc.
 // firework interface like Enchant - use For loops to generate it (similar to enchant inv)
-
+// /griefReport command - adds to the /log
 // Explore the ResourceBundle for setting Locale
 // A way to mute a player which stops all other chat being sent to that player except admin
 

@@ -2,6 +2,7 @@ package io.github.Skepter.Listeners;
 
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.API.User;
+import io.github.Skepter.API.LogEvent.LogType;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
@@ -65,7 +66,7 @@ public class PlayerListener implements Listener {
 		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
 			final List<String> ips = user.IPs();
 			if (!ips.isEmpty())
-				CommandLog.addOtherLog(event.getPlayer().getName() + " joined with a new IP");
+				CommandLog.addLog(event.getPlayer().getName() + " joined with a new IP", LogType.OTHER);
 			ips.add(event.getPlayer().getAddress().getHostName());
 			user.setIPs(ips);
 		}

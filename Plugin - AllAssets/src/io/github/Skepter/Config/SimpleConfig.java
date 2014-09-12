@@ -33,7 +33,7 @@ public class SimpleConfig {
 		/* Custom check to find tabs in config files */
 		try {
 			if (Boolean.parseBoolean(checkYamlFiles().split(":")[0])) {
-				AllAssets.instance().getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab  " + checkYamlFiles().split(":")[2] + "!");
+				AllAssets.instance().getLogger().severe(checkYamlFiles().split(":")[1] + " contains a tab " + checkYamlFiles().split(":")[2] + "!");
 				Bukkit.getPluginManager().disablePlugin(plugin);
 			} else
 				loadConfig(configStream);

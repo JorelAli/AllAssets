@@ -1,6 +1,7 @@
 package io.github.Skepter.Listeners;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.API.LogEvent.LogType;
 import io.github.Skepter.Commands.CommandConsoleLog;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Utils.TextUtils;
@@ -34,9 +35,9 @@ public class LogListener implements Filter {
 			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 				return null;
 			else 
-				CommandLog.addErrorLog(AllAssets.houseStyleColor + TextUtils.stringBetween(msg, "(", ")"));
+				CommandLog.addLog(AllAssets.houseStyleColor + TextUtils.stringBetween(msg, "(", ")"), LogType.ERROR);
 		if (msg.contains("Exception"))
-			CommandLog.addErrorLog(msg);
+			CommandLog.addLog(msg, LogType.ERROR);
 		return null;
 	}
 

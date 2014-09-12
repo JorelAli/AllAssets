@@ -1,6 +1,8 @@
 package io.github.Skepter.Config;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.API.LogEvent.LogType;
+import io.github.Skepter.Commands.CommandLog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -8,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Level;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -46,7 +47,7 @@ public class UUIDData {
 		try {
 			getDataFile().save(dataFileFile);
 		} catch (final java.io.IOException ex) {
-			AllAssets.instance().getLogger().log(Level.SEVERE, "Could not save data to " + dataFileFile, ex);
+			CommandLog.addLog("Could not save data to " + dataFileFile.toString(), LogType.ERROR);
 		}
 	}
 

@@ -1,11 +1,11 @@
 package io.github.Skepter.Config;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.API.LogEvent.LogType;
 import io.github.Skepter.Commands.CommandLog;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -43,7 +43,7 @@ public class PlayerData {
 			try {
 				getPlayerData().save(dataFile);
 			} catch (final IOException ex) {
-				AllAssets.instance().getLogger().log(Level.SEVERE, "Error saving player data file!");
+				CommandLog.addLog("Error saving player data file! ", LogType.ERROR);
 			}
 	}
 
@@ -54,7 +54,7 @@ public class PlayerData {
 		try {
 			dataFile.createNewFile();
 		} catch (final IOException e) {
-			CommandLog.addErrorLog("Could not save player data to " + dataFile);
+			CommandLog.addLog("Could not save player data to " + dataFile.toString(), LogType.ERROR);
 		}
 	}
 
