@@ -34,37 +34,38 @@ public class CommandEnchant implements Listener {
 		player.openInventory(EnchantmentInventories.page1());
 		return;
 	}
-	
+
 	@EventHandler
 	public void onClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
-		switch (event.getInventory().getName()) {
-		//page 1
-		case "Enchant - Armor":
-			if (event.getSlot() == 53) {
-				player.openInventory(EnchantmentInventories.page2()); // page 2
-				return;
-			} else if (event.getSlot() == 52) {
-				player.openInventory(EnchantmentInventories.page1()); // page 4
-				return;
-			}
-			doEnchant(player, event, 54);
-		case "Enchant - Tools":
-			if (event.getSlot() == 26) {
-				player.openInventory(EnchantmentInventories.page2()); // page 3
-				return;
-			} else if (event.getSlot() == 25) {
-				player.openInventory(EnchantmentInventories.page1()); // page 1
-				return;
-			}
-			doEnchant(player, event, 27);
-		case "Enchant - Weapons":
-			if (event.getSlot() == 53) {
-				player.openInventory(EnchantmentInventories.page2()); // page 4
-				return;
-			} else if (event.getSlot() == 52) {
-				player.openInventory(EnchantmentInventories.page1()); // page 2
-				return;
+		if (event.getAction().equals(InventoryAction.PICKUP_SOME)) {
+			switch (event.getInventory().getName()) {
+			case "Enchant - Armor":
+				if (event.getSlot() == 53) {
+					player.openInventory(EnchantmentInventories.page2()); // page 2
+					return;
+				} else if (event.getSlot() == 52) {
+					player.openInventory(EnchantmentInventories.page1()); // page 4
+					return;
+				}
+				doEnchant(player, event, 54);
+			case "Enchant - Tools":
+				if (event.getSlot() == 26) {
+					player.openInventory(EnchantmentInventories.page2()); // page 3
+					return;
+				} else if (event.getSlot() == 25) {
+					player.openInventory(EnchantmentInventories.page1()); // page 1
+					return;
+				}
+				doEnchant(player, event, 27);
+			case "Enchant - Weapons":
+				if (event.getSlot() == 53) {
+					player.openInventory(EnchantmentInventories.page2()); // page 4
+					return;
+				} else if (event.getSlot() == 52) {
+					player.openInventory(EnchantmentInventories.page1()); // page 2
+					return;
+				}
 			}
 		}
 	}

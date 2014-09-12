@@ -100,8 +100,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // firework interface like Enchant - use For loops to generate it (similar to enchant inv)
 
 // Explore the ResourceBundle for setting Locale
-// A way to mute a player which stops all other chat being sent to that player
-// except admin
+// A way to mute a player which stops all other chat being sent to that player except admin
 
 // sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)

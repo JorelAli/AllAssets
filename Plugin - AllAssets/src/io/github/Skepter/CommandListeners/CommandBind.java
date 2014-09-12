@@ -28,9 +28,17 @@ public class CommandBind implements Listener {
 
 	@CommandHandler(name = "bind", permission = "bind", description = "Binds a command to an item", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		// Player player = args.getPlayer();
-		/* Display help */
-		// if.......... yeah that kinda stuff return;
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+		player.sendMessage(TextUtils.title("Bind help"));
+		player.sendMessage(AllAssets.houseStyleColor + "/bind add <command> - adds a command to the binded item");
+		player.sendMessage(AllAssets.houseStyleColor + "/bind remove <number> - removes a command to the binded item");
+		return;
 	}
 
 	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item", usage = "Use <command>")

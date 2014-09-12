@@ -74,5 +74,7 @@ public abstract interface IUser {
 	public abstract List<UUID> getFriendList();
 	
 	public abstract void setFriendList();
+	
+	public abstract String getLanguage(Player p);
 
 }

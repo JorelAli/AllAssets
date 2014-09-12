@@ -40,12 +40,11 @@ public class CommandAllAssets {
 	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "AllAssets.allassets", description = "Reloads entire plugin", usage = "Use <command>")
 	public void reload(final CommandArgs args) {
 		args.getSender().sendMessage(AllAssets.title + "Reloading...");
-		final Timer timer = new Timer();
 		/* We're currently in dev and dev file name isn't the same as the released name */
 		final File devPluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets.jar");
 		//		final File pluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets-" + AllAssets.instance().getDescription().getVersion() + ".jar");
 		final String cachedTitle = AllAssets.title;
-		timer.schedule(new TimerTask() {
+		new Timer().schedule(new TimerTask() {
 
 			@Override
 			public void run() {

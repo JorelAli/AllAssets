@@ -66,6 +66,7 @@ public class User implements IUser {
 		return ping;
 	}
 
+	@Override
 	public String getLanguage(final Player p) {
 		try {
 			switch (new ReflectionUtils(p).locale.toLowerCase()) {
@@ -240,6 +241,7 @@ public class User implements IUser {
 	public void setAFK(final boolean afk) {
 		playerData.getPlayerData().set("afk", afk);
 		playerData.savePlayerData();
+		//add tag TODO
 	}
 
 	@Override
