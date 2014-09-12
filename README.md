@@ -13,4 +13,14 @@ Also desgined to be as light weight as possible (compared to Essentials) and sup
 
 Compiling
 ---------
-Not allowed. You could do it if you want to, but I prefer you'd use the AllAssets.jar file inside the /builds/ folder
+Not allowed. You could do it if you want to, but I prefer you'd use the AllAssets.jar file inside the /builds/ folder (since the builds there have less bugs than these default development builds - and sometimes development builds crash. A lot!)
+
+About
+-----
+Skepter, the single developer of AllAssets hated Essentials. He hated how it was easy to exploit teleporting by using /tpahere on himself whilst standing on the corner of a block and teleporting to a location far below him (easy way to descend canyons without the descend permission xD). He hated the massive (and amount) of files required - Essentials, EssentialsSpawn/Protect/Chat etc. He hated the system of removing commands by opening the jar file and removing it from Essentials' plugin.yml. He planned on creating a new plugin which would be:
+* The successor to his older plugin called NecessaryExtras
+* A plugin that was better better than Essentials
+* A more 'user friendly' plugin which would also have advanced features
+
+Upon creation, he named his project AllInOne, until his friend told him that a plugin was already named by that. Since then, after some help with friends (ajcozzo, Gerrie_K, amoniuszko20) he renamed his project to 'AllAssets'.
+The most unique thing about this plugin is, most large plugins such as CommandBook and Essentials for example were normally created with a collaboration of developers, however AllAssets was coded entirely (excepting the libraries) by one single developer - Skepter.
