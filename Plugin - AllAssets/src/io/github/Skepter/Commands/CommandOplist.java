@@ -7,8 +7,6 @@ import io.github.Skepter.Utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,24 +20,18 @@ public class CommandOplist {
 
 	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "oplist", description = "Lists the players that have op", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final Set<OfflinePlayer> ops = Bukkit.getOperators();
 		final ArrayList<String> operators = new ArrayList<String>();
-		for (final OfflinePlayer s : ops)
-			if (s.toString().contains("CraftPlayer")) {
-				final String onlinePlayerName = s.toString().substring(17, s.toString().length() - 1);
-				operators.add(onlinePlayerName);
-			} else if (s.toString().contains("CraftOfflinePlayer")) {
-				final String offlinePlayerName = s.toString().substring(24, s.toString().length() - 1);
-				operators.add(offlinePlayerName);
-			}
+		for (final OfflinePlayer s : Bukkit.getOperators())
+			operators.add(s.getName() + ":" + s.getUniqueId().toString());
 		Collections.sort(operators);
-		args.getSender().sendMessage(TextUtils.title("Operators"));
-		for (final String s : operators) {
-			final String u = PlayerUtils.getPlayernameFromUUID(UUID.fromString(s));
-			if (PlayerUtils.isOnline(u))
-				args.getSender().sendMessage(ChatColor.GREEN + "[Online] " + ChatColor.WHITE + u + " (" + s + ")");
+		if (!operators.isEmpty())
+			args.getSender().sendMessage(TextUtils.title("Operators"));
+		for (final String operator : operators) {
+			String[] op = operator.split(":");
+			if (PlayerUtils.isOnline(op[0]))
+				args.getSender().sendMessage(ChatColor.GREEN + "[Online] " + ChatColor.WHITE + op[0] + " (" + op[1] + ")");
 			else
-				args.getSender().sendMessage(ChatColor.RED + "[Offline] " + ChatColor.WHITE + (u == null ? "Couldn't find username" : u) + " (" + s + ")");
+				args.getSender().sendMessage(ChatColor.RED + "[Offline] " + ChatColor.WHITE + (op[0] == null ? "Couldn't find username" : op[0]) + " (" + op[1] + ")");
 		}
 
 	}

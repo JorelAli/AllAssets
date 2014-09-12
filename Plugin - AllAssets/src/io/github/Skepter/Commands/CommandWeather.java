@@ -29,14 +29,17 @@ public class CommandWeather {
 					player.getWorld().setStorm(true);
 					player.getWorld().setThundering(false);
 					player.sendMessage(AllAssets.title + "Weather set to downfall");
+					break;
 				case "clear":
 				case "sun":
 					player.getWorld().setStorm(false);
 					player.getWorld().setThundering(false);
 					player.sendMessage(AllAssets.title + "Weather set to clear");
+					break;
 				case "thunder":
 					player.getWorld().setThundering(true);
 					player.sendMessage(AllAssets.title + "Weather set to thunder");
+					break;
 				}
 			return;
 		} else {
@@ -48,6 +51,7 @@ public class CommandWeather {
 						world.setStorm(true);
 						world.setThundering(false);
 						args.getSender().sendMessage(AllAssets.title + "Weather set to downfall");
+						break;
 					}
 				case "clear":
 				case "sun":
@@ -55,11 +59,13 @@ public class CommandWeather {
 						world.setStorm(false);
 						world.setThundering(false);
 						args.getSender().sendMessage(AllAssets.title + "Weather set to clear");
+						break;
 					}
 				case "thunder":
 					for (final World world : Bukkit.getWorlds()) {
 						world.setThundering(true);
 						args.getSender().sendMessage(AllAssets.title + "Weather set to thunder");
+						break;
 					}
 				}
 			return;

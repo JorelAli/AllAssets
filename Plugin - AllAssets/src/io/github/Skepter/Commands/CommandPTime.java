@@ -33,18 +33,23 @@ public class CommandPTime {
 				case "day":
 					player.setPlayerTime(1000, false);
 					player.sendMessage(AllAssets.title + "Time set to day");
+					break;
 				case "midday":
 					player.setPlayerTime(6000, false);
 					player.sendMessage(AllAssets.title + "Time set to midday");
+					break;
 				case "night":
 					player.setPlayerTime(14000, false);
 					player.sendMessage(AllAssets.title + "Time set to night");
+					break;
 				case "midnight":
 					player.setPlayerTime(18000, false);
 					player.sendMessage(AllAssets.title + "Time set to midnight");
+					break;
 				case "reset":
 				case "normal:":
 					player.resetPlayerTime();
+					break;
 				}
 				return;
 			}
@@ -66,21 +71,26 @@ public class CommandPTime {
 					target.setPlayerTime(1000, false);
 					player.sendMessage(AllAssets.title + "Time set to day");
 					target.sendMessage(AllAssets.titleNoColor + player.getName() + " set your time to day");
+					break;
 				case "midday":
 					target.setPlayerTime(6000, false);
 					player.sendMessage(AllAssets.title + "Time set to midday");
 					target.sendMessage(AllAssets.titleNoColor + player.getName() + " set your time to midday");
+					break;
 				case "night":
 					target.setPlayerTime(14000, false);
 					player.sendMessage(AllAssets.title + "Time set to night");
 					target.sendMessage(AllAssets.titleNoColor + player.getName() + " set your time to night");
+					break;
 				case "midnight":
 					target.setPlayerTime(18000, false);
 					player.sendMessage(AllAssets.title + "Time set to midnight");
 					target.sendMessage(AllAssets.titleNoColor + player.getName() + " set your time to midnight");
+					break;
 				case "reset":
 				case "normal:":
 					target.resetPlayerTime();
+					break;
 				}
 				return;
 			}

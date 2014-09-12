@@ -13,7 +13,6 @@ import java.util.TreeMap;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 public class CommandNear {
@@ -31,28 +30,34 @@ public class CommandNear {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+		/* Changing lookup distance */
 		int distance = 200;
 		if (args.getArgs().length == 1)
 			if (TextUtils.isInteger(args.getArgs()[0]))
 				distance = Integer.parseInt(args.getArgs()[0]);
 			else
 				ErrorUtils.notAnInteger(player);
+		
+		/* Checking for entities */
 		final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
 		if (entities.isEmpty()) {
 			player.sendMessage(AllAssets.title + "No nearby entities could be found!");
 			return;
 		}
+		
+		/* Dump them into a map for easy lookup */
 		final Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
 		while (entities.iterator().hasNext()) {
 			final Entity entity = entities.iterator().next();
 			if (entity instanceof Player)
 				continue;
-			if (entity instanceof LivingEntity) {
+			else {
 				map.put(entity.getType(), map.get(entity.getType()) == null ? 1 : map.get(entity.getType()) + 1);
 				entities.remove(entity);
-			} else
-				entities.remove(entity);
+			}
 		}
+		
+		/* Print the info */
 		if (!map.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby entities"));
 			int count = 0;

@@ -124,7 +124,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 //friend list to find friends etc.
 //a way to parse PARTS  of a player's name in commands
 //play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
-
+//work on documentation - ensure EVERYTHING is REALLY clear.
 /* - Things NOT to export when releasing Alpha version - Permissions
  * ExperienceUtils ItemNames MessagePart Fanciful IPUtils Reflections (All of
  * the Libs) TabText Resources Builds */

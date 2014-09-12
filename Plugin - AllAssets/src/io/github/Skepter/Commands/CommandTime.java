@@ -1,8 +1,12 @@
 package io.github.Skepter.Commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.Commands.CommandFramework.Completer;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.TextUtils;
 
@@ -23,26 +27,32 @@ public class CommandTime {
 		case 1:
 			int time = 0;
 			try {
-				if(!TextUtils.isInteger(args.getArgs()[0]))
+				if (!TextUtils.isInteger(args.getArgs()[0]))
 					ErrorUtils.notAnInteger(args.getSender());
 				time = Integer.parseInt(args.getArgs()[0]);
 				args.getSender().sendMessage(AllAssets.title + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
-				
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					time = 1000;
 					args.getSender().sendMessage(AllAssets.title + "Time set to day");
+					break;
 				case "midday":
 					time = 6000;
 					args.getSender().sendMessage(AllAssets.title + "Time set to midday");
+					break;
 				case "night":
 					time = 14000;
 					args.getSender().sendMessage(AllAssets.title + "Time set to night");
+					break;
 				case "midnight":
 					time = 18000;
 					args.getSender().sendMessage(AllAssets.title + "Time set to midnight");
+					break;
+				default:
+					ErrorUtils.error(args.getSender(), "Couldn't set the time!");
+					return;
 				}
 			}
 			for (final World world : Bukkit.getWorlds())
@@ -78,6 +88,16 @@ public class CommandTime {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(18000);
 		args.getSender().sendMessage(AllAssets.title + "Time set to midnight");
+	}
+
+	@Completer(name = "time")
+	public List<String> testCompleter(final CommandArgs args) {
+		final List<String> list = new ArrayList<String>();
+		list.add("day");
+		list.add("midday");
+		list.add("night");
+		list.add("midnight");
+		return list;
 	}
 
 }

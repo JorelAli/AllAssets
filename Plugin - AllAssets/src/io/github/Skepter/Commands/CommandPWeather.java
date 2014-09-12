@@ -28,13 +28,16 @@ public class CommandPWeather {
 			case "downfall":
 			case "rain":
 				player.setPlayerWeather(WeatherType.DOWNFALL);
+				break;
 			case "clear":
 			case "sun":
 			case "day":
 				player.setPlayerWeather(WeatherType.CLEAR);
+				break;
 			case "reset":
 			case "normal":
 				player.resetPlayerWeather();
+				break;
 			}
 		if (args.getArgs().length == 2) {
 			Player target = null;
@@ -47,13 +50,16 @@ public class CommandPWeather {
 			case "downfall":
 			case "rain":
 				target.setPlayerWeather(WeatherType.DOWNFALL);
+				break;
 			case "clear":
 			case "sun":
 			case "day":
 				target.setPlayerWeather(WeatherType.CLEAR);
+				break;
 			case "reset":
 			case "normal":
 				target.resetPlayerWeather();
+				break;
 			}
 		}
 		return;

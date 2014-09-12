@@ -154,7 +154,7 @@ public class User implements IUser {
 							 // sounds like its from another player to another
 							 // player...
 		// TODO canTP in User file
-		return false;
+		return true;
 	}
 
 	@Override
