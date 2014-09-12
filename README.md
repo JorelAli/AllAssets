@@ -27,7 +27,7 @@ The most unique thing about this plugin is, most large plugins such as CommandBo
 
 Why choose me?
 --------------
-I know what you're thinking - why choose this plugin over <PLUGIN NAME>?
+I know what you're thinking - why choose this plugin over [PLUGIN NAME]?
 Well, this plugin is different. I'm not necessarily saying the commands - some are similar such as /god and /tp, however, this plugin has been designed with superior precision and lots of planning time. Unlike (most) others, this plugin can:
 * tell you which players are op
 * make you a ghost (translucent)
