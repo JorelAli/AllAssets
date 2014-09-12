@@ -11,9 +11,20 @@ It is designed with speed, simplicity and ease of use in mind, so even brand new
 
 Also desgined to be as light weight as possible (compared to Essentials) and supposed to be really easy to use.
 
-Compiling
----------
+Compiling & source code info
+----------------------------
 Not allowed. You could do it if you want to, but I prefer you'd use the AllAssets.jar file inside the /builds/ folder (since the builds there have less bugs than these default development builds - and sometimes development builds crash. A lot!)
+
+The source code is there, feel free to explore. Those who are new to source code browsing, here's the list of file information:
+* .settings - just some boring eclipse stuff. Nothing interesting here.
+* bin - GitHub stuff. Nothing interesting here.
+* builds - downloads of the latest builds
+* resources - some files I put there for reference when coding. Not really interesting.
+* src/io/github/Skepter - code here! Check this out - it's packed with useful stuff!
+* .classpath - eclipse settings. Nothing interesting.
+* .project - see .classpath.
+* Read me.txt - This is a file which will be exported with AllAssets once it is run. It contains a bunch of useful info to get started.
+* plugin.yml - The plugin.yml file - REALLY BORING, but you can check it out if you want.
 
 About
 -----
