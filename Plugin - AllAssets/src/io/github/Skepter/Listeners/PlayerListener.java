@@ -1,8 +1,8 @@
 package io.github.Skepter.Listeners;
 
 import io.github.Skepter.AllAssets;
-import io.github.Skepter.API.User;
 import io.github.Skepter.API.LogEvent.LogType;
+import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
@@ -70,11 +70,12 @@ public class PlayerListener implements Listener {
 			ips.add(event.getPlayer().getAddress().getHostName());
 			user.setIPs(ips);
 		}
-		
+
 		/* Sometimes needs a boost before the ping actually comes */
 		user.getPing();
 
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
+
 		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
 			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(AllAssets.title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
@@ -83,7 +84,11 @@ public class PlayerListener implements Listener {
 			if (ConfigHandler.instance().features().getBoolean("FireworkOnJoin"))
 				for (int i = 0; i < new Random().nextInt(5); i++)
 					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());
+			if (ConfigHandler.instance().features().getBoolean("CommandsOnJoin"))
+				for (String string : ConfigHandler.instance().config().getStringList("commandsOnJoin"))
+					Bukkit.dispatchCommand(event.getPlayer(), string.replace("{PLAYERNAME}", event.getPlayer().getName()));
 		}
+
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
 		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
@@ -107,7 +112,6 @@ public class PlayerListener implements Listener {
 			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
 	}
 
-	/* Hopefully, if they click that slot, it places the item on their head :D */
 	@EventHandler
 	public void blockHeads(final InventoryClickEvent event) {
 		if (((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE)) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
@@ -148,7 +152,6 @@ public class PlayerListener implements Listener {
 
 		if (ConfigHandler.instance().features().getBoolean("DeathSigns")) {
 			final Location loc = event.getEntity().getLocation();
-			// if(player canBuild in the location loc)
 			loc.getBlock().setType(Material.AIR);
 			loc.getBlock().setType(Material.SIGN_POST);
 			final Sign sign = (Sign) loc.getBlock().getState();

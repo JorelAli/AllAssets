@@ -1,5 +1,7 @@
 package io.github.Skepter.Config;
 
+import java.util.Arrays;
+
 import io.github.Skepter.AllAssets;
 
 public class ConfigHandler {
@@ -44,6 +46,7 @@ public class ConfigHandler {
 		config.set("staffChat", "'[&bStaff&f] {MESSAGE}'", "The prefix for the staff chat");
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");		
+		config.set("commandsOnJoin", Arrays.asList(new String[] {"/broadcast {PLAYERNAME} joined the game!"}), "CommandOnJoin must be enabled in features.yml");		
 		config.saveConfig();
 	}
 
@@ -131,7 +134,8 @@ public class ConfigHandler {
 		features.set("JoinActions", "true", new String[] { "Join Actions", "Actions to be carried out when a player joins" });
 		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
 		features.set("TotalTime", "true", "Display the total time the player has played on the server for");
-		config.set("FireworkOnJoin", "true", "JoinActions in features.yml must be turned on");
+		features.set("FireworkOnJoin", "true", "JoinActions in features.yml must be turned on");
+		features.set("CommandsOnJoin", "true", "Commands to run when a player joins - see config to add commands");
 
 		features.set("BlockHeads", "true", new String[] { "Cosmetics", "Cosmetic features to comply with the EULA" });
 //		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });

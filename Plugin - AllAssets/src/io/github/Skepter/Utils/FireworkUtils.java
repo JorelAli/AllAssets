@@ -61,4 +61,44 @@ public class FireworkUtils {
 		}
 		return null;
 	}
+	
+	class CustomFireworkBuilder {
+		
+		private Firework firework;
+		private FireworkMeta meta;
+		
+		public CustomFireworkBuilder(Location location) {
+			this.firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
+			this.meta = firework.getFireworkMeta();
+		}
+		
+		public void setPower(int power) {
+			meta.setPower(power);
+		}
+		
+		public void addTrail(boolean trail) {
+			meta.addEffect(FireworkEffect.builder().trail(trail).build());
+		}
+		
+		public void setType(Type type) {
+			meta.addEffect(FireworkEffect.builder().with(type).build());
+		}
+		
+		public void addFade(Color color) {
+			meta.addEffect(FireworkEffect.builder().withFade(color).build());
+		}
+		
+		public void addFlicker(boolean flicker) {
+			meta.addEffect(FireworkEffect.builder().flicker(flicker).build());
+		}
+		
+		public void addColor(Color color) {
+			meta.addEffect(FireworkEffect.builder().withColor(color).build());
+		}
+		
+		public Firework getFirework() {
+			firework.setFireworkMeta(meta);
+			return firework;
+		}
+	}
 }

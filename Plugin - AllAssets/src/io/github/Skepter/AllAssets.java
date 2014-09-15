@@ -96,7 +96,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Skepter */
 
 // something like WE with /replace <block> <radius>
-// onJoinAction - fireworks, command etc.
 // firework interface like Enchant - use For loops to generate it (similar to enchant inv)
 // /griefReport command - adds to the /log
 // Explore the ResourceBundle for setting Locale
@@ -127,6 +126,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 /* - Things NOT to export when releasing Alpha version - Permissions
  * ExperienceUtils ItemNames MessagePart Fanciful IPUtils Reflections (All of
  * the Libs) TabText Resources Builds */
+
+/*
+ * Climb vines
+ * check out commandBin
+ * recipes command
+ * insta-mine command
+ * disposal chest
+ * custom swords with poison perhaps & arrows perhaps
+ * jail
+ * redstone light netherrack/pumpkins/glowstone
+ *
+ */
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */
