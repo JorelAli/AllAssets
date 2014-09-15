@@ -6,8 +6,10 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class FireworkUtils {
@@ -64,12 +66,12 @@ public class FireworkUtils {
 	
 	class CustomFireworkBuilder {
 		
-		private Firework firework;
+		private ItemStack firework;
 		private FireworkMeta meta;
 		
-		public CustomFireworkBuilder(Location location) {
-			this.firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-			this.meta = firework.getFireworkMeta();
+		public CustomFireworkBuilder(int amount) {
+			this.firework = new ItemStack(Material.FIREWORK, amount);
+			this.meta = (FireworkMeta) firework.getItemMeta();
 		}
 		
 		public void setPower(int power) {
@@ -96,8 +98,8 @@ public class FireworkUtils {
 			meta.addEffect(FireworkEffect.builder().withColor(color).build());
 		}
 		
-		public Firework getFirework() {
-			firework.setFireworkMeta(meta);
+		public ItemStack getFirework() {
+			firework.setItemMeta(meta);
 			return firework;
 		}
 	}
