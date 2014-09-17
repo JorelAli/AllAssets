@@ -48,7 +48,7 @@ public class CommandEnchant implements Listener {
 					player.openInventory(EnchantmentInventories.page1()); // page 4
 					return;
 				}
-				doEnchant(player, event, 54);
+				doEnchant(player, event);
 			case "Enchant - Tools":
 				if (event.getSlot() == 26) {
 					player.openInventory(EnchantmentInventories.page2()); // page 3
@@ -57,7 +57,7 @@ public class CommandEnchant implements Listener {
 					player.openInventory(EnchantmentInventories.page1()); // page 1
 					return;
 				}
-				doEnchant(player, event, 27);
+				doEnchant(player, event);
 			case "Enchant - Weapons":
 				if (event.getSlot() == 53) {
 					player.openInventory(EnchantmentInventories.page2()); // page 4
@@ -70,12 +70,12 @@ public class CommandEnchant implements Listener {
 		}
 	}
 
-	private void doEnchant(final Player player, final InventoryClickEvent event, final int size) {
+	private void doEnchant(final Player player, final InventoryClickEvent event) {
 		if (!event.getAction().equals(InventoryAction.PICKUP_ONE))
 			event.setCancelled(true);
 		if ((event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 			return;
-		if (((event.getSlot() != (size - 2)) || (event.getSlot() != (size - 1)))) {
+		if (((event.getSlot() != (event.getInventory().getSize() - 2)) || (event.getSlot() != (event.getInventory().getSize() - 1)))) {
 			final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 			player.getItemInHand().addUnsafeEnchantments(eMap);
 			player.closeInventory();

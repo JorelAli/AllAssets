@@ -51,6 +51,7 @@ public class FireworkInventories {
 	/* 6 */
 	public static Inventory choosePower() {
 		final Inventory inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Choose a power size");
+		//return itemStack upon clicking whatever :D
 
 		return null;
 	}
