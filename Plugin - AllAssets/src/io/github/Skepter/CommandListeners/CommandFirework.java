@@ -1,12 +1,12 @@
 package io.github.Skepter.CommandListeners;
 
+import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Misc.FireworkInventories;
 import io.github.Skepter.Utils.CustomFireworkBuilder;
 import io.github.Skepter.Utils.ErrorUtils;
-import io.github.Skepter.Utils.ItemUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +27,8 @@ public class CommandFirework implements Listener {
 	public CommandFirework(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
-	
-	private Map<UUID, CustomFireworkBuilder> map = new HashMap<UUID, CustomFireworkBuilder>(); 
+
+	private Map<UUID, CustomFireworkBuilder> map = new HashMap<UUID, CustomFireworkBuilder>();
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -47,21 +47,59 @@ public class CommandFirework implements Listener {
 	public void onClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
 		if (event.getAction().equals(InventoryAction.PICKUP_SOME)) {
+			ItemStack item = event.getInventory().getItem(event.getSlot());
 			switch (event.getInventory().getName()) {
 			case "FireworkBuilder - Choose a firework type":
-				if(check(event)) {
+				if (check(event)) {
 					CustomFireworkBuilder builder = new CustomFireworkBuilder(1);
-					builder.setType(parseType(event.getInventory().getItem(event.getSlot())));
+					builder.setType(parseType(item));
 					map.put(player.getUniqueId(), builder);
-					player.openInventory(FireworkInventories.chooseColor());
+					player.openInventory(FireworkInventories.chooseColor(false));
 				}
+				break;
 			case "FireworkBuilder - Choose a color":
-				if(check(event)) {
+				if (check(event)) {
 					CustomFireworkBuilder builder = map.get(player);
-					builder.addColor(parseColor(event.getInventory().getItem(event.getSlot())));
+					builder.addColor(parseColor(item));
 					map.put(player.getUniqueId(), builder);
-					player.openInventory(FireworkInventories.chooseColor());
+					player.openInventory(FireworkInventories.chooseColor(true));
 				}
+				break;
+			case "FireworkBuilder - Choose a fade color":
+				if (check(event)) {
+					CustomFireworkBuilder builder = map.get(player);
+					builder.addFade(parseColor(item));
+					map.put(player.getUniqueId(), builder);
+					player.openInventory(FireworkInventories.chooseFlicker(false));
+				}
+				break;
+			case "FireworkBuilder - Do you want flickering?":
+				if (check(event)) {
+					CustomFireworkBuilder builder = map.get(player);
+					if (item.getType().equals(Material.MAGMA_CREAM))
+						builder.addFlicker(true);
+					map.put(player.getUniqueId(), builder);
+					player.openInventory(FireworkInventories.chooseFlicker(true));
+				}
+				break;
+			case "FireworkBuilder - Do you want a trail?":
+				if (check(event)) {
+					CustomFireworkBuilder builder = map.get(player);
+					if (item.getType().equals(Material.MAGMA_CREAM))
+						builder.addTrail(true);
+					map.put(player.getUniqueId(), builder);
+					player.openInventory(FireworkInventories.choosePower());
+				}
+				break;
+			case "FireworkBuilder - Choose a power size":
+				if (check(event)) {
+					CustomFireworkBuilder builder = map.get(player);
+					builder.setPower(parsePower(item));
+					map.remove(player.getUniqueId());
+					player.getInventory().addItem(builder.getFirework());
+					player.sendMessage(AllAssets.title + "Firework created!");
+				}
+				break;
 			}
 		}
 	}
@@ -73,10 +111,26 @@ public class CommandFirework implements Listener {
 			return false;
 		return true;
 	}
-	
+
+	private int parsePower(ItemStack item) {
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+			switch (item.getItemMeta().getDisplayName()) {
+			case "Power: 0":
+				return 0;
+			case "Power: 1":
+				return 1;
+			case "Power: 2":
+				return 2;
+			case "Power: 3":
+				return 3;
+			}
+		}
+		return 0;
+	}
+
 	private Type parseType(ItemStack item) {
-		if(item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
-			switch(item.getItemMeta().getDisplayName()) {
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+			switch (item.getItemMeta().getDisplayName()) {
 			case "Creeper":
 				return Type.CREEPER;
 			case "Ball":
@@ -91,28 +145,46 @@ public class CommandFirework implements Listener {
 		}
 		return Type.BALL;
 	}
-	
+
 	private Color parseColor(ItemStack item) {
-		if(item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
-			switch(item.getItemMeta().getDisplayName()) {
-			inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK), "Black"));
-			inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 8), "Gray"));
-			inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 7), "Silver"));
-			inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 3), "Maroon"));
-			inv.setItem(4, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 4), "Navy"));
-			inv.setItem(5, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 12), "Blue"));
-			inv.setItem(6, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 6), "Teal"));
-			inv.setItem(6, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 12), "Aqua"));
-			inv.setItem(7, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 2), "Olive"));
-			inv.setItem(8, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 10), "Lime"));
-			inv.setItem(9, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 2), "Green"));
-			inv.setItem(10, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 5), "Purple"));
-			inv.setItem(11, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 13), "Fuchsia"));
-			inv.setItem(12, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 1), "Red"));
-			inv.setItem(13, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 14), "Orange"));
-			inv.setItem(14, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 11), "Yellow"));
-			inv.setItem(15, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 15), "White"));		
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+			switch (item.getItemMeta().getDisplayName()) {
+			case "Black":
+				return Color.BLACK;
+			case "Gray":
+				return Color.GRAY;
+			case "Silver":
+				return Color.SILVER;
+			case "Maroon":
+				return Color.MAROON;
+			case "Navy":
+				return Color.NAVY;
+			case "Blue":
+				return Color.BLUE;
+			case "Teal":
+				return Color.TEAL;
+			case "Aqua":
+				return Color.AQUA;
+			case "Olive":
+				return Color.OLIVE;
+			case "Lime":
+				return Color.LIME;
+			case "Green":
+				return Color.GREEN;
+			case "Purple":
+				return Color.PURPLE;
+			case "Fuchsia":
+				return Color.FUCHSIA;
+			case "Red":
+				return Color.RED;
+			case "Orange":
+				return Color.ORANGE;
+			case "Yellow":
+				return Color.YELLOW;
+			case "White":
+				return Color.WHITE;
 			}
 		}
+		return Color.WHITE;
 	}
 }

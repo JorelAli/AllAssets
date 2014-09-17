@@ -20,9 +20,13 @@ public class FireworkInventories {
 		return inv;
 	}
 
-	/* 2 */
-	public static Inventory chooseColor() {
-		final Inventory inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Choose a color");
+	/* 2 & 3 - fade boolean to set title to fade */
+	public static Inventory chooseColor(boolean fade) {
+		Inventory inv = null;
+		if (fade)
+			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Choose a color");
+		else
+			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Choose a fade color");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK), "Black"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 8), "Gray"));
 		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 7), "Silver"));
@@ -39,35 +43,30 @@ public class FireworkInventories {
 		inv.setItem(12, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 1), "Red"));
 		inv.setItem(13, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 14), "Orange"));
 		inv.setItem(14, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 11), "Yellow"));
-		inv.setItem(15, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 15), "White"));		
+		inv.setItem(15, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 15), "White"));
 		return inv;
 	}
 
-	/* 3 */
-	public static Inventory chooseFade() {
-		final Inventory inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Choose a fade color");
-		return null;
-	}
-
-	/* 4 */
-	public static Inventory chooseFlicker() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Do you want flickering?");
-
-		return null;
-	}
-
-	/* 5 */
-	public static Inventory chooseTrail() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Do you want a trail?");
-
-		return null;
+	/* 4 & 5*/
+	public static Inventory chooseFlicker(boolean trail) {
+		Inventory inv = null;
+		if (trail)
+			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Do you want flickering?");
+		else
+			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Do you want a trail?");
+		inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Do you want flickering?");
+		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
+		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
+		return inv;
 	}
 
 	/* 6 */
 	public static Inventory choosePower() {
 		final Inventory inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Choose a power size");
-		//return itemStack upon clicking whatever :D
-
-		return null;
+		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 0"));
+		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 1"));
+		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 2"));
+		inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 3"));
+		return inv;
 	}
 }

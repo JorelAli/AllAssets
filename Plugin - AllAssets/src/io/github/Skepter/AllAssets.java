@@ -3,6 +3,7 @@ package io.github.Skepter;
 import io.github.Skepter.CommandListeners.CommandAFK;
 import io.github.Skepter.CommandListeners.CommandBind;
 import io.github.Skepter.CommandListeners.CommandEnchant;
+import io.github.Skepter.CommandListeners.CommandFirework;
 import io.github.Skepter.CommandListeners.CommandGod;
 import io.github.Skepter.Commands.CommandAllAssets;
 import io.github.Skepter.Commands.CommandBack;
@@ -222,6 +223,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandEnable(framework);
 		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
+		if (ConfigHandler.instance().features().getBoolean("Firework"))
+			r(new CommandFirework(framework));
 		if (ConfigHandler.instance().features().getBoolean("Fly"))
 			new CommandFly(framework);
 		if (ConfigHandler.instance().features().getBoolean("Gamemode"))

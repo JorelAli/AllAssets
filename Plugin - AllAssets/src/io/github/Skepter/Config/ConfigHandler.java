@@ -82,6 +82,7 @@ public class ConfigHandler {
 		features.set("Disable", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
+		features.set("Firework", "true");
 		features.set("Fly", "true");
 		features.set("ForceChat", "true");
 		features.set("Gamemode", "true");
