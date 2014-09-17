@@ -11,7 +11,7 @@ public class FireworkInventories {
 
 	/* 1 */
 	public static Inventory chooseType() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Choose a firework type");
+		final Inventory inv = Bukkit.createInventory(null, 9, "Firework - Type");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.SKULL_ITEM, 1, (short) 4), "Creeper"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Ball"));
 		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.FIREBALL), "Large Ball"));
@@ -24,9 +24,9 @@ public class FireworkInventories {
 	public static Inventory chooseColor(boolean fade) {
 		Inventory inv = null;
 		if (fade)
-			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Choose a color");
+			inv = Bukkit.createInventory(null, 18, "Firework - Fade");
 		else
-			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Choose a fade color");
+			inv = Bukkit.createInventory(null, 18, "Firework - Color");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK), "Black"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 8), "Gray"));
 		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 7), "Silver"));
@@ -51,10 +51,9 @@ public class FireworkInventories {
 	public static Inventory chooseFlicker(boolean trail) {
 		Inventory inv = null;
 		if (trail)
-			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Do you want flickering?");
+			inv = Bukkit.createInventory(null, 18, "Do you want a trail?");
 		else
-			inv = Bukkit.createInventory(null, 18, "FireworkBuilder - Do you want a trail?");
-		inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Do you want flickering?");
+			inv = Bukkit.createInventory(null, 18, "Do you want flickering?");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
 		return inv;
@@ -62,7 +61,7 @@ public class FireworkInventories {
 
 	/* 6 */
 	public static Inventory choosePower() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "FireworkBuilder - Choose a power size");
+		final Inventory inv = Bukkit.createInventory(null, 9, "Choose a power size");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 0"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 1"));
 		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 2"));

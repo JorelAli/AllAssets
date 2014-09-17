@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Color;
-import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,65 +38,65 @@ public class CommandFirework implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		player.openInventory(FireworkInventories.chooseType());
+		player.openInventory(FireworkInventories.chooseColor(false));
 		return;
 	}
 
 	@EventHandler
 	public void onClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
-		if (event.getAction().equals(InventoryAction.PICKUP_SOME)) {
+		if (event.getAction().equals(InventoryAction.PICKUP_ALL)) {
 			ItemStack item = event.getInventory().getItem(event.getSlot());
 			switch (event.getInventory().getName()) {
-			case "FireworkBuilder - Choose a firework type":
+			case "Firework - Type":
 				if (check(event)) {
-					CustomFireworkBuilder builder = new CustomFireworkBuilder(1);
+					CustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.setType(parseType(item));
-					map.put(player.getUniqueId(), builder);
-					player.openInventory(FireworkInventories.chooseColor(false));
-				}
-				break;
-			case "FireworkBuilder - Choose a color":
-				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player);
-					builder.addColor(parseColor(item));
 					map.put(player.getUniqueId(), builder);
 					player.openInventory(FireworkInventories.chooseColor(true));
 				}
 				break;
-			case "FireworkBuilder - Choose a fade color":
+			case "Firework - Color":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player);
+					CustomFireworkBuilder builder = new CustomFireworkBuilder(1);
+					builder.addColor(parseColor(item));
+					map.put(player.getUniqueId(), builder);
+					player.openInventory(FireworkInventories.chooseType());
+				}
+				break;
+			case "Firework - Fade":
+				if (check(event)) {
+					CustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.addFade(parseColor(item));
 					map.put(player.getUniqueId(), builder);
+
 					player.openInventory(FireworkInventories.chooseFlicker(false));
 				}
 				break;
-			case "FireworkBuilder - Do you want flickering?":
+			case "Do you want flickering?":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player);
-					if (item.getType().equals(Material.MAGMA_CREAM))
-						builder.addFlicker(true);
+					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					builder.addFlicker(parseBoolean(item));
 					map.put(player.getUniqueId(), builder);
 					player.openInventory(FireworkInventories.chooseFlicker(true));
 				}
 				break;
-			case "FireworkBuilder - Do you want a trail?":
+			case "Do you want a trail?":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player);
-					if (item.getType().equals(Material.MAGMA_CREAM))
-						builder.addTrail(true);
+					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					builder.addTrail(parseBoolean(item));
 					map.put(player.getUniqueId(), builder);
 					player.openInventory(FireworkInventories.choosePower());
 				}
 				break;
-			case "FireworkBuilder - Choose a power size":
+			case "Choose a power size":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player);
+					CustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.setPower(parsePower(item));
 					map.remove(player.getUniqueId());
 					player.getInventory().addItem(builder.getFirework());
 					player.sendMessage(AllAssets.title + "Firework created!");
+					player.closeInventory();
 				}
 				break;
 			}
@@ -105,11 +104,24 @@ public class CommandFirework implements Listener {
 	}
 
 	private boolean check(InventoryClickEvent event) {
-		if (!event.getAction().equals(InventoryAction.PICKUP_ONE))
+		if (!event.getAction().equals(InventoryAction.PICKUP_ALL))
 			return false;
 		if ((event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 			return false;
+		event.setCancelled(true);
 		return true;
+	}
+
+	private boolean parseBoolean(ItemStack item) {
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+			switch (item.getItemMeta().getDisplayName()) {
+			case "Yes":
+				return true;
+			case "No":
+				return false;
+			}
+		}
+		return false;
 	}
 
 	private int parsePower(ItemStack item) {
@@ -129,7 +141,7 @@ public class CommandFirework implements Listener {
 	}
 
 	private Type parseType(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
 			case "Creeper":
 				return Type.CREEPER;
@@ -142,7 +154,8 @@ public class CommandFirework implements Listener {
 			case "Star":
 				return Type.STAR;
 			}
-		}
+		else
+			return Type.BALL;
 		return Type.BALL;
 	}
 
