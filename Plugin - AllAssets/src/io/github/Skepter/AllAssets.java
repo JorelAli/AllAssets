@@ -116,6 +116,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 //normalColor: 9
 //emphasisColor: b
 //@ajcozzo
+//disco armor
 
 //recent players command - like seen, but for recent players
 //still able to tp when they're offline
