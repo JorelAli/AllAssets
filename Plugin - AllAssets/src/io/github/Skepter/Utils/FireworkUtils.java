@@ -22,7 +22,7 @@ public class FireworkUtils {
 		firework.setFireworkMeta(fireworkMeta);
 	}
 
-	private static Color getColor(final int i) {
+	public static Color getColor(final int i) {
 		switch (i) {
 		case 1:
 			return Color.AQUA;

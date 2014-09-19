@@ -17,6 +17,7 @@ import io.github.Skepter.Commands.CommandClearchat;
 import io.github.Skepter.Commands.CommandConsoleLog;
 import io.github.Skepter.Commands.CommandDebug;
 import io.github.Skepter.Commands.CommandDisable;
+import io.github.Skepter.Commands.CommandDiscoArmor;
 import io.github.Skepter.Commands.CommandEnable;
 import io.github.Skepter.Commands.CommandFly;
 import io.github.Skepter.Commands.CommandForceChat;
@@ -218,6 +219,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandDebug(framework);
 		if (ConfigHandler.instance().features().getBoolean("Disable"))
 			new CommandDisable(framework);
+		if (ConfigHandler.instance().features().getBoolean("DiscoArmor"))
+			new CommandDiscoArmor(framework);
 		if (ConfigHandler.instance().features().getBoolean("Enchant"))
 			r(new CommandEnchant(framework));
 		if (ConfigHandler.instance().features().getBoolean("Enable"))

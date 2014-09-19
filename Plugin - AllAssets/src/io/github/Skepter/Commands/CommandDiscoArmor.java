@@ -35,9 +35,11 @@ public class CommandDiscoArmor {
 			Bukkit.getScheduler().cancelTask((int) map.get(player.getUniqueId(), 1));
 			player.getInventory().setArmorContents((ItemStack[]) map.get(player.getUniqueId(), 2));
 			map.remove(player.getUniqueId());
+			player.sendMessage(AllAssets.title + "Your disco armor was removed");
 		} else {
-			BukkitTask i = Bukkit.getScheduler().runTaskTimer(AllAssets.instance(), new DiscoArmorTask(player), 0L, 20L);
+			BukkitTask i = Bukkit.getScheduler().runTaskTimer(AllAssets.instance(), new DiscoArmorTask(player), 0L, 5L);
 			map.put(player.getUniqueId(), i.getTaskId(), player.getInventory().getArmorContents(), null, null, null);
+			player.sendMessage(AllAssets.title + "You are now wearing disco armor!");
 		}
 		return;
 	}

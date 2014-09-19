@@ -80,6 +80,7 @@ public class ConfigHandler {
 		features.set("ConsoleLog", "true");
 		features.set("Debug", "true");
 		features.set("Disable", "true");
+		features.set("DiscoArmor", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
 		features.set("Firework", "true");
