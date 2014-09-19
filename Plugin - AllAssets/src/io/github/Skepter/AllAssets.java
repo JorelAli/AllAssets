@@ -47,6 +47,7 @@ import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.ComphenixsGhostFactory;
 import io.github.Skepter.Listeners.ChatListener;
 import io.github.Skepter.Listeners.ConsoleSayListener;
+import io.github.Skepter.Listeners.CustomUnknownCommandListener;
 import io.github.Skepter.Listeners.LogListener;
 import io.github.Skepter.Listeners.MultiCommandListener;
 import io.github.Skepter.Listeners.PlayerListener;
@@ -291,6 +292,7 @@ public class AllAssets extends JavaPlugin {
 		r(new ChatListener());
 		r(new SignListener());
 		r(new PlayerListener());
+		r(new CustomUnknownCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
