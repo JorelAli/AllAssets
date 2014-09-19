@@ -64,7 +64,7 @@ public class CommandNear {
 			for (final Entry<EntityType, Integer> entry : map.entrySet()) {
 				if (entry.getValue() == 0)
 					continue;
-				player.sendMessage(AllAssets.houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase()) + ": " + entry.getValue());
+				player.sendMessage(AllAssets.houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
 				count += entry.getValue();
 			}
 			player.sendMessage(AllAssets.houseStyleColor + "Total nearby entities: " + count);
