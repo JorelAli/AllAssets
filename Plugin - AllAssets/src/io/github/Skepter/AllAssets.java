@@ -140,6 +140,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * custom swords with poison perhaps & arrows perhaps
  * jail
  * redstone light netherrack/pumpkins/glowstone
+ * fix config resetting on reload
  *
  */
 public class AllAssets extends JavaPlugin {

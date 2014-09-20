@@ -1,5 +1,6 @@
 package io.github.Skepter.Config;
 
+import java.io.File;
 import java.util.Arrays;
 
 import io.github.Skepter.AllAssets;
@@ -21,9 +22,21 @@ public class ConfigHandler {
 			managerMessages = new SimpleConfigManager(AllAssets.instance());
 		if (managerFeatures == null)
 			managerFeatures = new SimpleConfigManager(AllAssets.instance());
-		createConfig();
-		createMessages();
-		createFeatures();
+
+		if (!new File(AllAssets.instance().getDataFolder(), "config.yml").exists())
+			createConfig();
+		else
+			config = manager.getNewConfig("config.yml");
+
+		if (!new File(AllAssets.instance().getDataFolder(), "messages.yml").exists())
+			createMessages();
+		else
+			messages = managerMessages.getNewConfig("messages.yml");
+		
+		if (!new File(AllAssets.instance().getDataFolder(), "features.yml").exists())
+			createFeatures();
+		else
+			features = managerFeatures.getNewConfig("features.yml");
 		instance = this;
 	}
 
@@ -43,10 +56,10 @@ public class ConfigHandler {
 		config.set("useIPInformation", "false", "Allows ");
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
 		config.set("multiCommandSeparator", "|", "The separator used in multi-commands");
-		config.set("staffChat", "'[&bStaff&f] {MESSAGE}'", "The prefix for the staff chat");
+		config.set("staffChat", "'[&bStaff - {PLAYERNAME}&f] {MESSAGE}'", "The prefix for the staff chat");
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
-		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");		
-		config.set("commandsOnJoin", Arrays.asList(new String[] {"/broadcast {PLAYERNAME} joined the game!"}), "CommandOnJoin must be enabled in features.yml");		
+		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
+		config.set("commandsOnJoin", Arrays.asList(new String[] { "/broadcast {PLAYERNAME} joined the game!" }), "CommandOnJoin must be enabled in features.yml");
 		config.saveConfig();
 	}
 
@@ -100,7 +113,7 @@ public class ConfigHandler {
 		features.set("PWeather", "true");
 		// work on this feature more - still a bit buggy and kinda unreliable
 		features.set("Reload", "false"); // default to FALSE when actually Nav
-										// exported
+										 // exported
 		features.set("Rename", "true");
 		features.set("SignEdit", "true");
 		features.set("StaffChat", "true");
@@ -119,7 +132,7 @@ public class ConfigHandler {
 		features.set("DeathSigns", "false");
 		features.set("DeathCount", "true");
 		features.set("InstantDeathRespawn", "false");
-//		features.set("AntiIllegalItems", "true");
+		//		features.set("AntiIllegalItems", "true");
 		features.set("MultiCommands", "true", "Allows you to execute multiple commands");
 		features.set("AnyLeash", "true", "Allows you to put leads on any mob");
 		features.set("PickupSkeletonArrows", "false", "Allows you to pick up skeleton arrows");
@@ -130,8 +143,8 @@ public class ConfigHandler {
 		features.set("FlyBreakSpeedModifier", "true", "Break blocks at normal speed when flying on survival");
 
 		// may remove in the future unless more instants come into play.
-//		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
-//		features.set("Instant bows", "false");
+		//		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
+		//		features.set("Instant bows", "false");
 
 		features.set("JoinActions", "true", new String[] { "Join Actions", "Actions to be carried out when a player joins" });
 		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
@@ -140,7 +153,7 @@ public class ConfigHandler {
 		features.set("CommandsOnJoin", "true", "Commands to run when a player joins - see config to add commands");
 
 		features.set("BlockHeads", "true", new String[] { "Cosmetics", "Cosmetic features to comply with the EULA" });
-//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
+		//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
 		features.saveConfig();
 	}
 
@@ -161,7 +174,7 @@ public class ConfigHandler {
 			return messages.getString(msg);
 		}
 	}
-	
+
 	public static String getSpecialMsg(final String msg) {
 		if (messages != null)
 			return messages.getSpecialString(msg);

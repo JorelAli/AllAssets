@@ -49,7 +49,10 @@ public class CommandStaffChat implements Listener {
 		if (players.contains(event.getPlayer().getUniqueId())) {
 			event.setCancelled(true);
 			for (final UUID uuid : players) {
-				Bukkit.getPlayer(uuid).sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigHandler.instance().config().getSpecialString("staffChat").replace("{MESSAGE}", event.getMessage())));
+				String format = ConfigHandler.instance().config().getSpecialString("staffChat");
+				String format1 = format.replace("{MESSAGE}", event.getMessage());
+				String format2 = format1.replace("{PLAYERNAME}", event.getPlayer().getName());
+				Bukkit.getPlayer(uuid).sendMessage(ChatColor.translateAlternateColorCodes('&', format2));
 			}
 		}
 	}
