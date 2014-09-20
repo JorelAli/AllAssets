@@ -77,6 +77,11 @@ public class SimpleConfig {
 		return String.valueOf(get(path));
 	}
 
+	public String getSpecialString(final String path) {
+		String string = getString(path);
+		return string.substring(1, string.length() - 1);
+	}
+
 	public String getString(final String path, final String def) {
 		return String.valueOf(get(path, def));
 	}

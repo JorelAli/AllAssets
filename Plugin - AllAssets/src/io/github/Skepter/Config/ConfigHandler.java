@@ -161,6 +161,15 @@ public class ConfigHandler {
 			return messages.getString(msg);
 		}
 	}
+	
+	public static String getSpecialMsg(final String msg) {
+		if (messages != null)
+			return messages.getSpecialString(msg);
+		else {
+			createMessages();
+			return messages.getSpecialString(msg);
+		}
+	}
 
 	public SimpleConfig features() {
 		if (features != null)

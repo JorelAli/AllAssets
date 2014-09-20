@@ -1,7 +1,8 @@
 package io.github.Skepter.Listeners;
 
+import io.github.Skepter.AllAssets;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -14,31 +15,22 @@ public class CustomUnknownCommandListener implements Listener {
 
 	@EventHandler
 	public void onCommand(PlayerCommandPreprocessEvent e) {
-		if (Bukkit.getHelpMap().getHelpTopic(e.getMessage().split(" ")[0]) == null) {
-			e.setCancelled(true);
-			handle(e.getMessage());
-			//check for possible commands
-			e.getPlayer().sendMessage("Example Text For Unkown Command!");
+		String msg = e.getMessage().split(" ")[0];
+		if (Bukkit.getHelpMap().getHelpTopic(msg) == null) {
+			if (searchTopics(msg) != null && !searchTopics(msg).isEmpty()) {
+				e.setCancelled(true);
+				//do something here that if you click on the message, it will ......... run the command
+				e.getPlayer().sendMessage(AllAssets.title + "Unknown command. Did you mean: " + AllAssets.houseStyleColor + searchTopics(msg).get(0));
+			}
+			return;
 		}
 	}
 
-	private void handle(String message) {
-		Collection<HelpTopic> topics = Bukkit.getHelpMap().getHelpTopics();
-		String newMessage = message.split(" ")[0];
-		for (HelpTopic topic : topics) {
-			for (int i = 0; i < topic.getName().length(); i++) {
-				if(!(topic.getName().charAt(i) == newMessage.charAt(i))) {
-					//stop. then check i - 1 get the chars, build the topicName up to that char and we got a command :)
-				}
-			}
-			//check the first letter of this, to the first letter of newMessage
-			//then break a label and we're good :)
-		}
-		for (int i = 0; i < newMessage.length(); i++) {
-			List<Character> charList = new ArrayList<Character>();
-			for (int j = 0; j < i; j++) {
-				charList.add(newMessage.charAt(j));
-			}
-		}
+	private List<String> searchTopics(String topicString) {
+		List<String> listOfCommands = new ArrayList<String>();
+		for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
+			if (topic.getName().contains(topicString))
+				listOfCommands.add(topic.getName());
+		return listOfCommands;
 	}
 }

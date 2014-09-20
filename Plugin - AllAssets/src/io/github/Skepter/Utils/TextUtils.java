@@ -36,6 +36,15 @@ public class TextUtils {
 		return s2;
 	}
 
+	public static String subStringFromChars(String string, int begin, int end) {
+		char[] originalCharArray = string.toCharArray();
+		String s = "";
+		for (int i = begin; i < end; i++) {
+			s += originalCharArray[i];
+		}
+		return s;
+	}
+
 	/** Centers text */
 	private static String center(final String text) {
 		final int spaces = (int) Math.round((80 - (1.4 * ChatColor.stripColor(text).length())) / 2);
@@ -95,10 +104,10 @@ public class TextUtils {
 		}
 		return array;
 	}
-	
-    public static String getMsgStringFromArgs(final String[] args, final int indexBegin, final int indexEnd) {
-    	return TextUtils.join(TextUtils.getMsgFromArgs(args, indexBegin, indexEnd), " ");
-    }
+
+	public static String getMsgStringFromArgs(final String[] args, final int indexBegin, final int indexEnd) {
+		return TextUtils.join(TextUtils.getMsgFromArgs(args, indexBegin, indexEnd), " ");
+	}
 
 	public static boolean isHyperlink(final String s) {
 		final String strippedColor = ChatColor.stripColor(s);
