@@ -4,7 +4,7 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
-import io.github.Skepter.Tasks.StaffChatTask;
+import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Utils.ErrorUtils;
 
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -45,7 +46,12 @@ public class CommandStaffChat implements Listener {
 
 	@EventHandler
 	public void onChat(final AsyncPlayerChatEvent event) {
-		Bukkit.getScheduler().runTask(AllAssets.instance(), new StaffChatTask(event, event.getPlayer(), players, event.getMessage()));
+		if (players.contains(event.getPlayer().getUniqueId())) {
+			event.setCancelled(true);
+			for (final UUID uuid : players) {
+				Bukkit.getPlayer(uuid).sendMessage(ChatColor.translateAlternateColorCodes('&', ConfigHandler.instance().config().getSpecialString("staffChat").replace("{MESSAGE}", event.getMessage())));
+			}
+		}
 	}
 
 }
