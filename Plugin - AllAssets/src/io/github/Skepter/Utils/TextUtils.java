@@ -46,6 +46,14 @@ public class TextUtils {
 		return list;
 	}
 
+	/** Checks if a String[] contains s */
+	public static boolean arrayContains(final String[] arr, final String s) {
+		for(String str : arr)
+			if(str.equals(s))
+				return true;
+		return false;
+	}
+
 	/** Centers text */
 	private static String center(final String text) {
 		final int spaces = (int) Math.round((80 - (1.4 * ChatColor.stripColor(text).length())) / 2);

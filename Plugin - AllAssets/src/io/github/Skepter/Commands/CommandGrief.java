@@ -5,6 +5,7 @@ import io.github.Skepter.API.LogEvent.LogType;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
+import io.github.Skepter.Utils.MathUtils;
 import io.github.Skepter.Utils.TextUtils;
 import io.github.Skepter.Utils.YesNoConversation;
 
@@ -28,6 +29,7 @@ public class CommandGrief {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+		//check if it's null
 		new YesNoConversation(player, new GriefPrompt(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		return;
 	}
@@ -41,25 +43,22 @@ public class CommandGrief {
 		}
 
 		@Override
-		public Prompt acceptInput(ConversationContext context, String string) {
-			if (context.getForWhom() instanceof Player) {
-				Player player = (Player) context.getForWhom();
-				String location = "(" +  player.getLocation().getX() + ", " + player.getLocation().getY() + ", " + player.getLocation().getZ() + ")" ;
-				CommandLog.addLog("Player: " + player.getName() + ", Location: " + location + ", Message: " + message, LogType.GRIEF);
-				player.sendMessage(AllAssets.title + "Successfully sent grief report");
-			}
-			return null;
-		}
-
-		@Override
 		public String getPromptText(ConversationContext context) {
-			context.getForWhom().sendRawMessage(YesNoConversation.getPromptText());
-			return null;
+			return YesNoConversation.getPromptText();
 		}
 
 		@Override
-		protected Prompt acceptValidatedInput(ConversationContext arg0, boolean arg1) {
-			return null;
+		protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
+			if (context.getForWhom() instanceof Player) {
+				if (b) {
+					Player player = (Player) context.getForWhom();
+					String location = "(" + MathUtils.round(player.getLocation().getX(), 0) + ", " + MathUtils.round(player.getLocation().getY(), 0) + ", " + MathUtils.round(player.getLocation().getZ(), 0) + ")";
+					CommandLog.addLog("Player: " + player.getName() + ", Location: " + location + ", Message: " + message, LogType.GRIEF);
+					context.getForWhom().sendRawMessage(AllAssets.title + "Successfully sent grief report");
+				} else
+					context.getForWhom().sendRawMessage(AllAssets.error + "Cancelled grief report");
+			}
+			return Prompt.END_OF_CONVERSATION;
 		}
 
 	}

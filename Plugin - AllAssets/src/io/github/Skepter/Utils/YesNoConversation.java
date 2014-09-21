@@ -18,7 +18,7 @@ public class YesNoConversation {
 	}
 
 	public static String getPromptText() {
-		return AllAssets.title + "Are you sure you want to do that? Use " + ChatColor.GREEN + "/yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "/no " + AllAssets.houseStyleColor + "to cancel";
+		return AllAssets.title + AllAssets.houseStyleColor + "Are you sure you want to do that? Say " + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
 	}
 
 	/* Example of a BooleanPrompt*/
@@ -26,20 +26,14 @@ public class YesNoConversation {
 	//	private class YesNoPrompt extends BooleanPrompt {
 	//
 	//		@Override
-	//		public Prompt acceptInput(ConversationContext context, String string) {
-	//			/* Action to perform here! */
-	//			return null;
-	//		}
-	//
-	//		@Override
 	//		public String getPromptText(ConversationContext context) {
-	//			context.getForWhom().sendRawMessage(YesNoConversation.getPromptText());
-	//			return null;
+	//			return YesNoConversation.getPromptText();
 	//		}
 	//
 	//		@Override
 	//		protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
-	//			return null;
+	//			/* Do action here :) */
+	//			return Prompt.END_OF_CONVERSATION;
 	//		}
 	//	}
 }
