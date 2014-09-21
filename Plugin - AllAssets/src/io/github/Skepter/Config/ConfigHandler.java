@@ -101,6 +101,7 @@ public class ConfigHandler {
 		features.set("ForceChat", "true");
 		features.set("Gamemode", "true");
 		features.set("Ghost", "true");
+		features.set("Glow", "true");
 		features.set("God", "true");
 		features.set("Inventory", "true");
 		features.set("Launch", "true");

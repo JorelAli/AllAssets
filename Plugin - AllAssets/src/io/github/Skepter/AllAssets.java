@@ -25,6 +25,7 @@ import io.github.Skepter.Commands.CommandForceChat;
 import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandGamemode;
 import io.github.Skepter.Commands.CommandGhost;
+import io.github.Skepter.Commands.CommandGlow;
 import io.github.Skepter.Commands.CommandInventory;
 import io.github.Skepter.Commands.CommandLaunch;
 import io.github.Skepter.Commands.CommandLog;
@@ -118,7 +119,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 //normalColor: 9
 //emphasisColor: b
 //@ajcozzo
-//disco armor
 
 //recent players command - like seen, but for recent players
 //still able to tp when they're offline
@@ -236,6 +236,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandGamemode(framework);
 		if (ConfigHandler.instance().features().getBoolean("Ghost"))
 			new CommandGhost(framework);
+		if (ConfigHandler.instance().features().getBoolean("Glow"))
+			new CommandGlow(framework);
 		if (ConfigHandler.instance().features().getBoolean("God"))
 			if (ConfigHandler.instance().config().getBoolean("useNMSGod"))
 				new CommandNMSGod(framework);

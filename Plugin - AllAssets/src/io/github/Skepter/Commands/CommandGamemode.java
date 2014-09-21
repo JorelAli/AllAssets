@@ -24,9 +24,29 @@ public class CommandGamemode {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+		if (args.getArgs().length == 0)
+			doCycleGameMode(player);
 		if (args.getArgs().length == 1)
 			doGameMode(player, args.getArgs()[0]);
 		return;
+	}
+
+	private void doCycleGameMode(Player player) {
+		switch(player.getGameMode()) {
+		case SURVIVAL:
+			doGameMode(player, "creative");
+			break;
+		case ADVENTURE:
+			doGameMode(player, "survival");
+			break;
+		case CREATIVE:
+			doGameMode(player, "adventure");
+			break;
+		default:
+			doGameMode(player, "survival");
+			break;
+		}
+
 	}
 
 	@CommandHandler(name = "gms", permission = "gamemode", description = "Changes your gamemode to survival", usage = "Use <command>", isListed = false)

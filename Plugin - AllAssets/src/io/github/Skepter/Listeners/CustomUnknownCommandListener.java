@@ -1,6 +1,7 @@
 package io.github.Skepter.Listeners;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.Libs.FancyMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +20,7 @@ public class CustomUnknownCommandListener implements Listener {
 		if (Bukkit.getHelpMap().getHelpTopic(msg) == null) {
 			if (searchTopics(msg) != null && !searchTopics(msg).isEmpty()) {
 				e.setCancelled(true);
-				//do something here that if you click on the message, it will ......... run the command
-				e.getPlayer().sendMessage(AllAssets.title + "Unknown command. Did you mean: " + AllAssets.houseStyleColor + searchTopics(msg).get(0));
+				new FancyMessage(AllAssets.title + "Unknown command. Did you mean: ").then(AllAssets.houseStyleColor + searchTopics(msg).get(0)).tooltip(AllAssets.houseStyleColor + "Click to execute " + searchTopics(msg).get(0)).command(searchTopics(msg).get(0)).send(e.getPlayer());;
 			}
 			return;
 		}

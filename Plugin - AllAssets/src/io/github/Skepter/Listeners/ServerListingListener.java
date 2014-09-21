@@ -20,9 +20,14 @@ public class ServerListingListener implements Listener {
 	public void ping(final ServerListPingEvent event) {
 		for (final UUID u : UUIDData.getValues()) {
 			final User user = new User(Bukkit.getOfflinePlayer(u));
-			if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
-				final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
-				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
+			try {
+				if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
+					final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
+					event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
+					return;
+				}
+			} catch (Exception e) {
+				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", "").replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 				return;
 			}
 		}

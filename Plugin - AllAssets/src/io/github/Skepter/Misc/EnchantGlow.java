@@ -65,13 +65,17 @@ public class EnchantGlow extends EnchantmentWrapper {
 	}
 
 	public static void addGlow(final ItemStack item, final String name) {
-		final Enchantment glow = getGlow(name);
-		item.addEnchantment(glow, 1);
+		item.addEnchantment(getGlow(name), 1);
 	}
 
-	public static void removeGlow(final ItemStack item) {
-		final Enchantment glow = getGlow(name);
-		item.removeEnchantment(glow);
+	public static void removeGlow(final ItemStack item, final String name) {
+		item.removeEnchantment(getGlow(name));
+	}
+
+	public static boolean hasGlow(final ItemStack item) {
+		if (item.containsEnchantment(getGlow(name)))
+			return true;
+		return false;
 	}
 
 }

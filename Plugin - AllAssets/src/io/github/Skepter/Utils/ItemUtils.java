@@ -72,7 +72,11 @@ public class ItemUtils {
 	}
 	
 	public static ItemStack removeGlow(final ItemStack itemStack) {
-		EnchantGlow.removeGlow(itemStack);
+		EnchantGlow.removeGlow(itemStack, "");
 		return itemStack;
+	}
+	
+	public static boolean hasGlow(final ItemStack itemStack) {
+		return EnchantGlow.hasGlow(itemStack);
 	}
 }
