@@ -35,6 +35,8 @@ public class CommandLog {
 			args.getSender().sendMessage(s);
 		args.getSender().sendMessage(TextUtils.title("Grief logs"));
 		for (final String s : griefLog)
+			//if player, parse as JSON so they can teleport to the crime scene :)
+			//else, just post as normal
 			args.getSender().sendMessage(s);
 		args.getSender().sendMessage(TextUtils.title("Other logs"));
 		for (final String s : otherLog)
