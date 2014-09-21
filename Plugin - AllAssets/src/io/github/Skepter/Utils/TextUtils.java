@@ -36,13 +36,14 @@ public class TextUtils {
 		return s2;
 	}
 
-	public static String subStringFromChars(String string, int begin, int end) {
-		char[] originalCharArray = string.toCharArray();
-		String s = "";
-		for (int i = begin; i < end; i++) {
-			s += originalCharArray[i];
-		}
-		return s;
+	/** Converts a String to a list of string with specific sizes For example,
+	 * "hello" would return "hello", "hell", "hel", "he", "h" */
+	public static List<String> truncater(final String string) {
+		List<String> list = new ArrayList<String>();
+		list.add(string);
+		for (int i = 1; i < string.length(); i++)
+			list.add(string.substring(0, string.length() - i));
+		return list;
 	}
 
 	/** Centers text */

@@ -21,22 +21,18 @@ public class MathUtils {
 		return false;
 	}
 
-	/** Rounds a number to a certain amount of decimal places
-	 * 
-	 * @param d - The number
-	 * @param n - The amount of 0's to put
-	 * @return a number */
-	public static double round(final double d, final int n) {
-		final StringBuilder b = new StringBuilder("1");
-		for (int i = 0; i < n; i++)
-			b.append("0");
-		final int dbl = Integer.valueOf(b.toString());
-		final double result = Math.round(d * dbl) / dbl;
-		return result;
+	/** Rounds a number to a certain amount of decimal places */
+	public static double round(double value, int places) {
+		if (places < 0)
+			return value;
+		long factor = (long) Math.pow(10, places);
+		value = value * factor;
+		long tmp = Math.round(value);
+		return (double) tmp / factor;
 	}
 
-	/** Formats date. Currently (other methods haven't been tested), it can
-	 * format it in the format of 'you have played since <time>'
+	/** Formats date. Format it in the format of 'you have played since <time>'
+	 * Doesn't count the 0's
 	 * 
 	 * @param date - The long date in milliseconds
 	 * @return the formatted date in String form */
@@ -45,7 +41,16 @@ public class MathUtils {
 		final long hours = TimeUnit.MILLISECONDS.toHours(date) - (days * 86400);
 		final long minutes = TimeUnit.MILLISECONDS.toMinutes(date) - (days * 86400) - (hours * 3600);
 		final long seconds = TimeUnit.MILLISECONDS.toSeconds(date) - (days * 86400) - (hours * 3600) - (minutes * 60);
-		return days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
+		StringBuilder builder = new StringBuilder();
+		if(days != 0)
+			builder.append(days + " days ");
+		if(hours != 0)
+			builder.append(hours + " hours ");
+		if(minutes != 0)
+			builder.append(minutes + " minutes ");
+		if(seconds != 0)
+			builder.append(seconds + " seconds ");
+		return builder.toString();
 	}
 
 	public static String formatDateAtASpecificPointInTime(final long dateTime) {

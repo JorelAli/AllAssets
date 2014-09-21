@@ -108,8 +108,8 @@ public class PlayerListener implements Listener {
 		event.getPlayer().resetPlayerWeather();
 		final User user = new User(event.getPlayer());
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
-		if (AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId()) != null)
-			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
+		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
+		AllAssets.instance().tempTimeMap.remove(event.getPlayer().getUniqueId());
 	}
 
 	@EventHandler

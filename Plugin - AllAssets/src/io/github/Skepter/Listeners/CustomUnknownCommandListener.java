@@ -2,6 +2,7 @@ package io.github.Skepter.Listeners;
 
 import io.github.Skepter.AllAssets;
 import io.github.Skepter.Libs.FancyMessage;
+import io.github.Skepter.Utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,19 +19,36 @@ public class CustomUnknownCommandListener implements Listener {
 	public void onCommand(PlayerCommandPreprocessEvent e) {
 		String msg = e.getMessage().split(" ")[0];
 		if (Bukkit.getHelpMap().getHelpTopic(msg) == null) {
-			if (searchTopics(msg) != null && !searchTopics(msg).isEmpty()) {
+			if (searchWithTuncater(msg) != null && !searchWithTuncater(msg).isEmpty()) {
 				e.setCancelled(true);
-				new FancyMessage(AllAssets.title + "Unknown command. Did you mean: ").then(AllAssets.houseStyleColor + searchTopics(msg).get(0)).tooltip(AllAssets.houseStyleColor + "Click to execute " + searchTopics(msg).get(0)).command(searchTopics(msg).get(0)).send(e.getPlayer());;
+				new FancyMessage(AllAssets.title + "Unknown command. Did you mean: ").then(AllAssets.houseStyleColor + searchWithTuncater(msg)).tooltip(AllAssets.houseStyleColor + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
 			}
 			return;
 		}
 	}
 
-	private List<String> searchTopics(String topicString) {
+	private String searchWithTuncater(String topicString) {
+		for (String s : TextUtils.truncater(topicString)) {
+			for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics()) {
+				if (topic.getName().contains(s)) {
+					return topic.getName();
+				}
+			}
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unused")
+	private List<String> searchListWithTuncater(String topicString) {
 		List<String> listOfCommands = new ArrayList<String>();
-		for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
-			if (topic.getName().contains(topicString))
-				listOfCommands.add(topic.getName());
+		for (String s : TextUtils.truncater(topicString)) {
+			for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics()) {
+				if (topic.getName().contains(s)) {
+					listOfCommands.add(topic.getName());
+					break;
+				}
+			}
+		}
 		return listOfCommands;
 	}
 }
