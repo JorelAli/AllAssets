@@ -108,8 +108,12 @@ public class PlayerListener implements Listener {
 		event.getPlayer().resetPlayerWeather();
 		final User user = new User(event.getPlayer());
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
-		user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
-		AllAssets.instance().tempTimeMap.remove(event.getPlayer().getUniqueId());
+		if(AllAssets.instance().tempTimeMap.containsKey(event.getPlayer().getUniqueId())) {
+			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
+			AllAssets.instance().tempTimeMap.remove(event.getPlayer().getUniqueId());
+		} else {
+			//error! it should be there because it was added on player join...
+		}
 	}
 
 	@EventHandler

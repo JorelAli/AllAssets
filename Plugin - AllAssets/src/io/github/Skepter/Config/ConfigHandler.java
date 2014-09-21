@@ -103,6 +103,7 @@ public class ConfigHandler {
 		features.set("Ghost", "true");
 		features.set("Glow", "true");
 		features.set("God", "true");
+		features.set("Grief", "true");
 		features.set("Inventory", "true");
 		features.set("Launch", "true");
 		features.set("Log", "true");

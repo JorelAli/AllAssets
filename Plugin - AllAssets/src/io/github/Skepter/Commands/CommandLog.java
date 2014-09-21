@@ -33,6 +33,9 @@ public class CommandLog {
 		args.getSender().sendMessage(TextUtils.title("Chat logs"));
 		for (final String s : chatLog)
 			args.getSender().sendMessage(s);
+		args.getSender().sendMessage(TextUtils.title("Grief logs"));
+		for (final String s : griefLog)
+			args.getSender().sendMessage(s);
 		args.getSender().sendMessage(TextUtils.title("Other logs"));
 		for (final String s : otherLog)
 			args.getSender().sendMessage(s);

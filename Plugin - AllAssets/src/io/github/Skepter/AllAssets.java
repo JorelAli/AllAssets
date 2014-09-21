@@ -26,6 +26,7 @@ import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandGamemode;
 import io.github.Skepter.Commands.CommandGhost;
 import io.github.Skepter.Commands.CommandGlow;
+import io.github.Skepter.Commands.CommandGrief;
 import io.github.Skepter.Commands.CommandInventory;
 import io.github.Skepter.Commands.CommandLaunch;
 import io.github.Skepter.Commands.CommandLog;
@@ -100,7 +101,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Skepter */
 
 // something like WE with /replace <block> <radius>
-// firework interface like Enchant - use For loops to generate it (similar to enchant inv)
 // /griefReport command - adds to the /log
 // Explore the ResourceBundle for setting Locale
 // A way to mute a player which stops all other chat being sent to that player except admin
@@ -243,6 +243,8 @@ public class AllAssets extends JavaPlugin {
 				new CommandNMSGod(framework);
 			else
 				r(new CommandGod(framework));
+		if (ConfigHandler.instance().features().getBoolean("Grief"))
+			new CommandGrief(framework);
 		if (ConfigHandler.instance().features().getBoolean("Inventory"))
 			new CommandInventory(framework);
 		if (ConfigHandler.instance().features().getBoolean("Launch"))
