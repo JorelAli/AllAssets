@@ -47,6 +47,7 @@ import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.PlayerData;
 import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.ComphenixsGhostFactory;
+import io.github.Skepter.Listeners.BlockPoweredListener;
 import io.github.Skepter.Listeners.ChatListener;
 import io.github.Skepter.Listeners.ConsoleSayListener;
 import io.github.Skepter.Listeners.CustomUnknownCommandListener;
@@ -59,9 +60,13 @@ import io.github.Skepter.Listeners.ServerListingListener;
 import io.github.Skepter.Listeners.SignListener;
 import io.github.Skepter.Listeners.SkeletonArrowListener;
 import io.github.Skepter.Tasks.TPS;
-import io.github.Skepter.Utils.JavaUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -75,6 +80,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -146,7 +152,9 @@ public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */
 	public final static String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
+	public final static String shortTitle = ChatColor.BLUE + "[" + ChatColor.AQUA + "AA" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
 	public final static String titleNoColor = "[AllAssets] ";
+	public final static String shortTitleNoColor = "[AA] ";
 	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
 	public final static String houseStyleColor = ChatColor.AQUA + "";
 
@@ -160,6 +168,8 @@ public class AllAssets extends JavaPlugin {
 	public CommandFramework framework;
 	public Map<UUID, Long> tempTimeMap;
 	public ComphenixsGhostFactory ghostFactory;
+
+	public static boolean masterSwitch = true;
 
 	@Override
 	public void onEnable() {
@@ -305,6 +315,8 @@ public class AllAssets extends JavaPlugin {
 			r(new SkeletonArrowListener());
 		if (ConfigHandler.instance().features().getBoolean("ServerListMOTDCustomisation"))
 			r(new ServerListingListener());
+		//Buggy and deprecated until fixed
+		//r(new BlockPoweredListener());
 
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();
@@ -317,7 +329,7 @@ public class AllAssets extends JavaPlugin {
 		/* Update tempTimeMap.bin file */
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
-				JavaUtils.load(new File(getDataFolder(), "tempTimeMap.bin"));
+				load(new File(getDataFolder(), "tempTimeMap.bin"));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -329,6 +341,10 @@ public class AllAssets extends JavaPlugin {
 
 	/* Writing getServer().... etc. is too much work :S */
 	private void r(final Listener l) {
+		if (masterSwitch)
+			for (Method method : l.getClass().getMethods())
+				if (method.getAnnotation(EventHandler.class) != null)
+					Bukkit.getLogger().info(shortTitleNoColor + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
 	}
 
@@ -339,7 +355,7 @@ public class AllAssets extends JavaPlugin {
 
 		if (!tempTimeMap.isEmpty())
 			try {
-				JavaUtils.save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
+				save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
@@ -366,5 +382,21 @@ public class AllAssets extends JavaPlugin {
 		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
 		if (chatProvider != null)
 			chat = chatProvider.getProvider();
+	}
+
+	/** Saves an object to a file */
+	public static void save(final Object obj, final File file) throws Exception {
+		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true));
+		oos.writeObject(obj);
+		oos.flush();
+		oos.close();
+	}
+
+	/** Loads an object from a file */
+	public static Object load(final File file) throws Exception {
+		final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+		final Object result = ois.readObject();
+		ois.close();
+		return result;
 	}
 }

@@ -63,6 +63,9 @@ public class CommandBatch {
 
 		/* If it contains [i=#] but doesn't contain [i] */
 		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]")))
+			//**** Amount has to be proportional to a different value. It cannot be amount since
+			//**** int i = 1, i < [i=x] - x will not be directly proportional to i, so x must
+			//**** be changed, or modify the entire syntax.
 			for (int i = 1; i < amount; i++) {
 				//				List<String> tagValues = new ArrayList<String>();
 				int beginInt = 1;

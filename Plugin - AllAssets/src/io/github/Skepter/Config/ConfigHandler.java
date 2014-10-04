@@ -139,6 +139,10 @@ public class ConfigHandler {
 		features.set("AnyLeash", "true", "Allows you to put leads on any mob");
 		features.set("PickupSkeletonArrows", "false", "Allows you to pick up skeleton arrows");
 		features.set("ServerListMOTDCustomisation", "true");
+		//glowstone, obby; netherrack, fire; pumpkin,jackolantern 
+		features.set("PoweredBlocks.Glowstone", "true");
+		features.set("PoweredBlocks.Netherrack", "true");
+		features.set("PoweredBlocks.Pumpkin", "true");
 		// add more modifiers to modify the mechanics of the game
 		// e.g. amount of exp mobs drop when killed, drop probability, spawning
 		// probability (perhaps?) (e.g. increase prob. spawn zombie+chicken

@@ -151,6 +151,8 @@ public class CommandFramework {
 	private void registerCommand(final CommandHandler command, final String label, final Method m, final Object obj) {
 		final Entry<Method, Object> entry = new AbstractMap.SimpleEntry<Method, Object>(m, obj);
 		commandMap.put(label.toLowerCase(), entry);
+		if(AllAssets.masterSwitch)
+			Bukkit.getLogger().info(AllAssets.shortTitleNoColor + "Added command: " + command.name());
 		if (command.isListed())
 			pluginCommands.add(ChatColor.BLUE + " /" + command.name().toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());//Nav
 		final String cmdLabel = label.replace(".", ",").split(",")[0].toLowerCase();
