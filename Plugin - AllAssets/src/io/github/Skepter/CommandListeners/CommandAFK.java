@@ -44,7 +44,7 @@ public class CommandAFK implements Listener {
 	}
 
 	@EventHandler
-	public void onHurt(final EntityDamageEvent event) {
+	public void playerHurt(final EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player) event.getEntity();
 			final User user = new User(player);
@@ -56,7 +56,7 @@ public class CommandAFK implements Listener {
 	}
 
 	@EventHandler
-	public void onMove(final PlayerMoveEvent event) {
+	public void playerMove(final PlayerMoveEvent event) {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if ((event.getFrom().distanceSquared(event.getTo()) > 1) && user.isAFK()) {

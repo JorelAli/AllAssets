@@ -45,7 +45,7 @@ public class CommandStaffChat implements Listener {
 	}
 
 	@EventHandler
-	public void onChat(final AsyncPlayerChatEvent event) {
+	public void playerChat(final AsyncPlayerChatEvent event) {
 		if (players.contains(event.getPlayer().getUniqueId())) {
 			event.setCancelled(true);
 			for (final UUID uuid : players) {

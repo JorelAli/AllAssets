@@ -95,7 +95,7 @@ public class CommandBind implements Listener {
 	}
 
 	@EventHandler
-	public void onInteract(final PlayerInteractEvent event) {
+	public void playerInteract(final PlayerInteractEvent event) {
 		if (ConfigHandler.instance().config().getBoolean("bindRight"))
 			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 				performAction(event.getPlayer());

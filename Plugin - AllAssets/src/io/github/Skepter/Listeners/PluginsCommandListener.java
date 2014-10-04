@@ -19,7 +19,7 @@ import org.bukkit.plugin.Plugin;
 public class PluginsCommandListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onCommand(final PlayerCommandPreprocessEvent event) {
+	public void commandExecuteEvent(final PlayerCommandPreprocessEvent event) {
 		final String cmd = event.getMessage().split(" ")[0].replace("/", "").toLowerCase();
 		switch (cmd) {
 		case "pl":

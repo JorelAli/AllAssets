@@ -36,7 +36,7 @@ public class CommandEnchant implements Listener {
 	}
 
 	@EventHandler
-	public void onClick(final InventoryClickEvent event) {
+	public void inventoryClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
 		if (event.getAction().equals(InventoryAction.PICKUP_SOME)) {
 			switch (event.getInventory().getName()) {

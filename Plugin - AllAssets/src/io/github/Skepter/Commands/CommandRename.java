@@ -6,6 +6,7 @@ import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.TextUtils;
+import net.minecraft.server.v1_7_R3.Material;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,6 +26,11 @@ public class CommandRename {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+		if(player.getItemInHand() == null || player.getItemInHand().getType().equals(Material.AIR)) {
+			ErrorUtils.error(player, "The item in your hand cannot be nothing!");
+			return;
+		}
+		//if args = 0, remove rename.
 		ItemUtils.setDisplayName(player.getItemInHand(), ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		player.sendMessage(AllAssets.title + "Renamed item to " + ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		return;

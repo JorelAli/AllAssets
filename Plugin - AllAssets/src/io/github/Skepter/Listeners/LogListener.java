@@ -4,7 +4,6 @@ import io.github.Skepter.AllAssets;
 import io.github.Skepter.API.LogEvent.LogType;
 import io.github.Skepter.Commands.CommandConsoleLog;
 import io.github.Skepter.Commands.CommandLog;
-import io.github.Skepter.Utils.TextUtils;
 
 import java.util.UUID;
 
@@ -22,9 +21,6 @@ public class LogListener implements Filter {
 	public LogListener(final AllAssets allAssets) {
 	}
 
-	// Caused by: java.lang.NullPointerException
-	// at com.droppages.Skepter.Other.MPlayer.getFile(MPlayer.java:19) ~[?:?]
-
 	@Override
 	public Result filter(final LogEvent event) {
 		final String msg1 = event.getMessage().toString();
@@ -35,7 +31,7 @@ public class LogListener implements Filter {
 			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 				return null;
 			else 
-				CommandLog.addLog(AllAssets.houseStyleColor + TextUtils.stringBetween(msg, "(", ")"), LogType.ERROR);
+				CommandLog.addLog(AllAssets.houseStyleColor + stringBetween(msg, "(", ")"), LogType.ERROR);
 		if (msg.contains("Exception"))
 			CommandLog.addLog(msg, LogType.ERROR);
 		return null;
@@ -45,6 +41,12 @@ public class LogListener implements Filter {
 		for (final Player p : Bukkit.getOnlinePlayers())
 			if (p.hasPermission("AllAssets.notify"))
 				p.sendMessage(s);
+	}
+	
+	/* Sometimes it's a bit fussy and so moving it to use this method should fix that problem. */
+	private String stringBetween(final String overallString, final String firstString, final String secondString) {
+		final String s = overallString.substring(overallString.indexOf(firstString) + firstString.length(), overallString.indexOf(secondString));
+		return s;
 	}
 
 	@Override

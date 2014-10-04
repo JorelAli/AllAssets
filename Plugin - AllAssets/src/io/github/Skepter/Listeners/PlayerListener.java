@@ -56,7 +56,7 @@ public class PlayerListener implements Listener {
 	//some data will not be initialized, so ensure that data is fixed and run for each player online.
 
 	@EventHandler
-	public void onJoin(final PlayerJoinEvent event) {
+	public void playerJoin(final PlayerJoinEvent event) {
 		AllAssets.instance().getLogger().info(event.getPlayer().getName() + "'s UUID is: " + event.getPlayer().getUniqueId().toString());
 
 		UUIDData.setData(event.getPlayer());
@@ -103,7 +103,7 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onQuit(final PlayerQuitEvent event) {
+	public void playerLeave(final PlayerQuitEvent event) {
 		event.getPlayer().resetPlayerTime();
 		event.getPlayer().resetPlayerWeather();
 		final User user = new User(event.getPlayer());
@@ -117,7 +117,7 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void blockHeads(final InventoryClickEvent event) {
+	public void playerPlaceBlockOnHead(final InventoryClickEvent event) {
 		if (((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE)) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
 			if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && ConfigHandler.instance().features().getBoolean("BlockHeads")) {
 				event.getWhoClicked().getInventory().setHelmet(event.getCursor());
@@ -131,13 +131,13 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onTeleport(final PlayerTeleportEvent event) {
+	public void playerTeleport(final PlayerTeleportEvent event) {
 		final User user = new User(event.getPlayer());
 		user.setLastLoc(event.getFrom());
 	}
 
 	@EventHandler
-	public void onDeath(final PlayerDeathEvent event) {
+	public void playerDeath(final PlayerDeathEvent event) {
 		final User user = new User(event.getEntity());
 		user.setLastLoc(event.getEntity().getLocation());
 
@@ -173,7 +173,7 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onSwitchItem(final PlayerItemHeldEvent event) {
+	public void playerSwitchItemInHand(final PlayerItemHeldEvent event) {
 		final Player player = event.getPlayer();
 		final ItemStack i = player.getInventory().getItem(event.getNewSlot());
 		if ((i == null) || (i.getType() == Material.AIR))
@@ -189,7 +189,7 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onMove(final PlayerMoveEvent event) {
+	public void playerMove(final PlayerMoveEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("FlyBreakSpeedModifier"))
 			if (event.getPlayer().isFlying() && event.getPlayer().getAllowFlight() && !event.getPlayer().getGameMode().equals(GameMode.CREATIVE))
 				event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100000, 18));
@@ -198,14 +198,14 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void creativeEnderpearl(final PlayerInteractEvent event) {
+	public void playerUseEnderpearl(final PlayerInteractEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl"))
 			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
 	}
 
 	@EventHandler
-	public void onLeash(final PlayerInteractEntityEvent event) {
+	public void playerAddLeash(final PlayerInteractEntityEvent event) {
 		if (ConfigHandler.instance().features().getBoolean("AnyLeash"))
 			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && (event.getRightClicked() instanceof LivingEntity)) {
 				event.setCancelled(true);

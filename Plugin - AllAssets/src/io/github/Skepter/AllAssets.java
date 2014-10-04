@@ -47,7 +47,6 @@ import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.PlayerData;
 import io.github.Skepter.Config.UUIDData;
 import io.github.Skepter.Libs.ComphenixsGhostFactory;
-import io.github.Skepter.Listeners.BlockPoweredListener;
 import io.github.Skepter.Listeners.ChatListener;
 import io.github.Skepter.Listeners.ConsoleSayListener;
 import io.github.Skepter.Listeners.CustomUnknownCommandListener;
@@ -110,6 +109,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 // /griefReport command - adds to the /log
 // Explore the ResourceBundle for setting Locale
 // A way to mute a player which stops all other chat being sent to that player except admin
+
+//world backup system:
+/*
+ *  /backup (worldName) - can be null, it just backs up this world. Copies world directory and renames it?
+ *  /revert/restore (worldName) - shows a list of worldBackups and then unloads world, replaces it with
+ *  new one.
+ */
 
 // sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
@@ -350,6 +356,11 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		try {
+			PlayerData.saveAllPlayers();
+		} catch (Exception e1) {
+			Bukkit.getLogger().severe("There was an error saving the player data D:");
+		}
 		CommandConsoleLog.players.clear();
 		Bukkit.getServer().getScheduler().cancelTasks(this);
 
@@ -359,7 +370,6 @@ public class AllAssets extends JavaPlugin {
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
-		PlayerData.saveAllPlayers();
 		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
 	}
 

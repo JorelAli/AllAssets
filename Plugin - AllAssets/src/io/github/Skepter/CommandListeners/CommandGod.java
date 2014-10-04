@@ -43,7 +43,7 @@ public class CommandGod implements Listener {
 	}
 
 	@EventHandler
-	public void onHurt(final EntityDamageEvent event) {
+	public void playerHurt(final EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player) event.getEntity();
 			if (godPlayers.contains(player.getUniqueId())) {

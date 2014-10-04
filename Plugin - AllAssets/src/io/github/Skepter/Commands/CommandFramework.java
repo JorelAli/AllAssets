@@ -1,6 +1,7 @@
 package io.github.Skepter.Commands;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.Utils.ErrorUtils;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -50,6 +51,7 @@ public class CommandFramework {
 	private final Plugin plugin;
 	private static final String noPerm = AllAssets.error + "You do not have permission to perform that action";
 	public static Set<String> pluginCommands = new HashSet<String>();
+	private Set<String> cmds = new HashSet<String>();
 
 	/** Initializes the command framework and sets up the command maps
 	 * 
@@ -93,8 +95,7 @@ public class CommandFramework {
 				}
 				try {
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
-				} catch (IllegalArgumentException | InvocationTargetException
-						| IllegalAccessException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return true;
@@ -151,8 +152,10 @@ public class CommandFramework {
 	private void registerCommand(final CommandHandler command, final String label, final Method m, final Object obj) {
 		final Entry<Method, Object> entry = new AbstractMap.SimpleEntry<Method, Object>(m, obj);
 		commandMap.put(label.toLowerCase(), entry);
-		if(AllAssets.masterSwitch)
-			Bukkit.getLogger().info(AllAssets.shortTitleNoColor + "Added command: " + command.name());
+		if (AllAssets.masterSwitch && !cmds.contains(command.name())) {
+			cmds.add(command.name());
+			Bukkit.getLogger().info(AllAssets.shortTitleNoColor + "Added command: /" + command.name().replace(".", " "));
+		}
 		if (command.isListed())
 			pluginCommands.add(ChatColor.BLUE + " /" + command.name().toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());//Nav
 		final String cmdLabel = label.replace(".", ",").split(",")[0].toLowerCase();
@@ -309,7 +312,10 @@ public class CommandFramework {
 			try {
 				success = executor.onCommand(sender, this, commandLabel, args);
 			} catch (final Throwable ex) {
-				throw new CommandException("Unhandled exception executing command '" + commandLabel + "' in plugin " + owningPlugin.getDescription().getFullName(), ex);
+				//Nav - try and sort this part out :)
+				Bukkit.getLogger().severe("Unhandled exception executing command '" + commandLabel + "' in plugin " + owningPlugin.getDescription().getFullName() + " - " + ex.getCause().getMessage());
+				ErrorUtils.generalCommandError(sender);
+				return true;
 			}
 
 			if (!success && (usageMessage.length() > 0))

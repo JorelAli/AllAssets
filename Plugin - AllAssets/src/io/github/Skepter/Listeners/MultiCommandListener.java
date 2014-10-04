@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 public class MultiCommandListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onCommand(final PlayerCommandPreprocessEvent event) {
+	public void playerCommand(final PlayerCommandPreprocessEvent event) {
 		if (event.getMessage().startsWith("/") && event.getMessage().contains(ConfigHandler.instance().config().getString("multiCommandSeparator"))) {
 			final String[] commands = event.getMessage().split(ConfigHandler.instance().config().getString("multiCommandSeparator"));
 			for (String command : commands) {

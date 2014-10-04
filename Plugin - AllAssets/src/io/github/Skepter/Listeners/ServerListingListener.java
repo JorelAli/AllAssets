@@ -17,7 +17,7 @@ import org.bukkit.event.server.ServerListPingEvent;
 public class ServerListingListener implements Listener {
 
 	@EventHandler
-	public void ping(final ServerListPingEvent event) {
+	public void multiplayerPing(final ServerListPingEvent event) {
 		for (final UUID u : UUIDData.getValues()) {
 			final User user = new User(Bukkit.getOfflinePlayer(u));
 			try {
@@ -34,7 +34,7 @@ public class ServerListingListener implements Listener {
 	}
 
 	@EventHandler
-	public void login(final AsyncPlayerPreLoginEvent event) {
+	public void playerLogin(final AsyncPlayerPreLoginEvent event) {
 		final String save = event.getAddress().toString().substring(1, event.getAddress().toString().length());
 		final User user = new User(event.getName());
 		final ArrayList<String> s = new ArrayList<String>();

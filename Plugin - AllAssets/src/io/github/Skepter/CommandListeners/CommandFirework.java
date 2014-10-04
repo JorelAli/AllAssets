@@ -43,7 +43,7 @@ public class CommandFirework implements Listener {
 	}
 
 	@EventHandler
-	public void onClick(final InventoryClickEvent event) {
+	public void inventoryClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
 		if (event.getAction().equals(InventoryAction.PICKUP_ALL)) {
 			ItemStack item = event.getInventory().getItem(event.getSlot());
