@@ -44,12 +44,16 @@ public class ErrorUtils {
 	public static void wrongConstruction(final Player player, final String construction) {
 		player.sendMessage(AllAssets.error + "Wrong construction, use the format: " + construction);
 	}
-	
+
 	public static void playerOnly(final CommandSender sender) {
 		sender.sendMessage(AllAssets.error + "You must be ingame in order to use that command");
 	}
-	
+
 	public static void generalCommandError(final CommandSender sender) {
 		sender.sendMessage(AllAssets.error + "There was an error while executing the command");
+	}
+
+	public static void onCooldown(final CommandSender sender, long seconds) {
+		sender.sendMessage(AllAssets.error + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
 	}
 }

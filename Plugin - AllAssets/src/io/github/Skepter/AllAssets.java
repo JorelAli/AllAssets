@@ -59,6 +59,8 @@ import io.github.Skepter.Listeners.ServerListingListener;
 import io.github.Skepter.Listeners.SignListener;
 import io.github.Skepter.Listeners.SkeletonArrowListener;
 import io.github.Skepter.Tasks.TPS;
+import io.github.Skepter.Utils.CommandCooldown;
+import io.github.Skepter.Utils.ErrorUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -115,6 +117,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  *  /backup (worldName) - can be null, it just backs up this world. Copies world directory and renames it?
  *  /revert/restore (worldName) - shows a list of worldBackups and then unloads world, replaces it with
  *  new one.
+ *  Put YesNo because it will COMPLETELY REPLACE (and delete) the old world
  */
 
 // sort out switch statements on strings and use toLowerCase to make it case safe
@@ -379,6 +382,14 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+		if (ConfigHandler.instance().config().getInt("commandCooldown") != 0 && sender instanceof Player) {
+			if (CommandCooldown.isOnCooldown((Player) sender)) {
+				ErrorUtils.onCooldown(sender, CommandCooldown.cooldownTimeMap.get(((Player) sender).getUniqueId()) - (System.currentTimeMillis() / 1000));
+				return true;
+			} else {
+				new CommandCooldown((Player) sender, ConfigHandler.instance().config().getInt("commandCooldown"));
+			}
+		}
 		return framework.handleCommand(sender, label, command, args);
 	}
 

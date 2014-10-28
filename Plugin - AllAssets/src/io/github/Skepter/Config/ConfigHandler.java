@@ -60,6 +60,7 @@ public class ConfigHandler {
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
 		config.set("commandsOnJoin", Arrays.asList(new String[] { "/broadcast {PLAYERNAME} joined the game!" }), "CommandOnJoin must be enabled in features.yml");
+		config.set("commandCooldown", "0", "Amount of seconds to have a cooldown between each command");
 		config.saveConfig();
 	}
 
