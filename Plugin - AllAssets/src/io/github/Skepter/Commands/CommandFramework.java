@@ -1,6 +1,7 @@
 package io.github.Skepter.Commands;
 
 import io.github.Skepter.AllAssets;
+import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Utils.ErrorUtils;
 
 import java.lang.annotation.ElementType;
@@ -94,14 +95,18 @@ public class CommandFramework {
 					return true;
 				}
 				try {
+					long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
+					if (ConfigHandler.instance().config().getBoolean("debugMode"))
+						sender.sendMessage(AllAssets.title + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				return true;
 			}
 		}
-		defaultCommand(new CommandArgs(sender, cmd, label, args, 0));
+
+		sender.sendMessage("There was an error whilst handling the " + label + " command");
 		return true;
 	}
 
@@ -197,10 +202,6 @@ public class CommandFramework {
 			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}
-	}
-
-	private void defaultCommand(final CommandArgs args) {
-		args.getSender().sendMessage(args.getLabel() + " is not handled! Oh noes!");
 	}
 
 	/** Command Framework - Command <br>
