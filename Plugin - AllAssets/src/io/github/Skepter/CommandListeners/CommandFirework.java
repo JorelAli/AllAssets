@@ -6,6 +6,7 @@ import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Misc.FireworkInventories;
 import io.github.Skepter.Utils.CustomFireworkBuilder;
+import io.github.Skepter.Utils.CustomObject;
 import io.github.Skepter.Utils.ErrorUtils;
 
 import java.util.HashMap;
@@ -103,10 +104,9 @@ public class CommandFirework implements Listener {
 		}
 	}
 
+	/* Checks to make sure that the event is valid (not clicking outside of the inventory etc.) */
 	private boolean check(InventoryClickEvent event) {
-		if (!event.getAction().equals(InventoryAction.PICKUP_ALL))
-			return false;
-		if ((event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
+		if (!event.getAction().equals(InventoryAction.PICKUP_ALL) || (event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 			return false;
 		event.setCancelled(true);
 		return true;
@@ -125,19 +125,10 @@ public class CommandFirework implements Listener {
 	}
 
 	private int parsePower(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
-			switch (item.getItemMeta().getDisplayName()) {
-			case "Power: 0":
-				return 0;
-			case "Power: 1":
-				return 1;
-			case "Power: 2":
-				return 2;
-			case "Power: 3":
-				return 3;
-			}
-		}
-		return 0;
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
+			return new CustomObject(item.getItemMeta().getDisplayName()).stripInteger();
+		else
+			return 0;
 	}
 
 	private Type parseType(ItemStack item) {
