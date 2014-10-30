@@ -66,6 +66,8 @@ public class User implements IUser {
 		return ping;
 	}
 
+	/** Returns the language that is selected in the player's settings (thus
+	 * giving their language) */
 	@Override
 	public String getLanguage(final Player p) {
 		try {
@@ -85,6 +87,7 @@ public class User implements IUser {
 		return "en";
 	}
 
+	/** Gets a list of every user's file and loads then as OfflineUsers */
 	public static List<User> userList() {
 		final List<User> userList = new ArrayList<User>();
 		for (final String s : PlayerUtils.getAllOfflinePlayerNames())
@@ -150,12 +153,14 @@ public class User implements IUser {
 	}
 
 	@Override
-	public boolean canTp() { // change to something like 'has tp enabled or
-							 // isAllowedToTpTo' or something because canTp
-							 // sounds like its from another player to another
-							 // player...
-		// TODO canTP in User file
-		return true;
+	public boolean canTP() { 
+		return playerData.getPlayerData().getBoolean("canTP");
+	}
+	
+	@Override
+	public void setCanTP(boolean tp) {
+		playerData.getPlayerData().set("canTP", tp);
+		playerData.savePlayerData();
 	}
 
 	@Override

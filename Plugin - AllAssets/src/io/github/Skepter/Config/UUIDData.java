@@ -16,10 +16,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class UUIDData {
-	
-	public UUIDData() {
-		
-	}
 
 	private static FileConfiguration dataFile = null;
 	private static File dataFileFile = null;
@@ -36,6 +32,7 @@ public class UUIDData {
 		return dataFile;
 	}
 
+	/** Adds a new entry to the UUIDData file */
 	public static void setData(final Player player) {
 		getDataFile().set(player.getName(), player.getUniqueId().toString());
 		saveDataFile();

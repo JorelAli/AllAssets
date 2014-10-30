@@ -77,4 +77,8 @@ public abstract interface IUser {
 	
 	public abstract String getLanguage(Player p);
 
+	public abstract boolean canTP();
+
+	public abstract void setCanTP(boolean tp);
+
 }

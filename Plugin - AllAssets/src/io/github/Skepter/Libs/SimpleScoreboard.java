@@ -29,8 +29,6 @@ public class SimpleScoreboard {
 	private final Map<String, Integer> scores;
 	private final List<Team> teams;
 
-	public static Map<UUID, SimpleScoreboard> scoreboardMap = new HashMap<UUID, SimpleScoreboard>();
-
 	public SimpleScoreboard(final String title) {
 		this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 		this.title = title;
@@ -124,19 +122,6 @@ public class SimpleScoreboard {
 				team.getKey().addPlayer(player);
 			obj.getScore(player).setScore(score);
 
-		}
-	}
-
-	/** Custom update method that updates it for a specific player
-	 * 
-	 * @param player - the player to update the board to
-	 * @param text - the text to update
-	 * @param score - the int to set the score as */
-	public static void update(final String text, final Integer score, final Player... players) {
-		for (final Player player : players) {
-			final SimpleScoreboard board = scoreboardMap.get(player.getUniqueId());
-			board.update(text, score);
-			board.send(player);
 		}
 	}
 

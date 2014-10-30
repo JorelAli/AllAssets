@@ -91,15 +91,7 @@ public class PlayerListener implements Listener {
 
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
-		//set it in the User (IUser) that the player can toggle if they have the scoreboard on or not (Admin only feature?)
-		final SimpleScoreboard board = new SimpleScoreboard(ChatColor.YELLOW + "Notifications");
-		board.add("Current TPS", TPS.getTPSAsInt());
-		board.add("Error Logs", 0);
-		board.add("Spam Logs", 0);
-		//current staff online
-		board.build();
-		board.send(event.getPlayer());
-		SimpleScoreboard.scoreboardMap.put(event.getPlayer().getUniqueId(), board);
+		//TODO - see NotificationsBoard
 	}
 
 	@EventHandler
