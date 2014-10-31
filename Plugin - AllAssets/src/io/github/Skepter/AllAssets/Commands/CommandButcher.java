@@ -23,8 +23,8 @@ public class CommandButcher {
 
 	@CommandHandler(name = "butcher", aliases = { "killall" }, permission = "butcher", description = "Kills mobs", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		boolean lightning, passive, hostile;
-		lightning = passive = hostile = false;
+		boolean lightning, passive, hostile, explosion;
+		explosion = lightning = passive = hostile = false;
 		if (args.getArgs().length > 0)
 			for (final String s : args.getArgs()) {
 				if (s.contains("-l"))
@@ -33,6 +33,8 @@ public class CommandButcher {
 					passive = true;
 				if (s.contains("-h"))
 					hostile = true;
+				if (s.contains("-e"))
+					explosion = true;
 			}
 		int count = 0;
 		if (args.isPlayer()) {
@@ -54,6 +56,8 @@ public class CommandButcher {
 							continue;
 					if (lightning)
 						entity.getWorld().strikeLightningEffect(entity.getLocation());
+					if (explosion)
+							entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
 					entity.remove();
 					count++;
 				}
@@ -73,6 +77,8 @@ public class CommandButcher {
 								continue;
 						if (lightning)
 							entity.getWorld().strikeLightningEffect(entity.getLocation());
+						if (explosion)
+								entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
 						entity.remove();
 						count++;
 					}

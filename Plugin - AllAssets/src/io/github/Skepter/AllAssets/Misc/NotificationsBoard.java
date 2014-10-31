@@ -13,11 +13,12 @@ public class NotificationsBoard {
 	private Player player;
 	private static int errorLogCount;
 	private static int spamLogCount;
-	private String playerName;
+	private static String playerName;
 
 	static {
 		errorLogCount = 0;
 		spamLogCount = 0;
+		clearPlayerName();
 	}
 
 	//ONLY allow admins (those with perms) to have notifications. allow them to toggle on/off
@@ -33,7 +34,7 @@ public class NotificationsBoard {
 
 		if (!playerName.equals(""))
 			board.add(ChatColor.YELLOW + playerName + " tried to tp to you");
-		board.add("");
+
 		board.build();
 		board.send(player);
 	}
@@ -55,12 +56,11 @@ public class NotificationsBoard {
 	}
 
 	/** A player tried to tp to you, but you have tp toggled off */
-	public void someoneTriedToTPButGotDenied(String playerName) {
-		this.playerName = playerName;
-		updateBoard();
+	public static void someoneTriedToTPButGotDenied(String pName) {
+		playerName = pName;
 	}
 
-	public void clearPlayerName() {
+	public static void clearPlayerName() {
 		playerName = "";
 	}
 

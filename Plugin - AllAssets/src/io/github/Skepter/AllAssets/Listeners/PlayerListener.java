@@ -1,11 +1,12 @@
 package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
+import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Commands.CommandLog;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.UUIDData;
+import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
 import io.github.Skepter.AllAssets.Tasks.AnyLeashTask;
 import io.github.Skepter.AllAssets.Tasks.InstantRespawnTask;
@@ -88,6 +89,7 @@ public class PlayerListener implements Listener {
 
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
+		new NotificationsBoard(event.getPlayer()).updateBoard();
 		//TODO - see NotificationsBoard
 	}
 
@@ -102,6 +104,7 @@ public class PlayerListener implements Listener {
 			AllAssets.instance().tempTimeMap.remove(event.getPlayer().getUniqueId());
 		} else {
 			//error! it should be there because it was added on player join...
+			//this shouldn't be possible so -.- yeah
 		}
 	}
 
@@ -184,6 +187,8 @@ public class PlayerListener implements Listener {
 				event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100000, 18));
 			else
 				event.getPlayer().removePotionEffect(PotionEffectType.FAST_DIGGING);
+		//Nav Just testing - I wanna see this
+		new NotificationsBoard(event.getPlayer()).updateBoard();
 	}
 
 	@EventHandler

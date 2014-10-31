@@ -18,6 +18,14 @@ public class CommandBatch {
 		framework.registerCommands(this);
 	}
 
+	//put a delay between each execution as a variable
+	/*
+	 * Change args from [i=n:x] to:
+	 * [i=<VALUE>] = whatever
+	 * [n=<VALUE>] = whatever
+	 * [d=<VALUE>] = delay between each execution
+	 */
+	
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
