@@ -1,7 +1,7 @@
 package io.github.Skepter.Listeners;
 
 import io.github.Skepter.API.LogEvent;
-import io.github.Skepter.API.LogEvent.LogType;
+import io.github.Skepter.Misc.NotificationsBoard;
 import io.github.Skepter.Utils.ErrorUtils;
 
 import org.bukkit.Bukkit;
@@ -13,9 +13,28 @@ public class CustomLogListener implements Listener {
 
 	@EventHandler
 	public void logError(final LogEvent event) {
-		if (event.getLogType().equals(LogType.ERROR))
+		switch (event.getLogType()) {
+		case CHAT:
+			NotificationsBoard.addSpamLog();
+			break;
+		case ERROR:
+			NotificationsBoard.addErrorLog();
 			for (final Player p : Bukkit.getOnlinePlayers())
 				if (p.hasPermission("AllAssets.log"))
 					ErrorUtils.error(p, "An error appeared in the log: " + event.getMessage());
+			break;
+		case GRIEF:
+			break;
+		case OTHER:
+			break;
+		default:
+			break;
+		}
+		for (final Player p : Bukkit.getOnlinePlayers()) {
+			if (p.hasPermission("AllAssets.notifications")) {
+				new NotificationsBoard(p).updateBoard();
+			}
+		}
+
 	}
 }

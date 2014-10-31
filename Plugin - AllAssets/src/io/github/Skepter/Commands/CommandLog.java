@@ -67,32 +67,4 @@ public class CommandLog {
 			log.remove(1);
 
 	}
-
-	@Deprecated
-	public static void addChatLog(final String s) {
-		final LogEvent event = new LogEvent(s, LogType.CHAT);
-		Bukkit.getServer().getPluginManager().callEvent(event);
-		chatLog.add(s);
-		if (chatLog.size() == max)
-			chatLog.remove(1);
-	}
-
-	@Deprecated
-	public static void addErrorLog(final String s) {
-		final LogEvent event = new LogEvent(s, LogType.ERROR);
-		Bukkit.getServer().getPluginManager().callEvent(event);
-		errorLog.add(s);
-		if (errorLog.size() == max)
-			errorLog.remove(1);
-	}
-
-	@Deprecated
-	public static void addOtherLog(final String s) {
-		final LogEvent event = new LogEvent(s, LogType.OTHER);
-		Bukkit.getServer().getPluginManager().callEvent(event);
-		otherLog.add(s);
-		if (otherLog.size() == max)
-			otherLog.remove(1);
-	}
-
 }
