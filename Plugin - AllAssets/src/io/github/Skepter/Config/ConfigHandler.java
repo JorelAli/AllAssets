@@ -1,9 +1,9 @@
 package io.github.Skepter.Config;
 
+import io.github.Skepter.AllAssets;
+
 import java.io.File;
 import java.util.Arrays;
-
-import io.github.Skepter.AllAssets;
 
 public class ConfigHandler {
 

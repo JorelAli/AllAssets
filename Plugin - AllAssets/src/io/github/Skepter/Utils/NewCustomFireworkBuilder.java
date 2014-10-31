@@ -15,7 +15,6 @@ public class NewCustomFireworkBuilder {
 	private FireworkMeta meta;
 	private Builder builder;
 
-	private Color fade;
 	private int power;
 
 	public NewCustomFireworkBuilder(int amount) {
@@ -37,7 +36,7 @@ public class NewCustomFireworkBuilder {
 	}
 
 	public void addFade(Color color) {
-		builder.withFade(fade);
+		builder.withFade(color);
 	}
 
 	public void addFlicker(boolean flicker) {

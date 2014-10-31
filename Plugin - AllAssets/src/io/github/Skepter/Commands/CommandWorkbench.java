@@ -1,10 +1,10 @@
 package io.github.Skepter.Commands;
 
-import org.bukkit.entity.Player;
-
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
+
+import org.bukkit.entity.Player;
 
 public class CommandWorkbench {
 

@@ -1,6 +1,6 @@
 package io.github.Skepter.Libs;
 
-import com.google.common.collect.ImmutableMap;
+import java.util.Map;
 
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.DyeColor;
@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Map;
+import com.google.common.collect.ImmutableMap;
 
 /** Class to get the displayed name (as the client shows) for an item. */
 public class ItemNames {
