@@ -1,27 +1,26 @@
-package io.github.Skepter.Utils;
+package io.github.Skepter.API;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Builder;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-public class CustomFireworkBuilder {
+/** Made this to allow multiple colors / fades etc. */
+public class AAFireworkBuilder {
 
 	private ItemStack firework;
 	private FireworkMeta meta;
+	private Builder builder;
 
-	private boolean trail;
-	private Type type;
-	private Color color;
-	private Color fade;
 	private int power;
-	private boolean flicker;
 
-	public CustomFireworkBuilder(int amount) {
+	public AAFireworkBuilder(int amount) {
 		this.firework = new ItemStack(Material.FIREWORK, amount);
 		this.meta = (FireworkMeta) firework.getItemMeta();
+		this.builder = FireworkEffect.builder();
 	}
 
 	public void setPower(int power) {
@@ -29,28 +28,28 @@ public class CustomFireworkBuilder {
 	}
 
 	public void addTrail(boolean trail) {
-		this.trail = trail;
+		builder.trail(trail);
 	}
 
 	public void setType(Type type) {
-		this.type = type;
+		builder.with(type);
 	}
 
 	public void addFade(Color color) {
-		this.fade = color;
+		builder.withFade(color);
 	}
 
 	public void addFlicker(boolean flicker) {
-		this.flicker = flicker;
+		builder.flicker(flicker);
 	}
 
 	public void addColor(Color color) {
-		this.color = color;
+		builder.withColor(color);
 	}
 
 	public ItemStack getFirework() {
 		meta.setPower(power);
-		meta.addEffect(FireworkEffect.builder().withColor(color).withFade(fade).flicker(flicker).trail(trail).with(type).build());
+		meta.addEffect(builder.build());
 		firework.setItemMeta(meta);
 		return firework;
 	}
