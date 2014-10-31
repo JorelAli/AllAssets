@@ -6,9 +6,9 @@ import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Utils.ErrorUtils;
 import io.github.Skepter.Utils.ItemUtils;
 import io.github.Skepter.Utils.TextUtils;
-import net.minecraft.server.v1_7_R3.Material;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class CommandRename {

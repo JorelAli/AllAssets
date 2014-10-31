@@ -44,7 +44,6 @@ public class SimpleConfig {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void loadConfig(final InputStream configStream) {
 		this.config = YamlConfiguration.loadConfiguration(configStream);
 	}
@@ -423,7 +422,6 @@ public class SimpleConfig {
 		this.reloadConfig();
 	}
 
-	@SuppressWarnings("deprecation")
 	public void reloadConfig() {
 		this.config = YamlConfiguration.loadConfiguration(manager.getConfigContent(file));
 	}

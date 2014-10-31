@@ -151,11 +151,6 @@ public class User implements IUser {
 		playerData.savePlayerData();
 		player.setCompassTarget(loc);
 	}
-
-	@Override
-	public boolean canTP() { 
-		return playerData.getPlayerData().getBoolean("canTP");
-	}
 	
 	@Override
 	public void setCanTP(boolean tp) {
@@ -264,6 +259,18 @@ public class User implements IUser {
 	public void setFriendList() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public boolean canTp() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean canTP() { 
+		return playerData.getPlayerData().getBoolean("canTP");
 	}
 
 	/*

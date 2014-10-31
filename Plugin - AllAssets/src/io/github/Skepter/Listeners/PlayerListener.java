@@ -6,11 +6,9 @@ import io.github.Skepter.API.User;
 import io.github.Skepter.Commands.CommandLog;
 import io.github.Skepter.Config.ConfigHandler;
 import io.github.Skepter.Config.UUIDData;
-import io.github.Skepter.Libs.SimpleScoreboard;
 import io.github.Skepter.Serializer.InventorySerializer;
 import io.github.Skepter.Tasks.AnyLeashTask;
 import io.github.Skepter.Tasks.InstantRespawnTask;
-import io.github.Skepter.Tasks.TPS;
 import io.github.Skepter.Utils.FireworkUtils;
 import io.github.Skepter.Utils.MathUtils;
 
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
