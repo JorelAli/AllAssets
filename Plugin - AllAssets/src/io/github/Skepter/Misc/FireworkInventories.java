@@ -51,9 +51,9 @@ public class FireworkInventories {
 	public static Inventory chooseFlicker(boolean trail) {
 		Inventory inv = null;
 		if (trail)
-			inv = Bukkit.createInventory(null, 18, "Do you want a trail?");
+			inv = Bukkit.createInventory(null, 9, "Do you want a trail?");
 		else
-			inv = Bukkit.createInventory(null, 18, "Do you want flickering?");
+			inv = Bukkit.createInventory(null, 9, "Do you want flickering?");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
 		return inv;
@@ -66,6 +66,13 @@ public class FireworkInventories {
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 1"));
 		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 2"));
 		inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 3"));
+		return inv;
+	}
+	
+	public static Inventory anotherColor() {
+		Inventory inv = Bukkit.createInventory(null, 9, "Do you want another color?");
+		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
+		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
 		return inv;
 	}
 }

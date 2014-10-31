@@ -5,7 +5,7 @@ import io.github.Skepter.Commands.CommandFramework;
 import io.github.Skepter.Commands.CommandFramework.CommandArgs;
 import io.github.Skepter.Commands.CommandFramework.CommandHandler;
 import io.github.Skepter.Misc.FireworkInventories;
-import io.github.Skepter.Utils.CustomFireworkBuilder;
+import io.github.Skepter.Utils.NewCustomFireworkBuilder;
 import io.github.Skepter.Utils.CustomObject;
 import io.github.Skepter.Utils.ErrorUtils;
 
@@ -28,7 +28,7 @@ public class CommandFirework implements Listener {
 		framework.registerCommands(this);
 	}
 
-	private Map<UUID, CustomFireworkBuilder> map = new HashMap<UUID, CustomFireworkBuilder>();
+	private Map<UUID, NewCustomFireworkBuilder> map = new HashMap<UUID, NewCustomFireworkBuilder>();
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -39,7 +39,7 @@ public class CommandFirework implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		player.openInventory(FireworkInventories.chooseColor(false));
+		player.openInventory(FireworkInventories.chooseType());
 		return;
 	}
 
@@ -51,32 +51,39 @@ public class CommandFirework implements Listener {
 			switch (event.getInventory().getName()) {
 			case "Firework - Type":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					NewCustomFireworkBuilder builder = new NewCustomFireworkBuilder(1);
 					builder.setType(parseType(item));
 					map.put(player.getUniqueId(), builder);
-					player.openInventory(FireworkInventories.chooseColor(true));
+					player.openInventory(FireworkInventories.chooseColor(false));
 				}
 				break;
 			case "Firework - Color":
 				if (check(event)) {
-					CustomFireworkBuilder builder = new CustomFireworkBuilder(1);
+					NewCustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.addColor(parseColor(item));
 					map.put(player.getUniqueId(), builder);
-					player.openInventory(FireworkInventories.chooseType());
+					player.openInventory(FireworkInventories.chooseColor(true));
 				}
 				break;
 			case "Firework - Fade":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					NewCustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.addFade(parseColor(item));
 					map.put(player.getUniqueId(), builder);
-
-					player.openInventory(FireworkInventories.chooseFlicker(false));
+					player.openInventory(FireworkInventories.anotherColor());
+				}
+				break;
+			case "Do you want another color?":
+				if (check(event)) {
+					if (parseBoolean(item))
+						player.openInventory(FireworkInventories.chooseColor(false));
+					else
+						player.openInventory(FireworkInventories.chooseFlicker(false));
 				}
 				break;
 			case "Do you want flickering?":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					NewCustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.addFlicker(parseBoolean(item));
 					map.put(player.getUniqueId(), builder);
 					player.openInventory(FireworkInventories.chooseFlicker(true));
@@ -84,7 +91,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Do you want a trail?":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					NewCustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.addTrail(parseBoolean(item));
 					map.put(player.getUniqueId(), builder);
 					player.openInventory(FireworkInventories.choosePower());
@@ -92,7 +99,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Choose a power size":
 				if (check(event)) {
-					CustomFireworkBuilder builder = map.get(player.getUniqueId());
+					NewCustomFireworkBuilder builder = map.get(player.getUniqueId());
 					builder.setPower(parsePower(item));
 					map.remove(player.getUniqueId());
 					player.getInventory().addItem(builder.getFirework());
@@ -151,7 +158,7 @@ public class CommandFirework implements Listener {
 	}
 
 	private Color parseColor(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
 			case "Black":
 				return Color.BLACK;
@@ -188,7 +195,8 @@ public class CommandFirework implements Listener {
 			case "White":
 				return Color.WHITE;
 			}
-		}
+		else
+			return Color.WHITE;
 		return Color.WHITE;
 	}
 }
