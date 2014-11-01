@@ -34,7 +34,7 @@ public class CommandGrief {
 			return;
 		}
 		//check if it's null
-		new YesNoConversation(player, new GriefPrompt(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+		new YesNoConversation(player, new GriefPrompt(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)), "Are you sure you want to send a grief report");
 		return;
 	}
 

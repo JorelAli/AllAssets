@@ -12,7 +12,11 @@ import org.bukkit.conversations.ConversationFactory;
 
 public class YesNoConversation {
 
-	public YesNoConversation(final CommandSender sender, final BooleanPrompt prompt) {
+	private static String customText;
+
+	public YesNoConversation(final CommandSender sender, final BooleanPrompt prompt, String text) {
+		if (customText != null)
+			customText = text;
 		if (sender instanceof Conversable) {
 			final ConversationFactory conversationFactory = new ConversationFactory(AllAssets.instance()).withModality(true).withFirstPrompt(prompt).withEscapeSequence("/quit").withTimeout(10);
 			conversationFactory.buildConversation((Conversable) sender).begin();
@@ -20,7 +24,11 @@ public class YesNoConversation {
 	}
 
 	public static String getPromptText() {
-		return AllAssets.title + AllAssets.houseStyleColor + "Are you sure you want to do that? Say " + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
+		if (customText == null)
+			return AllAssets.title + AllAssets.houseStyleColor + "Are you sure you want to do that? Say " + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
+		else
+			return AllAssets.title + AllAssets.houseStyleColor + customText + "? Say " + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
+
 	}
 
 	/* Example of a BooleanPrompt*/

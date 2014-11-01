@@ -32,6 +32,7 @@ public class CommandClear {
 			if (args.getArgs().length == 0)
 				player.getInventory().clear();
 			else if (args.getArgs().length == 1) {
+				//TODO try/catch exception e
 				final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
 				target.getInventory().clear();
 			}

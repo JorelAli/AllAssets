@@ -63,6 +63,7 @@ import io.github.Skepter.AllAssets.Listeners.ReloadCommandListener;
 import io.github.Skepter.AllAssets.Listeners.ServerListingListener;
 import io.github.Skepter.AllAssets.Listeners.SignListener;
 import io.github.Skepter.AllAssets.Listeners.SkeletonArrowListener;
+import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.CommandCooldown;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
@@ -336,6 +337,8 @@ public class AllAssets extends JavaPlugin {
 		r(new SignListener());
 		r(new PlayerListener());
 		r(new CustomUnknownCommandListener());
+		//TODO put into a thingymajig
+		r(new StopCommandListener());
 		if (ConfigHandler.instance().features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
 		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
