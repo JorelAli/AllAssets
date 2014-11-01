@@ -1,3 +1,5 @@
+/*******************************************************************************
+ *******************************************************************************/
 package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;

@@ -1,3 +1,5 @@
+/*******************************************************************************
+ *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
 import io.github.Skepter.AllAssets.Misc.EnchantGlow;

@@ -1,3 +1,5 @@
+/*******************************************************************************
+ *******************************************************************************/
 package io.github.Skepter.AllAssets.Misc;
 
 import io.github.Skepter.AllAssets.Libs.SimpleScoreboard;
