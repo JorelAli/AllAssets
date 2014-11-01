@@ -176,6 +176,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  * e.g. Skepter says "Hello amoniuszko20"
  * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
  * but on Skepter's screen, it's totally normal */
+
+
+/** --- TOP PRIORITY --- 
+ * The FileBrowser:
+ * 	Uses GUI
+ * 	Shows ONLY YAML files and folders
+ * 	File = paper
+ * 	Folder = Chest
+ * 		Upon opening file
+ * 		Shows YAML content parsed (in chat)
+ * 		allows modifications
+ * 		Shows content in colors for easy viewing
+ * 		Use some edit command to edit the YAML values
+ * 		Auto saving upon yaml value changing */
+
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */
