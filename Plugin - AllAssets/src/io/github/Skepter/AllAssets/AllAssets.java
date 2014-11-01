@@ -163,6 +163,14 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 
 /* If there's a will, there's 100% definitely a way :D */
+
+/*highlight text utility
+ * When a player says your username, send you (message) that message,
+ * but with your username highlighted.
+ * 
+ * e.g. Skepter says "Hello amoniuszko20"
+ * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
+ * but on Skepter's screen, it's totally normal */
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */

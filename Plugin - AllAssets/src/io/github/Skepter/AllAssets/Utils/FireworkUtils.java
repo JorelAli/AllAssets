@@ -21,7 +21,7 @@ public class FireworkUtils {
 		fireworkMeta.setPower(random.nextInt(2) + 1);
 		firework.setFireworkMeta(fireworkMeta);
 	}
-
+	
 	public static Color getColor(final int i) {
 		switch (i) {
 		case 1:

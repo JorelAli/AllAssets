@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Color;
+import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -161,39 +162,37 @@ public class CommandFirework implements Listener {
 		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
 			case "Black":
-				return Color.BLACK;
+				return DyeColor.BLACK.getFireworkColor();
 			case "Gray":
-				return Color.GRAY;
+				return DyeColor.GRAY.getFireworkColor();
 			case "Silver":
-				return Color.SILVER;
-			case "Maroon":
-				return Color.MAROON;
-			case "Navy":
-				return Color.NAVY;
+				return DyeColor.SILVER.getFireworkColor();
+			case "Brown":
+				return DyeColor.BROWN.getFireworkColor();
+			case "Light Blue":
+				return DyeColor.LIGHT_BLUE.getFireworkColor();
 			case "Blue":
-				return Color.BLUE;
-			case "Teal":
-				return Color.TEAL;
-			case "Aqua":
-				return Color.AQUA;
-			case "Olive":
-				return Color.OLIVE;
+				return DyeColor.BLUE.getFireworkColor();
+			case "Cyan":
+				return DyeColor.CYAN.getFireworkColor();
 			case "Lime":
-				return Color.LIME;
+				return DyeColor.LIME.getFireworkColor();
 			case "Green":
-				return Color.GREEN;
+				return DyeColor.GREEN.getFireworkColor();
+			case "Magenta":
+				return DyeColor.MAGENTA.getFireworkColor();
 			case "Purple":
-				return Color.PURPLE;
-			case "Fuchsia":
-				return Color.FUCHSIA;
+				return DyeColor.PURPLE.getFireworkColor();
+			case "Pink":
+				return DyeColor.PINK.getFireworkColor();
 			case "Red":
-				return Color.RED;
+				return DyeColor.RED.getFireworkColor();
 			case "Orange":
-				return Color.ORANGE;
+				return DyeColor.ORANGE.getFireworkColor();
 			case "Yellow":
-				return Color.YELLOW;
+				return DyeColor.YELLOW.getFireworkColor();
 			case "White":
-				return Color.WHITE;
+				return DyeColor.WHITE.getFireworkColor();
 			}
 		else
 			return Color.WHITE;

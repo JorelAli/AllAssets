@@ -48,8 +48,8 @@ public class TextUtils {
 
 	/** Checks if a String[] contains s */
 	public static boolean arrayContains(final String[] arr, final String s) {
-		for(String str : arr)
-			if(str.equals(s))
+		for (String str : arr)
+			if (str.equals(s))
 				return true;
 		return false;
 	}
@@ -249,25 +249,12 @@ public class TextUtils {
 
 	private static ArrayList<String> swearWords() {
 		final ArrayList<String> arr = new ArrayList<String>();
+		//work on some crazy awesome regex for this part here :)
 		arr.add("fuck");
-		arr.add("f*ck");
-		arr.add("f**k");
-		arr.add("f***");
 		arr.add("shit");
-		arr.add("sh*t");
-		arr.add("s**t");
-		arr.add("s***");
 		arr.add("bitch");
-		arr.add("b*tch");
-		arr.add("b**ch");
-		arr.add("b****");
 		arr.add("cunt");
-		arr.add("c*nt");
-		arr.add("c***");
 		arr.add("penis");
-		arr.add("p*nis");
-		arr.add("p*n*s");
-		arr.add("p****");
 		arr.add("vagina");
 		arr.add("porn");
 		return arr;
@@ -278,9 +265,6 @@ public class TextUtils {
 		return center(str);
 	}
 
-	/** @param str
-	 * @param tag - <tag>(.+?)</tag>
-	 * @return */
 	public static List<String> multipleStringBetween(final String str, final String beginTag, final String endTag) {
 		final Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
 		final List<String> tagValues = new ArrayList<String>();
@@ -300,5 +284,9 @@ public class TextUtils {
 		if (s.contains("\u00A7"))
 			return true;
 		return false;
+	}
+
+	public static String colorizeTextPart(final String overallString, final String textPart, final ChatColor color) {
+		return overallString.replace(textPart, color + textPart);
 	}
 }
