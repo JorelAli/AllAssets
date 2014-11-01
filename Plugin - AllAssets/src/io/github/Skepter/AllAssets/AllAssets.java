@@ -293,7 +293,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
 		if (ConfigHandler.instance().features().getBoolean("FileBrowser"))
-			new CommandFileBrowser(framework);
+			r(new CommandFileBrowser(framework));
 		if (ConfigHandler.instance().features().getBoolean("FileEditor"))
 			new CommandFileEditor(framework);
 		if (ConfigHandler.instance().features().getBoolean("Firework"))

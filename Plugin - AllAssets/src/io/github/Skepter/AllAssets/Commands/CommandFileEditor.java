@@ -45,7 +45,8 @@ public class CommandFileEditor {
 			player.sendMessage("e.g.: plugins/AllAssets/config.yml");
 			return;
 		case 3:
-			File dataFile = new File("." + args.getArgs()[0].replace("/", File.separator));
+			File dataFile = new File(args.getArgs()[0].replace("/", File.separator));
+			System.out.println(dataFile.getAbsolutePath());
 			YamlConfiguration config = new YamlConfiguration();
 			try {
 				config.load(dataFile);
