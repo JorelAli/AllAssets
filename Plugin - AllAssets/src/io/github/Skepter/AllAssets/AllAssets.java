@@ -8,6 +8,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandAFK;
 import io.github.Skepter.AllAssets.CommandListeners.CommandBind;
 import io.github.Skepter.AllAssets.CommandListeners.CommandEnchant;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFileBrowser;
+import io.github.Skepter.AllAssets.CommandListeners.CommandFileEditor;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
@@ -25,7 +26,6 @@ import io.github.Skepter.AllAssets.Commands.CommandDebug;
 import io.github.Skepter.AllAssets.Commands.CommandDisable;
 import io.github.Skepter.AllAssets.Commands.CommandDiscoArmor;
 import io.github.Skepter.AllAssets.Commands.CommandEnable;
-import io.github.Skepter.AllAssets.Commands.CommandFileEditor;
 import io.github.Skepter.AllAssets.Commands.CommandFly;
 import io.github.Skepter.AllAssets.Commands.CommandForceChat;
 import io.github.Skepter.AllAssets.Commands.CommandGamemode;
@@ -295,7 +295,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.instance().features().getBoolean("FileBrowser"))
 			r(new CommandFileBrowser(framework));
 		if (ConfigHandler.instance().features().getBoolean("FileEditor"))
-			new CommandFileEditor(framework);
+			r(new CommandFileEditor(framework));
 		if (ConfigHandler.instance().features().getBoolean("Firework"))
 			r(new CommandFirework(framework));
 		if (ConfigHandler.instance().features().getBoolean("Fly"))

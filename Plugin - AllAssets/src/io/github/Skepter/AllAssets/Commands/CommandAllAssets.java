@@ -41,7 +41,7 @@ public class CommandAllAssets {
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);
 
-		TextUtils.paginate(args.getSender(), commandList, 10, arg);
+		TextUtils.paginate(args.getSender(), commandList, 12, arg);
 		args.getSender().sendMessage(AllAssets.title + "Use /allassets commands <page number> to go to the next page");
 		return;
 	}

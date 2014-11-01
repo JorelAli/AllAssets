@@ -12,24 +12,22 @@ import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.InputStream;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.conversations.BooleanPrompt;
+import org.bukkit.conversations.ConversationContext;
+import org.bukkit.conversations.Prompt;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -38,16 +36,16 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class CommandFileBrowser implements Listener {
+public class CommandFileEditor implements Listener {
 
-	public CommandFileBrowser(final CommandFramework framework) {
+	public CommandFileEditor(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
-
+	
 	public Map<UUID, String> directoryMap = new HashMap<UUID, String>();
-	public Map<UUID, List<String>> dataMap = new HashMap<UUID, List<String>>();
-
-	@CommandHandler(name = "filebrowser", aliases = { "fb" }, permission = "filebrowser", description = "Browses files and shows configs", usage = "Use <command>")
+	public Map<UUID, String> fileMap = new HashMap<UUID, String>();
+	
+	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -56,28 +54,29 @@ public class CommandFileBrowser implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		/* If args = 0, show filebrowser
-		 * If args = 1, show last file (and next page) */
 		switch (args.getArgs().length) {
 		case 0:
+		case 1:
+		case 2:
 			openInventory(player, new File("."));
 			directoryMap.put(player.getUniqueId(), ".");
 			return;
-		case 1:
-			int arg = 1;
-			if (args.getArgs().length == 1)
-				arg = Integer.parseInt(args.getArgs()[0]);
-
-			if (dataMap.get(player.getUniqueId()) == null) {
-				ErrorUtils.error(player, "You have no data, cannot show next page!");
+		case 3:
+			File dataFile = new File(fileMap.get(player.getUniqueId()));
+			System.out.println(dataFile.getAbsolutePath());
+			YamlConfiguration config = new YamlConfiguration();
+			try {
+				config.load(dataFile);
+			} catch (Exception e) {
+				ErrorUtils.error(player, "That file could not be read!");
 				return;
 			}
-			TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, arg);
+			new YesNoConversation(player, new EditFilePrompt(dataFile, config, args.getArgs()[1], args.getArgs()[2]), "Are you sure you want to change " + args.getArgs()[1] + " to " + args.getArgs()[2] + " - this cannot be undone!");
 			return;
 		}
 
 	}
-
+	
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent event) {
 		try {
@@ -85,7 +84,7 @@ public class CommandFileBrowser implements Listener {
 				return;
 			event.setCancelled(true);
 			/* If they open a file inventory */
-			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "File - ")) {
+			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "Choose a file...")) {
 				ItemStack item = event.getInventory().getItem(event.getSlot());
 				Player player = (Player) event.getWhoClicked();
 				String dM = directoryMap.get(player.getUniqueId());
@@ -106,7 +105,6 @@ public class CommandFileBrowser implements Listener {
 					player.closeInventory();
 					File dataFile = new File(dM, ItemUtils.getDisplayName(item));
 					player.sendMessage(TextUtils.title(dataFile.getName()));
-					/* Only allow .yml, .txt, .properties files as they are each read differently */
 					if (dataFile.getName().contains(".yml")) {
 						YamlConfiguration config = new YamlConfiguration();
 						try {
@@ -115,47 +113,9 @@ public class CommandFileBrowser implements Listener {
 							ErrorUtils.error(player, "That file could not be read!");
 							return;
 						}
-						List<String> list = new ArrayList<String>();
-						BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-						String line;
-						while ((line = reader.readLine()) != null) {
-							if(line.startsWith("#"))
-								list.add(ChatColor.translateAlternateColorCodes('&', line));
-						}
-						reader.close();
-						for (String key : config.getKeys(true)) {
-							list.add(ChatColor.AQUA + key + ChatColor.WHITE + ": " + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
-						}
-						dataMap.put(player.getUniqueId(), list);
+						fileMap.put(player.getUniqueId(), dataFile.getAbsolutePath());
+						return;
 					}
-					if (dataFile.getName().contains(".txt")) {
-						BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-						String line;
-						List<String> list = new ArrayList<String>();
-						while ((line = reader.readLine()) != null) {
-							list.add(line);
-						}
-						reader.close();
-						dataMap.put(player.getUniqueId(), list);
-					}
-					if (dataFile.getName().contains(".properties")) {
-						Properties prop = new Properties();
-						InputStream inputStream = new FileInputStream(dataFile);
-						prop.load(inputStream);
-						List<String> list = new ArrayList<String>();
-						for (Object key : prop.keySet())
-							list.add(ChatColor.AQUA + key.toString() + ChatColor.WHITE + ": " + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
-						dataMap.put(player.getUniqueId(), list);
-					}
-					/* Only show it if you need to! */
-					if (dataMap.get(player.getUniqueId()).size() < 10) {
-						for (String s : dataMap.get(player.getUniqueId()))
-							player.sendMessage(s);
-					} else {
-						TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
-						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
-					}
-					return;
 				default:
 					return;
 				}
@@ -165,10 +125,10 @@ public class CommandFileBrowser implements Listener {
 			System.out.println("Error");
 		}
 	}
-
+	
 	private String openInventory(Player player, File currentDirectory) {
 		int fileCountRoot = 1;
-		String[] supportedFileTypes = new String[] { ".yml", ".properties", ".txt" };
+		String[] supportedFileTypes = new String[] { ".yml" };
 		for (File file : currentDirectory.listFiles()) {
 			for (String s : supportedFileTypes) {
 				if (file.getName().contains(s))
@@ -183,7 +143,7 @@ public class CommandFileBrowser implements Listener {
 			name = "Server root folder";
 		if (Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			fileCountRoot--;
-		Inventory inv = Bukkit.createInventory(null, new Double(MathUtils.roundUp(fileCountRoot, 9)).intValue(), ChatColor.BLUE + "File - " + name);
+		Inventory inv = Bukkit.createInventory(null, new Double(MathUtils.roundUp(fileCountRoot, 9)).intValue(), ChatColor.BLUE + "Choose a file...");
 		for (File file : currentDirectory.listFiles()) {
 			for (String s : supportedFileTypes) {
 				if (file.getName().contains(s))
@@ -198,5 +158,40 @@ public class CommandFileBrowser implements Listener {
 		}
 		player.openInventory(inv);
 		return currentDirectory.getAbsolutePath();
+	}
+}
+
+class EditFilePrompt extends BooleanPrompt {
+	
+	File file;
+	YamlConfiguration config;
+	String setting;
+	String value;
+
+	public EditFilePrompt(File file, YamlConfiguration config, String setting, String value) {
+		this.file = file;
+		this.config = config;
+		this.setting = setting;
+		this.value = value;
+	}
+
+	@Override
+	public String getPromptText(ConversationContext context) {
+		return YesNoConversation.getPromptText();
+	}
+
+	@Override
+	protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
+		if (b) {
+			config.set(setting, value);
+			try {
+				config.save(file);
+			} catch (IOException e) {
+				context.getForWhom().sendRawMessage(AllAssets.error + "There was an error whilst changing that value");
+				return Prompt.END_OF_CONVERSATION;
+			}
+			context.getForWhom().sendRawMessage(AllAssets.title + "Changed " + setting + " to " + value);
+		}	
+		return Prompt.END_OF_CONVERSATION;
 	}
 }
