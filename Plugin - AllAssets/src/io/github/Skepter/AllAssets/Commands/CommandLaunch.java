@@ -4,9 +4,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
-import io.github.Skepter.AllAssets.Commands.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.Commands.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Commands.CommandFramework.Completer;
+import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
+import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
 import java.util.ArrayList;

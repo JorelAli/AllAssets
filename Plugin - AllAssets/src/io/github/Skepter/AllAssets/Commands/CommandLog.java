@@ -4,10 +4,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
+import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.LogEvent;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
+import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 

@@ -5,10 +5,16 @@
 package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Commands.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.Commands.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
+import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.ChatColor;
 
 public class CommandAllAssets {
 
@@ -25,11 +31,17 @@ public class CommandAllAssets {
 
 	@CommandHandler(name = "allassets.commands", aliases = { "aa.cmds", "allassets.cmds", "aa.commands" }, permission = "AllAssets.allassets", description = "Views plugin commands", usage = "Use <command>")
 	public void commands(final CommandArgs args) {
+		List<String> commandList = new ArrayList<String>();
+		for(CommandHandler command : CommandFramework.pluginCommands) {
+			if(args.getSender().hasPermission(command.permission())){
+				commandList.add(ChatColor.BLUE + " /" + command.name().toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());
+			}
+		}
 		int arg = 1;
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);
 
-		TextUtils.paginate(args.getSender(), CommandFramework.pluginCommands, 10, arg);
+		TextUtils.paginate(args.getSender(), commandList, 10, arg);
 		args.getSender().sendMessage(AllAssets.title + "Use /allassets commands <page number> to go to the next page");
 		return;
 	}
