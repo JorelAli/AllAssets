@@ -25,7 +25,11 @@ public class TPS implements Runnable {
 		if (TICK_COUNT < ticks)
 			return 20.0D;
 		final int target = (TICK_COUNT - 1 - ticks) % TICKS.length;
-		final long elapsed = System.currentTimeMillis() - TICKS[target];
+		long elapsed = 0L;
+		try {
+			elapsed = System.currentTimeMillis() - TICKS[target];
+		} catch (Exception e) {
+		}
 
 		return ticks / (elapsed / 1000.0D);
 	}

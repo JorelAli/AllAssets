@@ -2,6 +2,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Serializers;
 
+import io.github.Skepter.AllAssets.Utils.MathUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -11,11 +13,11 @@ public class LocationSerializer {
 	/** Converts a Location to a String */
 	public static String LocToString(final Location loc) {
 		final String world = loc.getWorld().getName();
-		final double x = loc.getX();
-		final double y = loc.getY();
-		final double z = loc.getZ();
-		final float pitch = loc.getPitch();
-		final float yaw = loc.getYaw();
+		final double x = MathUtils.round(loc.getX(), 2);
+		final double y = MathUtils.round(loc.getY(), 2);
+		final double z = MathUtils.round(loc.getZ(), 2);
+		final double pitch = MathUtils.round(loc.getPitch(), 2);
+		final double yaw = MathUtils.round(loc.getYaw(), 2);
 		return world + ":" + x + ":" + y + ":" + z + ":" + yaw + ":" + pitch;
 	}
 

@@ -46,7 +46,7 @@ public class CommandFileBrowser implements Listener {
 	public Map<UUID, String> directoryMap = new HashMap<UUID, String>();
 	public Map<UUID, List<String>> dataMap = new HashMap<UUID, List<String>>();
 
-	@CommandHandler(name = "filebrowser", permission = "fb", description = "Browses files and shows configs", usage = "Use <command>")
+	@CommandHandler(name = "filebrowser", aliases = { "fb" }, permission = "filebrowser", description = "Browses files and shows configs", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -93,23 +93,26 @@ public class CommandFileBrowser implements Listener {
 				case BOOK:
 					directoryMap.put(player.getUniqueId(), openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
 					return;
-				/* If they click an arrow, go up another level */
+					/* If they click an arrow, go up another level */
 				case ARROW:
 					/* Prevents them idiots from getting out of the server folder and causing havoc :) */
 					if (Arrays.asList(new File(dM).list()).contains("server.properties"))
 						return;
 					directoryMap.put(player.getUniqueId(), openInventory(player, new File(dM).getParentFile()));
 					return;
+					/* Read the file */
 				case PAPER:
 					player.closeInventory();
 					File dataFile = new File(dM, ItemUtils.getDisplayName(item));
 					player.sendMessage(TextUtils.title(dataFile.getName()));
+					/* Only allow .yml, .txt, .properties files as they are each read differently */
 					if (dataFile.getName().contains(".yml")) {
-						YamlConfiguration config = null;
+						YamlConfiguration config = new YamlConfiguration();;
 						try {
-							config = YamlConfiguration.loadConfiguration(dataFile);
-
+							config.load(dataFile);
 						} catch (Exception e) {
+							ErrorUtils.error(player, "That file could not be read!");
+							return;
 						}
 						List<String> list = new ArrayList<String>();
 						for (String key : config.getKeys(true)) {
@@ -136,8 +139,14 @@ public class CommandFileBrowser implements Listener {
 							list.add(ChatColor.AQUA + key.toString() + ChatColor.WHITE + ": " + prop.get(key).toString());
 						dataMap.put(player.getUniqueId(), list);
 					}
-					TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
-					player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
+					/* Only show it if you need to! */
+					if (dataMap.get(player.getUniqueId()).size() < 10) {
+						for (String s : dataMap.get(player.getUniqueId()))
+							player.sendMessage(s);
+					} else {
+						TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
+						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
+					}
 					return;
 				default:
 					return;
