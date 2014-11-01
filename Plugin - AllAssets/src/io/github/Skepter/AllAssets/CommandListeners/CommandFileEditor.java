@@ -8,16 +8,18 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,10 +43,10 @@ public class CommandFileEditor implements Listener {
 	public CommandFileEditor(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
-	
+
 	public Map<UUID, String> directoryMap = new HashMap<UUID, String>();
 	public Map<UUID, String> fileMap = new HashMap<UUID, String>();
-	
+
 	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
@@ -57,13 +59,11 @@ public class CommandFileEditor implements Listener {
 		switch (args.getArgs().length) {
 		case 0:
 		case 1:
-		case 2:
 			openInventory(player, new File("."));
 			directoryMap.put(player.getUniqueId(), ".");
 			return;
-		case 3:
+		case 2:
 			File dataFile = new File(fileMap.get(player.getUniqueId()));
-			System.out.println(dataFile.getAbsolutePath());
 			YamlConfiguration config = new YamlConfiguration();
 			try {
 				config.load(dataFile);
@@ -71,12 +71,33 @@ public class CommandFileEditor implements Listener {
 				ErrorUtils.error(player, "That file could not be read!");
 				return;
 			}
-			new YesNoConversation(player, new EditFilePrompt(dataFile, config, args.getArgs()[1], args.getArgs()[2]), "Are you sure you want to change " + args.getArgs()[1] + " to " + args.getArgs()[2] + " - this cannot be undone!");
+			new YesNoConversation(player, new EditFilePrompt(dataFile, config, args.getArgs()[0], args.getArgs()[1]), "Are you sure you want to change " + args.getArgs()[0] + " to " + args.getArgs()[1] + " - this cannot be undone!");
 			return;
 		}
 
 	}
-	
+
+	@Completer(name = "fileeditor", aliases = { "fe" })
+	public List<String> testCompleter(final CommandArgs args) {
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+		}
+		File dataFile = new File(fileMap.get(player.getUniqueId()));
+		YamlConfiguration config = new YamlConfiguration();
+		try {
+			config.load(dataFile);
+		} catch (Exception e) {
+			ErrorUtils.error(player, "That file could not be read!");
+		}
+		final List<String> list = new ArrayList<String>();
+		for(String string : config.getKeys(true))
+			list.add(string);
+		return list;
+	}
+
 	@EventHandler
 	public void onInventoryClick(final InventoryClickEvent event) {
 		try {
@@ -104,7 +125,6 @@ public class CommandFileEditor implements Listener {
 				case PAPER:
 					player.closeInventory();
 					File dataFile = new File(dM, ItemUtils.getDisplayName(item));
-					player.sendMessage(TextUtils.title(dataFile.getName()));
 					if (dataFile.getName().contains(".yml")) {
 						YamlConfiguration config = new YamlConfiguration();
 						try {
@@ -114,6 +134,7 @@ public class CommandFileEditor implements Listener {
 							return;
 						}
 						fileMap.put(player.getUniqueId(), dataFile.getAbsolutePath());
+						player.sendMessage(AllAssets.title + dataFile.getName() + " chosen. Use /fe <setting> <value> to edit the file.");
 						return;
 					}
 				default:
@@ -125,7 +146,7 @@ public class CommandFileEditor implements Listener {
 			System.out.println("Error");
 		}
 	}
-	
+
 	private String openInventory(Player player, File currentDirectory) {
 		int fileCountRoot = 1;
 		String[] supportedFileTypes = new String[] { ".yml" };
@@ -162,7 +183,7 @@ public class CommandFileEditor implements Listener {
 }
 
 class EditFilePrompt extends BooleanPrompt {
-	
+
 	File file;
 	YamlConfiguration config;
 	String setting;
@@ -191,7 +212,7 @@ class EditFilePrompt extends BooleanPrompt {
 				return Prompt.END_OF_CONVERSATION;
 			}
 			context.getForWhom().sendRawMessage(AllAssets.title + "Changed " + setting + " to " + value);
-		}	
+		}
 		return Prompt.END_OF_CONVERSATION;
 	}
 }

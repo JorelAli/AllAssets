@@ -116,13 +116,6 @@ public class CommandFileBrowser implements Listener {
 							return;
 						}
 						List<String> list = new ArrayList<String>();
-						BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-						String line;
-						while ((line = reader.readLine()) != null) {
-							if(line.startsWith("#"))
-								list.add(ChatColor.translateAlternateColorCodes('&', line));
-						}
-						reader.close();
 						for (String key : config.getKeys(true)) {
 							list.add(ChatColor.AQUA + key + ChatColor.WHITE + ": " + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
 						}
