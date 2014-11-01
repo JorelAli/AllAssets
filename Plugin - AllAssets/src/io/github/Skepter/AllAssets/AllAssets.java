@@ -217,7 +217,7 @@ public class AllAssets extends JavaPlugin {
 	/** Block where developing stuff happens. Used for easy code removal 
 	 * Requires masterSwitch*/
 	private void dev() {
-		r(new CommandFB(framework));
+		r(new CommandFileBrowser(framework));
 	}
 	
 	@Override

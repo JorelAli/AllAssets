@@ -30,6 +30,7 @@ public class CommandAllAssets {
 			arg = Integer.parseInt(args.getArgs()[0]);
 
 		TextUtils.paginate(args.getSender(), CommandFramework.pluginCommands, 10, arg);
+		args.getSender().sendMessage(AllAssets.title + "Use /allassets commands <page number> to go to the next page");
 		return;
 	}
 
