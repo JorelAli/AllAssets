@@ -25,6 +25,7 @@ import io.github.Skepter.AllAssets.Commands.CommandDebug;
 import io.github.Skepter.AllAssets.Commands.CommandDisable;
 import io.github.Skepter.AllAssets.Commands.CommandDiscoArmor;
 import io.github.Skepter.AllAssets.Commands.CommandEnable;
+import io.github.Skepter.AllAssets.Commands.CommandFileEditor;
 import io.github.Skepter.AllAssets.Commands.CommandFly;
 import io.github.Skepter.AllAssets.Commands.CommandForceChat;
 import io.github.Skepter.AllAssets.Commands.CommandGamemode;
@@ -217,7 +218,6 @@ public class AllAssets extends JavaPlugin {
 	/** Block where developing stuff happens. Used for easy code removal 
 	 * Requires masterSwitch*/
 	private void dev() {
-		r(new CommandFileBrowser(framework));
 	}
 	
 	@Override
@@ -292,6 +292,10 @@ public class AllAssets extends JavaPlugin {
 			new CommandEnable(framework);
 		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
+		if (ConfigHandler.instance().features().getBoolean("FileBrowser"))
+			new CommandFileBrowser(framework);
+		if (ConfigHandler.instance().features().getBoolean("FileEditor"))
+			new CommandFileEditor(framework);
 		if (ConfigHandler.instance().features().getBoolean("Firework"))
 			r(new CommandFirework(framework));
 		if (ConfigHandler.instance().features().getBoolean("Fly"))

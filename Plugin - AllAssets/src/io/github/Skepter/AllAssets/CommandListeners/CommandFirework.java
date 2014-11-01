@@ -33,6 +33,7 @@ public class CommandFirework implements Listener {
 		framework.registerCommands(this);
 	}
 
+	//have a button to output it as a single lined command (for dispensers etc.)
 	private Map<UUID, AAFireworkBuilder> map = new HashMap<UUID, AAFireworkBuilder>();
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework", usage = "Use <command>")

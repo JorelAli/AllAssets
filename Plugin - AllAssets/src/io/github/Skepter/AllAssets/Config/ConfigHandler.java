@@ -107,6 +107,8 @@ public class ConfigHandler {
 		features.set("DiscoArmor", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
+		features.set("FileBrowser", "true");
+		features.set("FileEditor", "true");
 		features.set("Firework", "true");
 		features.set("Fly", "true");
 		features.set("ForceChat", "true");
