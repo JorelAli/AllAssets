@@ -408,8 +408,8 @@ public class SimpleConfig {
 		this.config.set(path, value);
 
 	}
-
-	public void set(final String path, final Object value, final String[] comment) {
+	
+	public void set(final String path, final Object value, final String... comment) {
 
 		for (final String comm : comment)
 			if (!this.config.contains(path)) {
@@ -418,7 +418,6 @@ public class SimpleConfig {
 			}
 
 		this.config.set(path, value);
-
 	}
 
 	public void setHeader(final String[] header) {

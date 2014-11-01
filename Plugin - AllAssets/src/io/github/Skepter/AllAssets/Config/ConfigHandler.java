@@ -7,7 +7,6 @@ package io.github.Skepter.AllAssets.Config;
 import io.github.Skepter.AllAssets.AllAssets;
 
 import java.io.File;
-import java.util.Arrays;
 
 public class ConfigHandler {
 
@@ -60,14 +59,14 @@ public class ConfigHandler {
 		config.set("maxLogAmount", "20", "The maximum amount of logs to store temporarily");
 		config.set("afkProtect", "true", "Prevents players from getting hurt by mobs when AFK");
 		// does it not like that 'm' in perform?
-		config.set("bindRight", "true", "Performs action with a right click (set to false to perform action with left click)");
+		config.set("bindRight", "true", "Performs action with a right click", "(set to false to perform action with left click)");
 		config.set("useIPInformation", "false", "Allows ");
 		config.set("clearArmor", "true", "Clears the armor from your inventory when using /clear");
 		config.set("multiCommandSeparator", "|", "The separator used in multi-commands");
 		config.set("staffChat", "'[&bStaff - {PLAYERNAME}&f] {MESSAGE}'", "The prefix for the staff chat");
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
-		config.set("commandsOnJoin", Arrays.asList(new String[] { "/broadcast {PLAYERNAME} joined the game!" }), "CommandOnJoin must be enabled in features.yml");
+		config.set("commandsOnJoin", "/broadcast {PLAYERNAME} joined the game!" , "CommandOnJoin must be enabled in features.yml");
 		config.set("commandCooldown", "0", "Amount of seconds to have a cooldown between each command");
 		config.set("debugMode", "false", "Enables debugging messages and features");
 		
@@ -90,7 +89,7 @@ public class ConfigHandler {
 
 		features = featuresManager.getNewConfig("features.yml", header);
 
-		features.set("AFK", "true", new String[] { "Commands", "Enable commands by setting the value to true", "Disable commands by setting the value to false" });
+		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false" );
 		features.set("AllAssets", "true");
 		features.set("Back", "true");
 		features.set("Balance", "true");
@@ -139,10 +138,10 @@ public class ConfigHandler {
 		features.set("Weather", "true");
 		features.set("Worlds", "true");
 
-		features.set("AntiHyperlink", "true", new String[] { "Listeners", "Actions which occur on events can be disabled here" });
+		features.set("AntiHyperlink", "true", "--- Events ---", "Actions which occur on events can be disabled here" );
 		features.set("AntiSwear", "true");
 		features.set("ChatColor", "true");
-		features.set("ConsoleSay", "false", "Allows the console to speak in chat without having to use /say");
+		features.set("ConsoleSay", "false", "Allows the console to n chat without having to use /say");
 		features.set("Log", "true", "Disabling this prevents logging information in the log command");
 		features.set("CreativeEnderpearl", "true");
 		features.set("DeathSigns", "false");
@@ -166,13 +165,13 @@ public class ConfigHandler {
 		//		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
 		//		features.set("Instant bows", "false");
 
-		features.set("JoinActions", "true", new String[] { "Join Actions", "Actions to be carried out when a player joins" });
-		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined the server");
-		features.set("TotalTime", "true", "Display the total time the player has played on the server for");
+		features.set("JoinActions", "true", "---nJoin Actions ---", "Actions to be carried out when a player joins");
+		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined");
+		features.set("TotalTime", "true", "Display the total time the player has played");
 		features.set("FireworkOnJoin", "true", "JoinActions in features.yml must be turned on");
 		features.set("CommandsOnJoin", "true", "Commands to run when a player joins - see config to add commands");
 
-		features.set("BlockHeads", "true", new String[] { "Cosmetics", "Cosmetic features to comply with the EULA" });
+		features.set("BlockHeads", "true", "--- Cosmetics ---", "Cosmetic features to comply with the EULA");
 		//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
 		features.saveConfig();
 	}
