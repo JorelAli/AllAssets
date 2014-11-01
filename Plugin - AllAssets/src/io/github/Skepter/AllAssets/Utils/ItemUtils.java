@@ -60,6 +60,11 @@ public class ItemUtils {
 		itemStack.setItemMeta(meta);
 		return itemStack;
 	}
+	
+	public static String getDisplayName(final ItemStack itemStack) {
+		final ItemMeta meta = itemStack.getItemMeta();
+		return meta.getDisplayName();
+	}
 
 	public static ItemStack setLore(final ItemStack itemStack, final String[] lore) {
 		final ItemMeta meta = itemStack.getItemMeta();

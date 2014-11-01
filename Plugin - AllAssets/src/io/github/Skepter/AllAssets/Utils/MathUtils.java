@@ -23,6 +23,11 @@ public class MathUtils {
 		return false;
 	}
 
+	/** Rounds up to next multiple */
+	public static double roundUp(double value, double factor) {
+		return factor * Math.ceil(value / factor);
+	}
+
 	/** Rounds a number to a certain amount of decimal places */
 	public static double round(double value, int places) {
 		if (places < 0)
@@ -44,13 +49,13 @@ public class MathUtils {
 		final long minutes = TimeUnit.MILLISECONDS.toMinutes(date) - (days * 86400) - (hours * 3600);
 		final long seconds = TimeUnit.MILLISECONDS.toSeconds(date) - (days * 86400) - (hours * 3600) - (minutes * 60);
 		StringBuilder builder = new StringBuilder();
-		if(days != 0)
+		if (days != 0)
 			builder.append(days + " days ");
-		if(hours != 0)
+		if (hours != 0)
 			builder.append(hours + " hours ");
-		if(minutes != 0)
+		if (minutes != 0)
 			builder.append(minutes + " minutes ");
-		if(seconds != 0)
+		if (seconds != 0)
 			builder.append(seconds + " seconds ");
 		return builder.toString();
 	}

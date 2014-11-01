@@ -214,6 +214,12 @@ public class AllAssets extends JavaPlugin {
 
 	public static boolean masterSwitch = true;
 
+	/** Block where developing stuff happens. Used for easy code removal 
+	 * Requires masterSwitch*/
+	private void dev() {
+		r(new CommandFB(framework));
+	}
+	
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
@@ -243,9 +249,14 @@ public class AllAssets extends JavaPlugin {
 			setupVault();
 			getLogger().info("Vault has been found and hooked into successfully");
 		}
+		
 
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
+		
+		if(masterSwitch)
+			dev();
+		//Nav
 
 		/* This is the features.yml file which enables/disables features according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
