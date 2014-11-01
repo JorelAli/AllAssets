@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/eclipse/external libraries/craftbukkit.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/eclipse/external libraries/Vault.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
