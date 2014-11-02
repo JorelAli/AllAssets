@@ -7,6 +7,7 @@ Commands:
 * Everything from version 0.2 and 0.3 Pre-Alpha
 * /filebrowser - allows you to browse the server files and read config files (only .yml, .txt and .properties files)
 * /fileeditor - allows you to edit server config files (only .yml files)
+  * http://i.imgur.com/hI14V4s.gifv 
 * /more - sets your itemstack value to 64
 * /butcher -e - butcher with explosions :P
 
@@ -18,6 +19,7 @@ Features:
 
 Fixes/Improvements:
 * /firework updates - now has support for multiple colors and fades
+  * http://i.imgur.com/PVrJqLH.gifv
 * Adjusted config so it doesn't store location values as 194.2491024718468732562757826317684
 
 Developer improvements:
