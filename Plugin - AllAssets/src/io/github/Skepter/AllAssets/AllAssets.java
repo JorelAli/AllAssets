@@ -118,7 +118,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/* AllAssets plugin, version 1.0 Alpha
+/* AllAssets plugin, version 0.4 Alpha
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -142,7 +142,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 // something like WE with /replace <block> <radius>
 // /griefReport command - adds to the /log
 // Explore the ResourceBundle for setting Locale
-// A way to mute a player which stops all other chat being sent to that player except admin
+// silence command - A way to mute a player which stops all other chat being sent to that player except admin
 
 //world backup system:
 /*
@@ -157,8 +157,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 // command allassets pluginFile instead of devPluginFile
 // how many unique players
 
-// plugin config manager thingy
-
 // I'm sorry everyone who doesn't speak English. It's an English plugin.
 // Ich bin entschuldigung, je suis desolé (Those are the only other languages I know :S)
 // built in announcer
@@ -167,8 +165,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 //normalColor: 9
 //emphasisColor: b
 //@ajcozzo
-
-//more command cuz yeah.
 
 //recent players command - like seen, but for recent players
 //still able to tp when they're offline
@@ -193,8 +189,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  *
  */
 
-/* If there's a will, there's 100% definitely a way :D */
-
 /*highlight text utility
  * When a player says your username, send you (message) that message,
  * but with your username highlighted.
@@ -202,20 +196,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * e.g. Skepter says "Hello amoniuszko20"
  * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
  * but on Skepter's screen, it's totally normal */
-
-
-/** --- TOP PRIORITY --- 
- * The FileBrowser:
- * 	Uses GUI
- * 	Shows ONLY YAML files and folders
- * 	File = paper
- * 	Folder = Chest
- * 		Upon opening file
- * 		Shows YAML content parsed (in chat)
- * 		allows modifications
- * 		Shows content in colors for easy viewing
- * 		Use some edit command to edit the YAML values
- * 		Auto saving upon yaml value changing */
 
 public class AllAssets extends JavaPlugin {
 
