@@ -224,7 +224,7 @@ public class AllAssets extends JavaPlugin {
 	 * Requires masterSwitch*/
 	private void dev() {
 	}
-	
+
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");

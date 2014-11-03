@@ -32,6 +32,7 @@ package io.github.Skepter.AllAssets.Config;
 import io.github.Skepter.AllAssets.AllAssets;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class ConfigHandler {
 
@@ -61,14 +62,14 @@ public class ConfigHandler {
 			createMessages();
 		else
 			messages = messagesManager.getNewConfig("messages.yml");
-		
+
 		if (!new File(AllAssets.instance().getDataFolder(), "features.yml").exists())
 			createFeatures();
 		else
 			features = featuresManager.getNewConfig("features.yml");
-		
+
 		//find a way to check for missing keys in configurations perhaps? - that way it can 'auto update'
-		
+
 		instance = this;
 	}
 
@@ -91,10 +92,10 @@ public class ConfigHandler {
 		config.set("staffChat", "'[&bStaff - {PLAYERNAME}&f] {MESSAGE}'", "The prefix for the staff chat");
 		config.set("pluginsShowAuthors", "true", "If true, the plugin command will show the authors of the plugin");
 		config.set("useNMSGod", "true", "If true, mobs don't target you when in godmode");
-		config.set("commandsOnJoin", "/broadcast {PLAYERNAME} joined the game!" , "CommandOnJoin must be enabled in features.yml");
+		config.set("commandsOnJoin", Arrays.asList(new String[] { "/broadcast {PLAYERNAME} joined the game!" }), "CommandOnJoin must be enabled in features.yml");
 		config.set("commandCooldown", "0", "Amount of seconds to have a cooldown between each command");
 		config.set("debugMode", "false", "Enables debugging messages and features");
-		
+
 		config.saveConfig();
 	}
 
@@ -114,7 +115,7 @@ public class ConfigHandler {
 
 		features = featuresManager.getNewConfig("features.yml", header);
 
-		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false" );
+		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false");
 		features.set("AllAssets", "true");
 		features.set("Back", "true");
 		features.set("Balance", "true");
@@ -163,7 +164,7 @@ public class ConfigHandler {
 		features.set("Weather", "true");
 		features.set("Worlds", "true");
 
-		features.set("AntiHyperlink", "true", "--- Events ---", "Actions which occur on events can be disabled here" );
+		features.set("AntiHyperlink", "true", "--- Events ---", "Actions which occur on events can be disabled here");
 		features.set("AntiSwear", "true");
 		features.set("ChatColor", "true");
 		features.set("ConsoleSay", "false", "Allows the console to n chat without having to use /say");

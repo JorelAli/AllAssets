@@ -124,7 +124,7 @@ public class CommandFramework {
 				try {
 					long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
-					if (ConfigHandler.instance().config().getBoolean("debugMode"))
+					if (ConfigHandler.instance().config().getBoolean("debugMode") || AllAssets.masterSwitch)
 						sender.sendMessage(AllAssets.title + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
 				} catch (Exception e) {
 					e.printStackTrace();

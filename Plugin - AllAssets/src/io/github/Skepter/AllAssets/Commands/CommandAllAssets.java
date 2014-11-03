@@ -41,6 +41,7 @@ import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -69,7 +70,7 @@ public class CommandAllAssets {
 		int arg = 1;
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);
-
+		Collections.sort(commandList);
 		TextUtils.paginate(args.getSender(), commandList, 12, arg);
 		args.getSender().sendMessage(AllAssets.title + "Use /allassets commands <page number> to go to the next page");
 		return;
