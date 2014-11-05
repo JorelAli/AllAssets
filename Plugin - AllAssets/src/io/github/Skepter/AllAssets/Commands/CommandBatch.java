@@ -53,11 +53,32 @@ public class CommandBatch {
 	}
 
 	//put a delay between each execution as a variable
+	
+	//how to do it:
+	//FIRSTLY, analyse the code, see what it is GOING to do FIRST
+	//then do the adjustments (so on the 3rd one put the value in etc.)
 	/*
 	 * Change args from [i=n:x] to:
-	 * [i=<VALUE>] = whatever
-	 * [n=<VALUE>] = whatever
-	 * [d=<VALUE>] = delay between each execution
+	 * [i=<VALUE>] = time to be run at (what run number)
+	 * e.g. /batch 5 /say hi [i]
+	 * 			returns hi 1, hi 2, hi 3, hi 4, hi 5
+	 * 		/batch 5 /say hi [i=3]
+	 * 			returns hi, hi, hi 3, hi 4, hi 5
+	 * 		/batch 5 /say hi [i=$3]
+	 * 			returns hi, hi, hi 3, hi, hi 
+	 * 
+	 * [r=<VALUE>] = reverse of i, only works in form of [r=INTEGER]
+	 * e.g. /batch 5 /say hi [r=3]
+	 * 			returns hi 1, hi 2, hi 3, hi, hi
+	 * 
+	 * [s=<VALUE>] = delay between each execution - only supports INTEGERS
+	 * Used as an argument value:
+	 * e.g. /batch 5 [s=5] /say hi
+	 * will run /say hi every 5 seconds
+	 * 
+	 * Change s to m or ms (does NOT support h)
+	 * e.g. /batch 5 [ms=500] /say hi
+	 * will run /say hi every 500 milliseconds (half a second)
 	 */
 	
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
