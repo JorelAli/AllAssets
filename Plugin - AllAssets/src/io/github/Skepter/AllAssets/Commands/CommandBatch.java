@@ -33,13 +33,17 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
+import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
+import java.util.List;
+
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /** Batch command - designed to run a specific command multiple times.
  * Technically a 'for loop emulator' for Minecraft, but designed to be more
@@ -53,7 +57,7 @@ public class CommandBatch {
 	}
 
 	//put a delay between each execution as a variable
-	
+
 	//how to do it:
 	//FIRSTLY, analyse the code, see what it is GOING to do FIRST
 	//then do the adjustments (so on the 3rd one put the value in etc.)
@@ -80,7 +84,7 @@ public class CommandBatch {
 	 * e.g. /batch 5 [ms=500] /say hi
 	 * will run /say hi every 500 milliseconds (half a second)
 	 */
-	
+
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
@@ -91,9 +95,10 @@ public class CommandBatch {
 			return;
 		}
 		if (args.getArgs().length == 0) {
-			player.sendMessage("[i] = the number in which the time is being run at (i.e. the iteration number)");
-			player.sendMessage("[i=NUMBER] = the number to start from, cannot use [i] in same command");
-			player.sendMessage("[i=NUMBER:INCREMENT] = the number to start from and the amount to increment it by");
+			player.sendMessage("[i] = the number in which the time is being run at");
+			player.sendMessage("[i=NUMBER] = the number to start from");
+			player.sendMessage("[r=NUMBER] = the number to start from, in reverse");
+			player.sendMessage("[ms/s/m=NUMBER] = the delay");
 			return;
 			// massive tut
 		}
@@ -108,90 +113,34 @@ public class CommandBatch {
 			ErrorUtils.error(player, "Amount cannot be larger than 500!");
 			return;
 		}
+		//batch 5 /say hi
 		final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
-		
-		/* If it doesn't contain [i] or [i=#] */
-		if (!(s.contains("[i]")) && !(s.contains("[i="))) {
-			for (int i = 1; i < (amount + 1); i++)
-				player.performCommand(s);
-			return;
-		}
-		
-		/* If it only contains [i] */
-		if (s.contains("[i]") && !(s.contains("[i="))) {
-			for (int i = 1; i < (amount + 1); i++)
-				player.performCommand(s.replace("[i]", String.valueOf(i)));
-			return;
-		}
-
-		/* If it contains [i=#] but doesn't contain [i] */
-		if ((s.contains("[i=") && s.contains("]")) && !(s.contains("[i]")))
-			//**** Amount has to be proportional to a different value. It cannot be amount since
-			//**** int i = 1, i < [i=x] - x will not be directly proportional to i, so x must
-			//**** be changed, or modify the entire syntax.
-			for (int i = 1; i < amount; i++) {
-				//				List<String> tagValues = new ArrayList<String>();
-				int beginInt = 1;
-				int increment = 1;
-				player.sendMessage("beginInt: " + beginInt);
-				player.sendMessage("increment: " + increment);
-				//you wanat to replace the str...
-				for (final String str : TextUtils.multipleStringBetween(s, "[i=", "]")) {
-					if (str.contains(":")) {
-						final String[] arr = str.split(":");
-						beginInt = Math.abs(Integer.parseInt(arr[0]));
-						increment = Integer.parseInt(arr[1]);
-					} else
-						try {
-							beginInt = Math.abs(Integer.parseInt(str));
-						} catch (final NumberFormatException e) {
-							beginInt = 1;
-						}
-					player.performCommand(s.replace("[i=" + str + "]", String.valueOf(((i - 1) * increment) + beginInt)));
-					//					tagValues.add("[i=" + str + "]");
+		List<String> iVariables = TextUtils.multipleStringBetween(s, "[i=", "]");
+		List<String> rVariables = TextUtils.multipleStringBetween(s, "[r=", "]");
+		for (int i = 1; i <= amount; i++) {
+			String cache = s;
+			for (String variable : iVariables) {
+				if(Integer.parseInt(variable) >= i) {
+					cache.replace("[i=" + variable + "]", String.valueOf(i));
 				}
-
-				//				for(String str : tagValues) {
-				//					//can't do that since it has to be dumped into the playerPerformCommand (calculated there)
-				//					//parse it into the 's'
-				//				}
-				//				player.performCommand(s.replace("[i]", String.valueOf(i)));
 			}
+			for (String variable : rVariables) {
+				if(Integer.parseInt(variable) <= i) {
+					cache.replace("[r=" + variable + "]", String.valueOf(i));
+				}
+			}
+			cache.replace("[i]", String.valueOf(i));
+			player.performCommand(cache);
+			//player.performCommand(s.replace("[i=" + str + "]", String.valueOf(((i - 1) * increment) + beginInt)));
 
-		//		if ((s.contains("[i=") && s.contains("]")) || s.contains("[i]")) {
-		//			final String between = TextUtils.stringBetween(s, "[i=", "]");
-		//			int timesToRun = 1;
-		//			int increment = 1;
-		//			if (between.contains(":")) {
-		//				final String[] arr = between.split(":");
-		//				timesToRun = Math.abs(Integer.parseInt(arr[0]));
-		//				increment = Integer.parseInt(arr[1]);
-		//			} else {
-		//				try {
-		//					timesToRun = Math.abs(Integer.parseInt(between));
-		//				} catch (final NumberFormatException e) {
-		//					timesToRun = 1;
-		//				}
-		//			}
-		//			int count = timesToRun;
-		//			for (int i = timesToRun; i < amount * increment; i += increment) {
-		//				String cmd = "";
-		//				final String cmdToRun = s.replace("[i=" + between + "]", String.valueOf(i)); // Nav
-		//				if (s.contains("[i]") && s.contains("[i=") && s.contains(":")) {
-		//					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(count++));
-		//				} else if (s.contains("[i]")) {
-		//					cmd = cmd + cmdToRun.replace("[i]", String.valueOf(i));
-		//				} else {
-		//					cmd = cmd + cmdToRun;
-		//				}
-		//				player.performCommand(cmd);
-		//			}
-		//			return;
-		//		} else {
-		//			for (int i = 1; i < amount + 1; i++) {
-		//				player.performCommand(s);
-		//			}
-		//			return;
-		//		}
+		}
+//		if (s.contains("[ms=") || s.contains("[s=") || s.contains("[m=")) {
+//			//delay
+//			new BukkitRunnable() {
+//				public void run() {
+//					//shoot - i and r uses for loops!
+//				}
+//			}.runTaskTimer(AllAssets.instance(), /*delay comes here*/0, /*do here the thingy erm amount?*/0);
+//		}
 	}
 }
