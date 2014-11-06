@@ -37,12 +37,14 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -60,6 +62,7 @@ public class CommandBatch {
 	}
 
 	private Map<Integer, Integer> runnableMap = new HashMap<Integer, Integer>();
+	private Map<UUID, Integer> runnablesMap = new HashMap<UUID, Integer>();
 
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -73,6 +76,18 @@ public class CommandBatch {
 
 		final Player cachedPlayer = player;
 
+		if (args.getArgs()[0].equals("stop")) {
+			int id = 0;
+			try {
+				id = Integer.parseInt(args.getArgs()[1]);
+			} catch (Exception e) {
+				id = runnablesMap.get(player.getUniqueId());
+			}
+			Bukkit.getScheduler().cancelTask(id);
+			player.sendMessage(AllAssets.title + "ID " + id + " stopped successfully");
+			return;
+		}
+
 		if (args.getArgs().length == 0) {
 			player.sendMessage("[ms/s/m=NUMBER] = the delay");
 			return;
@@ -84,7 +99,8 @@ public class CommandBatch {
 			ErrorUtils.notAnInteger(player);
 			return;
 		}
-		if (amount > 500) {
+		//limit in config
+		if (amount > ConfigHandler.instance().config().getInt("batchLimit")) {
 			ErrorUtils.error(player, "Amount cannot be larger than 500!");
 			return;
 		}
@@ -105,24 +121,28 @@ public class CommandBatch {
 				time = m * 60 * 20;
 			}
 			String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 2, args.getArgs().length), " ");
-			if(s.startsWith("/"))
+			if (s.startsWith("/"))
 				s = s.substring(1);
-			
+
 			final String cachedCommand = s;
-			new BukkitRunnable() {
+			int taskID = new BukkitRunnable() {
 				public void run() {
 					runnableMap.put(getTaskId(), runnableMap.get(getTaskId()) == null ? 1 : runnableMap.get(getTaskId()) + 1);
-					if (runnableMap.get(getTaskId()) == cachedAmount)
+					if (runnableMap.get(getTaskId()) == cachedAmount) {
+						runnableMap.remove(getTaskId());
 						Bukkit.getScheduler().cancelTask(getTaskId());
+					}
 
 					cachedPlayer.performCommand(cachedCommand);
 				}
-			}.runTaskTimer(AllAssets.instance(), 0, time);
+			}.runTaskTimer(AllAssets.instance(), 0, time).getTaskId();
+			runnablesMap.put(player.getUniqueId(), taskID);
+			player.sendMessage(AllAssets.title + "Use /batch stop to stop the batch command, or /batch stop " + taskID + " to stop it later");
 			return;
 		}
 
 		String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
-		if(s.startsWith("/"))
+		if (s.startsWith("/"))
 			s = s.substring(1);
 		for (int i = 1; i <= amount; i++) {
 			player.performCommand(s);

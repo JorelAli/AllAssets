@@ -84,6 +84,8 @@ public class ConfigHandler {
 
 		config.set("maxLogAmount", "20", "The maximum amount of logs to store temporarily");
 		config.set("afkProtect", "true", "Prevents players from getting hurt by mobs when AFK");
+		config.set("batchLimit", "500", "The limit of amounts to execute a command");
+		
 		// does it not like that 'm' in perform?
 		config.set("bindRight", "true", "Performs action with a right click", "(set to false to perform action with left click)");
 		config.set("useIPInformation", "false", "Allows ");
