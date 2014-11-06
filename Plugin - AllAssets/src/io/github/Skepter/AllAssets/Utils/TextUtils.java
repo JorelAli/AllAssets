@@ -42,6 +42,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -300,9 +301,13 @@ public class TextUtils {
 		final Pattern regexTag = Pattern.compile(beginTag + "(.+?)" + endTag);
 		final List<String> tagValues = new ArrayList<String>();
 		final Matcher matcher = regexTag.matcher(str);
-		while (matcher.find())
-			tagValues.add(matcher.group(1));
-		return tagValues;
+		try {
+			while (matcher.find())
+				tagValues.add(matcher.group(1));
+			return tagValues;
+		} catch (Exception e) {
+			return Arrays.asList(new String[] {stringBetween(str, beginTag, endTag)});
+		}
 	}
 
 	public static String replace(final String input, final int startindex, final int endindex, final String replacement) {

@@ -218,7 +218,7 @@ public class AllAssets extends JavaPlugin {
 	public Map<UUID, Long> tempTimeMap;
 	public ComphenixsGhostFactory ghostFactory;
 
-	public static boolean masterSwitch = true;
+	public static boolean masterSwitch = false;
 
 	/** Block where developing stuff happens. Used for easy code removal 
 	 * Requires masterSwitch*/

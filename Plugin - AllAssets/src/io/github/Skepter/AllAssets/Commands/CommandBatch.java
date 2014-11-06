@@ -37,11 +37,14 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -56,34 +59,7 @@ public class CommandBatch {
 		framework.registerCommands(this);
 	}
 
-	//put a delay between each execution as a variable
-
-	//how to do it:
-	//FIRSTLY, analyse the code, see what it is GOING to do FIRST
-	//then do the adjustments (so on the 3rd one put the value in etc.)
-	/*
-	 * Change args from [i=n:x] to:
-	 * [i=<VALUE>] = time to be run at (what run number)
-	 * e.g. /batch 5 /say hi [i]
-	 * 			returns hi 1, hi 2, hi 3, hi 4, hi 5
-	 * 		/batch 5 /say hi [i=3]
-	 * 			returns hi, hi, hi 3, hi 4, hi 5
-	 * 		/batch 5 /say hi [i=$3]
-	 * 			returns hi, hi, hi 3, hi, hi 
-	 * 
-	 * [r=<VALUE>] = reverse of i, only works in form of [r=INTEGER]
-	 * e.g. /batch 5 /say hi [r=3]
-	 * 			returns hi 1, hi 2, hi 3, hi, hi
-	 * 
-	 * [s=<VALUE>] = delay between each execution - only supports INTEGERS
-	 * Used as an argument value:
-	 * e.g. /batch 5 [s=5] /say hi
-	 * will run /say hi every 5 seconds
-	 * 
-	 * Change s to m or ms (does NOT support h)
-	 * e.g. /batch 5 [ms=500] /say hi
-	 * will run /say hi every 500 milliseconds (half a second)
-	 */
+	private Map<Integer, Integer> runnableMap = new HashMap<Integer, Integer>();
 
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -94,13 +70,12 @@ public class CommandBatch {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+
+		final Player cachedPlayer = player;
+
 		if (args.getArgs().length == 0) {
-			player.sendMessage("[i] = the number in which the time is being run at");
-			player.sendMessage("[i=NUMBER] = the number to start from");
-			player.sendMessage("[r=NUMBER] = the number to start from, in reverse");
 			player.sendMessage("[ms/s/m=NUMBER] = the delay");
 			return;
-			// massive tut
 		}
 		int amount = 1;
 		try {
@@ -113,34 +88,44 @@ public class CommandBatch {
 			ErrorUtils.error(player, "Amount cannot be larger than 500!");
 			return;
 		}
-		//batch 5 /say hi
-		final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
-		List<String> iVariables = TextUtils.multipleStringBetween(s, "[i=", "]");
-		List<String> rVariables = TextUtils.multipleStringBetween(s, "[r=", "]");
-		for (int i = 1; i <= amount; i++) {
-			String cache = s;
-			for (String variable : iVariables) {
-				if(Integer.parseInt(variable) >= i) {
-					cache.replace("[i=" + variable + "]", String.valueOf(i));
-				}
-			}
-			for (String variable : rVariables) {
-				if(Integer.parseInt(variable) <= i) {
-					cache.replace("[r=" + variable + "]", String.valueOf(i));
-				}
-			}
-			cache.replace("[i]", String.valueOf(i));
-			player.performCommand(cache);
-			//player.performCommand(s.replace("[i=" + str + "]", String.valueOf(((i - 1) * increment) + beginInt)));
 
+		final int cachedAmount = amount;
+
+		if (args.getArgs()[1].contains("[ms=") || args.getArgs()[1].contains("[s=") || args.getArgs()[1].contains("[m=")) {
+			long time = 0L;
+
+			if (args.getArgs()[1].contains("[ms=")) {
+				int ms = new CustomObject(args.getArgs()[1]).stripInteger();
+				time = ms / 1000 * 20;
+			} else if (args.getArgs()[1].contains("[s=")) {
+				int s = new CustomObject(args.getArgs()[1]).stripInteger();
+				time = s * 20;
+			} else if (args.getArgs()[1].contains("[m=")) {
+				int m = new CustomObject(args.getArgs()[1]).stripInteger();
+				time = m * 60 * 20;
+			}
+			String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 2, args.getArgs().length), " ");
+			if(s.startsWith("/"))
+				s = s.substring(1);
+			
+			final String cachedCommand = s;
+			new BukkitRunnable() {
+				public void run() {
+					runnableMap.put(getTaskId(), runnableMap.get(getTaskId()) == null ? 1 : runnableMap.get(getTaskId()) + 1);
+					if (runnableMap.get(getTaskId()) == cachedAmount)
+						Bukkit.getScheduler().cancelTask(getTaskId());
+
+					cachedPlayer.performCommand(cachedCommand);
+				}
+			}.runTaskTimer(AllAssets.instance(), 0, time);
+			return;
 		}
-//		if (s.contains("[ms=") || s.contains("[s=") || s.contains("[m=")) {
-//			//delay
-//			new BukkitRunnable() {
-//				public void run() {
-//					//shoot - i and r uses for loops!
-//				}
-//			}.runTaskTimer(AllAssets.instance(), /*delay comes here*/0, /*do here the thingy erm amount?*/0);
-//		}
+
+		String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
+		if(s.startsWith("/"))
+			s = s.substring(1);
+		for (int i = 1; i <= amount; i++) {
+			player.performCommand(s);
+		}
 	}
 }
