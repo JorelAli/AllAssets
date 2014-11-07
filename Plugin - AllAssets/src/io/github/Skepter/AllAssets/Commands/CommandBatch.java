@@ -89,7 +89,10 @@ public class CommandBatch {
 		}
 
 		if (args.getArgs().length == 0) {
-			player.sendMessage("[ms/s/m=NUMBER] = the delay");
+			player.sendMessage(TextUtils.title("Batch help"));
+			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 /say hi");
+			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 1s /say hi");
+			player.sendMessage(AllAssets.houseStyleColor + "/batch 20 500ms /say hi");
 			return;
 		}
 		int amount = 1;
@@ -107,18 +110,17 @@ public class CommandBatch {
 
 		final int cachedAmount = amount;
 
-		if (args.getArgs()[1].contains("[ms=") || args.getArgs()[1].contains("[s=") || args.getArgs()[1].contains("[m=")) {
+		//change format from [##=<VALUE>] to <VALUE>##
+		if (args.getArgs()[1].contains("ms") || args.getArgs()[1].contains("s") || args.getArgs()[1].contains("m")) {
 			long time = 0L;
-
-			if (args.getArgs()[1].contains("[ms=")) {
-				int ms = new CustomObject(args.getArgs()[1]).stripInteger();
-				time = ms / 1000 * 20;
-			} else if (args.getArgs()[1].contains("[s=")) {
-				int s = new CustomObject(args.getArgs()[1]).stripInteger();
-				time = s * 20;
-			} else if (args.getArgs()[1].contains("[m=")) {
-				int m = new CustomObject(args.getArgs()[1]).stripInteger();
-				time = m * 60 * 20;
+			int value = new CustomObject(args.getArgs()[1]).stripInteger();
+			String type = new CustomObject(args.getArgs()[1]).stripString();
+			if (type.equals("ms")) {
+				time = value / 1000 * 20;
+			} else if (type.equals("s")) {
+				time = value * 20;
+			} else if (type.equals("m")) {
+				time = value * 60 * 20;
 			}
 			String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 2, args.getArgs().length), " ");
 			if (s.startsWith("/"))
