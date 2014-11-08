@@ -133,17 +133,9 @@ public class TextUtils {
 			return false;
 	}
 
+	/* Thanks to Totom3 for pointing out how inefficient the old version was :P */
 	public static String[] getMsgFromArgs(final String[] args, final int indexBegin, final int indexEnd) {
-		final List<String> list = new ArrayList<String>();
-		for (int i = indexBegin; i < indexEnd; i++)
-			list.add(args[i]);
-		final String[] array = new String[list.size()];
-		int index = 0;
-		for (final Object value : list) {
-			array[index] = (String) value;
-			index++;
-		}
-		return array;
+		return Arrays.copyOfRange(args, indexBegin, indexEnd);
 	}
 
 	public static String getMsgStringFromArgs(final String[] args, final int indexBegin, final int indexEnd) {
