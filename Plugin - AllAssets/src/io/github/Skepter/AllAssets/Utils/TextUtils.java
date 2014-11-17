@@ -51,6 +51,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.bukkit.ChatColor.*;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -88,7 +90,7 @@ public class TextUtils {
 
 	/** Centers text */
 	private static String center(final String text) {
-		final int spaces = (int) Math.round((80 - (1.4 * ChatColor.stripColor(text).length())) / 2);
+		final int spaces = (int) Math.round((80 - (1.4 * stripColor(text).length())) / 2);
 		String s = "";
 		for (int i = 0; i < spaces; i++)
 			s = s + " ";
@@ -99,11 +101,10 @@ public class TextUtils {
 	 * 
 	 * @param s
 	 * @return */
-	public static boolean containsSwear(final String s) {
-		final String s00 = ChatColor.stripColor(s);
-		final String s0 = s00.toLowerCase();
-		for (final String str : swearWords())
-			if (s0.contains(str))
+	public static boolean containsSwear(String s) {
+		String[] swearWords =  new String[] {"fuck", "shit", "bitch", "cunt", "penis", "vagina", "porn"};
+		for (final String str : swearWords)
+			if (stripColor(s.toLowerCase()).contains(str))
 				return true;
 		return false;
 	}
@@ -143,7 +144,7 @@ public class TextUtils {
 	}
 
 	public static boolean isHyperlink(final String s) {
-		final String strippedColor = ChatColor.stripColor(s);
+		final String strippedColor = stripColor(s);
 		final String s0 = strippedColor.toLowerCase();
 		final Pattern p = Pattern.compile("[^.]+[.][^.]+");
 		final Scanner scanner = new Scanner(s0);
@@ -182,14 +183,11 @@ public class TextUtils {
 	}
 
 	public static String nonIndentedSubTitle(final String s) {
-		return ChatColor.BLUE + "[" + ChatColor.AQUA + s + ChatColor.BLUE + "]";
+		return BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
 	public static void paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
-
-		final ChatColor a = ChatColor.AQUA;
-		final ChatColor g = ChatColor.WHITE;
 
 		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
 			ErrorUtils.error(sender, "That number is too small!");
@@ -213,7 +211,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllAssets.title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllAssets.title + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return;
@@ -226,9 +224,6 @@ public class TextUtils {
 		Collections.sort(textData);
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
-		final ChatColor a = ChatColor.AQUA;
-		final ChatColor g = ChatColor.WHITE;
-
 		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
 			ErrorUtils.error(sender, "That number is too small!");
 			return;
@@ -251,7 +246,7 @@ public class TextUtils {
 			return;
 		}
 
-		sender.sendMessage(AllAssets.title + "Showing page " + a + pageNumberToShow + g + "/" + a + amountOfPages);
+		sender.sendMessage(AllAssets.title + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return;
@@ -268,24 +263,11 @@ public class TextUtils {
 	}
 
 	public static String subTitle(final String s) {
-		return "  " + ChatColor.BLUE + "[" + ChatColor.AQUA + s + ChatColor.BLUE + "]";
-	}
-
-	private static ArrayList<String> swearWords() {
-		final ArrayList<String> arr = new ArrayList<String>();
-		//work on some crazy awesome regex for this part here :)
-		arr.add("fuck");
-		arr.add("shit");
-		arr.add("bitch");
-		arr.add("cunt");
-		arr.add("penis");
-		arr.add("vagina");
-		arr.add("porn");
-		return arr;
+		return "  " + BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
 	public static String title(final String s) {
-		final String str = ChatColor.AQUA + "--" + ChatColor.BLUE + "[" + ChatColor.AQUA + s + ChatColor.BLUE + "]" + ChatColor.AQUA + "--";
+		final String str = AQUA + "--" + BLUE + "[" + AQUA + s + BLUE + "]" + AQUA + "--";
 		return center(str);
 	}
 

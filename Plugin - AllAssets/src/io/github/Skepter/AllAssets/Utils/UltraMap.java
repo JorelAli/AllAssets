@@ -51,7 +51,7 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 	}
 
 	public void put(final A key, final B value1, final C value2, final D value3, final E value4, final F value5) {
-		//check CURRENT values to allow for custom 'overlapping'
+		//TODO check CURRENT values to allow for custom 'overlapping'
 		map.put(key, Arrays.asList(new Object[] { value1, value2, value3, value4, value5 }));
 		return;
 	}

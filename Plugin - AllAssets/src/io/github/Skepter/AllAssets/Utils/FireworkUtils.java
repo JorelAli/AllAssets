@@ -33,6 +33,8 @@ package io.github.Skepter.AllAssets.Utils;
 
 import java.util.Random;
 
+import static org.bukkit.Color.*;
+
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
@@ -56,39 +58,39 @@ public class FireworkUtils {
 	public static Color getColor(final int i) {
 		switch (i) {
 		case 1:
-			return Color.AQUA;
+			return AQUA;
 		case 2:
-			return Color.BLACK;
+			return BLACK;
 		case 3:
-			return Color.BLUE;
+			return BLUE;
 		case 4:
-			return Color.FUCHSIA;
+			return FUCHSIA;
 		case 5:
-			return Color.GRAY;
+			return GRAY;
 		case 6:
-			return Color.GREEN;
+			return GREEN;
 		case 7:
-			return Color.LIME;
+			return LIME;
 		case 8:
-			return Color.MAROON;
+			return MAROON;
 		case 9:
-			return Color.NAVY;
+			return NAVY;
 		case 10:
-			return Color.OLIVE;
+			return OLIVE;
 		case 11:
-			return Color.ORANGE;
+			return ORANGE;
 		case 12:
-			return Color.PURPLE;
+			return PURPLE;
 		case 13:
-			return Color.RED;
+			return RED;
 		case 14:
-			return Color.SILVER;
+			return SILVER;
 		case 15:
-			return Color.TEAL;
+			return TEAL;
 		case 16:
-			return Color.WHITE;
+			return WHITE;
 		case 17:
-			return Color.YELLOW;
+			return YELLOW;
 		}
 		return null;
 	}
