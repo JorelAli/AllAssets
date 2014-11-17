@@ -236,7 +236,7 @@ public class CommandDebug {
 //	public void error(final CommandArgs args) {
 //		final String[] arr = { "bob", "mark" };
 //		final String s = arr[4];
-//		Bukkit.broadcastMessage(s);
+//		AllAssets.instance().getServer().broadcastMessage(s);
 //	}
 
 	//will be removed in future
@@ -251,7 +251,7 @@ public class CommandDebug {
 //		tt.setTabs(16, 22, 20); // horizontal tabs positions
 //		tt.sortByFields(-2, 1); // sort by second column descending, then by first
 //		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
-//		Bukkit.broadcastMessage(printedText);
+//		AllAssets.instance().getServer().broadcastMessage(printedText);
 //	}
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)

@@ -82,7 +82,9 @@ public class SimpleConfig {
 		this.config = YamlConfiguration.loadConfiguration(configStream);
 	}
 
-	/* Used to check for tabs in configuration files */
+	/* Used to check for tabs in configuration files 
+	 * Returns false:null:null if there are no tabs
+	 * Returns true:<FILE NAME>:<LINE NUMBER> if there is a tab */
 	private String checkYamlFiles() throws IOException {
 		final BufferedReader reader = new BufferedReader(new FileReader(file));
 		String line;
@@ -160,60 +162,41 @@ public class SimpleConfig {
 	}
 
 	public List<String> getStringList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<String>(0);
-
 		final List<String> result = new ArrayList<String>();
-
 		for (final Object object : list)
 			if ((object instanceof String) || (isPrimitiveWrapper(object)))
 				result.add(String.valueOf(object));
-
 		return result;
-
 	}
 
 	public List<Integer> getIntegerList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Integer>(0);
-
 		final List<Integer> result = new ArrayList<Integer>();
-
 		for (final Object object : list)
 			if (object instanceof Integer)
 				result.add((Integer) object);
 			else if (object instanceof String)
 				try {
-
 					result.add(Integer.valueOf((String) object));
-
 				} catch (final Exception ex) {
-
 				}
 			else if (object instanceof Character)
 				result.add((int) ((Character) object).charValue());
 			else if (object instanceof Number)
 				result.add(((Number) object).intValue());
-
 		return result;
-
 	}
 
 	public List<Boolean> getBooleanList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Boolean>(0);
-
 		final List<Boolean> result = new ArrayList<Boolean>();
-
 		for (final Object object : list)
 			if (object instanceof Boolean)
 				result.add((Boolean) object);
@@ -222,197 +205,135 @@ public class SimpleConfig {
 					result.add(true);
 				else if (Boolean.FALSE.toString().equals(object))
 					result.add(false);
-
 		return result;
-
 	}
 
 	public List<Double> getDoubleList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Double>(0);
-
 		final List<Double> result = new ArrayList<Double>();
-
 		for (final Object object : list)
 			if (object instanceof Double)
 				result.add((Double) object);
 			else if (object instanceof String)
 				try {
-
 					result.add(Double.valueOf((String) object));
-
 				} catch (final Exception ex) {
-
 				}
 			else if (object instanceof Character)
 				result.add((double) ((Character) object).charValue());
 			else if (object instanceof Number)
 				result.add(((Number) object).doubleValue());
-
 		return result;
-
 	}
 
 	public List<Float> getFloatList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Float>(0);
-
 		final List<Float> result = new ArrayList<Float>();
-
 		for (final Object object : list)
 			if (object instanceof Float)
 				result.add((Float) object);
 			else if (object instanceof String)
 				try {
-
 					result.add(Float.valueOf((String) object));
-
 				} catch (final Exception ex) {
-
 				}
 			else if (object instanceof Character)
 				result.add((float) ((Character) object).charValue());
 			else if (object instanceof Number)
 				result.add(((Number) object).floatValue());
-
 		return result;
-
 	}
 
 	public List<Long> getLongList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Long>(0);
-
 		final List<Long> result = new ArrayList<Long>();
-
 		for (final Object object : list)
 			if (object instanceof Long)
 				result.add((Long) object);
 			else if (object instanceof String)
 				try {
-
 					result.add(Long.valueOf((String) object));
-
 				} catch (final Exception ex) {
-
 				}
 			else if (object instanceof Character)
 				result.add((long) ((Character) object).charValue());
 			else if (object instanceof Number)
 				result.add(((Number) object).longValue());
-
 		return result;
-
 	}
 
 	public List<Byte> getByteList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Byte>(0);
-
 		final List<Byte> result = new ArrayList<Byte>();
-
 		for (final Object object : list)
 			if (object instanceof Byte)
 				result.add((Byte) object);
 			else if (object instanceof String)
 				try {
-
 					result.add(Byte.valueOf((String) object));
-
 				} catch (final Exception ex) {
-
 				}
 			else if (object instanceof Character)
 				result.add((byte) ((Character) object).charValue());
 			else if (object instanceof Number)
 				result.add(((Number) object).byteValue());
-
 		return result;
-
 	}
 
 	public List<Character> getCharacterList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Character>(0);
-
 		final List<Character> result = new ArrayList<Character>();
-
 		for (final Object object : list)
 			if (object instanceof Character)
 				result.add((Character) object);
 			else if (object instanceof String) {
-
 				final String str = (String) object;
-
 				if (str.length() == 1)
 					result.add(str.charAt(0));
-
 			} else if (object instanceof Number)
 				result.add((char) ((Number) object).intValue());
-
 		return result;
-
 	}
 
 	public List<Short> getShortList(final String path) {
-
 		final List<?> list = getList(path);
-
 		if (list == null)
 			return new ArrayList<Short>(0);
-
 		final List<Short> result = new ArrayList<Short>();
-
 		for (final Object object : list)
 			if (object instanceof Short)
 				result.add((Short) object);
 			else if (object instanceof String)
 				try {
-
 					result.add(Short.valueOf((String) object));
-
 				} catch (final Exception ex) {
-
 				}
 			else if (object instanceof Character)
 				result.add((short) ((Character) object).charValue());
 			else if (object instanceof Number)
 				result.add(((Number) object).shortValue());
-
 		return result;
-
 	}
 
 	public List<Map<?, ?>> getMapList(final String path) {
-
 		final List<?> list = getList(path);
-
 		final List<Map<?, ?>> result = new ArrayList<Map<?, ?>>();
-
 		if (list == null)
 			return result;
-
 		for (final Object object : list)
 			if (object instanceof Map)
 				result.add((Map<?, ?>) object);
-
 		return result;
-
 	}
 
 	public boolean contains(final String path) {
@@ -435,17 +356,14 @@ public class SimpleConfig {
 			comments++;
 		}
 		this.config.set(path, value);
-
 	}
-	
-	public void set(final String path, final Object value, final String... comment) {
 
+	public void set(final String path, final Object value, final String... comment) {
 		for (final String comm : comment)
 			if (!this.config.contains(path)) {
 				this.config.set(manager.getPluginName() + "_COMMENT_" + comments, " " + comm);
 				comments++;
 			}
-
 		this.config.set(path, value);
 	}
 
@@ -465,7 +383,6 @@ public class SimpleConfig {
 			return;
 		final String config = this.config.saveToString();
 		manager.saveConfig(config, this.file);
-
 	}
 
 	public Set<String> getKeys() {
@@ -473,9 +390,7 @@ public class SimpleConfig {
 	}
 
 	protected boolean isPrimitiveWrapper(final Object input) {
-
 		return (input instanceof Integer) || (input instanceof Boolean) || (input instanceof Character) || (input instanceof Byte) || (input instanceof Short) || (input instanceof Double) || (input instanceof Long) || (input instanceof Float);
-
 	}
 
 }

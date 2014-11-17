@@ -34,53 +34,102 @@ package io.github.Skepter.AllAssets.Utils;
 import io.github.Skepter.AllAssets.Misc.EnchantGlow;
 
 import java.util.Arrays;
-
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtils {
 
 	public static boolean isPick(final ItemStack item) {
-		if ((item.getType() == Material.DIAMOND_PICKAXE) || (item.getType() == Material.IRON_PICKAXE) || (item.getType() == Material.GOLD_PICKAXE) || (item.getType() == Material.STONE_PICKAXE) || (item.getType() == Material.WOOD_PICKAXE))
+		switch (item.getType()) {
+		case DIAMOND_PICKAXE:
+		case IRON_PICKAXE:
+		case GOLD_PICKAXE:
+		case STONE_PICKAXE:
+		case WOOD_PICKAXE:
 			return true;
-		else
+		default:
 			return false;
+		}
 	}
 
 	public static boolean isAxe(final ItemStack item) {
-		if ((item.getType() == Material.DIAMOND_AXE) || (item.getType() == Material.IRON_AXE) || (item.getType() == Material.GOLD_AXE) || (item.getType() == Material.STONE_AXE) || (item.getType() == Material.WOOD_AXE))
+		switch (item.getType()) {
+		case DIAMOND_AXE:
+		case IRON_AXE:
+		case GOLD_AXE:
+		case STONE_AXE:
+		case WOOD_AXE:
 			return true;
-		else
+		default:
 			return false;
+		}
 	}
 
 	public static boolean isSpade(final ItemStack item) {
-		if ((item.getType() == Material.DIAMOND_SPADE) || (item.getType() == Material.IRON_SPADE) || (item.getType() == Material.GOLD_SPADE) || (item.getType() == Material.STONE_SPADE) || (item.getType() == Material.WOOD_SPADE))
+		switch (item.getType()) {
+		case DIAMOND_SPADE:
+		case IRON_SPADE:
+		case GOLD_SPADE:
+		case STONE_SPADE:
+		case WOOD_SPADE:
 			return true;
-		else
+		default:
 			return false;
+		}
 	}
 
 	public static boolean isHoe(final ItemStack item) {
-		if ((item.getType() == Material.DIAMOND_HOE) || (item.getType() == Material.IRON_HOE) || (item.getType() == Material.GOLD_HOE) || (item.getType() == Material.STONE_HOE) || (item.getType() == Material.WOOD_HOE))
+		switch (item.getType()) {
+		case DIAMOND_HOE:
+		case IRON_HOE:
+		case GOLD_HOE:
+		case STONE_HOE:
+		case WOOD_HOE:
 			return true;
-		else
+		default:
 			return false;
+		}
 	}
 
 	public static boolean isSword(final ItemStack item) {
-		if ((item.getType() == Material.DIAMOND_SWORD) || (item.getType() == Material.IRON_SWORD) || (item.getType() == Material.GOLD_SWORD) || (item.getType() == Material.STONE_SWORD) || (item.getType() == Material.WOOD_SWORD))
+		switch (item.getType()) {
+		case DIAMOND_SWORD:
+		case IRON_SWORD:
+		case GOLD_SWORD:
+		case STONE_SWORD:
+		case WOOD_SWORD:
 			return true;
-		else
+		default:
 			return false;
+		}
 	}
 
 	public static boolean isArmour(final ItemStack item) {
-		if ((item.getType() == Material.DIAMOND_CHESTPLATE) || (item.getType() == Material.IRON_CHESTPLATE) || (item.getType() == Material.GOLD_CHESTPLATE) || (item.getType() == Material.LEATHER_CHESTPLATE) || (item.getType() == Material.DIAMOND_BOOTS) || (item.getType() == Material.IRON_BOOTS) || (item.getType() == Material.GOLD_BOOTS) || (item.getType() == Material.LEATHER_BOOTS) || (item.getType() == Material.DIAMOND_LEGGINGS) || (item.getType() == Material.IRON_LEGGINGS) || (item.getType() == Material.GOLD_LEGGINGS) || (item.getType() == Material.LEATHER_LEGGINGS) || (item.getType() == Material.DIAMOND_BOOTS) || (item.getType() == Material.IRON_BOOTS) || (item.getType() == Material.GOLD_BOOTS) || (item.getType() == Material.LEATHER_BOOTS) || (item.getType() == Material.DIAMOND_HELMET) || (item.getType() == Material.IRON_HELMET) || (item.getType() == Material.GOLD_HELMET) || (item.getType() == Material.LEATHER_HELMET))
+		switch (item.getType()) {
+		case DIAMOND_HELMET:
+		case IRON_HELMET:
+		case GOLD_HELMET:
+		case LEATHER_HELMET:
+		case CHAINMAIL_HELMET:
+		case DIAMOND_CHESTPLATE:
+		case IRON_CHESTPLATE:
+		case GOLD_CHESTPLATE:
+		case LEATHER_CHESTPLATE:
+		case CHAINMAIL_CHESTPLATE:
+		case DIAMOND_LEGGINGS:
+		case IRON_LEGGINGS:
+		case GOLD_LEGGINGS:
+		case LEATHER_LEGGINGS:
+		case CHAINMAIL_LEGGINGS:
+		case DIAMOND_BOOTS:
+		case IRON_BOOTS:
+		case GOLD_BOOTS:
+		case LEATHER_BOOTS:
+		case CHAINMAIL_BOOTS:
 			return true;
-		else
+		default:
 			return false;
+		}
 	}
 
 	public static ItemStack setDisplayName(final ItemStack itemStack, final String name) {
@@ -89,13 +138,13 @@ public class ItemUtils {
 		itemStack.setItemMeta(meta);
 		return itemStack;
 	}
-	
+
 	public static String getDisplayName(final ItemStack itemStack) {
 		final ItemMeta meta = itemStack.getItemMeta();
 		return meta.getDisplayName();
 	}
 
-	public static ItemStack setLore(final ItemStack itemStack, final String[] lore) {
+	public static ItemStack setLore(final ItemStack itemStack, final String... lore) {
 		final ItemMeta meta = itemStack.getItemMeta();
 		meta.setLore(Arrays.asList(lore));
 		itemStack.setItemMeta(meta);
@@ -106,12 +155,12 @@ public class ItemUtils {
 		EnchantGlow.addGlow(itemStack, "");
 		return itemStack;
 	}
-	
+
 	public static ItemStack removeGlow(final ItemStack itemStack) {
 		EnchantGlow.removeGlow(itemStack, "");
 		return itemStack;
 	}
-	
+
 	public static boolean hasGlow(final ItemStack itemStack) {
 		return EnchantGlow.hasGlow(itemStack);
 	}

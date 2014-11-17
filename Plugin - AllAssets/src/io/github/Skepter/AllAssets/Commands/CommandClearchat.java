@@ -33,11 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
+import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-
-import org.bukkit.Bukkit;
 
 public class CommandClearchat {
 
@@ -53,7 +52,7 @@ public class CommandClearchat {
 			return;
 		} else if ((args.getArgs().length == 1) && args.getArgs()[0].equalsIgnoreCase("all")) {
 			for (int i = 0; i < 120; i++)
-				Bukkit.broadcastMessage("");
+				AllAssets.instance().getServer().broadcastMessage("");
 			return;
 		}
 	}

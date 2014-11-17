@@ -31,13 +31,12 @@ package io.github.Skepter.AllAssets.CommandListeners;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -61,12 +60,11 @@ public class CommandAFK implements Listener {
 		}
 		final User user = new User(player);
 		if (!user.isAFK()) {
-			AllAssets.instance();
-			Bukkit.broadcastMessage(AllAssets.title + player.getName() + " is now AFK");
+			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
 			AllAssets.instance();
-			Bukkit.broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
+			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
@@ -89,8 +87,7 @@ public class CommandAFK implements Listener {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if ((event.getFrom().distanceSquared(event.getTo()) > 1) && user.isAFK()) {
-			AllAssets.instance();
-			Bukkit.broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
+			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 	}

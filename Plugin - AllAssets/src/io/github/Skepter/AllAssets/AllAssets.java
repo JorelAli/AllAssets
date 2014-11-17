@@ -411,7 +411,7 @@ public class AllAssets extends JavaPlugin {
 		if (masterSwitch)
 			for (Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)
-					Bukkit.getLogger().info(shortTitleNoColor + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
+					getLogger().info(shortTitleNoColor + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
 	}
 
@@ -420,10 +420,10 @@ public class AllAssets extends JavaPlugin {
 		try {
 			PlayerData.saveAllPlayers();
 		} catch (Exception e1) {
-			Bukkit.getLogger().severe("There was an error saving the player data D:");
+			getLogger().severe("There was an error saving the player data D:");
 		}
 		CommandConsoleLog.players.clear();
-		Bukkit.getServer().getScheduler().cancelTasks(this);
+		getServer().getScheduler().cancelTasks(this);
 
 		if (!tempTimeMap.isEmpty())
 			try {

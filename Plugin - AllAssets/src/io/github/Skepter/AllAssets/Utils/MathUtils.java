@@ -32,7 +32,7 @@
 package io.github.Skepter.AllAssets.Utils;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.*;
 
 public class MathUtils {
 
@@ -73,10 +73,10 @@ public class MathUtils {
 	 * @param date - The long date in milliseconds
 	 * @return the formatted date in String form */
 	public static String formatDate(final long date) {
-		final long days = TimeUnit.MILLISECONDS.toDays(date);
-		final long hours = TimeUnit.MILLISECONDS.toHours(date) - (days * 86400);
-		final long minutes = TimeUnit.MILLISECONDS.toMinutes(date) - (days * 86400) - (hours * 3600);
-		final long seconds = TimeUnit.MILLISECONDS.toSeconds(date) - (days * 86400) - (hours * 3600) - (minutes * 60);
+		final long days = MILLISECONDS.toDays(date);
+		final long hours = MILLISECONDS.toHours(date) - (days * 86400);
+		final long minutes = MILLISECONDS.toMinutes(date) - (days * 86400) - (hours * 3600);
+		final long seconds = MILLISECONDS.toSeconds(date) - (days * 86400) - (hours * 3600) - (minutes * 60);
 		StringBuilder builder = new StringBuilder();
 		if (days != 0)
 			builder.append(days + " days ");
@@ -90,8 +90,7 @@ public class MathUtils {
 	}
 
 	public static String formatDateAtASpecificPointInTime(final long dateTime) {
-		final Date date = new Date();
-		final long l = date.getTime() - dateTime;
+		final long l = new Date().getTime() - dateTime;
 		return formatDate(l);
 	}
 }
