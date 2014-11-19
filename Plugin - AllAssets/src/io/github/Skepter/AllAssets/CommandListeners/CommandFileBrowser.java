@@ -174,8 +174,10 @@ public class CommandFileBrowser implements Listener {
 						for (String s : dataMap.get(player.getUniqueId()))
 							player.sendMessage(s);
 					} else {
-						TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
-						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
+						//TODO ASAP!!!!!!
+						int pages = TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
+						//if (pages != 0 && )
+							player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
 					}
 					return;
 				default:

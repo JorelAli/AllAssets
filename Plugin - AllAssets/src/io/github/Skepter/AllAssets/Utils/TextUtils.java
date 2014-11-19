@@ -186,12 +186,12 @@ public class TextUtils {
 		return BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
-	public static void paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
+	public static int paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
 		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
 			ErrorUtils.error(sender, "That number is too small!");
-			return;
+			return 0;
 		}
 
 		final int amountOfPages = textData.size() / pageSize;
@@ -208,17 +208,17 @@ public class TextUtils {
 		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
 		if (pageNumberToShow > amountOfPages) {
 			ErrorUtils.error(sender, "That number is too large!");
-			return;
+			return 0;
 		}
 
 		sender.sendMessage(AllAssets.title + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
-		return;
+		return amountOfPages;
 	}
 
 	/* One of these pagination ones are deprecated and I can't remember which one! */
-	public static void paginate(final CommandSender sender, final Set<String> data, final int pageSize, final int pageNumberToShow) {
+	public static int paginate(final CommandSender sender, final Set<String> data, final int pageSize, final int pageNumberToShow) {
 		final List<String> textData = new ArrayList<String>();
 		textData.addAll(data);
 		Collections.sort(textData);
@@ -226,7 +226,7 @@ public class TextUtils {
 
 		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
 			ErrorUtils.error(sender, "That number is too small!");
-			return;
+			return 0;
 		}
 
 		final int amountOfPages = textData.size() / pageSize;
@@ -243,13 +243,13 @@ public class TextUtils {
 		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
 		if (pageNumberToShow > amountOfPages) {
 			ErrorUtils.error(sender, "That number is too large!");
-			return;
+			return 0;
 		}
 
 		sender.sendMessage(AllAssets.title + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
-		return;
+		return amountOfPages;
 	}
 
 	public static String stringBetween(final String overallString, final String firstString, final int index) {
