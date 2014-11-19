@@ -174,6 +174,7 @@ public class CommandFileBrowser implements Listener {
 						for (String s : dataMap.get(player.getUniqueId()))
 							player.sendMessage(s);
 					} else {
+						/* If pages = 1 and there is only 1 page, DO NOT SHOW THIS XD*/
 						//TODO ASAP!!!!!!
 						int pages = TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
 						//if (pages != 0 && )
@@ -207,7 +208,7 @@ public class CommandFileBrowser implements Listener {
 			name = "Server root folder";
 		if (Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			fileCountRoot--;
-		Inventory inv = Bukkit.createInventory(null, new Double(MathUtils.roundUp(fileCountRoot, 9)).intValue(), ChatColor.BLUE + "File - " + name);
+		Inventory inv = Bukkit.createInventory(null, MathUtils.toInt(MathUtils.roundUp(fileCountRoot, 9)), ChatColor.BLUE + "File - " + name);
 		for (File file : currentDirectory.listFiles()) {
 			for (String s : supportedFileTypes) {
 				if (file.getName().contains(s))

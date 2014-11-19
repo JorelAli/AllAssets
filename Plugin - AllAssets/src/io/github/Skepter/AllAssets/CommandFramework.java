@@ -67,11 +67,11 @@ import org.bukkit.plugin.SimplePluginManager;
 /** Command Framework - CommandFramework <br>
  * The main command framework class used for controlling the framework.
  * 
- * @author minnymin3
- * 
  * Some features have been added/modified for the use of AllAssets However,
  * minnymin3 deserves pretty much all of the credit since he (or she) wrote the
- * majority of the class. */
+ * majority of the class.
+ * 
+ * @author minnymin3 (and Skepter) */
 public class CommandFramework {
 
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();

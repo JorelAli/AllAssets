@@ -193,7 +193,7 @@ public class CommandFileEditor implements Listener {
 			name = "Server root folder";
 		if (Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			fileCountRoot--;
-		Inventory inv = Bukkit.createInventory(null, new Double(MathUtils.roundUp(fileCountRoot, 9)).intValue(), ChatColor.BLUE + "Choose a file...");
+		Inventory inv = Bukkit.createInventory(null, MathUtils.toInt(MathUtils.roundUp(fileCountRoot, 9)), ChatColor.BLUE + "Choose a file...");
 		for (File file : currentDirectory.listFiles()) {
 			for (String s : supportedFileTypes) {
 				if (file.getName().contains(s))

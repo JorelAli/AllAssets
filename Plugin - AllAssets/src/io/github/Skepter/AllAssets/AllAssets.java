@@ -73,6 +73,7 @@ import io.github.Skepter.AllAssets.Commands.CommandTime;
 import io.github.Skepter.AllAssets.Commands.CommandTp;
 import io.github.Skepter.AllAssets.Commands.CommandTphere;
 import io.github.Skepter.AllAssets.Commands.CommandWeather;
+import io.github.Skepter.AllAssets.Commands.CommandWorkbench;
 import io.github.Skepter.AllAssets.Commands.CommandWorlds;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.PlayerData;
@@ -355,6 +356,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandWeather(framework);
 		if (ConfigHandler.instance().features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
+		if (ConfigHandler.instance().features().getBoolean("Workbench"))
+			new CommandWorkbench(framework);
 
 		/* Vault commands. Only loads them if Vault is enabled so that:
 		 * [1] Unused commands aren't loaded

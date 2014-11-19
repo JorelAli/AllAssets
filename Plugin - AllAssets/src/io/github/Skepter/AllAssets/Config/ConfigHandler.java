@@ -165,6 +165,7 @@ public class ConfigHandler {
 		features.set("Tphere", "true");
 		features.set("Weather", "true");
 		features.set("Worlds", "true");
+		features.set("Workbench", "true");
 
 		features.set("AntiHyperlink", "true", "--- Events ---", "Actions which occur on events can be disabled here");
 		features.set("AntiSwear", "true");

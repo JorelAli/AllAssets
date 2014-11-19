@@ -31,6 +31,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Tasks;
 
+import io.github.Skepter.AllAssets.Utils.MathUtils;
+
 public class TPS implements Runnable {
 	public static int TICK_COUNT = 0;
 	public static long[] TICKS = new long[600];
@@ -43,7 +45,7 @@ public class TPS implements Runnable {
 	}
 
 	public static int getTPSAsInt() {
-		return new Double(getTPS()).intValue();
+		return MathUtils.toInt(getTPS());
 	}
 
 	public static double getTPS() {

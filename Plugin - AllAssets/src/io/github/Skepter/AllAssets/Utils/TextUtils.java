@@ -186,6 +186,7 @@ public class TextUtils {
 		return BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
+	@Deprecated
 	public static int paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
@@ -218,6 +219,7 @@ public class TextUtils {
 	}
 
 	/* One of these pagination ones are deprecated and I can't remember which one! */
+	@Deprecated
 	public static int paginate(final CommandSender sender, final Set<String> data, final int pageSize, final int pageNumberToShow) {
 		final List<String> textData = new ArrayList<String>();
 		textData.addAll(data);

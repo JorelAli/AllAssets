@@ -52,9 +52,18 @@ public class MathUtils {
 		return false;
 	}
 
-	/** Rounds up to next multiple */
+	/**
+	 * Rounds up to next multiple
+	 * @param value - Value to round up
+	 * @param factor - Factor (e.g. factor of 10 rounds up to nearest 10)
+	 * @return value.
+	 */
 	public static double roundUp(double value, double factor) {
 		return factor * Math.ceil(value / factor);
+	}
+	
+	public static int toInt(double value) {
+		return new Double(value).intValue();
 	}
 
 	/** Rounds a number to a certain amount of decimal places */

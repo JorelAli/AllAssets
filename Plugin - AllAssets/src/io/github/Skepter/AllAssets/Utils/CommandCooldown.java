@@ -44,22 +44,38 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandCooldown {
 
-	public static List<UUID> cooldownPlayers = new ArrayList<UUID>();
-	public static Map<UUID, Long> cooldownTimeMap = new HashMap<UUID, Long>();
+	private static Map<UUID, String> cooldownPlayer = new HashMap<UUID, String>();
 
-	public CommandCooldown(final Player player, final long time) {
+	private static List<UUID> cooldownPlayers = new ArrayList<UUID>();
+	private static Map<UUID, Long> cooldownTimeMap = new HashMap<UUID, Long>();
+
+	public CommandCooldown(final Player player, final long time, final String command) {
+		cooldownPlayer.put(player.getUniqueId(), command);
 		cooldownPlayers.add(player.getUniqueId());
 		cooldownTimeMap.put(player.getUniqueId(), (System.currentTimeMillis() / 1000) + time);
 		new BukkitRunnable() {
 			@Override
 			public void run() {
 				cooldownPlayers.remove(player.getUniqueId());
+				cooldownPlayer.remove(player.getUniqueId());
 			}
 		}.runTaskLater(AllAssets.instance(), time * 20);
 	}
 
+	public static boolean isOnCooldown0(final Player player, String command) {
+		if (cooldownPlayer.containsKey(player.getUniqueId()))
+			if (command.equals(cooldownPlayer.get(player.getUniqueId())))
+				return true;
+		return false;
+	}
+
+	@Deprecated
 	public static boolean isOnCooldown(final Player player) {
 		return cooldownPlayers.contains(player.getUniqueId()) ? true : false;
+	}
+
+	public static long getTimeLeft(final Player player) {
+		return cooldownTimeMap.get(player.getUniqueId()) - (System.currentTimeMillis() / 1000);
 	}
 
 }

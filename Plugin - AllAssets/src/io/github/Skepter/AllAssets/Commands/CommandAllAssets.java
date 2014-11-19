@@ -35,10 +35,10 @@ package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.API.Paginator;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,7 +71,9 @@ public class CommandAllAssets {
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);
 		Collections.sort(commandList);
-		TextUtils.paginate(args.getSender(), commandList, 12, arg);
+		Paginator p = new Paginator(commandList, 12);
+		p.send(args.getSender(), arg);
+		//TextUtils.paginate(args.getSender(), commandList, 12, arg);
 		args.getSender().sendMessage(AllAssets.title + "Use /allassets commands <page number> to go to the next page");
 		return;
 	}
