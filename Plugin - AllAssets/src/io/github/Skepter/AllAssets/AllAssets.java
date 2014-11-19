@@ -79,6 +79,7 @@ import io.github.Skepter.AllAssets.Config.PlayerData;
 import io.github.Skepter.AllAssets.Config.UUIDData;
 import io.github.Skepter.AllAssets.Libs.ComphenixsGhostFactory;
 import io.github.Skepter.AllAssets.Listeners.ChatListener;
+import io.github.Skepter.AllAssets.Listeners.CommandCooldownListener;
 import io.github.Skepter.AllAssets.Listeners.ConsoleSayListener;
 import io.github.Skepter.AllAssets.Listeners.CustomUnknownCommandListener;
 import io.github.Skepter.AllAssets.Listeners.LogListener;
@@ -91,8 +92,6 @@ import io.github.Skepter.AllAssets.Listeners.SignListener;
 import io.github.Skepter.AllAssets.Listeners.SkeletonArrowListener;
 import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
 import io.github.Skepter.AllAssets.Tasks.TPS;
-import io.github.Skepter.AllAssets.Utils.CommandCooldown;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -368,6 +367,7 @@ public class AllAssets extends JavaPlugin {
 		}
 
 		/* Listeners */
+		r(new CommandCooldownListener());
 		r(new ChatListener());
 		r(new SignListener());
 		r(new PlayerListener());
@@ -440,14 +440,6 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		if (ConfigHandler.instance().config().getInt("commandCooldown") != 0 && sender instanceof Player) {
-			if (CommandCooldown.isOnCooldown((Player) sender)) {
-				ErrorUtils.onCooldown(sender, CommandCooldown.cooldownTimeMap.get(((Player) sender).getUniqueId()) - (System.currentTimeMillis() / 1000));
-				return true;
-			} else {
-				new CommandCooldown((Player) sender, ConfigHandler.instance().config().getInt("commandCooldown"));
-			}
-		}
 		return framework.handleCommand(sender, label, command, args);
 	}
 
