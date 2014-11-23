@@ -32,11 +32,10 @@
 package io.github.Skepter.AllAssets.Utils;
 
 import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.Misc.PlayerMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
@@ -44,38 +43,38 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandCooldown {
 
-	private static Map<UUID, String> cooldownPlayer = new HashMap<UUID, String>();
+	private static PlayerMap<UUID, String> cooldownPlayer = new PlayerMap<UUID, String>();
 
 	private static List<UUID> cooldownPlayers = new ArrayList<UUID>();
-	private static Map<UUID, Long> cooldownTimeMap = new HashMap<UUID, Long>();
+	private static PlayerMap<UUID, Long> cooldownTimeMap = new PlayerMap<UUID, Long>();
 
 	public CommandCooldown(final Player player, final long time, final String command) {
-		cooldownPlayer.put(player.getUniqueId(), command);
+		cooldownPlayer.put(player, command);
 		cooldownPlayers.add(player.getUniqueId());
-		cooldownTimeMap.put(player.getUniqueId(), (System.currentTimeMillis() / 1000) + time);
+		cooldownTimeMap.put(player, (System.currentTimeMillis() / 1000) + time);
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				cooldownPlayers.remove(player.getUniqueId());
-				cooldownPlayer.remove(player.getUniqueId());
+				cooldownPlayers.remove(player);
+				cooldownPlayer.remove(player);
 			}
 		}.runTaskLater(AllAssets.instance(), time * 20);
 	}
 
 	public static boolean isOnCooldown0(final Player player, String command) {
-		if (cooldownPlayer.containsKey(player.getUniqueId()))
-			if (command.equals(cooldownPlayer.get(player.getUniqueId())))
+		if (cooldownPlayer.containsKey(player))
+			if (command.equals(cooldownPlayer.get(player)))
 				return true;
 		return false;
 	}
 
 	@Deprecated
 	public static boolean isOnCooldown(final Player player) {
-		return cooldownPlayers.contains(player.getUniqueId()) ? true : false;
+		return cooldownPlayers.contains(player) ? true : false;
 	}
 
 	public static long getTimeLeft(final Player player) {
-		return cooldownTimeMap.get(player.getUniqueId()) - (System.currentTimeMillis() / 1000);
+		return cooldownTimeMap.get(player) - (System.currentTimeMillis() / 1000);
 	}
 
 }

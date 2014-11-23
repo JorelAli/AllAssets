@@ -215,6 +215,7 @@ public class AllAssets extends JavaPlugin {
 
 	/* Other stuff */
 	public CommandFramework framework;
+	
 	public Map<UUID, Long> tempTimeMap;
 	public ComphenixsGhostFactory ghostFactory;
 
@@ -410,7 +411,7 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	/* Writing getServer().... etc. is too much work :S */
-	private void r(final Listener l) {
+	public void r(final Listener l) {
 		if (masterSwitch)
 			for (Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)

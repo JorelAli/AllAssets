@@ -46,6 +46,7 @@ import org.bukkit.entity.Player;
 /** Custom UUID Fetcher (written by me :D)
  * 
  * @author Skepter */
+@Deprecated
 public class UUIDFetch {
 
 	private static String playerName;

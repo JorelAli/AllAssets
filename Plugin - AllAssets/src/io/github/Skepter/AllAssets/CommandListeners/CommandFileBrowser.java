@@ -37,6 +37,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Misc.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
@@ -73,8 +74,8 @@ public class CommandFileBrowser implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public Map<UUID, String> directoryMap = new HashMap<UUID, String>();
-	public Map<UUID, List<String>> dataMap = new HashMap<UUID, List<String>>();
+	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>();
+	public PlayerMap<UUID, List<String>> dataMap = new PlayerMap<UUID, List<String>>();
 
 	@CommandHandler(name = "filebrowser", aliases = { "fb" }, permission = "filebrowser", description = "Browses files and shows configs", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -90,18 +91,18 @@ public class CommandFileBrowser implements Listener {
 		switch (args.getArgs().length) {
 		case 0:
 			openInventory(player, new File("."));
-			directoryMap.put(player.getUniqueId(), ".");
+			directoryMap.put(player, ".");
 			return;
 		case 1:
 			int arg = 1;
 			if (args.getArgs().length == 1)
 				arg = Integer.parseInt(args.getArgs()[0]);
 
-			if (dataMap.get(player.getUniqueId()) == null) {
+			if (dataMap.get(player) == null) {
 				ErrorUtils.error(player, "You have no data, cannot show next page!");
 				return;
 			}
-			TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, arg);
+			TextUtils.paginate(player, dataMap.get(player), 10, arg);
 			return;
 		}
 
@@ -117,18 +118,18 @@ public class CommandFileBrowser implements Listener {
 			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "File - ")) {
 				ItemStack item = event.getInventory().getItem(event.getSlot());
 				Player player = (Player) event.getWhoClicked();
-				String dM = directoryMap.get(player.getUniqueId());
+				String dM = directoryMap.get(player);
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
 				case BOOK:
-					directoryMap.put(player.getUniqueId(), openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
+					directoryMap.put(player, openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
 					return;
 					/* If they click an arrow, go up another level */
 				case ARROW:
 					/* Prevents them idiots from getting out of the server folder and causing havoc :) */
 					if (Arrays.asList(new File(dM).list()).contains("server.properties"))
 						return;
-					directoryMap.put(player.getUniqueId(), openInventory(player, new File(dM).getParentFile()));
+					directoryMap.put(player, openInventory(player, new File(dM).getParentFile()));
 					return;
 					/* Read the file */
 				case PAPER:
@@ -148,7 +149,7 @@ public class CommandFileBrowser implements Listener {
 						for (String key : config.getKeys(true)) {
 							list.add(ChatColor.AQUA + key + ChatColor.WHITE + ": " + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
 						}
-						dataMap.put(player.getUniqueId(), list);
+						dataMap.put(player, list);
 					}
 					if (dataFile.getName().contains(".txt")) {
 						BufferedReader reader = new BufferedReader(new FileReader(dataFile));
@@ -158,7 +159,7 @@ public class CommandFileBrowser implements Listener {
 							list.add(line);
 						}
 						reader.close();
-						dataMap.put(player.getUniqueId(), list);
+						dataMap.put(player, list);
 					}
 					if (dataFile.getName().contains(".properties")) {
 						Properties prop = new Properties();
@@ -167,16 +168,16 @@ public class CommandFileBrowser implements Listener {
 						List<String> list = new ArrayList<String>();
 						for (Object key : prop.keySet())
 							list.add(ChatColor.AQUA + key.toString() + ChatColor.WHITE + ": " + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
-						dataMap.put(player.getUniqueId(), list);
+						dataMap.put(player, list);
 					}
 					/* Only show it if you need to! */
-					if (dataMap.get(player.getUniqueId()).size() < 10) {
-						for (String s : dataMap.get(player.getUniqueId()))
+					if (dataMap.get(player).size() < 10) {
+						for (String s : dataMap.get(player))
 							player.sendMessage(s);
 					} else {
 						/* If pages = 1 and there is only 1 page, DO NOT SHOW THIS XD*/
 						//TODO ASAP!!!!!!
-						int pages = TextUtils.paginate(player, dataMap.get(player.getUniqueId()), 10, 1);
+						int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
 						//if (pages != 0 && )
 							player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
 					}

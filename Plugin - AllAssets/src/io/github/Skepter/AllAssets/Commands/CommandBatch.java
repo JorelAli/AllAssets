@@ -38,6 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Misc.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
@@ -62,7 +63,7 @@ public class CommandBatch {
 	}
 
 	private Map<Integer, Integer> runnableMap = new HashMap<Integer, Integer>();
-	private Map<UUID, Integer> runnablesMap = new HashMap<UUID, Integer>();
+	private PlayerMap<UUID, Integer> runnablesMap = new PlayerMap<UUID, Integer>();
 
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -81,7 +82,7 @@ public class CommandBatch {
 			try {
 				id = Integer.parseInt(args.getArgs()[1]);
 			} catch (Exception e) {
-				id = runnablesMap.get(player.getUniqueId());
+				id = runnablesMap.get(player);
 			}
 			Bukkit.getScheduler().cancelTask(id);
 			player.sendMessage(AllAssets.title + "ID " + id + " stopped successfully");
@@ -138,7 +139,7 @@ public class CommandBatch {
 					cachedPlayer.performCommand(cachedCommand);
 				}
 			}.runTaskTimer(AllAssets.instance(), 0, time).getTaskId();
-			runnablesMap.put(player.getUniqueId(), taskID);
+			runnablesMap.put(player, taskID);
 			player.sendMessage(AllAssets.title + "Use /batch stop to stop the batch command, or /batch stop " + taskID + " to stop it later");
 			return;
 		}

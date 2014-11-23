@@ -38,6 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
+import io.github.Skepter.AllAssets.Misc.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
@@ -47,9 +48,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -73,8 +72,8 @@ public class CommandFileEditor implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public Map<UUID, String> directoryMap = new HashMap<UUID, String>();
-	public Map<UUID, String> fileMap = new HashMap<UUID, String>();
+	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>();
+	public PlayerMap<UUID, String> fileMap = new PlayerMap<UUID, String>();
 
 	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -89,10 +88,10 @@ public class CommandFileEditor implements Listener {
 		case 0:
 		case 1:
 			openInventory(player, new File("."));
-			directoryMap.put(player.getUniqueId(), ".");
+			directoryMap.put(player, ".");
 			return;
 		case 2:
-			File dataFile = new File(fileMap.get(player.getUniqueId()));
+			File dataFile = new File(fileMap.get(player));
 			YamlConfiguration config = new YamlConfiguration();
 			try {
 				config.load(dataFile);
@@ -114,7 +113,7 @@ public class CommandFileEditor implements Listener {
 		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 		}
-		File dataFile = new File(fileMap.get(player.getUniqueId()));
+		File dataFile = new File(fileMap.get(player));
 		YamlConfiguration config = new YamlConfiguration();
 		try {
 			config.load(dataFile);
@@ -137,18 +136,18 @@ public class CommandFileEditor implements Listener {
 			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "Choose a file...")) {
 				ItemStack item = event.getInventory().getItem(event.getSlot());
 				Player player = (Player) event.getWhoClicked();
-				String dM = directoryMap.get(player.getUniqueId());
+				String dM = directoryMap.get(player);
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
 				case BOOK:
-					directoryMap.put(player.getUniqueId(), openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
+					directoryMap.put(player, openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
 					return;
 					/* If they click an arrow, go up another level */
 				case ARROW:
 					/* Prevents them idiots from getting out of the server folder and causing havoc :) */
 					if (Arrays.asList(new File(dM).list()).contains("server.properties"))
 						return;
-					directoryMap.put(player.getUniqueId(), openInventory(player, new File(dM).getParentFile()));
+					directoryMap.put(player, openInventory(player, new File(dM).getParentFile()));
 					return;
 					/* Read the file */
 				case PAPER:
@@ -162,7 +161,7 @@ public class CommandFileEditor implements Listener {
 							ErrorUtils.error(player, "That file could not be read!");
 							return;
 						}
-						fileMap.put(player.getUniqueId(), dataFile.getAbsolutePath());
+						fileMap.put(player, dataFile.getAbsolutePath());
 						player.sendMessage(AllAssets.title + dataFile.getName() + " chosen. Use /fe <setting> <value> to edit the file.");
 						return;
 					}
