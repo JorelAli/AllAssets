@@ -46,10 +46,6 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 	private static final long serialVersionUID = -6951127285757902765L;
 	private Map<Object, List<Object>> map = new HashMap<Object, List<Object>>();
 
-	public UltraMap() {
-
-	}
-
 	public void put(final A key, final B value1, final C value2, final D value3, final E value4, final F value5) {
 		//TODO check CURRENT values to allow for custom 'overlapping'
 		map.put(key, Arrays.asList(new Object[] { value1, value2, value3, value4, value5 }));
@@ -64,7 +60,10 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 		return map.entrySet();
 	}
 
-	/** I hear you like lists, so I made you a list of lists */
+	/**
+	 * Gets a list of values
+	 * @return The list of values as a List of objects
+	 */
 	public List<List<Object>> values() {
 		final List<List<Object>> list = new ArrayList<List<Object>>();
 		for (final Object key : keySet())
@@ -77,7 +76,12 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 		return;
 	}
 
-	/** Value limit = 5 */
+	/**
+	 * Gets the object from a key and value
+	 * @param key - The key to 'search'
+	 * @param value - The value to find. Max = 5
+	 * @return The object stored in the UltraMap
+	 */
 	public Object get(final A key, final int value) {
 		if ((value > 5) || (value == 0))
 			return null;
@@ -95,6 +99,31 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 			return true;
 		else
 			return false;
+	}
+	
+	/**
+	 * Looks for a value - pretty normal. Enter the int value to lookup
+	 * @param value
+	 * @return
+	 */
+	public boolean containsValue(Object objectToFind, int value) {
+		
+		return false;
+	}
+	
+	/**
+	 * Similar to containsValue() but looks through the entire map
+	 * @param objectToFind
+	 * @return
+	 */
+	public boolean containsValueDeep(Object objectToFind) {
+		for(List<Object> list : values()) {
+			for(Object object : list) {
+				if(objectToFind.equals(object))
+					return true;
+			}
+		}
+		return false;
 	}
 
 }

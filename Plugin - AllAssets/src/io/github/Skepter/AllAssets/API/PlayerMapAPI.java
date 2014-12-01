@@ -1,5 +1,6 @@
 package io.github.Skepter.AllAssets.API;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +16,9 @@ import org.bukkit.plugin.Plugin;
 
 /** Custom Map<K,V> class used to manage players.
  * @author Skepter */
-public class PlayerMapAPI<K, V> implements Listener {
+public class PlayerMapAPI<K, V> implements Listener, Cloneable, Serializable {
 
+	private static final long serialVersionUID = -8222232305054055527L;
 	private Map<UUID, V> map = new HashMap<UUID, V>();
 	
 	public PlayerMapAPI(Plugin plugin) {
