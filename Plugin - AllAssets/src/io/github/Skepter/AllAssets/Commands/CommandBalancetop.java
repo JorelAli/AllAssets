@@ -58,6 +58,7 @@ public class CommandBalancetop {
 		framework.registerCommands(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "balancetop", description = "Displays the top balances", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;

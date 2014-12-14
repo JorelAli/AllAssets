@@ -50,9 +50,7 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -68,6 +66,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+@SuppressWarnings("deprecation")
 public class CommandFileBrowser implements Listener {
 
 	public CommandFileBrowser(final CommandFramework framework) {
@@ -179,7 +178,7 @@ public class CommandFileBrowser implements Listener {
 						//TODO ASAP!!!!!!
 						int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
 						//if (pages != 0 && )
-							player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
+						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
 					}
 					return;
 				default:

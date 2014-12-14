@@ -38,6 +38,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+@SuppressWarnings("deprecation")
 public class UUIDAPI {
 
 	/** Gets the player object from their name using the UUIDMap

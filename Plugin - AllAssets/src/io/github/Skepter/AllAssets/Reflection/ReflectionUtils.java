@@ -148,12 +148,11 @@ public class ReflectionUtils {
 		return (Class.forName(packageName + "." + className));
 	}
 
-	public void sendPacket(Object packet) throws Exception {
+	public void sendOutgoingPacket(Object packet) throws Exception {
 		getConnection.getClass().getMethod("sendPacket", packetClass).invoke(getConnection, packet);
 	}
 
-	/** Used to send 'a' style packets (using 'a' method) */
-	public void sendAPacket(Object packet) throws Exception {
+	public void sendIncomingPacket(Object packet) throws Exception {
 		getConnection.getClass().getMethod("a", packet.getClass()).invoke(getConnection, packet);
 	}
 }

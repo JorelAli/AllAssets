@@ -6,6 +6,10 @@ import org.bukkit.entity.Player;
 
 public class ReflectionPlayer {
 
+	public enum AnimationType {
+		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
+	}
+	
 	public static void doAnimation(final Player player, AnimationType type) {
 		try {
 			ReflectionUtils utils = new ReflectionUtils(player);
@@ -42,7 +46,7 @@ public class ReflectionPlayer {
 				break;
 			}
 			utils.setPrivateField(animationPacket, "b", Integer.valueOf(animationID));
-			utils.sendPacket(animationPacket);
+			utils.sendOutgoingPacket(animationPacket);
 		} catch (Exception exception) {
 		}
 	}

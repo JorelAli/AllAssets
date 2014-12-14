@@ -42,6 +42,7 @@ import java.net.URL;
 import org.bukkit.craftbukkit.libs.com.google.gson.JsonObject;
 import org.bukkit.craftbukkit.libs.com.google.gson.JsonParser;
 
+@SuppressWarnings("deprecation")
 public class UUIDFetchTask implements Runnable {
 
 	private final String name;

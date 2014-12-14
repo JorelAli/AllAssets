@@ -31,7 +31,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Tasks;
 
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+import io.github.Skepter.AllAssets.Reflection.PacketBuilder;
+import io.github.Skepter.AllAssets.Reflection.PacketBuilder.PacketType;
 
 import org.bukkit.entity.Player;
 
@@ -45,14 +46,7 @@ public class InstantRespawnTask implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			final ReflectionUtils utils = new ReflectionUtils(player);
-			Object packet = utils.emptyPacketPlayInClientCommand;
-			packet = packet.getClass().getConstructor(utils.enumClientCommandClass).newInstance(utils.getEnum(utils.enumClientCommandClass, "PERFORM_RESPAWN"));
-			utils.sendAPacket(packet);
-		} catch (final Throwable t) {
-			t.printStackTrace();
-		}
+		new PacketBuilder(player, PacketType.PLAY_IN_CLIENT_COMMAND).setEnum("a", "EnumClientCommand", "PERFORM_RESPAWN").send();
 	}
 
 }
