@@ -65,7 +65,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class CommandDebug {
 
 	int taskID = 0;
-	
+
 	public CommandDebug(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
@@ -204,22 +204,22 @@ public class CommandDebug {
 	}
 
 	/* Not been fully tested yet */
-//	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
-//	public void rClean(final CommandArgs args) {
-//		if (taskID == 0) {
-//			int length = 0;
-//			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
-//				length = Integer.parseInt(args.getArgs()[0]);
-//			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(), new Runnable() {
-//				@Override
-//				public void run() {
-//					System.gc();
-//				}
-//			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
-//			args.getSender().sendMessage(AllAssets.title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
-//		} else
-//			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
-//	}
+	//	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
+	//	public void rClean(final CommandArgs args) {
+	//		if (taskID == 0) {
+	//			int length = 0;
+	//			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
+	//				length = Integer.parseInt(args.getArgs()[0]);
+	//			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(), new Runnable() {
+	//				@Override
+	//				public void run() {
+	//					System.gc();
+	//				}
+	//			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
+	//			args.getSender().sendMessage(AllAssets.title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
+	//		} else
+	//			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
+	//	}
 
 	@CommandHandler(name = "debug.ram", permission = "debug", description = "Displays RAM information", usage = "Use <command>")
 	public void ram(final CommandArgs args) {
@@ -232,27 +232,27 @@ public class CommandDebug {
 	}
 
 	/* Used to debug the Log feature */
-//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
-//	public void error(final CommandArgs args) {
-//		final String[] arr = { "bob", "mark" };
-//		final String s = arr[4];
-//		AllAssets.instance().getServer().broadcastMessage(s);
-//	}
+	//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
+	//	public void error(final CommandArgs args) {
+	//		final String[] arr = { "bob", "mark" };
+	//		final String s = arr[4];
+	//		AllAssets.instance().getServer().broadcastMessage(s);
+	//	}
 
 	//will be removed in future
-//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
-//	public void test(final CommandArgs args) {
-//		String multilineString = "Plugin                        `Thread\n";
-//
-//		multilineString += "AllInOne`30\n";
-//		multilineString += "Essentials`491";
-//		final TabText tt = new TabText(multilineString);
-//		tt.setPageHeight(10); // set page height and get number of pages
-//		tt.setTabs(16, 22, 20); // horizontal tabs positions
-//		tt.sortByFields(-2, 1); // sort by second column descending, then by first
-//		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
-//		AllAssets.instance().getServer().broadcastMessage(printedText);
-//	}
+	//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	//	public void test(final CommandArgs args) {
+	//		String multilineString = "Plugin                        `Thread\n";
+	//
+	//		multilineString += "AllInOne`30\n";
+	//		multilineString += "Essentials`491";
+	//		final TabText tt = new TabText(multilineString);
+	//		tt.setPageHeight(10); // set page height and get number of pages
+	//		tt.setTabs(16, 22, 20); // horizontal tabs positions
+	//		tt.sortByFields(-2, 1); // sort by second column descending, then by first
+	//		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
+	//		AllAssets.instance().getServer().broadcastMessage(printedText);
+	//	}
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
 	public void test1(final CommandArgs args) {
@@ -271,6 +271,10 @@ public class CommandDebug {
 		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted. Conflicting plugins:");
 		for (final String s : conflictingPlugins)
 			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
+	}
+
+	@CommandHandler(name = "debug.packet", permission = "debug", description = "Sends a packet", isListed = false)
+	public void packet(final CommandArgs args) {
 
 	}
 

@@ -49,7 +49,7 @@ public class InstantRespawnTask implements Runnable {
 			final ReflectionUtils utils = new ReflectionUtils(player);
 			Object packet = utils.emptyPacketPlayInClientCommand;
 			packet = packet.getClass().getConstructor(utils.enumClientCommandClass).newInstance(utils.getEnum(utils.enumClientCommandClass, "PERFORM_RESPAWN"));
-			utils.getConnection.getClass().getMethod("a", packet.getClass()).invoke(utils.getConnection, packet);
+			utils.sendAPacket(packet);
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}

@@ -76,7 +76,13 @@ public class CommandBatch {
 		}
 
 		final Player cachedPlayer = player;
-
+		if (args.getArgs().length == 0) {
+			player.sendMessage(TextUtils.title("Batch help"));
+			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 /say hi");
+			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 1s /say hi");
+			player.sendMessage(AllAssets.houseStyleColor + "/batch 20 500ms /say hi");
+			return;
+		}
 		if (args.getArgs()[0].equals("stop")) {
 			int id = 0;
 			try {
@@ -89,13 +95,6 @@ public class CommandBatch {
 			return;
 		}
 
-		if (args.getArgs().length == 0) {
-			player.sendMessage(TextUtils.title("Batch help"));
-			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 /say hi");
-			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 1s /say hi");
-			player.sendMessage(AllAssets.houseStyleColor + "/batch 20 500ms /say hi");
-			return;
-		}
 		int amount = 1;
 		try {
 			amount = Integer.parseInt(args.getArgs()[0]);

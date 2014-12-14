@@ -53,7 +53,7 @@ public class JSONMessageTask implements Runnable {
 			final ReflectionUtils utils = new ReflectionUtils(player);
 			Object packet = utils.emptyPacketPlayOutChat;
 			packet = packet.getClass().getConstructor(utils.iChatBaseComponentClass).newInstance(utils.chatSerialize(string));
-			utils.getConnection.getClass().getMethod("sendPacket", utils.packetClass).invoke(utils.getConnection, packet);
+			utils.sendPacket(packet);
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}

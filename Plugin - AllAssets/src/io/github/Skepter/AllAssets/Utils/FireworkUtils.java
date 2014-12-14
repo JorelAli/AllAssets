@@ -49,49 +49,18 @@ public class FireworkUtils {
 		final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
 		final FireworkMeta fireworkMeta = firework.getFireworkMeta();
 		final Random random = new Random();
-		final FireworkEffect effect = FireworkEffect.builder().flicker(random.nextBoolean()).withColor(getColor(random.nextInt(17) + 1)).withFade(getColor(random.nextInt(17) + 1)).with(Type.values()[random.nextInt(Type.values().length)]).trail(random.nextBoolean()).build();
+		final FireworkEffect effect = FireworkEffect.builder().flicker(random.nextBoolean()).withColor(getRandomColor()).withFade(getRandomColor()).with(Type.values()[random.nextInt(Type.values().length)]).trail(random.nextBoolean()).build();
 		fireworkMeta.addEffect(effect);
 		fireworkMeta.setPower(random.nextInt(2) + 1);
 		firework.setFireworkMeta(fireworkMeta);
 	}
-	
+
 	public static Color getColor(final int i) {
-		switch (i) {
-		case 1:
-			return AQUA;
-		case 2:
-			return BLACK;
-		case 3:
-			return BLUE;
-		case 4:
-			return FUCHSIA;
-		case 5:
-			return GRAY;
-		case 6:
-			return GREEN;
-		case 7:
-			return LIME;
-		case 8:
-			return MAROON;
-		case 9:
-			return NAVY;
-		case 10:
-			return OLIVE;
-		case 11:
-			return ORANGE;
-		case 12:
-			return PURPLE;
-		case 13:
-			return RED;
-		case 14:
-			return SILVER;
-		case 15:
-			return TEAL;
-		case 16:
-			return WHITE;
-		case 17:
-			return YELLOW;
-		}
-		return null;
+		Color[] colors = { AQUA, BLACK, BLUE, FUCHSIA, GRAY, GREEN, LIME, MAROON, NAVY, OLIVE, ORANGE, PURPLE, RED, SILVER, TEAL, WHITE, YELLOW };
+		return colors[i];
+	}
+	
+	public static Color getRandomColor() {
+		return getColor(new Random().nextInt(17));
 	}
 }
