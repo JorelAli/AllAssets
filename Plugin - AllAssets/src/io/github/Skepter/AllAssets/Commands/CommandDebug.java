@@ -273,11 +273,6 @@ public class CommandDebug {
 			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
 	}
 
-	@CommandHandler(name = "debug.packet", permission = "debug", description = "Sends a packet", isListed = false)
-	public void packet(final CommandArgs args) {
-
-	}
-
 	@Completer(name = "debug")
 	public List<String> testCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();

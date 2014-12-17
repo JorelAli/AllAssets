@@ -119,6 +119,7 @@ public class ConfigHandler {
 
 		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false");
 		features.set("AllAssets", "true");
+		features.set("Announcer", "true");
 		features.set("Back", "true");
 		features.set("Balance", "true");
 		features.set("Balancetop", "true");

@@ -196,7 +196,13 @@ import org.bukkit.plugin.java.JavaPlugin;
  * e.g. Skepter says "Hello amoniuszko20"
  * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
  * but on Skepter's screen, it's totally normal */
-
+/*
+ * A data accessing class which caches all of the data for each player
+ * and then saves NEW data.
+ * When using /reload (for aa), it then recaches all of the data - hence
+ * making super speedy data delivery.
+ * When a player leaves, remove them from the data?
+ */
 public class AllAssets extends JavaPlugin {
 
 	/* Messages - shouldn't really be here but meh -.- */
