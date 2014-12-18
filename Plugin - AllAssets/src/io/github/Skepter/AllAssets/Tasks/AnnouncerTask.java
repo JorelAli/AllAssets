@@ -27,59 +27,39 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API;
+package io.github.Skepter.AllAssets.Tasks;
 
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Builder;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkMeta;
+import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.MathUtils;
 
-/** Made this to allow multiple colors / fades etc. */
-public class AAFireworkBuilder {
+import org.bukkit.Bukkit;
 
-	private ItemStack firework;
-	private FireworkMeta meta;
-	private Builder builder;
+public class AnnouncerTask implements Runnable {
 
-	private int power;
+	private int count;
 
-	public AAFireworkBuilder(int amount) {
-		this.firework = new ItemStack(Material.FIREWORK, amount);
-		this.meta = (FireworkMeta) firework.getItemMeta();
-		this.builder = FireworkEffect.builder();
+	public AnnouncerTask() {
+		count = 0;
 	}
 
-	public void setPower(int power) {
-		this.power = power;
+	@Override
+	public void run() {
+		if (ConfigHandler.instance().config().getBoolean("randomAnnouncer"))
+			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, ConfigHandler.announcer().getKeys().size())));
+		else {
+			try {
+				Bukkit.broadcastMessage(getAnnouncer(count));
+				count++;
+			} catch (Exception e) {
+				//If the count is higher than in the data file, loop again
+				count = 0;
+				Bukkit.broadcastMessage(getAnnouncer(count));
+			}
+		}
 	}
 
-	public void addTrail() {
-		builder.trail(true);
+	private String getAnnouncer(int ID) {
+		return ConfigHandler.announcer().getString(String.valueOf(ID));
 	}
 
-	public void setType(Type type) {
-		builder.with(type);
-	}
-
-	public void addFade(Color color) {
-		builder.withFade(color);
-	}
-
-	public void addFlicker() {
-		builder.flicker(true);
-	}
-
-	public void addColor(Color color) {
-		builder.withColor(color);
-	}
-
-	public ItemStack getFirework() {
-		meta.setPower(power);
-		meta.addEffect(builder.build());
-		firework.setItemMeta(meta);
-		return firework;
-	}
 }

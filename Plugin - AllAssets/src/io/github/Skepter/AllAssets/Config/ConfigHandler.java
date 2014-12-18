@@ -116,6 +116,7 @@ public class ConfigHandler {
 		config.set("commandCooldown", "0", "Amount of seconds to have a cooldown between each command");
 		config.set("debugMode", "false", "Enables debugging messages and features");
 		config.set("randomAnnouncer", "true", "Selects announcements at random");
+		config.set("announcerTime", "300", "The delay between each announcement in seconds");
 
 		config.saveConfig();
 	}

@@ -38,6 +38,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
 import io.github.Skepter.AllAssets.Commands.CommandAllAssets;
+import io.github.Skepter.AllAssets.Commands.CommandAnnouncer;
 import io.github.Skepter.AllAssets.Commands.CommandBack;
 import io.github.Skepter.AllAssets.Commands.CommandBalance;
 import io.github.Skepter.AllAssets.Commands.CommandBalancetop;
@@ -282,6 +283,8 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandAFK(framework));
 		if (ConfigHandler.instance().features().getBoolean("AllAssets"))
 			new CommandAllAssets(framework);
+		if(ConfigHandler.instance().features().getBoolean("Announcer"))
+			new CommandAnnouncer(framework);
 		if (ConfigHandler.instance().features().getBoolean("Back"))
 			new CommandBack(framework);
 		if (ConfigHandler.instance().features().getBoolean("Batch"))

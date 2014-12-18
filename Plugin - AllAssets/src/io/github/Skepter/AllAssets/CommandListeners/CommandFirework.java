@@ -118,7 +118,8 @@ public class CommandFirework implements Listener {
 			case "Do you want flickering?":
 				if (check(event)) {
 					AAFireworkBuilder builder = map.get(player);
-					builder.addFlicker(parseBoolean(item));
+					if (parseBoolean(item))
+						builder.addFlicker();
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.chooseFlicker(true));
 				}
@@ -126,7 +127,8 @@ public class CommandFirework implements Listener {
 			case "Do you want a trail?":
 				if (check(event)) {
 					AAFireworkBuilder builder = map.get(player);
-					builder.addTrail(parseBoolean(item));
+					if (parseBoolean(item))
+						builder.addTrail();
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.choosePower());
 				}

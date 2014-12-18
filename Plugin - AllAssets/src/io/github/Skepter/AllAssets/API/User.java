@@ -68,6 +68,7 @@ public class User implements IUser {
 	/** Risky.... very risky. If the player isn't online, then it's risky...
 	 * 
 	 * @param s */
+	@Deprecated
 	public User(final String s) {
 		try {
 			player = PlayerUtils.getPlayerFromString(s);
