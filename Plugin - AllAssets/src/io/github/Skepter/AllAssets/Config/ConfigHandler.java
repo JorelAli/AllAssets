@@ -37,11 +37,17 @@ import java.util.Arrays;
 public class ConfigHandler {
 
 	private SimpleConfigManager configManager;
-	private static SimpleConfigManager messagesManager;
 	private SimpleConfigManager featuresManager;
+
+	private static SimpleConfigManager messagesManager;
+	private static SimpleConfigManager announcerManager;
+
 	private SimpleConfig config;
-	private static SimpleConfig messages;
 	private SimpleConfig features;
+
+	private static SimpleConfig messages;
+	private static SimpleConfig announcer;
+
 	private static ConfigHandler instance;
 
 	public ConfigHandler() {
@@ -51,6 +57,8 @@ public class ConfigHandler {
 			messagesManager = new SimpleConfigManager(AllAssets.instance());
 		if (featuresManager == null)
 			featuresManager = new SimpleConfigManager(AllAssets.instance());
+		if (announcerManager == null)
+			announcerManager = new SimpleConfigManager(AllAssets.instance());
 
 		/** Checks that they exist, otherwise it will replace the content */
 		if (!new File(AllAssets.instance().getDataFolder(), "config.yml").exists())
@@ -68,9 +76,19 @@ public class ConfigHandler {
 		else
 			features = featuresManager.getNewConfig("features.yml");
 
+		if (!new File(AllAssets.instance().getDataFolder() + File.separator + "Storage", "announcer.yml").exists())
+			createAnnouncer();
+		else
+			announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
 		//find a way to check for missing keys in configurations perhaps? - that way it can 'auto update'
 
 		instance = this;
+	}
+
+	private void createAnnouncer() {
+		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Announcer.yml - File to store announcer data" };
+		announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml", header);
+		announcer.saveConfig();
 	}
 
 	public static ConfigHandler instance() {
@@ -85,7 +103,7 @@ public class ConfigHandler {
 		config.set("maxLogAmount", "20", "The maximum amount of logs to store temporarily");
 		config.set("afkProtect", "true", "Prevents players from getting hurt by mobs when AFK");
 		config.set("batchLimit", "500", "The limit of amounts to execute a command");
-		
+
 		// does it not like that 'm' in perform?
 		config.set("bindRight", "true", "Performs action with a right click", "(set to false to perform action with left click)");
 		config.set("useIPInformation", "false", "Allows ");
@@ -97,6 +115,7 @@ public class ConfigHandler {
 		config.set("commandsOnJoin", Arrays.asList(new String[] { "/broadcast {PLAYERNAME} joined the game!" }), "CommandOnJoin must be enabled in features.yml");
 		config.set("commandCooldown", "0", "Amount of seconds to have a cooldown between each command");
 		config.set("debugMode", "false", "Enables debugging messages and features");
+		config.set("randomAnnouncer", "true", "Selects announcements at random");
 
 		config.saveConfig();
 	}
@@ -213,6 +232,10 @@ public class ConfigHandler {
 			createConfig();
 			return config;
 		}
+	}
+	
+	public static SimpleConfig announcer() {
+		return announcer;
 	}
 
 	public static String getMsg(final String msg) {

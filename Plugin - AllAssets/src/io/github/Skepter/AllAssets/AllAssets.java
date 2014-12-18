@@ -202,6 +202,12 @@ import org.bukkit.plugin.java.JavaPlugin;
  * When using /reload (for aa), it then recaches all of the data - hence
  * making super speedy data delivery.
  * When a player leaves, remove them from the data?
+ * 
+ * 
+ * 
+ * -
+ * 
+ * clean up configHandler - it's so damn freaking messy!
  */
 public class AllAssets extends JavaPlugin {
 

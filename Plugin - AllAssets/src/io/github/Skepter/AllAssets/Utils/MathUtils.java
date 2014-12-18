@@ -31,8 +31,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import java.util.Date;
-import static java.util.concurrent.TimeUnit.*;
+import java.util.Random;
 
 public class MathUtils {
 
@@ -52,6 +54,16 @@ public class MathUtils {
 		return false;
 	}
 
+	/**
+	 * Returns a random number between a minimum and maximum value
+	 * @param min - The minimum value
+	 * @param max - The maximum value
+	 * @return a random integer between that number
+	 */
+	public static int randomBetween(final int min, final int max) {    
+		return new Random().nextInt((max - min) + 1) + min;
+	}
+	
 	/**
 	 * Rounds up to next multiple
 	 * @param value - Value to round up

@@ -35,13 +35,13 @@ package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.MathUtils;
+import io.github.Skepter.AllAssets.Utils.TextUtils;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
 
 public class CommandAnnouncer {
 
@@ -51,45 +51,55 @@ public class CommandAnnouncer {
 
 	@CommandHandler(name = "announcer", aliases = { "announce" }, permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		
-		final User user = new User(player);
-		final Location l = player.getLocation();
-		player.teleport(user.getLastLoc());
-		user.setLastLoc(l);
-		player.sendMessage(AllAssets.title + "Teleported to your last location");
+		//for use with start/stop
+//		Player player = null;
+//		try {
+//			player = args.getPlayer();
+//		} catch (final Exception e) {
+//			ErrorUtils.playerOnly(args.getSender());
+//			return;
+//		}
+//announcer start/stop commands
+		//if config random
+		if (ConfigHandler.instance().config().getBoolean("randomAnnouncer"))
+			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, ConfigHandler.announcer().getKeys().size())));
+
 		return;
 	}
-	
+
 	@CommandHandler(name = "announcer.list", permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
 	public void listAnnouncements(final CommandArgs args) {
-		//list all announcements
+		args.getSender().sendMessage(TextUtils.title("Announcer list"));
+		for (String key : ConfigHandler.announcer().getKeys()) {
+			args.getSender().sendMessage(AllAssets.houseStyleColor + key + " " + ConfigHandler.announcer().getString(key));
+		}
 	}
-	
+
 	@CommandHandler(name = "announcer.add", permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
 	public void addAnnouncement(final CommandArgs args) {
-		//adds a new announcment
+		String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+		setAnnouncer(message);
+		args.getSender().sendMessage(AllAssets.title + "Successfully added a new message to the announcer");
 	}
-	
+
 	@CommandHandler(name = "announcer.remove", permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
 	public void removeAnnouncement(final CommandArgs args) {
-		//removes an announcement based on the announcement ID which is stored when adding an announcement
-		//store the announcement by using ID's based on the amount of announcements there are
-		// sp that way, when a new announcement is created, it saves it under the next ID.
-		/*
-		 * e.g. store first announcement as ID 1
-		 * store the second announcement as ID 2
-		 * if you delete ID 2, then next announcement stored will become ID 2
-		 * 
-		 * Ensure that all announcements are read in real-time (not cached) to prevent
-		 * memory leaks and allow for dynamic announcements.
-		 */
+		if (TextUtils.isInteger(args.getArgs()[0]))
+			ConfigHandler.announcer().removeKey(String.valueOf(args.getArgs()[0]));
+	}
+
+	private void setAnnouncer(String data) {
+		int ID = 1;
+		try {
+			ID = ConfigHandler.announcer().getKeys().size() + 1;
+		} catch (Exception e) {
+			//Catch nothing since if it fails, the ID will default to 1 anyway
+		}
+		ConfigHandler.announcer().set(String.valueOf(ID), data);
+	}
+
+	private String getAnnouncer(int ID) {
+		return ConfigHandler.announcer().getString(String.valueOf(ID));
 	}
 
 }
