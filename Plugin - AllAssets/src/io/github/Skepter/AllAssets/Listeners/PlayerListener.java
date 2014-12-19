@@ -47,7 +47,9 @@ import io.github.Skepter.AllAssets.Utils.MathUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -126,13 +128,15 @@ public class PlayerListener implements Listener {
 	
 	@EventHandler
 	public void playerLeave(final PlayerQuitEvent event) {
-		event.getPlayer().resetPlayerTime();
-		event.getPlayer().resetPlayerWeather();
-		final User user = new User(event.getPlayer());
+		Player player = event.getPlayer();
+		player.resetPlayerTime();
+		player.resetPlayerWeather();
+		final User user = new User(player);
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
-		if(AllAssets.instance().tempTimeMap.containsKey(event.getPlayer().getUniqueId())) {
-			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - AllAssets.instance().tempTimeMap.get(event.getPlayer().getUniqueId())));
-			AllAssets.instance().tempTimeMap.remove(event.getPlayer().getUniqueId());
+		Map<UUID, Long> map = AllAssets.instance().tempTimeMap;
+		if(map.containsKey(player.getUniqueId())) {
+			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - map.get(player.getUniqueId())));
+			map.remove(player.getUniqueId());
 		} else {
 			//error! it should be there because it was added on player join...
 			//this shouldn't be possible so -.- yeah

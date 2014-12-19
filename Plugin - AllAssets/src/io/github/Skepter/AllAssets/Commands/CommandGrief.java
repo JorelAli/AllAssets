@@ -63,8 +63,9 @@ public class CommandGrief {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		//check if it's null
-		new YesNoConversation(player, new GriefPrompt(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)), "Are you sure you want to send a grief report");
+		String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+		if (message != null)
+			new YesNoConversation(player, new GriefPrompt(message), "Are you sure you want to send a grief report");
 		return;
 	}
 

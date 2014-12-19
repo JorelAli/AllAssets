@@ -76,7 +76,7 @@ public class ConfigHandler {
 		else
 			features = featuresManager.getNewConfig("features.yml");
 
-		if (!new File(AllAssets.instance().getDataFolder() + File.separator + "Storage", "announcer.yml").exists())
+		if (!new File(AllAssets.getStorage(), "announcer.yml").exists())
 			createAnnouncer();
 		else
 			announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");

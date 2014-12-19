@@ -119,7 +119,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/* AllAssets plugin, version 0.4 Alpha
+/** AllAssets plugin, version 0.4 Alpha
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -140,8 +140,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * 
  * @author Skepter */
 
-// something like WE with /replace <block> <radius>
-// /griefReport command - adds to the /log
 // Explore the ResourceBundle for setting Locale
 // silence command - A way to mute a player which stops all other chat being sent to that player except admin
 
@@ -153,14 +151,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  *  Put YesNo because it will COMPLETELY REPLACE (and delete) the old world
  */
 
-// sort out switch statements on strings and use toLowerCase to make it case safe
 // add messages after commands (e.g. you successfully set the time to day etc.)
-// command allassets pluginFile instead of devPluginFile
-// how many unique players
-
-// I'm sorry everyone who doesn't speak English. It's an English plugin.
-// Ich bin entschuldigung, je suis desolé (Those are the only other languages I know :S)
-// built in announcer
 
 //color customisation -
 //normalColor: 9
@@ -219,7 +210,7 @@ public class AllAssets extends JavaPlugin {
 	public final static String shortTitleNoColor = "[AA] ";
 	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
 	public final static String houseStyleColor = ChatColor.AQUA + "";
-
+	
 	/* Vault stuff */
 	public boolean hasVault = false;
 	public Economy economy = null;
@@ -415,7 +406,7 @@ public class AllAssets extends JavaPlugin {
 		/* Update tempTimeMap.bin file */
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
-				load(new File(getDataFolder(), "tempTimeMap.bin"));
+				load(new File(getStorage(), "tempTimeMap.bin"));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -446,7 +437,7 @@ public class AllAssets extends JavaPlugin {
 
 		if (!tempTimeMap.isEmpty())
 			try {
-				save(tempTimeMap, new File(getDataFolder(), "tempTimeMap.bin"));
+				save(tempTimeMap, new File(getStorage(), "tempTimeMap.bin"));
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
@@ -488,5 +479,9 @@ public class AllAssets extends JavaPlugin {
 		final Object result = ois.readObject();
 		ois.close();
 		return result;
+	}
+	
+	public static File getStorage() {
+		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
 	}
 }
