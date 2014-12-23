@@ -37,8 +37,8 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.API.PlayerMap;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Misc.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
@@ -63,7 +63,7 @@ public class CommandBatch {
 	}
 
 	private final Map<Integer, Integer> runnableMap = new HashMap<Integer, Integer>();
-	private final PlayerMap<UUID, Integer> runnablesMap = new PlayerMap<UUID, Integer>();
+	private final PlayerMap<UUID, Integer> runnablesMap = new PlayerMap<UUID, Integer>(AllAssets.instance());
 
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {

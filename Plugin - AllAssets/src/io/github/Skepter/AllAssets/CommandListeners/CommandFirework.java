@@ -38,8 +38,8 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.AAFireworkBuilder;
+import io.github.Skepter.AllAssets.API.PlayerMap;
 import io.github.Skepter.AllAssets.Misc.FireworkInventories;
-import io.github.Skepter.AllAssets.Misc.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
@@ -62,7 +62,7 @@ public class CommandFirework implements Listener {
 	}
 
 	//have a button to output it as a single lined command (for dispensers etc.)
-	private final PlayerMap<UUID, AAFireworkBuilder> map = new PlayerMap<UUID, AAFireworkBuilder>();
+	private final PlayerMap<UUID, AAFireworkBuilder> map = new PlayerMap<UUID, AAFireworkBuilder>(AllAssets.instance());
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {

@@ -36,6 +36,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandFileBrowser;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFileEditor;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
+import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
@@ -141,7 +142,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author Skepter */
 
 // Explore the ResourceBundle for setting Locale
-// silence command - A way to mute a player which stops all other chat being sent to that player except admin
 
 //world backup system:
 /*
@@ -350,6 +350,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandRename(framework);
 		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
+		if (ConfigHandler.instance().features().getBoolean("Silence"))
+			r(new CommandSilence(framework));
 		if (ConfigHandler.instance().features().getBoolean("StaffChat"))
 			r(new CommandStaffChat(framework));
 		if (ConfigHandler.instance().features().getBoolean("Time"))

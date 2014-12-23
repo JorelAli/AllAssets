@@ -55,8 +55,8 @@ public class ErrorUtils {
 		commandSender.sendMessage(error + "Not enough arguments - use /help <command>!");
 	}
 
-	public static void playerNotFound(final Player player, final String target) {
-		player.sendMessage(error + target + " is offline");
+	public static void playerNotFound(final CommandSender commandSender, final String target) {
+		commandSender.sendMessage(error + target + " is offline");
 	}
 
 	public static void pluginNotFound(final CommandSender player, final String plugin) {

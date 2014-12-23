@@ -32,7 +32,7 @@
 package io.github.Skepter.AllAssets.Utils;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Misc.PlayerMap;
+import io.github.Skepter.AllAssets.API.PlayerMap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +43,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandCooldown {
 
-	private static PlayerMap<UUID, String> cooldownPlayer = new PlayerMap<UUID, String>();
+	private static PlayerMap<UUID, String> cooldownPlayer = new PlayerMap<UUID, String>(AllAssets.instance());
 
 	private static List<UUID> cooldownPlayers = new ArrayList<UUID>();
-	private static PlayerMap<UUID, Long> cooldownTimeMap = new PlayerMap<UUID, Long>();
+	private static PlayerMap<UUID, Long> cooldownTimeMap = new PlayerMap<UUID, Long>(AllAssets.instance());
 
 	public CommandCooldown(final Player player, final long time, final String command) {
 		cooldownPlayer.put(player, command);

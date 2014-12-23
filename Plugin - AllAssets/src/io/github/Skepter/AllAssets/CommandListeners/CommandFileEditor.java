@@ -38,7 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Misc.PlayerMap;
+import io.github.Skepter.AllAssets.API.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
@@ -72,8 +72,8 @@ public class CommandFileEditor implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>();
-	public PlayerMap<UUID, String> fileMap = new PlayerMap<UUID, String>();
+	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>(AllAssets.instance());
+	public PlayerMap<UUID, String> fileMap = new PlayerMap<UUID, String>(AllAssets.instance());
 
 	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {

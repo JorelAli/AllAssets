@@ -180,6 +180,7 @@ public class ConfigHandler {
 										 // exported
 		features.set("Rename", "true");
 		features.set("SignEdit", "true");
+		features.set("Silence", "true");
 		features.set("StaffChat", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Tp", "true");
