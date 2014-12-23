@@ -61,7 +61,7 @@ public class LogListener implements Filter {
 		if (msg.contains("at ") && msg.contains(".java:"))
 			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 				return null;
-			else 
+			else
 				CommandLog.addLog(AllAssets.houseStyleColor + stringBetween(msg, "(", ")"), LogType.ERROR);
 		if (msg.contains("Exception"))
 			CommandLog.addLog(msg, LogType.ERROR);
@@ -73,7 +73,7 @@ public class LogListener implements Filter {
 			if (p.hasPermission("AllAssets.notify"))
 				p.sendMessage(s);
 	}
-	
+
 	/* Sometimes it's a bit fussy and so moving it to use this method should fix that problem. */
 	private String stringBetween(final String overallString, final String firstString, final String secondString) {
 		final String s = overallString.substring(overallString.indexOf(firstString) + firstString.length(), overallString.indexOf(secondString));

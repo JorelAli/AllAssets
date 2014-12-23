@@ -9,7 +9,7 @@ public class ReflectionPlayer {
 	public enum AnimationType {
 		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
 	}
-	
+
 	public static void doAnimation(final Player player, final AnimationType type) {
 		try {
 			final ReflectionUtils utils = new ReflectionUtils(player);
@@ -52,7 +52,7 @@ public class ReflectionPlayer {
 	}
 
 	public static void putToBed(final Player player) {
-		new PacketBuilder(player, PacketType.PLAY_OUT_BED).set("a", player.getEntityId()).setLocation("b","c","d", player.getLocation()).send();
+		new PacketBuilder(player, PacketType.PLAY_OUT_BED).set("a", player.getEntityId()).setLocation("b", "c", "d", player.getLocation()).send();
 	}
 
 	public static void awakeFromBed(final Player player) {

@@ -56,9 +56,9 @@ public class CustomObject extends Object {
 	public int stripInteger() {
 		return new CustomObject(toString().replaceAll("[\\D]", "")).toInt();
 	}
-	
-	/** Returns a String from a String. Turns Hello123 to Hello.
-	 * Reverse of stripInteger */
+
+	/** Returns a String from a String. Turns Hello123 to Hello. Reverse of
+	 * stripInteger */
 	public String stripString() {
 		return new CustomObject(toString().replaceAll("[\\d]", "")).toString();
 	}

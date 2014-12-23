@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface HelpDocumentation {
 
 	public String commandName();
-	
+
 	public String[] helpDocumentation();
 
 }

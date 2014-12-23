@@ -47,7 +47,7 @@ public class CommandCooldownListener implements Listener {
 			if (CommandCooldown.isOnCooldown0(e.getPlayer(), e.getMessage().split(" ")[0])) {
 				ErrorUtils.onCooldown(e.getPlayer(), CommandCooldown.getTimeLeft(e.getPlayer()));
 				e.setCancelled(true);
-			} else 
+			} else
 				new CommandCooldown(e.getPlayer(), ConfigHandler.instance().config().getInt("commandCooldown"), e.getMessage().split(" ")[0]);
 	}
 }

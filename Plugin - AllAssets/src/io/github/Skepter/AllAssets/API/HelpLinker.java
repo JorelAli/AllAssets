@@ -16,10 +16,10 @@ public class HelpLinker {
 				CommandHelp.register(d.commandName(), d.helpDocumentation());
 			}
 	}
-	
-	@HelpDocumentation(commandName = "command", helpDocumentation = {"/command this - does this", "/command that - does that"})
+
+	@HelpDocumentation(commandName = "command", helpDocumentation = { "/command this - does this", "/command that - does that" })
 	public void onCommand() {
-		
+
 	}
 
 }

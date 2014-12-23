@@ -18,48 +18,48 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerMap<K, V> implements Listener {
 
 	private final Map<UUID, V> map = new HashMap<UUID, V>();
-	
+
 	public PlayerMap() {
 		AllAssets.instance().r(this);
 	}
 
 	@EventHandler
 	public void onQuit(final PlayerQuitEvent event) {
-		if(map.containsKey(event.getPlayer().getUniqueId()))
+		if (map.containsKey(event.getPlayer().getUniqueId()))
 			remove(event.getPlayer());
 	}
-	
+
 	public void put(final Player player, final V value) {
 		map.put(player.getUniqueId(), value);
 	}
-	
+
 	public V get(final Player player) {
 		return map.get(player.getUniqueId());
 	}
-	
+
 	public void remove(final Player player) {
 		map.remove(player.getUniqueId());
 	}
-	
+
 	public void clear() {
 		map.clear();
 	}
-	
+
 	public boolean containsKey(final Object key) {
 		if (map.containsKey(key))
 			return true;
 		else
 			return false;
 	}
-	
+
 	public Set<UUID> keySet() {
 		return map.keySet();
 	}
-	
+
 	public Collection<V> values() {
 		return map.values();
 	}
-	
+
 	public Set<Entry<UUID, V>> entrySet() {
 		return map.entrySet();
 	}

@@ -66,13 +66,13 @@ public class CommandHelp {
 			return;
 		}
 
-		for(final String key : helpData.keySet()) {
+		for (final String key : helpData.keySet()) {
 			if (args.getArgs()[0].equalsIgnoreCase(key))
-				for(final String string : helpData.get(key))
+				for (final String string : helpData.get(key))
 					args.getSender().sendMessage(string);
 			return;
 		}
-		
+
 		ErrorUtils.error(args.getSender(), "Could not find that!");
 		return;
 	}

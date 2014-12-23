@@ -102,7 +102,7 @@ public class TextUtils {
 	 * @param s
 	 * @return */
 	public static boolean containsSwear(final String s) {
-		final String[] swearWords =  new String[] {"fuck", "shit", "bitch", "cunt", "penis", "vagina", "porn"};
+		final String[] swearWords = new String[] { "fuck", "shit", "bitch", "cunt", "penis", "vagina", "porn" };
 		for (final String str : swearWords)
 			if (stripColor(s.toLowerCase()).contains(str))
 				return true;
@@ -282,7 +282,7 @@ public class TextUtils {
 				tagValues.add(matcher.group(1));
 			return tagValues;
 		} catch (final Exception e) {
-			return Arrays.asList(new String[] {stringBetween(str, beginTag, endTag)});
+			return Arrays.asList(new String[] { stringBetween(str, beginTag, endTag) });
 		}
 	}
 

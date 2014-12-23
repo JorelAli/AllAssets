@@ -234,7 +234,7 @@ public class ConfigHandler {
 			return config;
 		}
 	}
-	
+
 	public static SimpleConfig announcer() {
 		return announcer;
 	}

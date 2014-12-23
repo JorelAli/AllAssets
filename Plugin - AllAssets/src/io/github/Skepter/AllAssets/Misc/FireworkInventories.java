@@ -100,7 +100,7 @@ public class FireworkInventories {
 		inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 3"));
 		return inv;
 	}
-	
+
 	public static Inventory anotherColor() {
 		final Inventory inv = Bukkit.createInventory(null, 9, "Do you want another color?");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));

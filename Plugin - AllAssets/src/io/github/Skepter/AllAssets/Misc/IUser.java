@@ -101,11 +101,11 @@ public interface IUser {
 	public void setAFK(boolean afk);
 
 	public boolean isAFK();
-	
+
 	public List<UUID> getFriendList();
-	
+
 	public void setFriendList();
-	
+
 	public String getLanguage(Player p);
 
 	public boolean canTP();

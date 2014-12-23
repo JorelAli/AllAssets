@@ -51,7 +51,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class CommandDiscoArmor {
 
 	public static UltraMap<UUID, Integer, ItemStack[], String, String, String> map = new UltraMap<UUID, Integer, ItemStack[], String, String, String>();
-	
+
 	public CommandDiscoArmor(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
@@ -65,7 +65,7 @@ public class CommandDiscoArmor {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if(map.containsKey(player.getUniqueId())) {
+		if (map.containsKey(player.getUniqueId())) {
 			Bukkit.getScheduler().cancelTask((int) map.get(player.getUniqueId(), 1));
 			player.getInventory().setArmorContents((ItemStack[]) map.get(player.getUniqueId(), 2));
 			map.remove(player.getUniqueId());

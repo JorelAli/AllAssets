@@ -60,10 +60,9 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 		return map.entrySet();
 	}
 
-	/**
-	 * Gets a list of values
-	 * @return The list of values as a List of objects
-	 */
+	/** Gets a list of values
+	 * 
+	 * @return The list of values as a List of objects */
 	public List<List<Object>> values() {
 		final List<List<Object>> list = new ArrayList<List<Object>>();
 		for (final Object key : keySet())
@@ -76,12 +75,11 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 		return;
 	}
 
-	/**
-	 * Gets the object from a key and value
+	/** Gets the object from a key and value
+	 * 
 	 * @param key - The key to 'search'
 	 * @param value - The value to find. Max = 5
-	 * @return The object stored in the UltraMap
-	 */
+	 * @return The object stored in the UltraMap */
 	public Object get(final A key, final int value) {
 		if ((value > 5) || (value == 0))
 			return null;
@@ -100,26 +98,24 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 		else
 			return false;
 	}
-	
-	/**
-	 * Looks for a value - pretty normal. Enter the int value to lookup
+
+	/** Looks for a value - pretty normal. Enter the int value to lookup
+	 * 
 	 * @param value
-	 * @return
-	 */
+	 * @return */
 	public boolean containsValue(final Object objectToFind, final int value) {
-		
+
 		return false;
 	}
-	
-	/**
-	 * Similar to containsValue() but looks through the entire map
+
+	/** Similar to containsValue() but looks through the entire map
+	 * 
 	 * @param objectToFind
-	 * @return
-	 */
+	 * @return */
 	public boolean containsValueDeep(final Object objectToFind) {
-		for(final List<Object> list : values())
-			for(final Object object : list)
-				if(objectToFind.equals(object))
+		for (final List<Object> list : values())
+			for (final Object object : list)
+				if (objectToFind.equals(object))
 					return true;
 		return false;
 	}

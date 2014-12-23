@@ -181,7 +181,7 @@ public class User implements IUser {
 		playerData.savePlayerData();
 		player.setCompassTarget(loc);
 	}
-	
+
 	@Override
 	public void setCanTP(final boolean tp) {
 		playerData.getPlayerData().set("canTP", tp);
@@ -297,9 +297,8 @@ public class User implements IUser {
 		return false;
 	}
 
-
 	@Override
-	public boolean canTP() { 
+	public boolean canTP() {
 		return playerData.getPlayerData().getBoolean("canTP");
 	}
 

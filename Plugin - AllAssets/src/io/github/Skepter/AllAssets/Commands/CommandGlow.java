@@ -58,7 +58,7 @@ public class CommandGlow {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if(!player.getItemInHand().getType().isBlock()) {
+		if (!player.getItemInHand().getType().isBlock()) {
 			if (ItemUtils.hasGlow(player.getItemInHand())) {
 				final ItemStack is = ItemUtils.removeGlow(player.getItemInHand());
 				player.setItemInHand(is);

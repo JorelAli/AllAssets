@@ -54,26 +54,24 @@ public class MathUtils {
 		return false;
 	}
 
-	/**
-	 * Returns a random number between a minimum and maximum value
+	/** Returns a random number between a minimum and maximum value
+	 * 
 	 * @param min - The minimum value
 	 * @param max - The maximum value
-	 * @return a random integer between that number
-	 */
-	public static int randomBetween(final int min, final int max) {    
+	 * @return a random integer between that number */
+	public static int randomBetween(final int min, final int max) {
 		return new Random().nextInt((max - min) + 1) + min;
 	}
-	
-	/**
-	 * Rounds up to next multiple
+
+	/** Rounds up to next multiple
+	 * 
 	 * @param value - Value to round up
 	 * @param factor - Factor (e.g. factor of 10 rounds up to nearest 10)
-	 * @return value.
-	 */
+	 * @return value. */
 	public static double roundUp(final double value, final double factor) {
 		return factor * Math.ceil(value / factor);
 	}
-	
+
 	public static int toInt(final double value) {
 		return new Double(value).intValue();
 	}

@@ -91,7 +91,7 @@ public class CommandButcher {
 					if (lightning)
 						entity.getWorld().strikeLightningEffect(entity.getLocation());
 					if (explosion)
-							entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
+						entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
 					entity.remove();
 					count++;
 				}
@@ -112,7 +112,7 @@ public class CommandButcher {
 						if (lightning)
 							entity.getWorld().strikeLightningEffect(entity.getLocation());
 						if (explosion)
-								entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
+							entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
 						entity.remove();
 						count++;
 					}

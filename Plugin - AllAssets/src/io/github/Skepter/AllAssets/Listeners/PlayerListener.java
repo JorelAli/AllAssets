@@ -125,7 +125,7 @@ public class PlayerListener implements Listener {
 		new NotificationsBoard(event.getPlayer()).updateBoard();
 		//TODO - see NotificationsBoard
 	}
-	
+
 	@EventHandler
 	public void playerLeave(final PlayerQuitEvent event) {
 		final Player player = event.getPlayer();
@@ -134,7 +134,7 @@ public class PlayerListener implements Listener {
 		final User user = new User(player);
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
 		final Map<UUID, Long> map = AllAssets.instance().tempTimeMap;
-		if(map.containsKey(player.getUniqueId())) {
+		if (map.containsKey(player.getUniqueId())) {
 			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - map.get(player.getUniqueId())));
 			map.remove(player.getUniqueId());
 		} else {

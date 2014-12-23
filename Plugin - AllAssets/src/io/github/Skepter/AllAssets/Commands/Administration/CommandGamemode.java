@@ -66,7 +66,7 @@ public class CommandGamemode {
 	}
 
 	private void doCycleGameMode(final Player player) {
-		switch(player.getGameMode()) {
+		switch (player.getGameMode()) {
 		case SURVIVAL:
 			doGameMode(player, "creative");
 			break;

@@ -60,7 +60,7 @@ public class CommandRename {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if((player.getItemInHand() == null) || player.getItemInHand().getType().equals(Material.AIR)) {
+		if ((player.getItemInHand() == null) || player.getItemInHand().getType().equals(Material.AIR)) {
 			ErrorUtils.error(player, "The item in your hand cannot be nothing!");
 			return;
 		}

@@ -59,7 +59,7 @@ public class FireworkUtils {
 		final Color[] colors = { AQUA, BLACK, BLUE, FUCHSIA, GRAY, GREEN, LIME, MAROON, NAVY, OLIVE, ORANGE, PURPLE, RED, SILVER, TEAL, WHITE, YELLOW };
 		return colors[i];
 	}
-	
+
 	public static Color getRandomColor() {
 		return getColor(new Random().nextInt(17));
 	}

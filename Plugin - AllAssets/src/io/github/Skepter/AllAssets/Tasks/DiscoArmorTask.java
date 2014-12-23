@@ -54,17 +54,17 @@ public class DiscoArmorTask implements Runnable {
 		final LeatherArmorMeta leatherHelmetMeta = (LeatherArmorMeta) leatherHelmet.getItemMeta();
 		leatherHelmetMeta.setColor(FireworkUtils.getColor(new Random().nextInt(17)));
 		leatherHelmet.setItemMeta(leatherHelmetMeta);
-		
+
 		final ItemStack leatherChestPlate = new ItemStack(Material.LEATHER_CHESTPLATE, 1);
 		final LeatherArmorMeta leatherChestPlateMeta = (LeatherArmorMeta) leatherChestPlate.getItemMeta();
 		leatherChestPlateMeta.setColor(FireworkUtils.getColor(new Random().nextInt(17)));
 		leatherChestPlate.setItemMeta(leatherChestPlateMeta);
-		
+
 		final ItemStack leatherLeggings = new ItemStack(Material.LEATHER_LEGGINGS, 1);
 		final LeatherArmorMeta leatherLeggingsMeta = (LeatherArmorMeta) leatherLeggings.getItemMeta();
 		leatherLeggingsMeta.setColor(FireworkUtils.getColor(new Random().nextInt(17)));
 		leatherLeggings.setItemMeta(leatherLeggingsMeta);
-		
+
 		final ItemStack leatherBoots = new ItemStack(Material.LEATHER_BOOTS, 1);
 		final LeatherArmorMeta leatherBootsMeta = (LeatherArmorMeta) leatherBoots.getItemMeta();
 		leatherBootsMeta.setColor(FireworkUtils.getColor(new Random().nextInt(17)));

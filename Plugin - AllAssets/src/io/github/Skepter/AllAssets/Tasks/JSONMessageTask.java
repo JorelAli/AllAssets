@@ -41,7 +41,7 @@ public class JSONMessageTask implements Runnable {
 	private final String string;
 
 	public static String testString = "{\"text\":\"\",\"extra\":[{\"text\":\"Hello\",\"color\":\"gray\",\"bold\":\"true\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"http://skepter.github.io/\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"HAI\"}}}]}";
-	
+
 	public JSONMessageTask(final Player player, final String string) {
 		this.player = player;
 		this.string = string;

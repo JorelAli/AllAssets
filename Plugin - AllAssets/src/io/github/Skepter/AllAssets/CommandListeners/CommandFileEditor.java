@@ -121,7 +121,7 @@ public class CommandFileEditor implements Listener {
 			ErrorUtils.error(player, "That file could not be read!");
 		}
 		final List<String> list = new ArrayList<String>();
-		for(final String string : config.getKeys(true))
+		for (final String string : config.getKeys(true))
 			list.add(string);
 		return list;
 	}

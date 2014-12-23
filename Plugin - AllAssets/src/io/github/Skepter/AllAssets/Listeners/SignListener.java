@@ -38,20 +38,20 @@ import org.bukkit.event.block.SignChangeEvent;
 
 public class SignListener implements Listener {
 
-//	@EventHandler
-//	public void playerClickSignEvent(final PlayerInteractEvent event) {
-//		//buy signs etc.
-//	}
-//
-//	@EventHandler
-//	public void playerSwearEvent(final SignChangeEvent event) {
-//		//swear signs etc.
-//	}
-//
-//	@EventHandler
-//	public void onCreate(final SignChangeEvent event) {
-//		//buy signs etc.
-//	}
+	//	@EventHandler
+	//	public void playerClickSignEvent(final PlayerInteractEvent event) {
+	//		//buy signs etc.
+	//	}
+	//
+	//	@EventHandler
+	//	public void playerSwearEvent(final SignChangeEvent event) {
+	//		//swear signs etc.
+	//	}
+	//
+	//	@EventHandler
+	//	public void onCreate(final SignChangeEvent event) {
+	//		//buy signs etc.
+	//	}
 
 	@EventHandler
 	public void playerUseColor(final SignChangeEvent event) {

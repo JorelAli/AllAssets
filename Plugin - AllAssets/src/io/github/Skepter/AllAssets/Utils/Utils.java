@@ -41,8 +41,8 @@ public class Utils {
 	public static void setMetadata(final Entity entity, final String key, final Object value) {
 		entity.setMetadata(key, new FixedMetadataValue(AllAssets.instance(), value));
 	}
-	
-	public static Object getMetadata(final Entity entity, final String key)  {
+
+	public static Object getMetadata(final Entity entity, final String key) {
 		return entity.getMetadata(key);
 	}
 }

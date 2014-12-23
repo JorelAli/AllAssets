@@ -122,10 +122,10 @@ public class EnchantmentInventories {
 			is.addUnsafeEnchantment(Enchantment.DIG_SPEED, i);
 			map.put(i - 1, is);
 		}
-		
+
 		for (int i = 9; i < 14; i++) {
 			final ItemStack is = new ItemStack(Material.DIAMOND_PICKAXE);
-			is.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS , i - 8);
+			is.addUnsafeEnchantment(Enchantment.LOOT_BONUS_BLOCKS, i - 8);
 			map.put(i, is);
 		}
 

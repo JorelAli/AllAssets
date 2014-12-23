@@ -71,14 +71,14 @@ public class CommandNear {
 				distance = Integer.parseInt(args.getArgs()[0]);
 			else
 				ErrorUtils.notAnInteger(player);
-		
+
 		/* Checking for entities */
 		final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
 		if (entities.isEmpty()) {
 			player.sendMessage(AllAssets.title + "No nearby entities could be found!");
 			return;
 		}
-		
+
 		/* Dump them into a map for easy lookup */
 		final Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
 		while (entities.iterator().hasNext()) {
@@ -90,7 +90,7 @@ public class CommandNear {
 				entities.remove(entity);
 			}
 		}
-		
+
 		/* Print the info */
 		if (!map.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby entities"));
