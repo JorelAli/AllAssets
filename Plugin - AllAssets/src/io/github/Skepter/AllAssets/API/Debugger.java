@@ -8,29 +8,26 @@ import org.bukkit.ChatColor;
 
 public class Debugger {
 
-	public static void printVariable(String name, Object o) {
+	public static void printVariable(final String name, final Object o) {
 		printBlank();
 		System.out.println(name + ": " + o);
 	}
 
-	public static void printList(Collection<?> list) {
+	public static void printList(final Collection<?> list) {
 		printBlank();
-		for (Object o : list) {
+		for (final Object o : list)
 			System.out.println(ChatColor.stripColor(o.toString()));
-		}
 	}
 
-	public static void printMap(Map<?, ?> map) {
+	public static void printMap(final Map<?, ?> map) {
 		printBlank();
-		for (Entry<?, ?> e : map.entrySet()) {
+		for (final Entry<?, ?> e : map.entrySet())
 			if (e.getValue() instanceof Collection) {
 				printBlank();
-				for (Object o : (Collection<?>) e.getValue()) {
+				for (final Object o : (Collection<?>) e.getValue())
 					System.out.println(ChatColor.stripColor(e.getKey().toString() + " : " + o.toString()));
-				}
 			} else
 				System.out.println(ChatColor.stripColor(e.getKey().toString() + " : " + e.getValue().toString()));
-		}
 	}
 
 	private static void printBlank() {

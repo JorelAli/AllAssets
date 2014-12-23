@@ -61,7 +61,7 @@ public class CommandCooldown {
 		}.runTaskLater(AllAssets.instance(), time * 20);
 	}
 
-	public static boolean isOnCooldown0(final Player player, String command) {
+	public static boolean isOnCooldown0(final Player player, final String command) {
 		if (cooldownPlayer.containsKey(player))
 			if (command.equals(cooldownPlayer.get(player)))
 				return true;

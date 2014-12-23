@@ -79,7 +79,7 @@ public class CommandFramework {
 	private final Plugin plugin;
 	private static final String noPerm = AllAssets.error + "You do not have permission to perform that action";
 	public static Set<CommandHandler> pluginCommands = new HashSet<CommandHandler>();
-	private Set<String> cmds = new HashSet<String>();
+	private final Set<String> cmds = new HashSet<String>();
 
 	/** Initializes the command framework and sets up the command maps
 	 * 
@@ -122,11 +122,11 @@ public class CommandFramework {
 					return true;
 				}
 				try {
-					long before = System.currentTimeMillis();
+					final long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
 					if (ConfigHandler.instance().config().getBoolean("debugMode") || AllAssets.masterSwitch)
 						sender.sendMessage(AllAssets.title + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
 				return true;
@@ -188,9 +188,8 @@ public class CommandFramework {
 			cmds.add(command.name());
 			Bukkit.getLogger().info(AllAssets.shortTitleNoColor + "Added command: /" + command.name().replace(".", " "));
 		}
-		if (command.isListed()) {
+		if (command.isListed())
 			pluginCommands.add(command);
-		}
 		final String cmdLabel = label.replace(".", ",").split(",")[0].toLowerCase();
 		if (map.getCommand(cmdLabel) == null) {
 			final org.bukkit.command.Command cmd = new BukkitCommand(cmdLabel, plugin);

@@ -62,7 +62,7 @@ public class CommandFirework implements Listener {
 	}
 
 	//have a button to output it as a single lined command (for dispensers etc.)
-	private PlayerMap<UUID, AAFireworkBuilder> map = new PlayerMap<UUID, AAFireworkBuilder>();
+	private final PlayerMap<UUID, AAFireworkBuilder> map = new PlayerMap<UUID, AAFireworkBuilder>();
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -81,11 +81,11 @@ public class CommandFirework implements Listener {
 	public void inventoryClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
 		if (event.getAction().equals(InventoryAction.PICKUP_ALL)) {
-			ItemStack item = event.getInventory().getItem(event.getSlot());
+			final ItemStack item = event.getInventory().getItem(event.getSlot());
 			switch (event.getInventory().getName()) {
 			case "Firework - Type":
 				if (check(event)) {
-					AAFireworkBuilder builder = new AAFireworkBuilder(1);
+					final AAFireworkBuilder builder = new AAFireworkBuilder(1);
 					builder.setType(parseType(item));
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.chooseColor(false));
@@ -93,7 +93,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Firework - Color":
 				if (check(event)) {
-					AAFireworkBuilder builder = map.get(player);
+					final AAFireworkBuilder builder = map.get(player);
 					builder.addColor(parseColor(item));
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.chooseColor(true));
@@ -101,23 +101,22 @@ public class CommandFirework implements Listener {
 				break;
 			case "Firework - Fade":
 				if (check(event)) {
-					AAFireworkBuilder builder = map.get(player);
+					final AAFireworkBuilder builder = map.get(player);
 					builder.addFade(parseColor(item));
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.anotherColor());
 				}
 				break;
 			case "Do you want another color?":
-				if (check(event)) {
+				if (check(event))
 					if (parseBoolean(item))
 						player.openInventory(FireworkInventories.chooseColor(false));
 					else
 						player.openInventory(FireworkInventories.chooseFlicker(false));
-				}
 				break;
 			case "Do you want flickering?":
 				if (check(event)) {
-					AAFireworkBuilder builder = map.get(player);
+					final AAFireworkBuilder builder = map.get(player);
 					if (parseBoolean(item))
 						builder.addFlicker();
 					map.put(player, builder);
@@ -126,7 +125,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Do you want a trail?":
 				if (check(event)) {
-					AAFireworkBuilder builder = map.get(player);
+					final AAFireworkBuilder builder = map.get(player);
 					if (parseBoolean(item))
 						builder.addTrail();
 					map.put(player, builder);
@@ -135,7 +134,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Choose a power size":
 				if (check(event)) {
-					AAFireworkBuilder builder = map.get(player);
+					final AAFireworkBuilder builder = map.get(player);
 					builder.setPower(parsePower(item));
 					map.remove(player);
 					player.getInventory().addItem(builder.getFirework());
@@ -148,34 +147,33 @@ public class CommandFirework implements Listener {
 	}
 
 	/* Checks to make sure that the event is valid (not clicking outside of the inventory etc.) */
-	private boolean check(InventoryClickEvent event) {
+	private boolean check(final InventoryClickEvent event) {
 		if (!event.getAction().equals(InventoryAction.PICKUP_ALL) || (event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 			return false;
 		event.setCancelled(true);
 		return true;
 	}
 
-	private boolean parseBoolean(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
+	private boolean parseBoolean(final ItemStack item) {
+		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
 			case "Yes":
 				return true;
 			case "No":
 				return false;
 			}
-		}
 		return false;
 	}
 
-	private int parsePower(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
+	private int parsePower(final ItemStack item) {
+		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			return new CustomObject(item.getItemMeta().getDisplayName()).stripInteger();
 		else
 			return 0;
 	}
 
-	private Type parseType(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
+	private Type parseType(final ItemStack item) {
+		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
 			case "Creeper":
 				return Type.CREEPER;
@@ -193,8 +191,8 @@ public class CommandFirework implements Listener {
 		return Type.BALL;
 	}
 
-	private Color parseColor(ItemStack item) {
-		if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
+	private Color parseColor(final ItemStack item) {
+		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
 			case "Black":
 				return DyeColor.BLACK.getFireworkColor();

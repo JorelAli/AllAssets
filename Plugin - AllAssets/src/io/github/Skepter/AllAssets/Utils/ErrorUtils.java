@@ -83,7 +83,7 @@ public class ErrorUtils {
 		sender.sendMessage(error + "There was an error while executing the command");
 	}
 
-	public static void onCooldown(final CommandSender sender, long seconds) {
+	public static void onCooldown(final CommandSender sender, final long seconds) {
 		sender.sendMessage(error + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
 	}
 }

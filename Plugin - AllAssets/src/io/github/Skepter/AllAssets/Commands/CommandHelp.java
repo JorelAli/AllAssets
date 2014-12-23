@@ -53,25 +53,23 @@ public class CommandHelp {
 		helpData = new HashMap<String, String[]>();
 	}
 
-	public static void register(String commandName, String[] helpDocumentation) {
+	public static void register(final String commandName, final String[] helpDocumentation) {
 		helpData.put(commandName, helpDocumentation);
 	}
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		for (Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
+		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
 			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
 				//parse plugin data
 			}
 			return;
 		}
 
-		for(String key : helpData.keySet()) {
-			if (args.getArgs()[0].equalsIgnoreCase(key)) {
-				for(String string : helpData.get(key)) {
+		for(final String key : helpData.keySet()) {
+			if (args.getArgs()[0].equalsIgnoreCase(key))
+				for(final String string : helpData.get(key))
 					args.getSender().sendMessage(string);
-				}
-			}
 			return;
 		}
 		

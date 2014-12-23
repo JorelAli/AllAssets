@@ -44,12 +44,11 @@ import org.bukkit.event.block.BlockRedstoneEvent;
 public class BlockPoweredListener implements Listener {
 
 	@EventHandler
-	public void onBlockRedstoneChange(BlockRedstoneEvent event) {
-		Block block = event.getBlock();
-		if (event.getNewCurrent() > 0 && block.getType().equals(Material.OBSIDIAN)) {
+	public void onBlockRedstoneChange(final BlockRedstoneEvent event) {
+		final Block block = event.getBlock();
+		if ((event.getNewCurrent() > 0) && block.getType().equals(Material.OBSIDIAN))
 			if (ConfigHandler.instance().features().getBoolean("PoweredBlocks.Glowstone"))
 				block.setType(Material.GLOWSTONE);
-		}
 	}
 
 }

@@ -43,7 +43,7 @@ public class YesNoConversation {
 
 	private static String customText;
 
-	public YesNoConversation(final CommandSender sender, final BooleanPrompt prompt, String text) {
+	public YesNoConversation(final CommandSender sender, final BooleanPrompt prompt, final String text) {
 		if (customText != null)
 			customText = text;
 		if (sender instanceof Conversable) {

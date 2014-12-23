@@ -37,45 +37,45 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandFileEditor;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
-import io.github.Skepter.AllAssets.Commands.CommandAllAssets;
-import io.github.Skepter.AllAssets.Commands.CommandAnnouncer;
-import io.github.Skepter.AllAssets.Commands.CommandBack;
-import io.github.Skepter.AllAssets.Commands.CommandBalance;
-import io.github.Skepter.AllAssets.Commands.CommandBalancetop;
-import io.github.Skepter.AllAssets.Commands.CommandBatch;
-import io.github.Skepter.AllAssets.Commands.CommandButcher;
-import io.github.Skepter.AllAssets.Commands.CommandChestSearch;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
-import io.github.Skepter.AllAssets.Commands.CommandClearchat;
-import io.github.Skepter.AllAssets.Commands.CommandConsoleLog;
-import io.github.Skepter.AllAssets.Commands.CommandDebug;
-import io.github.Skepter.AllAssets.Commands.CommandDisable;
-import io.github.Skepter.AllAssets.Commands.CommandDiscoArmor;
-import io.github.Skepter.AllAssets.Commands.CommandEnable;
-import io.github.Skepter.AllAssets.Commands.CommandFly;
-import io.github.Skepter.AllAssets.Commands.CommandForceChat;
-import io.github.Skepter.AllAssets.Commands.CommandGamemode;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
 import io.github.Skepter.AllAssets.Commands.CommandGrief;
-import io.github.Skepter.AllAssets.Commands.CommandInventory;
-import io.github.Skepter.AllAssets.Commands.CommandLaunch;
-import io.github.Skepter.AllAssets.Commands.CommandLog;
 import io.github.Skepter.AllAssets.Commands.CommandMore;
-import io.github.Skepter.AllAssets.Commands.CommandNMSGod;
 import io.github.Skepter.AllAssets.Commands.CommandNear;
-import io.github.Skepter.AllAssets.Commands.CommandOplist;
 import io.github.Skepter.AllAssets.Commands.CommandPTime;
 import io.github.Skepter.AllAssets.Commands.CommandPWeather;
-import io.github.Skepter.AllAssets.Commands.CommandPing;
 import io.github.Skepter.AllAssets.Commands.CommandRename;
-import io.github.Skepter.AllAssets.Commands.CommandSignEdit;
-import io.github.Skepter.AllAssets.Commands.CommandTime;
-import io.github.Skepter.AllAssets.Commands.CommandTp;
-import io.github.Skepter.AllAssets.Commands.CommandTphere;
-import io.github.Skepter.AllAssets.Commands.CommandWeather;
 import io.github.Skepter.AllAssets.Commands.CommandWorkbench;
-import io.github.Skepter.AllAssets.Commands.CommandWorlds;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandAllAssets;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandAnnouncer;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandButcher;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandChestSearch;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandClearchat;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandConsoleLog;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandDisable;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandEnable;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandFly;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandForceChat;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandGamemode;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandInventory;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandNMSGod;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandTime;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandWeather;
+import io.github.Skepter.AllAssets.Commands.Debug.CommandBatch;
+import io.github.Skepter.AllAssets.Commands.Debug.CommandDebug;
+import io.github.Skepter.AllAssets.Commands.Debug.CommandPing;
+import io.github.Skepter.AllAssets.Commands.Economy.CommandBalance;
+import io.github.Skepter.AllAssets.Commands.Economy.CommandBalancetop;
+import io.github.Skepter.AllAssets.Commands.Fun.CommandDiscoArmor;
+import io.github.Skepter.AllAssets.Commands.Fun.CommandLaunch;
+import io.github.Skepter.AllAssets.Commands.Teleportation.CommandBack;
+import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTp;
+import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTphere;
+import io.github.Skepter.AllAssets.Commands.Teleportation.CommandWorlds;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.PlayerData;
 import io.github.Skepter.AllAssets.Config.UUIDData;
@@ -210,7 +210,7 @@ public class AllAssets extends JavaPlugin {
 	public final static String shortTitleNoColor = "[AA] ";
 	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
 	public final static String houseStyleColor = ChatColor.AQUA + "";
-	
+
 	/* Vault stuff */
 	public boolean hasVault = false;
 	public Economy economy = null;
@@ -219,14 +219,14 @@ public class AllAssets extends JavaPlugin {
 
 	/* Other stuff */
 	public CommandFramework framework;
-	
+
 	public Map<UUID, Long> tempTimeMap;
 	public ComphenixsGhostFactory ghostFactory;
 
 	public static boolean masterSwitch = false;
 
-	/** Block where developing stuff happens. Used for easy code removal 
-	 * Requires masterSwitch*/
+	/** Block where developing stuff happens. Used for easy code removal Requires
+	 * masterSwitch */
 	private void dev() {
 	}
 
@@ -259,12 +259,11 @@ public class AllAssets extends JavaPlugin {
 			setupVault();
 			getLogger().info("Vault has been found and hooked into successfully");
 		}
-		
 
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
-		
-		if(masterSwitch)
+
+		if (masterSwitch)
 			dev();
 		//Nav
 
@@ -274,7 +273,7 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandAFK(framework));
 		if (ConfigHandler.instance().features().getBoolean("AllAssets"))
 			new CommandAllAssets(framework);
-		if(ConfigHandler.instance().features().getBoolean("Announcer"))
+		if (ConfigHandler.instance().features().getBoolean("Announcer"))
 			new CommandAnnouncer(framework);
 		if (ConfigHandler.instance().features().getBoolean("Back"))
 			new CommandBack(framework);
@@ -419,7 +418,7 @@ public class AllAssets extends JavaPlugin {
 	/* Writing getServer().... etc. is too much work :S */
 	public void r(final Listener l) {
 		if (masterSwitch)
-			for (Method method : l.getClass().getMethods())
+			for (final Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)
 					getLogger().info(shortTitleNoColor + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
@@ -429,7 +428,7 @@ public class AllAssets extends JavaPlugin {
 	public void onDisable() {
 		try {
 			PlayerData.saveAllPlayers();
-		} catch (Exception e1) {
+		} catch (final Exception e1) {
 			getLogger().severe("There was an error saving the player data D:");
 		}
 		CommandConsoleLog.players.clear();
@@ -480,7 +479,7 @@ public class AllAssets extends JavaPlugin {
 		ois.close();
 		return result;
 	}
-	
+
 	public static File getStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
 	}

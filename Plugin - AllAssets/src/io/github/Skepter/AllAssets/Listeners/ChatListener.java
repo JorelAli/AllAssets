@@ -32,7 +32,7 @@
 package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.CommandLog;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 

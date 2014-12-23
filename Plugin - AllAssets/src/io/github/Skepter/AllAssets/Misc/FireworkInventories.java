@@ -52,7 +52,7 @@ public class FireworkInventories {
 	}
 
 	/* 2 & 3 - fade boolean to set title to fade */
-	public static Inventory chooseColor(boolean fade) {
+	public static Inventory chooseColor(final boolean fade) {
 		Inventory inv = null;
 		if (fade)
 			inv = Bukkit.createInventory(null, 18, "Firework - Fade");
@@ -80,7 +80,7 @@ public class FireworkInventories {
 	}
 
 	/* 4 & 5*/
-	public static Inventory chooseFlicker(boolean trail) {
+	public static Inventory chooseFlicker(final boolean trail) {
 		Inventory inv = null;
 		if (trail)
 			inv = Bukkit.createInventory(null, 9, "Do you want a trail?");
@@ -102,7 +102,7 @@ public class FireworkInventories {
 	}
 	
 	public static Inventory anotherColor() {
-		Inventory inv = Bukkit.createInventory(null, 9, "Do you want another color?");
+		final Inventory inv = Bukkit.createInventory(null, 9, "Do you want another color?");
 		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
 		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
 		return inv;

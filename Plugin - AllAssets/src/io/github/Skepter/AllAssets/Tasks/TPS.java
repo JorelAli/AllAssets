@@ -59,7 +59,7 @@ public class TPS implements Runnable {
 		long elapsed = 0L;
 		try {
 			elapsed = System.currentTimeMillis() - TICKS[target];
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 
 		return ticks / (elapsed / 1000.0D);

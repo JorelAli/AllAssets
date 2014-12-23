@@ -91,11 +91,11 @@ public class CommandFileEditor implements Listener {
 			directoryMap.put(player, ".");
 			return;
 		case 2:
-			File dataFile = new File(fileMap.get(player));
-			YamlConfiguration config = new YamlConfiguration();
+			final File dataFile = new File(fileMap.get(player));
+			final YamlConfiguration config = new YamlConfiguration();
 			try {
 				config.load(dataFile);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				ErrorUtils.error(player, "That file could not be read!");
 				return;
 			}
@@ -113,15 +113,15 @@ public class CommandFileEditor implements Listener {
 		} catch (final Exception e) {
 			ErrorUtils.playerOnly(args.getSender());
 		}
-		File dataFile = new File(fileMap.get(player));
-		YamlConfiguration config = new YamlConfiguration();
+		final File dataFile = new File(fileMap.get(player));
+		final YamlConfiguration config = new YamlConfiguration();
 		try {
 			config.load(dataFile);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.error(player, "That file could not be read!");
 		}
 		final List<String> list = new ArrayList<String>();
-		for(String string : config.getKeys(true))
+		for(final String string : config.getKeys(true))
 			list.add(string);
 		return list;
 	}
@@ -134,9 +134,9 @@ public class CommandFileEditor implements Listener {
 			event.setCancelled(true);
 			/* If they open a file inventory */
 			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "Choose a file...")) {
-				ItemStack item = event.getInventory().getItem(event.getSlot());
-				Player player = (Player) event.getWhoClicked();
-				String dM = directoryMap.get(player);
+				final ItemStack item = event.getInventory().getItem(event.getSlot());
+				final Player player = (Player) event.getWhoClicked();
+				final String dM = directoryMap.get(player);
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
 				case BOOK:
@@ -152,12 +152,12 @@ public class CommandFileEditor implements Listener {
 					/* Read the file */
 				case PAPER:
 					player.closeInventory();
-					File dataFile = new File(dM, ItemUtils.getDisplayName(item));
+					final File dataFile = new File(dM, ItemUtils.getDisplayName(item));
 					if (dataFile.getName().contains(".yml")) {
-						YamlConfiguration config = new YamlConfiguration();
+						final YamlConfiguration config = new YamlConfiguration();
 						try {
 							config.load(dataFile);
-						} catch (Exception e) {
+						} catch (final Exception e) {
 							ErrorUtils.error(player, "That file could not be read!");
 							return;
 						}
@@ -170,41 +170,37 @@ public class CommandFileEditor implements Listener {
 				}
 
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println("Error");
 		}
 	}
 
-	private String openInventory(Player player, File currentDirectory) {
+	private String openInventory(final Player player, final File currentDirectory) {
 		int fileCountRoot = 1;
-		String[] supportedFileTypes = new String[] { ".yml" };
-		for (File file : currentDirectory.listFiles()) {
-			for (String s : supportedFileTypes) {
+		final String[] supportedFileTypes = new String[] { ".yml" };
+		for (final File file : currentDirectory.listFiles()) {
+			for (final String s : supportedFileTypes)
 				if (file.getName().contains(s))
 					fileCountRoot++;
-			}
 			if (file.isDirectory())
 				fileCountRoot++;
 		}
 		String name = currentDirectory.getName();
-		String pName = currentDirectory.getName();
+		final String pName = currentDirectory.getName();
 		if (name.equals("."))
 			name = "Server root folder";
 		if (Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			fileCountRoot--;
-		Inventory inv = Bukkit.createInventory(null, MathUtils.toInt(MathUtils.roundUp(fileCountRoot, 9)), ChatColor.BLUE + "Choose a file...");
-		for (File file : currentDirectory.listFiles()) {
-			for (String s : supportedFileTypes) {
+		final Inventory inv = Bukkit.createInventory(null, MathUtils.toInt(MathUtils.roundUp(fileCountRoot, 9)), ChatColor.BLUE + "Choose a file...");
+		for (final File file : currentDirectory.listFiles()) {
+			for (final String s : supportedFileTypes)
 				if (file.getName().contains(s))
 					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.PAPER, 1), file.getName()));
-			}
-			if (file.isDirectory()) {
+			if (file.isDirectory())
 				inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.BOOK, 1), file.getName()));
-			}
 		}
-		if (!Arrays.asList(currentDirectory.list()).contains("server.properties")) {
-			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + (pName == null || pName.equals(".") ? "Server root folder" : pName)));
-		}
+		if (!Arrays.asList(currentDirectory.list()).contains("server.properties"))
+			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)));
 		player.openInventory(inv);
 		return currentDirectory.getAbsolutePath();
 	}
@@ -217,7 +213,7 @@ class EditFilePrompt extends BooleanPrompt {
 	String setting;
 	String value;
 
-	public EditFilePrompt(File file, YamlConfiguration config, String setting, String value) {
+	public EditFilePrompt(final File file, final YamlConfiguration config, final String setting, final String value) {
 		this.file = file;
 		this.config = config;
 		this.setting = setting;
@@ -225,17 +221,17 @@ class EditFilePrompt extends BooleanPrompt {
 	}
 
 	@Override
-	public String getPromptText(ConversationContext context) {
+	public String getPromptText(final ConversationContext context) {
 		return YesNoConversation.getPromptText();
 	}
 
 	@Override
-	protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
+	protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 		if (b) {
 			config.set(setting, value);
 			try {
 				config.save(file);
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				context.getForWhom().sendRawMessage(AllAssets.error + "There was an error whilst changing that value");
 				return Prompt.END_OF_CONVERSATION;
 			}

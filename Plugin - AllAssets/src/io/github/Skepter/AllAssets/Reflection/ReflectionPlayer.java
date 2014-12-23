@@ -10,9 +10,9 @@ public class ReflectionPlayer {
 		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
 	}
 	
-	public static void doAnimation(final Player player, AnimationType type) {
+	public static void doAnimation(final Player player, final AnimationType type) {
 		try {
-			ReflectionUtils utils = new ReflectionUtils(player);
+			final ReflectionUtils utils = new ReflectionUtils(player);
 			Object animationPacket = utils.emptyPacketPlayOutAnimation;
 			animationPacket = animationPacket.getClass().getConstructor().newInstance();
 			utils.setPrivateField(animationPacket, "a", player.getEntityId());
@@ -47,7 +47,7 @@ public class ReflectionPlayer {
 			}
 			utils.setPrivateField(animationPacket, "b", Integer.valueOf(animationID));
 			utils.sendOutgoingPacket(animationPacket);
-		} catch (Exception exception) {
+		} catch (final Exception exception) {
 		}
 	}
 

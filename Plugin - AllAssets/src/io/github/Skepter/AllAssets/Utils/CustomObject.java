@@ -35,10 +35,11 @@ public class CustomObject extends Object {
 
 	Object object;
 
-	public CustomObject(Object object) {
+	public CustomObject(final Object object) {
 		this.object = object;
 	}
 
+	@Override
 	public String toString() {
 		return String.valueOf(object);
 	}
@@ -46,7 +47,7 @@ public class CustomObject extends Object {
 	public int toInt() {
 		try {
 			return Integer.parseInt(toString());
-		} catch (NumberFormatException e) {
+		} catch (final NumberFormatException e) {
 			return 0;
 		}
 	}

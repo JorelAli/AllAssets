@@ -19,27 +19,27 @@ import org.bukkit.plugin.Plugin;
 public class PlayerMap<K, V> implements Listener, Cloneable, Serializable {
 
 	private static final long serialVersionUID = -8222232305054055527L;
-	private Map<UUID, V> map = new HashMap<UUID, V>();
+	private final Map<UUID, V> map = new HashMap<UUID, V>();
 	
-	public PlayerMap(Plugin plugin) {
+	public PlayerMap(final Plugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
 	@EventHandler
-	public void onQuit(PlayerQuitEvent event) {
+	public void onQuit(final PlayerQuitEvent event) {
 		if(map.containsKey(event.getPlayer().getUniqueId()))
 			remove(event.getPlayer());
 	}
 	
-	public void put(Player player, V value) {
+	public void put(final Player player, final V value) {
 		map.put(player.getUniqueId(), value);
 	}
 	
-	public V get(Player player) {
+	public V get(final Player player) {
 		return map.get(player.getUniqueId());
 	}
 	
-	public void remove(Player player) {
+	public void remove(final Player player) {
 		map.remove(player.getUniqueId());
 	}
 	
@@ -47,7 +47,7 @@ public class PlayerMap<K, V> implements Listener, Cloneable, Serializable {
 		map.clear();
 	}
 	
-	public boolean containsKey(Object key) {
+	public boolean containsKey(final Object key) {
 		if (map.containsKey(key))
 			return true;
 		else

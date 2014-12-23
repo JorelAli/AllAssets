@@ -57,7 +57,7 @@ public class ServerListingListener implements Listener {
 					event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 					return;
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", "").replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 				return;
 			}

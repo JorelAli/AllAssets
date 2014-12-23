@@ -56,7 +56,7 @@ public class FireworkUtils {
 	}
 
 	public static Color getColor(final int i) {
-		Color[] colors = { AQUA, BLACK, BLUE, FUCHSIA, GRAY, GREEN, LIME, MAROON, NAVY, OLIVE, ORANGE, PURPLE, RED, SILVER, TEAL, WHITE, YELLOW };
+		final Color[] colors = { AQUA, BLACK, BLUE, FUCHSIA, GRAY, GREEN, LIME, MAROON, NAVY, OLIVE, ORANGE, PURPLE, RED, SILVER, TEAL, WHITE, YELLOW };
 		return colors[i];
 	}
 	

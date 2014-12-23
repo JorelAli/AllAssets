@@ -61,11 +61,9 @@ public class CustomLogListener implements Listener {
 		default:
 			break;
 		}
-		for (final Player p : Bukkit.getOnlinePlayers()) {
-			if (p.hasPermission("AllAssets.notifications")) {
+		for (final Player p : Bukkit.getOnlinePlayers())
+			if (p.hasPermission("AllAssets.notifications"))
 				new NotificationsBoard(p).updateBoard();
-			}
-		}
 
 	}
 }

@@ -41,7 +41,7 @@ import org.bukkit.entity.Player;
  * the 'AllAssets.notifications' permission */
 public class NotificationsBoard {
 
-	private Player player;
+	private final Player player;
 	private static int errorLogCount;
 	private static int spamLogCount;
 	private static String playerName;
@@ -53,7 +53,7 @@ public class NotificationsBoard {
 	}
 
 	//ONLY allow admins (those with perms) to have notifications. allow them to toggle on/off
-	public NotificationsBoard(Player player) {
+	public NotificationsBoard(final Player player) {
 		this.player = player;
 	}
 
@@ -87,7 +87,7 @@ public class NotificationsBoard {
 	}
 
 	/** A player tried to tp to you, but you have tp toggled off */
-	public static void someoneTriedToTPButGotDenied(String pName) {
+	public static void someoneTriedToTPButGotDenied(final String pName) {
 		playerName = pName;
 	}
 

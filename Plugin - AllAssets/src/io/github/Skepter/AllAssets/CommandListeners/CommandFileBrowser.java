@@ -115,9 +115,9 @@ public class CommandFileBrowser implements Listener {
 			event.setCancelled(true);
 			/* If they open a file inventory */
 			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "File - ")) {
-				ItemStack item = event.getInventory().getItem(event.getSlot());
-				Player player = (Player) event.getWhoClicked();
-				String dM = directoryMap.get(player);
+				final ItemStack item = event.getInventory().getItem(event.getSlot());
+				final Player player = (Player) event.getWhoClicked();
+				final String dM = directoryMap.get(player);
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
 				case BOOK:
@@ -133,50 +133,48 @@ public class CommandFileBrowser implements Listener {
 					/* Read the file */
 				case PAPER:
 					player.closeInventory();
-					File dataFile = new File(dM, ItemUtils.getDisplayName(item));
+					final File dataFile = new File(dM, ItemUtils.getDisplayName(item));
 					player.sendMessage(TextUtils.title(dataFile.getName()));
 					/* Only allow .yml, .txt, .properties files as they are each read differently */
 					if (dataFile.getName().contains(".yml")) {
-						YamlConfiguration config = new YamlConfiguration();
+						final YamlConfiguration config = new YamlConfiguration();
 						try {
 							config.load(dataFile);
-						} catch (Exception e) {
+						} catch (final Exception e) {
 							ErrorUtils.error(player, "That file could not be read!");
 							return;
 						}
-						List<String> list = new ArrayList<String>();
-						for (String key : config.getKeys(true)) {
+						final List<String> list = new ArrayList<String>();
+						for (final String key : config.getKeys(true))
 							list.add(ChatColor.AQUA + key + ChatColor.WHITE + ": " + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
-						}
 						dataMap.put(player, list);
 					}
 					if (dataFile.getName().contains(".txt")) {
-						BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+						final BufferedReader reader = new BufferedReader(new FileReader(dataFile));
 						String line;
-						List<String> list = new ArrayList<String>();
-						while ((line = reader.readLine()) != null) {
+						final List<String> list = new ArrayList<String>();
+						while ((line = reader.readLine()) != null)
 							list.add(line);
-						}
 						reader.close();
 						dataMap.put(player, list);
 					}
 					if (dataFile.getName().contains(".properties")) {
-						Properties prop = new Properties();
-						InputStream inputStream = new FileInputStream(dataFile);
+						final Properties prop = new Properties();
+						final InputStream inputStream = new FileInputStream(dataFile);
 						prop.load(inputStream);
-						List<String> list = new ArrayList<String>();
-						for (Object key : prop.keySet())
+						final List<String> list = new ArrayList<String>();
+						for (final Object key : prop.keySet())
 							list.add(ChatColor.AQUA + key.toString() + ChatColor.WHITE + ": " + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
 						dataMap.put(player, list);
 					}
 					/* Only show it if you need to! */
-					if (dataMap.get(player).size() < 10) {
-						for (String s : dataMap.get(player))
+					if (dataMap.get(player).size() < 10)
+						for (final String s : dataMap.get(player))
 							player.sendMessage(s);
-					} else {
+					else {
 						/* If pages = 1 and there is only 1 page, DO NOT SHOW THIS XD*/
 						//TODO ASAP!!!!!!
-						int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
+						final int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
 						//if (pages != 0 && )
 						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
 					}
@@ -186,41 +184,37 @@ public class CommandFileBrowser implements Listener {
 				}
 
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.out.println("Error");
 		}
 	}
 
-	private String openInventory(Player player, File currentDirectory) {
+	private String openInventory(final Player player, final File currentDirectory) {
 		int fileCountRoot = 1;
-		String[] supportedFileTypes = new String[] { ".yml", ".properties", ".txt" };
-		for (File file : currentDirectory.listFiles()) {
-			for (String s : supportedFileTypes) {
+		final String[] supportedFileTypes = new String[] { ".yml", ".properties", ".txt" };
+		for (final File file : currentDirectory.listFiles()) {
+			for (final String s : supportedFileTypes)
 				if (file.getName().contains(s))
 					fileCountRoot++;
-			}
 			if (file.isDirectory())
 				fileCountRoot++;
 		}
 		String name = currentDirectory.getName();
-		String pName = currentDirectory.getName();
+		final String pName = currentDirectory.getName();
 		if (name.equals("."))
 			name = "Server root folder";
 		if (Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			fileCountRoot--;
-		Inventory inv = Bukkit.createInventory(null, MathUtils.toInt(MathUtils.roundUp(fileCountRoot, 9)), ChatColor.BLUE + "File - " + name);
-		for (File file : currentDirectory.listFiles()) {
-			for (String s : supportedFileTypes) {
+		final Inventory inv = Bukkit.createInventory(null, MathUtils.toInt(MathUtils.roundUp(fileCountRoot, 9)), ChatColor.BLUE + "File - " + name);
+		for (final File file : currentDirectory.listFiles()) {
+			for (final String s : supportedFileTypes)
 				if (file.getName().contains(s))
 					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.PAPER, 1), file.getName()));
-			}
-			if (file.isDirectory()) {
+			if (file.isDirectory())
 				inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.BOOK, 1), file.getName()));
-			}
 		}
-		if (!Arrays.asList(currentDirectory.list()).contains("server.properties")) {
-			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + (pName == null || pName.equals(".") ? "Server root folder" : pName)));
-		}
+		if (!Arrays.asList(currentDirectory.list()).contains("server.properties"))
+			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)));
 		player.openInventory(inv);
 		return currentDirectory.getAbsolutePath();
 	}

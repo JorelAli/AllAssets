@@ -46,19 +46,18 @@ public class AnnouncerTask implements Runnable {
 	public void run() {
 		if (ConfigHandler.instance().config().getBoolean("randomAnnouncer"))
 			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, ConfigHandler.announcer().getKeys().size())));
-		else {
+		else
 			try {
 				Bukkit.broadcastMessage(getAnnouncer(count));
 				count++;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				//If the count is higher than in the data file, loop again
 				count = 0;
 				Bukkit.broadcastMessage(getAnnouncer(count));
 			}
-		}
 	}
 
-	private String getAnnouncer(int ID) {
+	private String getAnnouncer(final int ID) {
 		return ConfigHandler.announcer().getString(String.valueOf(ID));
 	}
 

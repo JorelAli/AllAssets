@@ -49,10 +49,10 @@ public class CustomUnknownCommandListener implements Listener {
 	final private String[] excludedCommands = new String[] { "/yes", "/no" };
 
 	@EventHandler
-	public void onCommand(PlayerCommandPreprocessEvent e) {
-		String msg = e.getMessage().toLowerCase().split(" ")[0];
-		if (Bukkit.getHelpMap().getHelpTopic(msg) == null && !TextUtils.arrayContains(excludedCommands, msg)) {
-			if (searchWithTuncater(msg) != null && !searchWithTuncater(msg).isEmpty()) {
+	public void onCommand(final PlayerCommandPreprocessEvent e) {
+		final String msg = e.getMessage().toLowerCase().split(" ")[0];
+		if ((Bukkit.getHelpMap().getHelpTopic(msg) == null) && !TextUtils.arrayContains(excludedCommands, msg)) {
+			if ((searchWithTuncater(msg) != null) && !searchWithTuncater(msg).isEmpty()) {
 				e.setCancelled(true);
 				new FancyMessage(AllAssets.title + "Unknown command. Did you mean: ").then(AllAssets.houseStyleColor + searchWithTuncater(msg)).tooltip(AllAssets.houseStyleColor + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
 			}
@@ -60,28 +60,23 @@ public class CustomUnknownCommandListener implements Listener {
 		}
 	}
 
-	private String searchWithTuncater(String topicString) {
-		for (String s : TextUtils.truncater(topicString)) {
-			for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics()) {
-				if (topic.getName().contains(s)) {
+	private String searchWithTuncater(final String topicString) {
+		for (final String s : TextUtils.truncater(topicString))
+			for (final HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
+				if (topic.getName().contains(s))
 					return topic.getName();
-				}
-			}
-		}
 		return null;
 	}
 
 	@SuppressWarnings("unused")
-	private List<String> searchListWithTuncater(String topicString) {
-		List<String> listOfCommands = new ArrayList<String>();
-		for (String s : TextUtils.truncater(topicString)) {
-			for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics()) {
+	private List<String> searchListWithTuncater(final String topicString) {
+		final List<String> listOfCommands = new ArrayList<String>();
+		for (final String s : TextUtils.truncater(topicString))
+			for (final HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
 				if (topic.getName().contains(s)) {
 					listOfCommands.add(topic.getName());
 					break;
 				}
-			}
-		}
 		return listOfCommands;
 	}
 }

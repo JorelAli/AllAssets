@@ -1,7 +1,7 @@
 package io.github.Skepter.AllAssets.Reflection;
 
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.CommandLog;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public class PacketBuilder {
 	private PacketBuilder builder;
 	private PacketDirection direction;
 
-	public PacketBuilder(final Player player, PacketType type) {
+	public PacketBuilder(final Player player, final PacketType type) {
 		try {
 			this.utils = new ReflectionUtils(player);
 			this.packet = null;
@@ -49,42 +49,44 @@ public class PacketBuilder {
 			case PLAY_OUT_NAMED_ENTITY_SPAWN:
 				packet = utils.emptyPacketPlayOutNamedEntitySpawn;
 				break;
+			default:
+				break;
 			}
 
 			packet = packet.getClass().getConstructor().newInstance();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
-	public PacketBuilder set(String name, Object data) {
+	public PacketBuilder set(final String name, final Object data) {
 		try {
 			utils.setPrivateField(packet, name, data);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			CommandLog.addLog("Editing packet field failure", LogType.ERROR);
 		}
 		return builder;
 	}
 
-	public PacketBuilder setInt(String name, int data) {
+	public PacketBuilder setInt(final String name, final int data) {
 		try {
 			utils.setPrivateField(packet, name, Integer.valueOf(data));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			CommandLog.addLog("Editing packet field failure", LogType.ERROR);
 		}
 		return builder;
 	}
 
-	public PacketBuilder setLocation(String name1, String name2, String name3, Location data) {
+	public PacketBuilder setLocation(final String name1, final String name2, final String name3, final Location data) {
 		setInt(name1, (int) data.getX());
 		setInt(name2, (int) data.getY());
 		setInt(name3, (int) data.getZ());
 		return builder;
 	}
 
-	public PacketBuilder setEnum(String fieldName, String enumClassName, String enumName) {
+	public PacketBuilder setEnum(final String fieldName, final String enumClassName, final String enumName) {
 		try {
 			set(fieldName, utils.getEnum(utils.getNMSClass(enumClassName), enumName));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			CommandLog.addLog("Error finding enumeration", LogType.ERROR);
 		}
 		return builder;
@@ -96,7 +98,7 @@ public class PacketBuilder {
 				utils.sendOutgoingPacket(packet);
 			else if (direction.equals(PacketDirection.CLIENT_TO_SERVER))
 				utils.sendIncomingPacket(packet);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			CommandLog.addLog("Packet sending failure", LogType.ERROR);
 		}
 	}

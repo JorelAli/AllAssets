@@ -34,7 +34,7 @@ package io.github.Skepter.AllAssets.Listeners;
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.Commands.CommandLog;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.UUIDData;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
@@ -116,7 +116,7 @@ public class PlayerListener implements Listener {
 				for (int i = 0; i < new Random().nextInt(5); i++)
 					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());
 			if (ConfigHandler.instance().features().getBoolean("CommandsOnJoin"))
-				for (String string : ConfigHandler.instance().config().getStringList("commandsOnJoin"))
+				for (final String string : ConfigHandler.instance().config().getStringList("commandsOnJoin"))
 					Bukkit.dispatchCommand(event.getPlayer(), string.replace("{PLAYERNAME}", event.getPlayer().getName()));
 		}
 
@@ -128,12 +128,12 @@ public class PlayerListener implements Listener {
 	
 	@EventHandler
 	public void playerLeave(final PlayerQuitEvent event) {
-		Player player = event.getPlayer();
+		final Player player = event.getPlayer();
 		player.resetPlayerTime();
 		player.resetPlayerWeather();
 		final User user = new User(player);
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
-		Map<UUID, Long> map = AllAssets.instance().tempTimeMap;
+		final Map<UUID, Long> map = AllAssets.instance().tempTimeMap;
 		if(map.containsKey(player.getUniqueId())) {
 			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - map.get(player.getUniqueId())));
 			map.remove(player.getUniqueId());

@@ -42,13 +42,12 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 public class CommandCooldownListener implements Listener {
 
 	@EventHandler
-	public void onCommand(PlayerCommandPreprocessEvent e) {
-		if (ConfigHandler.instance().config().getInt("commandCooldown") != 0) {
+	public void onCommand(final PlayerCommandPreprocessEvent e) {
+		if (ConfigHandler.instance().config().getInt("commandCooldown") != 0)
 			if (CommandCooldown.isOnCooldown0(e.getPlayer(), e.getMessage().split(" ")[0])) {
 				ErrorUtils.onCooldown(e.getPlayer(), CommandCooldown.getTimeLeft(e.getPlayer()));
 				e.setCancelled(true);
 			} else 
-				new CommandCooldown(e.getPlayer(), ConfigHandler.instance().config().getInt("commandCooldown"), e.getMessage().split(" ")[0]);	
-		}
+				new CommandCooldown(e.getPlayer(), ConfigHandler.instance().config().getInt("commandCooldown"), e.getMessage().split(" ")[0]);
 	}
 }

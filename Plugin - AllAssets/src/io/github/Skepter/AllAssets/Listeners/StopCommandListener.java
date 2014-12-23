@@ -57,12 +57,12 @@ public class StopCommandListener implements Listener {
 class StopPrompt extends BooleanPrompt {
 
 	@Override
-	public String getPromptText(ConversationContext context) {
+	public String getPromptText(final ConversationContext context) {
 		return YesNoConversation.getPromptText();
 	}
 
 	@Override
-	protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
+	protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 		if (b)
 			Bukkit.shutdown();
 		return Prompt.END_OF_CONVERSATION;

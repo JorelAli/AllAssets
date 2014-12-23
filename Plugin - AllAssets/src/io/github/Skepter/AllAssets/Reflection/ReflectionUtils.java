@@ -74,13 +74,13 @@ public class ReflectionUtils {
 
 	/** Object classes (Packets) */
 	final public Object emptyChatSerializer;
-	
+
 	final public Object emptyPacketPlayOutChat;
 	final public Object emptyPacketPlayInClientCommand;
 	final public Object emptyPacketPlayOutNamedEntitySpawn;
 	final public Object emptyPacketPlayOutBed;
 	final public Object emptyPacketPlayOutAnimation;
-	
+
 	public ReflectionUtils(final Player player) throws Exception {
 		this.player = player;
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
@@ -135,7 +135,7 @@ public class ReflectionUtils {
 	}
 
 	public void setPrivateField(final Object object, final String fieldName, final Object data) throws Exception {
-		Field field = object.getClass().getDeclaredField(fieldName);
+		final Field field = object.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
 		field.set(object, data);
 	}
@@ -144,15 +144,15 @@ public class ReflectionUtils {
 		return gameProfileClass.getConstructor(UUID.class, String.class).newInstance(player.getUniqueId(), player.getName());
 	}
 
-	public Class<?> getNMSClass(String className) throws ClassNotFoundException {
+	public Class<?> getNMSClass(final String className) throws ClassNotFoundException {
 		return (Class.forName(packageName + "." + className));
 	}
 
-	public void sendOutgoingPacket(Object packet) throws Exception {
+	public void sendOutgoingPacket(final Object packet) throws Exception {
 		getConnection.getClass().getMethod("sendPacket", packetClass).invoke(getConnection, packet);
 	}
 
-	public void sendIncomingPacket(Object packet) throws Exception {
+	public void sendIncomingPacket(final Object packet) throws Exception {
 		getConnection.getClass().getMethod("a", packet.getClass()).invoke(getConnection, packet);
 	}
 }

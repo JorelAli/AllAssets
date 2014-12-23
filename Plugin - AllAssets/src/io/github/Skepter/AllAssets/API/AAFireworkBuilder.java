@@ -40,19 +40,19 @@ import org.bukkit.inventory.meta.FireworkMeta;
 /** Made this to allow multiple colors / fades etc. */
 public class AAFireworkBuilder {
 
-	private ItemStack firework;
-	private FireworkMeta meta;
-	private Builder builder;
+	private final ItemStack firework;
+	private final FireworkMeta meta;
+	private final Builder builder;
 
 	private int power;
 
-	public AAFireworkBuilder(int amount) {
+	public AAFireworkBuilder(final int amount) {
 		this.firework = new ItemStack(Material.FIREWORK, amount);
 		this.meta = (FireworkMeta) firework.getItemMeta();
 		this.builder = FireworkEffect.builder();
 	}
 
-	public void setPower(int power) {
+	public void setPower(final int power) {
 		this.power = power;
 	}
 
@@ -60,11 +60,11 @@ public class AAFireworkBuilder {
 		builder.trail(true);
 	}
 
-	public void setType(Type type) {
+	public void setType(final Type type) {
 		builder.with(type);
 	}
 
-	public void addFade(Color color) {
+	public void addFade(final Color color) {
 		builder.withFade(color);
 	}
 
@@ -72,7 +72,7 @@ public class AAFireworkBuilder {
 		builder.flicker(true);
 	}
 
-	public void addColor(Color color) {
+	public void addColor(final Color color) {
 		builder.withColor(color);
 	}
 

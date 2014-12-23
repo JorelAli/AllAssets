@@ -71,7 +71,7 @@ public class CommandEnchant implements Listener {
 	@EventHandler
 	public void inventoryClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
-		if (event.getAction().equals(InventoryAction.PICKUP_SOME)) {
+		if (event.getAction().equals(InventoryAction.PICKUP_SOME))
 			switch (event.getInventory().getName()) {
 			case "Enchant - Armor":
 				if (event.getSlot() == 53) {
@@ -100,7 +100,6 @@ public class CommandEnchant implements Listener {
 					return;
 				}
 			}
-		}
 	}
 
 	private void doEnchant(final Player player, final InventoryClickEvent event) {

@@ -38,6 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
@@ -63,7 +64,7 @@ public class CommandGrief {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+		final String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
 		if (message != null)
 			new YesNoConversation(player, new GriefPrompt(message), "Are you sure you want to send a grief report");
 		return;
@@ -71,28 +72,27 @@ public class CommandGrief {
 
 	private class GriefPrompt extends BooleanPrompt {
 
-		private String message;
+		private final String message;
 
-		private GriefPrompt(String message) {
+		private GriefPrompt(final String message) {
 			this.message = message;
 		}
 
 		@Override
-		public String getPromptText(ConversationContext context) {
+		public String getPromptText(final ConversationContext context) {
 			return YesNoConversation.getPromptText();
 		}
 
 		@Override
-		protected Prompt acceptValidatedInput(ConversationContext context, boolean b) {
-			if (context.getForWhom() instanceof Player) {
+		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
+			if (context.getForWhom() instanceof Player)
 				if (b) {
-					Player player = (Player) context.getForWhom();
-					String location = "(" + MathUtils.round(player.getLocation().getX(), 0) + ", " + MathUtils.round(player.getLocation().getY(), 0) + ", " + MathUtils.round(player.getLocation().getZ(), 0) + ")";
+					final Player player = (Player) context.getForWhom();
+					final String location = "(" + MathUtils.round(player.getLocation().getX(), 0) + ", " + MathUtils.round(player.getLocation().getY(), 0) + ", " + MathUtils.round(player.getLocation().getZ(), 0) + ")";
 					CommandLog.addLog("Player: " + player.getName() + ", Location: " + location + ", Message: " + message, LogType.GRIEF);
 					context.getForWhom().sendRawMessage(AllAssets.title + "Successfully sent grief report");
 				} else
 					context.getForWhom().sendRawMessage(AllAssets.error + "Cancelled grief report");
-			}
 			return Prompt.END_OF_CONVERSATION;
 		}
 

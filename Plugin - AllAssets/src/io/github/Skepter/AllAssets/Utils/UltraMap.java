@@ -44,7 +44,7 @@ import java.util.Set;
 public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 
 	private static final long serialVersionUID = -6951127285757902765L;
-	private Map<Object, List<Object>> map = new HashMap<Object, List<Object>>();
+	private final Map<Object, List<Object>> map = new HashMap<Object, List<Object>>();
 
 	public void put(final A key, final B value1, final C value2, final D value3, final E value4, final F value5) {
 		//TODO check CURRENT values to allow for custom 'overlapping'
@@ -94,7 +94,7 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 		return;
 	}
 
-	public boolean containsKey(Object key) {
+	public boolean containsKey(final Object key) {
 		if (keySet().contains(key))
 			return true;
 		else
@@ -106,7 +106,7 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 	 * @param value
 	 * @return
 	 */
-	public boolean containsValue(Object objectToFind, int value) {
+	public boolean containsValue(final Object objectToFind, final int value) {
 		
 		return false;
 	}
@@ -116,13 +116,11 @@ public class UltraMap<A, B, C, D, E, F> implements Cloneable, Serializable {
 	 * @param objectToFind
 	 * @return
 	 */
-	public boolean containsValueDeep(Object objectToFind) {
-		for(List<Object> list : values()) {
-			for(Object object : list) {
+	public boolean containsValueDeep(final Object objectToFind) {
+		for(final List<Object> list : values())
+			for(final Object object : list)
 				if(objectToFind.equals(object))
 					return true;
-			}
-		}
 		return false;
 	}
 

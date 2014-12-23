@@ -16,8 +16,8 @@ import org.bukkit.command.CommandSender;
 /** Class designed to paginate text :D */
 public class Paginator {
 
-	private List<String> textData;
-	private int pageSize;
+	private final List<String> textData;
+	private final int pageSize;
 	private int shownPageNumber;
 	private int maxPageNumber;
 
@@ -29,7 +29,7 @@ public class Paginator {
 	 * @param sender - The person executing the command (or use Player)
 	 * @param textData - The data with text
 	 * @param pageSize - The size of the page to show to the sender */
-	public Paginator(List<String> textData, int pageSize) {
+	public Paginator(final List<String> textData, final int pageSize) {
 		this.textData = textData;
 		this.pageSize = pageSize;
 		doPreconditions();
@@ -40,8 +40,8 @@ public class Paginator {
 	 * @param sender - The person executing the command (or use Player)
 	 * @param textData - The data with text
 	 * @param pageSize - The size of the page to show to the sender */
-	public Paginator(Set<String> textData, int pageSize) {
-		List<String> data = new ArrayList<String>();
+	public Paginator(final Set<String> textData, final int pageSize) {
+		final List<String> data = new ArrayList<String>();
 		data.addAll(textData);
 		Collections.sort(data);
 		this.textData = data;
@@ -61,27 +61,24 @@ public class Paginator {
 		else
 			pages.put(1, textData.subList(0, pageSize));
 
-		for (int i = 2; i < maxPageNumber; i++) {
+		for (int i = 2; i < maxPageNumber; i++)
 			try {
 				//20 - 30
 				//30 - 40
 				pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				pages.put(i, textData.subList(i * pageSize, textData.size() - 1));
 				System.out.println("Error: " + i);
 			}
-		}
 
 		Debugger.printMap(pages);
 	}
 
-	public void send(CommandSender sender, int pageNumberToShow) {
-		if (pageNumberToShow <= 0) {
+	public void send(final CommandSender sender, int pageNumberToShow) {
+		if (pageNumberToShow <= 0)
 			pageNumberToShow = 1;
-		}
-		if (pageNumberToShow > maxPageNumber) {
+		if (pageNumberToShow > maxPageNumber)
 			pageNumberToShow = maxPageNumber;
-		}
 
 		shownPageNumber = pageNumberToShow;
 

@@ -183,7 +183,7 @@ public class User implements IUser {
 	}
 	
 	@Override
-	public void setCanTP(boolean tp) {
+	public void setCanTP(final boolean tp) {
 		playerData.getPlayerData().set("canTP", tp);
 		playerData.savePlayerData();
 	}

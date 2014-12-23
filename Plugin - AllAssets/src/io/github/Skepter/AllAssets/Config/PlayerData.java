@@ -35,7 +35,7 @@ package io.github.Skepter.AllAssets.Config;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.CommandLog;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 
 import java.io.File;
 import java.io.IOException;

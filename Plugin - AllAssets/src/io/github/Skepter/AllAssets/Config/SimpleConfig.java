@@ -113,7 +113,7 @@ public class SimpleConfig {
 	}
 
 	public String getSpecialString(final String path) {
-		String string = getString(path);
+		final String string = getString(path);
 		return string.substring(1, string.length() - 1);
 	}
 

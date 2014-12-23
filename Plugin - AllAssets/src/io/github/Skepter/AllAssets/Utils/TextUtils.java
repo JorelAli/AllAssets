@@ -73,7 +73,7 @@ public class TextUtils {
 	/** Converts a String to a list of string with specific sizes For example,
 	 * "hello" would return "hello", "hell", "hel", "he", "h" */
 	public static List<String> truncater(final String string) {
-		List<String> list = new ArrayList<String>();
+		final List<String> list = new ArrayList<String>();
 		list.add(string);
 		for (int i = 1; i < string.length(); i++)
 			list.add(string.substring(0, string.length() - i));
@@ -82,7 +82,7 @@ public class TextUtils {
 
 	/** Checks if a String[] contains s */
 	public static boolean arrayContains(final String[] arr, final String s) {
-		for (String str : arr)
+		for (final String str : arr)
 			if (str.equals(s))
 				return true;
 		return false;
@@ -101,8 +101,8 @@ public class TextUtils {
 	 * 
 	 * @param s
 	 * @return */
-	public static boolean containsSwear(String s) {
-		String[] swearWords =  new String[] {"fuck", "shit", "bitch", "cunt", "penis", "vagina", "porn"};
+	public static boolean containsSwear(final String s) {
+		final String[] swearWords =  new String[] {"fuck", "shit", "bitch", "cunt", "penis", "vagina", "porn"};
 		for (final String str : swearWords)
 			if (stripColor(s.toLowerCase()).contains(str))
 				return true;
@@ -281,7 +281,7 @@ public class TextUtils {
 			while (matcher.find())
 				tagValues.add(matcher.group(1));
 			return tagValues;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return Arrays.asList(new String[] {stringBetween(str, beginTag, endTag)});
 		}
 	}
