@@ -61,7 +61,7 @@ public class PlayerUtils {
 		return playerNames;
 	}
 
-	public static Player getPlayerFromString(final String string) {
+	public static Player getOfflinePlayerFromString(final String string) {
 		for (final OfflinePlayer p : getOfflinePlayers())
 			if (p.getName().equals(string))
 				return getPlayer(p.getUniqueId());

@@ -52,7 +52,7 @@ public class CommandForceChat {
 	public void onCommand(final CommandArgs args) {
 		if (args.getArgs().length > 0)
 			try {
-				final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+				final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 				final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
 				target.chat(s);
 			} catch (final Exception e) {

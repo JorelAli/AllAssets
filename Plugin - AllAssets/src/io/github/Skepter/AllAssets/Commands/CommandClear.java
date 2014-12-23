@@ -63,7 +63,7 @@ public class CommandClear {
 				player.getInventory().clear();
 			else if (args.getArgs().length == 1) {
 				//TODO try/catch exception e
-				final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+				final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 				target.getInventory().clear();
 			}
 		} else if (args.getArgs().length == 0) {
@@ -71,7 +71,7 @@ public class CommandClear {
 			player.getInventory().clear();
 			player.getInventory().setArmorContents(temp);
 		} else if (args.getArgs().length == 1) {
-			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+			final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 			final ItemStack[] temp = target.getInventory().getArmorContents();
 			target.getInventory().clear();
 			target.getInventory().setArmorContents(temp);

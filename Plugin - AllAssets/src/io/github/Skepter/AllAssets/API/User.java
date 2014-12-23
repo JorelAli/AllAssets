@@ -71,7 +71,7 @@ public class User implements IUser {
 	@Deprecated
 	public User(final String s) {
 		try {
-			player = PlayerUtils.getPlayerFromString(s);
+			player = PlayerUtils.getOfflinePlayerFromString(s);
 		} catch (final Exception e) {
 		}
 		playerData = new PlayerData(player);

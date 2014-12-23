@@ -167,14 +167,17 @@ public class CommandFileBrowser implements Listener {
 							list.add(ChatColor.AQUA + key.toString() + ChatColor.WHITE + ": " + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
 						dataMap.put(player, list);
 					}
-					/* Only show it if you need to! */
+					/* Paginate data */
 					if (dataMap.get(player).size() < 10)
 						for (final String s : dataMap.get(player))
 							player.sendMessage(s);
 					else {
+						
+						
 						/* If pages = 1 and there is only 1 page, DO NOT SHOW THIS XD*/
 						//TODO ASAP!!!!!!
-						final int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
+						//final int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
+						TextUtils.paginate(player, dataMap.get(player), 10, 1);
 						//if (pages != 0 && )
 						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
 					}

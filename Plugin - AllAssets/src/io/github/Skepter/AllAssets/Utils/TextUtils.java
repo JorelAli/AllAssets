@@ -186,6 +186,14 @@ public class TextUtils {
 		return BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
+	/**
+	 * 
+	 * @param sender - The person sending to send the data to
+	 * @param textData - The data to send
+	 * @param pageSize - The size of each page (how many lines of data to show)
+	 * @param pageNumberToShow - The page number to show
+	 * @return The max number of pages
+	 */
 	@Deprecated
 	public static int paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();

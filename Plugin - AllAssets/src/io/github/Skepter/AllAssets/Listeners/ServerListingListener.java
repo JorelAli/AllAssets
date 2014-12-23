@@ -34,6 +34,7 @@ package io.github.Skepter.AllAssets.Listeners;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.UUIDData;
+import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -58,7 +59,7 @@ public class ServerListingListener implements Listener {
 					return;
 				}
 			} catch (final Exception e) {
-				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", "").replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
+				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace(" {PLAYERNAME}", "").replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 				return;
 			}
 		}
@@ -67,7 +68,7 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void playerLogin(final AsyncPlayerPreLoginEvent event) {
 		final String save = event.getAddress().toString().substring(1, event.getAddress().toString().length());
-		final User user = new User(event.getName());
+		final User user = new User(PlayerUtils.getOfflinePlayerFromString(event.getName()));
 		final ArrayList<String> s = new ArrayList<String>();
 		s.add(save);
 		user.setIPs(s);

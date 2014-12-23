@@ -62,7 +62,7 @@ public class CommandTphere {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		}
-		final Player t = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+		final Player t = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 		if (t != null) {
 			final User user = new User(player);
 			user.setLastLoc();

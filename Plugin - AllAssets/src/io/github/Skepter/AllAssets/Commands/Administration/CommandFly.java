@@ -69,7 +69,7 @@ public class CommandFly {
 				return;
 			}
 		} else if (args.getArgs().length == 1) {
-			final Player target = PlayerUtils.getPlayerFromString(args.getArgs()[0]);
+			final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 			if (target != null)
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
