@@ -35,6 +35,7 @@ import static io.github.Skepter.AllAssets.AllAssets.*;
 import static io.github.Skepter.AllAssets.Config.ConfigHandler.*;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.conversations.Conversable;
 import org.bukkit.entity.Player;
 
 public class ErrorUtils {
@@ -89,5 +90,9 @@ public class ErrorUtils {
 	
 	public static void worldNotFound(final CommandSender sender, final String worldName) {
 		sender.sendMessage(error + worldName + " could not be found!");
+	}
+
+	public static void conversableError(Conversable forWhom, String msg) {
+		forWhom.sendRawMessage(error + msg);
 	}
 }

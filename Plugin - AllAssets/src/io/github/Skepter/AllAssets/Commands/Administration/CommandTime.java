@@ -125,7 +125,7 @@ public class CommandTime {
 	}
 
 	@Completer(name = "time")
-	public List<String> testCompleter(final CommandArgs args) {
+	public List<String> timeCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();
 		list.add("day");
 		list.add("midday");
