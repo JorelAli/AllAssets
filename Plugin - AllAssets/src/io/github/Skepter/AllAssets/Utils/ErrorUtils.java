@@ -86,4 +86,8 @@ public class ErrorUtils {
 	public static void onCooldown(final CommandSender sender, final long seconds) {
 		sender.sendMessage(error + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
 	}
+	
+	public static void worldNotFound(final CommandSender sender, final String worldName) {
+		sender.sendMessage(error + worldName + " could not be found!");
+	}
 }

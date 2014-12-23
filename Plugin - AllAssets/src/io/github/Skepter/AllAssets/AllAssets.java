@@ -38,6 +38,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
+import io.github.Skepter.AllAssets.Commands.CommandBackup;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
@@ -151,8 +152,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  *  Put YesNo because it will COMPLETELY REPLACE (and delete) the old world
  */
 
-// add messages after commands (e.g. you successfully set the time to day etc.)
-
 //color customisation -
 //normalColor: 9
 //emphasisColor: b
@@ -194,10 +193,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * When using /reload (for aa), it then recaches all of the data - hence
  * making super speedy data delivery.
  * When a player leaves, remove them from the data?
- * 
- * 
- * 
- * -
  * 
  * clean up configHandler - it's so damn freaking messy!
  */
@@ -277,6 +272,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandAnnouncer(framework);
 		if (ConfigHandler.instance().features().getBoolean("Back"))
 			new CommandBack(framework);
+		if (ConfigHandler.instance().features().getBoolean("Backup"))
+			new CommandBackup(framework);
 		if (ConfigHandler.instance().features().getBoolean("Batch"))
 			new CommandBatch(framework);
 		if (ConfigHandler.instance().features().getBoolean("Bind"))
@@ -484,5 +481,9 @@ public class AllAssets extends JavaPlugin {
 
 	public static File getStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
+	}
+	
+	public static File getWorldStorage() {
+		return new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
 	}
 }

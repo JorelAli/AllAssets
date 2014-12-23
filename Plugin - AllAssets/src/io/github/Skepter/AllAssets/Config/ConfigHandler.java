@@ -141,6 +141,7 @@ public class ConfigHandler {
 		features.set("AllAssets", "true");
 		features.set("Announcer", "true");
 		features.set("Back", "true");
+		features.set("Backup", "true");
 		features.set("Balance", "true");
 		features.set("Balancetop", "true");
 		features.set("Batch", "true");
