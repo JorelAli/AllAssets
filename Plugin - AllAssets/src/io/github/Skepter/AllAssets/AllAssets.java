@@ -485,6 +485,9 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	public static File getWorldStorage() {
-		return new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
+		File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
+		if(!file.exists())
+			file.mkdirs();
+		return file;
 	}
 }

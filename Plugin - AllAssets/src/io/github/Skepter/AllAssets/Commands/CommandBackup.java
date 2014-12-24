@@ -47,13 +47,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.util.org.apache.commons.io.FileUtils;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.conversations.BooleanPrompt;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
-
-import com.google.common.io.Files;
 
 public class CommandBackup {
 
@@ -95,14 +95,14 @@ public class CommandBackup {
 						}
 					}
 				}
-
 				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
 					@Override
 					public void run() {
 						try {
-							Files.copy(w.getWorldFolder(), AllAssets.getWorldStorage());
+							FileUtils.copyDirectory(w.getWorldFolder(), new File(AllAssets.getWorldStorage(), w.getName()));
 						} catch (IOException e) {
 							ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
+							return;
 						}
 					}
 				});
@@ -111,11 +111,11 @@ public class CommandBackup {
 			}
 		}
 	}
-	
+
 	@Completer(name = "backup")
 	public List<String> backupCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();
-		for(World world : Bukkit.getWorlds())
+		for (World world : Bukkit.getWorlds())
 			list.add(world.getName());
 		return list;
 	}
@@ -135,17 +135,21 @@ public class CommandBackup {
 
 		@Override
 		protected Prompt acceptValidatedInput(final ConversationContext context, boolean b) {
-			Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
-				@Override
-				public void run() {
-					try {
-						Files.copy(world.getWorldFolder(), AllAssets.getWorldStorage());
-					} catch (IOException e) {
-						ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst backing up the world");
+			if (b) {
+				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
+					@Override
+					public void run() {
+						try {
+							FileUtils.copyDirectory(world.getWorldFolder(), new File(AllAssets.getWorldStorage(), world.getName()));
+						} catch (IOException e) {
+							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst backing up the world");
+							return;
+						}
 					}
-				}
-			});
-			context.getForWhom().sendRawMessage(AllAssets.title + world.getName() + " was backed up successfully ");
+				});
+				context.getForWhom().sendRawMessage(AllAssets.title + world.getName() + " was backed up successfully");
+			}
+			context.getForWhom().sendRawMessage(AllAssets.title + " Back up for " + world.getName() + " was cancelled");
 			return Prompt.END_OF_CONVERSATION;
 		}
 
