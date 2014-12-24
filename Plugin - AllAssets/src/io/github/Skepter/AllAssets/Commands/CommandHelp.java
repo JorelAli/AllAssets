@@ -37,18 +37,23 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UltraMap;
 
-import java.util.Map;
+import java.lang.reflect.Method;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class CommandHelp {
 
-	private static Map<String, String[]> helpData;
-
 	public CommandHelp(final CommandFramework framework) {
 		framework.registerCommands(this);
+	}
+
+	static UltraMap<String, Method, Object, String, String, String> map = new UltraMap<String, Method, Object, String, String, String>();
+
+	public static void register(String commandName, Method method, Object obj) {
+		map.put(commandName.toLowerCase(), method, obj, null, null, null);
 	}
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command", usage = "Use <command>")
@@ -56,15 +61,20 @@ public class CommandHelp {
 		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
 			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
 				//parse plugin data
+				return;
 			}
-			return;
 		}
 
-		for (final String key : helpData.keySet()) {
-			if (args.getArgs()[0].equalsIgnoreCase(key))
-				for (final String string : helpData.get(key))
-					args.getSender().sendMessage(string);
-			return;
+		String lookup = args.getArgs()[0].toLowerCase();
+		for (Object key : map.keySet()) {
+			if (String.valueOf(key).equals(lookup)) {
+				try {
+					((Method) map.get(lookup, 1)).invoke(map.get(lookup, 2), args.getSender());
+					return;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		ErrorUtils.error(args.getSender(), "Could not find that!");

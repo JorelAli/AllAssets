@@ -186,14 +186,11 @@ public class TextUtils {
 		return BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
-	/**
-	 * 
-	 * @param sender - The person sending to send the data to
+	/** @param sender - The person sending to send the data to
 	 * @param textData - The data to send
 	 * @param pageSize - The size of each page (how many lines of data to show)
 	 * @param pageNumberToShow - The page number to show
-	 * @return The max number of pages
-	 */
+	 * @return The max number of pages */
 	@Deprecated
 	public static int paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
@@ -308,5 +305,16 @@ public class TextUtils {
 
 	public static String colorizeTextPart(final String overallString, final String textPart, final ChatColor color) {
 		return overallString.replace(textPart, color + textPart);
+	}
+
+	public static void printHelp(CommandSender sender, String title, String... help) {
+		sender.sendMessage(title(title + " help"));
+		for (String string : help) {
+			String[] strs = string.split(" -");
+			String part1 = AllAssets.accentColor + strs[0];
+			String part2 = AllAssets.houseStyleColor + strs[1];
+			sender.sendMessage(part1 + " -" + part2);
+
+		}
 	}
 }

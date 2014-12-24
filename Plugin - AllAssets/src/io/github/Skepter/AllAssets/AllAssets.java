@@ -206,6 +206,7 @@ public class AllAssets extends JavaPlugin {
 	public final static String shortTitleNoColor = "[AA] ";
 	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
 	public final static String houseStyleColor = ChatColor.AQUA + "";
+	public final static String accentColor = ChatColor.WHITE + "";
 
 	/* Vault stuff */
 	public boolean hasVault = false;

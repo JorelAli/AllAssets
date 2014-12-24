@@ -37,12 +37,14 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Tasks.AnnouncerTask;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class CommandAnnouncer {
 
@@ -54,7 +56,7 @@ public class CommandAnnouncer {
 
 	@CommandHandler(name = "announcer", aliases = { "announce" }, permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		args.getSender().sendMessage("");
+		printHelp(args.getSender());
 		return; 
 	}
 
@@ -100,6 +102,11 @@ public class CommandAnnouncer {
 			//Catch nothing since if it fails, the ID will default to 1 anyway
 		}
 		ConfigHandler.announcer().set(String.valueOf(ID), data);
+	}
+	
+	@Help(name="Announcer")
+	public void printHelp(CommandSender sender) {
+		TextUtils.printHelp(sender, "Announcer", "/announcer start - starts the announcer", "/announcer stop - stops the announcer", "/announcer list - lists all announcements", "/announcer add <message> - adds a new message to the announcer", "/announcer remove <ID> - removes a message from the announcer based on its ID (use /announcer list to find the announcement ID)");
 	}
 
 }

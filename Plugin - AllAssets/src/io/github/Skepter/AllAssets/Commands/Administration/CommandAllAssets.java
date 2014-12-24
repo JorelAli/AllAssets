@@ -35,16 +35,19 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.API.Paginator;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Help;
+import io.github.Skepter.AllAssets.API.Paginator;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
 public class CommandAllAssets {
 
@@ -54,8 +57,7 @@ public class CommandAllAssets {
 
 	@CommandHandler(name = "allassets", aliases = { "aa" }, permission = "allassets", description = "Shows help & stuff", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		args.getSender().sendMessage("/allassets commands - shows a list of commands");
-		args.getSender().sendMessage("/allassets reload - reloads the entire plugin");
+		printHelp(args.getSender());
 		return;
 	}
 
@@ -103,5 +105,10 @@ public class CommandAllAssets {
 		//		}, 3000L);
 		//		Bukkit.getPluginManager().disablePlugin(AllAssets.instance());
 		//		return;
+	}
+	
+	@Help(name="AllAssets")
+	public void printHelp(CommandSender sender) {
+		TextUtils.printHelp(sender, "AllAssets", "/allassets commands - shows a list of commands", "/allassets reload - reloads the entire plugin");
 	}
 }

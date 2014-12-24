@@ -29,6 +29,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets;
 
+import io.github.Skepter.AllAssets.Commands.CommandHelp;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
@@ -165,6 +166,9 @@ public class CommandFramework {
 				registerCompleter(comp.name(), m, obj);
 				for (final String alias : comp.aliases())
 					registerCompleter(alias, m, obj);
+			} else if (m.getAnnotation(Help.class) != null) {
+				//Nav
+				CommandHelp.register(m.getAnnotation(Help.class).name(), m, obj);
 			}
 	}
 
