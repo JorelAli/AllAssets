@@ -164,9 +164,9 @@ public class ConfigHandler {
 		features.set("PTime", "true");
 		features.set("PWeather", "true");
 		// work on this feature more - still a bit buggy and kinda unreliable
-		features.set("Reload", "false"); // default to FALSE when actually Nav
-										 // exported
+		features.set("Reload", "false"); // default to FALSE when actually exported Nav
 		features.set("Rename", "true");
+		features.set("Restore", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
 		features.set("StaffChat", "true");

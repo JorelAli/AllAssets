@@ -38,7 +38,6 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
-import io.github.Skepter.AllAssets.Commands.CommandBackup;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
@@ -52,6 +51,7 @@ import io.github.Skepter.AllAssets.Commands.CommandRename;
 import io.github.Skepter.AllAssets.Commands.CommandWorkbench;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandAllAssets;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandAnnouncer;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandBackup;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandButcher;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandChestSearch;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandClearchat;
@@ -65,6 +65,7 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandInventory;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandNMSGod;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandRestore;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandTime;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandWeather;
@@ -350,6 +351,8 @@ public class AllAssets extends JavaPlugin {
 			r(new ReloadCommandListener());
 		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
+		if (ConfigHandler.features().getBoolean("Restore"))
+			new CommandRestore(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
 		if (ConfigHandler.features().getBoolean("Silence"))
@@ -486,7 +489,7 @@ public class AllAssets extends JavaPlugin {
 
 	public static File getWorldStorage() {
 		File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
-		if(!file.exists())
+		if (!file.exists())
 			file.mkdirs();
 		return file;
 	}
