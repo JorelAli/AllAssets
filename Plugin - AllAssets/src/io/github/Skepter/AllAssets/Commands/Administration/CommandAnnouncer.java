@@ -42,6 +42,7 @@ import io.github.Skepter.AllAssets.Tasks.AnnouncerTask;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 public class CommandAnnouncer {
 
@@ -53,18 +54,21 @@ public class CommandAnnouncer {
 
 	@CommandHandler(name = "announcer", aliases = { "announce" }, permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		return; //help page
+		args.getSender().sendMessage("");
+		return; 
 	}
 
 	@CommandHandler(name = "announcer.start", permission = "announcer", description = "Start the announcer", usage = "Use <command>")
 	public void startAnnouncer(final CommandArgs args) {
-		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new AnnouncerTask(), 0, ConfigHandler.instance().config().getInt("announcerTime"));
+		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new AnnouncerTask(), 0, ConfigHandler.config().getInt("announcerTime"));
+		args.getSender().sendMessage(AllAssets.title + "The announcer has started");
 		return;
 	}
 
 	@CommandHandler(name = "announcer.stop", permission = "announcer", description = "Stop the announcer", usage = "Use <command>")
 	public void stopAnnouncer(final CommandArgs args) {
 		Bukkit.getScheduler().cancelTask(taskID);
+		args.getSender().sendMessage(AllAssets.title + "The announcer has been stopped");
 		return;
 	}
 
@@ -72,7 +76,7 @@ public class CommandAnnouncer {
 	public void listAnnouncements(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Announcer list"));
 		for (final String key : ConfigHandler.announcer().getKeys())
-			args.getSender().sendMessage(AllAssets.houseStyleColor + key + " " + ConfigHandler.announcer().getString(key));
+			args.getSender().sendMessage(AllAssets.houseStyleColor + key + " " + ChatColor.translateAlternateColorCodes('&', ConfigHandler.announcer().getString(key)));
 	}
 
 	@CommandHandler(name = "announcer.add", permission = "announcer", description = "Add a new announcement", usage = "Use <command>")

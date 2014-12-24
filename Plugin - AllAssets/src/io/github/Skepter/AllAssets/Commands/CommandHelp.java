@@ -38,7 +38,6 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
@@ -50,11 +49,6 @@ public class CommandHelp {
 
 	public CommandHelp(final CommandFramework framework) {
 		framework.registerCommands(this);
-		helpData = new HashMap<String, String[]>();
-	}
-
-	public static void register(final String commandName, final String[] helpDocumentation) {
-		helpData.put(commandName, helpDocumentation);
 	}
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command", usage = "Use <command>")

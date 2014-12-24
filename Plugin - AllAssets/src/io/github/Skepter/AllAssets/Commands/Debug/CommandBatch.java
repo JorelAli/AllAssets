@@ -103,7 +103,7 @@ public class CommandBatch {
 			return;
 		}
 		//limit in config
-		if (amount > ConfigHandler.instance().config().getInt("batchLimit")) {
+		if (amount > ConfigHandler.config().getInt("batchLimit")) {
 			ErrorUtils.error(player, "Amount cannot be larger than 500!");
 			return;
 		}

@@ -43,6 +43,7 @@ import io.github.Skepter.AllAssets.Commands.CommandClear;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
 import io.github.Skepter.AllAssets.Commands.CommandGrief;
+import io.github.Skepter.AllAssets.Commands.CommandHelp;
 import io.github.Skepter.AllAssets.Commands.CommandMore;
 import io.github.Skepter.AllAssets.Commands.CommandNear;
 import io.github.Skepter.AllAssets.Commands.CommandPTime;
@@ -262,115 +263,118 @@ public class AllAssets extends JavaPlugin {
 			dev();
 		//Nav
 
+		new CommandHelp(framework);
+
 		/* This is the features.yml file which enables/disables features according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
-		if (ConfigHandler.instance().features().getBoolean("AFK"))
+		if (ConfigHandler.features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
-		if (ConfigHandler.instance().features().getBoolean("AllAssets"))
+		if (ConfigHandler.features().getBoolean("AllAssets"))
 			new CommandAllAssets(framework);
-		if (ConfigHandler.instance().features().getBoolean("Announcer"))
+		if (ConfigHandler.features().getBoolean("Announcer"))
 			new CommandAnnouncer(framework);
-		if (ConfigHandler.instance().features().getBoolean("Back"))
+		if (ConfigHandler.features().getBoolean("Back"))
 			new CommandBack(framework);
-		if (ConfigHandler.instance().features().getBoolean("Backup"))
+		if (ConfigHandler.features().getBoolean("Backup"))
 			new CommandBackup(framework);
-		if (ConfigHandler.instance().features().getBoolean("Batch"))
+		if (ConfigHandler.features().getBoolean("Batch"))
 			new CommandBatch(framework);
-		if (ConfigHandler.instance().features().getBoolean("Bind"))
+		if (ConfigHandler.features().getBoolean("Bind"))
 			r(new CommandBind(framework));
-		if (ConfigHandler.instance().features().getBoolean("Butcher"))
+		if (ConfigHandler.features().getBoolean("Butcher"))
 			new CommandButcher(framework);
-		if (ConfigHandler.instance().features().getBoolean("ChestSearch"))
+		if (ConfigHandler.features().getBoolean("ChestSearch"))
 			new CommandChestSearch(framework);
-		if (ConfigHandler.instance().features().getBoolean("Clear"))
+		if (ConfigHandler.features().getBoolean("Clear"))
 			new CommandClear(framework);
-		if (ConfigHandler.instance().features().getBoolean("ClearChat"))
+		if (ConfigHandler.features().getBoolean("ClearChat"))
 			new CommandClearchat(framework);
-		if (ConfigHandler.instance().features().getBoolean("ConsoleLog"))
+		if (ConfigHandler.features().getBoolean("ConsoleLog"))
 			new CommandConsoleLog(framework);
-		if (ConfigHandler.instance().features().getBoolean("Debug"))
+		if (ConfigHandler.features().getBoolean("Debug"))
 			new CommandDebug(framework);
-		if (ConfigHandler.instance().features().getBoolean("Disable"))
+		if (ConfigHandler.features().getBoolean("Disable"))
 			new CommandDisable(framework);
-		if (ConfigHandler.instance().features().getBoolean("DiscoArmor"))
+		if (ConfigHandler.features().getBoolean("DiscoArmor"))
 			new CommandDiscoArmor(framework);
-		if (ConfigHandler.instance().features().getBoolean("Enchant"))
+		if (ConfigHandler.features().getBoolean("Enchant"))
 			r(new CommandEnchant(framework));
-		if (ConfigHandler.instance().features().getBoolean("Enable"))
+		if (ConfigHandler.features().getBoolean("Enable"))
 			new CommandEnable(framework);
-		if (ConfigHandler.instance().features().getBoolean("ForceChat"))
+		if (ConfigHandler.features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
-		if (ConfigHandler.instance().features().getBoolean("FileBrowser"))
+		if (ConfigHandler.features().getBoolean("FileBrowser"))
 			r(new CommandFileBrowser(framework));
-		if (ConfigHandler.instance().features().getBoolean("FileEditor"))
+		if (ConfigHandler.features().getBoolean("FileEditor"))
 			r(new CommandFileEditor(framework));
-		if (ConfigHandler.instance().features().getBoolean("Firework"))
+		if (ConfigHandler.features().getBoolean("Firework"))
 			r(new CommandFirework(framework));
-		if (ConfigHandler.instance().features().getBoolean("Fly"))
+		if (ConfigHandler.features().getBoolean("Fly"))
 			new CommandFly(framework);
-		if (ConfigHandler.instance().features().getBoolean("Gamemode"))
+		if (ConfigHandler.features().getBoolean("Gamemode"))
 			new CommandGamemode(framework);
-		if (ConfigHandler.instance().features().getBoolean("Ghost"))
+		if (ConfigHandler.features().getBoolean("Ghost"))
 			new CommandGhost(framework);
-		if (ConfigHandler.instance().features().getBoolean("Glow"))
+		if (ConfigHandler.features().getBoolean("Glow"))
 			new CommandGlow(framework);
-		if (ConfigHandler.instance().features().getBoolean("God"))
-			if (ConfigHandler.instance().config().getBoolean("useNMSGod"))
+		if (ConfigHandler.features().getBoolean("God")) {
+			if (ConfigHandler.config().getBoolean("useNMSGod"))
 				new CommandNMSGod(framework);
 			else
 				r(new CommandGod(framework));
-		if (ConfigHandler.instance().features().getBoolean("Grief"))
+		}
+		if (ConfigHandler.features().getBoolean("Grief"))
 			new CommandGrief(framework);
-		if (ConfigHandler.instance().features().getBoolean("Inventory"))
+		if (ConfigHandler.features().getBoolean("Inventory"))
 			new CommandInventory(framework);
-		if (ConfigHandler.instance().features().getBoolean("Launch"))
+		if (ConfigHandler.features().getBoolean("Launch"))
 			new CommandLaunch(framework);
-		if (ConfigHandler.instance().features().getBoolean("Log"))
+		if (ConfigHandler.features().getBoolean("Log"))
 			new CommandLog(framework);
-		if (ConfigHandler.instance().features().getBoolean("More"))
+		if (ConfigHandler.features().getBoolean("More"))
 			new CommandMore(framework);
-		if (ConfigHandler.instance().features().getBoolean("Near"))
+		if (ConfigHandler.features().getBoolean("Near"))
 			new CommandNear(framework);
-		if (ConfigHandler.instance().features().getBoolean("Oplist"))
+		if (ConfigHandler.features().getBoolean("Oplist"))
 			new CommandOplist(framework);
-		if (ConfigHandler.instance().features().getBoolean("Ping"))
+		if (ConfigHandler.features().getBoolean("Ping"))
 			new CommandPing(framework);
-		if (ConfigHandler.instance().features().getBoolean("Plugins"))
+		if (ConfigHandler.features().getBoolean("Plugins"))
 			r(new PluginsCommandListener());
-		if (ConfigHandler.instance().features().getBoolean("PTime"))
+		if (ConfigHandler.features().getBoolean("PTime"))
 			new CommandPTime(framework);
-		if (ConfigHandler.instance().features().getBoolean("PWeather"))
+		if (ConfigHandler.features().getBoolean("PWeather"))
 			new CommandPWeather(framework);
-		if (ConfigHandler.instance().features().getBoolean("Reload"))
+		if (ConfigHandler.features().getBoolean("Reload"))
 			r(new ReloadCommandListener());
-		if (ConfigHandler.instance().features().getBoolean("Rename"))
+		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
-		if (ConfigHandler.instance().features().getBoolean("SignEdit"))
+		if (ConfigHandler.features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
-		if (ConfigHandler.instance().features().getBoolean("Silence"))
+		if (ConfigHandler.features().getBoolean("Silence"))
 			r(new CommandSilence(framework));
-		if (ConfigHandler.instance().features().getBoolean("StaffChat"))
+		if (ConfigHandler.features().getBoolean("StaffChat"))
 			r(new CommandStaffChat(framework));
-		if (ConfigHandler.instance().features().getBoolean("Time"))
+		if (ConfigHandler.features().getBoolean("Time"))
 			new CommandTime(framework);
-		if (ConfigHandler.instance().features().getBoolean("Tp"))
+		if (ConfigHandler.features().getBoolean("Tp"))
 			new CommandTp(framework);
-		if (ConfigHandler.instance().features().getBoolean("Tphere"))
+		if (ConfigHandler.features().getBoolean("Tphere"))
 			new CommandTphere(framework);
-		if (ConfigHandler.instance().features().getBoolean("Weather"))
+		if (ConfigHandler.features().getBoolean("Weather"))
 			new CommandWeather(framework);
-		if (ConfigHandler.instance().features().getBoolean("Worlds"))
+		if (ConfigHandler.features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
-		if (ConfigHandler.instance().features().getBoolean("Workbench"))
+		if (ConfigHandler.features().getBoolean("Workbench"))
 			new CommandWorkbench(framework);
 
 		/* Vault commands. Only loads them if Vault is enabled so that:
 		 * [1] Unused commands aren't loaded
 		 * [2] It's pointless having commands which don't work */
 		if (hasVault) {
-			if (ConfigHandler.instance().features().getBoolean("Balance"))
+			if (ConfigHandler.features().getBoolean("Balance"))
 				new CommandBalance(framework);
-			if (ConfigHandler.instance().features().getBoolean("Balancetop"))
+			if (ConfigHandler.features().getBoolean("Balancetop"))
 				new CommandBalancetop(framework);
 		}
 
@@ -382,13 +386,13 @@ public class AllAssets extends JavaPlugin {
 		r(new CustomUnknownCommandListener());
 		//TODO put into a thingymajig
 		r(new StopCommandListener());
-		if (ConfigHandler.instance().features().getBoolean("ConsoleSay"))
+		if (ConfigHandler.features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
-		if (ConfigHandler.instance().features().getBoolean("MultiCommands"))
+		if (ConfigHandler.features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
-		if (ConfigHandler.instance().features().getBoolean("PickupSkeletonArrows"))
+		if (ConfigHandler.features().getBoolean("PickupSkeletonArrows"))
 			r(new SkeletonArrowListener());
-		if (ConfigHandler.instance().features().getBoolean("ServerListMOTDCustomisation"))
+		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
 			r(new ServerListingListener());
 		//Buggy and deprecated until fixed
 		//r(new BlockPoweredListener());
@@ -425,11 +429,7 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		try {
-			PlayerData.saveAllPlayers();
-		} catch (final Exception e1) {
-			getLogger().severe("There was an error saving the player data D:");
-		}
+		PlayerData.saveAllPlayers();
 		CommandConsoleLog.players.clear();
 		getServer().getScheduler().cancelTasks(this);
 
@@ -482,7 +482,7 @@ public class AllAssets extends JavaPlugin {
 	public static File getStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
 	}
-	
+
 	public static File getWorldStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
 	}

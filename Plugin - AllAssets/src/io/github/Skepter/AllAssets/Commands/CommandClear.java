@@ -58,7 +58,7 @@ public class CommandClear {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (ConfigHandler.instance().config().getBoolean("clearArmor")) {
+		if (ConfigHandler.config().getBoolean("clearArmor")) {
 			if (args.getArgs().length == 0)
 				player.getInventory().clear();
 			else if (args.getArgs().length == 1) {

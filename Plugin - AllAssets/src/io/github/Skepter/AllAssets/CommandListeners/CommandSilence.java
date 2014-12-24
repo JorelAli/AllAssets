@@ -37,8 +37,6 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.HelpDocumentation;
-import io.github.Skepter.AllAssets.API.HelpLinker;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 
@@ -55,13 +53,11 @@ public class CommandSilence implements Listener {
 
 	public CommandSilence(final CommandFramework framework) {
 		framework.registerCommands(this);
-		HelpLinker.register(this);
 	}
 
 	public static List<UUID> players = new ArrayList<UUID>();
 
 	@CommandHandler(name = "silence", permission = "silence", description = "Silences a player", usage = "Use <command>")
-	@HelpDocumentation(commandName = "silence", helpDocumentation = { "/Silence <Player> - Prevents <Player> from receiving chat messages" })
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

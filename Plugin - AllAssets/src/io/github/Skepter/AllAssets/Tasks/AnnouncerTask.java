@@ -33,6 +33,7 @@ import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 public class AnnouncerTask implements Runnable {
 
@@ -44,17 +45,19 @@ public class AnnouncerTask implements Runnable {
 
 	@Override
 	public void run() {
-		if (ConfigHandler.instance().config().getBoolean("randomAnnouncer"))
+		if (ConfigHandler.config().getBoolean("randomAnnouncer"))
 			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, ConfigHandler.announcer().getKeys().size())));
-		else
+		else {
 			try {
-				Bukkit.broadcastMessage(getAnnouncer(count));
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getAnnouncer(count)));
 				count++;
 			} catch (final Exception e) {
 				//If the count is higher than in the data file, loop again
 				count = 0;
-				Bukkit.broadcastMessage(getAnnouncer(count));
+				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getAnnouncer(count)));
 			}
+		}
+			
 	}
 
 	private String getAnnouncer(final int ID) {

@@ -78,8 +78,8 @@ public class CommandAllAssets {
 
 	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "AllAssets.allassets", description = "Reloads entire plugin", usage = "Use <command>")
 	public void reload(final CommandArgs args) {
-		ConfigHandler.instance().config().reloadConfig();
-		ConfigHandler.instance().features().reloadConfig();
+		ConfigHandler.config().reloadConfig();
+		ConfigHandler.features().reloadConfig();
 		args.getSender().sendMessage(AllAssets.title + "Configuration reloaded");
 		//		args.getSender().sendMessage(AllAssets.title + "Reloading...");
 		//		/* We're currently in dev and dev file name isn't the same as the released name */

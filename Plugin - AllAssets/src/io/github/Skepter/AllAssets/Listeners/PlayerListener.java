@@ -107,17 +107,18 @@ public class PlayerListener implements Listener {
 
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 
-		if (ConfigHandler.instance().features().getBoolean("JoinActions")) {
-			if (ConfigHandler.instance().features().getBoolean("UniquePlayers"))
+		if (ConfigHandler.features().getBoolean("JoinActions")) {
+			if (ConfigHandler.features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(AllAssets.title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
-			if (ConfigHandler.instance().features().getBoolean("TotalTime"))
+			if (ConfigHandler.features().getBoolean("TotalTime"))
 				event.getPlayer().sendMessage(AllAssets.title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
-			if (ConfigHandler.instance().features().getBoolean("FireworkOnJoin"))
+			if (ConfigHandler.features().getBoolean("FireworkOnJoin"))
 				for (int i = 0; i < new Random().nextInt(5); i++)
 					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());
-			if (ConfigHandler.instance().features().getBoolean("CommandsOnJoin"))
-				for (final String string : ConfigHandler.instance().config().getStringList("commandsOnJoin"))
+			if (ConfigHandler.features().getBoolean("CommandsOnJoin")) {
+				for (final String string : ConfigHandler.config().getStringList("commandsOnJoin"))
 					Bukkit.dispatchCommand(event.getPlayer(), string.replace("{PLAYERNAME}", event.getPlayer().getName()));
+			}
 		}
 
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
@@ -146,7 +147,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void playerPlaceBlockOnHead(final InventoryClickEvent event) {
 		if (((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE)) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
-			if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && ConfigHandler.instance().features().getBoolean("BlockHeads")) {
+			if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && ConfigHandler.features().getBoolean("BlockHeads")) {
 				event.getWhoClicked().getInventory().setHelmet(event.getCursor());
 				new BukkitRunnable() {
 					@Override
@@ -171,17 +172,17 @@ public class PlayerListener implements Listener {
 		final Inventory inv = event.getEntity().getInventory();
 		user.setLastInventory(InventorySerializer.toString(inv));
 
-		if (ConfigHandler.instance().features().getBoolean("InstantDeathRespawn")) {
+		if (ConfigHandler.features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new InstantRespawnTask(p), 1L);
 		}
 
-		if (ConfigHandler.instance().features().getBoolean("DeathCount")) {
+		if (ConfigHandler.features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
 			user.getPlayer().sendMessage(AllAssets.title + "You have died " + user.getDeathCount() + " times!");
 		}
 
-		if (ConfigHandler.instance().features().getBoolean("DeathSigns")) {
+		if (ConfigHandler.features().getBoolean("DeathSigns")) {
 			final Location loc = event.getEntity().getLocation();
 			loc.getBlock().setType(Material.AIR);
 			loc.getBlock().setType(Material.SIGN_POST);
@@ -217,7 +218,7 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void playerMove(final PlayerMoveEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("FlyBreakSpeedModifier"))
+		if (ConfigHandler.features().getBoolean("FlyBreakSpeedModifier"))
 			if (event.getPlayer().isFlying() && event.getPlayer().getAllowFlight() && !event.getPlayer().getGameMode().equals(GameMode.CREATIVE))
 				event.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 100000, 18));
 			else
@@ -226,14 +227,14 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void playerUseEnderpearl(final PlayerInteractEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("CreativeEnderpearl"))
+		if (ConfigHandler.features().getBoolean("CreativeEnderpearl"))
 			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
 	}
 
 	@EventHandler
 	public void playerAddLeash(final PlayerInteractEntityEvent event) {
-		if (ConfigHandler.instance().features().getBoolean("AnyLeash"))
+		if (ConfigHandler.features().getBoolean("AnyLeash"))
 			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && (event.getRightClicked() instanceof LivingEntity)) {
 				event.setCancelled(true);
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new AnyLeashTask(event.getPlayer(), event.getRightClicked()), 1L);

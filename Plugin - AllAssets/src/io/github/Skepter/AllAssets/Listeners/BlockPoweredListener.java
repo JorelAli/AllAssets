@@ -47,7 +47,7 @@ public class BlockPoweredListener implements Listener {
 	public void onBlockRedstoneChange(final BlockRedstoneEvent event) {
 		final Block block = event.getBlock();
 		if ((event.getNewCurrent() > 0) && block.getType().equals(Material.OBSIDIAN))
-			if (ConfigHandler.instance().features().getBoolean("PoweredBlocks.Glowstone"))
+			if (ConfigHandler.features().getBoolean("PoweredBlocks.Glowstone"))
 				block.setType(Material.GLOWSTONE);
 	}
 

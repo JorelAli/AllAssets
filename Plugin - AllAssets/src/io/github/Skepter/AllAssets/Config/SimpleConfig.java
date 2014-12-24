@@ -346,6 +346,7 @@ public class SimpleConfig {
 
 	public void set(final String path, final Object value) {
 		this.config.set(path, value);
+		saveConfig();
 	}
 
 	public void set(final String path, final Object value, final String comment) {
@@ -356,6 +357,7 @@ public class SimpleConfig {
 			comments++;
 		}
 		this.config.set(path, value);
+		saveConfig();
 	}
 
 	public void set(final String path, final Object value, final String... comment) {
@@ -365,6 +367,7 @@ public class SimpleConfig {
 				comments++;
 			}
 		this.config.set(path, value);
+		saveConfig();
 	}
 
 	public void setHeader(final String[] header) {

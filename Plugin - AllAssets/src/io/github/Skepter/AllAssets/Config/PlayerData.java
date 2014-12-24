@@ -93,8 +93,7 @@ public class PlayerData {
 
 	public static void saveAllPlayers() {
 		for (final Player player : Bukkit.getOnlinePlayers()) {
-			final PlayerData newPlayerData = new PlayerData(player);
-			newPlayerData.savePlayerData();
+			new PlayerData(player).savePlayerData();
 		}
 	}
 }

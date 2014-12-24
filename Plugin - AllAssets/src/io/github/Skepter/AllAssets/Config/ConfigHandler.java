@@ -36,19 +36,17 @@ import java.util.Arrays;
 
 public class ConfigHandler {
 
-	private SimpleConfigManager configManager;
-	private SimpleConfigManager featuresManager;
+	private static SimpleConfigManager configManager;
+	private static SimpleConfigManager featuresManager;
 
 	private static SimpleConfigManager messagesManager;
 	private static SimpleConfigManager announcerManager;
 
-	private SimpleConfig config;
-	private SimpleConfig features;
+	private static SimpleConfig config;
+	private static SimpleConfig features;
 
 	private static SimpleConfig messages;
 	private static SimpleConfig announcer;
-
-	private static ConfigHandler instance;
 
 	public ConfigHandler() {
 		if (configManager == null)
@@ -81,21 +79,13 @@ public class ConfigHandler {
 		else
 			announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
 		//find a way to check for missing keys in configurations perhaps? - that way it can 'auto update'
-
-		instance = this;
 	}
 
 	private void createAnnouncer() {
-		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Announcer.yml - File to store announcer data" };
-		announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml", header);
-		announcer.saveConfig();
+		announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
 	}
 
-	public static ConfigHandler instance() {
-		return instance;
-	}
-
-	private void createConfig() {
+	private static void createConfig() {
 		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
 
 		config = configManager.getNewConfig("config.yml", header);
@@ -117,8 +107,6 @@ public class ConfigHandler {
 		config.set("debugMode", "false", "Enables debugging messages and features");
 		config.set("randomAnnouncer", "true", "Selects announcements at random");
 		config.set("announcerTime", "300", "The delay between each announcement in seconds");
-
-		config.saveConfig();
 	}
 
 	private static void createMessages() {
@@ -129,10 +117,9 @@ public class ConfigHandler {
 		messages.set("cantEnchant", "You cannot enchant that item!", "Error messages");
 		messages.set("notANumber", "That is not a number!");
 		messages.set("serverListMOTD", "'&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'");
-		messages.saveConfig();
 	}
 
-	private void createFeatures() {
+	private static void createFeatures() {
 		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
 		features = featuresManager.getNewConfig("features.yml", header);
@@ -225,10 +212,9 @@ public class ConfigHandler {
 
 		features.set("BlockHeads", "true", "--- Cosmetics ---", "Cosmetic features to comply with the EULA");
 		//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
-		features.saveConfig();
 	}
 
-	public SimpleConfig config() {
+	public static SimpleConfig config() {
 		if (config != null)
 			return config;
 		else {
@@ -259,7 +245,7 @@ public class ConfigHandler {
 		}
 	}
 
-	public SimpleConfig features() {
+	public static SimpleConfig features() {
 		if (features != null)
 			return features;
 		else {
