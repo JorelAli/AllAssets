@@ -147,7 +147,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 // Explore the ResourceBundle for setting Locale
 
+/*
+ * Add more methods to IDReader
+ * Move it to API perhaps?
+ * Add methods to retrieve the ID as an integer
+ * Use it with that other tool ITemNames or something to send debug messages
+ * add it to the config 
+ * fix up CommandGive because only having 3 variables isn't good enough!
+ */
+
 //color customisation -
+
 //normalColor: 9
 //emphasisColor: b
 //@ajcozzo
