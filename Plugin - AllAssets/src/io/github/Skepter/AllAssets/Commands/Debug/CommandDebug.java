@@ -39,6 +39,7 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Tasks.TPS;
+import io.github.Skepter.AllAssets.Utils.IDReader;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
@@ -229,6 +230,12 @@ public class CommandDebug {
 		sender.sendMessage("Total RAM: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Free RAM: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
+	}
+	
+	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	public void test(final CommandArgs args) {
+		System.out.println(args.getArgs()[0]);
+		args.getSender().sendMessage("The ID for " + args.getArgs()[0] + " is " + IDReader.readID(args.getArgs()[0]));
 	}
 
 	/* Used to debug the Log feature */

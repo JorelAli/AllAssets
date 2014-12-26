@@ -40,6 +40,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
+import io.github.Skepter.AllAssets.Commands.CommandGive;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
 import io.github.Skepter.AllAssets.Commands.CommandGrief;
 import io.github.Skepter.AllAssets.Commands.CommandHelp;
@@ -152,7 +153,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 //@ajcozzo
 
 //recent players command - like seen, but for recent players
-//still able to tp when they're offline
 //do YesNo conversation for payments etc. (/pay
 //friend list to find friends etc.
 //a way to parse PARTS  of a player's name in commands
@@ -218,6 +218,8 @@ public class AllAssets extends JavaPlugin {
 	/** Block where developing stuff happens. Used for easy code removal Requires
 	 * masterSwitch */
 	private void dev() {
+		new CommandGive(framework);
+		new CommandHelp(framework);
 	}
 
 	@Override
@@ -236,7 +238,7 @@ public class AllAssets extends JavaPlugin {
 
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
-
+		this.saveResource("ItemData.csv", true);
 		new ConfigHandler();
 
 		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
@@ -259,7 +261,6 @@ public class AllAssets extends JavaPlugin {
 			dev();
 		//Nav
 
-		new CommandHelp(framework);
 
 		/* This is the features.yml file which enables/disables features according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
