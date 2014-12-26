@@ -146,14 +146,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 // Explore the ResourceBundle for setting Locale
 
-//world backup system:
-/*
- *  /backup (worldName) - can be null, it just backs up this world. Copies world directory and renames it?
- *  /revert/restore (worldName) - shows a list of worldBackups and then unloads world, replaces it with
- *  new one.
- *  Put YesNo because it will COMPLETELY REPLACE (and delete) the old world
- */
-
 //color customisation -
 //normalColor: 9
 //emphasisColor: b
@@ -200,7 +192,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class AllAssets extends JavaPlugin {
 
-	/* Messages - shouldn't really be here but meh -.- */
+	/* Messages  */
 	public final static String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
 	public final static String shortTitle = ChatColor.BLUE + "[" + ChatColor.AQUA + "AA" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
 	public final static String titleNoColor = "[AllAssets] ";
@@ -209,7 +201,7 @@ public class AllAssets extends JavaPlugin {
 	public final static String houseStyleColor = ChatColor.AQUA + "";
 	public final static String accentColor = ChatColor.WHITE + "";
 
-	/* Vault stuff */
+	/* Vault variables */
 	public boolean hasVault = false;
 	public Economy economy = null;
 	public Permission permission = null;
@@ -217,10 +209,10 @@ public class AllAssets extends JavaPlugin {
 
 	/* Other stuff */
 	public CommandFramework framework;
-
 	public Map<UUID, Long> tempTimeMap;
 	public ComphenixsGhostFactory ghostFactory;
 
+	/* The master switch - used for debug purposes*/
 	public static boolean masterSwitch = false;
 
 	/** Block where developing stuff happens. Used for easy code removal Requires
@@ -260,6 +252,8 @@ public class AllAssets extends JavaPlugin {
 
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
+		
+		/** All variables should have been initialised now */
 
 		if (masterSwitch)
 			dev();
@@ -401,6 +395,8 @@ public class AllAssets extends JavaPlugin {
 		//Buggy and deprecated until fixed
 		//r(new BlockPoweredListener());
 
+		/** Reloading stuff */
+		
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers())
@@ -422,7 +418,7 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("+---------------------------------+");
 	}
 
-	/* Writing getServer().... etc. is too much work :S */
+	/* Easy system to add listeners */
 	public void r(final Listener l) {
 		if (masterSwitch)
 			for (final Method method : l.getClass().getMethods())
@@ -483,10 +479,12 @@ public class AllAssets extends JavaPlugin {
 		return result;
 	}
 
+	/** Returns the storage folder for storing data */
 	public static File getStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
 	}
 
+	/** Returns the storage folder to backing up worlds */
 	public static File getWorldStorage() {
 		File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
 		if (!file.exists())

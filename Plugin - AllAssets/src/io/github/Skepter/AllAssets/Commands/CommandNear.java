@@ -64,6 +64,7 @@ public class CommandNear {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+		
 		/* Changing lookup distance */
 		int distance = 200;
 		if (args.getArgs().length == 1)
