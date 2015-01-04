@@ -223,7 +223,7 @@ public class AllAssets extends JavaPlugin {
 	public ComphenixsGhostFactory ghostFactory;
 
 	/* The master switch - used for debug purposes*/
-	public static boolean masterSwitch = false;
+	public static boolean masterSwitch = true;
 
 	/** Block where developing stuff happens. Used for easy code removal Requires
 	 * masterSwitch */

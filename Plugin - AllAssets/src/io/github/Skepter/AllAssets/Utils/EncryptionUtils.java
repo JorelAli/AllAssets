@@ -31,43 +31,102 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
+import java.util.Random;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionUtils {
 
-	final private String IV = "SqkZQJd3xO6z5vc4";
+	private String IV = "SqkZQJd3xO6z5vc4";
 	private String encryptionKey = "8czoa6Ytk0uPYP6G";
-	private String s = "";
-	public byte[] cipherText = null;
 
-	public EncryptionUtils(final String key, final String stringToEncrypt, final byte[] bytesToDecrypt) {
-		if (encryptionKey == null)
-			encryptionKey = key;
-		s = stringToEncrypt;
-		cipherText = bytesToDecrypt;
+	/** Creates a new Encryption utility instance. The key is predefined. */
+	public EncryptionUtils() {
+		new EncryptionUtils(encryptionKey, IV);
 	}
 
-	public byte[] encrypt() throws Exception {
-		if (!((s.length() % 16) == 0)) {
-			final int amountToAdd = (16 - (s.length() % 16));
+	/** Creates a new Encryption utility instance using a custom key.
+	 * 
+	 * @param key - The key to use */
+	public EncryptionUtils(final String key) {
+		new EncryptionUtils(key, IV);
+	}
+
+	/** Creates a new Encryption utility instance using a custom key and IV.
+	 * 
+	 * @param key - The key to use
+	 * @param IV - The Initialisation Vector to use */
+	public EncryptionUtils(final String key, final String IV) {
+		if (key != null)
+			encryptionKey = key;
+		if (IV != null)
+			this.IV = IV;
+	}
+
+	/** Generates a new random key.
+	 * 
+	 * @return The new random key */
+	public String generateNewKey() {
+		encryptionKey = generateNewRandomString();
+		return encryptionKey;
+	}
+
+	/** Generates a new Initialisation Vector. Not to be used often!
+	 * 
+	 * @return The new Initialisation Vector */
+	public String generateNewIV() {
+		IV = generateNewRandomString();
+		return IV;
+	}
+
+	private String generateNewRandomString() {
+		char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
+		StringBuilder sb = new StringBuilder();
+		Random random = new Random();
+		for (int i = 0; i < 16; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
+	/** Encrypts a String into a byte[]
+	 * 
+	 * @param stringToEncrypt - The string to encrypt
+	 * @return byte[] with encrypted data */
+	public byte[] encrypt(String stringToEncrypt) {
+		if (!((stringToEncrypt.length() % 16) == 0)) {
+			final int amountToAdd = (16 - (stringToEncrypt.length() % 16));
 			String spaces = "";
 			for (int i = 0; i < amountToAdd; i++)
 				spaces = spaces + " ";
-			s = s + spaces;
+			stringToEncrypt = stringToEncrypt + spaces;
 		}
-		final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
-		final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
-		cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
-		cipherText = cipher.doFinal(s.getBytes("UTF-8"));
-		return cipherText;
+		try {
+			final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
+			final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
+			cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
+			return cipher.doFinal(stringToEncrypt.getBytes("UTF-8"));
+		} catch (Exception e) {
+			return stringToEncrypt.getBytes();
+		}
 	}
 
-	public String decrypt() throws Exception {
-		final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
-		final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
-		cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
-		return new String(cipher.doFinal(cipherText), "UTF-8").trim();
+	/**
+	 * Decrypts a byte[] into its original string form
+	 * @param bytesToDecrypt - The byte[] with the encrypted data
+	 * @return String with decrypted data
+	 */
+	public String decrypt(byte[] bytesToDecrypt) {
+		try {
+			final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
+			final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
+			cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
+			return new String(cipher.doFinal(bytesToDecrypt), "UTF-8").trim();
+		} catch (Exception e) {
+			return new String(bytesToDecrypt);
+		}
 	}
 }

@@ -31,9 +31,103 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Permissions;
 
+import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.API.PlayerMap;
+
+import java.util.UUID;
+
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
+
 public class Permission {
 
+	private static PlayerMap<UUID, PermissionAttachment> map = new PlayerMap<UUID, PermissionAttachment>(AllAssets.instance());
+
+	public static void registerPlayer(Player player) {
+		map.put(player, player.addAttachment(AllAssets.instance()));
+	}
+
+	public static void unregisterPlayer(Player player) {
+		player.removeAttachment(map.get(player));
+	}
+	
 	//You know, is this really needed? One can use PEX or GroupManager or whatever nowadays...
 	//Probably. PEX and GM are fantastic permission plugins, but are sometimes hard to use
+
+	/*
+	 * Finally! After figuring out how to use the VaultAPI, I can begin working on a permission section :D
+	 * 
+	 * Command list (things to put into this section)
+	 * 
+	 * A command to see the heirarchy
+	 * World permissions
+	 * Listings of everything (users etc.)
+	 * - List user will show their permissions, prefix/suffix
+	 * A way of adding perms for a user IN A CERTAIN WORLD
+	 * """""""""""""""""""""""""""""""" GLOBALLY
+	 * A way of undoing what I just said (removing it)
+	 * 
+	 * Creating groups
+	 * Group world perms
+	 * Group prefixes
+	 * Inheritence - perhaps use a GUI for this? Seems cleaner
+	 * 
+	 * A simple promote/demote command - a way of setting heiarachy
+	 * 
+	 * Checking stuff (if <player> has perm)
+	 * 
+	 * save/load - store in .yml for easy cheesy management
+	 */
+	
+	/* Sample format:
+	 * 
+	 * Worlds:
+	 *   <WorldName>:
+	 *     Groups:
+	 *       <GroupName>:
+	 *         Permissions:
+	 *           - permsList
+	 *         Prefix: [prefix]
+	 *         Suffix: [suffix]
+	 *       <GroupName>:
+	 *         Permissions:
+	 *           - permsList
+	 *         Prefix: [prefix]
+	 *         Suffix: [suffix]
+	 *     Players:
+	 *     	 <PlayerName>:
+	 *         Permissions:
+	 *           - permsList
+	 *         Prefix: [prefix]
+	 *         Suffix: [suffix]
+	 *       <PlayerName>:
+	 *         Permissions:
+	 *           - permsList
+	 *         Prefix: [prefix]
+	 *         Suffix: [suffix]
+	 * Global:
+	 *   Groups:
+	 *     <GroupName>:
+	 *       Permissions:
+	 *         - permsList
+	 *       Prefix: [prefix]
+	 *       Suffix: [suffix]
+	 *     <GroupName>:
+	 *       Permissions:
+	 *         - permsList
+	 *       Prefix: [prefix]
+	 *       Suffix: [suffix]
+	 *   Players:
+	 *     <PlayerName>:
+	 *       Permissions:
+	 *       - permsList
+	 *       Prefix: [prefix]
+	 *       Suffix: [suffix]
+	 *     <PlayerName>:
+	 *       Permissions:
+	 *         - permsList
+	 *       Prefix: [prefix]
+	 *       Suffix: [suffix]     
+	 */
 
 }

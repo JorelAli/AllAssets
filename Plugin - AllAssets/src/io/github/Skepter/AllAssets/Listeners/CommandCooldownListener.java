@@ -44,7 +44,7 @@ public class CommandCooldownListener implements Listener {
 	@EventHandler
 	public void onCommand(final PlayerCommandPreprocessEvent e) {
 		if (ConfigHandler.config().getInt("commandCooldown") != 0)
-			if (CommandCooldown.isOnCooldown0(e.getPlayer(), e.getMessage().split(" ")[0])) {
+			if (CommandCooldown.isOnCooldown(e.getPlayer(), e.getMessage().split(" ")[0])) {
 				ErrorUtils.onCooldown(e.getPlayer(), CommandCooldown.getTimeLeft(e.getPlayer()));
 				e.setCancelled(true);
 			} else
