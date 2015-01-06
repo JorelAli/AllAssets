@@ -189,7 +189,7 @@ public class PlayerListener implements Listener {
 			final Sign sign = (Sign) loc.getBlock().getState();
 			sign.setLine(0, event.getEntity().getName());
 			sign.setLine(1, "Died here on");
-			sign.setLine(2, new SimpleDateFormat("MMM W").format(new Date()));
+			sign.setLine(2, new SimpleDateFormat("MMM d").format(new Date()));
 			sign.setLine(3, new SimpleDateFormat("hh:mm a").format(new Date()));
 			sign.update();
 
