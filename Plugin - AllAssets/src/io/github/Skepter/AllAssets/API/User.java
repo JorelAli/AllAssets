@@ -127,24 +127,24 @@ public class User implements IUser {
 
 	@Override
 	public Location getLastLoc() {
-		return LocationSerializer.LocFromString(playerData.getPlayerData().getString("lastLoc"));
+		return LocationSerializer.LocFromString(playerData.getDataFile().getString("lastLoc"));
 	}
 
 	@Override
 	public void setLastLoc() {
-		playerData.getPlayerData().set("lastLoc", LocationSerializer.LocToString(player.getLocation()));
-		playerData.savePlayerData();
+		playerData.getDataFile().set("lastLoc", LocationSerializer.LocToString(player.getLocation()));
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public void setLastLoc(final Location loc) {
-		playerData.getPlayerData().set("lastLoc", LocationSerializer.LocToString(loc));
-		playerData.savePlayerData();
+		playerData.getDataFile().set("lastLoc", LocationSerializer.LocToString(loc));
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public Location getHome(final String name) {
-		final String s = playerData.getPlayerData().getString("home." + name);
+		final String s = playerData.getDataFile().getString("home." + name);
 		return LocationSerializer.LocFromString(s);
 	}
 
@@ -155,128 +155,128 @@ public class User implements IUser {
 
 	@Override
 	public Long getTimeSinceLastPlay() {
-		return playerData.getPlayerData().getLong("lastTimePlayed");
+		return playerData.getDataFile().getLong("lastTimePlayed");
 	}
 
 	@Override
 	public Long getTotalTimePlayed() {
-		return playerData.getPlayerData().getLong("totalTimePlayed");
+		return playerData.getDataFile().getLong("totalTimePlayed");
 	}
 
 	@Override
 	public void setHome(final Location loc, final String name) {
-		playerData.getPlayerData().set("home." + name, LocationSerializer.LocToString(loc));
-		playerData.savePlayerData();
+		playerData.getDataFile().set("home." + name, LocationSerializer.LocToString(loc));
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public Location getWaypoint(final Location loc) {
-		final String s = playerData.getPlayerData().getString("waypoint");
+		final String s = playerData.getDataFile().getString("waypoint");
 		return LocationSerializer.LocFromString(s);
 	}
 
 	@Override
 	public void setWaypoint(final Location loc) {
-		playerData.getPlayerData().set("waypoint", LocationSerializer.LocToString(loc));
-		playerData.savePlayerData();
+		playerData.getDataFile().set("waypoint", LocationSerializer.LocToString(loc));
+		playerData.saveDataFile();
 		player.setCompassTarget(loc);
 	}
 
 	@Override
 	public void setCanTP(final boolean tp) {
-		playerData.getPlayerData().set("canTP", tp);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("canTP", tp);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public void setTotalTimePlayed(final long time) {
-		playerData.getPlayerData().set("totalTimePlayed", time);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("totalTimePlayed", time);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public void setTimeSinceLastPlay(final long time) {
-		playerData.getPlayerData().set("lastTimePlayed", time);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("lastTimePlayed", time);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public int getAttackStrength() {
-		return playerData.getPlayerData().getInt("attackStrength");
+		return playerData.getDataFile().getInt("attackStrength");
 	}
 
 	@Override
 	public void setAttackStrength(final int strength) {
-		playerData.getPlayerData().set("attackStrength", strength);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("attackStrength", strength);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public int getJumpPower() {
-		return playerData.getPlayerData().getInt("jumpPower");
+		return playerData.getDataFile().getInt("jumpPower");
 	}
 
 	@Override
 	public void setJumpPower(final int power) {
-		playerData.getPlayerData().set("jumpPower", power);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("jumpPower", power);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public Inventory getLastInventory() {
-		final String inv = playerData.getPlayerData().getString("lastInv");
+		final String inv = playerData.getDataFile().getString("lastInv");
 		return InventorySerializer.fromString(inv);
 	}
 
 	@Override
 	public void setLastInventory(final String s) {
-		playerData.getPlayerData().set("lastInv", s);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("lastInv", s);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public int getDeathCount() {
-		return playerData.getPlayerData().getInt("deathCount");
+		return playerData.getDataFile().getInt("deathCount");
 	}
 
 	@Override
 	public void setDeathCount(final int i) {
-		playerData.getPlayerData().set("deathCount", i);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("deathCount", i);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public int getJoinCount() {
-		return playerData.getPlayerData().getInt("joinCount");
+		return playerData.getDataFile().getInt("joinCount");
 	}
 
 	@Override
 	public void setJoinCount(final int i) {
-		playerData.getPlayerData().set("joinCount", i);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("joinCount", i);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public List<String> IPs() {
-		return playerData.getPlayerData().getStringList("ips");
+		return playerData.getDataFile().getStringList("ips");
 	}
 
 	@Override
 	public void setIPs(final List<String> arr) {
-		playerData.getPlayerData().set("ips", arr);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("ips", arr);
+		playerData.saveDataFile();
 	}
 
 	@Override
 	public void setAFK(final boolean afk) {
-		playerData.getPlayerData().set("afk", afk);
-		playerData.savePlayerData();
+		playerData.getDataFile().set("afk", afk);
+		playerData.saveDataFile();
 		//add tag TODO
 	}
 
 	@Override
 	public boolean isAFK() {
-		return playerData.getPlayerData().getBoolean("afk");
+		return playerData.getDataFile().getBoolean("afk");
 	}
 
 	@Override
@@ -299,7 +299,7 @@ public class User implements IUser {
 
 	@Override
 	public boolean canTP() {
-		return playerData.getPlayerData().getBoolean("canTP");
+		return playerData.getDataFile().getBoolean("canTP");
 	}
 
 	/*

@@ -494,6 +494,11 @@ public class AllAssets extends JavaPlugin {
 	public static File getStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
 	}
+	
+	/** Returns the storage folder for player data */
+	public static File getPlayerStorage() {
+		return new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
+	}
 
 	/** Returns the storage folder to backing up worlds */
 	public static File getWorldStorage() {

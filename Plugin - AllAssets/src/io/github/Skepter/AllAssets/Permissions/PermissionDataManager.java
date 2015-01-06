@@ -1,17 +1,12 @@
 package io.github.Skepter.AllAssets.Permissions;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
+import io.github.Skepter.AllAssets.API.CustomConfig;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-public class PermissionDataManager {
+public class PermissionDataManager extends CustomConfig {
 
 	//manages data.
 	//yeah :D
@@ -68,33 +63,9 @@ public class PermissionDataManager {
 	 *       Suffix: [suffix]     
 	 */
 
-	private final File dataFile;
-	private FileConfiguration fileConfiguration;
 
 	public PermissionDataManager() {
-		dataFile = new File(AllAssets.getStorage(), "PermissionData.yml");
-	}
-
-	public void reloadDataFile() {
-		fileConfiguration = YamlConfiguration.loadConfiguration(dataFile);
-	}
-
-	public FileConfiguration getDataFile() {
-		if (fileConfiguration == null)
-			reloadDataFile();
-		return fileConfiguration;
-	}
-
-	public void saveDataFile() {
-		getDataFile().getValues(false);
-		if ((fileConfiguration == null) || (dataFile == null))
-			return;
-		else
-			try {
-				getDataFile().save(dataFile);
-			} catch (final IOException ex) {
-				CommandLog.addLog("Error saving data file for permissions! ", LogType.ERROR);
-			}
+		super(new File(AllAssets.getStorage(), "PermissionData.yml"), "Permissions");
 	}
 
 	public List<String> getWorldPermissions(String worldName, GroupDataType type, String dataName) {

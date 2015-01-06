@@ -34,66 +34,23 @@
 package io.github.Skepter.AllAssets.Config;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
+import io.github.Skepter.AllAssets.API.CustomConfig;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-public class PlayerData {
-
-	private final String uuid;
-	private final File dataFile;
-	private FileConfiguration fileConfiguration;
-	private final AllAssets plugin = AllAssets.instance();
+public class PlayerData extends CustomConfig {
 
 	public PlayerData(final OfflinePlayer player) {
-		uuid = player.getUniqueId().toString();
-		dataFile = new File(plugin.getDataFolder() + File.separator + "Players", uuid + ".yml");
-	}
-
-	public void reloadPlayerData() {
-		fileConfiguration = YamlConfiguration.loadConfiguration(dataFile);
-	}
-
-	public FileConfiguration getPlayerData() {
-		if (fileConfiguration == null)
-			reloadPlayerData();
-		return fileConfiguration;
-	}
-
-	public void savePlayerData() {
-		getPlayerData().getValues(false);
-		if ((fileConfiguration == null) || (dataFile == null))
-			return;
-		else
-			try {
-				getPlayerData().save(dataFile);
-			} catch (final IOException ex) {
-				CommandLog.addLog("Error saving player data file! ", LogType.ERROR);
-			}
-	}
-
-	public void saveDefaultPlayerData() {
-		if (dataFile.exists())
-			return;
-		dataFile.getParentFile().mkdirs();
-		try {
-			dataFile.createNewFile();
-		} catch (final IOException e) {
-			CommandLog.addLog("Could not save player data to " + dataFile.toString(), LogType.ERROR);
-		}
+		super(new File(AllAssets.getPlayerStorage(), player.getUniqueId() + ".yml"), player.getName());
 	}
 
 	public static void saveAllPlayers() {
 		for (final Player player : Bukkit.getOnlinePlayers()) {
-			new PlayerData(player).savePlayerData();
+			new PlayerData(player).saveDataFile();
 		}
 	}
 }
