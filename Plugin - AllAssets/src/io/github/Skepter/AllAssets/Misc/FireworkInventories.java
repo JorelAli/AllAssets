@@ -39,7 +39,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class FireworkInventories {
-
+	
 	/* 1 */
 	public static Inventory chooseType() {
 		final Inventory inv = Bukkit.createInventory(null, 9, "Firework - Type");

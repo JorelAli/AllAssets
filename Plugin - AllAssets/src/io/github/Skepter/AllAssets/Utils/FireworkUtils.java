@@ -31,9 +31,25 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
-import java.util.Random;
+import static org.bukkit.Color.AQUA;
+import static org.bukkit.Color.BLACK;
+import static org.bukkit.Color.BLUE;
+import static org.bukkit.Color.FUCHSIA;
+import static org.bukkit.Color.GRAY;
+import static org.bukkit.Color.GREEN;
+import static org.bukkit.Color.LIME;
+import static org.bukkit.Color.MAROON;
+import static org.bukkit.Color.NAVY;
+import static org.bukkit.Color.OLIVE;
+import static org.bukkit.Color.ORANGE;
+import static org.bukkit.Color.PURPLE;
+import static org.bukkit.Color.RED;
+import static org.bukkit.Color.SILVER;
+import static org.bukkit.Color.TEAL;
+import static org.bukkit.Color.WHITE;
+import static org.bukkit.Color.YELLOW;
 
-import static org.bukkit.Color.*;
+import java.util.Random;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -41,6 +57,7 @@ import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class FireworkUtils {
@@ -62,5 +79,16 @@ public class FireworkUtils {
 
 	public static Color getRandomColor() {
 		return getColor(new Random().nextInt(17));
+	}
+	
+	public static void spawnFireworkFromItemStack(final Location loc, final ItemStack itemStack) {
+		final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
+		final FireworkMeta fireworkMeta = firework.getFireworkMeta();
+		FireworkMeta meta = (FireworkMeta) itemStack.getItemMeta();
+		for(FireworkEffect effect : meta.getEffects()) {
+			fireworkMeta.addEffect(effect);
+		}
+		fireworkMeta.setPower(meta.getPower());
+		firework.setFireworkMeta(fireworkMeta);
 	}
 }

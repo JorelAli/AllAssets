@@ -12,6 +12,11 @@ public class Debugger {
 		printBlank();
 		System.out.println(name + ": " + o);
 	}
+	
+	public static void print(final String name) {
+		printBlank();
+		System.out.println(name);
+	}
 
 	public static void printList(final Collection<?> list) {
 		printBlank();

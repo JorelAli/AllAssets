@@ -91,4 +91,13 @@ public class LocationUtils {
 		return radiusEntities.toArray(new Entity[radiusEntities.size()]);
 	}
 
+	public static Location getCenter(Location loc) {
+		return new Location(loc.getWorld(), getCenter(loc.getBlockX()), getCenter(loc.getBlockY()), getCenter(loc.getBlockZ()));
+	}
+
+	private static double getCenter(int location) {
+		double newLocation = location;
+		return newLocation + 0.5D;
+	}
+
 }

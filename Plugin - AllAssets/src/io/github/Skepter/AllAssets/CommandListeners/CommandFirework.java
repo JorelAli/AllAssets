@@ -73,6 +73,7 @@ public class CommandFirework implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+				
 		player.openInventory(FireworkInventories.chooseType());
 		return;
 	}

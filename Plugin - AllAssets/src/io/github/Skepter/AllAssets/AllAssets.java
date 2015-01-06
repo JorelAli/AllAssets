@@ -31,6 +31,7 @@ package io.github.Skepter.AllAssets;
 
 import io.github.Skepter.AllAssets.CommandListeners.CommandAFK;
 import io.github.Skepter.AllAssets.CommandListeners.CommandBind;
+import io.github.Skepter.AllAssets.CommandListeners.CommandCommandBlock;
 import io.github.Skepter.AllAssets.CommandListeners.CommandEnchant;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFileBrowser;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFileEditor;
@@ -230,8 +231,12 @@ public class AllAssets extends JavaPlugin {
 	private void dev() {
 		new CommandGive(framework);
 		new CommandHelp(framework);
+		r(new CommandCommandBlock(framework));
 	}
 
+	//best command ever :D (yes, the dollar sign IS NECESSARY!)
+	//$firework SXRlbVN0YWNrOgogID09OiBvcmcuYnVra2l0LmludmVudG9yeS5JdGVtU3RhY2sKICB0eXBlOiBGSVJFV09SSwogIG1ldGE6CiAgICA9PTogSXRlbU1ldGEKICAgIG1ldGEtdHlwZTogRklSRVdPUksKICAgIGZpcmV3b3JrLWVmZmVjdHM6CiAgICAtID09OiBGaXJld29yawogICAgICBmbGlja2VyOiBmYWxzZQogICAgICB0cmFpbDogdHJ1ZQogICAgICBjb2xvcnM6CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIGZhZGUtY29sb3JzOgogICAgICAtID09OiBDb2xvcgogICAgICAgIFJFRDogMTc5CiAgICAgICAgQkxVRTogNDQKICAgICAgICBHUkVFTjogNDkKICAgICAgLSA9PTogQ29sb3IKICAgICAgICBSRUQ6IDM3CiAgICAgICAgQkxVRTogMTQ2CiAgICAgICAgR1JFRU46IDQ5CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAxNzEKICAgICAgICBCTFVFOiAxNzEKICAgICAgICBHUkVFTjogMTcxCiAgICAgIHR5cGU6IEJBTExfTEFSR0UKw
+	
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
