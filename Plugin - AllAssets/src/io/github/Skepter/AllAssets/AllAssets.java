@@ -77,6 +77,8 @@ import io.github.Skepter.AllAssets.Commands.Debug.CommandPing;
 import io.github.Skepter.AllAssets.Commands.Economy.CommandBalance;
 import io.github.Skepter.AllAssets.Commands.Economy.CommandBalancetop;
 import io.github.Skepter.AllAssets.Commands.Fun.CommandDiscoArmor;
+import io.github.Skepter.AllAssets.Commands.Fun.CommandFakeDeop;
+import io.github.Skepter.AllAssets.Commands.Fun.CommandFakeOp;
 import io.github.Skepter.AllAssets.Commands.Fun.CommandLaunch;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandBack;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTp;
@@ -229,6 +231,8 @@ public class AllAssets extends JavaPlugin {
 		new CommandGive(framework);
 		new CommandHelp(framework);
 		r(new CommandCommandBlock(framework));
+		new CommandFakeOp(framework);
+		new CommandFakeDeop(framework);
 	}
 
 	//best command ever :D (yes, the dollar sign IS NECESSARY!)
