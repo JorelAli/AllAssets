@@ -31,6 +31,9 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
+import io.github.Skepter.AllAssets.AllAssets;
+
+import java.io.File;
 import java.util.Random;
 
 import javax.crypto.Cipher;
@@ -39,46 +42,43 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionUtils {
 
-	private String IV = "SqkZQJd3xO6z5vc4";
-	private String encryptionKey = "8czoa6Ytk0uPYP6G";
-
-	/** Creates a new Encryption utility instance. The key is predefined. */
-	public EncryptionUtils() {
-		new EncryptionUtils(encryptionKey, IV);
-	}
+	private String IV;
+	private String encryptionKey;
 
 	/** Creates a new Encryption utility instance using a custom key.
 	 * 
 	 * @param key - The key to use */
 	public EncryptionUtils(final String key) {
-		new EncryptionUtils(key, IV);
+		encryptionKey = key;
+		initialize();
 	}
 
-	/** Creates a new Encryption utility instance using a custom key and IV.
-	 * 
-	 * @param key - The key to use
-	 * @param IV - The Initialisation Vector to use */
-	public EncryptionUtils(final String key, final String IV) {
-		if (key != null)
-			encryptionKey = key;
-		if (IV != null)
-			this.IV = IV;
-	}
-
-	/** Generates a new random key.
-	 * 
-	 * @return The new random key */
-	public String generateNewKey() {
-		encryptionKey = generateNewRandomString();
+	public String getKey() {
 		return encryptionKey;
 	}
 
 	/** Generates a new Initialisation Vector. Not to be used often!
 	 * 
 	 * @return The new Initialisation Vector */
-	public String generateNewIV() {
-		IV = generateNewRandomString();
-		return IV;
+	private void initialize() {
+		File file = new File(AllAssets.getStorage() + File.separator + "Encryption.bin");
+		if(file.exists()) {
+			try {
+				IV = String.valueOf(AllAssets.load(file));
+				return;
+			} catch (Exception e) {
+				ErrorUtils.printErrorToConsole("Error loading Encryption system");
+			}
+		} else {
+			try {
+				file.createNewFile();
+				IV = generateNewRandomString();
+				AllAssets.save(IV, file);
+			} catch (Exception e) {
+				ErrorUtils.printErrorToConsole("Error saving Encryption system");
+			}
+		}
+		
 	}
 
 	private String generateNewRandomString() {
@@ -114,11 +114,10 @@ public class EncryptionUtils {
 		}
 	}
 
-	/**
-	 * Decrypts a byte[] into its original string form
+	/** Decrypts a byte[] into its original string form
+	 * 
 	 * @param bytesToDecrypt - The byte[] with the encrypted data
-	 * @return String with decrypted data
-	 */
+	 * @return String with decrypted data */
 	public String decrypt(byte[] bytesToDecrypt) {
 		try {
 			final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");

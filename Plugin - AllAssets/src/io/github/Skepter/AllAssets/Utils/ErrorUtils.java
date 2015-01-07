@@ -31,9 +31,12 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
-import static io.github.Skepter.AllAssets.AllAssets.*;
-import static io.github.Skepter.AllAssets.Config.ConfigHandler.*;
+import static io.github.Skepter.AllAssets.AllAssets.error;
+import static io.github.Skepter.AllAssets.Config.ConfigHandler.getMsg;
+import io.github.Skepter.AllAssets.API.LogEvent.LogType;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.conversations.Conversable;
 import org.bukkit.entity.Player;
@@ -94,5 +97,10 @@ public class ErrorUtils {
 
 	public static void conversableError(Conversable forWhom, String msg) {
 		forWhom.sendRawMessage(error + msg);
+	}
+	
+	public static void printErrorToConsole(String msg) {
+		Bukkit.getLogger().severe(msg);
+		CommandLog.addLog(msg, LogType.ERROR);
 	}
 }
