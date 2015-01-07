@@ -49,22 +49,11 @@ public class EncryptionUtils {
 	 * 
 	 * @param key - The key to use */
 	public EncryptionUtils(final String key) {
-		encryptionKey = key;
-		initialize();
-	}
-
-	public String getKey() {
-		return encryptionKey;
-	}
-
-	/** Generates a new Initialisation Vector. Not to be used often!
-	 * 
-	 * @return The new Initialisation Vector */
-	private void initialize() {
-		File file = new File(AllAssets.getStorage() + File.separator + "Encryption.bin");
-		if(file.exists()) {
+		encryptionKey = makeCompatible(key);
+		File file = new File(AllAssets.getStorage(), "Encryption.bin");
+		if (file.exists()) {
 			try {
-				IV = String.valueOf(AllAssets.load(file));
+				IV = String.valueOf(FileUtils.loadStringSecurely(file));
 				return;
 			} catch (Exception e) {
 				ErrorUtils.printErrorToConsole("Error loading Encryption system");
@@ -73,12 +62,15 @@ public class EncryptionUtils {
 			try {
 				file.createNewFile();
 				IV = generateNewRandomString();
-				AllAssets.save(IV, file);
+				FileUtils.saveStringSecurely(IV, file);
 			} catch (Exception e) {
 				ErrorUtils.printErrorToConsole("Error saving Encryption system");
 			}
 		}
-		
+	}
+
+	public String getKey() {
+		return encryptionKey;
 	}
 
 	private String generateNewRandomString() {
@@ -97,23 +89,29 @@ public class EncryptionUtils {
 	 * @param stringToEncrypt - The string to encrypt
 	 * @return byte[] with encrypted data */
 	public byte[] encrypt(String stringToEncrypt) {
-		if (!((stringToEncrypt.length() % 16) == 0)) {
-			final int amountToAdd = (16 - (stringToEncrypt.length() % 16));
-			String spaces = "";
-			for (int i = 0; i < amountToAdd; i++)
-				spaces = spaces + " ";
-			stringToEncrypt = stringToEncrypt + spaces;
-		}
+		stringToEncrypt = makeCompatible(stringToEncrypt);
 		try {
 			final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
 			final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
 			cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 			return cipher.doFinal(stringToEncrypt.getBytes("UTF-8"));
 		} catch (Exception e) {
+			e.printStackTrace();
 			return stringToEncrypt.getBytes();
 		}
 	}
 
+	public String makeCompatible(String string) {
+		if (!((string.length() % 16) == 0)) {
+			final int amountToAdd = (16 - (string.length() % 16));
+			String spaces = "";
+			for (int i = 0; i < amountToAdd; i++)
+				spaces = spaces + " ";
+			string = string + spaces;
+		}
+		return string;
+	}
+	
 	/** Decrypts a byte[] into its original string form
 	 * 
 	 * @param bytesToDecrypt - The byte[] with the encrypted data

@@ -100,12 +100,9 @@ import io.github.Skepter.AllAssets.Listeners.SignListener;
 import io.github.Skepter.AllAssets.Listeners.SkeletonArrowListener;
 import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
 import io.github.Skepter.AllAssets.Tasks.TPS;
+import io.github.Skepter.AllAssets.Utils.FileUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -424,7 +421,7 @@ public class AllAssets extends JavaPlugin {
 		/* Update tempTimeMap.bin file */
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
-				load(new File(getStorage(), "tempTimeMap.bin"));
+				FileUtils.load(new File(getStorage(), "tempTimeMap.bin"));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -451,7 +448,7 @@ public class AllAssets extends JavaPlugin {
 
 		if (!tempTimeMap.isEmpty())
 			try {
-				save(tempTimeMap, new File(getStorage(), "tempTimeMap.bin"));
+				FileUtils.save(tempTimeMap, new File(getStorage(), "tempTimeMap.bin"));
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
@@ -477,22 +474,6 @@ public class AllAssets extends JavaPlugin {
 		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
 		if (chatProvider != null)
 			chat = chatProvider.getProvider();
-	}
-
-	/** Saves an object to a file */
-	public static void save(final Object obj, final File file) throws Exception {
-		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true));
-		oos.writeObject(obj);
-		oos.flush();
-		oos.close();
-	}
-
-	/** Loads an object from a file */
-	public static Object load(final File file) throws Exception {
-		final ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-		final Object result = ois.readObject();
-		ois.close();
-		return result;
 	}
 
 	/** Returns the storage folder for storing data */

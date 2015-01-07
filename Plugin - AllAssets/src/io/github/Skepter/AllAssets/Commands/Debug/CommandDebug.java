@@ -39,10 +39,13 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Tasks.TPS;
+import io.github.Skepter.AllAssets.Utils.EncryptionUtils;
+import io.github.Skepter.AllAssets.Utils.FileUtils;
 import io.github.Skepter.AllAssets.Utils.IDReader;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -231,11 +234,36 @@ public class CommandDebug {
 		sender.sendMessage("Free RAM: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
-	
-	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
-	public void test(final CommandArgs args) {
+
+	@CommandHandler(name = "debug.testid", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	public void testID(final CommandArgs args) {
 		System.out.println(args.getArgs()[0]);
 		args.getSender().sendMessage("The ID for " + args.getArgs()[0] + " is " + IDReader.readID(args.getArgs()[0]));
+	}
+
+	@CommandHandler(name = "debug.testencrypt", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	public void testEncrypt(final CommandArgs args) {
+		EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
+		try {
+			File file = new File(AllAssets.getStorage(), "data.bin");
+			if (!file.exists())
+				file.createNewFile();
+			FileUtils.saveBytesSecurely(ec.encrypt(args.getArgs()[1]), file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("Key: " + args.getArgs()[0] + ", data: " + args.getArgs()[1]);
+	}
+
+	@CommandHandler(name = "debug.testdecrypt", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	public void testDecrypt(final CommandArgs args) {
+		EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
+		try {
+			byte[] bytes = (byte[]) FileUtils.loadBytesSecurely(new File(AllAssets.getStorage(), "data.bin"));
+			System.out.println("Decrypted message: " + ec.decrypt(bytes));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* Used to debug the Log feature */
