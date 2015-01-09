@@ -92,27 +92,43 @@ public class PermissionDataManager extends CustomConfig {
 	 *       Suffix: [suffix]     
 	 */
 
-
 	public PermissionDataManager() {
 		super(new File(AllAssets.getStorage(), "PermissionData.yml"), "Permissions");
 	}
 
 	public List<String> getWorldPermissions(String worldName, GroupDataType type, String dataName) {
-		String path = "Worlds.";
-		switch (type) {
-		case GROUP:
-			path = path + worldName + ".Groups.";
-			break;
-		case PLAYER:
-			path = path + worldName + ".Players.";
-			break;
-		}
-		path = path + dataName + ".Permissions";
+		String path = getPath(type, "Worlds.", worldName) + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
 	public List<String> getGlobalPermissions(GroupDataType type, String dataName) {
-		String path = "Global.";
+		String path = getPath(type, "Global.") + dataName + ".Permissions";
+		return getDataFile().getStringList(path);
+	}
+
+	public String getWorldAffix(String worldName, GroupDataType type, String dataName, Affix affix) {
+		String path = getAffix(affix, getPath(type, "Worlds.", worldName) + dataName + ".");
+		return getDataFile().getString(path);
+	}
+
+	public String getGlobalAffix(GroupDataType type, String dataName, Affix affix) {
+		String path = getAffix(affix, getPath(type, "Global.") + dataName + ".");
+		return getDataFile().getString(path);
+	}
+
+	private String getAffix(Affix affix, String path) {
+		switch (affix) {
+		case PREFIX:
+			path = path + "Prefix";
+			break;
+		case SUFFIX:
+			path = path + "Suffix";
+			break;
+		}
+		return path;
+	}
+
+	private String getPath(GroupDataType type, String path) {
 		switch (type) {
 		case GROUP:
 			path = path + ".Groups.";
@@ -121,12 +137,10 @@ public class PermissionDataManager extends CustomConfig {
 			path = path + ".Players.";
 			break;
 		}
-		path = path + dataName + ".Permissions";
-		return getDataFile().getStringList(path);
+		return path;
 	}
 
-	public String getWorldAffix(String worldName, GroupDataType type, String dataName, Affix affix) {
-		String path = "Worlds.";
+	private String getPath(GroupDataType type, String path, String worldName) {
 		switch (type) {
 		case GROUP:
 			path = path + worldName + ".Groups.";
@@ -135,38 +149,7 @@ public class PermissionDataManager extends CustomConfig {
 			path = path + worldName + ".Players.";
 			break;
 		}
-		path = path + dataName + ".";
-		switch (affix) {
-		case PREFIX:
-			path = path + "Prefix";
-			break;
-		case SUFFIX:
-			path = path + "Suffix";
-			break;
-		}
-		return getDataFile().getString(path);
-	}
-
-	public String getGlobalAffix(GroupDataType type, String dataName, Affix affix) {
-		String path = "Global.";
-		switch (type) {
-		case GROUP:
-			path = path + ".Groups.";
-			break;
-		case PLAYER:
-			path = path + ".Players.";
-			break;
-		}
-		path = path + dataName + ".";
-		switch (affix) {
-		case PREFIX:
-			path = path + "Prefix";
-			break;
-		case SUFFIX:
-			path = path + "Suffix";
-			break;
-		}
-		return getDataFile().getString(path);
+		return path;
 	}
 
 	public enum GroupDataType {

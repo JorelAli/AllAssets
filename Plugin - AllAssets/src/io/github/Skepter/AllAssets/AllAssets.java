@@ -101,6 +101,7 @@ import io.github.Skepter.AllAssets.Listeners.ServerListingListener;
 import io.github.Skepter.AllAssets.Listeners.SignListener;
 import io.github.Skepter.AllAssets.Listeners.SkeletonArrowListener;
 import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
+import io.github.Skepter.AllAssets.Reflection.VaultReflection;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.FileUtils;
 
@@ -225,19 +226,25 @@ public class AllAssets extends JavaPlugin {
 	/* The master switch - used for debug purposes*/
 	public static boolean masterSwitch = true;
 
-	/** Block where developing stuff happens. Used for easy code removal Requires
-	 * masterSwitch */
-	private void dev() {
-		new CommandGive(framework);
-		new CommandHelp(framework);
-		r(new CommandCommandBlock(framework));
-		new CommandFakeOp(framework);
-		new CommandFakeDeop(framework);
+	/** Dev block - runs devvy stuff
+	 * 
+	 * @param loadTime - true means load at the END, false means load NORMALLY */
+	private void dev(boolean loadTime) {
+		if (!loadTime) {
+			new CommandGive(framework);
+			new CommandHelp(framework);
+			r(new CommandCommandBlock(framework));
+			new CommandFakeOp(framework);
+			new CommandFakeDeop(framework);
+		} else {
+			VaultReflection.hookIntoVaultEconomy();
+			VaultReflection.hookIntoVaultPermission();
+		}
 	}
 
 	//best command ever :D (yes, the dollar sign IS NECESSARY!)
 	//$firework SXRlbVN0YWNrOgogID09OiBvcmcuYnVra2l0LmludmVudG9yeS5JdGVtU3RhY2sKICB0eXBlOiBGSVJFV09SSwogIG1ldGE6CiAgICA9PTogSXRlbU1ldGEKICAgIG1ldGEtdHlwZTogRklSRVdPUksKICAgIGZpcmV3b3JrLWVmZmVjdHM6CiAgICAtID09OiBGaXJld29yawogICAgICBmbGlja2VyOiBmYWxzZQogICAgICB0cmFpbDogdHJ1ZQogICAgICBjb2xvcnM6CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIGZhZGUtY29sb3JzOgogICAgICAtID09OiBDb2xvcgogICAgICAgIFJFRDogMTc5CiAgICAgICAgQkxVRTogNDQKICAgICAgICBHUkVFTjogNDkKICAgICAgLSA9PTogQ29sb3IKICAgICAgICBSRUQ6IDM3CiAgICAgICAgQkxVRTogMTQ2CiAgICAgICAgR1JFRU46IDQ5CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAxNzEKICAgICAgICBCTFVFOiAxNzEKICAgICAgICBHUkVFTjogMTcxCiAgICAgIHR5cGU6IEJBTExfTEFSR0UKw
-	
+
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
@@ -270,13 +277,12 @@ public class AllAssets extends JavaPlugin {
 
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
-		
+
 		/** All variables should have been initialised now */
 
 		if (masterSwitch)
-			dev();
+			dev(false);
 		//Nav
-
 
 		/* This is the features.yml file which enables/disables features according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
@@ -413,7 +419,7 @@ public class AllAssets extends JavaPlugin {
 		//r(new BlockPoweredListener());
 
 		/** Reloading stuff */
-		
+
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers())
@@ -433,6 +439,8 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info(titleNoColor + "AllAssets has been enabled successfully");
 		Bukkit.broadcast(title + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
+		if (masterSwitch)
+			dev(true);
 	}
 
 	/* Easy system to add listeners */
@@ -484,7 +492,7 @@ public class AllAssets extends JavaPlugin {
 	public static File getStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
 	}
-	
+
 	/** Returns the storage folder for player data */
 	public static File getPlayerStorage() {
 		return new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
