@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Skepter's licence
- * Copyright 2014 
+ * Copyright 2015 
  *
  * AllAssets was created by Skepter (http://skepter.github.io/).
  *
@@ -13,7 +13,7 @@
  * * Sell AllAssets - it is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter
  * * Distribute it on any other website. The ONLY places where it can be downloaded from is github and the Bukkit repository
- * * Decompile the code - it's COMPLETELY unnecessary since the entire code is on Github. I've just made life easier for you :)
+ * * Decompile the code - it's COMPLETELY unnecessary since the entire code is on Github. The only exception is the BukkitDev staff who I have allowed permission to decompile (to search for malicious code)
  *
  * You can not:
  * * Hold me liable for your actions:
@@ -35,6 +35,7 @@ package io.github.Skepter.AllAssets.Commands.Debug;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.PlayerMap;
@@ -48,6 +49,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -77,10 +79,7 @@ public class CommandBatch {
 
 		final Player cachedPlayer = player;
 		if (args.getArgs().length == 0) {
-			player.sendMessage(TextUtils.title("Batch help"));
-			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 /say hi");
-			player.sendMessage(AllAssets.houseStyleColor + "/batch 5 1s /say hi");
-			player.sendMessage(AllAssets.houseStyleColor + "/batch 20 500ms /say hi");
+			printHelp(args.getSender());
 			return;
 		}
 		if (args.getArgs()[0].equals("stop")) {
@@ -148,5 +147,10 @@ public class CommandBatch {
 			s = s.substring(1);
 		for (int i = 1; i <= amount; i++)
 			player.performCommand(s);
+	}
+
+	@Help(name="Batch")
+	private void printHelp(CommandSender sender) {
+		TextUtils.printHelp(sender, "Batch", "Used to run a command multiple times", "Syntax: /batch <number of times> (time delay) <command>", "Example: /batch 5 /say hi will say 'hi' 5 times", "Example: /batch 5 10s /broadcast Welcome to my server will broadcast 'Welcome to my server' every 10 seconds, 5 times");
 	}
 }

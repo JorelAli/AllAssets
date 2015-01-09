@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Skepter's licence
- * Copyright 2014 
+ * Copyright 2015 
  *
  * AllAssets was created by Skepter (http://skepter.github.io/).
  *
@@ -13,7 +13,7 @@
  * * Sell AllAssets - it is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter
  * * Distribute it on any other website. The ONLY places where it can be downloaded from is github and the Bukkit repository
- * * Decompile the code - it's COMPLETELY unnecessary since the entire code is on Github. I've just made life easier for you :)
+ * * Decompile the code - it's COMPLETELY unnecessary since the entire code is on Github. The only exception is the BukkitDev staff who I have allowed permission to decompile (to search for malicious code)
  *
  * You can not:
  * * Hold me liable for your actions:
