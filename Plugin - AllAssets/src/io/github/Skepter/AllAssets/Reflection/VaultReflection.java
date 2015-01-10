@@ -1,16 +1,16 @@
 package io.github.Skepter.AllAssets.Reflection;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Vault.AAEco;
 import io.github.Skepter.AllAssets.Vault.AAPerms;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.milkbowl.vault.Vault;
+import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.ServicesManager;
 
@@ -39,32 +39,13 @@ public class VaultReflection {
 		Vault vault = (Vault) Bukkit.getPluginManager().getPlugin("Vault");
 		try {
 			ServicesManager sm = Bukkit.getServer().getServicesManager();
-//			net.milkbowl.vault.permission.Permission perms = new Permission_SuperPerms(vault);
+			Permission aaPerms = (Permission) AAPerms.class.getConstructor(new Class[] { Plugin.class }).newInstance(new Object[] { vault });
+			sm.register(Permission.class, aaPerms, vault, ServicePriority.Highest);
+			Bukkit.getLogger().info(String.format("[%s][Permission] %s found: %s", new Object[] { "AA", "AAPerms", (aaPerms.isEnabled()) ? "Loaded" : "Waiting" }));
 
-			AAPerms p = new AAPerms(AllAssets.instance());
-			sm.register(net.milkbowl.vault.permission.Permission.class, p, AllAssets.instance(), ServicePriority.Highest);
-
-			//sm.unregister(net.milkbowl.vault.permission.Permission.class, perms);
-
-			for (RegisteredServiceProvider<?> registration : sm.getRegistrations(vault)) {
-				System.out.println(registration.getProvider());
-			}
-
-			net.milkbowl.vault.permission.Permission p1 = (net.milkbowl.vault.permission.Permission) AAPerms.class.getConstructor(new Class[] { Plugin.class }).newInstance(new Object[] { vault });
-			sm.register(net.milkbowl.vault.permission.Permission.class, p1, vault, ServicePriority.Highest);
-			Bukkit.getLogger().info(String.format("[%s][Permission] %s found: %s", new Object[] { "AA", "AAPerms", (p1.isEnabled()) ? "Loaded" : "Waiting" }));
-			//sm.unregister(net.milkbowl.vault.permission.Permission.class, p1);
-
-			for (RegisteredServiceProvider<?> registration : sm.getRegistrations(vault)) {
-				System.out.println(registration.getProvider());
-			}
-
-
-			//			vault.perms = ((net.milkbowl.vault.permission.Permission) vault.sm.getRegistration(net.milkbowl.vault.permission.Permission.class).getProvider());
-
-//			Method method = vault.getClass().getDeclaredMethod("hookPermission", String.class, Class.class, ServicePriority.class, String[].class);
-//			method.setAccessible(true);
-//			method.invoke(vault, "AAPerms", AAEco.class, ServicePriority.Highest, new String[] { permissions });
+			Field permsField = vault.getClass().getDeclaredField("perms");
+			permsField.setAccessible(true);
+			permsField.set(vault, ((Permission) sm.getRegistration(Permission.class).getProvider()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

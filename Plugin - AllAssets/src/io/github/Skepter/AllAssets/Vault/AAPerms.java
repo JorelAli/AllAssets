@@ -28,7 +28,7 @@ public class AAPerms extends Permission {
 			if ((allAssets != null) && (allAssets.isEnabled())) {
 				this.allAssetsPlugin = ((AllAssets) allAssets);
 				Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
-				log.info(String.format("[%s][Permissions] %s hooked.", new Object[] { "AA", name }));
+				log.info(String.format("[%s][Permission] %s hooked.", new Object[] { "AA", name }));
 			}
 		}
 	}
@@ -46,7 +46,7 @@ public class AAPerms extends Permission {
 				Plugin perms = event.getPlugin();
 				if ((perms.getDescription().getName().equals("AllAssets")) && (perms.getClass().getName().equals(VaultReflection.economy))) {
 					permissions.allAssetsPlugin = (AllAssets) perms;
-					AAPerms.log.info(String.format("[%s][Permissions] %s hooked.", new Object[] { "AA", "AAPerms" }));
+					AAPerms.log.info(String.format("[%s][Permission] %s hooked.", new Object[] { "AA", "AAPerms" }));
 				}
 			}
 		}
@@ -56,7 +56,7 @@ public class AAPerms extends Permission {
 			if ((this.permissions.allAssetsPlugin == null) || (!(event.getPlugin().getDescription().getName().equals("AllAssets"))))
 				return;
 			permissions.allAssetsPlugin = null;
-			AAPerms.log.info(String.format("[%s][Permissions] %s unhooked.", new Object[] { "AA", "AAPerms" }));
+			AAPerms.log.info(String.format("[%s][Permission] %s unhooked.", new Object[] { "AA", "AAPerms" }));
 		}
 	}
 
@@ -146,8 +146,7 @@ public class AAPerms extends Permission {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
