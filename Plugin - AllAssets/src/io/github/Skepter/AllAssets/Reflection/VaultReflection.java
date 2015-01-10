@@ -1,6 +1,7 @@
 package io.github.Skepter.AllAssets.Reflection;
 
 import io.github.Skepter.AllAssets.Vault.AAChat;
+import io.github.Skepter.AllAssets.Vault.AAEco;
 import io.github.Skepter.AllAssets.Vault.AAPerms;
 
 import java.lang.reflect.Field;
@@ -29,7 +30,7 @@ public class VaultReflection {
 		try {
 			Method method = vault.getClass().getDeclaredMethod("hookEconomy", String.class, Class.class, ServicePriority.class, String[].class);
 			method.setAccessible(true);
-			method.invoke(vault, "AAEco", AAChat.class, ServicePriority.Highest, new String[] { economy });
+			method.invoke(vault, "AAEco", AAEco.class, ServicePriority.Highest, new String[] { economy });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -41,7 +42,6 @@ public class VaultReflection {
 			ServicesManager sm = Bukkit.getServer().getServicesManager();
 			Permission aaPerms = (Permission) AAPerms.class.getConstructor(new Class[] { Plugin.class }).newInstance(new Object[] { vault });
 			sm.register(Permission.class, aaPerms, vault, ServicePriority.Highest);
-			Bukkit.getLogger().info(String.format("[%s][Permission] %s found: %s", new Object[] { "AA", "AAPerms", (aaPerms.isEnabled()) ? "Loaded" : "Waiting" }));
 
 			Field permsField = vault.getClass().getDeclaredField("perms");
 			permsField.setAccessible(true);
