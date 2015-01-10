@@ -44,9 +44,9 @@ public class AAPerms extends Permission {
 		public void onPluginEnable(PluginEnableEvent event) {
 			if (this.permissions.allAssetsPlugin == null) {
 				Plugin perms = event.getPlugin();
-				if ((perms.getDescription().getName().equals("AllAssets")) && (perms.getClass().getName().equals(VaultReflection.economy))) {
+				if ((perms.getDescription().getName().equals("AllAssets")) && (perms.getClass().getName().equals(VaultReflection.permissions))) {
 					permissions.allAssetsPlugin = (AllAssets) perms;
-					AAPerms.log.info(String.format("[%s][Permission] %s hooked.", new Object[] { "AA", "AAPerms" }));
+					AAPerms.log.info(String.format("[%s][Permission] %s hooked.", new Object[] { "AA", name }));
 				}
 			}
 		}
@@ -56,7 +56,7 @@ public class AAPerms extends Permission {
 			if ((this.permissions.allAssetsPlugin == null) || (!(event.getPlugin().getDescription().getName().equals("AllAssets"))))
 				return;
 			permissions.allAssetsPlugin = null;
-			AAPerms.log.info(String.format("[%s][Permission] %s unhooked.", new Object[] { "AA", "AAPerms" }));
+			AAPerms.log.info(String.format("[%s][Permission] %s unhooked.", new Object[] { "AA", name }));
 		}
 	}
 

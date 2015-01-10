@@ -239,6 +239,7 @@ public class AllAssets extends JavaPlugin {
 		} else {
 			VaultReflection.hookIntoVaultEconomy();
 			VaultReflection.hookIntoVaultPermission();
+			VaultReflection.hookIntoVaultChat();
 		}
 	}
 

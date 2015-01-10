@@ -1,6 +1,6 @@
 package io.github.Skepter.AllAssets.Reflection;
 
-import io.github.Skepter.AllAssets.Vault.AAEco;
+import io.github.Skepter.AllAssets.Vault.AAChat;
 import io.github.Skepter.AllAssets.Vault.AAPerms;
 
 import java.lang.reflect.Field;
@@ -29,7 +29,7 @@ public class VaultReflection {
 		try {
 			Method method = vault.getClass().getDeclaredMethod("hookEconomy", String.class, Class.class, ServicePriority.class, String[].class);
 			method.setAccessible(true);
-			method.invoke(vault, "AAEco", AAEco.class, ServicePriority.Highest, new String[] { economy });
+			method.invoke(vault, "AAEco", AAChat.class, ServicePriority.Highest, new String[] { economy });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +56,7 @@ public class VaultReflection {
 		try {
 			Method method = vault.getClass().getDeclaredMethod("hookChat", String.class, Class.class, ServicePriority.class, String[].class);
 			method.setAccessible(true);
-			method.invoke(vault, "AAChat", AAEco.class, ServicePriority.Highest, new String[] { chat });
+			method.invoke(vault, "AAChat", AAChat.class, ServicePriority.Highest, new String[] { chat });
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

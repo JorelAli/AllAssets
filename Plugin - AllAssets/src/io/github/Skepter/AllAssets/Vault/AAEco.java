@@ -210,7 +210,7 @@ public class AAEco implements Economy {
 				Plugin ec = event.getPlugin();
 				if ((ec.getDescription().getName().equals("AllAssets")) && (ec.getClass().getName().equals(VaultReflection.economy))) {
 					economy.allAssetsPlugin = (AllAssets) ec;
-					AAEco.log.info(String.format("[%s][Economy] %s hooked.", new Object[] { "AA", "AAEco" }));
+					AAEco.log.info(String.format("[%s][Economy] %s hooked.", new Object[] { "AA", name }));
 				}
 			}
 		}
@@ -220,7 +220,7 @@ public class AAEco implements Economy {
 			if ((this.economy.allAssetsPlugin == null) || (!(event.getPlugin().getDescription().getName().equals("AllAssets"))))
 				return;
 			economy.allAssetsPlugin = null;
-			AAEco.log.info(String.format("[%s][Economy] %s unhooked.", new Object[] { "AA", "AAEco" }));
+			AAEco.log.info(String.format("[%s][Economy] %s unhooked.", new Object[] { "AA", name }));
 		}
 	}
 
