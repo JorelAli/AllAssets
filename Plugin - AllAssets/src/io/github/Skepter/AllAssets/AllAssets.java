@@ -237,9 +237,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandFakeOp(framework);
 			new CommandFakeDeop(framework);
 		} else {
-			VaultReflection.hookIntoVaultEconomy();
-			VaultReflection.hookIntoVaultPermission();
-			VaultReflection.hookIntoVaultChat();
+			new VaultReflection().loadAAEco();
 		}
 	}
 
