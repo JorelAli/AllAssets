@@ -2,9 +2,9 @@ package io.github.Skepter.AllAssets.Reflection;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Vault.AAChat;
-import io.github.Skepter.AllAssets.Vault.AAEco;
-import io.github.Skepter.AllAssets.Vault.AAPerms;
+import io.github.Skepter.AllAssets.Vault.Chat.AAChat;
+import io.github.Skepter.AllAssets.Vault.Economy.AAEco;
+import io.github.Skepter.AllAssets.Vault.Permissions.AAPerms;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -24,9 +24,9 @@ import org.bukkit.plugin.ServicesManager;
 public class VaultReflection {
 
 	//Adjust to io.github.Skepter.AllAssets.Vault.<Economy/Permissions/Chat>.AA<Eco/PermsChat>
-	public static final String economy = "io.github.Skepter.AllAssets.Vault.AAEco";
-	public static final String permissions = "io.github.Skepter.AllAssets.Vault.AAPerms";
-	public static final String chat = "io.github.Skepter.AllAssets.Vault.AAChat";
+	public static final String economy = "io.github.Skepter.AllAssets.Vault.Economy.AAEco";
+	public static final String permissions = "io.github.Skepter.AllAssets.Vault.Permissions.AAPerms";
+	public static final String chat = "io.github.Skepter.AllAssets.Vault.Chat.AAChat";
 	
 	private final Vault vault;
 	private final ServicesManager sm;
