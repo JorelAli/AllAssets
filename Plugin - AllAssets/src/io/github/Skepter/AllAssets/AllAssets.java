@@ -266,12 +266,12 @@ public class AllAssets extends JavaPlugin {
 		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
 			getLogger().warning("Vault not found, so some features may not be available");
+			getLogger().info("To fully maximize AllAssets' potential (Economy, Permissions, Chat, Give commands), download Vault from http://dev.bukkit.org/bukkit-plugins/vault/");
 			/* I put this here because if the plugin reloads, it may be set to true, however the owner of a server could have removed vault, thus some features would crash */
 			hasVault = false;
 		} else {
 			hasVault = true;
 			setupVault();
-			getLogger().info("Vault has been found and hooked into successfully");
 		}
 
 		ghostFactory = new ComphenixsGhostFactory(this);
@@ -477,14 +477,20 @@ public class AllAssets extends JavaPlugin {
 
 	private void setupVault() {
 		final RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-		if (economyProvider != null)
+		if (economyProvider != null) {
 			economy = economyProvider.getProvider();
+			getLogger().info("Vault Economy system hooked");
+		}
 		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-		if (permissionProvider != null)
+		if (permissionProvider != null) {
 			permission = permissionProvider.getProvider();
+			getLogger().info("Vault Permission system hooked");
+		}
 		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
-		if (chatProvider != null)
+		if (chatProvider != null) {
 			chat = chatProvider.getProvider();
+			getLogger().info("Vault Chat system hooked");
+		}
 	}
 
 	/** Returns the storage folder for storing data */

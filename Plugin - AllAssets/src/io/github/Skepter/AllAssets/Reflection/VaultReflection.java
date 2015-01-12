@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.milkbowl.vault.Vault;
+import net.milkbowl.vault.chat.Chat;
+import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
@@ -54,6 +56,7 @@ public class VaultReflection {
 				Method vaultEconomy = vault.getClass().getDeclaredMethod("hookEconomy", String.class, Class.class, ServicePriority.class, String[].class);
 				vaultEconomy.setAccessible(true);
 				vaultEconomy.invoke(vault, "AAEco", AAEco.class, ServicePriority.Highest, new String[] { economy });
+				AllAssets.instance().economy = Bukkit.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
 				break;
 			case PERMISSION:
 				Permission aaPerms = (Permission) AAPerms.class.getConstructor(new Class[] { Plugin.class }).newInstance(new Object[] { vault });
@@ -62,11 +65,13 @@ public class VaultReflection {
 				Field permsField = vault.getClass().getDeclaredField("perms");
 				permsField.setAccessible(true);
 				permsField.set(vault, ((Permission) sm.getRegistration(Permission.class).getProvider()));
+				AllAssets.instance().permission = Bukkit.getServer().getServicesManager().getRegistration(Permission.class).getProvider();
 				break;
 			case CHAT:
 				Method vaultChat = vault.getClass().getDeclaredMethod("hookChat", String.class, Class.class, ServicePriority.class, String[].class);
 				vaultChat.setAccessible(true);
 				vaultChat.invoke(vault, "AAChat", AAChat.class, ServicePriority.Highest, new String[] { chat });
+				AllAssets.instance().chat = Bukkit.getServer().getServicesManager().getRegistration(Chat.class).getProvider();
 				break;
 			}
 		} catch (Exception e) {
