@@ -45,24 +45,24 @@ import org.bukkit.entity.Player;
 //play with playerAbilities in EntityHuman
 public class ReflectionUtils {
 
-	/** Main objects */
+	/* Main objects */
 	final public Player player;
 	final public Object nmsPlayer;
 	final public Object getConnection;
 	final public Object craftServer;
 
-	/** Fields */
+	/* Fields */
 	final public int ping;
 	final public String locale;
 	final public Object abilities;
 
-	/** Misc & other objects */
+	/* Misc & other objects */
 	final private String packageName;
 	final public String authLibPackageName = "net.minecraft.util.com.mojang.authlib";
 	final public Object dedicatedServer;
 	final public Object worldServer;
 
-	/** Classes */
+	/* Classes */
 	final public Class<?> craftWorldClass;
 	final public Class<?> iChatBaseComponentClass;
 	final public Class<?> packetClass;
@@ -72,7 +72,7 @@ public class ReflectionUtils {
 	final public Class<?> nmsWorldClass;
 	final public Class<?> entityHumanClass;
 
-	/** Object classes (Packets) */
+	/* Object classes (Packets) */
 	final public Object emptyChatSerializer;
 
 	final public Object emptyPacketPlayOutChat;
@@ -81,7 +81,10 @@ public class ReflectionUtils {
 	final public Object emptyPacketPlayOutBed;
 	final public Object emptyPacketPlayOutAnimation;
 
+	/** Creates a new instance of ReflectionUtils and prepares the classes and
+	 * stuff */
 	public ReflectionUtils(final Player player) throws Exception {
+		/* Load player classes, player connection, server and world */
 		this.player = player;
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
 		entityHumanClass = nmsPlayer.getClass().getSuperclass();
@@ -89,13 +92,19 @@ public class ReflectionUtils {
 		craftServer = Bukkit.getServer();
 		craftWorldClass = player.getWorld().getClass();
 
+		/* Get the player's ping and locale */
 		ping = (int) getField(nmsPlayer, "ping");
 		locale = (String) getPrivateField(nmsPlayer, "locale");
 
+		/* Get the server, world server and the package name for reflection.
+		 * The package name is retrieved dynamically from the server instead
+		 * of using the default package name and then parsing the version number.
+		 * It seems easier this way. */
 		dedicatedServer = getPrivateField(craftServer, "console");
 		worldServer = craftWorldClass.getMethod("getHandle").invoke(player.getWorld());
 		packageName = dedicatedServer.getClass().getPackage().getName();
 
+		/* Create the class instances */
 		packetClass = getNMSClass("Packet");
 		iChatBaseComponentClass = getNMSClass("IChatBaseComponent");
 		enumClientCommandClass = getNMSClass("EnumClientCommand");
@@ -104,6 +113,7 @@ public class ReflectionUtils {
 		nmsWorldClass = worldServer.getClass().getSuperclass();
 		abilities = entityHumanClass.getField("abilities").get(nmsPlayer);
 
+		/* Create the class instances */
 		emptyChatSerializer = getNMSClass("ChatSerializer").newInstance();
 
 		emptyPacketPlayOutChat = getNMSClass("PacketPlayOutChat").newInstance();
@@ -113,10 +123,12 @@ public class ReflectionUtils {
 		emptyPacketPlayOutAnimation = getNMSClass("PacketPlayOutAnimation").newInstance();
 	}
 
+	/** Serialises a String (JSON stuff) */
 	public Object chatSerialize(final String string) throws Exception {
 		return emptyChatSerializer.getClass().getMethod("a", String.class).invoke(emptyChatSerializer, string);
 	}
 
+	/** Retrieves an Enumeration via Reflection */
 	public Object getEnum(final Class<?> enumClass, final String enumName) throws NullPointerException {
 		for (final Object object : enumClass.getEnumConstants())
 			if (object.toString().equals(enumName))
@@ -124,34 +136,42 @@ public class ReflectionUtils {
 		throw new NullPointerException();
 	}
 
+	/** Return the value from a private field */
 	public Object getPrivateField(final Object object, final String fieldName) throws Exception {
 		final Field field = object.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
 		return field.get(object);
 	}
 
+	/** Return the value from a non private field */
 	public Object getField(final Object object, final String fieldName) throws Exception {
 		return object.getClass().getDeclaredField(fieldName).get(object);
 	}
 
+	/** Sets the value of a private field */
 	public void setPrivateField(final Object object, final String fieldName, final Object data) throws Exception {
 		final Field field = object.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
 		field.set(object, data);
 	}
 
+	/** Creates a new GameProfile instance */
 	public Object getGameProfile() throws Exception {
 		return gameProfileClass.getConstructor(UUID.class, String.class).newInstance(player.getUniqueId(), player.getName());
 	}
 
+	/** Retrieves a net.minecraft.server class by using the dynamic package from
+	 * the dedicated server */
 	public Class<?> getNMSClass(final String className) throws ClassNotFoundException {
 		return (Class.forName(packageName + "." + className));
 	}
 
+	/** Sends an outgoing packet (From server to client) */
 	public void sendOutgoingPacket(final Object packet) throws Exception {
 		getConnection.getClass().getMethod("sendPacket", packetClass).invoke(getConnection, packet);
 	}
 
+	/** Sends an incoming packet (From client to server) - An example would be the instant revive */
 	public void sendIncomingPacket(final Object packet) throws Exception {
 		getConnection.getClass().getMethod("a", packet.getClass()).invoke(getConnection, packet);
 	}

@@ -57,6 +57,6 @@ public class CommandBalance {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		player.sendMessage(AllAssets.title + "Balance: " + AllAssets.instance().economy.getBalance(player.getName()));
+		player.sendMessage(AllAssets.title + "Balance: " + AllAssets.instance().economy.getBalance(player));
 	}
 }
