@@ -105,10 +105,17 @@ public class PacketBuilder {
 		return builder;
 	}
 
-	public PacketBuilder setLocation(final String name1, final String name2, final String name3, final Location data) {
-		setInt(name1, (int) data.getX());
-		setInt(name2, (int) data.getY());
-		setInt(name3, (int) data.getZ());
+	/**
+	 * Sets 3 parameters to a location
+	 * @param x - the name of the x field
+	 * @param y - the name of the y field
+	 * @param z - the name of the z field
+	 * @param data - the Location object.
+	 */
+	public PacketBuilder setLocation(final String x, final String y, final String z, final Location data) {
+		setInt(x, (int) data.getX());
+		setInt(y, (int) data.getY());
+		setInt(z, (int) data.getZ());
 		return builder;
 	}
 
