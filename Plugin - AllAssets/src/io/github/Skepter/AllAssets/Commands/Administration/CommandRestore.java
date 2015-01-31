@@ -47,8 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.util.org.apache.commons.io.FileUtils;
-
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.conversations.BooleanPrompt;

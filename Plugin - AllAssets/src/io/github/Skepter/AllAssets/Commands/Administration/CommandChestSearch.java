@@ -42,8 +42,7 @@ import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import java.util.ArrayList;
 
-import net.minecraft.util.org.apache.commons.lang3.StringUtils;
-
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.block.BlockState;
