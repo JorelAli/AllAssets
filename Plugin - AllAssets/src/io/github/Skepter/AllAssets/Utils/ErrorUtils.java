@@ -95,11 +95,11 @@ public class ErrorUtils {
 		sender.sendMessage(error + worldName + " could not be found!");
 	}
 
-	public static void conversableError(Conversable forWhom, String msg) {
+	public static void conversableError(final Conversable forWhom, final String msg) {
 		forWhom.sendRawMessage(error + msg);
 	}
 	
-	public static void printErrorToConsole(String msg) {
+	public static void printErrorToConsole(final String msg) {
 		Bukkit.getLogger().severe(msg);
 		CommandLog.addLog(msg, LogType.ERROR);
 	}

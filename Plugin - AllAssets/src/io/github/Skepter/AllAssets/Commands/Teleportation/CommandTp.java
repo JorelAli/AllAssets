@@ -68,11 +68,10 @@ public class CommandTp {
 			user.setLastLoc();
 			final User target = new User(t);
 			if (user.canTp()) {
-				if (!t.isOnline()) {
+				if (!t.isOnline())
 					player.teleport(target.getLastLoc());
-				} else {
+				else
 					player.teleport(t);
-				}
 				player.sendMessage(AllAssets.title + "Successfully teleported to " + t.getName());
 				return;
 			} else {

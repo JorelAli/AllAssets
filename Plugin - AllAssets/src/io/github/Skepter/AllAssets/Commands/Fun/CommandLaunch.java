@@ -55,6 +55,7 @@ import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.WitherSkull;
 
+@SuppressWarnings("deprecation")
 public class CommandLaunch {
 
 	public CommandLaunch(final CommandFramework framework) {

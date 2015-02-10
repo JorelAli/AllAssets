@@ -62,7 +62,7 @@ public class CommandSilence implements Listener {
 		Player player = null;
 		try {
 			player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
 			return;
 		}

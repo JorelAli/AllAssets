@@ -307,12 +307,12 @@ public class TextUtils {
 		return overallString.replace(textPart, color + textPart);
 	}
 
-	public static void printHelp(CommandSender sender, String title, String... help) {
+	public static void printHelp(final CommandSender sender, final String title, final String... help) {
 		sender.sendMessage(title(title + " help"));
-		for (String string : help) {
-			String[] strs = string.split(" -");
-			String part1 = AllAssets.accentColor + strs[0];
-			String part2 = AllAssets.houseStyleColor + strs[1];
+		for (final String string : help) {
+			final String[] strs = string.split(" -");
+			final String part1 = AllAssets.accentColor + strs[0];
+			final String part2 = AllAssets.houseStyleColor + strs[1];
 			sender.sendMessage(part1 + " -" + part2);
 
 		}

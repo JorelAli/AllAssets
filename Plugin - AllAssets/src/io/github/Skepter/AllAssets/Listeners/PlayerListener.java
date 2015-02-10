@@ -115,10 +115,9 @@ public class PlayerListener implements Listener {
 			if (ConfigHandler.features().getBoolean("FireworkOnJoin"))
 				for (int i = 0; i < new Random().nextInt(5); i++)
 					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());
-			if (ConfigHandler.features().getBoolean("CommandsOnJoin")) {
+			if (ConfigHandler.features().getBoolean("CommandsOnJoin"))
 				for (final String string : ConfigHandler.config().getStringList("commandsOnJoin"))
 					Bukkit.dispatchCommand(event.getPlayer(), string.replace("{PLAYERNAME}", event.getPlayer().getName()));
-			}
 		}
 
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());

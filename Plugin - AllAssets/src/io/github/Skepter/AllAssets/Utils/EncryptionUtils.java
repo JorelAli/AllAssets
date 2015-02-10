@@ -50,23 +50,22 @@ public class EncryptionUtils {
 	 * @param key - The key to use */
 	public EncryptionUtils(final String key) {
 		encryptionKey = makeCompatible(key);
-		File file = new File(AllAssets.getStorage(), "Encryption.bin");
-		if (file.exists()) {
+		final File file = new File(AllAssets.getStorage(), "Encryption.bin");
+		if (file.exists())
 			try {
 				IV = String.valueOf(FileUtils.loadStringSecurely(file));
 				return;
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				ErrorUtils.printErrorToConsole("Error loading Encryption system");
 			}
-		} else {
+		else
 			try {
 				file.createNewFile();
 				IV = generateNewRandomString();
 				FileUtils.saveStringSecurely(IV, file);
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				ErrorUtils.printErrorToConsole("Error saving Encryption system");
 			}
-		}
 	}
 
 	public String getKey() {
@@ -74,11 +73,11 @@ public class EncryptionUtils {
 	}
 
 	private String generateNewRandomString() {
-		char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
-		StringBuilder sb = new StringBuilder();
-		Random random = new Random();
+		final char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890".toCharArray();
+		final StringBuilder sb = new StringBuilder();
+		final Random random = new Random();
 		for (int i = 0; i < 16; i++) {
-			char c = chars[random.nextInt(chars.length)];
+			final char c = chars[random.nextInt(chars.length)];
 			sb.append(c);
 		}
 		return sb.toString();
@@ -95,7 +94,7 @@ public class EncryptionUtils {
 			final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
 			cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 			return cipher.doFinal(stringToEncrypt.getBytes("UTF-8"));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			return stringToEncrypt.getBytes();
 		}
@@ -116,13 +115,13 @@ public class EncryptionUtils {
 	 * 
 	 * @param bytesToDecrypt - The byte[] with the encrypted data
 	 * @return String with decrypted data */
-	public String decrypt(byte[] bytesToDecrypt) {
+	public String decrypt(final byte[] bytesToDecrypt) {
 		try {
 			final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
 			final SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
 			cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(IV.getBytes("UTF-8")));
 			return new String(cipher.doFinal(bytesToDecrypt), "UTF-8").trim();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			return new String(bytesToDecrypt);
 		}
 	}

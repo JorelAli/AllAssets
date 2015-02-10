@@ -42,9 +42,9 @@ public class CustomConfig {
 
 	private final File dataFile;
 	private FileConfiguration fileConfiguration;
-	private String usage;
+	private final String usage;
 
-	public CustomConfig(File storageLocation, String usage) {
+	public CustomConfig(final File storageLocation, final String usage) {
 		dataFile = storageLocation;
 		this.usage = usage;
 	}

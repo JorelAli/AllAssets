@@ -49,8 +49,7 @@ public class PlayerData extends CustomConfig {
 	}
 
 	public static void saveAllPlayers() {
-		for (final Player player : Bukkit.getOnlinePlayers()) {
+		for (final Player player : Bukkit.getOnlinePlayers())
 			new PlayerData(player).saveDataFile();
-		}
 	}
 }

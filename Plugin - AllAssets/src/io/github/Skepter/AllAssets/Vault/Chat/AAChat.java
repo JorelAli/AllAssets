@@ -23,10 +23,10 @@ public class AAChat extends Chat {
 	private final String name = "AAChat";
 	private AllAssets allAssetsPlugin;
 
-	public AAChat(Plugin plugin, Permission perms) {
+	public AAChat(final Plugin plugin, final Permission perms) {
 		super(perms);
 		if (this.allAssetsPlugin == null) {
-			Plugin allAssets = plugin.getServer().getPluginManager().getPlugin("AllAssets");
+			final Plugin allAssets = plugin.getServer().getPluginManager().getPlugin("AllAssets");
 			if ((allAssets != null) && (allAssets.isEnabled())) {
 				this.allAssetsPlugin = ((AllAssets) allAssets);
 				Bukkit.getServer().getPluginManager().registerEvents(new ChatServerListener(this), plugin);
@@ -38,14 +38,14 @@ public class AAChat extends Chat {
 	public class ChatServerListener implements Listener {
 		AAChat chat = null;
 
-		public ChatServerListener(AAChat aaeco) {
+		public ChatServerListener(final AAChat aaeco) {
 			this.chat = aaeco;
 		}
 
 		@EventHandler(priority = EventPriority.MONITOR)
-		public void onPluginEnable(PluginEnableEvent event) {
+		public void onPluginEnable(final PluginEnableEvent event) {
 			if (this.chat.allAssetsPlugin == null) {
-				Plugin chatPlugin = event.getPlugin();
+				final Plugin chatPlugin = event.getPlugin();
 				if ((chatPlugin.getDescription().getName().equals("AllAssets")) && (chatPlugin.getClass().getName().equals(VaultReflection.chat))) {
 					chat.allAssetsPlugin = (AllAssets) chatPlugin;
 					AAChat.log.info(String.format("[%s][Chat] %s hooked.", new Object[] { "AA", name }));
@@ -54,7 +54,7 @@ public class AAChat extends Chat {
 		}
 
 		@EventHandler(priority = EventPriority.MONITOR)
-		public void onPluginDisable(PluginDisableEvent event) {
+		public void onPluginDisable(final PluginDisableEvent event) {
 			if ((this.chat.allAssetsPlugin == null) || (!(event.getPlugin().getDescription().getName().equals("AllAssets"))))
 				return;
 			chat.allAssetsPlugin = null;
@@ -73,145 +73,145 @@ public class AAChat extends Chat {
 	}
 
 	@Override
-	public String getPlayerPrefix(String paramString1, String paramString2) {
+	public String getPlayerPrefix(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setPlayerPrefix(String paramString1, String paramString2, String paramString3) {
+	public void setPlayerPrefix(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getPlayerSuffix(String paramString1, String paramString2) {
+	public String getPlayerSuffix(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setPlayerSuffix(String paramString1, String paramString2, String paramString3) {
+	public void setPlayerSuffix(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getGroupPrefix(String paramString1, String paramString2) {
+	public String getGroupPrefix(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setGroupPrefix(String paramString1, String paramString2, String paramString3) {
+	public void setGroupPrefix(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getGroupSuffix(String paramString1, String paramString2) {
+	public String getGroupSuffix(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setGroupSuffix(String paramString1, String paramString2, String paramString3) {
+	public void setGroupSuffix(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public int getPlayerInfoInteger(String paramString1, String paramString2, String paramString3, int paramInt) {
+	public int getPlayerInfoInteger(final String paramString1, final String paramString2, final String paramString3, final int paramInt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setPlayerInfoInteger(String paramString1, String paramString2, String paramString3, int paramInt) {
+	public void setPlayerInfoInteger(final String paramString1, final String paramString2, final String paramString3, final int paramInt) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public int getGroupInfoInteger(String paramString1, String paramString2, String paramString3, int paramInt) {
+	public int getGroupInfoInteger(final String paramString1, final String paramString2, final String paramString3, final int paramInt) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setGroupInfoInteger(String paramString1, String paramString2, String paramString3, int paramInt) {
+	public void setGroupInfoInteger(final String paramString1, final String paramString2, final String paramString3, final int paramInt) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public double getPlayerInfoDouble(String paramString1, String paramString2, String paramString3, double paramDouble) {
+	public double getPlayerInfoDouble(final String paramString1, final String paramString2, final String paramString3, final double paramDouble) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setPlayerInfoDouble(String paramString1, String paramString2, String paramString3, double paramDouble) {
+	public void setPlayerInfoDouble(final String paramString1, final String paramString2, final String paramString3, final double paramDouble) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public double getGroupInfoDouble(String paramString1, String paramString2, String paramString3, double paramDouble) {
+	public double getGroupInfoDouble(final String paramString1, final String paramString2, final String paramString3, final double paramDouble) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setGroupInfoDouble(String paramString1, String paramString2, String paramString3, double paramDouble) {
+	public void setGroupInfoDouble(final String paramString1, final String paramString2, final String paramString3, final double paramDouble) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean getPlayerInfoBoolean(String paramString1, String paramString2, String paramString3, boolean paramBoolean) {
+	public boolean getPlayerInfoBoolean(final String paramString1, final String paramString2, final String paramString3, final boolean paramBoolean) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void setPlayerInfoBoolean(String paramString1, String paramString2, String paramString3, boolean paramBoolean) {
+	public void setPlayerInfoBoolean(final String paramString1, final String paramString2, final String paramString3, final boolean paramBoolean) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean getGroupInfoBoolean(String paramString1, String paramString2, String paramString3, boolean paramBoolean) {
+	public boolean getGroupInfoBoolean(final String paramString1, final String paramString2, final String paramString3, final boolean paramBoolean) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void setGroupInfoBoolean(String paramString1, String paramString2, String paramString3, boolean paramBoolean) {
+	public void setGroupInfoBoolean(final String paramString1, final String paramString2, final String paramString3, final boolean paramBoolean) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getPlayerInfoString(String paramString1, String paramString2, String paramString3, String paramString4) {
+	public String getPlayerInfoString(final String paramString1, final String paramString2, final String paramString3, final String paramString4) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setPlayerInfoString(String paramString1, String paramString2, String paramString3, String paramString4) {
+	public void setPlayerInfoString(final String paramString1, final String paramString2, final String paramString3, final String paramString4) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public String getGroupInfoString(String paramString1, String paramString2, String paramString3, String paramString4) {
+	public String getGroupInfoString(final String paramString1, final String paramString2, final String paramString3, final String paramString4) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setGroupInfoString(String paramString1, String paramString2, String paramString3, String paramString4) {
+	public void setGroupInfoString(final String paramString1, final String paramString2, final String paramString3, final String paramString4) {
 		// TODO Auto-generated method stub
 		
 	}

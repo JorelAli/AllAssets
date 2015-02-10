@@ -105,7 +105,7 @@ public class CommandAnnouncer {
 	}
 	
 	@Help(name="Announcer")
-	public void printHelp(CommandSender sender) {
+	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "Announcer", "/announcer start - starts the announcer", "/announcer stop - stops the announcer", "/announcer list - lists all announcements", "/announcer add <message> - adds a new message to the announcer", "/announcer remove <ID> - removes a message from the announcer based on its ID (use /announcer list to find the announcement ID)");
 	}
 

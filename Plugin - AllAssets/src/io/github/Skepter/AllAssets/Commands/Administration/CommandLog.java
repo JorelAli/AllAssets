@@ -58,7 +58,7 @@ public class CommandLog {
 		framework.registerCommands(this);
 		try {
 			max = ConfigHandler.config().getInt("maxLogAmount");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			max = 20;
 		}
 	}

@@ -52,30 +52,26 @@ public class CommandHelp {
 
 	static UltraMap<String, Method, Object, String, String, String> map = new UltraMap<String, Method, Object, String, String, String>();
 
-	public static void register(String commandName, Method method, Object obj) {
+	public static void register(final String commandName, final Method method, final Object obj) {
 		map.put(commandName.toLowerCase(), method, obj, null, null, null);
 	}
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
-			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
+		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
+			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName()))
 				//parse plugin data
 				return;
-			}
-		}
 
-		String lookup = args.getArgs()[0].toLowerCase();
-		for (Object key : map.keySet()) {
-			if (String.valueOf(key).equals(lookup)) {
+		final String lookup = args.getArgs()[0].toLowerCase();
+		for (final Object key : map.keySet())
+			if (String.valueOf(key).equals(lookup))
 				try {
 					((Method) map.get(lookup, 1)).invoke(map.get(lookup, 2), args.getSender());
 					return;
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					e.printStackTrace();
 				}
-			}
-		}
 
 		ErrorUtils.error(args.getSender(), "Could not find that!");
 		return;

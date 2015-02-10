@@ -43,11 +43,11 @@ public class Permission {
 
 	private static PlayerMap<UUID, PermissionAttachment> map = new PlayerMap<UUID, PermissionAttachment>(AllAssets.instance());
 
-	public static void registerPlayer(Player player) {
+	public static void registerPlayer(final Player player) {
 		map.put(player, player.addAttachment(AllAssets.instance()));
 	}
 
-	public static void unregisterPlayer(Player player) {
+	public static void unregisterPlayer(final Player player) {
 		player.removeAttachment(map.get(player));
 	}
 	

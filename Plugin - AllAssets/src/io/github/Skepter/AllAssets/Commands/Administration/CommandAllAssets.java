@@ -108,7 +108,7 @@ public class CommandAllAssets {
 	}
 	
 	@Help(name="AllAssets")
-	public void printHelp(CommandSender sender) {
+	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "AllAssets", "/allassets commands - shows a list of commands", "/allassets reload - reloads the entire plugin");
 	}
 }

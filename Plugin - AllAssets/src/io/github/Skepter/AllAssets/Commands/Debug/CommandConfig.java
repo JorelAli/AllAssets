@@ -68,9 +68,8 @@ public class CommandConfig {
 				args.getSender().sendMessage(AllAssets.title + "Config, Features");
 			case "view":
 				args.getSender().sendMessage(TextUtils.title("Config"));
-				for (final String key : ConfigHandler.config().getKeys()) {
+				for (final String key : ConfigHandler.config().getKeys())
 					args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
-				}
 			}
 			return;
 		case 2:

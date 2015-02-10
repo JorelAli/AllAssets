@@ -69,16 +69,13 @@ public class CommandRestore {
 		case 1:
 			if (args.getArgs()[0].equalsIgnoreCase("list")) {
 				args.getSender().sendMessage(TextUtils.title("List of worlds"));
-				for (File file : AllAssets.getWorldStorage().listFiles()) {
+				for (final File file : AllAssets.getWorldStorage().listFiles())
 					args.getSender().sendMessage(file.getName());
-				}
 				return;
 			} else {
-				for (File file : AllAssets.getWorldStorage().listFiles()) {
-					if (args.getArgs()[0].equalsIgnoreCase(file.getName())) {
+				for (final File file : AllAssets.getWorldStorage().listFiles())
+					if (args.getArgs()[0].equalsIgnoreCase(file.getName()))
 						new YesNoConversation(args.getSender(), new RestorePrompt(args.getArgs()[0].toLowerCase()), "Are you sure you want to restore this world? Your previous world cannot be recovered!");
-					}
-				}
 				return;
 			}
 		}
@@ -87,9 +84,8 @@ public class CommandRestore {
 	@Completer(name = "restore", aliases = { "revert" })
 	public List<String> backupCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();
-		for (File file : AllAssets.getWorldStorage().listFiles()) {
+		for (final File file : AllAssets.getWorldStorage().listFiles())
 			list.add(file.getName());
-		}
 		return list;
 	}
 
@@ -97,17 +93,17 @@ public class CommandRestore {
 
 		private final String world;
 
-		public RestorePrompt(String world) {
+		public RestorePrompt(final String world) {
 			this.world = world;
 		}
 
 		@Override
-		public String getPromptText(ConversationContext context) {
+		public String getPromptText(final ConversationContext context) {
 			return YesNoConversation.getPromptText();
 		}
 
 		@Override
-		protected Prompt acceptValidatedInput(final ConversationContext context, boolean b) {
+		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 			if (b) {
 				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
 					@Override
@@ -117,16 +113,15 @@ public class CommandRestore {
 							new File(".", world).mkdirs();
 							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(".", world));
 							Bukkit.getServer().createWorld(new WorldCreator(world));
-						} catch (IOException e) {
+						} catch (final IOException e) {
 							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst restoring the world");
 							return;
 						}
 					}
 				});
 				context.getForWhom().sendRawMessage(AllAssets.title + world + " was restored successfully");
-			} else {
+			} else
 				context.getForWhom().sendRawMessage(AllAssets.title + "Restoration for " +  world + " was cancelled");
-			}
 			return Prompt.END_OF_CONVERSATION;
 		}
 

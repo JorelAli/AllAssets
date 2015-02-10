@@ -46,13 +46,13 @@ public class CommandGive {
 
 	@CommandHandler(name = "give", aliases = { "i", "item" }, permission = "give", description = "Gives items", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
+		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
 		try {
 			args.getPlayer().getInventory().addItem(iF.toStack());
-		} catch (IllegalArgumentException e1) {
+		} catch (final IllegalArgumentException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (Exception e1) {
+		} catch (final Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

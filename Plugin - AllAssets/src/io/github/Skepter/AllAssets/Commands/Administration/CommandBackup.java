@@ -69,37 +69,33 @@ public class CommandBackup {
 		case 1:
 			if (args.getArgs()[0].equalsIgnoreCase("list")) {
 				args.getSender().sendMessage(TextUtils.title("List of worlds"));
-				for (World world : Bukkit.getWorlds()) {
+				for (final World world : Bukkit.getWorlds())
 					args.getSender().sendMessage(world.getName());
-				}
 				return;
 			} else {
 				World world = null;
 				try {
 					world = Bukkit.getWorld(args.getArgs()[0]);
-				} catch (Exception e) {
+				} catch (final Exception e) {
 					ErrorUtils.worldNotFound(args.getSender(), args.getArgs()[0]);
 					return;
 				}
 				final World w = world;
 
-				for (File file : AllAssets.getWorldStorage().listFiles()) {
-					if (file.isDirectory()) {
+				for (final File file : AllAssets.getWorldStorage().listFiles())
+					if (file.isDirectory())
 						if (file.getName().equals(world.getName())) {
 							args.getSender().sendMessage(AllAssets.title + "There is already a backup for " + world.getName() + ", backing it up again will lose the previous backup");
 							new YesNoConversation(args.getSender(), new BackupPrompt(w), "Do you want to continue?");
 							return;
-						} else {
+						} else
 							break;
-						}
-					}
-				}
 				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
 					@Override
 					public void run() {
 						try {
 							FileUtils.copyDirectory(w.getWorldFolder(), new File(AllAssets.getWorldStorage(), w.getName()));
-						} catch (IOException e) {
+						} catch (final IOException e) {
 							ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
 							return;
 						}
@@ -114,42 +110,41 @@ public class CommandBackup {
 	@Completer(name = "backup")
 	public List<String> backupCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();
-		for (World world : Bukkit.getWorlds())
+		for (final World world : Bukkit.getWorlds())
 			list.add(world.getName());
 		return list;
 	}
 
 	private class BackupPrompt extends BooleanPrompt {
 
-		private World world;
+		private final World world;
 
-		public BackupPrompt(World world) {
+		public BackupPrompt(final World world) {
 			this.world = world;
 		}
 
 		@Override
-		public String getPromptText(ConversationContext context) {
+		public String getPromptText(final ConversationContext context) {
 			return YesNoConversation.getPromptText();
 		}
 
 		@Override
-		protected Prompt acceptValidatedInput(final ConversationContext context, boolean b) {
+		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 			if (b) {
 				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
 					@Override
 					public void run() {
 						try {
 							FileUtils.copyDirectory(world.getWorldFolder(), new File(AllAssets.getWorldStorage(), world.getName()));
-						} catch (IOException e) {
+						} catch (final IOException e) {
 							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst backing up the world");
 							return;
 						}
 					}
 				});
 				context.getForWhom().sendRawMessage(AllAssets.title + world.getName() + " was backed up successfully");
-			} else {
+			} else
 				context.getForWhom().sendRawMessage(AllAssets.title + " Back up for " + world.getName() + " was cancelled");
-			}
 			return Prompt.END_OF_CONVERSATION;
 		}
 

@@ -166,10 +166,9 @@ public class CommandFramework {
 				registerCompleter(comp.name(), m, obj);
 				for (final String alias : comp.aliases())
 					registerCompleter(alias, m, obj);
-			} else if (m.getAnnotation(Help.class) != null) {
+			} else if (m.getAnnotation(Help.class) != null)
 				//Nav
 				CommandHelp.register(m.getAnnotation(Help.class).name(), m, obj);
-			}
 	}
 
 	/** Registers all the commands under the plugin's help */

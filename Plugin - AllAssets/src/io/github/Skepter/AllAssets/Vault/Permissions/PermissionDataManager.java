@@ -96,27 +96,27 @@ public class PermissionDataManager extends CustomConfig {
 		super(new File(AllAssets.getStorage(), "PermissionData.yml"), "Permissions");
 	}
 
-	public List<String> getWorldPermissions(String worldName, GroupDataType type, String dataName) {
-		String path = getPath(type, "Worlds.", worldName) + dataName + ".Permissions";
+	public List<String> getWorldPermissions(final String worldName, final GroupDataType type, final String dataName) {
+		final String path = getPath(type, "Worlds.", worldName) + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
-	public List<String> getGlobalPermissions(GroupDataType type, String dataName) {
-		String path = getPath(type, "Global.") + dataName + ".Permissions";
+	public List<String> getGlobalPermissions(final GroupDataType type, final String dataName) {
+		final String path = getPath(type, "Global.") + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
-	public String getWorldAffix(String worldName, GroupDataType type, String dataName, Affix affix) {
-		String path = getAffix(affix, getPath(type, "Worlds.", worldName) + dataName + ".");
+	public String getWorldAffix(final String worldName, final GroupDataType type, final String dataName, final Affix affix) {
+		final String path = getAffix(affix, getPath(type, "Worlds.", worldName) + dataName + ".");
 		return getDataFile().getString(path);
 	}
 
-	public String getGlobalAffix(GroupDataType type, String dataName, Affix affix) {
-		String path = getAffix(affix, getPath(type, "Global.") + dataName + ".");
+	public String getGlobalAffix(final GroupDataType type, final String dataName, final Affix affix) {
+		final String path = getAffix(affix, getPath(type, "Global.") + dataName + ".");
 		return getDataFile().getString(path);
 	}
 
-	private String getAffix(Affix affix, String path) {
+	private String getAffix(final Affix affix, String path) {
 		switch (affix) {
 		case PREFIX:
 			path = path + "Prefix";
@@ -128,7 +128,7 @@ public class PermissionDataManager extends CustomConfig {
 		return path;
 	}
 
-	private String getPath(GroupDataType type, String path) {
+	private String getPath(final GroupDataType type, String path) {
 		switch (type) {
 		case GROUP:
 			path = path + ".Groups.";
@@ -140,7 +140,7 @@ public class PermissionDataManager extends CustomConfig {
 		return path;
 	}
 
-	private String getPath(GroupDataType type, String path, String worldName) {
+	private String getPath(final GroupDataType type, String path, final String worldName) {
 		switch (type) {
 		case GROUP:
 			path = path + worldName + ".Groups.";

@@ -39,16 +39,16 @@ import java.io.IOException;
 
 public class IDReader {
 
-	public static String readID(String str) {
+	public static String readID(final String str) {
 
-		File csvFile = new File(AllAssets.instance().getDataFolder(), "ItemData.csv");
+		final File csvFile = new File(AllAssets.instance().getDataFolder(), "ItemData.csv");
 		BufferedReader br = null;
 		String line = "";
-		String cvsSplitBy = "\t";
+		final String cvsSplitBy = "\t";
 
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
-		} catch (FileNotFoundException e) {
+		} catch (final FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -56,17 +56,17 @@ public class IDReader {
 			while ((line = br.readLine()) != null) {
 
 				// use comma as separator
-				String[] data = line.split(cvsSplitBy);
+				final String[] data = line.split(cvsSplitBy);
 				if (data[0].equalsIgnoreCase(str))
 					return data[1] + ":" + data[2];
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			br.close();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

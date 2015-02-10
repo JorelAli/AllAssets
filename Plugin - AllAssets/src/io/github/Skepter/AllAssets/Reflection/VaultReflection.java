@@ -49,32 +49,32 @@ public class VaultReflection {
 		ECONOMY, PERMISSION, CHAT;
 	}
 
-	private void load(VaultType type) {
+	private void load(final VaultType type) {
 		try {
 			switch (type) {
 			case ECONOMY:
-				Method vaultEconomy = vault.getClass().getDeclaredMethod("hookEconomy", String.class, Class.class, ServicePriority.class, String[].class);
+				final Method vaultEconomy = vault.getClass().getDeclaredMethod("hookEconomy", String.class, Class.class, ServicePriority.class, String[].class);
 				vaultEconomy.setAccessible(true);
 				vaultEconomy.invoke(vault, "AAEco", AAEco.class, ServicePriority.Highest, new String[] { economy });
 				AllAssets.instance().economy = Bukkit.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
 				break;
 			case PERMISSION:
-				Permission aaPerms = (Permission) AAPerms.class.getConstructor(new Class[] { Plugin.class }).newInstance(new Object[] { vault });
+				final Permission aaPerms = AAPerms.class.getConstructor(new Class[] { Plugin.class }).newInstance(new Object[] { vault });
 				sm.register(Permission.class, aaPerms, vault, ServicePriority.Highest);
 
-				Field permsField = vault.getClass().getDeclaredField("perms");
+				final Field permsField = vault.getClass().getDeclaredField("perms");
 				permsField.setAccessible(true);
-				permsField.set(vault, ((Permission) sm.getRegistration(Permission.class).getProvider()));
+				permsField.set(vault, (sm.getRegistration(Permission.class).getProvider()));
 				AllAssets.instance().permission = Bukkit.getServer().getServicesManager().getRegistration(Permission.class).getProvider();
 				break;
 			case CHAT:
-				Method vaultChat = vault.getClass().getDeclaredMethod("hookChat", String.class, Class.class, ServicePriority.class, String[].class);
+				final Method vaultChat = vault.getClass().getDeclaredMethod("hookChat", String.class, Class.class, ServicePriority.class, String[].class);
 				vaultChat.setAccessible(true);
 				vaultChat.invoke(vault, "AAChat", AAChat.class, ServicePriority.Highest, new String[] { chat });
 				AllAssets.instance().chat = Bukkit.getServer().getServicesManager().getRegistration(Chat.class).getProvider();
 				break;
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}

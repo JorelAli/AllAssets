@@ -25,12 +25,12 @@ public class AAEco implements Economy {
 	public class EconomyServerListener implements Listener {
 		AAEco economy = null;
 
-		public EconomyServerListener(AAEco aaeco) {
+		public EconomyServerListener(final AAEco aaeco) {
 			this.economy = aaeco;
 		}
 
 		@EventHandler(priority = EventPriority.MONITOR)
-		public void onPluginDisable(PluginDisableEvent event) {
+		public void onPluginDisable(final PluginDisableEvent event) {
 			if ((this.economy.allAssetsPlugin == null) || (!(event.getPlugin().getDescription().getName().equals("AllAssets"))))
 				return;
 			economy.allAssetsPlugin = null;
@@ -38,9 +38,9 @@ public class AAEco implements Economy {
 		}
 
 		@EventHandler(priority = EventPriority.MONITOR)
-		public void onPluginEnable(PluginEnableEvent event) {
+		public void onPluginEnable(final PluginEnableEvent event) {
 			if (this.economy.allAssetsPlugin == null) {
-				Plugin ec = event.getPlugin();
+				final Plugin ec = event.getPlugin();
 				if ((ec.getDescription().getName().equals("AllAssets")) && (ec.getClass().getName().equals(VaultReflection.economy))) {
 					economy.allAssetsPlugin = (AllAssets) ec;
 					AAEco.log.info(String.format("[%s][Economy] %s hooked.", new Object[] { "AA", name }));
@@ -58,9 +58,9 @@ public class AAEco implements Economy {
 	private final EconomyResponse bankEconomyResponse = new EconomyResponse(0.0D, 0.0D, ResponseType.NOT_IMPLEMENTED, name + " does not support banks!");
 	
 
-	public AAEco(Plugin plugin) {
+	public AAEco(final Plugin plugin) {
 		if (this.allAssetsPlugin == null) {
-			Plugin allAssets = plugin.getServer().getPluginManager().getPlugin("AllAssets");
+			final Plugin allAssets = plugin.getServer().getPluginManager().getPlugin("AllAssets");
 			if ((allAssets != null) && (allAssets.isEnabled())) {
 				this.allAssetsPlugin = ((AllAssets) allAssets);
 				Bukkit.getServer().getPluginManager().registerEvents(new EconomyServerListener(this), plugin);
@@ -70,55 +70,55 @@ public class AAEco implements Economy {
 	}
 
 	@Override
-	public EconomyResponse bankBalance(String paramString) {
+	public EconomyResponse bankBalance(final String paramString) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse bankDeposit(String paramString, double paramDouble) {
+	public EconomyResponse bankDeposit(final String paramString, final double paramDouble) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse bankHas(String paramString, double paramDouble) {
+	public EconomyResponse bankHas(final String paramString, final double paramDouble) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse bankWithdraw(String paramString, double paramDouble) {
+	public EconomyResponse bankWithdraw(final String paramString, final double paramDouble) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse createBank(String arg0, OfflinePlayer arg1) {
+	public EconomyResponse createBank(final String arg0, final OfflinePlayer arg1) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse createBank(String paramString1, String paramString2) {
+	public EconomyResponse createBank(final String paramString1, final String paramString2) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public boolean createPlayerAccount(OfflinePlayer arg0) {
+	public boolean createPlayerAccount(final OfflinePlayer arg0) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean createPlayerAccount(OfflinePlayer arg0, String arg1) {
+	public boolean createPlayerAccount(final OfflinePlayer arg0, final String arg1) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean createPlayerAccount(String playerName) {
+	public boolean createPlayerAccount(final String playerName) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean createPlayerAccount(String playerName, String worldName) {
+	public boolean createPlayerAccount(final String playerName, final String worldName) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -136,37 +136,37 @@ public class AAEco implements Economy {
 	}
 
 	@Override
-	public EconomyResponse deleteBank(String paramString) {
+	public EconomyResponse deleteBank(final String paramString) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse depositPlayer(OfflinePlayer arg0, double arg1) {
+	public EconomyResponse depositPlayer(final OfflinePlayer arg0, final double arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse depositPlayer(OfflinePlayer arg0, String arg1, double arg2) {
+	public EconomyResponse depositPlayer(final OfflinePlayer arg0, final String arg1, final double arg2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse depositPlayer(String playerName, double value) {
+	public EconomyResponse depositPlayer(final String playerName, final double value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse depositPlayer(String playerName, String worldName, double value) {
+	public EconomyResponse depositPlayer(final String playerName, final String worldName, final double value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	//format into readable string
-	public String format(double value) {
+	public String format(final double value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -177,25 +177,25 @@ public class AAEco implements Economy {
 	}
 
 	@Override
-	public double getBalance(OfflinePlayer arg0) {
+	public double getBalance(final OfflinePlayer arg0) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public double getBalance(OfflinePlayer arg0, String arg1) {
+	public double getBalance(final OfflinePlayer arg0, final String arg1) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public double getBalance(String playerName) {
+	public double getBalance(final String playerName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public double getBalance(String playerName, String worldName) {
+	public double getBalance(final String playerName, final String worldName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -211,49 +211,49 @@ public class AAEco implements Economy {
 	}
 
 	@Override
-	public boolean has(OfflinePlayer player, double value) {
+	public boolean has(final OfflinePlayer player, final double value) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean has(OfflinePlayer arg0, String arg1, double arg2) {
+	public boolean has(final OfflinePlayer arg0, final String arg1, final double arg2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean has(String paramString, double paramDouble) {
+	public boolean has(final String paramString, final double paramDouble) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean has(String paramString1, String paramString2, double paramDouble) {
+	public boolean has(final String paramString1, final String paramString2, final double paramDouble) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean hasAccount(OfflinePlayer arg0) {
+	public boolean hasAccount(final OfflinePlayer arg0) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean hasAccount(OfflinePlayer arg0, String arg1) {
+	public boolean hasAccount(final OfflinePlayer arg0, final String arg1) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean hasAccount(String paramString) {
+	public boolean hasAccount(final String paramString) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean hasAccount(String paramString1, String paramString2) {
+	public boolean hasAccount(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -264,24 +264,24 @@ public class AAEco implements Economy {
 	}
 
 	@Override
-	public EconomyResponse isBankMember(String arg0, OfflinePlayer arg1) {
+	public EconomyResponse isBankMember(final String arg0, final OfflinePlayer arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse isBankMember(String paramString1, String paramString2) {
+	public EconomyResponse isBankMember(final String paramString1, final String paramString2) {
 		return bankEconomyResponse;
 	}
 
 	@Override
-	public EconomyResponse isBankOwner(String arg0, OfflinePlayer arg1) {
+	public EconomyResponse isBankOwner(final String arg0, final OfflinePlayer arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse isBankOwner(String paramString1, String paramString2) {
+	public EconomyResponse isBankOwner(final String paramString1, final String paramString2) {
 		return bankEconomyResponse;
 	}
 
@@ -291,25 +291,25 @@ public class AAEco implements Economy {
 	}
 
 	@Override
-	public EconomyResponse withdrawPlayer(OfflinePlayer arg0, double arg1) {
+	public EconomyResponse withdrawPlayer(final OfflinePlayer arg0, final double arg1) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse withdrawPlayer(OfflinePlayer arg0, String arg1, double arg2) {
+	public EconomyResponse withdrawPlayer(final OfflinePlayer arg0, final String arg1, final double arg2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse withdrawPlayer(String paramString, double paramDouble) {
+	public EconomyResponse withdrawPlayer(final String paramString, final double paramDouble) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public EconomyResponse withdrawPlayer(String paramString1, String paramString2, double paramDouble) {
+	public EconomyResponse withdrawPlayer(final String paramString1, final String paramString2, final double paramDouble) {
 		// TODO Auto-generated method stub
 		return null;
 	}

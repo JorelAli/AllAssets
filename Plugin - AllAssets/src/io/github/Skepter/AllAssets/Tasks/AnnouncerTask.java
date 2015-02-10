@@ -47,7 +47,7 @@ public class AnnouncerTask implements Runnable {
 	public void run() {
 		if (ConfigHandler.config().getBoolean("randomAnnouncer"))
 			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, ConfigHandler.announcer().getKeys().size())));
-		else {
+		else
 			try {
 				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getAnnouncer(count)));
 				count++;
@@ -56,7 +56,6 @@ public class AnnouncerTask implements Runnable {
 				count = 0;
 				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getAnnouncer(count)));
 			}
-		}
 			
 	}
 

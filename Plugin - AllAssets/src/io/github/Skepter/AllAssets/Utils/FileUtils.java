@@ -58,7 +58,7 @@ public class FileUtils {
 	/** Saves an object to a file */
 	public static void saveBytesSecurely(final byte[] bytes, final File file) throws Exception {
 		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true));
-		char[] data = Base64Coder.encode(bytes);
+		final char[] data = Base64Coder.encode(bytes);
 		oos.writeObject(data);
 		oos.flush();
 		oos.close();
@@ -78,7 +78,7 @@ public class FileUtils {
 	/** Saves an object to a file */
 	public static void saveStringSecurely(final String string, final File file) throws Exception {
 		final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file, true));
-		String data = Base64Coder.encodeString(string);
+		final String data = Base64Coder.encodeString(string);
 		oos.writeObject(data);
 		oos.flush();
 		oos.close();

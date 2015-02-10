@@ -22,9 +22,9 @@ public class AAPerms extends Permission {
 	private final String name = "AAPerms";
 	private AllAssets allAssetsPlugin;
 
-	public AAPerms(Plugin plugin) {
+	public AAPerms(final Plugin plugin) {
 		if (this.allAssetsPlugin == null) {
-			Plugin allAssets = plugin.getServer().getPluginManager().getPlugin("AllAssets");
+			final Plugin allAssets = plugin.getServer().getPluginManager().getPlugin("AllAssets");
 			if ((allAssets != null) && (allAssets.isEnabled())) {
 				this.allAssetsPlugin = ((AllAssets) allAssets);
 				Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
@@ -36,14 +36,14 @@ public class AAPerms extends Permission {
 	public class PermissionServerListener implements Listener {
 		AAPerms permissions = null;
 
-		public PermissionServerListener(AAPerms aaeco) {
+		public PermissionServerListener(final AAPerms aaeco) {
 			this.permissions = aaeco;
 		}
 
 		@EventHandler(priority = EventPriority.MONITOR)
-		public void onPluginEnable(PluginEnableEvent event) {
+		public void onPluginEnable(final PluginEnableEvent event) {
 			if (this.permissions.allAssetsPlugin == null) {
-				Plugin perms = event.getPlugin();
+				final Plugin perms = event.getPlugin();
 				if ((perms.getDescription().getName().equals("AllAssets")) && (perms.getClass().getName().equals(VaultReflection.permissions))) {
 					permissions.allAssetsPlugin = (AllAssets) perms;
 					AAPerms.log.info(String.format("[%s][Permission] %s hooked.", new Object[] { "AA", name }));
@@ -52,7 +52,7 @@ public class AAPerms extends Permission {
 		}
 
 		@EventHandler(priority = EventPriority.MONITOR)
-		public void onPluginDisable(PluginDisableEvent event) {
+		public void onPluginDisable(final PluginDisableEvent event) {
 			if ((this.permissions.allAssetsPlugin == null) || (!(event.getPlugin().getDescription().getName().equals("AllAssets"))))
 				return;
 			permissions.allAssetsPlugin = null;
@@ -67,31 +67,31 @@ public class AAPerms extends Permission {
 	}
 
 	@Override
-	public String[] getPlayerGroups(String paramString1, String paramString2) {
+	public String[] getPlayerGroups(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String getPrimaryGroup(String paramString1, String paramString2) {
+	public String getPrimaryGroup(final String paramString1, final String paramString2) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean groupAdd(String paramString1, String paramString2, String paramString3) {
+	public boolean groupAdd(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean groupHas(String paramString1, String paramString2, String paramString3) {
+	public boolean groupHas(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean groupRemove(String paramString1, String paramString2, String paramString3) {
+	public boolean groupRemove(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -109,37 +109,37 @@ public class AAPerms extends Permission {
 	}
 
 	@Override
-	public boolean playerAdd(String paramString1, String paramString2, String paramString3) {
+	public boolean playerAdd(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean playerAddGroup(String paramString1, String paramString2, String paramString3) {
+	public boolean playerAddGroup(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean playerHas(String paramString1, String paramString2, String paramString3) {
+	public boolean playerHas(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean playerInGroup(String paramString1, String paramString2, String paramString3) {
+	public boolean playerInGroup(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean playerRemove(String paramString1, String paramString2, String paramString3) {
+	public boolean playerRemove(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean playerRemoveGroup(String paramString1, String paramString2, String paramString3) {
+	public boolean playerRemoveGroup(final String paramString1, final String paramString2, final String paramString3) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -229,16 +229,15 @@ public class AllAssets extends JavaPlugin {
 	/** Dev block - runs devvy stuff
 	 * 
 	 * @param loadTime - true means load at the END, false means load NORMALLY */
-	private void dev(boolean loadTime) {
+	private void dev(final boolean loadTime) {
 		if (!loadTime) {
 			new CommandGive(framework);
 			new CommandHelp(framework);
 			r(new CommandCommandBlock(framework));
 			new CommandFakeOp(framework);
 			new CommandFakeDeop(framework);
-		} else {
+		} else
 			new VaultReflection().loadAAEco();
-		}
 	}
 
 	//best command ever :D (yes, the dollar sign IS NECESSARY!)
@@ -335,12 +334,11 @@ public class AllAssets extends JavaPlugin {
 			new CommandGhost(framework);
 		if (ConfigHandler.features().getBoolean("Glow"))
 			new CommandGlow(framework);
-		if (ConfigHandler.features().getBoolean("God")) {
+		if (ConfigHandler.features().getBoolean("God"))
 			if (ConfigHandler.config().getBoolean("useNMSGod"))
 				new CommandNMSGod(framework);
 			else
 				r(new CommandGod(framework));
-		}
 		if (ConfigHandler.features().getBoolean("Grief"))
 			new CommandGrief(framework);
 		if (ConfigHandler.features().getBoolean("Inventory"))
@@ -505,7 +503,7 @@ public class AllAssets extends JavaPlugin {
 
 	/** Returns the storage folder to backing up worlds */
 	public static File getWorldStorage() {
-		File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
+		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
 		if (!file.exists())
 			file.mkdirs();
 		return file;

@@ -59,24 +59,23 @@ public class CommandCommandBlock implements Listener {
 	@CommandHandler(name = "$firework", permission = "$console", description = "Launches a firework", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
 		if (args.getSender() instanceof BlockCommandSender) {
-			BlockCommandSender sender = (BlockCommandSender) args.getSender();
-			ItemStack is = ItemSerializer.fromString(args.getArgs()[0]);
+			final BlockCommandSender sender = (BlockCommandSender) args.getSender();
+			final ItemStack is = ItemSerializer.fromString(args.getArgs()[0]);
 			FireworkUtils.spawnFireworkFromItemStack(LocationUtils.getCenter(sender.getBlock().getLocation()), is);
 		}
 		return;
 	}
 
 	@EventHandler
-	public void onClick(PlayerInteractEvent event) {
-		if (event.getClickedBlock().getState() instanceof CommandBlock && event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+	public void onClick(final PlayerInteractEvent event) {
+		if ((event.getClickedBlock().getState() instanceof CommandBlock) && event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			if (event.getPlayer().getItemInHand().getType().equals(Material.FIREWORK)) {
 				event.setCancelled(true);
-				CommandBlock block = (CommandBlock) event.getClickedBlock().getState();
+				final CommandBlock block = (CommandBlock) event.getClickedBlock().getState();
 				block.setCommand("$firework " + ItemSerializer.toString(event.getPlayer().getItemInHand()));
 				block.update(true);
 				event.getPlayer().closeInventory();
 				event.getPlayer().sendMessage(AllAssets.title + "Added firework to commandblock");
 			}
-		}
 	}
 }
