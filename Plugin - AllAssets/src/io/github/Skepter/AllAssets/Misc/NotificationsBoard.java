@@ -34,6 +34,7 @@ package io.github.Skepter.AllAssets.Misc;
 import io.github.Skepter.AllAssets.Libs.SimpleScoreboard;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -56,6 +57,13 @@ public class NotificationsBoard {
 	//ONLY allow admins (those with perms) to have notifications. allow them to toggle on/off
 	public NotificationsBoard(final Player player) {
 		this.player = player;
+	}
+	
+	@Deprecated
+	public static void updateAll() {
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			new NotificationsBoard(p).updateBoard();
+		}
 	}
 
 	public void updateBoard() {

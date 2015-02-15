@@ -59,14 +59,22 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockFromToEvent;
+import org.bukkit.event.block.BlockPhysicsEvent;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
-public class CommandDebug {
+public class CommandDebug implements Listener {
 
 	int taskID = 0;
 
@@ -306,6 +314,49 @@ public class CommandDebug {
 		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted. Conflicting plugins:");
 		for (final String s : conflictingPlugins)
 			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
+	}
+
+	boolean physics = true;
+
+	@CommandHandler(name = "debug.physics", permission = "debug", description = "Toggles server physics", usage = "Use <command>", isListed = false)
+	public void stopPhysics(final CommandArgs args) {
+		if (physics) {
+			physics = false;
+			Bukkit.broadcastMessage(AllAssets.title + "Paused server physics");
+		} else {
+			physics = true;
+			Bukkit.broadcastMessage(AllAssets.title + "Resumed server physics");
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onPlace(PlayerInteractEvent event) {
+		if (!physics && event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+			if (event.getPlayer().getItemInHand().getType().isBlock()) {
+				Block b = event.getClickedBlock().getRelative(event.getBlockFace());
+				b.setType(event.getPlayer().getItemInHand().getType());
+				b.setData(event.getPlayer().getItemInHand().getData().getData());
+			}
+		}
+	}
+
+	@EventHandler
+	public void onPhysics(BlockPhysicsEvent event) {
+		if (!physics)
+			event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onBlockFall(EntityChangeBlockEvent event) {
+		if (!physics)
+			event.setCancelled(true);
+	}
+
+	@EventHandler
+	public void onLiquidFlow(BlockFromToEvent event) {
+		if (!physics)
+			event.setCancelled(true);
 	}
 
 	@Completer(name = "debug")

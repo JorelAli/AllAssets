@@ -101,6 +101,7 @@ import io.github.Skepter.AllAssets.Listeners.ServerListingListener;
 import io.github.Skepter.AllAssets.Listeners.SignListener;
 import io.github.Skepter.AllAssets.Listeners.SkeletonArrowListener;
 import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
+import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Reflection.VaultReflection;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.FileUtils;
@@ -243,6 +244,7 @@ public class AllAssets extends JavaPlugin {
 	//best command ever :D (yes, the dollar sign IS NECESSARY!)
 	//$firework SXRlbVN0YWNrOgogID09OiBvcmcuYnVra2l0LmludmVudG9yeS5JdGVtU3RhY2sKICB0eXBlOiBGSVJFV09SSwogIG1ldGE6CiAgICA9PTogSXRlbU1ldGEKICAgIG1ldGEtdHlwZTogRklSRVdPUksKICAgIGZpcmV3b3JrLWVmZmVjdHM6CiAgICAtID09OiBGaXJld29yawogICAgICBmbGlja2VyOiBmYWxzZQogICAgICB0cmFpbDogdHJ1ZQogICAgICBjb2xvcnM6CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIGZhZGUtY29sb3JzOgogICAgICAtID09OiBDb2xvcgogICAgICAgIFJFRDogMTc5CiAgICAgICAgQkxVRTogNDQKICAgICAgICBHUkVFTjogNDkKICAgICAgLSA9PTogQ29sb3IKICAgICAgICBSRUQ6IDM3CiAgICAgICAgQkxVRTogMTQ2CiAgICAgICAgR1JFRU46IDQ5CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAxNzEKICAgICAgICBCTFVFOiAxNzEKICAgICAgICBHUkVFTjogMTcxCiAgICAgIHR5cGU6IEJBTExfTEFSR0UKw
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
@@ -309,7 +311,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.features().getBoolean("ConsoleLog"))
 			new CommandConsoleLog(framework);
 		if (ConfigHandler.features().getBoolean("Debug"))
-			new CommandDebug(framework);
+			r(new CommandDebug(framework));
 		if (ConfigHandler.features().getBoolean("Disable"))
 			new CommandDisable(framework);
 		if (ConfigHandler.features().getBoolean("DiscoArmor"))
@@ -417,6 +419,9 @@ public class AllAssets extends JavaPlugin {
 
 		/** Reloading stuff */
 
+		/* Update NotificationsBoard for all admins */
+		NotificationsBoard.updateAll();
+		
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers())
