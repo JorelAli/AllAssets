@@ -37,10 +37,12 @@ import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class CommandAFK implements Listener {
@@ -63,11 +65,20 @@ public class CommandAFK implements Listener {
 			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
-			AllAssets.instance();
 			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
+	}
+
+	@EventHandler
+	public void onJoin(PlayerJoinEvent event) {
+		//TODO add to the features file
+		StringBuilder builder = new StringBuilder();
+		for (Player player : Bukkit.getOnlinePlayers())
+			if (new User(player).isAFK())
+				builder.append(player.getName() + ", ");
+		event.getPlayer().sendMessage(AllAssets.title + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
 	}
 
 	@EventHandler

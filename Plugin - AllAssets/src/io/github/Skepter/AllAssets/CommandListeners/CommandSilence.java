@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -55,7 +56,7 @@ public class CommandSilence implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public static List<UUID> players = new ArrayList<UUID>();
+	public List<UUID> players = new ArrayList<UUID>();
 
 	@CommandHandler(name = "silence", permission = "silence", description = "Silences a player", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
@@ -79,7 +80,8 @@ public class CommandSilence implements Listener {
 
 	@EventHandler
 	public void playerInteract(final AsyncPlayerChatEvent event) {
-		event.getRecipients().removeAll(players);
+		for (UUID u : players)
+			event.getRecipients().remove(Bukkit.getPlayer(u));
 	}
 
 }

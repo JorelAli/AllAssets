@@ -51,6 +51,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+/*TODO - only works IF the receiver has sc turned on as well*/
 public class CommandStaffChat implements Listener {
 
 	public CommandStaffChat(final CommandFramework framework) {

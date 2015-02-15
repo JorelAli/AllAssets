@@ -62,85 +62,85 @@ public class AAPerms extends Permission {
 
 	@Override
 	public String[] getGroups() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public String[] getPlayerGroups(final String paramString1, final String paramString2) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public String getPrimaryGroup(final String paramString1, final String paramString2) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public boolean groupAdd(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean groupHas(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean groupRemove(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean hasGroupSupport() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean hasSuperPermsCompat() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean playerAdd(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean playerAddGroup(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean playerHas(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean playerInGroup(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean playerRemove(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean playerRemoveGroup(final String paramString1, final String paramString2, final String paramString3) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 

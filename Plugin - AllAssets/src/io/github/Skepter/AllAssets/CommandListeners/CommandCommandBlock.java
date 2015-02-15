@@ -68,8 +68,9 @@ public class CommandCommandBlock implements Listener {
 
 	@EventHandler
 	public void onClick(final PlayerInteractEvent event) {
-		if ((event.getClickedBlock().getState() instanceof CommandBlock) && event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
-			if (event.getPlayer().getItemInHand().getType().equals(Material.FIREWORK)) {
+		//TODO fix - chqnge order of optiration
+		if (event.getPlayer().getItemInHand().getType().equals(Material.FIREWORK)) {
+			if ((event.getClickedBlock().getState() instanceof CommandBlock) && event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 				event.setCancelled(true);
 				final CommandBlock block = (CommandBlock) event.getClickedBlock().getState();
 				block.setCommand("$firework " + ItemSerializer.toString(event.getPlayer().getItemInHand()));
@@ -77,5 +78,6 @@ public class CommandCommandBlock implements Listener {
 				event.getPlayer().closeInventory();
 				event.getPlayer().sendMessage(AllAssets.title + "Added firework to commandblock");
 			}
+		}
 	}
 }

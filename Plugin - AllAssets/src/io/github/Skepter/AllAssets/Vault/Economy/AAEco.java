@@ -101,37 +101,37 @@ public class AAEco implements Economy {
 
 	@Override
 	public boolean createPlayerAccount(final OfflinePlayer arg0) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean createPlayerAccount(final OfflinePlayer arg0, final String arg1) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean createPlayerAccount(final String playerName) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean createPlayerAccount(final String playerName, final String worldName) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public String currencyNamePlural() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public String currencyNameSingular() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -142,32 +142,32 @@ public class AAEco implements Economy {
 
 	@Override
 	public EconomyResponse depositPlayer(final OfflinePlayer arg0, final double arg1) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public EconomyResponse depositPlayer(final OfflinePlayer arg0, final String arg1, final double arg2) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public EconomyResponse depositPlayer(final String playerName, final double value) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public EconomyResponse depositPlayer(final String playerName, final String worldName, final double value) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	//format into readable string
 	public String format(final double value) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -178,25 +178,25 @@ public class AAEco implements Economy {
 
 	@Override
 	public double getBalance(final OfflinePlayer arg0) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public double getBalance(final OfflinePlayer arg0, final String arg1) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public double getBalance(final String playerName) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
 	@Override
 	public double getBalance(final String playerName, final String worldName) {
-		// TODO Auto-generated method stub
+
 		return 0;
 	}
 
@@ -212,49 +212,49 @@ public class AAEco implements Economy {
 
 	@Override
 	public boolean has(final OfflinePlayer player, final double value) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean has(final OfflinePlayer arg0, final String arg1, final double arg2) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean has(final String paramString, final double paramDouble) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean has(final String paramString1, final String paramString2, final double paramDouble) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean hasAccount(final OfflinePlayer arg0) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean hasAccount(final OfflinePlayer arg0, final String arg1) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean hasAccount(final String paramString) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public boolean hasAccount(final String paramString1, final String paramString2) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
@@ -265,7 +265,7 @@ public class AAEco implements Economy {
 
 	@Override
 	public EconomyResponse isBankMember(final String arg0, final OfflinePlayer arg1) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -276,7 +276,7 @@ public class AAEco implements Economy {
 
 	@Override
 	public EconomyResponse isBankOwner(final String arg0, final OfflinePlayer arg1) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
@@ -292,25 +292,25 @@ public class AAEco implements Economy {
 
 	@Override
 	public EconomyResponse withdrawPlayer(final OfflinePlayer arg0, final double arg1) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public EconomyResponse withdrawPlayer(final OfflinePlayer arg0, final String arg1, final double arg2) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public EconomyResponse withdrawPlayer(final String paramString, final double paramDouble) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public EconomyResponse withdrawPlayer(final String paramString1, final String paramString2, final double paramDouble) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

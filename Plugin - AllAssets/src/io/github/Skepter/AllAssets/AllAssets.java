@@ -224,7 +224,7 @@ public class AllAssets extends JavaPlugin {
 	public ComphenixsGhostFactory ghostFactory;
 
 	/* The master switch - used for debug purposes*/
-	public static boolean masterSwitch = true;
+	public static boolean masterSwitch = false;
 
 	/** Dev block - runs devvy stuff
 	 * 
@@ -278,7 +278,7 @@ public class AllAssets extends JavaPlugin {
 
 		/** All variables should have been initialised now */
 
-		if (masterSwitch)
+//		if (masterSwitch)
 			dev(false);
 		//Nav
 

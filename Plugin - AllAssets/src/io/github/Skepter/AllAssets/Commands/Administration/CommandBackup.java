@@ -95,13 +95,14 @@ public class CommandBackup {
 					public void run() {
 						try {
 							FileUtils.copyDirectory(w.getWorldFolder(), new File(AllAssets.getWorldStorage(), w.getName()));
+							args.getSender().sendMessage(AllAssets.title + w.getName() + " was backed up successfully ");
 						} catch (final IOException e) {
 							ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
 							return;
 						}
 					}
 				});
-				args.getSender().sendMessage(AllAssets.title + world.getName() + " was backed up successfully ");
+				
 				return;
 			}
 		}
