@@ -44,6 +44,7 @@ public class NotificationsBoard {
 	private final Player player;
 	private static int errorLogCount;
 	private static int spamLogCount;
+	private static int griefLogCount;
 	private static String playerName;
 
 	static {
@@ -62,6 +63,7 @@ public class NotificationsBoard {
 		board.add("Current TPS", TPS.getTPSAsInt());
 		board.add("Error Logs", errorLogCount);
 		board.add("Spam Logs", spamLogCount);
+		board.add("Grief Logs", griefLogCount);
 
 		if (!playerName.equals(""))
 			board.add(ChatColor.YELLOW + playerName + " tried to tp to you");
@@ -82,6 +84,10 @@ public class NotificationsBoard {
 		spamLogCount++;
 	}
 
+	public static void addGriefLog() {
+		griefLogCount++;
+	}
+	
 	public static void clearSpamLogs() {
 		spamLogCount = 0;
 	}

@@ -30,6 +30,8 @@
 package io.github.Skepter.AllAssets.API;
 
 import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.API.LogEvent.LogType;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Config.PlayerData;
 import io.github.Skepter.AllAssets.Misc.IUser;
 import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
@@ -56,7 +58,11 @@ public class User implements IUser {
 
 	public User(final Player p) {
 		player = p;
-		playerData = new PlayerData(player);
+		try {
+			playerData = new PlayerData(player);
+		} catch (Exception e) {
+			CommandLog.addLog("Error retrieving " + p.getName() + "'s data file", LogType.ERROR);
+		}
 	}
 
 	/** Remember that when using this method the following are impossible:

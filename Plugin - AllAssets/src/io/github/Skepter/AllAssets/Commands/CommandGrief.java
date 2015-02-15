@@ -39,11 +39,13 @@ import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
+import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 
+import org.bukkit.Bukkit;
 import org.bukkit.conversations.BooleanPrompt;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
@@ -90,6 +92,11 @@ public class CommandGrief {
 					final Player player = (Player) context.getForWhom();
 					final String location = "(" + MathUtils.round(player.getLocation().getX(), 0) + ", " + MathUtils.round(player.getLocation().getY(), 0) + ", " + MathUtils.round(player.getLocation().getZ(), 0) + ")";
 					CommandLog.addLog("Player: " + player.getName() + ", Location: " + location + ", Message: " + message, LogType.GRIEF);
+					NotificationsBoard.addGriefLog();
+					//TODO make it Admin only
+					for(Player p : Bukkit.getOnlinePlayers()) {
+						new NotificationsBoard(p).updateBoard();
+					}
 					context.getForWhom().sendRawMessage(AllAssets.title + "Successfully sent grief report");
 				} else
 					context.getForWhom().sendRawMessage(AllAssets.error + "Cancelled grief report");
