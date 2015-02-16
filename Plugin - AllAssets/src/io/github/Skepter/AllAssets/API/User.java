@@ -87,6 +87,15 @@ public class User {
 		playerData = new PlayerData(player);
 	}
 
+	public void refreshPing() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+			@Override
+			public void run() {
+				getPing();
+			}
+		}, 20L);
+	}
+	
 	public int getPing() {
 		/* Delay it by 1 tick for accurate results */
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new PingTask(player), 1L);
@@ -113,11 +122,12 @@ public class User {
 		return "en";
 	}
 
-	/** Gets a list of every user's file and loads then as OfflineUsers */
-	public static List<User> userList() {
+	/** Gets a list of every user's file and loads them as OfflineUsers */
+	public static List<User> onlineUsers() {
 		final List<User> userList = new ArrayList<User>();
-		for (final String s : PlayerUtils.getAllOfflinePlayerNames())
-			userList.add(new User(s));
+		for(Player player : Bukkit.getOnlinePlayers()) {
+			userList.add(new User(player));
+		}
 		return userList;
 	}
 

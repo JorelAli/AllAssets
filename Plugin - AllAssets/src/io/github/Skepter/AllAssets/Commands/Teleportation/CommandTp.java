@@ -69,9 +69,9 @@ public class CommandTp {
 			final OfflinePlayer t = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 			if (t != null) {
 				final User user = new User(player);
-				user.setLastLoc();
 				final OfflineUser target = new OfflineUser(t);
 				if (user.canTp()) {
+					user.setLastLoc();
 					if (!t.isOnline())
 						player.teleport(target.getLastLoc());
 					else

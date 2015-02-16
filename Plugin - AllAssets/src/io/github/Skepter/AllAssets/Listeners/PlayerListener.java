@@ -102,9 +102,8 @@ public class PlayerListener implements Listener {
 			ips.add(event.getPlayer().getAddress().getHostName());
 			user.setIPs(ips);
 		}
-
-		/* Sometimes needs a boost before the ping actually comes */
-		user.getPing();
+		
+		user.refreshPing();
 
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 

@@ -29,6 +29,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets;
 
+import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandListeners.CommandAFK;
 import io.github.Skepter.AllAssets.CommandListeners.CommandBind;
 import io.github.Skepter.AllAssets.CommandListeners.CommandCommandBlock;
@@ -425,6 +426,10 @@ public class AllAssets extends JavaPlugin {
 
 		/* Update NotificationsBoard for all admins */
 		NotificationsBoard.updateAll();
+		
+		for(User user : User.onlineUsers()) {
+			user.refreshPing();
+		}
 		
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();

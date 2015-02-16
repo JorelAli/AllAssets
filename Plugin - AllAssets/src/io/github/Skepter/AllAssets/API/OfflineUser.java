@@ -80,7 +80,7 @@ public class OfflineUser {
 	}
 
 	/** Gets a list of every user's file and loads then as OfflineUsers */
-	public static List<OfflineUser> userList() {
+	public static List<OfflineUser> offlineUsers() {
 		final List<OfflineUser> userList = new ArrayList<OfflineUser>();
 		for (final String s : PlayerUtils.getAllOfflinePlayerNames())
 			userList.add(new OfflineUser(s));

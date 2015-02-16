@@ -55,6 +55,7 @@ public class PlayerUtils {
 	//cache data from the world data files and install them into the UUID map
 	//ensure that duplicates are NOT added! (use a set)
 
+	/** Retrieves the list of offline player names using Bukkit's getOfflinePlayers() */
 	public static List<String> getAllOfflinePlayerNames() {
 		final List<String> playerNames = new ArrayList<String>();
 		for (final OfflinePlayer p : getOfflinePlayers())
