@@ -36,10 +36,14 @@ package io.github.Skepter.AllAssets.Commands;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UltraMap;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -75,6 +79,16 @@ public class CommandHelp {
 
 		ErrorUtils.error(args.getSender(), "Could not find that!");
 		return;
+	}
+	
+	@Completer(name="help")
+	public List<String> onComplete(final CommandArgs args) {
+		List<String> helpTopics = new ArrayList<String>();
+		for(Entry<Object, List<Object>> entry : map.entrySet()) {
+			helpTopics.add(String.valueOf(entry.getKey()));
+		}
+		return helpTopics;
+		
 	}
 
 }

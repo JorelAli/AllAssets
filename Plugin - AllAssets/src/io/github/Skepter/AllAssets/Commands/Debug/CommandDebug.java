@@ -40,6 +40,7 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.EncryptionUtils;
+import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.FileUtils;
 import io.github.Skepter.AllAssets.Utils.IDReader;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
@@ -251,6 +252,10 @@ public class CommandDebug implements Listener {
 
 	@CommandHandler(name = "debug.testencrypt", permission = "debug", description = "Runs a test", usage = "Use <command>")
 	public void testEncrypt(final CommandArgs args) {
+		if (args.getArgs().length != 2) {
+			ErrorUtils.notEnoughArguments(args.getSender());
+			return;
+		}
 		final EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
 		try {
 			final File file = new File(AllAssets.getStorage(), "data.bin");
@@ -265,6 +270,10 @@ public class CommandDebug implements Listener {
 
 	@CommandHandler(name = "debug.testdecrypt", permission = "debug", description = "Runs a test", usage = "Use <command>")
 	public void testDecrypt(final CommandArgs args) {
+		if (args.getArgs().length != 1) {
+			ErrorUtils.notEnoughArguments(args.getSender());
+			return;
+		}
 		final EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
 		try {
 			final byte[] bytes = FileUtils.loadBytesSecurely(new File(AllAssets.getStorage(), "data.bin"));
@@ -311,7 +320,7 @@ public class CommandDebug implements Listener {
 				conflict++;
 			}
 		}
-		args.getSender().sendMessage(AllAssets.title + "There were " + conflict + " commands that conflicted. Conflicting plugins:");
+		args.getSender().sendMessage(AllAssets.title + "There are " + conflict + " conflicting commands" + (conflict == 0 ? "" : " - Conflicting plugins:"));
 		for (final String s : conflictingPlugins)
 			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
 	}
@@ -326,18 +335,6 @@ public class CommandDebug implements Listener {
 		} else {
 			physics = true;
 			Bukkit.broadcastMessage(AllAssets.title + "Resumed server physics");
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@EventHandler
-	public void onPlace(PlayerInteractEvent event) {
-		if (!physics && event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-			if (event.getPlayer().getItemInHand().getType().isBlock()) {
-				Block b = event.getClickedBlock().getRelative(event.getBlockFace());
-				b.setType(event.getPlayer().getItemInHand().getType());
-				b.setData(event.getPlayer().getItemInHand().getData().getData());
-			}
 		}
 	}
 
@@ -365,6 +362,11 @@ public class CommandDebug implements Listener {
 		list.add("full");
 		list.add("ram");
 		list.add("clean");
+		list.add("physics");
+		list.add("conflicts");
+		list.add("testencrypt");
+		list.add("testdecrypt");
+		list.add("testid");
 		return list;
 	}
 
