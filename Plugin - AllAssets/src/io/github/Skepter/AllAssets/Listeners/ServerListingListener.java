@@ -52,7 +52,7 @@ public class ServerListingListener implements Listener {
 		for (final UUID u : UUIDData.getValues()) {
 			final OfflineUser user = new OfflineUser(Bukkit.getOfflinePlayer(u));
 			try {
-				if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
+				if (user.IPs().contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 					final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
 					event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 					return;
@@ -73,11 +73,5 @@ public class ServerListingListener implements Listener {
 			if (user.getPlayer().getName().equals(event.getName()))
 				user.setIPs(Arrays.asList(new String[] { save }));
 		}
-	}
-
-	private String getLastIP(final OfflineUser user) {
-		if (!user.IPs().isEmpty())
-			return user.IPs().get(user.IPs().size() - 1);
-		return null;
 	}
 }
