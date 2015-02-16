@@ -38,16 +38,16 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
+import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.WorldUtils;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.conversations.BooleanPrompt;
@@ -105,23 +105,35 @@ public class CommandRestore {
 		@Override
 		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 			if (b) {
-				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
+				try {
+					ReflectionUtils utils = new ReflectionUtils(Bukkit.getPlayer("Skepter"));
+					Object o = utils.getNMSClass("WorldLoader").newInstance();
+					o = o.getClass().getConstructor(File.class).newInstance(Bukkit.getWorld(world).getWorldFolder());
+					o.getClass().getMethod("e", String.class).invoke(o, world);
+				} catch (Exception e) {
+				}
+								final WorldUtils wUtils = new WorldUtils(world);
+				//				utils.unloadWorld();
+				//				Bukkit.unloadWorld(world, true);
+				Bukkit.getScheduler().runTaskLaterAsynchronously(AllAssets.instance(), new Runnable() {
 					@Override
 					public void run() {
 						try {
-							Bukkit.unloadWorld(world, false);
-							new File(".", world).mkdirs();
-							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(".", world));
+							//							utils.deleteWorld();
+							//							if (new File(world).exists())
+							//								new File(world).delete();
+														wUtils.copyWorld(new File(AllAssets.getWorldStorage(), world));
+							//							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(world));
 							Bukkit.getServer().createWorld(new WorldCreator(world));
-						} catch (final IOException e) {
+							context.getForWhom().sendRawMessage(AllAssets.title + world + " was restored successfully");
+						} catch (final Exception e) {
 							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst restoring the world");
 							return;
 						}
 					}
-				});
-				context.getForWhom().sendRawMessage(AllAssets.title + world + " was restored successfully");
+				}, 200L);
 			} else
-				context.getForWhom().sendRawMessage(AllAssets.title + "Restoration for " +  world + " was cancelled");
+				context.getForWhom().sendRawMessage(AllAssets.title + "Restoration for " + world + " was cancelled");
 			return Prompt.END_OF_CONVERSATION;
 		}
 

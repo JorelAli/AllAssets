@@ -57,7 +57,7 @@ public class CommandFakeDeop {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		target.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "[" + args.getSender().getName() + ": De-pped " + target.getName() + "]");
+		target.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "[" + args.getSender().getName() + ": De-Opped " + target.getName() + "]");
 		target.sendMessage(ChatColor.YELLOW + "You are no longer op!");
 
 		return;

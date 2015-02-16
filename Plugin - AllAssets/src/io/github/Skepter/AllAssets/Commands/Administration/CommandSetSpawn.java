@@ -33,6 +33,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
+import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
@@ -55,6 +56,8 @@ public class CommandSetSpawn {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		player.getWorld().setSpawnLocation(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
+		int x = player.getLocation().getBlockX(), y = player.getLocation().getBlockY(), z = player.getLocation().getBlockZ();
+		player.getWorld().setSpawnLocation(x, y, z);
+		player.sendMessage(AllAssets.title + "Set spawn location to [" + x + ", " + y + ", " + z + "]");
 	}
 }

@@ -50,7 +50,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class CommandDiscoArmor {
 
-	public static UltraMap<UUID, Integer, ItemStack[], String, String, String> map = new UltraMap<UUID, Integer, ItemStack[], String, String, String>();
+	private static UltraMap<UUID, Integer, ItemStack[], String, String, String> map = new UltraMap<UUID, Integer, ItemStack[], String, String, String>();
 
 	public CommandDiscoArmor(final CommandFramework framework) {
 		framework.registerCommands(this);
@@ -65,17 +65,26 @@ public class CommandDiscoArmor {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
+		toggleArmor(player);
+		return;
+	}
+	
+	/** Checks if the player has disco armor enabled */
+	public static boolean hasArmor(Player player) {
+		return map.containsKey(player.getUniqueId());
+	}
+	
+	public static void toggleArmor(Player player) {
 		if (map.containsKey(player.getUniqueId())) {
 			Bukkit.getScheduler().cancelTask((int) map.get(player.getUniqueId(), 1));
 			player.getInventory().setArmorContents((ItemStack[]) map.get(player.getUniqueId(), 2));
 			map.remove(player.getUniqueId());
 			player.sendMessage(AllAssets.title + "Your disco armor was removed");
 		} else {
-			final BukkitTask i = Bukkit.getScheduler().runTaskTimer(AllAssets.instance(), new DiscoArmorTask(player), 0L, 5L);
+			final BukkitTask i = Bukkit.getScheduler().runTaskTimer(AllAssets.instance(), new DiscoArmorTask(player), 0L, 3L);
 			map.put(player.getUniqueId(), i.getTaskId(), player.getInventory().getArmorContents(), null, null, null);
 			player.sendMessage(AllAssets.title + "You are now wearing disco armor!");
 		}
-		return;
 	}
 
 }

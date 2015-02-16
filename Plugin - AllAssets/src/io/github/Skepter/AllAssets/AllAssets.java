@@ -475,6 +475,11 @@ public class AllAssets extends JavaPlugin {
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
+		
+		for(Player player : Bukkit.getOnlinePlayers()) {
+			if(CommandDiscoArmor.hasArmor(player))
+				CommandDiscoArmor.toggleArmor(player);
+		}
 		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
 	}
 
