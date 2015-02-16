@@ -33,7 +33,6 @@ package io.github.Skepter.AllAssets.Utils;
 
 import static org.bukkit.Bukkit.getOfflinePlayers;
 import static org.bukkit.Bukkit.getOnlinePlayers;
-import static org.bukkit.Bukkit.getPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +46,8 @@ public class PlayerUtils {
 
 	public static Player getOnlinePlayerFromString(final String string) {
 		for (final Player p : getOnlinePlayers())
-			if (p.getName().equalsIgnoreCase(string))
-				return getPlayer(p.getUniqueId());
+			if (p.getName().equalsIgnoreCase(string) || p.getName().toLowerCase().startsWith(string.toLowerCase()))
+				return p;
 		return null;
 	}
 
@@ -67,7 +66,7 @@ public class PlayerUtils {
 	public static OfflinePlayer getOfflinePlayerFromString(final String string) {
 		for (final OfflinePlayer p : getOfflinePlayers())
 			if (p.getName().equalsIgnoreCase(string))
-				return getPlayer(p.getUniqueId());
+				return p;
 		return Bukkit.getOfflinePlayer(string);
 	}
 

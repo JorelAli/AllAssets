@@ -64,25 +64,25 @@ public class CommandTp {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		}
-		final Player t1 = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		if (t1 == null) {
-			final OfflinePlayer t = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-			if (t != null) {
-				final User user = new User(player);
-				final OfflineUser target = new OfflineUser(t);
-				if (user.canTp()) {
-					user.setLastLoc();
-					if (!t.isOnline())
-						player.teleport(target.getLastLoc());
-					else
-						player.teleport(t1);
-					player.sendMessage(AllAssets.title + "Successfully teleported to " + t.getName());
-					return;
-				} else {
-					ErrorUtils.tptoggle(player, args.getArgs()[0]);
-					return;
-				}
-			}
+		final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+		final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
+		if(offlineTarget == null && onlineTarget == null) {
+			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+			return;
+		}
+		final User user = new User(player);
+		final OfflineUser target = new OfflineUser(offlineTarget);
+		if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
+			user.setLastLoc();
+			if (!offlineTarget.isOnline() || onlineTarget == null)
+				player.teleport(target.getLastLoc());
+			else
+				player.teleport(onlineTarget);
+			player.sendMessage(AllAssets.title + "Successfully teleported to " + offlineTarget.getName());
+			return;
+		} else {
+			ErrorUtils.tptoggle(player, args.getArgs()[0]);
+			return;
 		}
 	}
 }
