@@ -31,52 +31,30 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.CommandListeners;
+package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Serializers.ItemSerializer;
-import io.github.Skepter.AllAssets.Utils.FireworkUtils;
-import io.github.Skepter.AllAssets.Utils.LocationUtils;
+import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
-import org.bukkit.Material;
-import org.bukkit.block.CommandBlock;
-import org.bukkit.command.BlockCommandSender;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.entity.Player;
 
-public class CommandCommandBlock implements Listener {
+public class CommandSetSpawn {
 
-	public CommandCommandBlock(final CommandFramework framework) {
+	public CommandSetSpawn(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "$firework", permission = "$console", description = "Launches a firework", usage = "Use <command>")
-	public void onCommand(final CommandArgs args) {
-		if (args.getSender() instanceof BlockCommandSender) {
-			final BlockCommandSender sender = (BlockCommandSender) args.getSender();
-			final ItemStack is = ItemSerializer.fromString(args.getArgs()[0]);
-			FireworkUtils.spawnFireworkFromItemStack(LocationUtils.getCenter(sender.getBlock().getLocation()), is);
+	@CommandHandler(name = "setspawn", permission = "setspawn", description = "Sets the world spawn to your location", usage = "Use <command>")
+	public void command(final CommandArgs args) {
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
 		}
-		return;
-	}
-
-	@EventHandler
-	public void onClick(final PlayerInteractEvent event) {
-		if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getPlayer().getItemInHand().getType().equals(Material.FIREWORK)) {
-			if ((event.getClickedBlock().getState() instanceof CommandBlock)) {
-				event.setCancelled(true);
-				final CommandBlock block = (CommandBlock) event.getClickedBlock().getState();
-				block.setCommand("$firework " + ItemSerializer.toString(event.getPlayer().getItemInHand()));
-				block.update(true);
-				event.getPlayer().closeInventory();
-				event.getPlayer().sendMessage(AllAssets.title + "Added firework to commandblock");
-			}
-		}
+		player.getWorld().setSpawnLocation(player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
 	}
 }

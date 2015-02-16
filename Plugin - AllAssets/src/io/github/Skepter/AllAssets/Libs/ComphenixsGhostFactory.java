@@ -47,11 +47,11 @@ import org.bukkit.scoreboard.Team;
 
 public class ComphenixsGhostFactory {
 	/** Team of ghosts and people who can see ghosts. */
-	private static final String GHOST_TEAM_NAME = "Ghosts";
-	private static final long UPDATE_DELAY = 20L;
+	private final String GHOST_TEAM_NAME = "Ghosts";
+	private final long UPDATE_DELAY = 20L;
 
 	// No players in the ghost factory
-	private static final OfflinePlayer[] EMPTY_PLAYERS = new OfflinePlayer[0];
+	private final OfflinePlayer[] EMPTY_PLAYERS = new OfflinePlayer[0];
 	private Team ghostTeam;
 
 	// Task that must be cleaned up
@@ -72,7 +72,7 @@ public class ComphenixsGhostFactory {
 	}
 
 	private void createGetTeam() {
-		final Scoreboard board = Bukkit.getServer().getScoreboardManager().getMainScoreboard();
+		final Scoreboard board = Bukkit.getServer().getScoreboardManager().getNewScoreboard();
 
 		ghostTeam = board.getTeam(GHOST_TEAM_NAME);
 

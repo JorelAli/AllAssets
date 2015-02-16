@@ -68,6 +68,7 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandNMSGod;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandRestore;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandSetSpawn;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandTime;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandWeather;
@@ -235,8 +236,6 @@ public class AllAssets extends JavaPlugin {
 			new CommandGive(framework);
 			new CommandHelp(framework);
 			r(new CommandCommandBlock(framework));
-			new CommandFakeOp(framework);
-			new CommandFakeDeop(framework);
 		} else
 			new VaultReflection().loadAAEco();
 	}
@@ -320,8 +319,10 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandEnchant(framework));
 		if (ConfigHandler.features().getBoolean("Enable"))
 			new CommandEnable(framework);
-		if (ConfigHandler.features().getBoolean("ForceChat"))
-			new CommandForceChat(framework);
+		if (ConfigHandler.features().getBoolean("FakeDeop"))
+			new CommandFakeDeop(framework);
+		if (ConfigHandler.features().getBoolean("FakeOp"))
+			new CommandFakeOp(framework);
 		if (ConfigHandler.features().getBoolean("FileBrowser"))
 			r(new CommandFileBrowser(framework));
 		if (ConfigHandler.features().getBoolean("FileEditor"))
@@ -330,6 +331,8 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandFirework(framework));
 		if (ConfigHandler.features().getBoolean("Fly"))
 			new CommandFly(framework);
+		if (ConfigHandler.features().getBoolean("ForceChat"))
+			new CommandForceChat(framework);
 		if (ConfigHandler.features().getBoolean("Gamemode"))
 			new CommandGamemode(framework);
 		if (ConfigHandler.features().getBoolean("Ghost"))
@@ -369,6 +372,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandRename(framework);
 		if (ConfigHandler.features().getBoolean("Restore"))
 			new CommandRestore(framework);
+		if (ConfigHandler.features().getBoolean("SetSpawn"))
+			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
 		if (ConfigHandler.features().getBoolean("Silence"))

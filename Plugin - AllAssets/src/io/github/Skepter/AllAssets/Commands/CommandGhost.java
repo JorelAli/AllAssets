@@ -57,30 +57,28 @@ public class CommandGhost {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (args.getArgs().length == 0) {
+		switch (args.getArgs().length) {
+		case 0:
 			if (AllAssets.instance().ghostFactory.isGhost(player)) {
 				AllAssets.instance().ghostFactory.setGhost(player, false);
 				player.sendMessage(AllAssets.title + "Ghost mode disabled");
-				return;
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(player, true);
 				player.sendMessage(AllAssets.title + "Ghost mode enabled");
-				return;
 			}
-		} else if (args.getArgs().length == 1) {
+			return;
+		case 1:
 			final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 			if (AllAssets.instance().ghostFactory.isGhost(target)) {
 				AllAssets.instance().ghostFactory.setGhost(target, false);
 				target.sendMessage(AllAssets.title + "Ghost mode disabled");
-				return;
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(target, true);
 				target.sendMessage(AllAssets.title + "Ghost mode enabled");
-				return;
 			}
-		} else {
-			ErrorUtils.tooManyArguments(player);
 			return;
 		}
+		ErrorUtils.tooManyArguments(player);
+		return;
 	}
 }

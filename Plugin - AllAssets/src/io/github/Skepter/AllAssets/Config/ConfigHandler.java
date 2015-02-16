@@ -143,6 +143,8 @@ public class ConfigHandler {
 		features.set("DiscoArmor", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
+		features.set("FakeDeop", "true");
+		features.set("FakeOp", "true");
 		features.set("FileBrowser", "true");
 		features.set("FileEditor", "true");
 		features.set("Firework", "true");
@@ -167,6 +169,7 @@ public class ConfigHandler {
 		features.set("Reload", "false"); // default to FALSE when actually exported Nav
 		features.set("Rename", "true");
 		features.set("Restore", "true");
+		features.set("SetSpawn", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
 		features.set("StaffChat", "true");
