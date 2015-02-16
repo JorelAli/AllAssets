@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -61,11 +62,12 @@ public class PlayerUtils {
 		return playerNames;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static Player getOfflinePlayerFromString(final String string) {
 		for (final OfflinePlayer p : getOfflinePlayers())
 			if (p.getName().equals(string))
 				return getPlayer(p.getUniqueId());
-		return null;
+		return (Player) Bukkit.getOfflinePlayer(string);
 	}
 
 	public static String getPlayernameFromUUID(final UUID uuid) {

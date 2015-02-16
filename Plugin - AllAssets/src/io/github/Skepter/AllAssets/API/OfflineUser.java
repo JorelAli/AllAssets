@@ -30,51 +30,39 @@
 package io.github.Skepter.AllAssets.API;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Config.PlayerData;
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
 import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
 import io.github.Skepter.AllAssets.Serializers.LocationSerializer;
-import io.github.Skepter.AllAssets.Tasks.PingTask;
 import io.github.Skepter.AllAssets.Utils.PlayerUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class User {
-
-	Player player;
+public class OfflineUser {
+	
+	OfflinePlayer player;
 	PlayerData playerData;
-	public static int ping;
 
-	public User(final Player p) {
+	public OfflineUser(final OfflinePlayer p) {
 		player = p;
-		
-		try {
-			playerData = new PlayerData(player);
-		} catch (Exception e) {
-			CommandLog.addLog("Error retrieving " + p.getName() + "'s data file", LogType.ERROR);
-		}
+		playerData = new PlayerData(p);
 	}
 
-	@Deprecated
-	public User(final String s) {
+	public OfflineUser(final String s) {
 		try {
 			player = PlayerUtils.getOfflinePlayerFromString(s);
 		} catch (final Exception e) {
+			e.printStackTrace();
 		}
 		playerData = new PlayerData(player);
 	}
 
-	public User(final UUID u) {
+	public OfflineUser(final UUID u) {
 		try {
 			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 				if (u.equals(p.getUniqueId())) {
@@ -86,48 +74,21 @@ public class User {
 		}
 		playerData = new PlayerData(player);
 	}
-
-	public int getPing() {
-		/* Delay it by 1 tick for accurate results */
-		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new PingTask(player), 1L);
-		return ping;
-	}
-
-	/** Returns the language that is selected in the player's settings (thus
-	 * giving their language) */
-	public String getLanguage(final Player p) {
-		try {
-			switch (new ReflectionUtils(p).locale.toLowerCase()) {
-			case "de_de":
-				return "de";
-			case "sv_se":
-				return "sv";
-			case "nl_nl":
-				return "nl";
-			case "fr_fr":
-				return "fr";
-			}
-		} catch (final Exception e) {
-			return "en";
-		}
-		return "en";
+	
+	public OfflinePlayer getPlayer() {
+		return player;
 	}
 
 	/** Gets a list of every user's file and loads then as OfflineUsers */
-	public static List<User> userList() {
-		final List<User> userList = new ArrayList<User>();
+	public static List<OfflineUser> userList() {
+		final List<OfflineUser> userList = new ArrayList<OfflineUser>();
 		for (final String s : PlayerUtils.getAllOfflinePlayerNames())
-			userList.add(new User(s));
+			userList.add(new OfflineUser(s));
 		return userList;
 	}
 
 	public Location getLastLoc() {
 		return LocationSerializer.LocFromString(playerData.getDataFile().getString("lastLoc"));
-	}
-
-	public void setLastLoc() {
-		playerData.getDataFile().set("lastLoc", LocationSerializer.LocToString(player.getLocation()));
-		playerData.saveDataFile();
 	}
 
 	public void setLastLoc(final Location loc) {
@@ -138,10 +99,6 @@ public class User {
 	public Location getHome(final String name) {
 		final String s = playerData.getDataFile().getString("home." + name);
 		return LocationSerializer.LocFromString(s);
-	}
-
-	public Player getPlayer() {
-		return player;
 	}
 
 	public Long getTimeSinceLastPlay() {
@@ -165,7 +122,6 @@ public class User {
 	public void setWaypoint(final Location loc) {
 		playerData.getDataFile().set("waypoint", LocationSerializer.LocToString(loc));
 		playerData.saveDataFile();
-		player.setCompassTarget(loc);
 	}
 
 	public void setCanTP(final boolean tp) {
@@ -255,7 +211,6 @@ public class User {
 
 	public void setFriendList() {
 		// TODO Auto-generated method stub
-
 	}
 
 	public boolean canTp() {
@@ -266,11 +221,4 @@ public class User {
 	public boolean canTP() {
 		return playerData.getDataFile().getBoolean("canTP");
 	}
-
-	/*
-	 * last play = maths with ticks lived? add feature where you can set
-	 * waypoints: /waypoint <set/reset> - sets the compass pointing location
-	 * 
-	 * feature where you can add holograms??
-	 */
 }

@@ -31,12 +31,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Listeners;
 
-import io.github.Skepter.AllAssets.API.User;
+import io.github.Skepter.AllAssets.API.OfflineUser;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.UUIDData;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -51,7 +50,7 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void multiplayerPing(final ServerListPingEvent event) {
 		for (final UUID u : UUIDData.getValues()) {
-			final User user = new User(Bukkit.getOfflinePlayer(u));
+			final OfflineUser user = new OfflineUser(Bukkit.getOfflinePlayer(u));
 			try {
 				if (getLastIP(user).contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 					final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
@@ -68,13 +67,15 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void playerLogin(final AsyncPlayerPreLoginEvent event) {
 		final String save = event.getAddress().toString().substring(1, event.getAddress().toString().length());
-		final User user = new User(PlayerUtils.getOfflinePlayerFromString(event.getName()));
-		final ArrayList<String> s = new ArrayList<String>();
-		s.add(save);
-		user.setIPs(s);
+
+		for (final UUID u : UUIDData.getValues()) {
+			final OfflineUser user = new OfflineUser(Bukkit.getOfflinePlayer(u));
+			if (user.getPlayer().getName().equals(event.getName()))
+				user.setIPs(Arrays.asList(new String[] { save }));
+		}
 	}
 
-	private String getLastIP(final User user) {
+	private String getLastIP(final OfflineUser user) {
 		if (!user.IPs().isEmpty())
 			return user.IPs().get(user.IPs().size() - 1);
 		return null;

@@ -78,7 +78,8 @@ public class CommandAFK implements Listener {
 		for (Player player : Bukkit.getOnlinePlayers())
 			if (new User(player).isAFK())
 				builder.append(player.getName() + ", ");
-		event.getPlayer().sendMessage(AllAssets.title + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
+		if (!builder.toString().isEmpty())
+			event.getPlayer().sendMessage(AllAssets.title + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
 	}
 
 	@EventHandler
