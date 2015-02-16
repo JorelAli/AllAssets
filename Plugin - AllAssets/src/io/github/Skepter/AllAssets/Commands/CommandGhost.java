@@ -68,7 +68,10 @@ public class CommandGhost {
 			}
 			return;
 		case 1:
-			final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
+			final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+			if(target == null) {
+				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+			}
 			if (AllAssets.instance().ghostFactory.isGhost(target)) {
 				AllAssets.instance().ghostFactory.setGhost(target, false);
 				target.sendMessage(AllAssets.title + "Ghost mode disabled");

@@ -37,10 +37,12 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.API.OfflineUser;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class CommandTp {
@@ -62,21 +64,24 @@ public class CommandTp {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		}
-		final Player t = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-		if (t != null) {
-			final User user = new User(player);
-			user.setLastLoc();
-			final User target = new User(t);
-			if (user.canTp()) {
-				if (!t.isOnline())
-					player.teleport(target.getLastLoc());
-				else
-					player.teleport(t);
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + t.getName());
-				return;
-			} else {
-				ErrorUtils.tptoggle(player, args.getArgs()[0]);
-				return;
+		final Player t1 = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+		if (t1 == null) {
+			final OfflinePlayer t = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
+			if (t != null) {
+				final User user = new User(player);
+				user.setLastLoc();
+				final OfflineUser target = new OfflineUser(t);
+				if (user.canTp()) {
+					if (!t.isOnline())
+						player.teleport(target.getLastLoc());
+					else
+						player.teleport(t1);
+					player.sendMessage(AllAssets.title + "Successfully teleported to " + t.getName());
+					return;
+				} else {
+					ErrorUtils.tptoggle(player, args.getArgs()[0]);
+					return;
+				}
 			}
 		}
 	}

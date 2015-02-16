@@ -62,7 +62,7 @@ public class CommandTphere {
 			ErrorUtils.notEnoughArguments(player);
 			return;
 		}
-		final Player t = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
+		final Player t = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
 		if (t != null) {
 			final User user = new User(player);
 			user.setLastLoc();
@@ -75,6 +75,8 @@ public class CommandTphere {
 				ErrorUtils.tptoggle(player, args.getArgs()[0]);
 				return;
 			}
+		} else {
+			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
 		}
 	}
 }

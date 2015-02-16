@@ -68,7 +68,7 @@ public class User {
 	@Deprecated
 	public User(final String s) {
 		try {
-			player = PlayerUtils.getOfflinePlayerFromString(s);
+			player = PlayerUtils.getOnlinePlayerFromString(s);
 		} catch (final Exception e) {
 		}
 		playerData = new PlayerData(player);
@@ -260,7 +260,7 @@ public class User {
 
 	public boolean canTp() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public boolean canTP() {

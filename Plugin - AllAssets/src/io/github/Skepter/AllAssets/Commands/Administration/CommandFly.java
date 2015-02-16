@@ -57,33 +57,35 @@ public class CommandFly {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (args.getArgs().length == 0) {
+		switch (args.getArgs().length) {
+		case 0:
 			if (player.getAllowFlight()) {
 				player.setAllowFlight(false);
 				player.setFlying(false);
 				player.sendMessage(AllAssets.title + "Flying disabled");
-				return;
+
 			} else {
 				player.setAllowFlight(true);
 				player.sendMessage(AllAssets.title + "Flying enabled");
-				return;
 			}
-		} else if (args.getArgs().length == 1) {
-			final Player target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-			if (target != null)
+			return;
+		case 1:
+			final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+			if (target != null) {
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
 					player.setFlying(false);
 					target.sendMessage(AllAssets.title + "Flying disabled");
-					return;
 				} else {
 					target.setAllowFlight(true);
 					target.sendMessage(AllAssets.title + "Flying enabled");
-					return;
 				}
-		} else {
-			ErrorUtils.tooManyArguments(player);
+				return;
+			} else
+				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
 			return;
 		}
+		ErrorUtils.tooManyArguments(player);
+		return;
 	}
 }

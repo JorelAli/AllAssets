@@ -45,9 +45,9 @@ import org.bukkit.entity.Player;
 
 public class PlayerUtils {
 
-	public static Player getOnlinePlayerFromString(final String string) throws Exception {
+	public static Player getOnlinePlayerFromString(final String string) {
 		for (final Player p : getOnlinePlayers())
-			if (p.getName().equals(string))
+			if (p.getName().equalsIgnoreCase(string))
 				return getPlayer(p.getUniqueId());
 		return null;
 	}
@@ -63,11 +63,11 @@ public class PlayerUtils {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static Player getOfflinePlayerFromString(final String string) {
+	public static OfflinePlayer getOfflinePlayerFromString(final String string) {
 		for (final OfflinePlayer p : getOfflinePlayers())
-			if (p.getName().equals(string))
+			if (p.getName().equalsIgnoreCase(string))
 				return getPlayer(p.getUniqueId());
-		return (Player) Bukkit.getOfflinePlayer(string);
+		return Bukkit.getOfflinePlayer(string);
 	}
 
 	public static String getPlayernameFromUUID(final UUID uuid) {
