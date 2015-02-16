@@ -41,7 +41,6 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
-import io.github.Skepter.AllAssets.Commands.CommandGive;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
 import io.github.Skepter.AllAssets.Commands.CommandGrief;
 import io.github.Skepter.AllAssets.Commands.CommandHelp;
@@ -233,7 +232,7 @@ public class AllAssets extends JavaPlugin {
 	 * @param loadTime - true means load at the END, false means load NORMALLY */
 	private void dev(final boolean loadTime) {
 		if (!loadTime) {
-			new CommandGive(framework);
+//			new CommandGive(framework);
 			new CommandHelp(framework);
 			r(new CommandCommandBlock(framework));
 		} else

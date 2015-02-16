@@ -98,7 +98,7 @@ public class CommandAFK implements Listener {
 	public void playerMove(final PlayerMoveEvent event) {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
-		if ((event.getFrom().distanceSquared(event.getTo()) > 1) && user.isAFK()) {
+		if (user.isAFK()) {
 			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}

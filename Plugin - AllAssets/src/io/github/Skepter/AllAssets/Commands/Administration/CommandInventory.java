@@ -39,7 +39,9 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 public class CommandInventory {
 
@@ -58,12 +60,14 @@ public class CommandInventory {
 		}
 		if (args.getArgs().length == 1)
 			try {
-				player.openInventory(PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]).getInventory());
+				Inventory inv = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]).getInventory();
+				Inventory targetInventory = Bukkit.createInventory(null, inv.getSize(), args.getArgs()[0]);
+				targetInventory.setContents(inv.getContents());
+				player.openInventory(targetInventory);
 			} catch (final Exception e) {
 				ErrorUtils.playerNotFound(player, args.getArgs()[0]);
 			}
 		return;
 		//TODO editable system so it can/cannot be edited.
-		//set inv name to <playername>'s Inventory
 	}
 }

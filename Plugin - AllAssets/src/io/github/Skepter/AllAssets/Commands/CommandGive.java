@@ -36,7 +36,12 @@ package io.github.Skepter.AllAssets.Commands;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import net.milkbowl.vault.item.ItemInfo;
+import io.github.Skepter.AllAssets.Utils.IDReader;
+import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class CommandGive {
 
@@ -44,30 +49,31 @@ public class CommandGive {
 		framework.registerCommands(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "give", aliases = { "i", "item" }, permission = "give", description = "Gives items", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
-		try {
-			args.getPlayer().getInventory().addItem(iF.toStack());
-		} catch (final IllegalArgumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (final Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-//		//give <player> <item> <amount>
-//		switch(args.getArgs().length) {
-//		case 1:
-//		case 2:
-//			return;
-//		case 3:
-//			try {
-//				Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-//				player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
+//		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
+//		try {
+//			args.getPlayer().getInventory().addItem(iF.toStack());
+//		} catch (final IllegalArgumentException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		} catch (final Exception e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
 //		}
+//		//give <player> <item> <amount>
+		switch(args.getArgs().length) {
+		case 1:
+		case 2:
+			return;
+		case 3:
+			try {
+				Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+				player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
