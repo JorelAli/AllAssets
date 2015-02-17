@@ -31,60 +31,42 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Teleportation;
+package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.OfflineUser;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+import io.github.Skepter.AllAssets.Utils.TextUtils;
 
-import org.bukkit.OfflinePlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class CommandTp {
+public class CommandForceCommand {
 
-	public CommandTp(final CommandFramework framework) {
+	public CommandForceCommand(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user", usage = "Use <command>")
+	@CommandHandler(name = "forcecommand", aliases = { "sudo" }, permission = "forcecommand", description = "Force a player to run a command", usage = "Use <command>")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (args.getArgs().length == 0) {
-			ErrorUtils.notEnoughArguments(player);
-			return;
-		}
-		final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-		if (offlineTarget == null && onlineTarget == null) {
-			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-			return;
-		}
-		final User user = new User(player);
-		final OfflineUser target = new OfflineUser(offlineTarget);
-		if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
-			user.setLastLoc();
-			if (onlineTarget == null) {
-				player.teleport(target.getLastLoc());
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + offlineTarget.getName());
-			} else {
-				player.teleport(onlineTarget);
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + onlineTarget.getName());
+		if (args.getArgs().length > 0)
+			try {
+				final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+				if (target == null) {
+					ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+					return;
+				}
+				final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
+				Bukkit.dispatchCommand(target, s);
+			} catch (final Exception e) {
+				//TODO post error here!
+				return;
 			}
-			return;
-		} else {
-			ErrorUtils.tptoggle(player, args.getArgs()[0]);
-			return;
-		}
+		else
+			ErrorUtils.notEnoughArguments(args.getSender());
+		return;
 	}
+
 }

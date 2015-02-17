@@ -60,8 +60,10 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandClearchat;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandConsoleLog;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandDisable;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandEnable;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandExtinguish;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandFly;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandForceChat;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandForceCommand;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandGamemode;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandInventory;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
@@ -319,6 +321,8 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandEnchant(framework));
 		if (ConfigHandler.features().getBoolean("Enable"))
 			new CommandEnable(framework);
+		if (ConfigHandler.features().getBoolean("Extinguish"))
+			new CommandExtinguish(framework);
 		if (ConfigHandler.features().getBoolean("FakeDeop"))
 			new CommandFakeDeop(framework);
 		if (ConfigHandler.features().getBoolean("FakeOp"))
@@ -333,6 +337,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandFly(framework);
 		if (ConfigHandler.features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
+		if (ConfigHandler.features().getBoolean("ForceCommand"))
+			new CommandForceCommand(framework);
 		if (ConfigHandler.features().getBoolean("Gamemode"))
 			new CommandGamemode(framework);
 		if (ConfigHandler.features().getBoolean("Ghost"))

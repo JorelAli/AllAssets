@@ -31,28 +31,24 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Teleportation;
+package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.OfflineUser;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class CommandTp {
+public class CommandSpawnMob {
 
-	public CommandTp(final CommandFramework framework) {
+	public CommandSpawnMob(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user", usage = "Use <command>")
-	public void onCommand(final CommandArgs args) {
+	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob", usage = "Use <command>")
+	public void command(final CommandArgs args) {
+		//TODO finish
 		Player player = null;
 		try {
 			player = args.getPlayer();
@@ -60,31 +56,13 @@ public class CommandTp {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (args.getArgs().length == 0) {
-			ErrorUtils.notEnoughArguments(player);
+		switch (args.getArgs().length) {
+		case 0:
+			return;
+		case 1:
 			return;
 		}
-		final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-		if (offlineTarget == null && onlineTarget == null) {
-			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-			return;
-		}
-		final User user = new User(player);
-		final OfflineUser target = new OfflineUser(offlineTarget);
-		if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
-			user.setLastLoc();
-			if (onlineTarget == null) {
-				player.teleport(target.getLastLoc());
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + offlineTarget.getName());
-			} else {
-				player.teleport(onlineTarget);
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + onlineTarget.getName());
-			}
-			return;
-		} else {
-			ErrorUtils.tptoggle(player, args.getArgs()[0]);
-			return;
-		}
+		ErrorUtils.tooManyArguments(player);
+		return;
 	}
 }

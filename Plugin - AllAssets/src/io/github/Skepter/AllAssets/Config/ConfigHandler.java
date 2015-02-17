@@ -143,6 +143,7 @@ public class ConfigHandler {
 		features.set("DiscoArmor", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
+		features.set("Extinguish", "true");
 		features.set("FakeDeop", "true");
 		features.set("FakeOp", "true");
 		features.set("FileBrowser", "true");
@@ -150,6 +151,7 @@ public class ConfigHandler {
 		features.set("Firework", "true");
 		features.set("Fly", "true");
 		features.set("ForceChat", "true");
+		features.set("ForceCommand", "true");
 		features.set("Gamemode", "true");
 		features.set("Ghost", "true");
 		features.set("Glow", "true");

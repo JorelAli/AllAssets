@@ -31,28 +31,27 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Teleportation;
+package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.OfflineUser;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+import io.github.Skepter.AllAssets.Utils.Sphere;
+import io.github.Skepter.AllAssets.Utils.TextUtils;
 
-import org.bukkit.OfflinePlayer;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class CommandTp {
+public class CommandExtinguish {
 
-	public CommandTp(final CommandFramework framework) {
+	public CommandExtinguish(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user", usage = "Use <command>")
-	public void onCommand(final CommandArgs args) {
+	@CommandHandler(name = "extinguish", aliases = { "ext" }, permission = "extinguish", description = "Extinguishes fires", usage = "Use <command>")
+	public void command(final CommandArgs args) {
 		Player player = null;
 		try {
 			player = args.getPlayer();
@@ -60,31 +59,27 @@ public class CommandTp {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (args.getArgs().length == 0) {
-			ErrorUtils.notEnoughArguments(player);
-			return;
-		}
-		final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-		if (offlineTarget == null && onlineTarget == null) {
-			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-			return;
-		}
-		final User user = new User(player);
-		final OfflineUser target = new OfflineUser(offlineTarget);
-		if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
-			user.setLastLoc();
-			if (onlineTarget == null) {
-				player.teleport(target.getLastLoc());
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + offlineTarget.getName());
-			} else {
-				player.teleport(onlineTarget);
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + onlineTarget.getName());
+		switch (args.getArgs().length) {
+		case 0:
+			Sphere sphere = new Sphere(player.getLocation(), 120);
+			for (Block b : sphere.getBlocks()) {
+				if (b.getType().equals(Material.FIRE))
+					b.setType(Material.AIR);
 			}
 			return;
-		} else {
-			ErrorUtils.tptoggle(player, args.getArgs()[0]);
+		case 1:
+			if(TextUtils.isInteger(args.getArgs()[0])) {
+				Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]));
+				for (Block b : sphereWithCustomRadius.getBlocks()) {
+					if (b.getType().equals(Material.FIRE))
+						b.setType(Material.AIR);
+				}
+			} else {
+				ErrorUtils.notAnInteger(args.getSender());
+			}
 			return;
 		}
+		ErrorUtils.tooManyArguments(player);
+		return;
 	}
 }

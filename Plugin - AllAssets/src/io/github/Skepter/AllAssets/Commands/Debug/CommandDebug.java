@@ -60,17 +60,15 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -335,6 +333,27 @@ public class CommandDebug implements Listener {
 		} else {
 			physics = true;
 			Bukkit.broadcastMessage(AllAssets.title + "Resumed server physics");
+		}
+	}
+
+	boolean explosions = true;
+
+	@CommandHandler(name = "debug.explosions", permission = "debug", description = "Toggles explosions", usage = "Use <command>")
+	public void toggleExplosions(final CommandArgs args) {
+		if (explosions) {
+			explosions = false;
+			Bukkit.broadcastMessage(AllAssets.title + "Explosions have been turned off");
+		} else {
+			explosions = true;
+			Bukkit.broadcastMessage(AllAssets.title + "Explosions have been turned on");
+		}
+	}
+
+	@EventHandler
+	public void onExplode(EntityExplodeEvent event) {
+		if (!explosions) {
+			event.setCancelled(true);
+			event.setYield(0.0F);
 		}
 	}
 
