@@ -34,7 +34,10 @@ package io.github.Skepter.AllAssets.Listeners;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
+
+import java.math.BigInteger;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -66,5 +69,60 @@ public class ChatListener implements Listener {
 		if (ConfigHandler.features().getBoolean("ChatColor"))
 			if (event.getPlayer().hasPermission("AllAssets.chatColor"))
 				event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+	}
+
+	//TODO add to features/config
+
+	@EventHandler
+	public void playerSumEvent(final AsyncPlayerChatEvent event) {
+		if (event.getMessage().startsWith("sum(") && event.getMessage().endsWith(")")) {
+			String sum = event.getMessage().replace("sum(", "").replace(")", "").replace(" ", "");
+			String arr[] = null;
+			if (sum.contains("+")) {
+				sum = sum.replace('+', ':');
+				arr = sum.split(":");
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) + Integer.parseInt(arr[1])));
+				} else {
+					ErrorUtils.notAnInteger(event.getPlayer());
+				}
+			}
+			if (sum.contains("-")) {
+				sum = sum.replace('-', ':');
+				arr = sum.split(":");
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) - Integer.parseInt(arr[1])));
+				} else {
+					ErrorUtils.notAnInteger(event.getPlayer());
+				}
+			}
+			if (sum.contains("*")) {
+				sum = sum.replace('*', ':');
+				arr = sum.split(":");
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) * Integer.parseInt(arr[1])));
+				} else {
+					ErrorUtils.notAnInteger(event.getPlayer());
+				}
+			}
+			if (sum.contains("/")) {
+				sum = sum.replace('/', ':');
+				arr = sum.split(":");
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+					event.setMessage(event.getMessage() + " = " + (new Double(Integer.parseInt(arr[0])) / new Double(Integer.parseInt(arr[1]))));
+				} else {
+					ErrorUtils.notAnInteger(event.getPlayer());
+				}
+			}
+			if (sum.contains("^")) {
+				sum = sum.replace('^', ':');
+				arr = sum.split(":");
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+					event.setMessage(event.getMessage() + " = " + new BigInteger(arr[0]).pow(Integer.parseInt(arr[1])).toString());
+				} else {
+					ErrorUtils.notAnInteger(event.getPlayer());
+				}
+			}
+		}
 	}
 }
