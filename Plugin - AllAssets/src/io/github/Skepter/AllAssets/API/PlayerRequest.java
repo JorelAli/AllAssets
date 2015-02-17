@@ -23,12 +23,26 @@ public class PlayerRequest {
 	private boolean hasAccepted;
 	private static String sender;
 	private static String information;
-	
-	/* to -> from */
-	private Map<UUID,UUID> playerMap;
+	private boolean hasExpired;
 
+	/* to -> from */
+	private Map<UUID, UUID> playerMap;
+
+	/** Use -1 as the timeout for an infinite timeout */
 	public PlayerRequest(Player from, Player to, String information, long timeout) {
-		playerMap = new HashMap<UUID,UUID>();
+		hasExpired = false;
+		if (timeout != -1) {
+			from.sendMessage(AllAssets.title + "Your request will expire in " + (timeout / 1000) + " seconds");
+			Bukkit.getScheduler().runTaskLater(AllAssets.instance(), new Runnable() {
+				@Override
+				public void run() {
+					hasExpired = true;
+					hasAccepted = false;
+				}
+			}, timeout);
+		}
+
+		playerMap = new HashMap<UUID, UUID>();
 		playerMap.put(to.getUniqueId(), from.getUniqueId());
 		sender = from.getName();
 		PlayerRequest.information = information;
@@ -37,7 +51,7 @@ public class PlayerRequest {
 			conversationFactory.buildConversation((Conversable) to).begin();
 		}
 	}
-	
+
 	public PlayerRequest getRequest() {
 		return this;
 	}
@@ -45,11 +59,11 @@ public class PlayerRequest {
 	public static String getPromptText() {
 		return AllAssets.title + AllAssets.houseStyleColor + sender + " has requested to " + information + " Say" + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
 	}
-	
+
 	public boolean hasAccepted() {
 		return hasAccepted;
 	}
-	
+
 	/** The event when a player has accepted/declined a request */
 	static class PlayerRequestEvent extends Event {
 
@@ -58,19 +72,19 @@ public class PlayerRequest {
 		private Player from;
 		private Player to;
 		private boolean result;
-		
+
 		public PlayerRequestEvent(PlayerRequest request, Player from, Player to, boolean result) {
 			this.setFrom(from);
 			this.setTo(to);
 			this.setResult(result);
 			this.setRequest(request);
 		}
-		
+
 		@Override
 		public HandlerList getHandlers() {
 			return handlers;
 		}
-		
+
 		public static HandlerList getHandlerList() {
 			return handlers;
 		}
@@ -106,7 +120,7 @@ public class PlayerRequest {
 		public void setRequest(PlayerRequest request) {
 			this.request = request;
 		}
-		
+
 	}
 
 	class YesNoPrompt extends BooleanPrompt {
@@ -118,10 +132,15 @@ public class PlayerRequest {
 
 		@Override
 		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
-			hasAccepted = true;
 			if (context.getForWhom() instanceof Player) {
 				final Player player = (Player) context.getForWhom();
 				final Player from = Bukkit.getPlayer(playerMap.get(player.getUniqueId()));
+
+				if (hasExpired) {
+					from.sendMessage(AllAssets.title + "Your request has expired");
+					return Prompt.END_OF_CONVERSATION;
+				}
+				hasAccepted = true;
 				final Event playerRequestEvent = new PlayerRequestEvent(getRequest(), from, player, b);
 				Bukkit.getServer().getPluginManager().callEvent(playerRequestEvent);
 				if (b) {
@@ -137,5 +156,4 @@ public class PlayerRequest {
 
 	}
 
-	
 }
