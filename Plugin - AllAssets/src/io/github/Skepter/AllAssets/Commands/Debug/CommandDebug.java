@@ -81,7 +81,7 @@ public class CommandDebug implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "debug", permission = "debug", description = "Show server data", usage = "Use <command>")
+	@CommandHandler(name = "debug", permission = "debug", description = "Show server data")
 	public void command(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		String strTps = "";
@@ -99,7 +99,7 @@ public class CommandDebug implements Listener {
 		return;
 	}
 
-	@CommandHandler(name = "debug.full", permission = "debug", description = "Show server data", usage = "Use <command>")
+	@CommandHandler(name = "debug.full", permission = "debug", description = "Show server data")
 	public void full(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		String strTps = "";
@@ -202,7 +202,7 @@ public class CommandDebug implements Listener {
 		});
 	}
 
-	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection", usage = "Use <command>")
+	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection")
 	public void clean(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		final long totalRamPre = Runtime.getRuntime().totalMemory() / 1024 / 1024;
@@ -215,7 +215,7 @@ public class CommandDebug implements Listener {
 	}
 
 	/* Not been fully tested yet */
-	//	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval", usage = "Use <command>")
+	//	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval")
 	//	public void rClean(final CommandArgs args) {
 	//		if (taskID == 0) {
 	//			int length = 0;
@@ -232,7 +232,7 @@ public class CommandDebug implements Listener {
 	//			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
 	//	}
 
-	@CommandHandler(name = "debug.ram", permission = "debug", description = "Displays RAM information", usage = "Use <command>")
+	@CommandHandler(name = "debug.ram", permission = "debug", description = "Displays RAM information")
 	public void ram(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		sender.sendMessage(TextUtils.title("RAM"));
@@ -242,13 +242,13 @@ public class CommandDebug implements Listener {
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
 
-	@CommandHandler(name = "debug.testid", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	@CommandHandler(name = "debug.testid", permission = "debug", description = "Runs a test")
 	public void testID(final CommandArgs args) {
 		System.out.println(args.getArgs()[0]);
 		args.getSender().sendMessage("The ID for " + args.getArgs()[0] + " is " + IDReader.readID(args.getArgs()[0]));
 	}
 
-	@CommandHandler(name = "debug.testencrypt", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	@CommandHandler(name = "debug.testencrypt", permission = "debug", description = "Runs a test")
 	public void testEncrypt(final CommandArgs args) {
 		if (args.getArgs().length != 2) {
 			ErrorUtils.notEnoughArguments(args.getSender());
@@ -266,7 +266,7 @@ public class CommandDebug implements Listener {
 		System.out.println("Key: " + args.getArgs()[0] + ", data: " + args.getArgs()[1]);
 	}
 
-	@CommandHandler(name = "debug.testdecrypt", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	@CommandHandler(name = "debug.testdecrypt", permission = "debug", description = "Runs a test")
 	public void testDecrypt(final CommandArgs args) {
 		if (args.getArgs().length != 1) {
 			ErrorUtils.notEnoughArguments(args.getSender());
@@ -282,7 +282,7 @@ public class CommandDebug implements Listener {
 	}
 
 	/* Used to debug the Log feature */
-	//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error", usage = "Use <command>")
+	//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")
 	//	public void error(final CommandArgs args) {
 	//		final String[] arr = { "bob", "mark" };
 	//		final String s = arr[4];
@@ -290,7 +290,7 @@ public class CommandDebug implements Listener {
 	//	}
 
 	//will be removed in future
-	//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test", usage = "Use <command>")
+	//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test")
 	//	public void test(final CommandArgs args) {
 	//		String multilineString = "Plugin                        `Thread\n";
 	//
@@ -304,7 +304,7 @@ public class CommandDebug implements Listener {
 	//		AllAssets.instance().getServer().broadcastMessage(printedText);
 	//	}
 
-	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", isListed = false)
 	public void test1(final CommandArgs args) {
 		int conflict = 0;
 		final Set<String> conflictingPlugins = new HashSet<String>();
@@ -325,7 +325,7 @@ public class CommandDebug implements Listener {
 
 	boolean physics = true;
 
-	@CommandHandler(name = "debug.physics", permission = "debug", description = "Toggles server physics", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "debug.physics", permission = "debug", description = "Toggles server physics", isListed = false)
 	public void stopPhysics(final CommandArgs args) {
 		if (physics) {
 			physics = false;
@@ -338,7 +338,7 @@ public class CommandDebug implements Listener {
 
 	boolean explosions = true;
 
-	@CommandHandler(name = "debug.explosions", permission = "debug", description = "Toggles explosions", usage = "Use <command>")
+	@CommandHandler(name = "debug.explosions", permission = "debug", description = "Toggles explosions")
 	public void toggleExplosions(final CommandArgs args) {
 		if (explosions) {
 			explosions = false;

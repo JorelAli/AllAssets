@@ -48,7 +48,7 @@ public class CommandPing {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "ping", permission = "ping", description = "Shows your ping", usage = "Use <command>")
+	@CommandHandler(name = "ping", permission = "ping", description = "Shows your ping")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

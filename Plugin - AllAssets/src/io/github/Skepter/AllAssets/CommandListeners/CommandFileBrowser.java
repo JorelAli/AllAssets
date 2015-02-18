@@ -76,7 +76,7 @@ public class CommandFileBrowser implements Listener {
 	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>(AllAssets.instance());
 	public PlayerMap<UUID, List<String>> dataMap = new PlayerMap<UUID, List<String>>(AllAssets.instance());
 
-	@CommandHandler(name = "filebrowser", aliases = { "fb" }, permission = "filebrowser", description = "Browses files and shows configs", usage = "Use <command>")
+	@CommandHandler(name = "filebrowser", aliases = { "fb" }, permission = "filebrowser", description = "Browses files and shows configs")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

@@ -60,7 +60,7 @@ public class CommandStaffChat implements Listener {
 
 	private final List<UUID> players = new ArrayList<UUID>();
 
-	@CommandHandler(name = "staffchat", aliases = { "sc", "adminchat", "ac", "a" }, permission = "staffchat", description = "Toggles the staff chat", usage = "Use <command>")
+	@CommandHandler(name = "staffchat", aliases = { "sc", "adminchat", "ac", "a" }, permission = "staffchat", description = "Toggles the staff chat")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

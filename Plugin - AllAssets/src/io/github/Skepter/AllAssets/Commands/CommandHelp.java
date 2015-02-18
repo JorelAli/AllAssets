@@ -60,7 +60,7 @@ public class CommandHelp {
 		map.put(commandName.toLowerCase(), method, obj, null, null, null);
 	}
 
-	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command", usage = "Use <command>")
+	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command")
 	public void onCommand(final CommandArgs args) {
 		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName()))

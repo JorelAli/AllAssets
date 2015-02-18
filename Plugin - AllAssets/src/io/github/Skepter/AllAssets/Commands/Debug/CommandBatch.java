@@ -67,7 +67,7 @@ public class CommandBatch {
 	private final Map<Integer, Integer> runnableMap = new HashMap<Integer, Integer>();
 	private final PlayerMap<UUID, Integer> runnablesMap = new PlayerMap<UUID, Integer>(AllAssets.instance());
 
-	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times", usage = "Use <command>")
+	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

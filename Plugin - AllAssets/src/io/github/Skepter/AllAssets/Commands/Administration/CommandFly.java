@@ -48,7 +48,7 @@ public class CommandFly {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly", usage = "Use <command>")
+	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly")
 	public void command(final CommandArgs args) {
 		Player player = null;
 		try {

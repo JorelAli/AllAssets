@@ -56,7 +56,7 @@ public class CommandGrief {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "grief", aliases = { "griefreport", "gr" }, permission = "grief", description = "Report a grief incident", usage = "Use <command>")
+	@CommandHandler(name = "grief", aliases = { "griefreport", "gr" }, permission = "grief", description = "Report a grief incident")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

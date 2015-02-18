@@ -48,7 +48,7 @@ public class CommandForceChat {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "forcechat", aliases = { "fc" }, permission = "forcechat", description = "Force a player to say something", usage = "Use <command>")
+	@CommandHandler(name = "forcechat", aliases = { "fc" }, permission = "forcechat", description = "Force a player to say something")
 	public void onCommand(final CommandArgs args) {
 		if (args.getArgs().length > 0)
 			try {

@@ -56,7 +56,7 @@ public class CommandDiscoArmor {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "discoarmor", aliases = { "darmor", "partyarmor", "parmor" }, permission = "discoarmor", description = "Gives you flashing armor", usage = "Use <command>")
+	@CommandHandler(name = "discoarmor", aliases = { "darmor", "partyarmor", "parmor" }, permission = "discoarmor", description = "Gives you flashing armor")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

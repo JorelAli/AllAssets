@@ -49,7 +49,7 @@ public class CommandInventory {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "inventory", aliases = { "invsee", "inv" }, permission = "inventory", description = "Views a players inventory", usage = "Use <command>")
+	@CommandHandler(name = "inventory", aliases = { "invsee", "inv" }, permission = "inventory", description = "Views a players inventory")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

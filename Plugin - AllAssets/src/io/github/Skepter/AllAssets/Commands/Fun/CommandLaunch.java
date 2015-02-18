@@ -62,7 +62,7 @@ public class CommandLaunch {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "launch", permission = "launch", description = "Launches a projectile", usage = "Use <command>")
+	@CommandHandler(name = "launch", permission = "launch", description = "Launches a projectile")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

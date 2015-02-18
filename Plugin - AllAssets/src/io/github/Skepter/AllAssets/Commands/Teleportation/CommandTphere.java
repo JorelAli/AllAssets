@@ -49,7 +49,7 @@ public class CommandTphere {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "tphere", aliases = { "teleporthere" }, permission = "tphere", description = "Teleport another user to you", usage = "Use <command>")
+	@CommandHandler(name = "tphere", aliases = { "teleporthere" }, permission = "tphere", description = "Teleport another user to you")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

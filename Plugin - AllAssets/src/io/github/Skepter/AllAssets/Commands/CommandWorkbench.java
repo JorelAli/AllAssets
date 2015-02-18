@@ -46,7 +46,7 @@ public class CommandWorkbench {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "workbench", aliases = { "wb" }, permission = "workbench", description = "Shows your ping", usage = "Use <command>")
+	@CommandHandler(name = "workbench", aliases = { "wb" }, permission = "workbench", description = "Shows your ping")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

@@ -48,7 +48,7 @@ public class CommandFakeDeop {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "fakedeop", aliases = { "fdeop" }, permission = "fakedeop", description = "Fakes a player deop status", usage = "Use <command>")
+	@CommandHandler(name = "fakedeop", aliases = { "fdeop" }, permission = "fakedeop", description = "Fakes a player deop status")
 	public void onCommand(final CommandArgs args) {
 		Player target = null;
 		try {

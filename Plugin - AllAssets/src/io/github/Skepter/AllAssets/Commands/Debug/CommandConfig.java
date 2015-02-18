@@ -46,7 +46,7 @@ public class CommandConfig {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "config", permission = "config", description = "Views and modifies the config", usage = "Use <command>")
+	@CommandHandler(name = "config", permission = "config", description = "Views and modifies the config")
 	public void onCommand(final CommandArgs args) {
 		/** Command usage: /config list /config view - shows all keys/values
 		 * /config view <file> /config set <config/features> <key> <value>

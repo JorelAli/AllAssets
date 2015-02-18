@@ -47,7 +47,7 @@ public class CommandSetSpawn {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "setspawn", permission = "setspawn", description = "Sets the world spawn to your location", usage = "Use <command>")
+	@CommandHandler(name = "setspawn", permission = "setspawn", description = "Sets the world spawn to your location")
 	public void command(final CommandArgs args) {
 		Player player = null;
 		try {

@@ -49,7 +49,7 @@ public class CommandGlow {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "glow", permission = "glow", description = "Makes the item in your hand glow", usage = "Use <command>")
+	@CommandHandler(name = "glow", permission = "glow", description = "Makes the item in your hand glow")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

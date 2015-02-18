@@ -49,7 +49,7 @@ public class CommandGamemode {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "gamemode", aliases = { "gm" }, permission = "gamemode", description = "Changes your gamemode", usage = "Use <command>")
+	@CommandHandler(name = "gamemode", aliases = { "gm" }, permission = "gamemode", description = "Changes your gamemode")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -83,7 +83,7 @@ public class CommandGamemode {
 
 	}
 
-	@CommandHandler(name = "gms", permission = "gamemode", description = "Changes your gamemode to survival", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "gms", permission = "gamemode", description = "Changes your gamemode to survival", isListed = false)
 	public void onGms(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -95,7 +95,7 @@ public class CommandGamemode {
 		doGameMode(player, "survival");
 	}
 
-	@CommandHandler(name = "gmc", permission = "gamemode", description = "Changes your gamemode to creative", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "gmc", permission = "gamemode", description = "Changes your gamemode to creative", isListed = false)
 	public void onGmc(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -107,7 +107,7 @@ public class CommandGamemode {
 		doGameMode(player, "creative");
 	}
 
-	@CommandHandler(name = "gma", permission = "gamemode", description = "Changes your gamemode to adventure", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "gma", permission = "gamemode", description = "Changes your gamemode to adventure", isListed = false)
 	public void onGma(final CommandArgs args) {
 		Player player = null;
 		try {

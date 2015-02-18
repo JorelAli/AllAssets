@@ -52,7 +52,7 @@ public class CommandOplist {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "oplist", description = "Lists the players that have op", usage = "Use <command>")
+	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "oplist", description = "Lists the players that have op")
 	public void onCommand(final CommandArgs args) {
 		final ArrayList<String> operators = new ArrayList<String>();
 		for (final OfflinePlayer s : Bukkit.getOperators())

@@ -54,41 +54,41 @@ public class CommandAnnouncer {
 
 	private int taskID;
 
-	@CommandHandler(name = "announcer", aliases = { "announce" }, permission = "announcer", description = "Configure the scheduled announcer", usage = "Use <command>")
+	@CommandHandler(name = "announcer", aliases = { "announce" }, permission = "announcer", description = "Configure the scheduled announcer")
 	public void onCommand(final CommandArgs args) {
 		printHelp(args.getSender());
 		return; 
 	}
 
-	@CommandHandler(name = "announcer.start", permission = "announcer", description = "Start the announcer", usage = "Use <command>")
+	@CommandHandler(name = "announcer.start", permission = "announcer", description = "Start the announcer")
 	public void startAnnouncer(final CommandArgs args) {
 		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new AnnouncerTask(), 0, ConfigHandler.config().getInt("announcerTime"));
 		args.getSender().sendMessage(AllAssets.title + "The announcer has started");
 		return;
 	}
 
-	@CommandHandler(name = "announcer.stop", permission = "announcer", description = "Stop the announcer", usage = "Use <command>")
+	@CommandHandler(name = "announcer.stop", permission = "announcer", description = "Stop the announcer")
 	public void stopAnnouncer(final CommandArgs args) {
 		Bukkit.getScheduler().cancelTask(taskID);
 		args.getSender().sendMessage(AllAssets.title + "The announcer has been stopped");
 		return;
 	}
 
-	@CommandHandler(name = "announcer.list", permission = "announcer", description = "List all announcements", usage = "Use <command>")
+	@CommandHandler(name = "announcer.list", permission = "announcer", description = "List all announcements")
 	public void listAnnouncements(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Announcer list"));
 		for (final String key : ConfigHandler.announcer().getKeys())
 			args.getSender().sendMessage(AllAssets.houseStyleColor + key + " " + ChatColor.translateAlternateColorCodes('&', ConfigHandler.announcer().getString(key)));
 	}
 
-	@CommandHandler(name = "announcer.add", permission = "announcer", description = "Add a new announcement", usage = "Use <command>")
+	@CommandHandler(name = "announcer.add", permission = "announcer", description = "Add a new announcement")
 	public void addAnnouncement(final CommandArgs args) {
 		final String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
 		setAnnouncer(message);
 		args.getSender().sendMessage(AllAssets.title + "Successfully added a new message to the announcer");
 	}
 
-	@CommandHandler(name = "announcer.remove", permission = "announcer", description = "Remove an announcement", usage = "Use <command>")
+	@CommandHandler(name = "announcer.remove", permission = "announcer", description = "Remove an announcement")
 	public void removeAnnouncement(final CommandArgs args) {
 		if (TextUtils.isInteger(args.getArgs()[0]))
 			ConfigHandler.announcer().removeKey(String.valueOf(args.getArgs()[0]));

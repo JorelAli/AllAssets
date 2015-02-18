@@ -48,7 +48,7 @@ public class CommandGhost {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "ghost", description = "Allows you to turn into a ghost", usage = "Use <command>")
+	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "ghost", description = "Allows you to turn into a ghost")
 	public void command(final CommandArgs args) {
 		Player player = null;
 		try {

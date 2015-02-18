@@ -55,7 +55,7 @@ public class CommandNear {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "near", permission = "near", description = "Shows entities near to you", usage = "Use <command>")
+	@CommandHandler(name = "near", permission = "near", description = "Shows entities near to you")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

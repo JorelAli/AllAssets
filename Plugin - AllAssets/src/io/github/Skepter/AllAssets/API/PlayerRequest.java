@@ -65,7 +65,7 @@ public class PlayerRequest {
 	}
 
 	/** The event when a player has accepted/declined a request */
-	static class PlayerRequestEvent extends Event {
+	public static class PlayerRequestEvent extends Event {
 
 		private static final HandlerList handlers = new HandlerList();
 		private PlayerRequest request;

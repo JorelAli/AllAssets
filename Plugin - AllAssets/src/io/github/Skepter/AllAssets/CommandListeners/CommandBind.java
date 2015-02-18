@@ -59,7 +59,7 @@ public class CommandBind implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "bind", permission = "bind", description = "Binds a command to an item", usage = "Use <command>")
+	@CommandHandler(name = "bind", permission = "bind", description = "Binds a command to an item")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -74,7 +74,7 @@ public class CommandBind implements Listener {
 		return;
 	}
 
-	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item", usage = "Use <command>")
+	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item")
 	public void addBind(final CommandArgs args) {
 		Player player = null;
 		try {
@@ -101,7 +101,7 @@ public class CommandBind implements Listener {
 		return;
 	}
 
-	@CommandHandler(name = "bind.remove", permission = "bind", description = "Removes a command to the binded item", usage = "Use <command>")
+	@CommandHandler(name = "bind.remove", permission = "bind", description = "Removes a command to the binded item")
 	public void removeBind(final CommandArgs args) {
 		Player player = null;
 		try {

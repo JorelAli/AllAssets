@@ -55,13 +55,13 @@ public class CommandAllAssets {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "allassets", aliases = { "aa" }, permission = "allassets", description = "Shows help & stuff", usage = "Use <command>")
+	@CommandHandler(name = "allassets", aliases = { "aa" }, permission = "allassets", description = "Shows help & stuff")
 	public void onCommand(final CommandArgs args) {
 		printHelp(args.getSender());
 		return;
 	}
 
-	@CommandHandler(name = "allassets.commands", aliases = { "aa.cmds", "allassets.cmds", "aa.commands" }, permission = "AllAssets.allassets", description = "Views plugin commands", usage = "Use <command>")
+	@CommandHandler(name = "allassets.commands", aliases = { "aa.cmds", "allassets.cmds", "aa.commands" }, permission = "AllAssets.allassets", description = "Views plugin commands")
 	public void commands(final CommandArgs args) {
 		final List<String> commandList = new ArrayList<String>();
 		for (final CommandHandler command : CommandFramework.pluginCommands)
@@ -78,7 +78,7 @@ public class CommandAllAssets {
 		return;
 	}
 
-	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "AllAssets.allassets", description = "Reloads entire plugin", usage = "Use <command>")
+	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "AllAssets.allassets", description = "Reloads entire plugin")
 	public void reload(final CommandArgs args) {
 		ConfigHandler.config().reloadConfig();
 		ConfigHandler.features().reloadConfig();

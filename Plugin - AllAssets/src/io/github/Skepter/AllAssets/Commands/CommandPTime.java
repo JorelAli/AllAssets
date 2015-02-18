@@ -48,7 +48,7 @@ public class CommandPTime {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "ptime", aliases = { "playertime" }, permission = "ptime", description = "Sets your time", usage = "Use <command>")
+	@CommandHandler(name = "ptime", aliases = { "playertime" }, permission = "ptime", description = "Sets your time")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

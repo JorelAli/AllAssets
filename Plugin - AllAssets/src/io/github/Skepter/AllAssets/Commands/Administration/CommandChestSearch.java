@@ -57,7 +57,7 @@ public class CommandChestSearch {
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "chestsearch", aliases = { "csearch" }, permission = "chestsearch", description = "Search for items in chests", usage = "Use <command>")
+	@CommandHandler(name = "chestsearch", aliases = { "csearch" }, permission = "chestsearch", description = "Search for items in chests")
 	public void command(final CommandArgs args) {
 		Player player = null;
 		try {

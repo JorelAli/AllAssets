@@ -52,7 +52,7 @@ public class CommandSignEdit {
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "signedit", description = "Allows you to edit signs", usage = "Use <command>")
+	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "signedit", description = "Allows you to edit signs")
 	public void command(final CommandArgs args) {
 		Player player = null;
 		try {

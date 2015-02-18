@@ -58,7 +58,7 @@ public class CommandSilence implements Listener {
 
 	public List<UUID> players = new ArrayList<UUID>();
 
-	@CommandHandler(name = "silence", permission = "silence", description = "Silences a player", usage = "Use <command>")
+	@CommandHandler(name = "silence", permission = "silence", description = "Silences a player")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

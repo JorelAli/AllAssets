@@ -59,7 +59,7 @@ public class CommandBalancetop {
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "balancetop", description = "Displays the top balances", usage = "Use <command>")
+	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "balancetop", description = "Displays the top balances")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

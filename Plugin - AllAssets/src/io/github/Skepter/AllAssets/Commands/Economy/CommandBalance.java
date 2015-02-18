@@ -47,7 +47,7 @@ public class CommandBalance {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "balance", aliases = { "bal" }, permission = "balance", description = "Displays your balance", usage = "Use <command>")
+	@CommandHandler(name = "balance", aliases = { "bal" }, permission = "balance", description = "Displays your balance")
 	public void onCommand(final CommandArgs args) {
 		//other balance
 		Player player = null;

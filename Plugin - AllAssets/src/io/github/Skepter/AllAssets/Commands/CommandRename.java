@@ -51,7 +51,7 @@ public class CommandRename {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "rename", aliases = { "rn" }, permission = "rename", description = "Renames the current item in your hand", usage = "Use <command>")
+	@CommandHandler(name = "rename", aliases = { "rn" }, permission = "rename", description = "Renames the current item in your hand")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

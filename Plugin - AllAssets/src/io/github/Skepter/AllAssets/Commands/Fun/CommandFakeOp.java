@@ -48,7 +48,7 @@ public class CommandFakeOp {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "fakeop", aliases = { "fop" }, permission = "fakeop", description = "Fakes a player op status", usage = "Use <command>")
+	@CommandHandler(name = "fakeop", aliases = { "fop" }, permission = "fakeop", description = "Fakes a player op status")
 	public void onCommand(final CommandArgs args) {
 		Player target = null;
 		try {

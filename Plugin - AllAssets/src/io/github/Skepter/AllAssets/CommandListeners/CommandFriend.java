@@ -27,31 +27,35 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Administration;
+package io.github.Skepter.AllAssets.CommandListeners;
 
+import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Help;
+import io.github.Skepter.AllAssets.API.OfflineUser;
+import io.github.Skepter.AllAssets.API.PlayerRequest.PlayerRequestEvent;
+import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.Sphere;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
-import org.bukkit.Material;
-import org.bukkit.block.Block;
+import java.util.List;
+import java.util.UUID;
+
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 
-public class CommandExtinguish {
+public class CommandFriend implements Listener{
 
-	public CommandExtinguish(final CommandFramework framework) {
+	public CommandFriend(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "extinguish", aliases = { "ext" }, permission = "extinguish", description = "Extinguishes fires")
-	public void command(final CommandArgs args) {
+	@CommandHandler(name = "friend", aliases = { "f" }, permission = "friend", description = "Access your friend information")
+	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {
 			player = args.getPlayer();
@@ -59,27 +63,45 @@ public class CommandExtinguish {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		switch (args.getArgs().length) {
-		case 0:
-			Sphere sphere = new Sphere(player.getLocation(), 120);
-			for (Block b : sphere.getBlocks()) {
-				if (b.getType().equals(Material.FIRE))
-					b.setType(Material.AIR);
-			}
-			return;
-		case 1:
-			if(TextUtils.isInteger(args.getArgs()[0])) {
-				Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]));
-				for (Block b : sphereWithCustomRadius.getBlocks()) {
-					if (b.getType().equals(Material.FIRE))
-						b.setType(Material.AIR);
-				}
-			} else {
-				ErrorUtils.notAnInteger(args.getSender());
-			}
+		printHelp(player);
+	}
+	
+	@CommandHandler(name = "friend.list", aliases = { "friends" }, permission = "friend", description = "Show a list of all of your friends")
+	public void onList(final CommandArgs args) {
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		ErrorUtils.tooManyArguments(player);
-		return;
+		User user = new User(player);
+		List<UUID> friends = user.getFriendList();
+		for(UUID u : friends) {
+			OfflineUser offlineFriend = new OfflineUser(u);
+			player.sendMessage(AllAssets.houseStyleColor + offlineFriend.getPlayer().getName() + " - " +  offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
+		}		
+	}
+	
+	@CommandHandler(name = "friend.add", permission = "friend", description = "Add a friend")
+	public void addFriend(final CommandArgs args) {
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			ErrorUtils.playerOnly(args.getSender());
+			return;
+		}
+				
+	}
+	
+	@EventHandler
+	public void onAccept(PlayerRequestEvent event) {
+		event.getRequest();
+	}
+	
+	@Help(name="Friend")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Friend", "/friend list - lists your friends");
 	}
 }

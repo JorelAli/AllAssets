@@ -274,7 +274,7 @@ public class CommandFramework {
 		/** The usage that will appear in /help (commandname)
 		 * 
 		 * @return */
-		public String usage() default "";
+		public String usage() default "Use <command>";
 
 		/** A custom annotation that decides weather or not the command is listed
 		 * in /aio commands or not

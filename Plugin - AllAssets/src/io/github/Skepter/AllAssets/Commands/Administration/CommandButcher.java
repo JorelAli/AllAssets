@@ -55,7 +55,7 @@ public class CommandButcher {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "butcher", aliases = { "killall" }, permission = "butcher", description = "Kills mobs", usage = "Use <command>")
+	@CommandHandler(name = "butcher", aliases = { "killall" }, permission = "butcher", description = "Kills mobs")
 	public void onCommand(final CommandArgs args) {
 		boolean lightning, passive, hostile, explosion;
 		explosion = lightning = passive = hostile = false;

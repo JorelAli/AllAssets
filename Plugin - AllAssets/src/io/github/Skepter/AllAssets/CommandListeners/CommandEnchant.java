@@ -55,7 +55,7 @@ public class CommandEnchant implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "enchant", permission = "enchant", description = "Enchants an item", usage = "Use <command>")
+	@CommandHandler(name = "enchant", permission = "enchant", description = "Enchants an item")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

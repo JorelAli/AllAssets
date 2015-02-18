@@ -46,7 +46,7 @@ public class CommandMore {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "more", permission = "more", description = "Sets your itemstack size to 64", usage = "Use <command>")
+	@CommandHandler(name = "more", permission = "more", description = "Sets your itemstack size to 64")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

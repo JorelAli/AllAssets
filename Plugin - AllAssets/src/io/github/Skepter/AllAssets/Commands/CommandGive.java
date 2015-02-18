@@ -50,7 +50,7 @@ public class CommandGive {
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "give", aliases = { "i", "item" }, permission = "give", description = "Gives items", usage = "Use <command>")
+	@CommandHandler(name = "give", aliases = { "i", "item" }, permission = "give", description = "Gives items")
 	public void onCommand(final CommandArgs args) {
 //		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
 //		try {

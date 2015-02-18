@@ -48,7 +48,7 @@ public class CommandPWeather {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "pweather", description = "Sets your weather", usage = "Use <command>")
+	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "pweather", description = "Sets your weather")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

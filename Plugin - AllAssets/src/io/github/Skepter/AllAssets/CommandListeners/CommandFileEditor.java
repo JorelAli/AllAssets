@@ -75,7 +75,7 @@ public class CommandFileEditor implements Listener {
 	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>(AllAssets.instance());
 	public PlayerMap<UUID, String> fileMap = new PlayerMap<UUID, String>(AllAssets.instance());
 
-	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files", usage = "Use <command>")
+	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

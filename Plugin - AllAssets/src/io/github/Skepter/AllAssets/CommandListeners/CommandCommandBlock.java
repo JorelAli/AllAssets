@@ -56,7 +56,7 @@ public class CommandCommandBlock implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "$firework", permission = "$console", description = "Launches a firework", usage = "Use <command>")
+	@CommandHandler(name = "$firework", permission = "$console", description = "Launches a firework")
 	public void onCommand(final CommandArgs args) {
 		if (args.getSender() instanceof BlockCommandSender) {
 			final BlockCommandSender sender = (BlockCommandSender) args.getSender();

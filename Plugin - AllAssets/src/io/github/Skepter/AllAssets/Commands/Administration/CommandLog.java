@@ -63,7 +63,7 @@ public class CommandLog {
 		}
 	}
 
-	@CommandHandler(name = "log", permission = "log", description = "Shows log information", usage = "Use <command>")
+	@CommandHandler(name = "log", permission = "log", description = "Shows log information")
 	public void onCommand(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Error logs"));
 		for (final String s : errorLog)

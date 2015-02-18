@@ -53,7 +53,7 @@ public class CommandTime {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "time", permission = "time", description = "Sets the world time", usage = "Use <command>")
+	@CommandHandler(name = "time", permission = "time", description = "Sets the world time")
 	public void onCommand(final CommandArgs args) {
 		switch (args.getArgs().length) {
 		case 0:
@@ -96,28 +96,28 @@ public class CommandTime {
 		return;
 	}
 
-	@CommandHandler(name = "day", permission = "time", description = "Sets the time to day", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "day", permission = "time", description = "Sets the time to day", isListed = false)
 	public void onCommandDay(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(1000);
 		args.getSender().sendMessage(AllAssets.title + "Time set to day");
 	}
 
-	@CommandHandler(name = "midday", permission = "time", description = "Sets the time to midday", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "midday", permission = "time", description = "Sets the time to midday", isListed = false)
 	public void onCommandMidday(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(6000);
 		args.getSender().sendMessage(AllAssets.title + "Time set to midday");
 	}
 
-	@CommandHandler(name = "night", permission = "time", description = "Sets the time to night", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "night", permission = "time", description = "Sets the time to night", isListed = false)
 	public void onCommandNight(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(14000);
 		args.getSender().sendMessage(AllAssets.title + "Time set to night");
 	}
 
-	@CommandHandler(name = "midnight", permission = "time", description = "Sets the time to midnight", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "midnight", permission = "time", description = "Sets the time to midnight", isListed = false)
 	public void onCommandMidnight(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(18000);

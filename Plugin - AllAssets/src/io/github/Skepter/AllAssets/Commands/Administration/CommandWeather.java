@@ -48,7 +48,7 @@ public class CommandWeather {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "weather", permission = "weather", description = "Sets the world weather", usage = "Use <command>")
+	@CommandHandler(name = "weather", permission = "weather", description = "Sets the world weather")
 	public void onCommand(final CommandArgs args) {
 		if (args.isPlayer()) {
 			Player player = null;
@@ -107,7 +107,7 @@ public class CommandWeather {
 
 	}
 
-	@CommandHandler(name = "sun", permission = "weather", description = "Sets the weather to sun", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "sun", permission = "weather", description = "Sets the weather to sun", isListed = false)
 	public void onCommandSun(final CommandArgs args) {
 		if (args.isPlayer()) {
 			Player player = null;
@@ -126,7 +126,7 @@ public class CommandWeather {
 			}
 	}
 
-	@CommandHandler(name = "rain", permission = "weather", description = "Sets the weather to rain", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "rain", permission = "weather", description = "Sets the weather to rain", isListed = false)
 	public void onCommandRain(final CommandArgs args) {
 		if (args.isPlayer()) {
 			Player player = null;
@@ -145,7 +145,7 @@ public class CommandWeather {
 			}
 	}
 
-	@CommandHandler(name = "thunder", permission = "weather", description = "Sets the weather to thunder", usage = "Use <command>", isListed = false)
+	@CommandHandler(name = "thunder", permission = "weather", description = "Sets the weather to thunder", isListed = false)
 	public void onCommandThunder(final CommandArgs args) {
 		if (args.isPlayer()) {
 			Player player = null;

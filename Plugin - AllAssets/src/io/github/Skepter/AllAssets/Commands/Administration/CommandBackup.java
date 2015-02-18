@@ -60,7 +60,7 @@ public class CommandBackup {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "backup", permission = "backup", description = "Backs up a world", usage = "Use <command>")
+	@CommandHandler(name = "backup", permission = "backup", description = "Backs up a world")
 	public void onCommand(final CommandArgs args) {
 		switch (args.getArgs().length) {
 		case 0:

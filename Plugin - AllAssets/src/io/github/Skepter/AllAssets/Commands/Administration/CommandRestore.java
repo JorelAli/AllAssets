@@ -60,7 +60,7 @@ public class CommandRestore {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "restore", aliases = { "revert" }, permission = "restore", description = "Restores a backed up a world", usage = "Use <command>")
+	@CommandHandler(name = "restore", aliases = { "revert" }, permission = "restore", description = "Restores a backed up a world")
 	public void onCommand(final CommandArgs args) {
 		switch (args.getArgs().length) {
 		case 0:

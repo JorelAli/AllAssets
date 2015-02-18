@@ -44,7 +44,7 @@ public class CommandClearchat {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "clearchat", aliases = { "cc" }, permission = "clearchat", description = "Clears the chat", usage = "Use <command>")
+	@CommandHandler(name = "clearchat", aliases = { "cc" }, permission = "clearchat", description = "Clears the chat")
 	public void onCommand(final CommandArgs args) {
 		if (args.getArgs().length == 0) {
 			for (int i = 0; i < 120; i++)

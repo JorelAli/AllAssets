@@ -51,7 +51,7 @@ public class CommandTp {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user", usage = "Use <command>")
+	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

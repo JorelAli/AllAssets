@@ -49,7 +49,7 @@ public class CommandForceCommand {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "forcecommand", aliases = { "sudo" }, permission = "forcecommand", description = "Force a player to run a command", usage = "Use <command>")
+	@CommandHandler(name = "forcecommand", aliases = { "sudo" }, permission = "forcecommand", description = "Force a player to run a command")
 	public void onCommand(final CommandArgs args) {
 		if (args.getArgs().length > 0)
 			try {

@@ -51,7 +51,7 @@ public class CommandAFK implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "afk", permission = "afk", description = "Sets your status as away from keyboard", usage = "Use <command>")
+	@CommandHandler(name = "afk", permission = "afk", description = "Sets your status as away from keyboard")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

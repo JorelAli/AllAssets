@@ -53,7 +53,7 @@ public class CommandConsoleLog {
 
 	public static List<UUID> players = new ArrayList<UUID>();
 
-	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console", usage = "Use <command>")
+	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

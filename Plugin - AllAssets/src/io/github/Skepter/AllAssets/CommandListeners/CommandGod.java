@@ -56,7 +56,7 @@ public class CommandGod implements Listener {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "god", aliases = { "invincible", "invunerable" }, permission = "god", description = "Makes you invincible", usage = "Use <command>")
+	@CommandHandler(name = "god", aliases = { "invincible", "invunerable" }, permission = "god", description = "Makes you invincible")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

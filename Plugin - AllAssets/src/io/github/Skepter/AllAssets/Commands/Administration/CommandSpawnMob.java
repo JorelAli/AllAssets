@@ -46,7 +46,7 @@ public class CommandSpawnMob {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob", usage = "Use <command>")
+	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob")
 	public void command(final CommandArgs args) {
 		//TODO finish
 		Player player = null;

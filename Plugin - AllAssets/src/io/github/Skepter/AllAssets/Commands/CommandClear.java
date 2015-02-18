@@ -49,7 +49,7 @@ public class CommandClear {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "clear", description = "Clears your inventory", usage = "Use <command>")
+	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "clear", description = "Clears your inventory")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {

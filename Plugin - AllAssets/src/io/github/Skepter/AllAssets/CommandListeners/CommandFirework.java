@@ -64,7 +64,7 @@ public class CommandFirework implements Listener {
 	//have a button to output it as a single lined command (for dispensers etc.)
 	private final PlayerMap<UUID, AAFireworkBuilder> map = new PlayerMap<UUID, AAFireworkBuilder>(AllAssets.instance());
 
-	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework", usage = "Use <command>")
+	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework")
 	public void onCommand(final CommandArgs args) {
 		Player player = null;
 		try {
