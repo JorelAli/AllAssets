@@ -33,6 +33,8 @@ package io.github.Skepter.AllAssets.Utils;
 
 import io.github.Skepter.AllAssets.AllAssets;
 
+import java.util.List;
+
 import org.bukkit.entity.Entity;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -44,5 +46,10 @@ public class Utils {
 
 	public static Object getMetadata(final Entity entity, final String key) {
 		return entity.getMetadata(key);
+	}
+	
+	public static <T> List<T> add(List<T> list, T type) {
+		list.add(type);
+		return list;
 	}
 }

@@ -35,11 +35,15 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.OfflineUser;
+import io.github.Skepter.AllAssets.API.PlayerRequest;
 import io.github.Skepter.AllAssets.API.PlayerRequest.PlayerRequestEvent;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -92,12 +96,21 @@ public class CommandFriend implements Listener{
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-				
+		if(PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]) == null) {
+			ErrorUtils.playerNotFound(player, args.getArgs()[0]);
+			return;
+		}
+		Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+		new PlayerRequest(player, target, "Do you want to add " + target.getName() + " add a friend?", -1L);
 	}
 	
 	@EventHandler
 	public void onAccept(PlayerRequestEvent event) {
-		event.getRequest();
+		if(event.getResult()) {
+			User user = new User(event.getFrom());
+			user.setFriendList(Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
+		}
+		
 	}
 	
 	@Help(name="Friend")

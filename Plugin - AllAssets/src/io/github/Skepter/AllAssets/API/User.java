@@ -259,13 +259,16 @@ public class User {
 	}
 
 	public List<UUID> getFriendList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> str = playerData.getDataFile().getStringList("friends");
+		List<UUID> list = new ArrayList<UUID>();
+		for(String s : str) {
+			list.add(UUID.fromString(s));
+		}
+		return list;
 	}
 
-	public void setFriendList() {
-		// TODO Auto-generated method stub
-
+	public void setFriendList(List<UUID> friends) {
+		playerData.getDataFile().set("friends", friends);
 	}
 
 	public boolean canTp() {

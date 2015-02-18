@@ -105,7 +105,7 @@ public class PlayerRequest {
 			this.to = to;
 		}
 
-		public boolean isResult() {
+		public boolean getResult() {
 			return result;
 		}
 
