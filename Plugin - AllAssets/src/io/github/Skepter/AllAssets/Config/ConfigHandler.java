@@ -86,7 +86,7 @@ public class ConfigHandler {
 	}
 
 	private static void createConfig() {
-		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
+		final String[] header = { AllAssets.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
 
 		config = configManager.getNewConfig("config.yml", header);
 
@@ -110,7 +110,7 @@ public class ConfigHandler {
 	}
 
 	private static void createMessages() {
-		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
+		final String[] header = { AllAssets.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
 
 		messages = messagesManager.getNewConfig("messages.yml", header);
 
@@ -120,7 +120,7 @@ public class ConfigHandler {
 	}
 
 	private static void createFeatures() {
-		final String[] header = { AllAssets.titleNoColor, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
+		final String[] header = { AllAssets.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
 		features = featuresManager.getNewConfig("features.yml", header);
 
@@ -152,6 +152,7 @@ public class ConfigHandler {
 		features.set("Fly", "true");
 		features.set("ForceChat", "true");
 		features.set("ForceCommand", "true");
+		features.set("Friend", "true");
 		features.set("Gamemode", "true");
 		features.set("Ghost", "true");
 		features.set("Glow", "true");
@@ -169,6 +170,7 @@ public class ConfigHandler {
 		features.set("PWeather", "true");
 		// work on this feature more - still a bit buggy and kinda unreliable
 		features.set("Reload", "false"); // default to FALSE when actually exported Nav
+		features.set("Remove", "true");
 		features.set("Rename", "true");
 		features.set("Restore", "true");
 		features.set("SetSpawn", "true");

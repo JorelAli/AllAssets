@@ -71,10 +71,10 @@ public class CommandStaffChat implements Listener {
 		}
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.title + "Staff chat is now off");
+			player.sendMessage(AllAssets.TITLE + "Staff chat is now off");
 		} else {
 			players.add(player.getUniqueId());
-			player.sendMessage(AllAssets.title + "Staff chat is now on");
+			player.sendMessage(AllAssets.TITLE + "Staff chat is now on");
 		}
 	}
 

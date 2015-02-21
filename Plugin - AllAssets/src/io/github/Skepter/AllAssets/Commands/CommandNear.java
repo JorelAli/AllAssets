@@ -76,7 +76,7 @@ public class CommandNear {
 		/* Checking for entities */
 		final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
 		if (entities.isEmpty()) {
-			player.sendMessage(AllAssets.title + "No nearby entities could be found!");
+			player.sendMessage(AllAssets.TITLE + "No nearby entities could be found!");
 			return;
 		}
 
@@ -99,16 +99,16 @@ public class CommandNear {
 			for (final Entry<EntityType, Integer> entry : map.entrySet()) {
 				if (entry.getValue() == 0)
 					continue;
-				player.sendMessage(AllAssets.houseStyleColor + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
+				player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
 				count += entry.getValue();
 			}
-			player.sendMessage(AllAssets.houseStyleColor + "Total nearby entities: " + count);
+			player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + "Total nearby entities: " + count);
 		}
 		if (!entities.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby players"));
 			for (final Entity entity : entities) {
 				final Player target = (Player) entity;
-				player.sendMessage(AllAssets.houseStyleColor + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
+				player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
 			}
 		}
 	}

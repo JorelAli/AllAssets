@@ -121,7 +121,7 @@ public class CommandGamemode {
 
 	private void doGameMode(final Player player, final String s) {
 		player.setGameMode(parseGameMode(s));
-		player.sendMessage(AllAssets.title + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name().toLowerCase()));
+		player.sendMessage(AllAssets.TITLE + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name().toLowerCase()));
 	}
 
 	private GameMode parseGameMode(final String s) {

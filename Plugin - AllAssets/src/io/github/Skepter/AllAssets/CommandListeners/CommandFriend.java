@@ -43,7 +43,6 @@ import io.github.Skepter.AllAssets.Utils.PlayerUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 import io.github.Skepter.AllAssets.Utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -83,7 +82,7 @@ public class CommandFriend implements Listener{
 		List<UUID> friends = user.getFriendList();
 		for(UUID u : friends) {
 			OfflineUser offlineFriend = new OfflineUser(u);
-			player.sendMessage(AllAssets.houseStyleColor + offlineFriend.getPlayer().getName() + " - " +  offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
+			player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " +  offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
 		}		
 	}
 	

@@ -67,10 +67,10 @@ public class CommandGod implements Listener {
 		}
 		if (godPlayers.contains(player.getUniqueId())) {
 			godPlayers.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.title + "You suddenly feel much more vunerable");
+			player.sendMessage(AllAssets.TITLE + "You suddenly feel much more vunerable");
 		} else {
 			godPlayers.add(player.getUniqueId());
-			player.sendMessage(AllAssets.title + "A higher power falls upon you");
+			player.sendMessage(AllAssets.TITLE + "A higher power falls upon you");
 		}
 		return;
 	}

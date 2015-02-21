@@ -38,7 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.PlayerMap;
+import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
@@ -90,7 +90,7 @@ public class CommandBatch {
 				id = runnablesMap.get(player);
 			}
 			Bukkit.getScheduler().cancelTask(id);
-			player.sendMessage(AllAssets.title + "ID " + id + " stopped successfully");
+			player.sendMessage(AllAssets.TITLE + "ID " + id + " stopped successfully");
 			return;
 		}
 
@@ -138,7 +138,7 @@ public class CommandBatch {
 				}
 			}.runTaskTimer(AllAssets.instance(), 0, time).getTaskId();
 			runnablesMap.put(player, taskID);
-			player.sendMessage(AllAssets.title + "Use /batch stop to stop the batch command, or /batch stop " + taskID + " to stop it later");
+			player.sendMessage(AllAssets.TITLE + "Use /batch stop to stop the batch command, or /batch stop " + taskID + " to stop it later");
 			return;
 		}
 

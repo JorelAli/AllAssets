@@ -38,7 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.API.PlayerMap;
+import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
@@ -162,7 +162,7 @@ public class CommandFileEditor implements Listener {
 							return;
 						}
 						fileMap.put(player, dataFile.getAbsolutePath());
-						player.sendMessage(AllAssets.title + dataFile.getName() + " chosen. Use /fe <setting> <value> to edit the file.");
+						player.sendMessage(AllAssets.TITLE + dataFile.getName() + " chosen. Use /fe <setting> <value> to edit the file.");
 						return;
 					}
 				default:
@@ -232,10 +232,10 @@ class EditFilePrompt extends BooleanPrompt {
 			try {
 				config.save(file);
 			} catch (final IOException e) {
-				context.getForWhom().sendRawMessage(AllAssets.error + "There was an error whilst changing that value");
+				context.getForWhom().sendRawMessage(AllAssets.ERROR + "There was an error whilst changing that value");
 				return Prompt.END_OF_CONVERSATION;
 			}
-			context.getForWhom().sendRawMessage(AllAssets.title + "Changed " + setting + " to " + value);
+			context.getForWhom().sendRawMessage(AllAssets.TITLE + "Changed " + setting + " to " + value);
 		}
 		return Prompt.END_OF_CONVERSATION;
 	}

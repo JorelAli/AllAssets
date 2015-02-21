@@ -63,14 +63,14 @@ public class CommandAnnouncer {
 	@CommandHandler(name = "announcer.start", permission = "announcer", description = "Start the announcer")
 	public void startAnnouncer(final CommandArgs args) {
 		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new AnnouncerTask(), 0, ConfigHandler.config().getInt("announcerTime"));
-		args.getSender().sendMessage(AllAssets.title + "The announcer has started");
+		args.getSender().sendMessage(AllAssets.TITLE + "The announcer has started");
 		return;
 	}
 
 	@CommandHandler(name = "announcer.stop", permission = "announcer", description = "Stop the announcer")
 	public void stopAnnouncer(final CommandArgs args) {
 		Bukkit.getScheduler().cancelTask(taskID);
-		args.getSender().sendMessage(AllAssets.title + "The announcer has been stopped");
+		args.getSender().sendMessage(AllAssets.TITLE + "The announcer has been stopped");
 		return;
 	}
 
@@ -78,14 +78,14 @@ public class CommandAnnouncer {
 	public void listAnnouncements(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Announcer list"));
 		for (final String key : ConfigHandler.announcer().getKeys())
-			args.getSender().sendMessage(AllAssets.houseStyleColor + key + " " + ChatColor.translateAlternateColorCodes('&', ConfigHandler.announcer().getString(key)));
+			args.getSender().sendMessage(AllAssets.HOUSE_STYLE_COLOR + key + " " + ChatColor.translateAlternateColorCodes('&', ConfigHandler.announcer().getString(key)));
 	}
 
 	@CommandHandler(name = "announcer.add", permission = "announcer", description = "Add a new announcement")
 	public void addAnnouncement(final CommandArgs args) {
 		final String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
 		setAnnouncer(message);
-		args.getSender().sendMessage(AllAssets.title + "Successfully added a new message to the announcer");
+		args.getSender().sendMessage(AllAssets.TITLE + "Successfully added a new message to the announcer");
 	}
 
 	@CommandHandler(name = "announcer.remove", permission = "announcer", description = "Remove an announcement")

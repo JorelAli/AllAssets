@@ -64,10 +64,10 @@ public class CommandConsoleLog {
 		}
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.title + "You are no longer viewing the console");
+			player.sendMessage(AllAssets.TITLE + "You are no longer viewing the console");
 		} else {
 			players.add(player.getUniqueId());
-			player.sendMessage(AllAssets.title + "You are now viewing the console");
+			player.sendMessage(AllAssets.TITLE + "You are now viewing the console");
 		}
 	}
 

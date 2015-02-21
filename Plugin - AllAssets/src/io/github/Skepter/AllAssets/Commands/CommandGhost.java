@@ -61,10 +61,10 @@ public class CommandGhost {
 		case 0:
 			if (AllAssets.instance().ghostFactory.isGhost(player)) {
 				AllAssets.instance().ghostFactory.setGhost(player, false);
-				player.sendMessage(AllAssets.title + "Ghost mode disabled");
+				player.sendMessage(AllAssets.TITLE + "Ghost mode disabled");
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(player, true);
-				player.sendMessage(AllAssets.title + "Ghost mode enabled");
+				player.sendMessage(AllAssets.TITLE + "Ghost mode enabled");
 			}
 			return;
 		case 1:
@@ -74,10 +74,10 @@ public class CommandGhost {
 			}
 			if (AllAssets.instance().ghostFactory.isGhost(target)) {
 				AllAssets.instance().ghostFactory.setGhost(target, false);
-				target.sendMessage(AllAssets.title + "Ghost mode disabled");
+				target.sendMessage(AllAssets.TITLE + "Ghost mode disabled");
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(target, true);
-				target.sendMessage(AllAssets.title + "Ghost mode enabled");
+				target.sendMessage(AllAssets.TITLE + "Ghost mode enabled");
 			}
 			return;
 		}

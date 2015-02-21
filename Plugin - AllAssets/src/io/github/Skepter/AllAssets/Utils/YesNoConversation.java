@@ -54,9 +54,9 @@ public class YesNoConversation {
 
 	public static String getPromptText() {
 		if (customText == null)
-			return AllAssets.title + AllAssets.houseStyleColor + "Are you sure you want to do that? Say " + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
+			return AllAssets.TITLE + AllAssets.HOUSE_STYLE_COLOR + "Are you sure you want to do that? Say " + ChatColor.GREEN + "yes " + AllAssets.HOUSE_STYLE_COLOR + "to continue or " + ChatColor.RED + "no " + AllAssets.HOUSE_STYLE_COLOR + "to cancel";
 		else
-			return AllAssets.title + AllAssets.houseStyleColor + customText + "? Say " + ChatColor.GREEN + "yes " + AllAssets.houseStyleColor + "to continue or " + ChatColor.RED + "no " + AllAssets.houseStyleColor + "to cancel";
+			return AllAssets.TITLE + AllAssets.HOUSE_STYLE_COLOR + customText + "? Say " + ChatColor.GREEN + "yes " + AllAssets.HOUSE_STYLE_COLOR + "to continue or " + ChatColor.RED + "no " + AllAssets.HOUSE_STYLE_COLOR + "to cancel";
 
 	}
 

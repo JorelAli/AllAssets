@@ -98,11 +98,11 @@ public class EnchantmentInventories {
 		map.put(14, aquaaffinity);
 
 		final ItemStack nextPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(nextPage, AllAssets.houseStyleColor + "Next Page");
+		ItemUtils.setDisplayName(nextPage, AllAssets.HOUSE_STYLE_COLOR + "Next Page");
 		ItemUtils.addGlow(nextPage);
 
 		final ItemStack previousPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(previousPage, AllAssets.houseStyleColor + "Previous Page");
+		ItemUtils.setDisplayName(previousPage, AllAssets.HOUSE_STYLE_COLOR + "Previous Page");
 		ItemUtils.addGlow(previousPage);
 
 		map.put(52, previousPage);
@@ -134,11 +134,11 @@ public class EnchantmentInventories {
 		map.put(18, silkTouch);
 
 		final ItemStack nextPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(nextPage, AllAssets.houseStyleColor + "Next Page");
+		ItemUtils.setDisplayName(nextPage, AllAssets.HOUSE_STYLE_COLOR + "Next Page");
 		ItemUtils.addGlow(nextPage);
 
 		final ItemStack previousPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(previousPage, AllAssets.houseStyleColor + "Previous Page");
+		ItemUtils.setDisplayName(previousPage, AllAssets.HOUSE_STYLE_COLOR + "Previous Page");
 		ItemUtils.addGlow(previousPage);
 
 		map.put(25, previousPage);

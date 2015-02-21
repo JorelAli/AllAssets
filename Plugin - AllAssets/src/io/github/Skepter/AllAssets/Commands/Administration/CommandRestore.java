@@ -125,7 +125,7 @@ public class CommandRestore {
 														wUtils.copyWorld(new File(AllAssets.getWorldStorage(), world));
 							//							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(world));
 							Bukkit.getServer().createWorld(new WorldCreator(world));
-							context.getForWhom().sendRawMessage(AllAssets.title + world + " was restored successfully");
+							context.getForWhom().sendRawMessage(AllAssets.TITLE + world + " was restored successfully");
 						} catch (final Exception e) {
 							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst restoring the world");
 							return;
@@ -133,7 +133,7 @@ public class CommandRestore {
 					}
 				}, 200L);
 			} else
-				context.getForWhom().sendRawMessage(AllAssets.title + "Restoration for " + world + " was cancelled");
+				context.getForWhom().sendRawMessage(AllAssets.TITLE + "Restoration for " + world + " was cancelled");
 			return Prompt.END_OF_CONVERSATION;
 		}
 

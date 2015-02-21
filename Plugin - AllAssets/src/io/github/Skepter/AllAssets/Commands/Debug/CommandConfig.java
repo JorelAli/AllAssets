@@ -65,11 +65,11 @@ public class CommandConfig {
 		case 1:
 			switch (args.getArgs()[0].toLowerCase()) {
 			case "list":
-				args.getSender().sendMessage(AllAssets.title + "Config, Features");
+				args.getSender().sendMessage(AllAssets.TITLE + "Config, Features");
 			case "view":
 				args.getSender().sendMessage(TextUtils.title("Config"));
 				for (final String key : ConfigHandler.config().getKeys())
-					args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
+					args.getSender().sendMessage(AllAssets.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
 			}
 			return;
 		case 2:
@@ -78,11 +78,11 @@ public class CommandConfig {
 				case "config":
 					args.getSender().sendMessage(TextUtils.title("Config"));
 					for (final String key : ConfigHandler.config().getKeys())
-						args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
+						args.getSender().sendMessage(AllAssets.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
 				case "features":
 					args.getSender().sendMessage(TextUtils.title("Features"));
 					for (final String key : ConfigHandler.features().getKeys())
-						args.getSender().sendMessage(AllAssets.houseStyleColor + key + ": " + String.valueOf(ConfigHandler.features().get(key)));
+						args.getSender().sendMessage(AllAssets.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.features().get(key)));
 				}
 			return;
 		case 4:

@@ -69,8 +69,8 @@ public class CommandBind implements Listener {
 			return;
 		}
 		player.sendMessage(TextUtils.title("Bind help"));
-		player.sendMessage(AllAssets.houseStyleColor + "/bind add <command> - adds a command to the binded item");
-		player.sendMessage(AllAssets.houseStyleColor + "/bind remove <number> - removes a command to the binded item");
+		player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + "/bind add <command> - adds a command to the binded item");
+		player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + "/bind remove <number> - removes a command to the binded item");
 		return;
 	}
 
@@ -97,7 +97,7 @@ public class CommandBind implements Listener {
 			ItemUtils.addGlow(item);
 		} catch (final Exception e) {
 		}
-		player.sendMessage(AllAssets.title + "Successfully added " + s + "to your item!");
+		player.sendMessage(AllAssets.TITLE + "Successfully added " + s + "to your item!");
 		return;
 	}
 
@@ -123,7 +123,7 @@ public class CommandBind implements Listener {
 		item.setItemMeta(meta);
 		if (!containsCommand(item))
 			ItemUtils.removeGlow(item);
-		player.sendMessage(AllAssets.title + "Successfully removed " + s + "from your item!");
+		player.sendMessage(AllAssets.TITLE + "Successfully removed " + s + "from your item!");
 		return;
 	}
 

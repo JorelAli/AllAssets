@@ -62,7 +62,7 @@ public class LogListener implements Filter {
 			if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 				return null;
 			else
-				CommandLog.addLog(AllAssets.houseStyleColor + stringBetween(msg, "(", ")"), LogType.ERROR);
+				CommandLog.addLog(AllAssets.HOUSE_STYLE_COLOR + stringBetween(msg, "(", ")"), LogType.ERROR);
 		if (msg.contains("Exception"))
 			CommandLog.addLog(msg, LogType.ERROR);
 		return null;

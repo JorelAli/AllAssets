@@ -76,10 +76,10 @@ public class CommandTp {
 			user.setLastLoc();
 			if (onlineTarget == null) {
 				player.teleport(target.getLastLoc());
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + offlineTarget.getName());
+				player.sendMessage(AllAssets.TITLE + "Successfully teleported to " + offlineTarget.getName());
 			} else {
 				player.teleport(onlineTarget);
-				player.sendMessage(AllAssets.title + "Successfully teleported to " + onlineTarget.getName());
+				player.sendMessage(AllAssets.TITLE + "Successfully teleported to " + onlineTarget.getName());
 			}
 			return;
 		} else {

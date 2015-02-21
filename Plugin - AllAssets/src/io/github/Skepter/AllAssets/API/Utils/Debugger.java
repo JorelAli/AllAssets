@@ -27,43 +27,50 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Teleportation;
+package io.github.Skepter.AllAssets.API.Utils;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Map.Entry;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import org.bukkit.ChatColor;
 
-public class CommandBack {
+/** A class to easily debug variables and stuff */
+public class Debugger {
 
-	public CommandBack(final CommandFramework framework) {
-		framework.registerCommands(this);
+	/** Prints the object value in the console. */
+	public static void printVariable(final String name, final Object o) {
+		printBlank();
+		System.out.println(name + ": " + o);
 	}
 
-	@CommandHandler(name = "back", aliases = { "lastloc" }, permission = "back", description = "Teleports you to your last location")
-	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		final User user = new User(player);
-		final Location l = player.getLocation();
-		player.teleport(user.getLastLoc());
-		user.setLastLoc(l);
-		player.sendMessage(AllAssets.TITLE + "Teleported to your last location");
-		return;
+	/** Prints a String (name). Used to check if a function is being executed
+	 * correctly. */
+	public static void print(final String name) {
+		printBlank();
+		System.out.println(name);
 	}
 
+	/** Prints a list in the console. */
+	public static void printList(final Collection<?> list) {
+		printBlank();
+		for (final Object o : list)
+			System.out.println(ChatColor.stripColor(o.toString()));
+	}
+
+	/** Prints a Map in the console. */
+	public static void printMap(final Map<?, ?> map) {
+		printBlank();
+		for (final Entry<?, ?> e : map.entrySet())
+			if (e.getValue() instanceof Collection) {
+				printBlank();
+				for (final Object o : (Collection<?>) e.getValue())
+					System.out.println(ChatColor.stripColor(e.getKey().toString() + " : " + o.toString()));
+			} else
+				System.out.println(ChatColor.stripColor(e.getKey().toString() + " : " + e.getValue().toString()));
+	}
+
+	private static void printBlank() {
+		System.out.println(" ");
+	}
 }

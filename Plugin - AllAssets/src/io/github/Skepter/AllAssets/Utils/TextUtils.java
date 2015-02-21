@@ -217,7 +217,7 @@ public class TextUtils {
 			return 0;
 		}
 
-		sender.sendMessage(AllAssets.title + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
+		sender.sendMessage(AllAssets.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return amountOfPages;
@@ -253,7 +253,7 @@ public class TextUtils {
 			return 0;
 		}
 
-		sender.sendMessage(AllAssets.title + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
+		sender.sendMessage(AllAssets.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return amountOfPages;
@@ -311,8 +311,8 @@ public class TextUtils {
 		sender.sendMessage(title(title + " help"));
 		for (final String string : help) {
 			final String[] strs = string.split(" -");
-			final String part1 = AllAssets.accentColor + strs[0];
-			final String part2 = AllAssets.houseStyleColor + strs[1];
+			final String part1 = AllAssets.ACCENT_COLOR + strs[0];
+			final String part2 = AllAssets.HOUSE_STYLE_COLOR + strs[1];
 			sender.sendMessage(part1 + " -" + part2);
 
 		}

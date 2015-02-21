@@ -318,9 +318,9 @@ public class CommandDebug implements Listener {
 				conflict++;
 			}
 		}
-		args.getSender().sendMessage(AllAssets.title + "There are " + conflict + " conflicting commands" + (conflict == 0 ? "" : " - Conflicting plugins:"));
+		args.getSender().sendMessage(AllAssets.TITLE + "There are " + conflict + " conflicting commands" + (conflict == 0 ? "" : " - Conflicting plugins:"));
 		for (final String s : conflictingPlugins)
-			args.getSender().sendMessage(AllAssets.houseStyleColor + s);
+			args.getSender().sendMessage(AllAssets.HOUSE_STYLE_COLOR + s);
 	}
 
 	boolean physics = true;
@@ -329,10 +329,10 @@ public class CommandDebug implements Listener {
 	public void stopPhysics(final CommandArgs args) {
 		if (physics) {
 			physics = false;
-			Bukkit.broadcastMessage(AllAssets.title + "Paused server physics");
+			Bukkit.broadcastMessage(AllAssets.TITLE + "Paused server physics");
 		} else {
 			physics = true;
-			Bukkit.broadcastMessage(AllAssets.title + "Resumed server physics");
+			Bukkit.broadcastMessage(AllAssets.TITLE + "Resumed server physics");
 		}
 	}
 
@@ -342,10 +342,10 @@ public class CommandDebug implements Listener {
 	public void toggleExplosions(final CommandArgs args) {
 		if (explosions) {
 			explosions = false;
-			Bukkit.broadcastMessage(AllAssets.title + "Explosions have been turned off");
+			Bukkit.broadcastMessage(AllAssets.TITLE + "Explosions have been turned off");
 		} else {
 			explosions = true;
-			Bukkit.broadcastMessage(AllAssets.title + "Explosions have been turned on");
+			Bukkit.broadcastMessage(AllAssets.TITLE + "Explosions have been turned on");
 		}
 	}
 

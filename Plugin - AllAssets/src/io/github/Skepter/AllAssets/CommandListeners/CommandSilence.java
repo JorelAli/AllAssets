@@ -70,10 +70,10 @@ public class CommandSilence implements Listener {
 
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			args.getSender().sendMessage(AllAssets.title + player.getName() + " is no longer silenced");
+			args.getSender().sendMessage(AllAssets.TITLE + player.getName() + " is no longer silenced");
 		} else {
 			players.add(player.getUniqueId());
-			args.getSender().sendMessage(AllAssets.title + player.getName() + " is now silenced");
+			args.getSender().sendMessage(AllAssets.TITLE + player.getName() + " is now silenced");
 		}
 		return;
 	}

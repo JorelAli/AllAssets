@@ -58,7 +58,7 @@ public class CommandPing {
 			return;
 		}
 		final User user = new User(player);
-		user.getPlayer().sendMessage(AllAssets.title + "Your ping is " + user.getPing() + "ms");
+		user.getPlayer().sendMessage(AllAssets.TITLE + "Your ping is " + user.getPing() + "ms");
 		return;
 	}
 }

@@ -78,7 +78,7 @@ public class CommandFramework {
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
 	private CommandMap map;
 	private final Plugin plugin;
-	private static final String noPerm = AllAssets.error + "You do not have permission to perform that action";
+	private static final String noPerm = AllAssets.ERROR + "You do not have permission to perform that action";
 	public static Set<CommandHandler> pluginCommands = new HashSet<CommandHandler>();
 	private final Set<String> cmds = new HashSet<String>();
 
@@ -126,7 +126,7 @@ public class CommandFramework {
 					final long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
 					if (ConfigHandler.config().getBoolean("debugMode") || AllAssets.masterSwitch)
-						sender.sendMessage(AllAssets.title + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
+						sender.sendMessage(AllAssets.TITLE + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
 				} catch (final Exception e) {
 					e.printStackTrace();
 				}
@@ -189,7 +189,7 @@ public class CommandFramework {
 		commandMap.put(label.toLowerCase(), entry);
 		if (AllAssets.masterSwitch && !cmds.contains(command.name())) {
 			cmds.add(command.name());
-			Bukkit.getLogger().info(AllAssets.shortTitleNoColor + "Added command: /" + command.name().replace(".", " "));
+			Bukkit.getLogger().info(AllAssets.SHORT_NO_COLOR_TITLE + "Added command: /" + command.name().replace(".", " "));
 		}
 		if (command.isListed())
 			pluginCommands.add(command);

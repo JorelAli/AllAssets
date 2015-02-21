@@ -32,7 +32,7 @@
 package io.github.Skepter.AllAssets.Utils;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.PlayerMap;
+import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -75,7 +75,7 @@ public class CommandCommandBlock implements Listener {
 				block.setCommand("$firework " + ItemSerializer.toString(event.getPlayer().getItemInHand()));
 				block.update(true);
 				event.getPlayer().closeInventory();
-				event.getPlayer().sendMessage(AllAssets.title + "Added firework to commandblock");
+				event.getPlayer().sendMessage(AllAssets.TITLE + "Added firework to commandblock");
 			}
 		}
 	}

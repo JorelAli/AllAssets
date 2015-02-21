@@ -37,6 +37,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandEnchant;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFileBrowser;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFileEditor;
 import io.github.Skepter.AllAssets.CommandListeners.CommandFirework;
+import io.github.Skepter.AllAssets.CommandListeners.CommandFriend;
 import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
@@ -69,6 +70,7 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandInventory;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandNMSGod;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandRemove;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandRestore;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSetSpawn;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
@@ -208,13 +210,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AllAssets extends JavaPlugin {
 
 	/* Messages  */
-	public final static String title = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
-	public final static String shortTitle = ChatColor.BLUE + "[" + ChatColor.AQUA + "AA" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
-	public final static String titleNoColor = "[AllAssets] ";
-	public final static String shortTitleNoColor = "[AA] ";
-	public final static String error = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
-	public final static String houseStyleColor = ChatColor.AQUA + "";
-	public final static String accentColor = ChatColor.WHITE + "";
+	public final static String TITLE = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
+	public final static String SHORT_TITLE = ChatColor.BLUE + "[" + ChatColor.AQUA + "AA" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
+	public final static String NO_COLOR_TITLE = "[AllAssets] ";
+	public final static String SHORT_NO_COLOR_TITLE = "[AA] ";
+	public final static String ERROR = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
+	public final static String HOUSE_STYLE_COLOR = ChatColor.AQUA + "";
+	public final static String ACCENT_COLOR = ChatColor.WHITE + "";
 
 	/* Vault variables */
 	public boolean hasVault = false;
@@ -339,6 +341,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandForceChat(framework);
 		if (ConfigHandler.features().getBoolean("ForceCommand"))
 			new CommandForceCommand(framework);
+		if (ConfigHandler.features().getBoolean("Friend"))
+			new CommandFriend(framework);
 		if (ConfigHandler.features().getBoolean("Gamemode"))
 			new CommandGamemode(framework);
 		if (ConfigHandler.features().getBoolean("Ghost"))
@@ -374,6 +378,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandPWeather(framework);
 		if (ConfigHandler.features().getBoolean("Reload"))
 			r(new ReloadCommandListener());
+		if (ConfigHandler.features().getBoolean("Remove"))
+			new CommandRemove(framework);
 		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
 		if (ConfigHandler.features().getBoolean("Restore"))
@@ -453,8 +459,8 @@ public class AllAssets extends JavaPlugin {
 			e.printStackTrace();
 		}
 
-		getLogger().info(titleNoColor + "AllAssets has been enabled successfully");
-		Bukkit.broadcast(title + "Plugin reloaded!", "AllAssets.allassets");
+		getLogger().info(NO_COLOR_TITLE + "AllAssets has been enabled successfully");
+		Bukkit.broadcast(TITLE + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
 		if (masterSwitch)
 			dev(true);
@@ -465,7 +471,7 @@ public class AllAssets extends JavaPlugin {
 		if (masterSwitch)
 			for (final Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)
-					getLogger().info(shortTitleNoColor + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
+					getLogger().info(SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
 	}
 
@@ -486,7 +492,7 @@ public class AllAssets extends JavaPlugin {
 			if(CommandDiscoArmor.hasArmor(player))
 				CommandDiscoArmor.toggleArmor(player);
 		}
-		getLogger().info(titleNoColor + getDescription().getVersion() + " has been disabled successfully");
+		getLogger().info(NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
 
 	public static AllAssets instance() {

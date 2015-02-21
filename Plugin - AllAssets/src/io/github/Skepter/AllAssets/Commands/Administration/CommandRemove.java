@@ -31,33 +31,27 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands;
+package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
-import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
-import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 
-import org.bukkit.conversations.BooleanPrompt;
-import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.Prompt;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-public class CommandGrief {
+public class CommandRemove {
 
-	public CommandGrief(final CommandFramework framework) {
+	public CommandRemove(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "grief", aliases = { "griefreport", "gr" }, permission = "grief", description = "Report a grief incident")
-	public void onCommand(final CommandArgs args) {
+	@CommandHandler(name = "remove", permission = "remove", description = "Removes entities")
+	public void command(final CommandArgs args) {
 		Player player = null;
 		try {
 			player = args.getPlayer();
@@ -65,41 +59,39 @@ public class CommandGrief {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		final String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
-		if (message != null)
-			new YesNoConversation(player, new GriefPrompt(message), "Are you sure you want to send a grief report");
+		//remove <radius>
+		//remove <entity> <radius>
+		//remove (all) (120)
+		//remove entity (120)
+		switch (args.getArgs().length) {
+		case 0:
+			//arrow,boat,item
+			int count = 0;
+			for (Entity e : player.getNearbyEntities(120, 120, 120)) {
+				if (e.getType().equals(EntityType.DROPPED_ITEM)) {
+					e.remove();
+					count++;
+				}
+			}
+			player.sendMessage(AllAssets.TITLE + count + (count == 1 ? " item removed" : " items removed"));
+			return;
+		case 1:
+			if (TextUtils.isInteger(args.getArgs()[0])) {
+				int i = Integer.parseInt(args.getArgs()[0]);
+				int count2 = 0;
+				for (Entity e : player.getNearbyEntities(i, i, i)) {
+					if (e.getType().equals(EntityType.DROPPED_ITEM))
+						e.remove();
+					count2++;
+				}
+				player.sendMessage(AllAssets.TITLE + count2 + (count2 == 1 ? " item removed" : " items removed"));
+				return;
+			} else {
+				ErrorUtils.notAnInteger(args.getSender());
+			}
+			return;
+		}
+		ErrorUtils.tooManyArguments(player);
 		return;
 	}
-
-	private class GriefPrompt extends BooleanPrompt {
-
-		private final String message;
-
-		private GriefPrompt(final String message) {
-			this.message = message;
-		}
-
-		@Override
-		public String getPromptText(final ConversationContext context) {
-			return YesNoConversation.getPromptText();
-		}
-
-		@SuppressWarnings("deprecation")
-		@Override
-		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
-			if (context.getForWhom() instanceof Player)
-				if (b) {
-					final Player player = (Player) context.getForWhom();
-					final String location = "(" + MathUtils.round(player.getLocation().getX(), 0) + ", " + MathUtils.round(player.getLocation().getY(), 0) + ", " + MathUtils.round(player.getLocation().getZ(), 0) + ")";
-					CommandLog.addLog("Player: " + player.getName() + ", Location: " + location + ", Message: " + message, LogType.GRIEF);
-					NotificationsBoard.addGriefLog();
-					NotificationsBoard.updateAll();
-					context.getForWhom().sendRawMessage(AllAssets.TITLE + "Successfully sent grief report");
-				} else
-					context.getForWhom().sendRawMessage(AllAssets.ERROR + "Cancelled grief report");
-			return Prompt.END_OF_CONVERSATION;
-		}
-
-	}
-
 }

@@ -62,11 +62,11 @@ public class CommandFly {
 			if (player.getAllowFlight()) {
 				player.setAllowFlight(false);
 				player.setFlying(false);
-				player.sendMessage(AllAssets.title + "Flying disabled");
+				player.sendMessage(AllAssets.TITLE + "Flying disabled");
 
 			} else {
 				player.setAllowFlight(true);
-				player.sendMessage(AllAssets.title + "Flying enabled");
+				player.sendMessage(AllAssets.TITLE + "Flying enabled");
 			}
 			return;
 		case 1:
@@ -75,10 +75,10 @@ public class CommandFly {
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
 					player.setFlying(false);
-					target.sendMessage(AllAssets.title + "Flying disabled");
+					target.sendMessage(AllAssets.TITLE + "Flying disabled");
 				} else {
 					target.setAllowFlight(true);
-					target.sendMessage(AllAssets.title + "Flying enabled");
+					target.sendMessage(AllAssets.TITLE + "Flying enabled");
 				}
 				return;
 			} else

@@ -62,10 +62,10 @@ public class CommandAFK implements Listener {
 		}
 		final User user = new User(player);
 		if (!user.isAFK()) {
-			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is now AFK");
+			AllAssets.instance().getServer().broadcastMessage(AllAssets.TITLE + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
-			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
+			AllAssets.instance().getServer().broadcastMessage(AllAssets.TITLE + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
@@ -79,7 +79,7 @@ public class CommandAFK implements Listener {
 			if (new User(player).isAFK())
 				builder.append(player.getName() + ", ");
 		if (!builder.toString().isEmpty())
-			event.getPlayer().sendMessage(AllAssets.title + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
+			event.getPlayer().sendMessage(AllAssets.TITLE + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
 	}
 
 	@EventHandler
@@ -99,7 +99,7 @@ public class CommandAFK implements Listener {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if (user.isAFK()) {
-			AllAssets.instance().getServer().broadcastMessage(AllAssets.title + player.getName() + " is no longer AFK");
+			AllAssets.instance().getServer().broadcastMessage(AllAssets.TITLE + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 	}

@@ -62,10 +62,10 @@ public class CommandNMSGod {
 			final ReflectionUtils utils = new ReflectionUtils(args.getPlayer());
 			if (utils.abilities.getClass().getField("isInvulnerable").getBoolean(utils.abilities)) {
 				utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, false);
-				player.sendMessage(AllAssets.title + "You suddenly feel much more vunerable");
+				player.sendMessage(AllAssets.TITLE + "You suddenly feel much more vunerable");
 			} else {
 				utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, true);
-				player.sendMessage(AllAssets.title + "A higher power falls upon you");
+				player.sendMessage(AllAssets.TITLE + "A higher power falls upon you");
 			}
 		} catch (final Exception t) {
 			ErrorUtils.generalCommandError(player);

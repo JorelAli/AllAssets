@@ -38,7 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.AAFireworkBuilder;
-import io.github.Skepter.AllAssets.API.PlayerMap;
+import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Misc.FireworkInventories;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
@@ -139,7 +139,7 @@ public class CommandFirework implements Listener {
 					builder.setPower(parsePower(item));
 					map.remove(player);
 					player.getInventory().addItem(builder.getFirework());
-					player.sendMessage(AllAssets.title + "Firework created!");
+					player.sendMessage(AllAssets.TITLE + "Firework created!");
 					player.closeInventory();
 				}
 				break;

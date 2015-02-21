@@ -37,7 +37,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.PlayerMap;
+import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
@@ -179,7 +179,7 @@ public class CommandFileBrowser implements Listener {
 						//final int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
 						TextUtils.paginate(player, dataMap.get(player), 10, 1);
 						//if (pages != 0 && )
-						player.sendMessage(AllAssets.title + "Use /filebrowser <page number> to go to the next page");
+						player.sendMessage(AllAssets.TITLE + "Use /filebrowser <page number> to go to the next page");
 					}
 					return;
 				default:

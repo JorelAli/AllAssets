@@ -54,7 +54,7 @@ public class CustomUnknownCommandListener implements Listener {
 		if ((Bukkit.getHelpMap().getHelpTopic(msg) == null) && !TextUtils.arrayContains(excludedCommands, msg)) {
 			if ((searchWithTuncater(msg) != null) && !searchWithTuncater(msg).isEmpty()) {
 				e.setCancelled(true);
-				new FancyMessage(AllAssets.title + "Unknown command. Did you mean: ").then(AllAssets.houseStyleColor + searchWithTuncater(msg)).tooltip(AllAssets.houseStyleColor + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
+				new FancyMessage(AllAssets.TITLE + "Unknown command. Did you mean: ").then(AllAssets.HOUSE_STYLE_COLOR + searchWithTuncater(msg)).tooltip(AllAssets.HOUSE_STYLE_COLOR + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
 			}
 			return;
 		}

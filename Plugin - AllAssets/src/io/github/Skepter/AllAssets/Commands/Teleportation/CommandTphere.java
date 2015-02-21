@@ -69,7 +69,7 @@ public class CommandTphere {
 			final User target = new User(t);
 			if (target.canTp()) {
 				t.teleport(player);
-				player.sendMessage(AllAssets.title + "Successfully teleported " + t.getName() + " to you ");
+				player.sendMessage(AllAssets.TITLE + "Successfully teleported " + t.getName() + " to you ");
 				return;
 			} else {
 				ErrorUtils.tptoggle(player, args.getArgs()[0]);

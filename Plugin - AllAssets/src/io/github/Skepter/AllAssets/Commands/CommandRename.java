@@ -66,7 +66,7 @@ public class CommandRename {
 		}
 		//if args = 0, remove rename.
 		ItemUtils.setDisplayName(player.getItemInHand(), ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
-		player.sendMessage(AllAssets.title + "Renamed item to " + ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+		player.sendMessage(AllAssets.TITLE + "Renamed item to " + ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		return;
 	}
 

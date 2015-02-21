@@ -109,9 +109,9 @@ public class PlayerListener implements Listener {
 
 		if (ConfigHandler.features().getBoolean("JoinActions")) {
 			if (ConfigHandler.features().getBoolean("UniquePlayers"))
-				event.getPlayer().sendMessage(AllAssets.title + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
+				event.getPlayer().sendMessage(AllAssets.TITLE + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.features().getBoolean("TotalTime"))
-				event.getPlayer().sendMessage(AllAssets.title + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
+				event.getPlayer().sendMessage(AllAssets.TITLE + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
 			if (ConfigHandler.features().getBoolean("FireworkOnJoin"))
 				for (int i = 0; i < new Random().nextInt(5); i++)
 					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());
@@ -178,7 +178,7 @@ public class PlayerListener implements Listener {
 
 		if (ConfigHandler.features().getBoolean("DeathCount")) {
 			user.setDeathCount(user.getDeathCount() + 1);
-			user.getPlayer().sendMessage(AllAssets.title + "You have died " + user.getDeathCount() + " times!");
+			user.getPlayer().sendMessage(AllAssets.TITLE + "You have died " + user.getDeathCount() + " times!");
 		}
 
 		if (ConfigHandler.features().getBoolean("DeathSigns")) {

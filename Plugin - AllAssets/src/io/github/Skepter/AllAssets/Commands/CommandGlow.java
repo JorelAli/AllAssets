@@ -62,11 +62,11 @@ public class CommandGlow {
 			if (ItemUtils.hasGlow(player.getItemInHand())) {
 				final ItemStack is = ItemUtils.removeGlow(player.getItemInHand());
 				player.setItemInHand(is);
-				player.sendMessage(AllAssets.title + "Your item is no longer glowing!");
+				player.sendMessage(AllAssets.TITLE + "Your item is no longer glowing!");
 			} else {
 				final ItemStack is = ItemUtils.addGlow(player.getItemInHand());
 				player.setItemInHand(is);
-				player.sendMessage(AllAssets.title + "Your item is now glowing!");
+				player.sendMessage(AllAssets.TITLE + "Your item is now glowing!");
 			}
 		} else
 			ErrorUtils.error(player, "You cannot make that item glow!");
