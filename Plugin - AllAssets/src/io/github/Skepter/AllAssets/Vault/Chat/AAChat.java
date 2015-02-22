@@ -81,7 +81,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setPlayerPrefix(final String paramString1, final String paramString2, final String paramString3) {
 
-		
 	}
 
 	@Override
@@ -93,7 +92,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setPlayerSuffix(final String paramString1, final String paramString2, final String paramString3) {
 
-		
 	}
 
 	@Override
@@ -105,7 +103,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setGroupPrefix(final String paramString1, final String paramString2, final String paramString3) {
 
-		
 	}
 
 	@Override
@@ -117,7 +114,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setGroupSuffix(final String paramString1, final String paramString2, final String paramString3) {
 
-		
 	}
 
 	@Override
@@ -129,7 +125,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setPlayerInfoInteger(final String paramString1, final String paramString2, final String paramString3, final int paramInt) {
 
-		
 	}
 
 	@Override
@@ -141,7 +136,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setGroupInfoInteger(final String paramString1, final String paramString2, final String paramString3, final int paramInt) {
 
-		
 	}
 
 	@Override
@@ -153,7 +147,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setPlayerInfoDouble(final String paramString1, final String paramString2, final String paramString3, final double paramDouble) {
 
-		
 	}
 
 	@Override
@@ -165,7 +158,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setGroupInfoDouble(final String paramString1, final String paramString2, final String paramString3, final double paramDouble) {
 
-		
 	}
 
 	@Override
@@ -177,7 +169,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setPlayerInfoBoolean(final String paramString1, final String paramString2, final String paramString3, final boolean paramBoolean) {
 
-		
 	}
 
 	@Override
@@ -189,7 +180,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setGroupInfoBoolean(final String paramString1, final String paramString2, final String paramString3, final boolean paramBoolean) {
 
-		
 	}
 
 	@Override
@@ -201,7 +191,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setPlayerInfoString(final String paramString1, final String paramString2, final String paramString3, final String paramString4) {
 
-		
 	}
 
 	@Override
@@ -213,7 +202,6 @@ public class AAChat extends Chat {
 	@Override
 	public void setGroupInfoString(final String paramString1, final String paramString2, final String paramString3, final String paramString4) {
 
-		
 	}
 
 }

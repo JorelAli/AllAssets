@@ -54,6 +54,7 @@ import org.bukkit.conversations.BooleanPrompt;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
 
+@Deprecated
 public class CommandRestore {
 
 	public CommandRestore(final CommandFramework framework) {

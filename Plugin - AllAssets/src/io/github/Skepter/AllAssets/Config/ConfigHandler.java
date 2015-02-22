@@ -172,7 +172,7 @@ public class ConfigHandler {
 		features.set("Reload", "false"); // default to FALSE when actually exported Nav
 		features.set("Remove", "true");
 		features.set("Rename", "true");
-		features.set("Restore", "true");
+//		features.set("Restore", "true");
 		features.set("SetSpawn", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");

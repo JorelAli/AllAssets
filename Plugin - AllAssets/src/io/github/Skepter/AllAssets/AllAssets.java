@@ -71,7 +71,6 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandNMSGod;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandRemove;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandRestore;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSetSpawn;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandTime;
@@ -382,8 +381,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandRemove(framework);
 		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
-		if (ConfigHandler.features().getBoolean("Restore"))
-			new CommandRestore(framework);
+//		if (ConfigHandler.features().getBoolean("Restore"))
+//			new CommandRestore(framework);
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
