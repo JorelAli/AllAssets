@@ -5,7 +5,7 @@ API overview
 ------------
 The AllAssets API has been designed for ease of use and to allow your plugin to cooperate with AllAssets in order to give the best result possible. All of the API classes can be found in io.github.Skepter.AllAssets.API
 
-AAFireworkBuilder
+FireworkBuilder
 -----------------
 The firework builder is a class designed to help make fireworks in the ItemStack form. Example usage:
 
@@ -17,7 +17,7 @@ public ItemStack getFirework() {
 
 Simply, use the methods to create your firework and use '.getFirework()' at the end
 Methods:
-* new AAFireworkBuilder(int value) - Creates a new builder with the amount of fireworks to generate
+* new FireworkBuilder(int value) - Creates a new builder with the amount of fireworks to generate
 * setPower(int value) - Sets the power (flight length) of the firework
 * setType(Type type) - Sets the type of firework (e.g. ball/burst)
 * addFade(Color color) - Adds a fade color to the firework, can be used more than once
