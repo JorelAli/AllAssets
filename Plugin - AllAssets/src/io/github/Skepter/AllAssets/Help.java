@@ -36,7 +36,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-
 /** Help annotation to display help screen */
 public @interface Help {
 

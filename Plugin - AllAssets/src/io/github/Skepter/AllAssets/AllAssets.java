@@ -236,7 +236,7 @@ public class AllAssets extends JavaPlugin {
 	 * @param loadTime - true means load at the END, false means load NORMALLY */
 	private void dev(final boolean loadTime) {
 		if (!loadTime) {
-//			new CommandGive(framework);
+			//			new CommandGive(framework);
 			new CommandHelp(framework);
 			r(new CommandCommandBlock(framework));
 		} else
@@ -282,8 +282,8 @@ public class AllAssets extends JavaPlugin {
 
 		/** All variables should have been initialised now */
 
-//		if (masterSwitch)
-			dev(false);
+		//		if (masterSwitch)
+		dev(false);
 		//Nav
 
 		/* This is the features.yml file which enables/disables features according to the users will */
@@ -381,8 +381,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandRemove(framework);
 		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
-//		if (ConfigHandler.features().getBoolean("Restore"))
-//			new CommandRestore(framework);
+		//		if (ConfigHandler.features().getBoolean("Restore"))
+		//			new CommandRestore(framework);
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
@@ -437,11 +437,10 @@ public class AllAssets extends JavaPlugin {
 
 		/* Update NotificationsBoard for all admins */
 		NotificationsBoard.updateAll();
-		
-		for(User user : User.onlineUsers()) {
+
+		for (final User user : User.onlineUsers())
 			user.refreshPing();
-		}
-		
+
 		/* Update UUIDData file */
 		UUIDData.reloadDataFile();
 		for (final Player p : Bukkit.getOnlinePlayers())
@@ -486,11 +485,10 @@ public class AllAssets extends JavaPlugin {
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
-		
-		for(Player player : Bukkit.getOnlinePlayers()) {
-			if(CommandDiscoArmor.hasArmor(player))
+
+		for (final Player player : Bukkit.getOnlinePlayers())
+			if (CommandDiscoArmor.hasArmor(player))
 				CommandDiscoArmor.toggleArmor(player);
-		}
 		getLogger().info(NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
 
