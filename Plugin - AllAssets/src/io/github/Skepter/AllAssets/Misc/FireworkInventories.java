@@ -31,23 +31,29 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Misc;
 
-import io.github.Skepter.AllAssets.Utils.ItemUtils;
+import static org.bukkit.Bukkit.createInventory;
+import static org.bukkit.Material.FEATHER;
+import static org.bukkit.Material.FIREBALL;
+import static org.bukkit.Material.FIREWORK_CHARGE;
+import static org.bukkit.Material.INK_SACK;
+import static org.bukkit.Material.MAGMA_CREAM;
+import static org.bukkit.Material.NETHER_STAR;
+import static org.bukkit.Material.SKULL_ITEM;
+import static org.bukkit.Material.SLIME_BALL;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class FireworkInventories {
-	
+
 	/* 1 */
 	public static Inventory chooseType() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "Firework - Type");
-		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.SKULL_ITEM, 1, (short) 4), "Creeper"));
-		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Ball"));
-		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.FIREBALL), "Large Ball"));
-		inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.FEATHER), "Burst"));
-		inv.setItem(4, ItemUtils.setDisplayName(new ItemStack(Material.NETHER_STAR), "Star"));
+		final Inventory inv = createInventory(null, 9, "Firework - Type");
+		inv.setItem(0, new ItemBuilder(SKULL_ITEM, (short) 4).setDisplayName("Creeper").build());
+		inv.setItem(1, new ItemBuilder(FIREWORK_CHARGE).setDisplayName("Ball").build());
+		inv.setItem(2, new ItemBuilder(FIREBALL).setDisplayName("Large Ball").build());
+		inv.setItem(3, new ItemBuilder(FEATHER).setDisplayName("Burst").build());
+		inv.setItem(4, new ItemBuilder(NETHER_STAR).setDisplayName("Star").build());
 		return inv;
 	}
 
@@ -55,26 +61,26 @@ public class FireworkInventories {
 	public static Inventory chooseColor(final boolean fade) {
 		Inventory inv = null;
 		if (fade)
-			inv = Bukkit.createInventory(null, 18, "Firework - Fade");
+			inv = createInventory(null, 18, "Firework - Fade");
 		else
-			inv = Bukkit.createInventory(null, 18, "Firework - Color");
+			inv = createInventory(null, 18, "Firework - Color");
 
-		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK), "Black"));
-		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 8), "Gray"));
-		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 7), "Silver"));
-		inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 3), "Brown"));
-		inv.setItem(4, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 12), "Light Blue"));
-		inv.setItem(5, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 4), "Blue"));
-		inv.setItem(6, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 6), "Cyan"));
-		inv.setItem(7, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 13), "Magenta"));
-		inv.setItem(8, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 10), "Lime"));
-		inv.setItem(9, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 2), "Green"));
-		inv.setItem(10, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 5), "Purple"));
-		inv.setItem(11, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 9), "Pink"));
-		inv.setItem(12, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 1), "Red"));
-		inv.setItem(13, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 14), "Orange"));
-		inv.setItem(14, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 11), "Yellow"));
-		inv.setItem(15, ItemUtils.setDisplayName(new ItemStack(Material.INK_SACK, 1, (short) 15), "White"));
+		inv.setItem(0, new ItemBuilder(INK_SACK).setDisplayName("Black").build());
+		inv.setItem(1, new ItemBuilder(INK_SACK, 1, (short) 8).setDisplayName("Gray").build());
+		inv.setItem(2, new ItemBuilder(INK_SACK, 1, (short) 7).setDisplayName("Silver").build());
+		inv.setItem(3, new ItemBuilder(INK_SACK, 1, (short) 3).setDisplayName("Brown").build());
+		inv.setItem(4, new ItemBuilder(INK_SACK, 1, (short) 12).setDisplayName("Light Blue").build());
+		inv.setItem(5, new ItemBuilder(INK_SACK, 1, (short) 4).setDisplayName("Blue").build());
+		inv.setItem(6, new ItemBuilder(INK_SACK, 1, (short) 6).setDisplayName("Cyan").build());
+		inv.setItem(7, new ItemBuilder(INK_SACK, 1, (short) 13).setDisplayName("Magenta").build());
+		inv.setItem(8, new ItemBuilder(INK_SACK, 1, (short) 10).setDisplayName("Lime").build());
+		inv.setItem(9, new ItemBuilder(INK_SACK, 1, (short) 2).setDisplayName("Green").build());
+		inv.setItem(10, new ItemBuilder(INK_SACK, 1, (short) 5).setDisplayName("Purple").build());
+		inv.setItem(11, new ItemBuilder(INK_SACK, 1, (short) 9).setDisplayName("Pink").build());
+		inv.setItem(12, new ItemBuilder(INK_SACK, 1, (short) 1).setDisplayName("Red").build());
+		inv.setItem(13, new ItemBuilder(INK_SACK, 1, (short) 14).setDisplayName("Orange").build());
+		inv.setItem(14, new ItemBuilder(INK_SACK, 1, (short) 11).setDisplayName("Yellow").build());
+		inv.setItem(15, new ItemBuilder(INK_SACK, 1, (short) 15).setDisplayName("White").build());
 		//put a way to have no fade!
 		return inv;
 	}
@@ -83,28 +89,27 @@ public class FireworkInventories {
 	public static Inventory chooseFlicker(final boolean trail) {
 		Inventory inv = null;
 		if (trail)
-			inv = Bukkit.createInventory(null, 9, "Do you want a trail?");
+			inv = createInventory(null, 9, "Do you want a trail?");
 		else
-			inv = Bukkit.createInventory(null, 9, "Do you want flickering?");
-		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
-		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
+			inv = createInventory(null, 9, "Do you want flickering?");
+		inv.setItem(0, new ItemBuilder(MAGMA_CREAM).setDisplayName("Yes").build());
+		inv.setItem(1, new ItemBuilder(SLIME_BALL).setDisplayName("No").build());
 		return inv;
 	}
 
 	/* 6 */
 	public static Inventory choosePower() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "Choose a power size");
-		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 0"));
-		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 1"));
-		inv.setItem(2, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 2"));
-		inv.setItem(3, ItemUtils.setDisplayName(new ItemStack(Material.FIREWORK_CHARGE), "Power: 3"));
+		final Inventory inv = createInventory(null, 9, "Choose a power size");
+		for (int i = 0; i <= 3; i++) {
+			inv.setItem(i, new ItemBuilder(FIREWORK_CHARGE).setDisplayName("Power: " + i).build());
+		}
 		return inv;
 	}
 
 	public static Inventory anotherColor() {
-		final Inventory inv = Bukkit.createInventory(null, 9, "Do you want another color?");
-		inv.setItem(0, ItemUtils.setDisplayName(new ItemStack(Material.MAGMA_CREAM), "Yes"));
-		inv.setItem(1, ItemUtils.setDisplayName(new ItemStack(Material.SLIME_BALL), "No"));
+		final Inventory inv = createInventory(null, 9, "Do you want another color?");
+		inv.setItem(0, new ItemBuilder(MAGMA_CREAM).setDisplayName("Yes").build());
+		inv.setItem(1, new ItemBuilder(SLIME_BALL).setDisplayName("No").build());
 		return inv;
 	}
 }

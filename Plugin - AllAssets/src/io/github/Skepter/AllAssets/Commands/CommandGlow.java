@@ -35,13 +35,12 @@ package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.ItemUtils;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class CommandGlow {
 
@@ -59,13 +58,11 @@ public class CommandGlow {
 			return;
 		}
 		if (!player.getItemInHand().getType().isBlock()) {
-			if (ItemUtils.hasGlow(player.getItemInHand())) {
-				final ItemStack is = ItemUtils.removeGlow(player.getItemInHand());
-				player.setItemInHand(is);
+			if (new ItemBuilder(player.getItemInHand()).hasGlow()) {
+				player.setItemInHand(new ItemBuilder(player.getItemInHand()).removeGlow().build());
 				player.sendMessage(AllAssets.TITLE + "Your item is no longer glowing!");
 			} else {
-				final ItemStack is = ItemUtils.addGlow(player.getItemInHand());
-				player.setItemInHand(is);
+				player.setItemInHand(new ItemBuilder(player.getItemInHand()).addGlow().build());
 				player.sendMessage(AllAssets.TITLE + "Your item is now glowing!");
 			}
 		} else

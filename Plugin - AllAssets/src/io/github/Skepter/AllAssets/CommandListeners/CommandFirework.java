@@ -37,7 +37,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.API.AAFireworkBuilder;
+import io.github.Skepter.AllAssets.API.Builders.FireworkBuilder;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Misc.FireworkInventories;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
@@ -62,7 +62,7 @@ public class CommandFirework implements Listener {
 	}
 
 	//have a button to output it as a single lined command (for dispensers etc.)
-	private final PlayerMap<UUID, AAFireworkBuilder> map = new PlayerMap<UUID, AAFireworkBuilder>(AllAssets.instance());
+	private final PlayerMap<UUID, FireworkBuilder> map = new PlayerMap<UUID, FireworkBuilder>(AllAssets.instance());
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework")
 	public void onCommand(final CommandArgs args) {
@@ -86,7 +86,7 @@ public class CommandFirework implements Listener {
 			switch (event.getInventory().getName()) {
 			case "Firework - Type":
 				if (check(event)) {
-					final AAFireworkBuilder builder = new AAFireworkBuilder(1);
+					final FireworkBuilder builder = new FireworkBuilder(1);
 					builder.setType(parseType(item));
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.chooseColor(false));
@@ -94,7 +94,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Firework - Color":
 				if (check(event)) {
-					final AAFireworkBuilder builder = map.get(player);
+					final FireworkBuilder builder = map.get(player);
 					builder.addColor(parseColor(item));
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.chooseColor(true));
@@ -102,7 +102,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Firework - Fade":
 				if (check(event)) {
-					final AAFireworkBuilder builder = map.get(player);
+					final FireworkBuilder builder = map.get(player);
 					builder.addFade(parseColor(item));
 					map.put(player, builder);
 					player.openInventory(FireworkInventories.anotherColor());
@@ -117,7 +117,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Do you want flickering?":
 				if (check(event)) {
-					final AAFireworkBuilder builder = map.get(player);
+					final FireworkBuilder builder = map.get(player);
 					if (parseBoolean(item))
 						builder.addFlicker();
 					map.put(player, builder);
@@ -126,7 +126,7 @@ public class CommandFirework implements Listener {
 				break;
 			case "Do you want a trail?":
 				if (check(event)) {
-					final AAFireworkBuilder builder = map.get(player);
+					final FireworkBuilder builder = map.get(player);
 					if (parseBoolean(item))
 						builder.addTrail();
 					map.put(player, builder);
@@ -135,10 +135,10 @@ public class CommandFirework implements Listener {
 				break;
 			case "Choose a power size":
 				if (check(event)) {
-					final AAFireworkBuilder builder = map.get(player);
+					final FireworkBuilder builder = map.get(player);
 					builder.setPower(parsePower(item));
 					map.remove(player);
-					player.getInventory().addItem(builder.getFirework());
+					player.getInventory().addItem(builder.build());
 					player.sendMessage(AllAssets.TITLE + "Firework created!");
 					player.closeInventory();
 				}

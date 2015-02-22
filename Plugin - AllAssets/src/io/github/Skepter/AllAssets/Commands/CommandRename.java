@@ -35,10 +35,10 @@ package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import org.bukkit.ChatColor;
@@ -65,7 +65,7 @@ public class CommandRename {
 			return;
 		}
 		//if args = 0, remove rename.
-		ItemUtils.setDisplayName(player.getItemInHand(), ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+		player.setItemInHand(new ItemBuilder(player.getItemInHand()).setDisplayName(ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length))).build());
 		player.sendMessage(AllAssets.TITLE + "Renamed item to " + ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		return;
 	}

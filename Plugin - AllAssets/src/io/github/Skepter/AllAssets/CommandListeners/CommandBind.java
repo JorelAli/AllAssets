@@ -37,12 +37,11 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.entity.Player;
@@ -51,7 +50,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class CommandBind implements Listener {
 
@@ -83,21 +81,16 @@ public class CommandBind implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		final ItemStack item = player.getItemInHand();
-		final ItemMeta meta = item.getItemMeta();
-		if (!meta.hasLore())
-			meta.setLore(new ArrayList<String>());
-		final List<String> lore = meta.getLore();
+		ItemBuilder builder = new ItemBuilder(player.getItemInHand());
 		final String[] command = TextUtils.getMsgFromArgs(args.getArgs(), 0, args.getArgs().length);
-		final String s = "/" + TextUtils.join(command, " ");
-		lore.add(s);
-		meta.setLore(lore);
-		item.setItemMeta(meta);
+		String lore = "/" + TextUtils.join(command, " ");
+		builder.addLore(lore);
 		try {
-			ItemUtils.addGlow(item);
+			builder.addGlow();
 		} catch (final Exception e) {
 		}
-		player.sendMessage(AllAssets.TITLE + "Successfully added " + s + "to your item!");
+		player.setItemInHand(builder.build());
+		player.sendMessage(AllAssets.TITLE + "Successfully added " + lore + "to your item!");
 		return;
 	}
 
@@ -110,19 +103,19 @@ public class CommandBind implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		final ItemStack item = player.getItemInHand();
-		final ItemMeta meta = item.getItemMeta();
-		final List<String> lore = meta.getLore();
+		
+		ItemBuilder builder = new ItemBuilder(player.getItemInHand());
+		final List<String> lore = builder.getLore();
 		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);
 			return;
 		}
 		final String s = lore.get(Integer.parseInt(args.getArgs()[0]) - 1);
 		lore.remove((Integer.parseInt(args.getArgs()[0]) - 1));
-		meta.setLore(lore);
-		item.setItemMeta(meta);
-		if (!containsCommand(item))
-			ItemUtils.removeGlow(item);
+		builder.setLore(lore);
+		if (!containsCommand(player.getItemInHand()))
+			builder.removeGlow();
+		player.setItemInHand(builder.build());
 		player.sendMessage(AllAssets.TITLE + "Successfully removed " + s + "from your item!");
 		return;
 	}

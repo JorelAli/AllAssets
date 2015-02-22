@@ -34,7 +34,7 @@
 package io.github.Skepter.AllAssets.Misc;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Utils.ItemUtils;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,9 +52,7 @@ public class EnchantmentInventories {
 	public static Inventory page1() {
 		final Map<Integer, ItemStack> map = new HashMap<Integer, ItemStack>();
 		for (int i = 1; i < 5; i++) {
-			final ItemStack is = new ItemStack(Material.DIAMOND_CHESTPLATE);
-			is.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, i);
-			map.put(i - 1, is);
+			map.put(i - 1, new ItemBuilder(Material.DIAMOND_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).build());
 		}
 
 		for (int i = 5; i < 9; i++) {
@@ -96,17 +94,9 @@ public class EnchantmentInventories {
 		final ItemStack aquaaffinity = new ItemStack(Material.DIAMOND_HELMET);
 		aquaaffinity.addUnsafeEnchantment(Enchantment.WATER_WORKER, 1);
 		map.put(14, aquaaffinity);
-
-		final ItemStack nextPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(nextPage, AllAssets.HOUSE_STYLE_COLOR + "Next Page");
-		ItemUtils.addGlow(nextPage);
-
-		final ItemStack previousPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(previousPage, AllAssets.HOUSE_STYLE_COLOR + "Previous Page");
-		ItemUtils.addGlow(previousPage);
-
-		map.put(52, previousPage);
-		map.put(53, nextPage);
+		
+		map.put(52, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
+		map.put(53, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
 
 		final Inventory inv1 = Bukkit.createInventory(null, 54, "Enchant - Armor");
 
@@ -133,16 +123,8 @@ public class EnchantmentInventories {
 		silkTouch.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 1);
 		map.put(18, silkTouch);
 
-		final ItemStack nextPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(nextPage, AllAssets.HOUSE_STYLE_COLOR + "Next Page");
-		ItemUtils.addGlow(nextPage);
-
-		final ItemStack previousPage = new ItemStack(Material.ARROW, 1);
-		ItemUtils.setDisplayName(previousPage, AllAssets.HOUSE_STYLE_COLOR + "Previous Page");
-		ItemUtils.addGlow(previousPage);
-
-		map.put(25, previousPage);
-		map.put(26, nextPage);
+		map.put(25, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
+		map.put(26, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
 
 		final Inventory inv1 = Bukkit.createInventory(null, 27, "Enchant - Tools");
 

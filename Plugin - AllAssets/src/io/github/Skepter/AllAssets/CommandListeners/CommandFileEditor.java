@@ -38,9 +38,9 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.ItemUtils;
 import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 
@@ -140,7 +140,7 @@ public class CommandFileEditor implements Listener {
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
 				case BOOK:
-					directoryMap.put(player, openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
+					directoryMap.put(player, openInventory(player, new File(dM, File.separator + new ItemBuilder(item).getDisplayName())));
 					return;
 					/* If they click an arrow, go up another level */
 				case ARROW:
@@ -152,7 +152,7 @@ public class CommandFileEditor implements Listener {
 					/* Read the file */
 				case PAPER:
 					player.closeInventory();
-					final File dataFile = new File(dM, ItemUtils.getDisplayName(item));
+					final File dataFile = new File(dM, new ItemBuilder(item).getDisplayName());
 					if (dataFile.getName().contains(".yml")) {
 						final YamlConfiguration config = new YamlConfiguration();
 						try {
@@ -195,12 +195,12 @@ public class CommandFileEditor implements Listener {
 		for (final File file : currentDirectory.listFiles()) {
 			for (final String s : supportedFileTypes)
 				if (file.getName().contains(s))
-					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.PAPER, 1), file.getName()));
+					inv.addItem(new ItemBuilder(Material.PAPER).setDisplayName(file.getName()).build());
 			if (file.isDirectory())
-				inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.BOOK, 1), file.getName()));
+				inv.addItem(new ItemBuilder(Material.BOOK).setDisplayName(file.getName()).build());
 		}
 		if (!Arrays.asList(currentDirectory.list()).contains("server.properties"))
-			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)));
+			inv.setItem(inv.getSize() - 1, new ItemBuilder(Material.ARROW).setDisplayName("Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)).build());
 		player.openInventory(inv);
 		return currentDirectory.getAbsolutePath();
 	}
