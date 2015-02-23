@@ -73,6 +73,7 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandRemove;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSetSpawn;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
+import io.github.Skepter.AllAssets.Commands.Administration.CommandSpawnItem;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandTime;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandWeather;
 import io.github.Skepter.AllAssets.Commands.Debug.CommandBatch;
@@ -391,6 +392,8 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandSilence(framework));
 		if (ConfigHandler.features().getBoolean("StaffChat"))
 			r(new CommandStaffChat(framework));
+		if (ConfigHandler.features().getBoolean("SpawnItem"))
+			new CommandSpawnItem(framework);
 		if (ConfigHandler.features().getBoolean("Time"))
 			new CommandTime(framework);
 		if (ConfigHandler.features().getBoolean("Tp"))

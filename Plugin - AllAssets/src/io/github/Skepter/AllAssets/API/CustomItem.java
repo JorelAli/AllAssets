@@ -29,6 +29,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.API;
 
+import io.github.Skepter.AllAssets.Commands.Administration.CommandSpawnItem;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,18 +44,25 @@ public abstract class CustomItem implements Listener {
 	private ItemStack itemStack;
 	private String permission;
 	private Block block;
+	private String itemName;
 
-	public CustomItem(JavaPlugin plugin, ItemStack itemStack) {
+	public CustomItem(JavaPlugin plugin, ItemStack itemStack, String itemName) {
 		this.itemStack = itemStack;
-
+		this.itemName = itemName;
+		registerItem();
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	public CustomItem(JavaPlugin plugin, ItemStack itemStack, String permission) {
+	public CustomItem(JavaPlugin plugin, ItemStack itemStack, String itemName, String permission) {
 		this.itemStack = itemStack;
+		this.itemName = itemName;
 		this.permission = permission;
-
+		registerItem();
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	}
+	
+	private void registerItem() {
+		CommandSpawnItem.items.put(itemName, itemStack);
 	}
 
 	public abstract void leftClickBlock(Player player);
