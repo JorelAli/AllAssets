@@ -34,9 +34,11 @@ import io.github.Skepter.AllAssets.Config.PlayerData;
 import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
 import io.github.Skepter.AllAssets.Serializers.LocationSerializer;
 import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -205,20 +207,19 @@ public class OfflineUser {
 	}
 
 	public List<UUID> getFriendList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> str = playerData.getDataFile().getStringList("friends");
+		List<UUID> list = new ArrayList<UUID>();
+		for(String s : str) {
+			list.add(UUID.fromString(s));
+		}
+		return list;
 	}
 
-	public void setFriendList() {
-		// TODO Auto-generated method stub
+	public void setFriendList(List<UUID> friends) {
+		playerData.getDataFile().set("friends", friends);
 	}
 
 	public boolean canTp() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean canTP() {
 		return playerData.getDataFile().getBoolean("canTP");
 	}
 }

@@ -272,11 +272,6 @@ public class User {
 	}
 
 	public boolean canTp() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	public boolean canTP() {
 		return playerData.getDataFile().getBoolean("canTP");
 	}
 
