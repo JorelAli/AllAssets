@@ -26,11 +26,14 @@ Methods:
 * addColor(Color color) - Adds a color to the firework, can be used more than once
 * getFirework() - Returns the firework ItemStack
 
+ItemBuilder
+-----------
+
 Debugger
 --------
 Just a little class I created to help debug issues by checking values:
 
-* printVariable(String name, Object object) - Prints a variable into the console
+* printVariable(String name, Object object) - Prints a variable into the console. The name is used to describe the object
 * printList(Collection<?> list) - Prints a list into the console
 * printMap(Map<?,?> map) - Prints a map into the console
 
@@ -51,7 +54,7 @@ There are three ways to get User instances:
 * new User(Player);
 * new User(OfflinePlayer);
 * new User(UUID);
-By using the offline player version of the user, you are unable to get the player's ping and you are unable to set their last location and last waypoint.
+AllAssets also uses the OfflineUser class to get an instance of a user that is offline. Note that some methods that are available in the User class cannot by used in the OfflineUser class (such as the users ping).
 
 UUIDAPI
 -------
