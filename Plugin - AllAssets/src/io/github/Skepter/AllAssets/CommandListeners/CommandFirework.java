@@ -43,8 +43,6 @@ import io.github.Skepter.AllAssets.Misc.FireworkInventories;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 
-import java.util.UUID;
-
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect.Type;
@@ -62,7 +60,7 @@ public class CommandFirework implements Listener {
 	}
 
 	//have a button to output it as a single lined command (for dispensers etc.)
-	private final PlayerMap<UUID, FireworkBuilder> map = new PlayerMap<UUID, FireworkBuilder>(AllAssets.instance());
+	private final PlayerMap<FireworkBuilder> map = new PlayerMap<FireworkBuilder>(AllAssets.instance());
 
 	@CommandHandler(name = "firework", permission = "firework", description = "Creates a custom firework")
 	public void onCommand(final CommandArgs args) {

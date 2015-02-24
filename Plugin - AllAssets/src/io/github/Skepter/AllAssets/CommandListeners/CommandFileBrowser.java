@@ -52,7 +52,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -73,8 +72,8 @@ public class CommandFileBrowser implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>(AllAssets.instance());
-	public PlayerMap<UUID, List<String>> dataMap = new PlayerMap<UUID, List<String>>(AllAssets.instance());
+	public PlayerMap<String> directoryMap = new PlayerMap<String>(AllAssets.instance());
+	public PlayerMap<List<String>> dataMap = new PlayerMap<List<String>>(AllAssets.instance());
 
 	@CommandHandler(name = "filebrowser", aliases = { "fb" }, permission = "filebrowser", description = "Browses files and shows configs")
 	public void onCommand(final CommandArgs args) {

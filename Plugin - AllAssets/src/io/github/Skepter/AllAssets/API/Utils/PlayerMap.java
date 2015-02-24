@@ -46,10 +46,10 @@ import org.bukkit.plugin.Plugin;
 /** Custom Map<K,V> class used to manage players.
  * 
  * @author Skepter */
-public class PlayerMap<K, V> implements Listener, Cloneable, Serializable {
+public class PlayerMap<T> implements Listener, Cloneable, Serializable {
 
 	private static final long serialVersionUID = -8222232305054055527L;
-	private final Map<UUID, V> map = new HashMap<UUID, V>();
+	private final Map<UUID, T> map = new HashMap<UUID, T>();
 
 	public PlayerMap(final Plugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -61,11 +61,11 @@ public class PlayerMap<K, V> implements Listener, Cloneable, Serializable {
 			remove(event.getPlayer());
 	}
 
-	public void put(final Player player, final V value) {
+	public void put(final Player player, final T value) {
 		map.put(player.getUniqueId(), value);
 	}
 
-	public V get(final Player player) {
+	public T get(final Player player) {
 		return map.get(player.getUniqueId());
 	}
 
@@ -88,11 +88,11 @@ public class PlayerMap<K, V> implements Listener, Cloneable, Serializable {
 		return map.keySet();
 	}
 
-	public Collection<V> values() {
+	public Collection<T> values() {
 		return map.values();
 	}
 
-	public Set<Entry<UUID, V>> entrySet() {
+	public Set<Entry<UUID, T>> entrySet() {
 		return map.entrySet();
 	}
 }

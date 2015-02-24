@@ -34,14 +34,12 @@ package io.github.Skepter.AllAssets.Vault.Permissions;
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 
-import java.util.UUID;
-
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 
 public class Permission {
 
-	private static PlayerMap<UUID, PermissionAttachment> map = new PlayerMap<UUID, PermissionAttachment>(AllAssets.instance());
+	private static PlayerMap<PermissionAttachment> map = new PlayerMap<PermissionAttachment>(AllAssets.instance());
 
 	public static void registerPlayer(final Player player) {
 		map.put(player, player.addAttachment(AllAssets.instance()));

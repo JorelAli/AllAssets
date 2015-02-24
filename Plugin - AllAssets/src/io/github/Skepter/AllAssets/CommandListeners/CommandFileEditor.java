@@ -49,7 +49,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -72,8 +71,8 @@ public class CommandFileEditor implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public PlayerMap<UUID, String> directoryMap = new PlayerMap<UUID, String>(AllAssets.instance());
-	public PlayerMap<UUID, String> fileMap = new PlayerMap<UUID, String>(AllAssets.instance());
+	public PlayerMap<String> directoryMap = new PlayerMap<String>(AllAssets.instance());
+	public PlayerMap<String> fileMap = new PlayerMap<String>(AllAssets.instance());
 
 	@CommandHandler(name = "fileeditor", aliases = { "fe" }, permission = "fileeditor", description = "Edits files")
 	public void onCommand(final CommandArgs args) {

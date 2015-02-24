@@ -43,10 +43,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class CommandCooldown {
 
-	private static PlayerMap<UUID, String> cooldownPlayer = new PlayerMap<UUID, String>(AllAssets.instance());
+	private static PlayerMap<String> cooldownPlayer = new PlayerMap<String>(AllAssets.instance());
 
 	private static List<UUID> cooldownPlayers = new ArrayList<UUID>();
-	private static PlayerMap<UUID, Long> cooldownTimeMap = new PlayerMap<UUID, Long>(AllAssets.instance());
+	private static PlayerMap<Long> cooldownTimeMap = new PlayerMap<Long>(AllAssets.instance());
 
 	public CommandCooldown(final Player player, final long time, final String command) {
 		cooldownPlayer.put(player, command);

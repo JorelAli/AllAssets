@@ -35,9 +35,9 @@ package io.github.Skepter.AllAssets.Commands.Debug;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
@@ -46,7 +46,6 @@ import io.github.Skepter.AllAssets.Utils.TextUtils;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -65,7 +64,7 @@ public class CommandBatch {
 	}
 
 	private final Map<Integer, Integer> runnableMap = new HashMap<Integer, Integer>();
-	private final PlayerMap<UUID, Integer> runnablesMap = new PlayerMap<UUID, Integer>(AllAssets.instance());
+	private final PlayerMap<Integer> runnablesMap = new PlayerMap<Integer>(AllAssets.instance());
 
 	@CommandHandler(name = "batch", permission = "batch", description = "Run a command multiple times")
 	public void onCommand(final CommandArgs args) {
