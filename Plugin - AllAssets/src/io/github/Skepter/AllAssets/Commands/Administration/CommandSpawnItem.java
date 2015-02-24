@@ -34,6 +34,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Help;
+import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
@@ -50,7 +51,7 @@ public class CommandSpawnItem {
 	public CommandSpawnItem(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
-	
+
 	public static Map<String, ItemStack> items = new HashMap<String, ItemStack>();
 
 	@CommandHandler(name = "spawnitem", aliases = { "si" }, permission = "spawnitem", description = "Spawns a custom item")
@@ -62,19 +63,20 @@ public class CommandSpawnItem {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		
+
 		switch (args.getArgs().length) {
 		case 0:
-			printHelp(args.getSender());
-			return;
+			//help
+			break;
 		case 1:
-			try {
-				player.setItemInHand(items.get(args.getArgs()[0]));
-			} catch (Exception e) {
-				ErrorUtils.error(player, "That item does not exist!");
-			}
+			ItemStack is = items.get(args.getArgs()[0]);
+			if (is != null) {
+				player.setItemInHand(is);
+				player.sendMessage("Gave you a " + new ItemBuilder(is).getDisplayName());
+			} else
+				ErrorUtils.error(player, "Item not found");
 			return;
-			
+
 		}
 		return;
 	}
@@ -82,7 +84,7 @@ public class CommandSpawnItem {
 	@CommandHandler(name = "spawnitem.list", permission = "spawnitem", description = "Shows a list of items to spawn")
 	public void startAnnouncer(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Items"));
-		for(Entry<String, ItemStack> entry : items.entrySet()) {
+		for (Entry<String, ItemStack> entry : items.entrySet()) {
 			args.getSender().sendMessage(AllAssets.ACCENT_COLOR + entry.getKey());
 		}
 		return;

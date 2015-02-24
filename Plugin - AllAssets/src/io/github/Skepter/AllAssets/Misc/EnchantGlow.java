@@ -37,6 +37,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class EnchantGlow extends EnchantmentWrapper {
 
@@ -90,7 +91,7 @@ public class EnchantGlow extends EnchantmentWrapper {
 			e.printStackTrace();
 		}
 		name = cname;
-		glow = new EnchantGlow(255);
+		glow = new EnchantGlow(70);
 		Enchantment.registerEnchantment(glow);
 		return glow;
 	}
@@ -107,6 +108,10 @@ public class EnchantGlow extends EnchantmentWrapper {
 		if (item.containsEnchantment(getGlow(name)))
 			return true;
 		return false;
+	}
+
+	public static void addGlow(ItemMeta meta, String name) {
+		meta.addEnchant(getGlow(name), 1, true);		
 	}
 
 }

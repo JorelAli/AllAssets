@@ -60,7 +60,7 @@ public abstract class CustomItem implements Listener {
 		registerItem();
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
 	private void registerItem() {
 		CommandSpawnItem.items.put(itemName, itemStack);
 	}
@@ -82,7 +82,8 @@ public abstract class CustomItem implements Listener {
 		this.block = event.getClickedBlock();
 		try {
 			if (permission == null || event.getPlayer().hasPermission(permission))
-				if (event.getPlayer().getItemInHand().equals(itemStack))
+				if (event.getPlayer().getItemInHand().equals(itemStack)) {
+					event.setCancelled(true);
 					switch (event.getAction()) {
 					case LEFT_CLICK_AIR:
 						leftClickAir(event.getPlayer());
@@ -100,6 +101,7 @@ public abstract class CustomItem implements Listener {
 						break;
 
 					}
+				}
 		} catch (NullPointerException e) {
 		}
 	}

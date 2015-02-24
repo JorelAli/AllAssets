@@ -247,14 +247,26 @@ public class AllAssets extends JavaPlugin {
 	//best command ever :D (yes, the dollar sign IS NECESSARY!)
 	//$firework SXRlbVN0YWNrOgogID09OiBvcmcuYnVra2l0LmludmVudG9yeS5JdGVtU3RhY2sKICB0eXBlOiBGSVJFV09SSwogIG1ldGE6CiAgICA9PTogSXRlbU1ldGEKICAgIG1ldGEtdHlwZTogRklSRVdPUksKICAgIGZpcmV3b3JrLWVmZmVjdHM6CiAgICAtID09OiBGaXJld29yawogICAgICBmbGlja2VyOiBmYWxzZQogICAgICB0cmFpbDogdHJ1ZQogICAgICBjb2xvcnM6CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIGZhZGUtY29sb3JzOgogICAgICAtID09OiBDb2xvcgogICAgICAgIFJFRDogMTc5CiAgICAgICAgQkxVRTogNDQKICAgICAgICBHUkVFTjogNDkKICAgICAgLSA9PTogQ29sb3IKICAgICAgICBSRUQ6IDM3CiAgICAgICAgQkxVRTogMTQ2CiAgICAgICAgR1JFRU46IDQ5CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAxNzEKICAgICAgICBCTFVFOiAxNzEKICAgICAgICBHUkVFTjogMTcxCiAgICAgIHR5cGU6IEJBTExfTEFSR0UKw
 
+	@Override
+	public void onLoad() {
+		getLogger().info("+---------------------------------+");
+		getLogger().info("Preparing AllAssets for enabling...");
+		tempTimeMap = new HashMap<UUID, Long>();
+		framework = new CommandFramework(this);
+		new ConfigHandler();
+		getLogger().info("+---------------------------------+");
+
+	}
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
-		getLogger().info("Initializing AllAssets version " + getDescription().getVersion());
+		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
 
 		/* Some names will be removed - depends on whatever is in the Libs package */
-		getLogger().info("AllAssets, created by Skepter. Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
+		getLogger().info("AllAssets, created by Skepter and tundraboy44");
+		//getLogger().info("Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 
 		if (!new File(getDataFolder(), "Read me.txt").exists())
 			saveResource("Read me.txt", false);
@@ -262,10 +274,8 @@ public class AllAssets extends JavaPlugin {
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener(this));
 
-		tempTimeMap = new HashMap<UUID, Long>();
-		framework = new CommandFramework(this);
+		
 		this.saveResource("ItemData.csv", true);
-		new ConfigHandler();
 
 		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
@@ -463,8 +473,15 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info(NO_COLOR_TITLE + "AllAssets has been enabled successfully");
 		Bukkit.broadcast(TITLE + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
+		
+		/* Post load stuff */
 		if (masterSwitch)
 			dev(true);
+		postLoad();
+	}
+	
+	public void postLoad() {
+
 	}
 
 	/* Easy system to add listeners */

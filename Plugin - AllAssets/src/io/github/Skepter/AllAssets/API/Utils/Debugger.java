@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 /** A class to easily debug variables and stuff */
@@ -41,21 +42,21 @@ public class Debugger {
 	/** Prints the object value in the console. */
 	public static void printVariable(final String name, final Object o) {
 		printBlank();
-		System.out.println(name + ": " + o);
+		Bukkit.getLogger().info(name + ": " + o);
 	}
 
 	/** Prints a String (name). Used to check if a function is being executed
 	 * correctly. */
 	public static void print(final String name) {
 		printBlank();
-		System.out.println(name);
+		Bukkit.getLogger().info(name);
 	}
 
 	/** Prints a list in the console. */
 	public static void printList(final Collection<?> list) {
 		printBlank();
 		for (final Object o : list)
-			System.out.println(ChatColor.stripColor(o.toString()));
+			Bukkit.getLogger().info(ChatColor.stripColor(o.toString()));
 	}
 
 	/** Prints a Map in the console. */
@@ -65,12 +66,12 @@ public class Debugger {
 			if (e.getValue() instanceof Collection) {
 				printBlank();
 				for (final Object o : (Collection<?>) e.getValue())
-					System.out.println(ChatColor.stripColor(e.getKey().toString() + " : " + o.toString()));
+					Bukkit.getLogger().info(ChatColor.stripColor(e.getKey().toString() + " : " + o.toString()));
 			} else
-				System.out.println(ChatColor.stripColor(e.getKey().toString() + " : " + e.getValue().toString()));
+				Bukkit.getLogger().info(ChatColor.stripColor(e.getKey().toString() + " : " + e.getValue().toString()));
 	}
 
 	private static void printBlank() {
-		System.out.println(" ");
+		Bukkit.getLogger().info(" ");
 	}
 }

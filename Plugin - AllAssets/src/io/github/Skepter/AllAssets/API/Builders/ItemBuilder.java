@@ -49,23 +49,31 @@ public class ItemBuilder {
 
 	/** Creates a new ItemBuilder with a material. The amount is defaulted to 1 */
 	public ItemBuilder(Material material) {
-		new ItemBuilder(material, 1);
+		this.itemStack = new ItemStack(material);
+		this.meta = itemStack.getItemMeta();
+		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with a material and an amount */
 	public ItemBuilder(Material material, int amount) {
-		new ItemBuilder(new ItemStack(material, amount));
+		this.itemStack = new ItemStack(material, amount);
+		this.meta = itemStack.getItemMeta();
+		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with a material and a data value. The amount is
 	 * defaulted to 1 */
 	public ItemBuilder(Material material, short data) {
-		new ItemBuilder(new ItemStack(material, 1, data));
+		this.itemStack = new ItemStack(material, 1, data);
+		this.meta = itemStack.getItemMeta();
+		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with a material, an amount and a data value */
 	public ItemBuilder(Material material, int amount, short data) {
-		new ItemBuilder(new ItemStack(material, amount, data));
+		this.itemStack = new ItemStack(material, amount, data);
+		this.meta = itemStack.getItemMeta();
+		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with an ItemStack */
@@ -92,7 +100,7 @@ public class ItemBuilder {
 		meta.setLore(Arrays.asList(lore));
 		return builder;
 	}
-	
+
 	/** Sets the lore of the item */
 	public ItemBuilder setLore(final List<String> lore) {
 		meta.setLore(lore);
@@ -123,15 +131,15 @@ public class ItemBuilder {
 	public String getDisplayName() {
 		return meta.getDisplayName();
 	}
-	
+
 	/** Gets lore of the item */
 	public List<String> getLore() {
 		return meta.getLore();
 	}
-	
+
 	/** Adds a glow to the item */
 	public ItemBuilder addGlow() {
-		EnchantGlow.addGlow(itemStack, "");
+		EnchantGlow.addGlow(meta, "");
 		return builder;
 	}
 
