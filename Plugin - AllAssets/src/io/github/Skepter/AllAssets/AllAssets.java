@@ -131,7 +131,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** AllAssets plugin, version 0.4 Alpha
+/** AllAssets plugin, version 0.65 Alpha
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
