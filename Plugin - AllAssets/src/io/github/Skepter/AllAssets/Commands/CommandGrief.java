@@ -33,13 +33,13 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
@@ -94,9 +94,9 @@ public class CommandGrief {
 					CommandLog.addLog("Player: " + player.getName() + ", Location: " + location + ", Message: " + message, LogType.GRIEF);
 					NotificationsBoard.addGriefLog();
 					NotificationsBoard.updateAll();
-					context.getForWhom().sendRawMessage(AllAssets.TITLE + "Successfully sent grief report");
+					context.getForWhom().sendRawMessage(Strings.TITLE + "Successfully sent grief report");
 				} else
-					context.getForWhom().sendRawMessage(AllAssets.ERROR + "Cancelled grief report");
+					context.getForWhom().sendRawMessage(Strings.ERROR + "Cancelled grief report");
 			return Prompt.END_OF_CONVERSATION;
 		}
 

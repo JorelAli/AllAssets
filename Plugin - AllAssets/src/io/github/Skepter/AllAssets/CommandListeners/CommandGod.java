@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.ArrayList;
@@ -67,10 +67,10 @@ public class CommandGod implements Listener {
 		}
 		if (godPlayers.contains(player.getUniqueId())) {
 			godPlayers.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "You suddenly feel much more vunerable");
+			player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");
 		} else {
 			godPlayers.add(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "A higher power falls upon you");
+			player.sendMessage(Strings.TITLE + "A higher power falls upon you");
 		}
 		return;
 	}

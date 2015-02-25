@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.ArrayList;
@@ -71,10 +71,10 @@ public class CommandStaffChat implements Listener {
 		}
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "Staff chat is now off");
+			player.sendMessage(Strings.TITLE + "Staff chat is now off");
 		} else {
 			players.add(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "Staff chat is now on");
+			player.sendMessage(Strings.TITLE + "Staff chat is now on");
 		}
 	}
 

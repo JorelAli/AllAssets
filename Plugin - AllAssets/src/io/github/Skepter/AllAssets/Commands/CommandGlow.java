@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Player;
@@ -60,10 +60,10 @@ public class CommandGlow {
 		if (!player.getItemInHand().getType().isBlock()) {
 			if (new ItemBuilder(player.getItemInHand()).hasGlow()) {
 				player.setItemInHand(new ItemBuilder(player.getItemInHand()).removeGlow().build());
-				player.sendMessage(AllAssets.TITLE + "Your item is no longer glowing!");
+				player.sendMessage(Strings.TITLE + "Your item is no longer glowing!");
 			} else {
 				player.setItemInHand(new ItemBuilder(player.getItemInHand()).addGlow().build());
-				player.sendMessage(AllAssets.TITLE + "Your item is now glowing!");
+				player.sendMessage(Strings.TITLE + "Your item is now glowing!");
 			}
 		} else
 			ErrorUtils.error(player, "You cannot make that item glow!");

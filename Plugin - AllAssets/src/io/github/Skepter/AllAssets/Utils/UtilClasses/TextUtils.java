@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils.UtilClasses;
 
-import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.Utils.Strings;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -217,7 +217,7 @@ public class TextUtils {
 			return 0;
 		}
 
-		sender.sendMessage(AllAssets.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
+		sender.sendMessage(Strings.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return amountOfPages;
@@ -253,7 +253,7 @@ public class TextUtils {
 			return 0;
 		}
 
-		sender.sendMessage(AllAssets.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
+		sender.sendMessage(Strings.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 		return amountOfPages;
@@ -311,8 +311,8 @@ public class TextUtils {
 		sender.sendMessage(title(title + " help"));
 		for (final String string : help) {
 			final String[] strs = string.split(" -");
-			final String part1 = AllAssets.ACCENT_COLOR + strs[0];
-			final String part2 = AllAssets.HOUSE_STYLE_COLOR + strs[1];
+			final String part1 = Strings.ACCENT_COLOR + strs[0];
+			final String part2 = Strings.HOUSE_STYLE_COLOR + strs[1];
 			sender.sendMessage(part1 + " -" + part2);
 
 		}

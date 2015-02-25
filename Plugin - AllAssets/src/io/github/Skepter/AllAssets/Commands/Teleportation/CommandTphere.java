@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Teleportation;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
@@ -69,7 +69,7 @@ public class CommandTphere {
 			final User target = new User(t);
 			if (target.canTp()) {
 				t.teleport(player);
-				player.sendMessage(AllAssets.TITLE + "Successfully teleported " + t.getName() + " to you ");
+				player.sendMessage(Strings.TITLE + "Successfully teleported " + t.getName() + " to you ");
 				return;
 			} else {
 				ErrorUtils.tptoggle(player, args.getArgs()[0]);

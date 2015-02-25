@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
@@ -62,11 +62,11 @@ public class CommandFly {
 			if (player.getAllowFlight()) {
 				player.setAllowFlight(false);
 				player.setFlying(false);
-				player.sendMessage(AllAssets.TITLE + "Flying disabled");
+				player.sendMessage(Strings.TITLE + "Flying disabled");
 
 			} else {
 				player.setAllowFlight(true);
-				player.sendMessage(AllAssets.TITLE + "Flying enabled");
+				player.sendMessage(Strings.TITLE + "Flying enabled");
 			}
 			return;
 		case 1:
@@ -75,10 +75,10 @@ public class CommandFly {
 				if (target.getAllowFlight()) {
 					target.setAllowFlight(false);
 					player.setFlying(false);
-					target.sendMessage(AllAssets.TITLE + "Flying disabled");
+					target.sendMessage(Strings.TITLE + "Flying disabled");
 				} else {
 					target.setAllowFlight(true);
-					target.sendMessage(AllAssets.TITLE + "Flying enabled");
+					target.sendMessage(Strings.TITLE + "Flying enabled");
 				}
 				return;
 			} else

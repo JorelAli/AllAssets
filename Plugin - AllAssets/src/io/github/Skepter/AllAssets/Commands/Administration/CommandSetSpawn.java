@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Player;
@@ -58,6 +58,6 @@ public class CommandSetSpawn {
 		}
 		int x = player.getLocation().getBlockX(), y = player.getLocation().getBlockY(), z = player.getLocation().getBlockZ();
 		player.getWorld().setSpawnLocation(x, y, z);
-		player.sendMessage(AllAssets.TITLE + "Set spawn location to [" + x + ", " + y + ", " + z + "]");
+		player.sendMessage(Strings.TITLE + "Set spawn location to [" + x + ", " + y + ", " + z + "]");
 	}
 }

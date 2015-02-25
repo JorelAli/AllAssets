@@ -33,12 +33,12 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Teleportation;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.OfflineUser;
 import io.github.Skepter.AllAssets.API.User;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
@@ -76,10 +76,10 @@ public class CommandTp {
 			user.setLastLoc();
 			if (onlineTarget == null) {
 				player.teleport(target.getLastLoc());
-				player.sendMessage(AllAssets.TITLE + "Successfully teleported to " + offlineTarget.getName());
+				player.sendMessage(Strings.TITLE + "Successfully teleported to " + offlineTarget.getName());
 			} else {
 				player.teleport(onlineTarget);
-				player.sendMessage(AllAssets.TITLE + "Successfully teleported to " + onlineTarget.getName());
+				player.sendMessage(Strings.TITLE + "Successfully teleported to " + onlineTarget.getName());
 			}
 			return;
 		} else {

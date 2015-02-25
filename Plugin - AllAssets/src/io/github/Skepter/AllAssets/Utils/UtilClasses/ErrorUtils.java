@@ -31,10 +31,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils.UtilClasses;
 
-import static io.github.Skepter.AllAssets.AllAssets.ERROR;
 import static io.github.Skepter.AllAssets.Config.ConfigHandler.getMsg;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
+import io.github.Skepter.AllAssets.Utils.Strings;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -44,59 +44,59 @@ import org.bukkit.entity.Player;
 public class ErrorUtils {
 
 	public static void cantEnchant(final Player player) {
-		player.sendMessage(ERROR + getMsg("cantEnchant"));
+		player.sendMessage(Strings.ERROR + getMsg("cantEnchant"));
 	}
 
 	public static void error(final CommandSender sender, final String msg) {
-		sender.sendMessage(ERROR + msg);
+		sender.sendMessage(Strings.ERROR + msg);
 	}
 
 	public static void notAnInteger(final CommandSender commandSender) {
-		commandSender.sendMessage(ERROR + getMsg("notANumber"));
+		commandSender.sendMessage(Strings.ERROR + getMsg("notANumber"));
 	}
 
 	public static void notEnoughArguments(final CommandSender commandSender) {
-		commandSender.sendMessage(ERROR + "Not enough arguments - use /help <command>!");
+		commandSender.sendMessage(Strings.ERROR + "Not enough arguments - use /help <command>!");
 	}
 
 	public static void playerNotFound(final CommandSender commandSender, final String target) {
-		commandSender.sendMessage(ERROR + target + " is offline");
+		commandSender.sendMessage(Strings.ERROR + target + " is offline");
 	}
 
 	public static void pluginNotFound(final CommandSender player, final String plugin) {
-		player.sendMessage(ERROR + "Couldn't find the plugin " + plugin + "!");
+		player.sendMessage(Strings.ERROR + "Couldn't find the plugin " + plugin + "!");
 	}
 
 	public static void tooManyArguments(final Player player) {
-		player.sendMessage(ERROR + "Too many arguments - use /help <command>!");
+		player.sendMessage(Strings.ERROR + "Too many arguments - use /help <command>!");
 	}
 
 	public static void tptoggle(final Player player, final String target) {
-		player.sendMessage(ERROR + target + " has turned teleporting off");
+		player.sendMessage(Strings.ERROR + target + " has turned teleporting off");
 	}
 
 	public static void wrongConstruction(final Player player, final String construction) {
-		player.sendMessage(ERROR + "Wrong construction, use the format: " + construction);
+		player.sendMessage(Strings.ERROR + "Wrong construction, use the format: " + construction);
 	}
 
 	public static void playerOnly(final CommandSender sender) {
-		sender.sendMessage(ERROR + "You must be ingame in order to use that command");
+		sender.sendMessage(Strings.ERROR + "You must be ingame in order to use that command");
 	}
 
 	public static void generalCommandError(final CommandSender sender) {
-		sender.sendMessage(ERROR + "There was an error while executing the command");
+		sender.sendMessage(Strings.ERROR + "There was an error while executing the command");
 	}
 
 	public static void onCooldown(final CommandSender sender, final long seconds) {
-		sender.sendMessage(ERROR + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
+		sender.sendMessage(Strings.ERROR + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
 	}
 	
 	public static void worldNotFound(final CommandSender sender, final String worldName) {
-		sender.sendMessage(ERROR + worldName + " could not be found!");
+		sender.sendMessage(Strings.ERROR + worldName + " could not be found!");
 	}
 
 	public static void conversableError(final Conversable forWhom, final String msg) {
-		forWhom.sendRawMessage(ERROR + msg);
+		forWhom.sendRawMessage(Strings.ERROR + msg);
 	}
 	
 	public static void printErrorToConsole(final String msg) {

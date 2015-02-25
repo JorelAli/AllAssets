@@ -33,8 +33,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Misc;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
+import io.github.Skepter.AllAssets.Utils.Strings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -95,8 +95,8 @@ public class EnchantmentInventories {
 		aquaaffinity.addUnsafeEnchantment(Enchantment.WATER_WORKER, 1);
 		map.put(14, aquaaffinity);
 		
-		map.put(52, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
-		map.put(53, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
+		map.put(52, new ItemBuilder(Material.ARROW).setDisplayName(Strings.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
+		map.put(53, new ItemBuilder(Material.ARROW).setDisplayName(Strings.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
 
 		final Inventory inv1 = Bukkit.createInventory(null, 54, "Enchant - Armor");
 
@@ -123,8 +123,8 @@ public class EnchantmentInventories {
 		silkTouch.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 1);
 		map.put(18, silkTouch);
 
-		map.put(25, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
-		map.put(26, new ItemBuilder(Material.ARROW).setDisplayName(AllAssets.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
+		map.put(25, new ItemBuilder(Material.ARROW).setDisplayName(Strings.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
+		map.put(26, new ItemBuilder(Material.ARROW).setDisplayName(Strings.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
 
 		final Inventory inv1 = Bukkit.createInventory(null, 27, "Enchant - Tools");
 

@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.ArrayList;
@@ -64,10 +64,10 @@ public class CommandConsoleLog {
 		}
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "You are no longer viewing the console");
+			player.sendMessage(Strings.TITLE + "You are no longer viewing the console");
 		} else {
 			players.add(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "You are now viewing the console");
+			player.sendMessage(Strings.TITLE + "You are now viewing the console");
 		}
 	}
 

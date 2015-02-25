@@ -31,8 +31,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Listeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class PluginsCommandListener implements Listener {
 			if (event.getPlayer().hasPermission("AllAssets.plugins")) {
 				event.setCancelled(true);
 				event.getPlayer().sendMessage(TextUtils.title("Plugins"));
-				event.getPlayer().sendMessage(AllAssets.TITLE + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
+				event.getPlayer().sendMessage(Strings.TITLE + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
 				final List<String> pluginList = new ArrayList<String>();
 				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 					if (ConfigHandler.config().getBoolean("pluginsShowAuthors")) {

@@ -39,6 +39,7 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Tasks.DiscoArmorTask;
 import io.github.Skepter.AllAssets.Utils.DoubleMap;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.UUID;
@@ -79,11 +80,11 @@ public class CommandDiscoArmor {
 			Bukkit.getScheduler().cancelTask((int) map.get(player.getUniqueId(), 1));
 			player.getInventory().setArmorContents((ItemStack[]) map.get(player.getUniqueId(), 2));
 			map.remove(player.getUniqueId());
-			player.sendMessage(AllAssets.TITLE + "Your disco armor was removed");
+			player.sendMessage(Strings.TITLE + "Your disco armor was removed");
 		} else {
 			final BukkitTask i = Bukkit.getScheduler().runTaskTimer(AllAssets.instance(), new DiscoArmorTask(player), 0L, 3L);
 			map.put(player.getUniqueId(), i.getTaskId(), player.getInventory().getArmorContents());
-			player.sendMessage(AllAssets.TITLE + "You are now wearing disco armor!");
+			player.sendMessage(Strings.TITLE + "You are now wearing disco armor!");
 		}
 	}
 

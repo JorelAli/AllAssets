@@ -30,6 +30,7 @@
 package io.github.Skepter.AllAssets.Config;
 
 import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.Utils.Strings;
 
 import java.io.File;
 import java.util.Arrays;
@@ -86,7 +87,7 @@ public class ConfigHandler {
 	}
 
 	private static void createConfig() {
-		final String[] header = { AllAssets.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
+		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
 
 		config = configManager.getNewConfig("config.yml", header);
 
@@ -110,7 +111,7 @@ public class ConfigHandler {
 	}
 
 	private static void createMessages() {
-		final String[] header = { AllAssets.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
+		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
 
 		messages = messagesManager.getNewConfig("messages.yml", header);
 
@@ -120,7 +121,7 @@ public class ConfigHandler {
 	}
 
 	private static void createFeatures() {
-		final String[] header = { AllAssets.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
+		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
 		features = featuresManager.getNewConfig("features.yml", header);
 

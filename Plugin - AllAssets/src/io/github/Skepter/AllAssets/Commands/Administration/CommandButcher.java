@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.Iterator;
@@ -96,7 +96,7 @@ public class CommandButcher {
 					count++;
 				}
 			}
-			player.sendMessage(AllAssets.TITLE + count + " entities removed");
+			player.sendMessage(Strings.TITLE + count + " entities removed");
 		} else
 			for (final World world : Bukkit.getWorlds()) {
 				final Iterator<Entity> iterator = world.getEntities().iterator();
@@ -117,7 +117,7 @@ public class CommandButcher {
 						count++;
 					}
 				}
-				args.getSender().sendMessage(AllAssets.TITLE + count + " entities removed from " + world.getName());
+				args.getSender().sendMessage(Strings.TITLE + count + " entities removed from " + world.getName());
 			}
 		return;
 	}

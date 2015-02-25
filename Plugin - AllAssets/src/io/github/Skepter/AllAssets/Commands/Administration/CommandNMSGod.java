@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Player;
@@ -62,10 +62,10 @@ public class CommandNMSGod {
 			final ReflectionUtils utils = new ReflectionUtils(args.getPlayer());
 			if (utils.abilities.getClass().getField("isInvulnerable").getBoolean(utils.abilities)) {
 				utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, false);
-				player.sendMessage(AllAssets.TITLE + "You suddenly feel much more vunerable");
+				player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");
 			} else {
 				utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, true);
-				player.sendMessage(AllAssets.TITLE + "A higher power falls upon you");
+				player.sendMessage(Strings.TITLE + "A higher power falls upon you");
 			}
 		} catch (final Exception t) {
 			ErrorUtils.generalCommandError(player);

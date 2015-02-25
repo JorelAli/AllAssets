@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Listeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Bukkit;
@@ -50,7 +50,7 @@ public class ReloadCommandListener implements Listener {
 			final String[] args = event.getMessage().split(" ");
 			if (args.length == 1) {
 				Bukkit.reload();
-				event.getPlayer().sendMessage(AllAssets.TITLE + "Reload complete");
+				event.getPlayer().sendMessage(Strings.TITLE + "Reload complete");
 				return;
 			}
 			if (args.length == 2) {
@@ -61,7 +61,7 @@ public class ReloadCommandListener implements Listener {
 				try {
 					Bukkit.getPluginManager().disablePlugin(Bukkit.getPluginManager().getPlugin(args[1]));
 					Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(args[1]));
-					event.getPlayer().sendMessage(AllAssets.TITLE + args[1] + " successfully reloaded");
+					event.getPlayer().sendMessage(Strings.TITLE + args[1] + " successfully reloaded");
 				} catch (final Exception e) {
 					ErrorUtils.pluginNotFound(event.getPlayer(), args[1]);
 				}

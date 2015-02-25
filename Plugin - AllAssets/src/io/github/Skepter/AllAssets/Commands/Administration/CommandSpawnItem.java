@@ -29,13 +29,13 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -96,7 +96,7 @@ public class CommandSpawnItem {
 	public void startAnnouncer(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Items"));
 		for (Entry<String, ItemStack> entry : items.entrySet()) {
-			args.getSender().sendMessage(AllAssets.ACCENT_COLOR + entry.getKey());
+			args.getSender().sendMessage(Strings.ACCENT_COLOR + entry.getKey());
 		}
 		return;
 	}

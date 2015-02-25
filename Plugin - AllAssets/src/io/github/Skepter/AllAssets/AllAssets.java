@@ -110,6 +110,7 @@ import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Reflection.VaultReflection;
 import io.github.Skepter.AllAssets.Tasks.TPS;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
 
 import java.io.File;
@@ -123,7 +124,6 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -151,7 +151,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  * 
  * 
- * @author Skepter */
+ * @authors Skepter, Tundra */
 
 // Explore the ResourceBundle for setting Locale
 
@@ -210,28 +210,47 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class AllAssets extends JavaPlugin {
 
-	/* Messages  */
-	public final static String TITLE = ChatColor.BLUE + "[" + ChatColor.AQUA + "AllAssets" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
-	public final static String SHORT_TITLE = ChatColor.BLUE + "[" + ChatColor.AQUA + "AA" + ChatColor.BLUE + "]" + ChatColor.WHITE + " ";
-	public final static String NO_COLOR_TITLE = "[AllAssets] ";
-	public final static String SHORT_NO_COLOR_TITLE = "[AA] ";
-	public final static String ERROR = ChatColor.DARK_RED + "[" + ChatColor.RED + "AllAssets" + ChatColor.DARK_RED + "]" + ChatColor.RED + " ";
-	public final static String HOUSE_STYLE_COLOR = ChatColor.AQUA + "";
-	public final static String ACCENT_COLOR = ChatColor.WHITE + "";
-
-	/* Vault variables */
-	public boolean hasVault = false;
-	public Economy economy = null;
-	public Permission permission = null;
-	public Chat chat = null;
-
-	/* Other stuff */
-	public CommandFramework framework;
-	public Map<UUID, Long> tempTimeMap;
-	public ComphenixsGhostFactory ghostFactory;
-
 	/* The master switch - used for debug purposes*/
 	public static boolean masterSwitch = false;
+	public Chat chat = null;
+	public Economy economy = null;
+	/* Other stuff */
+	public CommandFramework framework;
+
+	public ComphenixsGhostFactory ghostFactory;
+	/* Vault variables */
+	public boolean hasVault = false;
+	public Permission permission = null;
+
+	public Map<UUID, Long> tempTimeMap;
+
+	/** Returns the storage folder for player data */
+	public static File getPlayerStorage() {
+		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
+		if (!file.exists())
+			file.mkdirs();
+		return file;
+	}
+
+	/** Returns the storage folder for storing data */
+	public static File getStorage() {
+		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
+		if (!file.exists())
+			file.mkdirs();
+		return file;
+	}
+	
+	/** Returns the storage folder to backing up worlds */
+	public static File getWorldStorage() {
+		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
+		if (!file.exists())
+			file.mkdirs();
+		return file;
+	}
+	
+	public static AllAssets instance() {
+		return JavaPlugin.getPlugin(AllAssets.class);
+	}
 
 	/** Dev block - runs devvy stuff
 	 * 
@@ -245,28 +264,38 @@ public class AllAssets extends JavaPlugin {
 			new VaultReflection().loadAAEco();
 	}
 
-	//best command ever :D (yes, the dollar sign IS NECESSARY!)
-	//$firework SXRlbVN0YWNrOgogID09OiBvcmcuYnVra2l0LmludmVudG9yeS5JdGVtU3RhY2sKICB0eXBlOiBGSVJFV09SSwogIG1ldGE6CiAgICA9PTogSXRlbU1ldGEKICAgIG1ldGEtdHlwZTogRklSRVdPUksKICAgIGZpcmV3b3JrLWVmZmVjdHM6CiAgICAtID09OiBGaXJld29yawogICAgICBmbGlja2VyOiBmYWxzZQogICAgICB0cmFpbDogdHJ1ZQogICAgICBjb2xvcnM6CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAyNDAKICAgICAgICBCTFVFOiAyNDAKICAgICAgICBHUkVFTjogMjQwCiAgICAgIGZhZGUtY29sb3JzOgogICAgICAtID09OiBDb2xvcgogICAgICAgIFJFRDogMTc5CiAgICAgICAgQkxVRTogNDQKICAgICAgICBHUkVFTjogNDkKICAgICAgLSA9PTogQ29sb3IKICAgICAgICBSRUQ6IDM3CiAgICAgICAgQkxVRTogMTQ2CiAgICAgICAgR1JFRU46IDQ5CiAgICAgIC0gPT06IENvbG9yCiAgICAgICAgUkVEOiAxNzEKICAgICAgICBCTFVFOiAxNzEKICAgICAgICBHUkVFTjogMTcxCiAgICAgIHR5cGU6IEJBTExfTEFSR0UKw
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+		return framework.handleCommand(sender, label, command, args);
+	}
 
 	@Override
-	public void onLoad() {
-		getLogger().info("+---------------------------------+");
-		getLogger().info("Preparing AllAssets for enabling...");
-		tempTimeMap = new HashMap<UUID, Long>();
-		framework = new CommandFramework(this);
-		new ConfigHandler();
-		getLogger().info("+---------------------------------+");
+	public void onDisable() {
+		PlayerData.saveAllPlayers();
+		CommandConsoleLog.players.clear();
+		getServer().getScheduler().cancelTasks(this);
 
+		if (!tempTimeMap.isEmpty())
+			try {
+				FileUtils.save(tempTimeMap, new File(getStorage(), "tempTimeMap.bin"));
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+
+		for (final Player player : Bukkit.getOnlinePlayers())
+			if (CommandDiscoArmor.hasArmor(player))
+				CommandDiscoArmor.toggleArmor(player);
+		getLogger().info(Strings.NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
-	
-	@SuppressWarnings("deprecation")
+
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
 		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
 
 		/* Some names will be removed - depends on whatever is in the Libs package */
-		getLogger().info("AllAssets, created by Skepter and tundraboy44");
+		getLogger().info("AllAssets, created by Skepter and Tundra");
 		//getLogger().info("Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 
 		if (!new File(getDataFolder(), "Read me.txt").exists())
@@ -468,13 +497,13 @@ public class AllAssets extends JavaPlugin {
 		/* Update tempTimeMap.bin file */
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
-				FileUtils.load(new File(getStorage(), "tempTimeMap.bin"));
+				tempTimeMap = (Map<UUID, Long>) FileUtils.load(new File(getStorage(), "tempTimeMap.bin"));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
-		getLogger().info(NO_COLOR_TITLE + "AllAssets has been enabled successfully");
-		Bukkit.broadcast(TITLE + "Plugin reloaded!", "AllAssets.allassets");
+		getLogger().info(Strings.NO_COLOR_TITLE + "AllAssets has been enabled successfully");
+		Bukkit.broadcast(Strings.TITLE + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
 		
 		/* Post load stuff */
@@ -482,7 +511,18 @@ public class AllAssets extends JavaPlugin {
 			dev(true);
 		postLoad();
 	}
-	
+
+	@Override
+	public void onLoad() {
+		getLogger().info("+---------------------------------+");
+		getLogger().info("Preparing AllAssets for enabling...");
+		tempTimeMap = new HashMap<UUID, Long>();
+		framework = new CommandFramework(this);
+		new ConfigHandler();
+		getLogger().info("+---------------------------------+");
+
+	}
+
 	public void postLoad() {
 
 	}
@@ -492,36 +532,8 @@ public class AllAssets extends JavaPlugin {
 		if (masterSwitch)
 			for (final Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)
-					getLogger().info(SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
+					getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
-	}
-
-	@Override
-	public void onDisable() {
-		PlayerData.saveAllPlayers();
-		CommandConsoleLog.players.clear();
-		getServer().getScheduler().cancelTasks(this);
-
-		if (!tempTimeMap.isEmpty())
-			try {
-				FileUtils.save(tempTimeMap, new File(getStorage(), "tempTimeMap.bin"));
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-
-		for (final Player player : Bukkit.getOnlinePlayers())
-			if (CommandDiscoArmor.hasArmor(player))
-				CommandDiscoArmor.toggleArmor(player);
-		getLogger().info(NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
-	}
-
-	public static AllAssets instance() {
-		return JavaPlugin.getPlugin(AllAssets.class);
-	}
-
-	@Override
-	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		return framework.handleCommand(sender, label, command, args);
 	}
 
 	private void setupVault() {
@@ -540,23 +552,5 @@ public class AllAssets extends JavaPlugin {
 			chat = chatProvider.getProvider();
 			getLogger().info("Vault Chat system hooked");
 		}
-	}
-
-	/** Returns the storage folder for storing data */
-	public static File getStorage() {
-		return new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
-	}
-
-	/** Returns the storage folder for player data */
-	public static File getPlayerStorage() {
-		return new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
-	}
-
-	/** Returns the storage folder to backing up worlds */
-	public static File getWorldStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
 	}
 }

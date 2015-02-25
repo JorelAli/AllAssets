@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Misc.EnchantmentInventories;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.Map;
@@ -111,7 +111,7 @@ public class CommandEnchant implements Listener {
 			final Map<Enchantment, Integer> eMap = event.getInventory().getItem(event.getSlot()).getItemMeta().getEnchants();
 			player.getItemInHand().addUnsafeEnchantments(eMap);
 			player.closeInventory();
-			player.sendMessage(AllAssets.TITLE + "You successfully enchanted your item in your hand");
+			player.sendMessage(Strings.TITLE + "You successfully enchanted your item in your hand");
 		}
 	}
 }

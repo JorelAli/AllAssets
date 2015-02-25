@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Serializers.ItemSerializer;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.LocationUtils;
 
@@ -75,7 +75,7 @@ public class CommandCommandBlock implements Listener {
 				block.setCommand("$firework " + ItemSerializer.toString(event.getPlayer().getItemInHand()));
 				block.update(true);
 				event.getPlayer().closeInventory();
-				event.getPlayer().sendMessage(AllAssets.TITLE + "Added firework to commandblock");
+				event.getPlayer().sendMessage(Strings.TITLE + "Added firework to commandblock");
 			}
 		}
 	}

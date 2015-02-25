@@ -37,6 +37,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
@@ -61,10 +62,10 @@ public class CommandGhost {
 		case 0:
 			if (AllAssets.instance().ghostFactory.isGhost(player)) {
 				AllAssets.instance().ghostFactory.setGhost(player, false);
-				player.sendMessage(AllAssets.TITLE + "Ghost mode disabled");
+				player.sendMessage(Strings.TITLE + "Ghost mode disabled");
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(player, true);
-				player.sendMessage(AllAssets.TITLE + "Ghost mode enabled");
+				player.sendMessage(Strings.TITLE + "Ghost mode enabled");
 			}
 			return;
 		case 1:
@@ -74,10 +75,10 @@ public class CommandGhost {
 			}
 			if (AllAssets.instance().ghostFactory.isGhost(target)) {
 				AllAssets.instance().ghostFactory.setGhost(target, false);
-				target.sendMessage(AllAssets.TITLE + "Ghost mode disabled");
+				target.sendMessage(Strings.TITLE + "Ghost mode disabled");
 			} else {
 				AllAssets.instance().ghostFactory.setGhost(target, true);
-				target.sendMessage(AllAssets.TITLE + "Ghost mode enabled");
+				target.sendMessage(Strings.TITLE + "Ghost mode enabled");
 			}
 			return;
 		}

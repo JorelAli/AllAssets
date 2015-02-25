@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
@@ -70,10 +70,10 @@ public class CommandSilence implements Listener {
 
 		if (players.contains(player.getUniqueId())) {
 			players.remove(player.getUniqueId());
-			args.getSender().sendMessage(AllAssets.TITLE + player.getName() + " is no longer silenced");
+			args.getSender().sendMessage(Strings.TITLE + player.getName() + " is no longer silenced");
 		} else {
 			players.add(player.getUniqueId());
-			args.getSender().sendMessage(AllAssets.TITLE + player.getName() + " is now silenced");
+			args.getSender().sendMessage(Strings.TITLE + player.getName() + " is now silenced");
 		}
 		return;
 	}

@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -93,7 +93,7 @@ public class CommandChestSearch {
 					if (chest.getInventory().containsAtLeast(new ItemStack(i), 1))
 						locatedChests.add(chest.getLocation());
 				}
-			player.sendMessage(AllAssets.TITLE + "Located " + (locatedChests.size()) + " chests");
+			player.sendMessage(Strings.TITLE + "Located " + (locatedChests.size()) + " chests");
 			for (final Location loc : locatedChests)
 				player.sendMessage(TextUtils.subTitle("X: " + loc.getX() + " Y: " + loc.getY() + " Z: " + loc.getZ()));
 		}

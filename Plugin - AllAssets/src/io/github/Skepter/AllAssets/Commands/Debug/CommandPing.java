@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Debug;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Player;
@@ -58,7 +58,7 @@ public class CommandPing {
 			return;
 		}
 		final User user = new User(player);
-		user.getPlayer().sendMessage(AllAssets.TITLE + "Your ping is " + user.getPing() + "ms");
+		user.getPlayer().sendMessage(Strings.TITLE + "Your ping is " + user.getPing() + "ms");
 		return;
 	}
 }

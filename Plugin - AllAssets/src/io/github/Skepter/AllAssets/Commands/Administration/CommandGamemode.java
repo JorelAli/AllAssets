@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -121,7 +121,7 @@ public class CommandGamemode {
 
 	private void doGameMode(final Player player, final String s) {
 		player.setGameMode(parseGameMode(s));
-		player.sendMessage(AllAssets.TITLE + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name().toLowerCase()));
+		player.sendMessage(Strings.TITLE + "Changed gamemode to " + TextUtils.capitalize(parseGameMode(s).name().toLowerCase()));
 	}
 
 	private GameMode parseGameMode(final String s) {

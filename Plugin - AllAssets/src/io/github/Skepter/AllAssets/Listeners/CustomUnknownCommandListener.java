@@ -31,8 +31,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Listeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Libs.FancyMessage;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ public class CustomUnknownCommandListener implements Listener {
 		if ((Bukkit.getHelpMap().getHelpTopic(msg) == null) && !TextUtils.arrayContains(excludedCommands, msg)) {
 			if ((searchWithTuncater(msg) != null) && !searchWithTuncater(msg).isEmpty()) {
 				e.setCancelled(true);
-				new FancyMessage(AllAssets.TITLE + "Unknown command. Did you mean: ").then(AllAssets.HOUSE_STYLE_COLOR + searchWithTuncater(msg)).tooltip(AllAssets.HOUSE_STYLE_COLOR + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
+				new FancyMessage(Strings.TITLE + "Unknown command. Did you mean: ").then(Strings.HOUSE_STYLE_COLOR + searchWithTuncater(msg)).tooltip(Strings.HOUSE_STYLE_COLOR + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
 			}
 			return;
 		}

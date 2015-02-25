@@ -33,12 +33,12 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -67,8 +67,8 @@ public class CommandBind implements Listener {
 			return;
 		}
 		player.sendMessage(TextUtils.title("Bind help"));
-		player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + "/bind add <command> - adds a command to the binded item");
-		player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + "/bind remove <number> - removes a command to the binded item");
+		player.sendMessage(Strings.HOUSE_STYLE_COLOR + "/bind add <command> - adds a command to the binded item");
+		player.sendMessage(Strings.HOUSE_STYLE_COLOR + "/bind remove <number> - removes a command to the binded item");
 		return;
 	}
 
@@ -90,7 +90,7 @@ public class CommandBind implements Listener {
 		} catch (final Exception e) {
 		}
 		player.setItemInHand(builder.build());
-		player.sendMessage(AllAssets.TITLE + "Successfully added " + lore + "to your item!");
+		player.sendMessage(Strings.TITLE + "Successfully added " + lore + "to your item!");
 		return;
 	}
 
@@ -116,7 +116,7 @@ public class CommandBind implements Listener {
 		if (!containsCommand(player.getItemInHand()))
 			builder.removeGlow();
 		player.setItemInHand(builder.build());
-		player.sendMessage(AllAssets.TITLE + "Successfully removed " + s + "from your item!");
+		player.sendMessage(Strings.TITLE + "Successfully removed " + s + "from your item!");
 		return;
 	}
 

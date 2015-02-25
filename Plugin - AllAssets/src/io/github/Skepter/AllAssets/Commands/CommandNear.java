@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -76,7 +76,7 @@ public class CommandNear {
 		/* Checking for entities */
 		final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
 		if (entities.isEmpty()) {
-			player.sendMessage(AllAssets.TITLE + "No nearby entities could be found!");
+			player.sendMessage(Strings.TITLE + "No nearby entities could be found!");
 			return;
 		}
 
@@ -99,16 +99,16 @@ public class CommandNear {
 			for (final Entry<EntityType, Integer> entry : map.entrySet()) {
 				if (entry.getValue() == 0)
 					continue;
-				player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
+				player.sendMessage(Strings.HOUSE_STYLE_COLOR + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
 				count += entry.getValue();
 			}
-			player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + "Total nearby entities: " + count);
+			player.sendMessage(Strings.HOUSE_STYLE_COLOR + "Total nearby entities: " + count);
 		}
 		if (!entities.isEmpty()) {
 			player.sendMessage(TextUtils.title("Nearby players"));
 			for (final Entity entity : entities) {
 				final Player target = (Player) entity;
-				player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
+				player.sendMessage(Strings.HOUSE_STYLE_COLOR + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
 			}
 		}
 	}

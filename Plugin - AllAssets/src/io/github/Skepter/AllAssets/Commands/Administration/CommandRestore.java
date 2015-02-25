@@ -39,10 +39,11 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
-import io.github.Skepter.AllAssets.Utils.WorldUtils;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.WorldUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class CommandRestore {
 														wUtils.copyWorld(new File(AllAssets.getWorldStorage(), world));
 							//							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(world));
 							Bukkit.getServer().createWorld(new WorldCreator(world));
-							context.getForWhom().sendRawMessage(AllAssets.TITLE + world + " was restored successfully");
+							context.getForWhom().sendRawMessage(Strings.TITLE + world + " was restored successfully");
 						} catch (final Exception e) {
 							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst restoring the world");
 							return;
@@ -134,7 +135,7 @@ public class CommandRestore {
 					}
 				}, 200L);
 			} else
-				context.getForWhom().sendRawMessage(AllAssets.TITLE + "Restoration for " + world + " was cancelled");
+				context.getForWhom().sendRawMessage(Strings.TITLE + "Restoration for " + world + " was cancelled");
 			return Prompt.END_OF_CONVERSATION;
 		}
 

@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Teleportation;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Location;
@@ -62,7 +62,7 @@ public class CommandBack {
 		final Location l = player.getLocation();
 		player.teleport(user.getLastLoc());
 		user.setLastLoc(l);
-		player.sendMessage(AllAssets.TITLE + "Teleported to your last location");
+		player.sendMessage(Strings.TITLE + "Teleported to your last location");
 		return;
 	}
 

@@ -41,6 +41,7 @@ import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.EncryptionUtils;
 import io.github.Skepter.AllAssets.Utils.IDReader;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
@@ -318,9 +319,9 @@ public class CommandDebug implements Listener {
 				conflict++;
 			}
 		}
-		args.getSender().sendMessage(AllAssets.TITLE + "There are " + conflict + " conflicting commands" + (conflict == 0 ? "" : " - Conflicting plugins:"));
+		args.getSender().sendMessage(Strings.TITLE + "There are " + conflict + " conflicting commands" + (conflict == 0 ? "" : " - Conflicting plugins:"));
 		for (final String s : conflictingPlugins)
-			args.getSender().sendMessage(AllAssets.HOUSE_STYLE_COLOR + s);
+			args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + s);
 	}
 
 	boolean physics = true;
@@ -329,10 +330,10 @@ public class CommandDebug implements Listener {
 	public void stopPhysics(final CommandArgs args) {
 		if (physics) {
 			physics = false;
-			Bukkit.broadcastMessage(AllAssets.TITLE + "Paused server physics");
+			Bukkit.broadcastMessage(Strings.TITLE + "Paused server physics");
 		} else {
 			physics = true;
-			Bukkit.broadcastMessage(AllAssets.TITLE + "Resumed server physics");
+			Bukkit.broadcastMessage(Strings.TITLE + "Resumed server physics");
 		}
 	}
 
@@ -342,10 +343,10 @@ public class CommandDebug implements Listener {
 	public void toggleExplosions(final CommandArgs args) {
 		if (explosions) {
 			explosions = false;
-			Bukkit.broadcastMessage(AllAssets.TITLE + "Explosions have been turned off");
+			Bukkit.broadcastMessage(Strings.TITLE + "Explosions have been turned off");
 		} else {
 			explosions = true;
-			Bukkit.broadcastMessage(AllAssets.TITLE + "Explosions have been turned on");
+			Bukkit.broadcastMessage(Strings.TITLE + "Explosions have been turned on");
 		}
 	}
 

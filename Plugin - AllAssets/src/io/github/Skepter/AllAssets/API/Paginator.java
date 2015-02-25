@@ -31,8 +31,8 @@ package io.github.Skepter.AllAssets.API;
 
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.WHITE;
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.Utils.Debugger;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 import java.util.ArrayList;
@@ -112,7 +112,7 @@ public class Paginator {
 
 		shownPageNumber = pageNumberToShow;
 
-		sender.sendMessage(AllAssets.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + maxPageNumber);
+		sender.sendMessage(Strings.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + maxPageNumber);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 	}

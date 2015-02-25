@@ -33,11 +33,11 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -64,25 +64,25 @@ public class CommandTime {
 				if (!TextUtils.isInteger(args.getArgs()[0]))
 					ErrorUtils.notAnInteger(args.getSender());
 				time = Integer.parseInt(args.getArgs()[0]);
-				args.getSender().sendMessage(AllAssets.TITLE + "Time set to " + args.getArgs()[0]);
+				args.getSender().sendMessage(Strings.TITLE + "Time set to " + args.getArgs()[0]);
 				return;
 			} catch (final NumberFormatException e) {
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "day":
 					time = 1000;
-					args.getSender().sendMessage(AllAssets.TITLE + "Time set to day");
+					args.getSender().sendMessage(Strings.TITLE + "Time set to day");
 					break;
 				case "midday":
 					time = 6000;
-					args.getSender().sendMessage(AllAssets.TITLE + "Time set to midday");
+					args.getSender().sendMessage(Strings.TITLE + "Time set to midday");
 					break;
 				case "night":
 					time = 14000;
-					args.getSender().sendMessage(AllAssets.TITLE + "Time set to night");
+					args.getSender().sendMessage(Strings.TITLE + "Time set to night");
 					break;
 				case "midnight":
 					time = 18000;
-					args.getSender().sendMessage(AllAssets.TITLE + "Time set to midnight");
+					args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
 					break;
 				default:
 					ErrorUtils.error(args.getSender(), "Couldn't set the time!");
@@ -100,28 +100,28 @@ public class CommandTime {
 	public void onCommandDay(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(1000);
-		args.getSender().sendMessage(AllAssets.TITLE + "Time set to day");
+		args.getSender().sendMessage(Strings.TITLE + "Time set to day");
 	}
 
 	@CommandHandler(name = "midday", permission = "time", description = "Sets the time to midday", isListed = false)
 	public void onCommandMidday(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(6000);
-		args.getSender().sendMessage(AllAssets.TITLE + "Time set to midday");
+		args.getSender().sendMessage(Strings.TITLE + "Time set to midday");
 	}
 
 	@CommandHandler(name = "night", permission = "time", description = "Sets the time to night", isListed = false)
 	public void onCommandNight(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(14000);
-		args.getSender().sendMessage(AllAssets.TITLE + "Time set to night");
+		args.getSender().sendMessage(Strings.TITLE + "Time set to night");
 	}
 
 	@CommandHandler(name = "midnight", permission = "time", description = "Sets the time to midnight", isListed = false)
 	public void onCommandMidnight(final CommandArgs args) {
 		for (final World world : Bukkit.getWorlds())
 			world.setTime(18000);
-		args.getSender().sendMessage(AllAssets.TITLE + "Time set to midnight");
+		args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
 	}
 
 	@Completer(name = "time")

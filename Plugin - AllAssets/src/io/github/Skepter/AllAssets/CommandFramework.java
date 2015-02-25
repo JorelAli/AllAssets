@@ -31,6 +31,7 @@ package io.github.Skepter.AllAssets;
 
 import io.github.Skepter.AllAssets.Commands.CommandHelp;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.lang.annotation.ElementType;
@@ -78,7 +79,7 @@ public class CommandFramework {
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
 	private CommandMap map;
 	private final Plugin plugin;
-	private final String noPerm = AllAssets.ERROR + "You do not have permission to perform that action";
+	private final String noPerm = Strings.ERROR + "You do not have permission to perform that action";
 	public static Set<CommandHandler> pluginCommands = new HashSet<CommandHandler>();
 	private final Set<String> cmds = new HashSet<String>();
 
@@ -126,7 +127,7 @@ public class CommandFramework {
 					final long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
 					if (ConfigHandler.config().getBoolean("debugMode") || AllAssets.masterSwitch)
-						sender.sendMessage(AllAssets.TITLE + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
+						sender.sendMessage(Strings.TITLE + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
 				} catch (final Exception e) {
 					e.printStackTrace();
 				}
@@ -189,7 +190,7 @@ public class CommandFramework {
 		commandMap.put(label.toLowerCase(), entry);
 		if (AllAssets.masterSwitch && !cmds.contains(command.name())) {
 			cmds.add(command.name());
-			Bukkit.getLogger().info(AllAssets.SHORT_NO_COLOR_TITLE + "Added command: /" + command.name().replace(".", " "));
+			Bukkit.getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added command: /" + command.name().replace(".", " "));
 		}
 		if (command.isListed())
 			pluginCommands.add(command);

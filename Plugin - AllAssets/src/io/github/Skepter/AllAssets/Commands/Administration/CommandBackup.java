@@ -38,6 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
@@ -85,7 +86,7 @@ public class CommandBackup {
 				for (final File file : AllAssets.getWorldStorage().listFiles())
 					if (file.isDirectory())
 						if (file.getName().equals(world.getName())) {
-							args.getSender().sendMessage(AllAssets.TITLE + "There is already a backup for " + world.getName() + ", backing it up again will lose the previous backup");
+							args.getSender().sendMessage(Strings.TITLE + "There is already a backup for " + world.getName() + ", backing it up again will lose the previous backup");
 							new YesNoConversation(args.getSender(), new BackupPrompt(w), "Do you want to continue?");
 							return;
 						} else
@@ -95,7 +96,7 @@ public class CommandBackup {
 					public void run() {
 						try {
 							FileUtils.copyDirectory(w.getWorldFolder(), new File(AllAssets.getWorldStorage(), w.getName()));
-							args.getSender().sendMessage(AllAssets.TITLE + w.getName() + " was backed up successfully ");
+							args.getSender().sendMessage(Strings.TITLE + w.getName() + " was backed up successfully ");
 						} catch (final IOException e) {
 							ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
 							return;
@@ -143,9 +144,9 @@ public class CommandBackup {
 						}
 					}
 				});
-				context.getForWhom().sendRawMessage(AllAssets.TITLE + world.getName() + " was backed up successfully");
+				context.getForWhom().sendRawMessage(Strings.TITLE + world.getName() + " was backed up successfully");
 			} else
-				context.getForWhom().sendRawMessage(AllAssets.TITLE + " Back up for " + world.getName() + " was cancelled");
+				context.getForWhom().sendRawMessage(Strings.TITLE + " Back up for " + world.getName() + " was cancelled");
 			return Prompt.END_OF_CONVERSATION;
 		}
 

@@ -1,6 +1,7 @@
 package io.github.Skepter.AllAssets.API;
 
 import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.Utils.Strings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class PlayerRequest {
 	public PlayerRequest(Player from, Player to, String information, long timeout) {
 		hasExpired = false;
 		if (timeout != -1) {
-			from.sendMessage(AllAssets.TITLE + "Your request will expire in " + (timeout / 1000) + " seconds");
+			from.sendMessage(Strings.TITLE + "Your request will expire in " + (timeout / 1000) + " seconds");
 			Bukkit.getScheduler().runTaskLater(AllAssets.instance(), new Runnable() {
 				@Override
 				public void run() {
@@ -57,7 +58,7 @@ public class PlayerRequest {
 	}
 
 	public static String getPromptText() {
-		return AllAssets.TITLE + AllAssets.HOUSE_STYLE_COLOR + sender + " has requested to " + information + " Say" + ChatColor.GREEN + "yes " + AllAssets.HOUSE_STYLE_COLOR + "to continue or " + ChatColor.RED + "no " + AllAssets.HOUSE_STYLE_COLOR + "to cancel";
+		return Strings.TITLE + Strings.HOUSE_STYLE_COLOR + sender + " has requested to " + information + " Say" + ChatColor.GREEN + "yes " + Strings.HOUSE_STYLE_COLOR + "to continue or " + ChatColor.RED + "no " + Strings.HOUSE_STYLE_COLOR + "to cancel";
 	}
 
 	public boolean hasAccepted() {
@@ -137,18 +138,18 @@ public class PlayerRequest {
 				final Player from = Bukkit.getPlayer(playerMap.get(player.getUniqueId()));
 
 				if (hasExpired) {
-					from.sendMessage(AllAssets.TITLE + "Your request has expired");
+					from.sendMessage(Strings.TITLE + "Your request has expired");
 					return Prompt.END_OF_CONVERSATION;
 				}
 				hasAccepted = true;
 				final Event playerRequestEvent = new PlayerRequestEvent(getRequest(), from, player, b);
 				Bukkit.getServer().getPluginManager().callEvent(playerRequestEvent);
 				if (b) {
-					context.getForWhom().sendRawMessage(AllAssets.TITLE + "You have accepted the request");
-					from.sendMessage(AllAssets.TITLE + player.getName() + " has accepted your request");
+					context.getForWhom().sendRawMessage(Strings.TITLE + "You have accepted the request");
+					from.sendMessage(Strings.TITLE + player.getName() + " has accepted your request");
 				} else {
-					context.getForWhom().sendRawMessage(AllAssets.TITLE + "You have declined the request");
-					from.sendMessage(AllAssets.TITLE + player.getName() + " has declined your request");
+					context.getForWhom().sendRawMessage(Strings.TITLE + "You have declined the request");
+					from.sendMessage(Strings.TITLE + player.getName() + " has declined your request");
 				}
 			}
 			return Prompt.END_OF_CONVERSATION;

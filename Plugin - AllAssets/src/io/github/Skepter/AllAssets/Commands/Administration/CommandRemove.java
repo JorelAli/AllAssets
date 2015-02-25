@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -73,7 +73,7 @@ public class CommandRemove {
 					count++;
 				}
 			}
-			player.sendMessage(AllAssets.TITLE + count + (count == 1 ? " item removed" : " items removed"));
+			player.sendMessage(Strings.TITLE + count + (count == 1 ? " item removed" : " items removed"));
 			return;
 		case 1:
 			if (TextUtils.isInteger(args.getArgs()[0])) {
@@ -84,7 +84,7 @@ public class CommandRemove {
 						e.remove();
 					count2++;
 				}
-				player.sendMessage(AllAssets.TITLE + count2 + (count2 == 1 ? " item removed" : " items removed"));
+				player.sendMessage(Strings.TITLE + count2 + (count2 == 1 ? " item removed" : " items removed"));
 				return;
 			} else {
 				ErrorUtils.notAnInteger(args.getSender());

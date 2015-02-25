@@ -33,13 +33,13 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.Paginator;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class CommandAllAssets {
 		final Paginator p = new Paginator(commandList, 12);
 		p.send(args.getSender(), arg);
 		//TextUtils.paginate(args.getSender(), commandList, 12, arg);
-		args.getSender().sendMessage(AllAssets.TITLE + "Use /allassets commands <page number> to go to the next page");
+		args.getSender().sendMessage(Strings.TITLE + "Use /allassets commands <page number> to go to the next page");
 		return;
 	}
 
@@ -82,7 +82,7 @@ public class CommandAllAssets {
 	public void reload(final CommandArgs args) {
 		ConfigHandler.config().reloadConfig();
 		ConfigHandler.features().reloadConfig();
-		args.getSender().sendMessage(AllAssets.TITLE + "Configuration reloaded");
+		args.getSender().sendMessage(Strings.TITLE + "Configuration reloaded");
 		//		args.getSender().sendMessage(AllAssets.title + "Reloading...");
 		//		/* We're currently in dev and dev file name isn't the same as the released name */
 		//		final File devPluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets.jar");

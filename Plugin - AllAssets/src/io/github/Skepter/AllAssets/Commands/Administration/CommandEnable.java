@@ -33,10 +33,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Commands.Administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Bukkit;
@@ -51,7 +51,7 @@ public class CommandEnable {
 	public void onCommand(final CommandArgs args) {
 		try {
 			Bukkit.getPluginManager().enablePlugin(Bukkit.getPluginManager().getPlugin(args.getArgs()[0]));
-			args.getSender().sendMessage(AllAssets.TITLE + "Plugin enabled successfully");
+			args.getSender().sendMessage(Strings.TITLE + "Plugin enabled successfully");
 		} catch (final Exception e) {
 			ErrorUtils.pluginNotFound(args.getSender(), args.getArgs()[0]);
 		}

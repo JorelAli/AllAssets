@@ -37,6 +37,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Player;
@@ -57,6 +58,6 @@ public class CommandBalance {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		player.sendMessage(AllAssets.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
+		player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
 	}
 }

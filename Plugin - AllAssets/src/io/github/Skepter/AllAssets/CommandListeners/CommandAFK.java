@@ -35,6 +35,7 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Bukkit;
@@ -62,10 +63,10 @@ public class CommandAFK implements Listener {
 		}
 		final User user = new User(player);
 		if (!user.isAFK()) {
-			AllAssets.instance().getServer().broadcastMessage(AllAssets.TITLE + player.getName() + " is now AFK");
+			AllAssets.instance().getServer().broadcastMessage(Strings.TITLE + player.getName() + " is now AFK");
 			user.setAFK(true);
 		} else {
-			AllAssets.instance().getServer().broadcastMessage(AllAssets.TITLE + player.getName() + " is no longer AFK");
+			AllAssets.instance().getServer().broadcastMessage(Strings.TITLE + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 		return;
@@ -79,7 +80,7 @@ public class CommandAFK implements Listener {
 			if (new User(player).isAFK())
 				builder.append(player.getName() + ", ");
 		if (!builder.toString().isEmpty())
-			event.getPlayer().sendMessage(AllAssets.TITLE + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
+			event.getPlayer().sendMessage(Strings.TITLE + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
 	}
 
 	@EventHandler
@@ -99,7 +100,7 @@ public class CommandAFK implements Listener {
 		final Player player = event.getPlayer();
 		final User user = new User(player);
 		if (user.isAFK()) {
-			AllAssets.instance().getServer().broadcastMessage(AllAssets.TITLE + player.getName() + " is no longer AFK");
+			AllAssets.instance().getServer().broadcastMessage(Strings.TITLE + player.getName() + " is no longer AFK");
 			user.setAFK(false);
 		}
 	}

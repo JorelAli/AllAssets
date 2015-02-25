@@ -37,6 +37,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -82,7 +83,7 @@ public class CommandBalancetop {
 		player.sendMessage(TextUtils.title("Top balances"));
 		final List<String> balanceList = new ArrayList<String>();
 		for (final Entry<String, Double> e : sortedMap.entrySet())
-			balanceList.add(AllAssets.HOUSE_STYLE_COLOR + e.getKey() + ": " + e.getValue());
+			balanceList.add(Strings.HOUSE_STYLE_COLOR + e.getKey() + ": " + e.getValue());
 		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);
 			return;

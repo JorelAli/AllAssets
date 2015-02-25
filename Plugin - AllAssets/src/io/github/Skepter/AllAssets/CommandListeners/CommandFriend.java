@@ -29,7 +29,6 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.CommandListeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
@@ -38,6 +37,7 @@ import io.github.Skepter.AllAssets.API.OfflineUser;
 import io.github.Skepter.AllAssets.API.PlayerRequest;
 import io.github.Skepter.AllAssets.API.PlayerRequest.PlayerRequestEvent;
 import io.github.Skepter.AllAssets.API.User;
+import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.Utils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
@@ -82,7 +82,7 @@ public class CommandFriend implements Listener{
 		List<UUID> friends = user.getFriendList();
 		for(UUID u : friends) {
 			OfflineUser offlineFriend = new OfflineUser(u);
-			player.sendMessage(AllAssets.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " +  offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
+			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " +  offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
 		}		
 	}
 	
