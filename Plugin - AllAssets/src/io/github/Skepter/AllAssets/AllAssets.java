@@ -42,6 +42,7 @@ import io.github.Skepter.AllAssets.CommandListeners.CommandGod;
 import io.github.Skepter.AllAssets.CommandListeners.CommandSilence;
 import io.github.Skepter.AllAssets.CommandListeners.CommandStaffChat;
 import io.github.Skepter.AllAssets.Commands.CommandClear;
+import io.github.Skepter.AllAssets.Commands.CommandEnderchest;
 import io.github.Skepter.AllAssets.Commands.CommandGhost;
 import io.github.Skepter.AllAssets.Commands.CommandGlow;
 import io.github.Skepter.AllAssets.Commands.CommandGrief;
@@ -71,7 +72,6 @@ import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandNMSGod;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandOplist;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandRemove;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandSetSpawn;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSignEdit;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandSpawnItem;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandTime;
@@ -86,6 +86,7 @@ import io.github.Skepter.AllAssets.Commands.Fun.CommandFakeDeop;
 import io.github.Skepter.AllAssets.Commands.Fun.CommandFakeOp;
 import io.github.Skepter.AllAssets.Commands.Fun.CommandLaunch;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandBack;
+import io.github.Skepter.AllAssets.Commands.Teleportation.CommandSetSpawn;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandSpawn;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTp;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTphere;
@@ -211,6 +212,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * 
  * clean up configHandler - it's so damn freaking messy!
  */
+@SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
 
 	/* The master switch - used for debug purposes*/
@@ -268,7 +270,7 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info(Strings.NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
 
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
@@ -336,10 +338,12 @@ public class AllAssets extends JavaPlugin {
 			new CommandDisable(framework);
 		if (ConfigHandler.features().getBoolean("DiscoArmor"))
 			new CommandDiscoArmor(framework);
-		if (ConfigHandler.features().getBoolean("Enchant"))
-			r(new CommandEnchant(framework));
 		if (ConfigHandler.features().getBoolean("Enable"))
 			new CommandEnable(framework);
+		if (ConfigHandler.features().getBoolean("Enchant"))
+			r(new CommandEnchant(framework));
+		if (ConfigHandler.features().getBoolean("Enderchest"))
+			new CommandEnderchest(framework);
 		if (ConfigHandler.features().getBoolean("Extinguish"))
 			new CommandExtinguish(framework);
 		if (ConfigHandler.features().getBoolean("FakeDeop"))

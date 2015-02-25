@@ -34,11 +34,11 @@
 package io.github.Skepter.AllAssets.Commands.Teleportation;
 
 import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
+import io.github.Skepter.AllAssets.API.User;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -51,18 +51,14 @@ public class CommandBack {
 
 	@CommandHandler(name = "back", aliases = { "lastloc" }, permission = "back", description = "Teleports you to your last location")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			final User user = new User(player);
+			final Location l = player.getLocation();
+			player.teleport(user.getLastLoc());
+			user.setLastLoc(l);
+			player.sendMessage(Strings.TITLE + "Teleported to your last location");
 		}
-		final User user = new User(player);
-		final Location l = player.getLocation();
-		player.teleport(user.getLastLoc());
-		user.setLastLoc(l);
-		player.sendMessage(Strings.TITLE + "Teleported to your last location");
 		return;
 	}
 

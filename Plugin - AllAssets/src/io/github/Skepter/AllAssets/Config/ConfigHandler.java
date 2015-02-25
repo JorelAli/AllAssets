@@ -145,6 +145,7 @@ public class ConfigHandler {
 		features.set("DiscoArmor", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
+		features.set("Enderchest", "true");
 		features.set("Extinguish", "true");
 		features.set("FakeDeop", "true");
 		features.set("FakeOp", "true");

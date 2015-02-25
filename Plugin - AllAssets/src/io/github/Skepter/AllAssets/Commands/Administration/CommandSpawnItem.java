@@ -30,11 +30,12 @@
 package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
+import io.github.Skepter.AllAssets.Misc.Help;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
@@ -59,34 +60,30 @@ public class CommandSpawnItem {
 
 	@CommandHandler(name = "spawnitem", aliases = { "si" }, permission = "spawnitem", description = "Spawns a custom item")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+
+			switch (args.getArgs().length) {
+			case 0:
+				printHelp(player);
+				break;
+			case 1:
+				ItemStack is = getItem(args.getArgs()[0]);
+				if (is != null) {
+					player.setItemInHand(is);
+					player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
+				} else
+					ErrorUtils.error(player, "Item not found");
+				return;
+
+			}
 			return;
 		}
-
-		switch (args.getArgs().length) {
-		case 0:
-			printHelp(player);
-			break;
-		case 1:
-			ItemStack is = getItem(args.getArgs()[0]);
-			if (is != null) {
-				player.setItemInHand(is);
-				player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
-			} else
-				ErrorUtils.error(player, "Item not found");
-			return;
-
-		}
-		return;
 	}
-	
+
 	private ItemStack getItem(String arg) {
-		for(String string : items.keySet()){
-			if(string.equalsIgnoreCase(arg))
+		for (String string : items.keySet()) {
+			if (string.equalsIgnoreCase(arg))
 				return items.get(string);
 		}
 		return null;

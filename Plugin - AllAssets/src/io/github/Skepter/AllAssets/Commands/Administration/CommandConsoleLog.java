@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,20 +55,15 @@ public class CommandConsoleLog {
 
 	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (players.contains(player.getUniqueId())) {
-			players.remove(player.getUniqueId());
-			player.sendMessage(Strings.TITLE + "You are no longer viewing the console");
-		} else {
-			players.add(player.getUniqueId());
-			player.sendMessage(Strings.TITLE + "You are now viewing the console");
-		}
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			if (players.contains(player.getUniqueId())) {
+				players.remove(player.getUniqueId());
+				player.sendMessage(Strings.TITLE + "You are no longer viewing the console");
+			} else {
+				players.add(player.getUniqueId());
+				player.sendMessage(Strings.TITLE + "You are now viewing the console");
+			}
 	}
 
 }

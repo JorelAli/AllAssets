@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.Iterator;
 
@@ -72,31 +72,28 @@ public class CommandButcher {
 			}
 		int count = 0;
 		if (args.isPlayer()) {
-			Player player = null;
-			try {
-				player = args.getPlayer();
-			} catch (final Exception e) {
-				ErrorUtils.playerOnly(args.getSender());
-			}
-			final Iterator<Entity> iterator = player.getWorld().getEntities().iterator();
-			while (iterator.hasNext()) {
-				final Entity entity = iterator.next();
-				if ((entity instanceof LivingEntity) && !(entity instanceof Player)) {
-					if (passive)
-						if (entity instanceof Monster)
-							continue;
-					if (hostile)
-						if (entity instanceof Animals)
-							continue;
-					if (lightning)
-						entity.getWorld().strikeLightningEffect(entity.getLocation());
-					if (explosion)
-						entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
-					entity.remove();
-					count++;
+			Player player = PlayerGetter.getPlayer(args);
+			if (player != null) {
+				final Iterator<Entity> iterator = player.getWorld().getEntities().iterator();
+				while (iterator.hasNext()) {
+					final Entity entity = iterator.next();
+					if ((entity instanceof LivingEntity) && !(entity instanceof Player)) {
+						if (passive)
+							if (entity instanceof Monster)
+								continue;
+						if (hostile)
+							if (entity instanceof Animals)
+								continue;
+						if (lightning)
+							entity.getWorld().strikeLightningEffect(entity.getLocation());
+						if (explosion)
+							entity.getWorld().createExplosion(entity.getLocation(), 0.0F);
+						entity.remove();
+						count++;
+					}
 				}
+				player.sendMessage(Strings.TITLE + count + " entities removed");
 			}
-			player.sendMessage(Strings.TITLE + count + " entities removed");
 		} else
 			for (final World world : Bukkit.getWorlds()) {
 				final Iterator<Entity> iterator = world.getEntities().iterator();

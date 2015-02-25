@@ -37,10 +37,10 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Tasks.DiscoArmorTask;
 import io.github.Skepter.AllAssets.Utils.DoubleMap;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.UUID;
 
@@ -59,22 +59,17 @@ public class CommandDiscoArmor {
 
 	@CommandHandler(name = "discoarmor", aliases = { "darmor", "partyarmor", "parmor" }, permission = "discoarmor", description = "Gives you flashing armor")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		toggleArmor(player);
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			toggleArmor(player);
 		return;
 	}
-	
+
 	/** Checks if the player has disco armor enabled */
 	public static boolean hasArmor(Player player) {
 		return map.containsKey(player.getUniqueId());
 	}
-	
+
 	public static void toggleArmor(Player player) {
 		if (map.containsKey(player.getUniqueId())) {
 			Bukkit.getScheduler().cancelTask((int) map.get(player.getUniqueId(), 1));

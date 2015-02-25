@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
@@ -49,20 +50,16 @@ public class CommandSpawnMob {
 	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob")
 	public void command(final CommandArgs args) {
 		//TODO finish
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			switch (args.getArgs().length) {
+			case 0:
+				return;
+			case 1:
+				return;
+			}
+			ErrorUtils.tooManyArguments(player);
 			return;
 		}
-		switch (args.getArgs().length) {
-		case 0:
-			return;
-		case 1:
-			return;
-		}
-		ErrorUtils.tooManyArguments(player);
-		return;
 	}
 }

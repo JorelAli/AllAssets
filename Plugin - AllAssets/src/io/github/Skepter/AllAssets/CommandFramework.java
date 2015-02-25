@@ -31,6 +31,7 @@ package io.github.Skepter.AllAssets;
 
 import io.github.Skepter.AllAssets.Commands.CommandHelp;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.Skepter.AllAssets.Misc.Help;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 

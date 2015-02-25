@@ -36,8 +36,7 @@ package io.github.Skepter.AllAssets.Commands.Fun;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.Skepter.AllAssets.PlayerGetter;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -50,16 +49,11 @@ public class CommandFakeOp {
 
 	@CommandHandler(name = "fakeop", aliases = { "fop" }, permission = "fakeop", description = "Fakes a player op status")
 	public void onCommand(final CommandArgs args) {
-		Player target = null;
-		try {
-			target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+		if (target != null) {
+			target.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "[" + args.getSender().getName() + ": Opped " + target.getName() + "]");
+			target.sendMessage(ChatColor.YELLOW + "You are now op!");
 		}
-		target.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "[" + args.getSender().getName() + ": Opped " + target.getName() + "]");
-		target.sendMessage(ChatColor.YELLOW + "You are now op!");
-
 		return;
 	}
 

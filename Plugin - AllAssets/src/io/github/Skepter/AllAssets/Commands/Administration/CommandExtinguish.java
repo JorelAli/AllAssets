@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.API.Utils.Sphere;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
@@ -52,34 +53,25 @@ public class CommandExtinguish {
 
 	@CommandHandler(name = "extinguish", aliases = { "ext" }, permission = "extinguish", description = "Extinguishes fires")
 	public void command(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		switch (args.getArgs().length) {
-		case 0:
-			Sphere sphere = new Sphere(player.getLocation(), 120);
-			for (Block b : sphere.getBlocks()) {
-				if (b.getType().equals(Material.FIRE))
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			switch (args.getArgs().length) {
+			case 0:
+				Sphere sphere = new Sphere(player.getLocation(), 120, Material.FIRE);
+				for (Block b : sphere.getBlocks())
 					b.setType(Material.AIR);
-			}
-			return;
-		case 1:
-			if(TextUtils.isInteger(args.getArgs()[0])) {
-				Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]));
-				for (Block b : sphereWithCustomRadius.getBlocks()) {
-					if (b.getType().equals(Material.FIRE))
+				return;
+			case 1:
+				if (TextUtils.isInteger(args.getArgs()[0])) {
+					Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]), Material.FIRE);
+					for (Block b : sphereWithCustomRadius.getBlocks())
 						b.setType(Material.AIR);
-				}
-			} else {
-				ErrorUtils.notAnInteger(args.getSender());
+				} else
+					ErrorUtils.notAnInteger(args.getSender());
+				return;
 			}
-			return;
+			ErrorUtils.tooManyArguments(player);
 		}
-		ErrorUtils.tooManyArguments(player);
 		return;
 	}
 }

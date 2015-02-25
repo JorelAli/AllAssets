@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
@@ -50,23 +51,19 @@ public class CommandGlow {
 
 	@CommandHandler(name = "glow", permission = "glow", description = "Makes the item in your hand glow")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if (!player.getItemInHand().getType().isBlock()) {
+				if (new ItemBuilder(player.getItemInHand()).hasGlow()) {
+					player.setItemInHand(new ItemBuilder(player.getItemInHand()).removeGlow().build());
+					player.sendMessage(Strings.TITLE + "Your item is no longer glowing!");
+				} else {
+					player.setItemInHand(new ItemBuilder(player.getItemInHand()).addGlow().build());
+					player.sendMessage(Strings.TITLE + "Your item is now glowing!");
+				}
+			} else
+				ErrorUtils.error(player, "You cannot make that item glow!");
 		}
-		if (!player.getItemInHand().getType().isBlock()) {
-			if (new ItemBuilder(player.getItemInHand()).hasGlow()) {
-				player.setItemInHand(new ItemBuilder(player.getItemInHand()).removeGlow().build());
-				player.sendMessage(Strings.TITLE + "Your item is no longer glowing!");
-			} else {
-				player.setItemInHand(new ItemBuilder(player.getItemInHand()).addGlow().build());
-				player.sendMessage(Strings.TITLE + "Your item is now glowing!");
-			}
-		} else
-			ErrorUtils.error(player, "You cannot make that item glow!");
 		return;
 	}
 }

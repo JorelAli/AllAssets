@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.Strings;
@@ -52,46 +53,42 @@ public class CommandRemove {
 
 	@CommandHandler(name = "remove", permission = "remove", description = "Removes entities")
 	public void command(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		//remove <radius>
-		//remove <entity> <radius>
-		//remove (all) (120)
-		//remove entity (120)
-		switch (args.getArgs().length) {
-		case 0:
-			//arrow,boat,item
-			int count = 0;
-			for (Entity e : player.getNearbyEntities(120, 120, 120)) {
-				if (e.getType().equals(EntityType.DROPPED_ITEM)) {
-					e.remove();
-					count++;
-				}
-			}
-			player.sendMessage(Strings.TITLE + count + (count == 1 ? " item removed" : " items removed"));
-			return;
-		case 1:
-			if (TextUtils.isInteger(args.getArgs()[0])) {
-				int i = Integer.parseInt(args.getArgs()[0]);
-				int count2 = 0;
-				for (Entity e : player.getNearbyEntities(i, i, i)) {
-					if (e.getType().equals(EntityType.DROPPED_ITEM))
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			//remove <radius>
+			//remove <entity> <radius>
+			//remove (all) (120)
+			//remove entity (120)
+			switch (args.getArgs().length) {
+			case 0:
+				//arrow,boat,item
+				int count = 0;
+				for (Entity e : player.getNearbyEntities(120, 120, 120)) {
+					if (e.getType().equals(EntityType.DROPPED_ITEM)) {
 						e.remove();
-					count2++;
+						count++;
+					}
 				}
-				player.sendMessage(Strings.TITLE + count2 + (count2 == 1 ? " item removed" : " items removed"));
+				player.sendMessage(Strings.TITLE + count + (count == 1 ? " item removed" : " items removed"));
 				return;
-			} else {
-				ErrorUtils.notAnInteger(args.getSender());
+			case 1:
+				if (TextUtils.isInteger(args.getArgs()[0])) {
+					int i = Integer.parseInt(args.getArgs()[0]);
+					int count2 = 0;
+					for (Entity e : player.getNearbyEntities(i, i, i)) {
+						if (e.getType().equals(EntityType.DROPPED_ITEM))
+							e.remove();
+						count2++;
+					}
+					player.sendMessage(Strings.TITLE + count2 + (count2 == 1 ? " item removed" : " items removed"));
+					return;
+				} else {
+					ErrorUtils.notAnInteger(args.getSender());
+				}
+				return;
 			}
+			ErrorUtils.tooManyArguments(player);
 			return;
 		}
-		ErrorUtils.tooManyArguments(player);
-		return;
 	}
 }

@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands.Fun;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
@@ -64,54 +65,50 @@ public class CommandLaunch {
 
 	@CommandHandler(name = "launch", permission = "launch", description = "Launches a projectile")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (!(args.getArgs().length == 1))
-			ErrorUtils.notEnoughArguments(player);
-		switch (args.getArgs()[0].toLowerCase()) {
-		case "arrow":
-			player.launchProjectile(Arrow.class);
-			break;
-		case "egg":
-			player.launchProjectile(Egg.class);
-			break;
-		case "enderpearl":
-			player.launchProjectile(EnderPearl.class);
-			break;
-		case "fireball":
-			player.launchProjectile(Fireball.class);
-			break;
-		case "fish":
-			player.launchProjectile(Fish.class);
-			break;
-		case "largefireball":
-			player.launchProjectile(LargeFireball.class);
-			break;
-		case "smallfireball":
-			player.launchProjectile(SmallFireball.class);
-			break;
-		case "snowball":
-			player.launchProjectile(Snowball.class);
-			break;
-		case "thrownexpbottle":
-			player.launchProjectile(ThrownExpBottle.class);
-			break;
-		case "thrownpotion":
-			player.launchProjectile(ThrownPotion.class);
-			break;
-		case "witherskull":
-			player.launchProjectile(WitherSkull.class);
-			break;
-		case "bluewitherskull":
-			player.launchProjectile(WitherSkull.class).setCharged(true);
-			break;
-		default:
-			break;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if (!(args.getArgs().length == 1))
+				ErrorUtils.notEnoughArguments(player);
+			switch (args.getArgs()[0].toLowerCase()) {
+			case "arrow":
+				player.launchProjectile(Arrow.class);
+				break;
+			case "egg":
+				player.launchProjectile(Egg.class);
+				break;
+			case "enderpearl":
+				player.launchProjectile(EnderPearl.class);
+				break;
+			case "fireball":
+				player.launchProjectile(Fireball.class);
+				break;
+			case "fish":
+				player.launchProjectile(Fish.class);
+				break;
+			case "largefireball":
+				player.launchProjectile(LargeFireball.class);
+				break;
+			case "smallfireball":
+				player.launchProjectile(SmallFireball.class);
+				break;
+			case "snowball":
+				player.launchProjectile(Snowball.class);
+				break;
+			case "thrownexpbottle":
+				player.launchProjectile(ThrownExpBottle.class);
+				break;
+			case "thrownpotion":
+				player.launchProjectile(ThrownPotion.class);
+				break;
+			case "witherskull":
+				player.launchProjectile(WitherSkull.class);
+				break;
+			case "bluewitherskull":
+				player.launchProjectile(WitherSkull.class).setCharged(true);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

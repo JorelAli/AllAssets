@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.Strings;
@@ -57,58 +58,54 @@ public class CommandNear {
 
 	@CommandHandler(name = "near", permission = "near", description = "Shows entities near to you")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		
-		/* Changing lookup distance */
-		int distance = 200;
-		if (args.getArgs().length == 1)
-			if (TextUtils.isInteger(args.getArgs()[0]))
-				distance = Integer.parseInt(args.getArgs()[0]);
-			else
-				ErrorUtils.notAnInteger(player);
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
 
-		/* Checking for entities */
-		final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
-		if (entities.isEmpty()) {
-			player.sendMessage(Strings.TITLE + "No nearby entities could be found!");
-			return;
-		}
+			/* Changing lookup distance */
+			int distance = 200;
+			if (args.getArgs().length == 1)
+				if (TextUtils.isInteger(args.getArgs()[0]))
+					distance = Integer.parseInt(args.getArgs()[0]);
+				else
+					ErrorUtils.notAnInteger(player);
 
-		/* Dump them into a map for easy lookup */
-		final Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
-		while (entities.iterator().hasNext()) {
-			final Entity entity = entities.iterator().next();
-			if (entity instanceof Player)
-				continue;
-			else {
-				map.put(entity.getType(), map.get(entity.getType()) == null ? 1 : map.get(entity.getType()) + 1);
-				entities.remove(entity);
+			/* Checking for entities */
+			final List<Entity> entities = player.getNearbyEntities(distance, distance, distance);
+			if (entities.isEmpty()) {
+				player.sendMessage(Strings.TITLE + "No nearby entities could be found!");
+				return;
 			}
-		}
 
-		/* Print the info */
-		if (!map.isEmpty()) {
-			player.sendMessage(TextUtils.title("Nearby entities"));
-			int count = 0;
-			for (final Entry<EntityType, Integer> entry : map.entrySet()) {
-				if (entry.getValue() == 0)
+			/* Dump them into a map for easy lookup */
+			final Map<EntityType, Integer> map = new TreeMap<EntityType, Integer>();
+			while (entities.iterator().hasNext()) {
+				final Entity entity = entities.iterator().next();
+				if (entity instanceof Player)
 					continue;
-				player.sendMessage(Strings.HOUSE_STYLE_COLOR + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
-				count += entry.getValue();
+				else {
+					map.put(entity.getType(), map.get(entity.getType()) == null ? 1 : map.get(entity.getType()) + 1);
+					entities.remove(entity);
+				}
 			}
-			player.sendMessage(Strings.HOUSE_STYLE_COLOR + "Total nearby entities: " + count);
-		}
-		if (!entities.isEmpty()) {
-			player.sendMessage(TextUtils.title("Nearby players"));
-			for (final Entity entity : entities) {
-				final Player target = (Player) entity;
-				player.sendMessage(Strings.HOUSE_STYLE_COLOR + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
+
+			/* Print the info */
+			if (!map.isEmpty()) {
+				player.sendMessage(TextUtils.title("Nearby entities"));
+				int count = 0;
+				for (final Entry<EntityType, Integer> entry : map.entrySet()) {
+					if (entry.getValue() == 0)
+						continue;
+					player.sendMessage(Strings.HOUSE_STYLE_COLOR + TextUtils.capitalize(entry.getKey().name().toLowerCase().replace("_", " ")) + ": " + entry.getValue());
+					count += entry.getValue();
+				}
+				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "Total nearby entities: " + count);
+			}
+			if (!entities.isEmpty()) {
+				player.sendMessage(TextUtils.title("Nearby players"));
+				for (final Entity entity : entities) {
+					final Player target = (Player) entity;
+					player.sendMessage(Strings.HOUSE_STYLE_COLOR + target.getName() + ": " + target.getLocation().distance(player.getLocation()));
+				}
 			}
 		}
 	}

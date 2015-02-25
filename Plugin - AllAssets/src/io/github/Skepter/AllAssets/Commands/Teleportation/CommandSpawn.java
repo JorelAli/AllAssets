@@ -36,7 +36,7 @@ package io.github.Skepter.AllAssets.Commands.Teleportation;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.PlayerGetter;
 
 import org.bukkit.entity.Player;
 
@@ -48,13 +48,8 @@ public class CommandSpawn {
 
 	@CommandHandler(name = "spawn", permission = "spawn", description = "Teleports to the world spawn")
 	public void command(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		player.teleport(player.getWorld().getSpawnLocation());
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			player.teleport(player.getWorld().getSpawnLocation());
 	}
 }

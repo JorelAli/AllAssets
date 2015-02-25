@@ -35,6 +35,7 @@ package io.github.Skepter.AllAssets.Commands.Economy;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.Strings;
@@ -62,33 +63,29 @@ public class CommandBalancetop {
 	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "balancetop", aliases = { "baltop" }, permission = "balancetop", description = "Displays the top balances")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if (args.getArgs().length != 1) {
+				ErrorUtils.notEnoughArguments(player);
+				return;
+			}
+			/* I'm certain that there's a MUCH MORE simple method of doing this -.- */
+			final Map<String, Double> map = new HashMap<String, Double>();
+			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
+				map.put(p.getName(), AllAssets.instance().economy.getBalance(p.getName()));
+			final ValueComparator bvc = new ValueComparator(map);
+			final TreeMap<String, Double> sortedMap = new TreeMap<String, Double>(bvc);
+			sortedMap.putAll(map);
+			player.sendMessage(TextUtils.title("Top balances"));
+			final List<String> balanceList = new ArrayList<String>();
+			for (final Entry<String, Double> e : sortedMap.entrySet())
+				balanceList.add(Strings.HOUSE_STYLE_COLOR + e.getKey() + ": " + e.getValue());
+			if (!TextUtils.isInteger(args.getArgs()[0])) {
+				ErrorUtils.notAnInteger(player);
+				return;
+			}
+			TextUtils.paginate(player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
 		}
-		if (args.getArgs().length != 1) {
-			ErrorUtils.notEnoughArguments(player);
-			return;
-		}
-		/* I'm certain that there's a MUCH MORE simple method of doing this -.- */
-		final Map<String, Double> map = new HashMap<String, Double>();
-		for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
-			map.put(p.getName(), AllAssets.instance().economy.getBalance(p.getName()));
-		final ValueComparator bvc = new ValueComparator(map);
-		final TreeMap<String, Double> sortedMap = new TreeMap<String, Double>(bvc);
-		sortedMap.putAll(map);
-		player.sendMessage(TextUtils.title("Top balances"));
-		final List<String> balanceList = new ArrayList<String>();
-		for (final Entry<String, Double> e : sortedMap.entrySet())
-			balanceList.add(Strings.HOUSE_STYLE_COLOR + e.getKey() + ": " + e.getValue());
-		if (!TextUtils.isInteger(args.getArgs()[0])) {
-			ErrorUtils.notAnInteger(player);
-			return;
-		}
-		TextUtils.paginate(player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
 	}
 
 	class ValueComparator implements Comparator<String> {

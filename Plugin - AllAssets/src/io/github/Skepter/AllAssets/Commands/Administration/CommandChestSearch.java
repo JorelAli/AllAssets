@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.ArrayList;
@@ -59,43 +59,38 @@ public class CommandChestSearch {
 	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "chestsearch", aliases = { "csearch" }, permission = "chestsearch", description = "Search for items in chests")
 	public void command(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (args.getArgs().length == 0) {
-			player.sendMessage(TextUtils.title("Chest search"));
-			player.sendMessage("Use chest search to find items in chests in the world");
-			player.sendMessage("Usage:");
-			player.sendMessage("/chestsearch hand - search for chests with the item in your hand");
-			player.sendMessage("/chestsearch <itemID> - search for chests with that item ID");
-			return;
-		} else if (args.getArgs().length == 1) {
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			if (args.getArgs().length == 0) {
+				player.sendMessage(TextUtils.title("Chest search"));
+				player.sendMessage("Use chest search to find items in chests in the world");
+				player.sendMessage("Usage:");
+				player.sendMessage("/chestsearch hand - search for chests with the item in your hand");
+				player.sendMessage("/chestsearch <itemID> - search for chests with that item ID");
+				return;
+			} else if (args.getArgs().length == 1) {
 
-			//probably store chests into a yaml file for searching for easy locations
-			//of placed chests. or hook into LWC or something
+				//probably store chests into a yaml file for searching for easy locations
+				//of placed chests. or hook into LWC or something
 
-			final ArrayList<Chest> chests = new ArrayList<Chest>();
-			for (final Chunk chunk : player.getWorld().getLoadedChunks())
-				for (final BlockState e : chunk.getTileEntities())
-					if (e instanceof Chest)
-						chests.add((Chest) e);
-			final ArrayList<Location> locatedChests = new ArrayList<Location>();
-			for (final Chest chest : chests)
-				if (args.getArgs()[0].equalsIgnoreCase("hand")) {
-					if (chest.getInventory().containsAtLeast(player.getItemInHand(), 1))
-						locatedChests.add(chest.getLocation());
-				} else if (StringUtils.isNumeric(args.getArgs()[0])) {
-					final int i = Integer.parseInt(args.getArgs()[0]);
-					if (chest.getInventory().containsAtLeast(new ItemStack(i), 1))
-						locatedChests.add(chest.getLocation());
-				}
-			player.sendMessage(Strings.TITLE + "Located " + (locatedChests.size()) + " chests");
-			for (final Location loc : locatedChests)
-				player.sendMessage(TextUtils.subTitle("X: " + loc.getX() + " Y: " + loc.getY() + " Z: " + loc.getZ()));
-		}
+				final ArrayList<Chest> chests = new ArrayList<Chest>();
+				for (final Chunk chunk : player.getWorld().getLoadedChunks())
+					for (final BlockState e : chunk.getTileEntities())
+						if (e instanceof Chest)
+							chests.add((Chest) e);
+				final ArrayList<Location> locatedChests = new ArrayList<Location>();
+				for (final Chest chest : chests)
+					if (args.getArgs()[0].equalsIgnoreCase("hand")) {
+						if (chest.getInventory().containsAtLeast(player.getItemInHand(), 1))
+							locatedChests.add(chest.getLocation());
+					} else if (StringUtils.isNumeric(args.getArgs()[0])) {
+						final int i = Integer.parseInt(args.getArgs()[0]);
+						if (chest.getInventory().containsAtLeast(new ItemStack(i), 1))
+							locatedChests.add(chest.getLocation());
+					}
+				player.sendMessage(Strings.TITLE + "Located " + (locatedChests.size()) + " chests");
+				for (final Location loc : locatedChests)
+					player.sendMessage(TextUtils.subTitle("X: " + loc.getX() + " Y: " + loc.getY() + " Z: " + loc.getZ()));
+			}
 	}
 }

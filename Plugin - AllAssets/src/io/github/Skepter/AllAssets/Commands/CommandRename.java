@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
@@ -53,21 +54,21 @@ public class CommandRename {
 
 	@CommandHandler(name = "rename", aliases = { "rn" }, permission = "rename", description = "Renames the current item in your hand")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if ((player.getItemInHand() == null) || player.getItemInHand().getType().equals(Material.AIR)) {
+				ErrorUtils.error(player, "The item in your hand cannot be nothing!");
+				return;
+			}
+			if (args.getArgs().length == 0) {
+				player.setItemInHand(new ItemBuilder(player.getItemInHand()).setDisplayName("").build());
+				player.sendMessage(Strings.TITLE + "Item display name removed");
+			} else {
+				player.setItemInHand(new ItemBuilder(player.getItemInHand()).setDisplayName(ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length))).build());
+				player.sendMessage(Strings.TITLE + "Renamed item to " + ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+			}
 			return;
 		}
-		if ((player.getItemInHand() == null) || player.getItemInHand().getType().equals(Material.AIR)) {
-			ErrorUtils.error(player, "The item in your hand cannot be nothing!");
-			return;
-		}
-		//if args = 0, remove rename.
-		player.setItemInHand(new ItemBuilder(player.getItemInHand()).setDisplayName(ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length))).build());
-		player.sendMessage(Strings.TITLE + "Renamed item to " + ChatColor.translateAlternateColorCodes('&', TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
-		return;
 	}
 
 }

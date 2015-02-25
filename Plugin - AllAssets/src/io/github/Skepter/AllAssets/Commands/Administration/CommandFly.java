@@ -36,9 +36,9 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
 import org.bukkit.entity.Player;
 
@@ -50,42 +50,38 @@ public class CommandFly {
 
 	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly")
 	public void command(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		switch (args.getArgs().length) {
-		case 0:
-			if (player.getAllowFlight()) {
-				player.setAllowFlight(false);
-				player.setFlying(false);
-				player.sendMessage(Strings.TITLE + "Flying disabled");
-
-			} else {
-				player.setAllowFlight(true);
-				player.sendMessage(Strings.TITLE + "Flying enabled");
-			}
-			return;
-		case 1:
-			final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-			if (target != null) {
-				if (target.getAllowFlight()) {
-					target.setAllowFlight(false);
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			switch (args.getArgs().length) {
+			case 0:
+				if (player.getAllowFlight()) {
+					player.setAllowFlight(false);
 					player.setFlying(false);
-					target.sendMessage(Strings.TITLE + "Flying disabled");
+					player.sendMessage(Strings.TITLE + "Flying disabled");
+
 				} else {
-					target.setAllowFlight(true);
-					target.sendMessage(Strings.TITLE + "Flying enabled");
+					player.setAllowFlight(true);
+					player.sendMessage(Strings.TITLE + "Flying enabled");
 				}
 				return;
-			} else
-				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-			return;
+			case 1:
+				final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
+				if (target != null) {
+					if (target.getAllowFlight()) {
+						target.setAllowFlight(false);
+						player.setFlying(false);
+						target.sendMessage(Strings.TITLE + "Flying disabled");
+					} else {
+						target.setAllowFlight(true);
+						target.sendMessage(Strings.TITLE + "Flying enabled");
+					}
+					return;
+				} else
+					ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+				return;
+			}
+			ErrorUtils.tooManyArguments(player);
 		}
-		ErrorUtils.tooManyArguments(player);
 		return;
 	}
 }

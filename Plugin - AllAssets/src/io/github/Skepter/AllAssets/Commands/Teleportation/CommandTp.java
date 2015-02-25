@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands.Teleportation;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.OfflineUser;
@@ -53,38 +54,34 @@ public class CommandTp {
 
 	@CommandHandler(name = "tp", aliases = { "teleport" }, permission = "tp", description = "Teleport to another user")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (args.getArgs().length == 0) {
-			ErrorUtils.notEnoughArguments(player);
-			return;
-		}
-		final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
-		if (offlineTarget == null && onlineTarget == null) {
-			ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-			return;
-		}
-		final User user = new User(player);
-		final OfflineUser target = new OfflineUser(offlineTarget);
-		if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
-			user.setLastLoc();
-			if (onlineTarget == null) {
-				player.teleport(target.getLastLoc());
-				player.sendMessage(Strings.TITLE + "Successfully teleported to " + offlineTarget.getName());
-			} else {
-				player.teleport(onlineTarget);
-				player.sendMessage(Strings.TITLE + "Successfully teleported to " + onlineTarget.getName());
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if (args.getArgs().length == 0) {
+				ErrorUtils.notEnoughArguments(player);
+				return;
 			}
-			return;
-		} else {
-			ErrorUtils.tptoggle(player, args.getArgs()[0]);
-			return;
+			final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+			final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
+			if (offlineTarget == null && onlineTarget == null) {
+				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+				return;
+			}
+			final User user = new User(player);
+			final OfflineUser target = new OfflineUser(offlineTarget);
+			if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
+				user.setLastLoc();
+				if (onlineTarget == null) {
+					player.teleport(target.getLastLoc());
+					player.sendMessage(Strings.TITLE + "Successfully teleported to " + offlineTarget.getName());
+				} else {
+					player.teleport(onlineTarget);
+					player.sendMessage(Strings.TITLE + "Successfully teleported to " + onlineTarget.getName());
+				}
+				return;
+			} else {
+				ErrorUtils.tptoggle(player, args.getArgs()[0]);
+				return;
+			}
 		}
 	}
 }

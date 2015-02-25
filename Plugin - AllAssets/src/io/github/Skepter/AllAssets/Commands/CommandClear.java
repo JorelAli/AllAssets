@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
 import org.bukkit.entity.Player;
@@ -51,30 +51,26 @@ public class CommandClear {
 
 	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "clear", description = "Clears your inventory")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (ConfigHandler.config().getBoolean("clearArmor")) {
-			if (args.getArgs().length == 0)
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if (ConfigHandler.config().getBoolean("clearArmor")) {
+				if (args.getArgs().length == 0)
+					player.getInventory().clear();
+				else if (args.getArgs().length == 1) {
+					//TODO try/catch exception e
+					final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+					target.getInventory().clear();
+				}
+			} else if (args.getArgs().length == 0) {
+				final ItemStack[] temp = player.getInventory().getArmorContents();
 				player.getInventory().clear();
-			else if (args.getArgs().length == 1) {
-				//TODO try/catch exception e
+				player.getInventory().setArmorContents(temp);
+			} else if (args.getArgs().length == 1) {
 				final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+				final ItemStack[] temp = target.getInventory().getArmorContents();
 				target.getInventory().clear();
+				target.getInventory().setArmorContents(temp);
 			}
-		} else if (args.getArgs().length == 0) {
-			final ItemStack[] temp = player.getInventory().getArmorContents();
-			player.getInventory().clear();
-			player.getInventory().setArmorContents(temp);
-		} else if (args.getArgs().length == 1) {
-			final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-			final ItemStack[] temp = target.getInventory().getArmorContents();
-			target.getInventory().clear();
-			target.getInventory().setArmorContents(temp);
 		}
 		return;
 	}

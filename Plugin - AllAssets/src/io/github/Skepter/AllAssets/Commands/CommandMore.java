@@ -36,7 +36,7 @@ package io.github.Skepter.AllAssets.Commands;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.PlayerGetter;
 
 import org.bukkit.entity.Player;
 
@@ -48,14 +48,9 @@ public class CommandMore {
 
 	@CommandHandler(name = "more", permission = "more", description = "Sets your itemstack size to 64")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		player.getItemInHand().setAmount(64);
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			player.getItemInHand().setAmount(64);
 		return;
 	}
 

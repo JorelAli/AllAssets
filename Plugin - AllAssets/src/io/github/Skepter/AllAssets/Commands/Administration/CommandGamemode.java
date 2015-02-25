@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import org.bukkit.GameMode;
@@ -51,18 +51,13 @@ public class CommandGamemode {
 
 	@CommandHandler(name = "gamemode", aliases = { "gm" }, permission = "gamemode", description = "Changes your gamemode")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			if (args.getArgs().length == 0)
+				doCycleGameMode(player);
+			if (args.getArgs().length == 1)
+				doGameMode(player, args.getArgs()[0]);
 		}
-		if (args.getArgs().length == 0)
-			doCycleGameMode(player);
-		if (args.getArgs().length == 1)
-			doGameMode(player, args.getArgs()[0]);
-		return;
 	}
 
 	private void doCycleGameMode(final Player player) {
@@ -85,38 +80,23 @@ public class CommandGamemode {
 
 	@CommandHandler(name = "gms", permission = "gamemode", description = "Changes your gamemode to survival", isListed = false)
 	public void onGms(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		doGameMode(player, "survival");
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			doGameMode(player, "survival");
 	}
 
 	@CommandHandler(name = "gmc", permission = "gamemode", description = "Changes your gamemode to creative", isListed = false)
 	public void onGmc(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		doGameMode(player, "creative");
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			doGameMode(player, "creative");
 	}
 
 	@CommandHandler(name = "gma", permission = "gamemode", description = "Changes your gamemode to adventure", isListed = false)
 	public void onGma(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		doGameMode(player, "adventure");
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			doGameMode(player, "adventure");
 	}
 
 	private void doGameMode(final Player player, final String s) {

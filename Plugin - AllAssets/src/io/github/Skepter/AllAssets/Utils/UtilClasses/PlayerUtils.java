@@ -44,6 +44,8 @@ import org.bukkit.entity.Player;
 
 public class PlayerUtils {
 
+	
+	/** Gets the player from the name. Returns null if player not found */
 	public static Player getOnlinePlayerFromString(final String string) {
 		for (final Player p : getOnlinePlayers())
 			if (p.getName().equalsIgnoreCase(string) || p.getName().toLowerCase().startsWith(string.toLowerCase()))

@@ -36,8 +36,7 @@ package io.github.Skepter.AllAssets.Commands;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.Skepter.AllAssets.PlayerGetter;
 
 import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
@@ -50,53 +49,50 @@ public class CommandPWeather {
 
 	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "pweather", description = "Sets your weather")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (args.getArgs().length == 1)
-			switch (args.getArgs()[0].toLowerCase()) {
-			case "downfall":
-			case "rain":
-				player.setPlayerWeather(WeatherType.DOWNFALL);
-				break;
-			case "clear":
-			case "sun":
-			case "day":
-				player.setPlayerWeather(WeatherType.CLEAR);
-				break;
-			case "reset":
-			case "normal":
-				player.resetPlayerWeather();
-				break;
-			}
-		if (args.getArgs().length == 2) {
-			Player target = null;
-			try {
-				target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-			} catch (final Exception e) {
-				ErrorUtils.playerNotFound(player, args.getArgs()[0]);
-			}
-			switch (args.getArgs()[0].toLowerCase()) {
-			case "downfall":
-			case "rain":
-				target.setPlayerWeather(WeatherType.DOWNFALL);
-				break;
-			case "clear":
-			case "sun":
-			case "day":
-				target.setPlayerWeather(WeatherType.CLEAR);
-				break;
-			case "reset":
-			case "normal":
-				target.resetPlayerWeather();
-				break;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			switch (args.getArgs().length) {
+			case 0:
+				return;
+			case 1:
+				switch (args.getArgs()[0].toLowerCase()) {
+				case "downfall":
+				case "rain":
+					player.setPlayerWeather(WeatherType.DOWNFALL);
+					break;
+				case "clear":
+				case "sun":
+				case "day":
+					player.setPlayerWeather(WeatherType.CLEAR);
+					break;
+				case "reset":
+				case "normal":
+					player.resetPlayerWeather();
+					break;
+				}
+				return;
+			case 2:
+				Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+				if (target != null) {
+					switch (args.getArgs()[0].toLowerCase()) {
+					case "downfall":
+					case "rain":
+						target.setPlayerWeather(WeatherType.DOWNFALL);
+						break;
+					case "clear":
+					case "sun":
+					case "day":
+						target.setPlayerWeather(WeatherType.CLEAR);
+						break;
+					case "reset":
+					case "normal":
+						target.resetPlayerWeather();
+						break;
+					}
+				}
+				return;
 			}
 		}
 		return;
 	}
-
 }

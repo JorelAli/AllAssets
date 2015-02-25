@@ -36,12 +36,12 @@ package io.github.Skepter.AllAssets.Commands;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
@@ -58,16 +58,12 @@ public class CommandGrief {
 
 	@CommandHandler(name = "grief", aliases = { "griefreport", "gr" }, permission = "grief", description = "Report a grief incident")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			final String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+			if (message != null)
+				new YesNoConversation(player, new GriefPrompt(message), "Are you sure you want to send a grief report");
 		}
-		final String message = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
-		if (message != null)
-			new YesNoConversation(player, new GriefPrompt(message), "Are you sure you want to send a grief report");
 		return;
 	}
 

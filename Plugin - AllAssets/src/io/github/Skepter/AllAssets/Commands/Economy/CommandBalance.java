@@ -37,8 +37,8 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Player;
 
@@ -51,13 +51,8 @@ public class CommandBalance {
 	@CommandHandler(name = "balance", aliases = { "bal" }, permission = "balance", description = "Displays your balance")
 	public void onCommand(final CommandArgs args) {
 		//other balance
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
 	}
 }

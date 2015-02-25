@@ -27,34 +27,18 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Fun;
+package io.github.Skepter.AllAssets.Misc;
 
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.PlayerGetter;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+/** Help annotation to display help screen */
+public @interface Help {
 
-public class CommandFakeDeop {
-
-	public CommandFakeDeop(final CommandFramework framework) {
-		framework.registerCommands(this);
-	}
-
-	@CommandHandler(name = "fakedeop", aliases = { "fdeop" }, permission = "fakedeop", description = "Fakes a player deop status")
-	public void onCommand(final CommandArgs args) {
-		Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
-		if (target != null) {
-			target.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "[" + args.getSender().getName() + ": De-Opped " + target.getName() + "]");
-			target.sendMessage(ChatColor.YELLOW + "You are no longer op!");
-		}
-		return;
-	}
+	String name();
 
 }

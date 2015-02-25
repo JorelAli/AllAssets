@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import org.bukkit.Bukkit;
@@ -53,15 +53,12 @@ public class CommandForceCommand {
 	public void onCommand(final CommandArgs args) {
 		if (args.getArgs().length > 0)
 			try {
-				final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-				if (target == null) {
-					ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-					return;
+				final Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+				if (target != null) {
+					final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
+					Bukkit.dispatchCommand(target, s);
 				}
-				final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
-				Bukkit.dispatchCommand(target, s);
 			} catch (final Exception e) {
-				//TODO post error here!
 				return;
 			}
 		else

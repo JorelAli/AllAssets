@@ -34,6 +34,7 @@
 package io.github.Skepter.AllAssets.Commands.Administration;
 
 import io.github.Skepter.AllAssets.CommandFramework;
+import io.github.Skepter.AllAssets.PlayerGetter;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
@@ -51,22 +52,17 @@ public class CommandInventory {
 
 	@CommandHandler(name = "inventory", aliases = { "invsee", "inv" }, permission = "inventory", description = "Views a players inventory")
 	public void onCommand(final CommandArgs args) {
-		Player player = null;
-		try {
-			player = args.getPlayer();
-		} catch (final Exception e) {
-			ErrorUtils.playerOnly(args.getSender());
-			return;
-		}
-		if (args.getArgs().length == 1)
-			try {
-				Inventory inv = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]).getInventory();
-				Inventory targetInventory = Bukkit.createInventory(null, inv.getSize(), args.getArgs()[0]);
-				targetInventory.setContents(inv.getContents());
-				player.openInventory(targetInventory);
-			} catch (final Exception e) {
-				ErrorUtils.playerNotFound(player, args.getArgs()[0]);
-			}
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
+			if (args.getArgs().length == 1)
+				try {
+					Inventory inv = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]).getInventory();
+					Inventory targetInventory = Bukkit.createInventory(null, inv.getSize(), args.getArgs()[0]);
+					targetInventory.setContents(inv.getContents());
+					player.openInventory(targetInventory);
+				} catch (final Exception e) {
+					ErrorUtils.playerNotFound(player, args.getArgs()[0]);
+				}
 		return;
 		//TODO editable system so it can/cannot be edited.
 	}
