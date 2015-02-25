@@ -32,6 +32,8 @@
 package io.github.Skepter.AllAssets.Misc;
 
 import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -42,11 +44,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class EnchantGlow extends EnchantmentWrapper {
 
 	private static Enchantment glow;
-
-	static String name;
+	private static int id;
+	private static String name;
 
 	public EnchantGlow(final int id) {
 		super(id);
+		EnchantGlow.id = id;
 	}
 
 	@Override
@@ -94,6 +97,28 @@ public class EnchantGlow extends EnchantmentWrapper {
 		glow = new EnchantGlow(70);
 		Enchantment.registerEnchantment(glow);
 		return glow;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void unLoad() {
+		try {
+			final Field f = Enchantment.class.getDeclaredField("byId");
+			f.setAccessible(true);
+			Map<Integer, Enchantment> byIDMap = (Map<Integer, Enchantment>) f.get(null);
+			byIDMap.remove(id);
+			f.set(null, byIDMap);
+			
+			final Field f1 = Enchantment.class.getDeclaredField("byName");
+			f1.setAccessible(true);
+			Map<String, Enchantment> byNameMap = (Map<String, Enchantment>) f1.get(null);
+			for(Entry<String, Enchantment> e : byNameMap.entrySet()) {
+				if(e.getValue().equals(glow))
+					byNameMap.remove(e.getKey());
+			}
+			f1.set(null, byNameMap);
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void addGlow(final ItemStack item, final String name) {

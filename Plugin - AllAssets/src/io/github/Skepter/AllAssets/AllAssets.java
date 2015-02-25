@@ -107,6 +107,7 @@ import io.github.Skepter.AllAssets.Listeners.ServerListingListener;
 import io.github.Skepter.AllAssets.Listeners.SignListener;
 import io.github.Skepter.AllAssets.Listeners.SkeletonArrowListener;
 import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
+import io.github.Skepter.AllAssets.Misc.EnchantGlow;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Reflection.VaultReflection;
 import io.github.Skepter.AllAssets.Tasks.TPS;
@@ -285,6 +286,7 @@ public class AllAssets extends JavaPlugin {
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
 				CommandDiscoArmor.toggleArmor(player);
+		EnchantGlow.unLoad();
 		getLogger().info(Strings.NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
 
