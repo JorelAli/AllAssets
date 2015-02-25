@@ -86,6 +86,7 @@ import io.github.Skepter.AllAssets.Commands.Fun.CommandFakeDeop;
 import io.github.Skepter.AllAssets.Commands.Fun.CommandFakeOp;
 import io.github.Skepter.AllAssets.Commands.Fun.CommandLaunch;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandBack;
+import io.github.Skepter.AllAssets.Commands.Teleportation.CommandSpawn;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTp;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandTphere;
 import io.github.Skepter.AllAssets.Commands.Teleportation.CommandWorlds;
@@ -402,6 +403,8 @@ public class AllAssets extends JavaPlugin {
 			r(new CommandSilence(framework));
 		if (ConfigHandler.features().getBoolean("StaffChat"))
 			r(new CommandStaffChat(framework));
+		if (ConfigHandler.features().getBoolean("Spawn"))
+			new CommandSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SpawnItem"))
 			new CommandSpawnItem(framework);
 		if (ConfigHandler.features().getBoolean("Time"))

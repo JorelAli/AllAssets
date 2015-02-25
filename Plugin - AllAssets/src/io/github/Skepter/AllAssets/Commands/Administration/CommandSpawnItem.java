@@ -33,12 +33,15 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
+import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.Utils.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.TextUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -66,10 +69,10 @@ public class CommandSpawnItem {
 
 		switch (args.getArgs().length) {
 		case 0:
-			//help
+			printHelp(player);
 			break;
 		case 1:
-			ItemStack is = items.get(args.getArgs()[0]);
+			ItemStack is = getItem(args.getArgs()[0]);
 			if (is != null) {
 				player.setItemInHand(is);
 				player.sendMessage("Gave you a " + new ItemBuilder(is).getDisplayName());
@@ -79,6 +82,14 @@ public class CommandSpawnItem {
 
 		}
 		return;
+	}
+	
+	private ItemStack getItem(String arg) {
+		for(String string : items.keySet()){
+			if(string.equalsIgnoreCase(arg))
+				return items.get(string);
+		}
+		return null;
 	}
 
 	@CommandHandler(name = "spawnitem.list", permission = "spawnitem", description = "Shows a list of items to spawn")
@@ -90,9 +101,16 @@ public class CommandSpawnItem {
 		return;
 	}
 
+	@Completer(name = "spawnitem")
+	public List<String> onTab() {
+		List<String> i = new ArrayList<String>();
+		i.addAll(items.keySet());
+		return i;
+	}
+
 	@Help(name = "Spawnitem")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Spawnitem", "Spawns an item");
+		TextUtils.printHelp(sender, "Spawnitem", "/spawnitem list - shows a list of items to spawn", "/spawnitem <itemName> - spawns a custom item");
 	}
 
 }

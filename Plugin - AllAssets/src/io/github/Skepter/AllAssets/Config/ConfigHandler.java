@@ -176,6 +176,7 @@ public class ConfigHandler {
 		features.set("SetSpawn", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
+		features.set("Spawn", "true");
 		features.set("SpawnItem", "true");
 		features.set("StaffChat", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
