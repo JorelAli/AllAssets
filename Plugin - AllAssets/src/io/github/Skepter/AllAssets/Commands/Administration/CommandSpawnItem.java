@@ -75,7 +75,7 @@ public class CommandSpawnItem {
 			ItemStack is = getItem(args.getArgs()[0]);
 			if (is != null) {
 				player.setItemInHand(is);
-				player.sendMessage("Gave you a " + new ItemBuilder(is).getDisplayName());
+				player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
 			} else
 				ErrorUtils.error(player, "Item not found");
 			return;
@@ -102,7 +102,7 @@ public class CommandSpawnItem {
 	}
 
 	@Completer(name = "spawnitem")
-	public List<String> onTab() {
+	public List<String> onTab(final CommandArgs args) {
 		List<String> i = new ArrayList<String>();
 		i.addAll(items.keySet());
 		return i;

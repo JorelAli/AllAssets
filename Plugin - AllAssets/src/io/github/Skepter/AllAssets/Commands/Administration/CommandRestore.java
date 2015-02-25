@@ -38,7 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
@@ -108,7 +108,7 @@ public class CommandRestore {
 		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 			if (b) {
 				try {
-					ReflectionUtils utils = new ReflectionUtils(Bukkit.getPlayer("Skepter"));
+					MinecraftReflectionUtils utils = new MinecraftReflectionUtils(Bukkit.getPlayer("Skepter"));
 					Object o = utils.getNMSClass("WorldLoader").newInstance();
 					o = o.getClass().getConstructor(File.class).newInstance(Bukkit.getWorld(world).getWorldFolder());
 					o.getClass().getMethod("e", String.class).invoke(o, world);

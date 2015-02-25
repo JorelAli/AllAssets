@@ -41,10 +41,10 @@ public class ReflectionPlayer {
 
 	public static void doAnimation(final Player player, final AnimationType type) {
 		try {
-			final ReflectionUtils utils = new ReflectionUtils(player);
+			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 			Object animationPacket = utils.emptyPacketPlayOutAnimation;
 			animationPacket = animationPacket.getClass().getConstructor().newInstance();
-			utils.setPrivateField(animationPacket, "a", player.getEntityId());
+			ReflectionUtils.setPrivateField(animationPacket, "a", player.getEntityId());
 			int animationID = 0;
 			switch (type) {
 			case CRITICAL_EFFECT:
@@ -74,7 +74,7 @@ public class ReflectionPlayer {
 			default:
 				break;
 			}
-			utils.setPrivateField(animationPacket, "b", Integer.valueOf(animationID));
+			ReflectionUtils.setPrivateField(animationPacket, "b", Integer.valueOf(animationID));
 			utils.sendOutgoingPacket(animationPacket);
 		} catch (final Exception exception) {
 		}

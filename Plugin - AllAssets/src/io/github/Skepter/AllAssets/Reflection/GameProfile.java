@@ -45,12 +45,12 @@ public class GameProfile {
 	/** Gets the UUID of a player from the UserCache.json file Not reliable
 	 * compared to .getUniqueID and UUIDData file */
 	public GameProfile(final Player player) throws Exception {
-		final ReflectionUtils utils = new ReflectionUtils(player);
+		final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 		final Object usercache = utils.getNMSClass("UserCache").getConstructor(utils.minecraftServerClass, File.class).newInstance(utils.dedicatedServer, new File("usercache.json"));
 		final Method method = usercache.getClass().getDeclaredMethod("a", utils.minecraftServerClass, String.class);
 		method.setAccessible(true);
 		final Object gameProfile = method.invoke(usercache, utils.dedicatedServer, player.getName());
-		id = (UUID) utils.getPrivateField(gameProfile, "id");
+		id = (UUID) ReflectionUtils.getPrivateField(gameProfile, "id");
 		name = player.getName();
 	}
 

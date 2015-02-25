@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Tasks;
 
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
 
 import org.bukkit.entity.Player;
 
@@ -50,7 +50,7 @@ public class JSONMessageTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			final ReflectionUtils utils = new ReflectionUtils(player);
+			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 			Object packet = utils.emptyPacketPlayOutChat;
 			packet = packet.getClass().getConstructor(utils.iChatBaseComponentClass).newInstance(utils.chatSerialize(string));
 			utils.sendOutgoingPacket(packet);

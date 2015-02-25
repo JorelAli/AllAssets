@@ -46,14 +46,14 @@ public class PacketBuilder {
 		CLIENT_TO_SERVER, SERVER_TO_CLIENT;
 	}
 
-	private ReflectionUtils utils;
+	private MinecraftReflectionUtils utils;
 	private Object packet;
 	private PacketBuilder builder;
 	private PacketDirection direction;
 
 	public PacketBuilder(final Player player, final PacketType type) {
 		try {
-			this.utils = new ReflectionUtils(player);
+			this.utils = new MinecraftReflectionUtils(player);
 			this.packet = null;
 			this.builder = this;
 
@@ -89,7 +89,7 @@ public class PacketBuilder {
 
 	public PacketBuilder set(final String name, final Object data) {
 		try {
-			utils.setPrivateField(packet, name, data);
+			ReflectionUtils.setPrivateField(packet, name, data);
 		} catch (final Exception e) {
 			CommandLog.addLog("Editing packet field failure", LogType.ERROR);
 		}
@@ -98,7 +98,7 @@ public class PacketBuilder {
 
 	public PacketBuilder setInt(final String name, final int data) {
 		try {
-			utils.setPrivateField(packet, name, Integer.valueOf(data));
+			ReflectionUtils.setPrivateField(packet, name, Integer.valueOf(data));
 		} catch (final Exception e) {
 			CommandLog.addLog("Editing packet field failure", LogType.ERROR);
 		}
@@ -121,7 +121,7 @@ public class PacketBuilder {
 
 	public PacketBuilder setEnum(final String fieldName, final String enumClassName, final String enumName) {
 		try {
-			set(fieldName, utils.getEnum(utils.getNMSClass(enumClassName), enumName));
+			set(fieldName, ReflectionUtils.getEnum(utils.getNMSClass(enumClassName), enumName));
 		} catch (final Exception e) {
 			CommandLog.addLog("Error finding enumeration", LogType.ERROR);
 		}

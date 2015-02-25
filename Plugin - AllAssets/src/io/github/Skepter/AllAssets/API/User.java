@@ -33,7 +33,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Config.PlayerData;
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
 import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
 import io.github.Skepter.AllAssets.Serializers.LocationSerializer;
 import io.github.Skepter.AllAssets.Tasks.PingTask;
@@ -106,7 +106,7 @@ public class User {
 	 * giving their language) */
 	public String getLanguage(final Player p) {
 		try {
-			switch (new ReflectionUtils(p).locale.toLowerCase()) {
+			switch (new MinecraftReflectionUtils(p).locale.toLowerCase()) {
 			case "de_de":
 				return "de";
 			case "sv_se":

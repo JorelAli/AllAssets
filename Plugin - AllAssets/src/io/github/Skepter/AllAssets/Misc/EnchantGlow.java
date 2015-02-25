@@ -31,8 +31,10 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Misc;
 
+import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+
 import java.lang.reflect.Field;
-import java.util.Map;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
 import org.bukkit.enchantments.Enchantment;
@@ -98,24 +100,27 @@ public class EnchantGlow extends EnchantmentWrapper {
 		Enchantment.registerEnchantment(glow);
 		return glow;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static void unLoad() {
 		try {
 			final Field f = Enchantment.class.getDeclaredField("byId");
 			f.setAccessible(true);
-			Map<Integer, Enchantment> byIDMap = (Map<Integer, Enchantment>) f.get(null);
+			HashMap<Integer, Enchantment> byIDMap = (HashMap<Integer, Enchantment>) f.get(null);
 			byIDMap.remove(id);
-			f.set(null, byIDMap);
+
+			ReflectionUtils.setFinalStaticField(f, byIDMap);
 			
 			final Field f1 = Enchantment.class.getDeclaredField("byName");
 			f1.setAccessible(true);
-			Map<String, Enchantment> byNameMap = (Map<String, Enchantment>) f1.get(null);
-			for(Entry<String, Enchantment> e : byNameMap.entrySet()) {
-				if(e.getValue().equals(glow))
+			HashMap<String, Enchantment> byNameMap = (HashMap<String, Enchantment>) f1.get(null);
+			for (Entry<String, Enchantment> e : byNameMap.entrySet()) {
+				if (e.getValue().equals(glow))
 					byNameMap.remove(e.getKey());
 			}
-			f1.set(null, byNameMap);
+						
+			ReflectionUtils.setFinalStaticField(f1, byNameMap);
+
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -136,7 +141,7 @@ public class EnchantGlow extends EnchantmentWrapper {
 	}
 
 	public static void addGlow(ItemMeta meta, String name) {
-		meta.addEnchant(getGlow(name), 1, true);		
+		meta.addEnchant(getGlow(name), 1, true);
 	}
 
 }

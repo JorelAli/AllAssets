@@ -32,7 +32,7 @@
 package io.github.Skepter.AllAssets.Tasks;
 
 import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
+import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
 
 import org.bukkit.entity.Player;
 
@@ -47,7 +47,7 @@ public class PingTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			User.ping = new ReflectionUtils(player).ping;
+			User.ping = new MinecraftReflectionUtils(player).ping;
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}
