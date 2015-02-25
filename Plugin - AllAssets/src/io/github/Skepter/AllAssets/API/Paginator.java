@@ -33,7 +33,7 @@ import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.WHITE;
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.Utils.Debugger;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

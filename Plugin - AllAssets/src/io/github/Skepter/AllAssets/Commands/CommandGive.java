@@ -37,7 +37,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Utils.IDReader;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

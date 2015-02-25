@@ -30,7 +30,7 @@
 package io.github.Skepter.AllAssets.Tasks;
 
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

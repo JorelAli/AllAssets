@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Tasks;
 
-import io.github.Skepter.AllAssets.Utils.FireworkUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
 
 import java.util.Random;
 

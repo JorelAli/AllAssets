@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Tasks;
 
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

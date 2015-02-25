@@ -32,7 +32,7 @@
 package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

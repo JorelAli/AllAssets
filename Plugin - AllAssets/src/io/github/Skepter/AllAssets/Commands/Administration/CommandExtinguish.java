@@ -37,8 +37,8 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.API.Utils.Sphere;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;

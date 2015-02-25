@@ -38,7 +38,7 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 public class CommandConfig {
 

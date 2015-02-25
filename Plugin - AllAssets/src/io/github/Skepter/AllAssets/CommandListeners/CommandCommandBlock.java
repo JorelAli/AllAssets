@@ -38,8 +38,8 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Serializers.ItemSerializer;
-import io.github.Skepter.AllAssets.Utils.FireworkUtils;
-import io.github.Skepter.AllAssets.Utils.LocationUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.LocationUtils;
 
 import org.bukkit.Material;
 import org.bukkit.block.CommandBlock;

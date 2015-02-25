@@ -31,7 +31,7 @@ package io.github.Skepter.AllAssets;
 
 import io.github.Skepter.AllAssets.Commands.CommandHelp;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -78,7 +78,7 @@ public class CommandFramework {
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
 	private CommandMap map;
 	private final Plugin plugin;
-	private static final String noPerm = AllAssets.ERROR + "You do not have permission to perform that action";
+	private final String noPerm = AllAssets.ERROR + "You do not have permission to perform that action";
 	public static Set<CommandHandler> pluginCommands = new HashSet<CommandHandler>();
 	private final Set<String> cmds = new HashSet<String>();
 

@@ -40,9 +40,9 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 import java.io.File;
 import java.io.IOException;

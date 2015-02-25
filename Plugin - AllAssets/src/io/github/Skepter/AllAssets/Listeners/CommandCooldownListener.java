@@ -33,7 +33,7 @@ package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.CommandCooldown;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

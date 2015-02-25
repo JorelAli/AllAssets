@@ -39,7 +39,7 @@ import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;

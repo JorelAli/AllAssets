@@ -33,7 +33,7 @@ package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Libs.FancyMessage;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;

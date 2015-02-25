@@ -40,10 +40,10 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.API.LogEvent.LogType;
 import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
 import io.github.Skepter.AllAssets.Utils.YesNoConversation;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import org.bukkit.conversations.BooleanPrompt;
 import org.bukkit.conversations.ConversationContext;

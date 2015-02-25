@@ -38,8 +38,8 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.Tasks.DiscoArmorTask;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UltraMap;
+import io.github.Skepter.AllAssets.Utils.DoubleMap;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.util.UUID;
 
@@ -50,7 +50,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class CommandDiscoArmor {
 
-	private static UltraMap<UUID, Integer, ItemStack[], String, String, String> map = new UltraMap<UUID, Integer, ItemStack[], String, String, String>();
+	private static DoubleMap<UUID, Integer, ItemStack[]> map = new DoubleMap<UUID, Integer, ItemStack[]>();
 
 	public CommandDiscoArmor(final CommandFramework framework) {
 		framework.registerCommands(this);
@@ -82,7 +82,7 @@ public class CommandDiscoArmor {
 			player.sendMessage(AllAssets.TITLE + "Your disco armor was removed");
 		} else {
 			final BukkitTask i = Bukkit.getScheduler().runTaskTimer(AllAssets.instance(), new DiscoArmorTask(player), 0L, 3L);
-			map.put(player.getUniqueId(), i.getTaskId(), player.getInventory().getArmorContents(), null, null, null);
+			map.put(player.getUniqueId(), i.getTaskId(), player.getInventory().getArmorContents());
 			player.sendMessage(AllAssets.TITLE + "You are now wearing disco armor!");
 		}
 	}

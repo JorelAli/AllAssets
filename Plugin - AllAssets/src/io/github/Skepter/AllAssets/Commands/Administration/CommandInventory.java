@@ -36,8 +36,8 @@ package io.github.Skepter.AllAssets.Commands.Administration;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

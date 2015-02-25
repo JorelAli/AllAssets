@@ -42,8 +42,8 @@ import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
 import io.github.Skepter.AllAssets.Tasks.AnyLeashTask;
 import io.github.Skepter.AllAssets.Tasks.InstantRespawnTask;
-import io.github.Skepter.AllAssets.Utils.FireworkUtils;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

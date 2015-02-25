@@ -33,7 +33,7 @@ import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Config.PlayerData;
 import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
 import io.github.Skepter.AllAssets.Serializers.LocationSerializer;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.List;

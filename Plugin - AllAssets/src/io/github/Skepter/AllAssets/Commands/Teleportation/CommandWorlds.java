@@ -36,7 +36,7 @@ package io.github.Skepter.AllAssets.Commands.Teleportation;
 import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;

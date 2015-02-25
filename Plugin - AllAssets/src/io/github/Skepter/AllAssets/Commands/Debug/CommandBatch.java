@@ -41,8 +41,8 @@ import io.github.Skepter.AllAssets.Help;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.HashMap;
 import java.util.Map;

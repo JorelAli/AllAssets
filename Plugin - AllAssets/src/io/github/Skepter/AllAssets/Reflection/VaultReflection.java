@@ -1,7 +1,7 @@
 package io.github.Skepter.AllAssets.Reflection;
 
 import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Vault.Chat.AAChat;
 import io.github.Skepter.AllAssets.Vault.Economy.AAEco;
 import io.github.Skepter.AllAssets.Vault.Permissions.AAPerms;

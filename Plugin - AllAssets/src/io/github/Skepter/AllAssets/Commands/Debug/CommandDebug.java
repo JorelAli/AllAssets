@@ -40,11 +40,11 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.EncryptionUtils;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.FileUtils;
 import io.github.Skepter.AllAssets.Utils.IDReader;
-import io.github.Skepter.AllAssets.Utils.MathUtils;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;

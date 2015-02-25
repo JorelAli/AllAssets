@@ -37,8 +37,8 @@ import io.github.Skepter.AllAssets.CommandFramework;
 import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
 import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UltraMap;
+import io.github.Skepter.AllAssets.Utils.DoubleMap;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -54,10 +54,10 @@ public class CommandHelp {
 		framework.registerCommands(this);
 	}
 
-	static UltraMap<String, Method, Object, String, String, String> map = new UltraMap<String, Method, Object, String, String, String>();
+	static DoubleMap<String, Method, Object> map = new DoubleMap<String, Method, Object>();
 
 	public static void register(final String commandName, final Method method, final Object obj) {
-		map.put(commandName.toLowerCase(), method, obj, null, null, null);
+		map.put(commandName.toLowerCase(), method, obj);
 	}
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command")

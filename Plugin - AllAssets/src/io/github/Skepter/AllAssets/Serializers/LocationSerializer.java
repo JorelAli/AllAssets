@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Serializers;
 
-import io.github.Skepter.AllAssets.Utils.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

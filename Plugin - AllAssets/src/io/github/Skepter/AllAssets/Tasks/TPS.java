@@ -31,7 +31,7 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Tasks;
 
-import io.github.Skepter.AllAssets.Utils.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 
 public class TPS implements Runnable {
 	public static int TICK_COUNT = 0;

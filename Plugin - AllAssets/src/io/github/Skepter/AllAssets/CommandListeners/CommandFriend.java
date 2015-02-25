@@ -38,10 +38,10 @@ import io.github.Skepter.AllAssets.API.OfflineUser;
 import io.github.Skepter.AllAssets.API.PlayerRequest;
 import io.github.Skepter.AllAssets.API.PlayerRequest.PlayerRequestEvent;
 import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.PlayerUtils;
-import io.github.Skepter.AllAssets.Utils.TextUtils;
 import io.github.Skepter.AllAssets.Utils.Utils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
 
 import java.util.List;
 import java.util.UUID;

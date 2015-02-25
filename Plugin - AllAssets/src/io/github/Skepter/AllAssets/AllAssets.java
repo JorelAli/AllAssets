@@ -110,7 +110,7 @@ import io.github.Skepter.AllAssets.Listeners.StopCommandListener;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Reflection.VaultReflection;
 import io.github.Skepter.AllAssets.Tasks.TPS;
-import io.github.Skepter.AllAssets.Utils.FileUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
 
 import java.io.File;
 import java.lang.reflect.Method;

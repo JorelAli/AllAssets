@@ -33,7 +33,7 @@ package io.github.Skepter.AllAssets.Listeners;
 
 import io.github.Skepter.AllAssets.API.LogEvent;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -41,7 +41,7 @@ import io.github.Skepter.AllAssets.API.Builders.FireworkBuilder;
 import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
 import io.github.Skepter.AllAssets.Misc.FireworkInventories;
 import io.github.Skepter.AllAssets.Utils.CustomObject;
-import io.github.Skepter.AllAssets.Utils.ErrorUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 
 import org.bukkit.Color;
 import org.bukkit.DyeColor;

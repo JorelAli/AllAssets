@@ -29,45 +29,58 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Administration;
+package io.github.Skepter.AllAssets.Utils.UtilClasses;
 
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
+import static org.bukkit.Bukkit.getOfflinePlayers;
+import static org.bukkit.Bukkit.getOnlinePlayers;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
-public class CommandOplist {
+public class PlayerUtils {
 
-	public CommandOplist(final CommandFramework framework) {
-		framework.registerCommands(this);
+	public static Player getOnlinePlayerFromString(final String string) {
+		for (final Player p : getOnlinePlayers())
+			if (p.getName().equalsIgnoreCase(string) || p.getName().toLowerCase().startsWith(string.toLowerCase()))
+				return p;
+		return null;
 	}
 
-	@CommandHandler(name = "oplist", aliases = { "ops" }, permission = "oplist", description = "Lists the players that have op")
-	public void onCommand(final CommandArgs args) {
-		final ArrayList<String> operators = new ArrayList<String>();
-		for (final OfflinePlayer s : Bukkit.getOperators())
-			operators.add(s.getName() + ":" + s.getUniqueId().toString());
-		Collections.sort(operators);
-		if (!operators.isEmpty())
-			args.getSender().sendMessage(TextUtils.title("Operators"));
-		for (final String operator : operators) {
-			final String[] op = operator.split(":");
-			if (PlayerUtils.isOnline(op[0]))
-				args.getSender().sendMessage(ChatColor.GREEN + "[Online] " + ChatColor.WHITE + op[0] + " (" + op[1] + ")");
-			else
-				args.getSender().sendMessage(ChatColor.RED + "[Offline] " + ChatColor.WHITE + (op[0] == null ? "Couldn't find username" : op[0]) + " (" + op[1] + ")");
-		}
+	//cache data from the world data files and install them into the UUID map
+	//ensure that duplicates are NOT added! (use a set)
 
+	/** Retrieves the list of offline player names using Bukkit's getOfflinePlayers() */
+	public static List<String> getAllOfflinePlayerNames() {
+		final List<String> playerNames = new ArrayList<String>();
+		for (final OfflinePlayer p : getOfflinePlayers())
+			playerNames.add(p.getName());
+		return playerNames;
 	}
 
+	@SuppressWarnings("deprecation")
+	public static OfflinePlayer getOfflinePlayerFromString(final String string) {
+		for (final OfflinePlayer p : getOfflinePlayers())
+			if (p.getName().equalsIgnoreCase(string))
+				return p;
+		return Bukkit.getOfflinePlayer(string);
+	}
+
+	public static String getPlayernameFromUUID(final UUID uuid) {
+		for (final OfflinePlayer p : getOfflinePlayers())
+			if (p.getUniqueId().equals(uuid))
+				return p.getName();
+		return null;
+	}
+
+	public static boolean isOnline(final String player) {
+		for (final Player p : getOnlinePlayers())
+			if (p.getName().equals(player))
+				return true;
+		return false;
+	}
 }
