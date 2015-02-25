@@ -40,6 +40,7 @@ import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
 import io.github.Skepter.AllAssets.CommandFramework.Completer;
 import io.github.Skepter.AllAssets.Tasks.TPS;
 import io.github.Skepter.AllAssets.Utils.EncryptionUtils;
+import io.github.Skepter.AllAssets.Utils.Files;
 import io.github.Skepter.AllAssets.Utils.IDReader;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
@@ -257,7 +258,7 @@ public class CommandDebug implements Listener {
 		}
 		final EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
 		try {
-			final File file = new File(AllAssets.getStorage(), "data.bin");
+			final File file = new File(Files.getStorage(), "data.bin");
 			if (!file.exists())
 				file.createNewFile();
 			FileUtils.saveBytesSecurely(ec.encrypt(args.getArgs()[1]), file);
@@ -275,7 +276,7 @@ public class CommandDebug implements Listener {
 		}
 		final EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
 		try {
-			final byte[] bytes = FileUtils.loadBytesSecurely(new File(AllAssets.getStorage(), "data.bin"));
+			final byte[] bytes = FileUtils.loadBytesSecurely(new File(Files.getStorage(), "data.bin"));
 			System.out.println("Decrypted message: " + ec.decrypt(bytes));
 		} catch (final Exception e) {
 			e.printStackTrace();

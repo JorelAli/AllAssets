@@ -112,6 +112,7 @@ import io.github.Skepter.AllAssets.Misc.EnchantGlow;
 import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
 import io.github.Skepter.AllAssets.Reflection.VaultReflection;
 import io.github.Skepter.AllAssets.Tasks.TPS;
+import io.github.Skepter.AllAssets.Utils.Files;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
 
@@ -226,30 +227,6 @@ public class AllAssets extends JavaPlugin {
 
 	public Map<UUID, Long> tempTimeMap;
 
-	/** Returns the storage folder for player data */
-	public static File getPlayerStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
-	}
-
-	/** Returns the storage folder for storing data */
-	public static File getStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
-	}
-	
-	/** Returns the storage folder to backing up worlds */
-	public static File getWorldStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
-	}
-	
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
 	}
@@ -279,7 +256,7 @@ public class AllAssets extends JavaPlugin {
 
 		if (!tempTimeMap.isEmpty())
 			try {
-				FileUtils.save(tempTimeMap, new File(getStorage(), "tempTimeMap.bin"));
+				FileUtils.save(tempTimeMap, new File(Files.getStorage(), "tempTimeMap.bin"));
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
@@ -300,9 +277,6 @@ public class AllAssets extends JavaPlugin {
 		/* Some names will be removed - depends on whatever is in the Libs package */
 		getLogger().info("AllAssets, created by Skepter and Tundra");
 		//getLogger().info("Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
-
-		if (!new File(getDataFolder(), "Read me.txt").exists())
-			saveResource("Read me.txt", false);
 
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener(this));
@@ -501,7 +475,7 @@ public class AllAssets extends JavaPlugin {
 		/* Update tempTimeMap.bin file */
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
-				tempTimeMap = (Map<UUID, Long>) FileUtils.load(new File(getStorage(), "tempTimeMap.bin"));
+				tempTimeMap = (Map<UUID, Long>) FileUtils.load(new File(Files.getStorage(), "tempTimeMap.bin"));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -527,12 +501,12 @@ public class AllAssets extends JavaPlugin {
 
 	}
 
-	public void postLoad() {
+	private void postLoad() {
 
 	}
 
 	/* Easy system to add listeners */
-	public void r(final Listener l) {
+	private void r(final Listener l) {
 		if (masterSwitch)
 			for (final Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)

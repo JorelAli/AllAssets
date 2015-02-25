@@ -31,7 +31,6 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
 
@@ -52,7 +51,7 @@ public class EncryptionUtils {
 	 * @param key - The key to use */
 	public EncryptionUtils(final String key) {
 		encryptionKey = makeCompatible(key);
-		final File file = new File(AllAssets.getStorage(), "Encryption.bin");
+		final File file = new File(Files.getStorage(), "Encryption.bin");
 		if (file.exists())
 			try {
 				IV = String.valueOf(FileUtils.loadStringSecurely(file));

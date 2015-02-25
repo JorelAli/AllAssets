@@ -33,8 +33,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Config;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.CustomConfig;
+import io.github.Skepter.AllAssets.Utils.Files;
 
 import java.io.File;
 
@@ -45,7 +45,7 @@ import org.bukkit.entity.Player;
 public class PlayerData extends CustomConfig {
 
 	public PlayerData(final OfflinePlayer player) {
-		super(new File(AllAssets.getPlayerStorage(), player.getUniqueId() + ".yml"), player.getName());
+		super(new File(Files.getPlayerStorage(), player.getUniqueId() + ".yml"), player.getName());
 	}
 
 	public static void saveAllPlayers() {

@@ -29,8 +29,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Vault.Permissions;
 
-import io.github.Skepter.AllAssets.AllAssets;
 import io.github.Skepter.AllAssets.API.CustomConfig;
+import io.github.Skepter.AllAssets.Utils.Files;
 
 import java.io.File;
 import java.util.List;
@@ -93,7 +93,7 @@ public class PermissionDataManager extends CustomConfig {
 	 */
 
 	public PermissionDataManager() {
-		super(new File(AllAssets.getStorage(), "PermissionData.yml"), "Permissions");
+		super(new File(Files.getStorage(), "PermissionData.yml"), "Permissions");
 	}
 
 	public List<String> getWorldPermissions(final String worldName, final GroupDataType type, final String dataName) {

@@ -30,6 +30,7 @@
 package io.github.Skepter.AllAssets.Config;
 
 import io.github.Skepter.AllAssets.AllAssets;
+import io.github.Skepter.AllAssets.Utils.Files;
 import io.github.Skepter.AllAssets.Utils.Strings;
 
 import java.io.File;
@@ -75,7 +76,7 @@ public class ConfigHandler {
 		else
 			features = featuresManager.getNewConfig("features.yml");
 
-		if (!new File(AllAssets.getStorage(), "announcer.yml").exists())
+		if (!new File(Files.getStorage(), "announcer.yml").exists())
 			createAnnouncer();
 		else
 			announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
