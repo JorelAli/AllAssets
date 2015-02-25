@@ -31,11 +31,8 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Misc;
 
-import io.github.Skepter.AllAssets.Reflection.ReflectionUtils;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -107,19 +104,14 @@ public class EnchantGlow extends EnchantmentWrapper {
 			final Field f = Enchantment.class.getDeclaredField("byId");
 			f.setAccessible(true);
 			HashMap<Integer, Enchantment> byIDMap = (HashMap<Integer, Enchantment>) f.get(null);
-			byIDMap.remove(id);
+			if (byIDMap.containsKey(id))
+				byIDMap.remove(id);
 
-			ReflectionUtils.setFinalStaticField(f, byIDMap);
-			
 			final Field f1 = Enchantment.class.getDeclaredField("byName");
 			f1.setAccessible(true);
 			HashMap<String, Enchantment> byNameMap = (HashMap<String, Enchantment>) f1.get(null);
-			for (Entry<String, Enchantment> e : byNameMap.entrySet()) {
-				if (e.getValue().equals(glow))
-					byNameMap.remove(e.getKey());
-			}
-						
-			ReflectionUtils.setFinalStaticField(f1, byNameMap);
+			if (byNameMap.containsKey(name))
+				byNameMap.remove(name);
 
 		} catch (final Exception e) {
 			e.printStackTrace();

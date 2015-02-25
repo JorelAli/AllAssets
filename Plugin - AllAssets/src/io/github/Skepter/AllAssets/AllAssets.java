@@ -94,6 +94,7 @@ import io.github.Skepter.AllAssets.Config.ConfigHandler;
 import io.github.Skepter.AllAssets.Config.PlayerData;
 import io.github.Skepter.AllAssets.Config.UUIDData;
 import io.github.Skepter.AllAssets.Libs.ComphenixsGhostFactory;
+import io.github.Skepter.AllAssets.Listeners.AnvilListener;
 import io.github.Skepter.AllAssets.Listeners.ChatListener;
 import io.github.Skepter.AllAssets.Listeners.CommandCooldownListener;
 import io.github.Skepter.AllAssets.Listeners.ConsoleSayListener;
@@ -467,6 +468,7 @@ public class AllAssets extends JavaPlugin {
 		r(new SignListener());
 		r(new PlayerListener());
 		r(new CustomUnknownCommandListener());
+		r(new AnvilListener());
 		//TODO put into a thingymajig
 		r(new StopCommandListener());
 		if (ConfigHandler.features().getBoolean("ConsoleSay"))
