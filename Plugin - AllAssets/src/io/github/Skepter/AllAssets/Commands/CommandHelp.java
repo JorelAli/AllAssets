@@ -31,14 +31,14 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands;
+package io.github.skepter.allassets.commands;
 
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Utils.DoubleMap;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.skepter.allassets.CommandFramework;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.CommandFramework.Completer;
+import io.github.skepter.allassets.utils.DoubleMap;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

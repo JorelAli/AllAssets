@@ -27,7 +27,7 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API.Utils;
+package io.github.skepter.allassets.api.utils;
 
 import java.io.Serializable;
 import java.util.Collection;

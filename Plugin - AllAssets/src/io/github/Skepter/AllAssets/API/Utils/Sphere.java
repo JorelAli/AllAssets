@@ -1,4 +1,4 @@
-package io.github.Skepter.AllAssets.API.Utils;
+package io.github.skepter.allassets.api.utils;
 
 import java.util.ArrayList;
 

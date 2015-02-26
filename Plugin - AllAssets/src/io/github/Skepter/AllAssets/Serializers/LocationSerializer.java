@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Serializers;
+package io.github.skepter.allassets.serializers;
 
-import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
+import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

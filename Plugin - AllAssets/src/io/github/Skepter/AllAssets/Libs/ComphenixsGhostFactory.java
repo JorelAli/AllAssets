@@ -28,7 +28,7 @@
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
 
-package io.github.Skepter.AllAssets.Libs;
+package io.github.skepter.allassets.libs;
 
 import java.util.HashSet;
 import java.util.Iterator;

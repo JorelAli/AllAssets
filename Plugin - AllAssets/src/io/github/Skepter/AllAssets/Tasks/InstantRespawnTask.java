@@ -29,10 +29,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Tasks;
+package io.github.skepter.allassets.tasks;
 
-import io.github.Skepter.AllAssets.Reflection.PacketBuilder;
-import io.github.Skepter.AllAssets.Reflection.PacketBuilder.PacketType;
+import io.github.skepter.allassets.reflection.PacketBuilder;
+import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 
 import org.bukkit.entity.Player;
 

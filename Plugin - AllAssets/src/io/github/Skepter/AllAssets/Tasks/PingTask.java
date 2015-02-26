@@ -29,10 +29,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Tasks;
+package io.github.skepter.allassets.tasks;
 
-import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 
 import org.bukkit.entity.Player;
 

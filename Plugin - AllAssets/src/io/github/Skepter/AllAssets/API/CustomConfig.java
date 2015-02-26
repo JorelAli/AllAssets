@@ -27,10 +27,10 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API;
+package io.github.skepter.allassets.api;
 
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.commands.administration.CommandLog;
 
 import java.io.File;
 import java.io.IOException;

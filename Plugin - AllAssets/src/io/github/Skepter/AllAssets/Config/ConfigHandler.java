@@ -27,11 +27,11 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Config;
+package io.github.skepter.allassets.config;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Utils.Files;
-import io.github.Skepter.AllAssets.Utils.Strings;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Strings;
 
 import java.io.File;
 import java.util.Arrays;

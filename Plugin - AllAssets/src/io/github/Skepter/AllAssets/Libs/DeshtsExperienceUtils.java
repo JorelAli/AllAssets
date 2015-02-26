@@ -31,7 +31,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Libs;
+package io.github.skepter.allassets.libs;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;

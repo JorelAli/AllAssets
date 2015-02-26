@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils.UtilClasses;
+package io.github.skepter.allassets.utils.utilclasses;
 
 import java.util.ArrayList;
 import java.util.HashSet;

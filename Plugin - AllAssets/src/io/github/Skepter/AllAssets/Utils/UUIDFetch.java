@@ -29,11 +29,11 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.Tasks.UUIDFetchTask;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.tasks.UUIDFetchTask;
 
 import java.util.HashMap;
 import java.util.Map;

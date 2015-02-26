@@ -27,10 +27,10 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Vault.Permissions;
+package io.github.skepter.allassets.Vault.Permissions;
 
-import io.github.Skepter.AllAssets.API.CustomConfig;
-import io.github.Skepter.AllAssets.Utils.Files;
+import io.github.skepter.allassets.api.CustomConfig;
+import io.github.skepter.allassets.utils.Files;
 
 import java.io.File;
 import java.util.List;

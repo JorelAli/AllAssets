@@ -29,11 +29,11 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.API.OfflineUser;
-import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Config.UUIDData;
+import io.github.skepter.allassets.api.OfflineUser;
+import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.config.UUIDData;
 
 import java.util.Arrays;
 import java.util.UUID;

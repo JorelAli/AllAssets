@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;

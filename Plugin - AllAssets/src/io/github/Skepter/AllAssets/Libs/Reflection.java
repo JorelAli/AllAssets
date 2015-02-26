@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Libs;
+package io.github.skepter.allassets.libs;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

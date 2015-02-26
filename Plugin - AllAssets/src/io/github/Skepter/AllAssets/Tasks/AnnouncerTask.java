@@ -27,10 +27,10 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Tasks;
+package io.github.skepter.allassets.tasks;
 
-import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
+import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

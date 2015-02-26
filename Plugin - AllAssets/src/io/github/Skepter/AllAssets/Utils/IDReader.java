@@ -27,9 +27,9 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
-import io.github.Skepter.AllAssets.AllAssets;
+import io.github.skepter.allassets.AllAssets;
 
 import java.io.BufferedReader;
 import java.io.File;

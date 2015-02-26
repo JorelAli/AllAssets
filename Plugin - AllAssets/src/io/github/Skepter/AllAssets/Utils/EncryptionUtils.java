@@ -29,10 +29,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 
 import java.io.File;
 import java.util.Random;

@@ -31,14 +31,14 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.CommandListeners;
+package io.github.skepter.allassets.commandlisteners;
 
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.skepter.allassets.CommandFramework;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Tasks;
+package io.github.skepter.allassets.tasks;
 
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

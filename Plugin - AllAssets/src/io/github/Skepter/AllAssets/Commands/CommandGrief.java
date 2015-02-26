@@ -31,19 +31,19 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands;
+package io.github.skepter.allassets.commands;
 
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.PlayerGetter;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
-import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
-import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.YesNoConversation;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
+import io.github.skepter.allassets.CommandFramework;
+import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.misc.NotificationsBoard;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.YesNoConversation;
+import io.github.skepter.allassets.utils.utilclasses.MathUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import org.bukkit.conversations.BooleanPrompt;
 import org.bukkit.conversations.ConversationContext;

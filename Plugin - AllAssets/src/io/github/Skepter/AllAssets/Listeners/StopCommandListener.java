@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.Utils.YesNoConversation;
+import io.github.skepter.allassets.utils.YesNoConversation;
 
 import org.bukkit.Bukkit;
 import org.bukkit.conversations.BooleanPrompt;

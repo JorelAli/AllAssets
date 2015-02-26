@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.Config.ConfigHandler;
+import io.github.skepter.allassets.config.ConfigHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;

@@ -29,10 +29,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Vault.Permissions;
+package io.github.skepter.allassets.Vault.Permissions;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.utils.PlayerMap;
 
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;

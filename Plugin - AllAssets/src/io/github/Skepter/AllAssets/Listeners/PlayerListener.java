@@ -30,21 +30,21 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.API.User;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
-import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Config.UUIDData;
-import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
-import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
-import io.github.Skepter.AllAssets.Tasks.AnyLeashTask;
-import io.github.Skepter.AllAssets.Tasks.InstantRespawnTask;
-import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TimeUtils;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.config.UUIDData;
+import io.github.skepter.allassets.misc.NotificationsBoard;
+import io.github.skepter.allassets.serializers.InventorySerializer;
+import io.github.skepter.allassets.tasks.AnyLeashTask;
+import io.github.skepter.allassets.tasks.InstantRespawnTask;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.FireworkUtils;
+import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

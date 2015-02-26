@@ -29,12 +29,12 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils.UtilClasses;
+package io.github.skepter.allassets.utils.utilclasses;
 
-import static io.github.Skepter.AllAssets.Config.ConfigHandler.getMsg;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
-import io.github.Skepter.AllAssets.Utils.Strings;
+import static io.github.skepter.allassets.config.ConfigHandler.getMsg;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.utils.Strings;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

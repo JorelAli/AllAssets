@@ -1,8 +1,8 @@
-package io.github.Skepter.AllAssets;
+package io.github.skepter.allassets;
 
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

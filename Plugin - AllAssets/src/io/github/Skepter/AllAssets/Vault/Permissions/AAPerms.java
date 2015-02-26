@@ -1,7 +1,7 @@
-package io.github.Skepter.AllAssets.Vault.Permissions;
+package io.github.skepter.allassets.Vault.Permissions;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Reflection.VaultReflection;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.reflection.VaultReflection;
 
 import java.util.logging.Logger;
 

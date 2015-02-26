@@ -1,4 +1,4 @@
-package io.github.Skepter.AllAssets.Reflection;
+package io.github.skepter.allassets.reflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -12,16 +12,22 @@ public class ReflectionUtils {
 				return object;
 		throw new NullPointerException();
 	}
+	
+	/** Return the private field */
+	public static Field getPrivateField(final Object object, final String fieldName) throws Exception {
+		final Field field = object.getClass().getDeclaredField(fieldName);
+		return field;
+	}
 
 	/** Return the value from a private field */
-	public static Object getPrivateField(final Object object, final String fieldName) throws Exception {
+	public static Object getPrivateFieldValue(final Object object, final String fieldName) throws Exception {
 		final Field field = object.getClass().getDeclaredField(fieldName);
 		field.setAccessible(true);
 		return field.get(object);
 	}
 
 	/** Return the value from a non private field */
-	public static Object getField(final Object object, final String fieldName) throws Exception {
+	public static Object getFieldValue(final Object object, final String fieldName) throws Exception {
 		return object.getClass().getDeclaredField(fieldName).get(object);
 	}
 

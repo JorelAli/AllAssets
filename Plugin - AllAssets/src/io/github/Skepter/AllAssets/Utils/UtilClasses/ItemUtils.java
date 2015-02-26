@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils.UtilClasses;
+package io.github.skepter.allassets.utils.utilclasses;
 
-import io.github.Skepter.AllAssets.Misc.EnchantGlow;
+import io.github.skepter.allassets.misc.EnchantGlow;
 
 import java.util.Arrays;
 

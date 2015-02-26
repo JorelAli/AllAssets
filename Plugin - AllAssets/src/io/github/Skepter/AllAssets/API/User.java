@@ -27,17 +27,17 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API;
+package io.github.skepter.allassets.api;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
-import io.github.Skepter.AllAssets.Config.PlayerData;
-import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
-import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
-import io.github.Skepter.AllAssets.Serializers.LocationSerializer;
-import io.github.Skepter.AllAssets.Tasks.PingTask;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.config.PlayerData;
+import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.serializers.InventorySerializer;
+import io.github.skepter.allassets.serializers.LocationSerializer;
+import io.github.skepter.allassets.tasks.PingTask;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.List;

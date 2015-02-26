@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils.UtilClasses;
+package io.github.skepter.allassets.utils.utilclasses;
 
-import io.github.Skepter.AllAssets.Utils.Strings;
+import io.github.skepter.allassets.utils.Strings;
 
 import java.io.BufferedReader;
 import java.io.IOException;

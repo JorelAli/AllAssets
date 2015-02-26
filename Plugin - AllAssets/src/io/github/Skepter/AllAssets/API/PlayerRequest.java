@@ -1,7 +1,7 @@
-package io.github.Skepter.AllAssets.API;
+package io.github.skepter.allassets.api;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Utils.Strings;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.utils.Strings;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -29,10 +29,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Misc;
+package io.github.skepter.allassets.misc;
 
-import io.github.Skepter.AllAssets.Libs.SimpleScoreboard;
-import io.github.Skepter.AllAssets.Tasks.TPS;
+import io.github.skepter.allassets.libs.SimpleScoreboard;
+import io.github.skepter.allassets.tasks.TPS;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

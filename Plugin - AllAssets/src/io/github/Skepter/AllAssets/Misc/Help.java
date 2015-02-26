@@ -27,7 +27,7 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Misc;
+package io.github.skepter.allassets.misc;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

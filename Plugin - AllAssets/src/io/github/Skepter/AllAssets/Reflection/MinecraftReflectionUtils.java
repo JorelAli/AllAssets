@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Reflection;
+package io.github.skepter.allassets.reflection;
 
 import java.util.UUID;
 
@@ -88,19 +88,19 @@ public class MinecraftReflectionUtils {
 		this.player = player;
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
 		entityHumanClass = nmsPlayer.getClass().getSuperclass();
-		getConnection = ReflectionUtils.getField(nmsPlayer, "playerConnection");
+		getConnection = ReflectionUtils.getFieldValue(nmsPlayer, "playerConnection");
 		craftServer = Bukkit.getServer();
 		craftWorldClass = player.getWorld().getClass();
 
 		/* Get the player's ping and locale */
-		ping = (int) ReflectionUtils.getField(nmsPlayer, "ping");
-		locale = (String) ReflectionUtils.getPrivateField(nmsPlayer, "locale");
+		ping = (int) ReflectionUtils.getFieldValue(nmsPlayer, "ping");
+		locale = (String) ReflectionUtils.getPrivateFieldValue(nmsPlayer, "locale");
 
 		/* Get the server, world server and the package name for reflection.
 		 * The package name is retrieved dynamically from the server instead
 		 * of using the default package name and then parsing the version number.
 		 * It seems easier this way. */
-		dedicatedServer = ReflectionUtils.getPrivateField(craftServer, "console");
+		dedicatedServer = ReflectionUtils.getPrivateFieldValue(craftServer, "console");
 		worldServer = craftWorldClass.getMethod("getHandle").invoke(player.getWorld());
 		packageName = dedicatedServer.getClass().getPackage().getName();
 		obcPackageName = Bukkit.getServer().getClass().getPackage().getName();

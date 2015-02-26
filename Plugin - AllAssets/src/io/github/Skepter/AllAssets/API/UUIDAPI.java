@@ -27,10 +27,10 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API;
+package io.github.skepter.allassets.api;
 
-import io.github.Skepter.AllAssets.Config.UUIDData;
-import io.github.Skepter.AllAssets.Utils.UUIDFetch;
+import io.github.skepter.allassets.config.UUIDData;
+import io.github.skepter.allassets.utils.UUIDFetch;
 
 import java.util.Map.Entry;
 import java.util.UUID;

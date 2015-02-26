@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;

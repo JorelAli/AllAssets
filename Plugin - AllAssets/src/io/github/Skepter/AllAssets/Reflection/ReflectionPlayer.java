@@ -27,9 +27,9 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Reflection;
+package io.github.skepter.allassets.reflection;
 
-import io.github.Skepter.AllAssets.Reflection.PacketBuilder.PacketType;
+import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 
 import org.bukkit.entity.Player;
 

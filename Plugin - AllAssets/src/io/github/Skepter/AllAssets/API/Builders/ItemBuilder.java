@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API.Builders;
+package io.github.skepter.allassets.api.builders;
 
-import io.github.Skepter.AllAssets.Misc.EnchantGlow;
+import io.github.skepter.allassets.misc.EnchantGlow;
 
 import java.util.Arrays;
 import java.util.List;

@@ -31,20 +31,20 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Administration;
+package io.github.skepter.allassets.commands.administration;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Reflection.MinecraftReflectionUtils;
-import io.github.Skepter.AllAssets.Utils.Files;
-import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.YesNoConversation;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.WorldUtils;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.CommandFramework;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.CommandFramework.Completer;
+import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.YesNoConversation;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.WorldUtils;
 
 import java.io.File;
 import java.util.ArrayList;

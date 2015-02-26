@@ -27,13 +27,13 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API;
+package io.github.skepter.allassets.api;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Config.PlayerData;
-import io.github.Skepter.AllAssets.Serializers.InventorySerializer;
-import io.github.Skepter.AllAssets.Serializers.LocationSerializer;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.PlayerUtils;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.config.PlayerData;
+import io.github.skepter.allassets.serializers.InventorySerializer;
+import io.github.skepter.allassets.serializers.LocationSerializer;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import java.util.ArrayList;
 import java.util.List;

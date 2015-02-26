@@ -31,9 +31,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

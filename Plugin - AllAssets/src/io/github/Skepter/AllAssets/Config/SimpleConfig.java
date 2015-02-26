@@ -31,9 +31,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Config;
+package io.github.skepter.allassets.config;
 
-import io.github.Skepter.AllAssets.AllAssets;
+import io.github.skepter.allassets.AllAssets;
 
 import java.io.BufferedReader;
 import java.io.File;

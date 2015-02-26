@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Misc;
+package io.github.skepter.allassets.misc;
 
 import static org.bukkit.Bukkit.createInventory;
 import static org.bukkit.Material.FEATHER;
@@ -40,7 +40,7 @@ import static org.bukkit.Material.MAGMA_CREAM;
 import static org.bukkit.Material.NETHER_STAR;
 import static org.bukkit.Material.SKULL_ITEM;
 import static org.bukkit.Material.SLIME_BALL;
-import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
 
 import org.bukkit.inventory.Inventory;
 

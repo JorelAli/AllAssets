@@ -29,13 +29,13 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandConsoleLog;
-import io.github.Skepter.AllAssets.Commands.Administration.CommandLog;
-import io.github.Skepter.AllAssets.Utils.Strings;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.commands.administration.CommandConsoleLog;
+import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.utils.Strings;
 
 import java.util.UUID;
 

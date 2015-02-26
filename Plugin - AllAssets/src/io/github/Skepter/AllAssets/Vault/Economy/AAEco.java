@@ -1,7 +1,7 @@
-package io.github.Skepter.AllAssets.Vault.Economy;
+package io.github.skepter.allassets.Vault.Economy;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.Reflection.VaultReflection;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.reflection.VaultReflection;
 
 import java.util.ArrayList;
 import java.util.List;

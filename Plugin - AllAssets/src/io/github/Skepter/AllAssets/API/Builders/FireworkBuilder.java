@@ -27,7 +27,7 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API.Builders;
+package io.github.skepter.allassets.api.builders;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;

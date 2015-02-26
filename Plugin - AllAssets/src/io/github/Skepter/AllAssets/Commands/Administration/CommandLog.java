@@ -31,15 +31,15 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Administration;
+package io.github.skepter.allassets.commands.administration;
 
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.API.LogEvent;
-import io.github.Skepter.AllAssets.API.LogEvent.LogType;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.Config.ConfigHandler;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
+import io.github.skepter.allassets.CommandFramework;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.api.LogEvent;
+import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;

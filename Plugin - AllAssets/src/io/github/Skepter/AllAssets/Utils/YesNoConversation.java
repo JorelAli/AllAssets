@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
-import io.github.Skepter.AllAssets.AllAssets;
+import io.github.skepter.allassets.AllAssets;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

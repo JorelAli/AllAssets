@@ -27,13 +27,13 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.Skepter.AllAssets.API;
+package io.github.skepter.allassets.api;
 
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.WHITE;
-import io.github.Skepter.AllAssets.API.Utils.Debugger;
-import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
+import io.github.skepter.allassets.api.utils.Debugger;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

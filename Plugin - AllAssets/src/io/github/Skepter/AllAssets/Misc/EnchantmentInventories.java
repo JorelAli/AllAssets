@@ -31,10 +31,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Misc;
+package io.github.skepter.allassets.misc;
 
-import io.github.Skepter.AllAssets.API.Builders.ItemBuilder;
-import io.github.Skepter.AllAssets.Utils.Strings;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
+import io.github.skepter.allassets.utils.Strings;
 
 import java.util.HashMap;
 import java.util.Map;

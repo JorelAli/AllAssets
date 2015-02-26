@@ -29,10 +29,10 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.API.Utils.PlayerMap;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.utils.PlayerMap;
 
 import java.util.ArrayList;
 import java.util.List;

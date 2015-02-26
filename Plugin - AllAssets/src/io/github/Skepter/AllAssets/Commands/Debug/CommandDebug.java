@@ -31,23 +31,24 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Commands.Debug;
+package io.github.skepter.allassets.commands.debug;
 
-import io.github.Skepter.AllAssets.AllAssets;
-import io.github.Skepter.AllAssets.CommandFramework;
-import io.github.Skepter.AllAssets.CommandFramework.CommandArgs;
-import io.github.Skepter.AllAssets.CommandFramework.CommandHandler;
-import io.github.Skepter.AllAssets.CommandFramework.Completer;
-import io.github.Skepter.AllAssets.Tasks.TPS;
-import io.github.Skepter.AllAssets.Utils.EncryptionUtils;
-import io.github.Skepter.AllAssets.Utils.Files;
-import io.github.Skepter.AllAssets.Utils.IDReader;
-import io.github.Skepter.AllAssets.Utils.Strings;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.TimeUtils;
+import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.CommandFramework;
+import io.github.skepter.allassets.CommandFramework.CommandArgs;
+import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.CommandFramework.Completer;
+import io.github.skepter.allassets.tasks.TPS;
+import io.github.skepter.allassets.utils.EncryptionUtils;
+import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.IDReader;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.FileUtils;
+import io.github.skepter.allassets.utils.utilclasses.MathUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
+import io.github.skepter.allassets.utils.utilclasses.WorldUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -283,6 +284,26 @@ public class CommandDebug implements Listener {
 			e.printStackTrace();
 		}
 	}
+
+	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
+	public void unloadWorld(final CommandArgs args) {
+		if (args.getArgs().length != 1) {
+			ErrorUtils.notEnoughArguments(args.getSender());
+			return;
+		}
+		WorldUtils utils = null;
+		try {
+			utils = new WorldUtils(args.getPlayer());
+		} catch (Exception e1) {
+		}
+		try {
+			utils.forceUnloadWorld();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	/* Used to debug the Log feature */
 	//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")

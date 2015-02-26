@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Reflection;
+package io.github.skepter.allassets.reflection;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -50,7 +50,7 @@ public class GameProfile {
 		final Method method = usercache.getClass().getDeclaredMethod("a", utils.minecraftServerClass, String.class);
 		method.setAccessible(true);
 		final Object gameProfile = method.invoke(usercache, utils.dedicatedServer, player.getName());
-		id = (UUID) ReflectionUtils.getPrivateField(gameProfile, "id");
+		id = (UUID) ReflectionUtils.getPrivateFieldValue(gameProfile, "id");
 		name = player.getName();
 	}
 

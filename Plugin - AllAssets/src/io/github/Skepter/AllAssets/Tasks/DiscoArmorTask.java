@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Tasks;
+package io.github.skepter.allassets.tasks;
 
-import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
+import io.github.skepter.allassets.utils.utilclasses.FireworkUtils;
 
 import java.util.Random;
 

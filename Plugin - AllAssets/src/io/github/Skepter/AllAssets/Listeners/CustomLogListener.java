@@ -29,11 +29,11 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Listeners;
+package io.github.skepter.allassets.listeners;
 
-import io.github.Skepter.AllAssets.API.LogEvent;
-import io.github.Skepter.AllAssets.Misc.NotificationsBoard;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
+import io.github.skepter.allassets.api.LogEvent;
+import io.github.skepter.allassets.misc.NotificationsBoard;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

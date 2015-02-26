@@ -1,4 +1,4 @@
-package io.github.Skepter.AllAssets.Utils.UtilClasses;
+package io.github.skepter.allassets.utils.utilclasses;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 

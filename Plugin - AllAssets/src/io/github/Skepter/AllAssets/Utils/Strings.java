@@ -1,4 +1,4 @@
-package io.github.Skepter.AllAssets.Utils;
+package io.github.skepter.allassets.utils;
 
 import static org.bukkit.ChatColor.*;
 

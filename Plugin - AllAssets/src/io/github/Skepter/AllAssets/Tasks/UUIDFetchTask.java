@@ -29,9 +29,9 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Tasks;
+package io.github.skepter.allassets.tasks;
 
-import io.github.Skepter.AllAssets.Utils.UUIDFetch;
+import io.github.skepter.allassets.utils.UUIDFetch;
 
 import java.io.BufferedReader;
 import java.io.IOException;

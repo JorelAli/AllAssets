@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.Skepter.AllAssets.Serializers;
+package io.github.skepter.allassets.serializers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
