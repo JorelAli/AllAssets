@@ -50,6 +50,10 @@ public class WorldUtils {
 		MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 
 		Object handle = utils.worldServer;
+		
+		for(java.lang.reflect.Method m : utils.craftServer.getClass().getMethods())
+			player.sendMessage(m.getName());
+		
 		Object console = utils.craftServer.getClass().getMethod("getServer").invoke(null, (Object[]) null);
 		List<?> worlds = (List<?>) ReflectionUtils.getFieldValue(console, "worlds");
 		worlds.remove(worlds.indexOf(handle));

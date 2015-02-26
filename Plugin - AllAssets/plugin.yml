@@ -1,5 +1,5 @@
 name: AllAssets
-main: io.github.Skepter.AllAssets.AllAssets
+main: io.github.skepter.allassets.AllAssets
 version: 0.65 Alpha
 description: A plugin which has everything a server requires
 authors: [Skepter, Tundra]
