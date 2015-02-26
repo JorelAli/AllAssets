@@ -47,6 +47,7 @@ import io.github.Skepter.AllAssets.Utils.UtilClasses.ErrorUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FileUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.TextUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TimeUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -96,7 +97,7 @@ public class CommandDebug implements Listener {
 			strTps = ChatColor.RED + String.valueOf(tps);
 
 		sender.sendMessage(TextUtils.title("Debug"));
-		sender.sendMessage("Server uptime: " + MathUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
+		sender.sendMessage("Server uptime: " + TimeUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
 		sender.sendMessage("Server TPS: " + strTps);
 		return;
 	}
@@ -114,7 +115,7 @@ public class CommandDebug implements Listener {
 			strTps = ChatColor.RED + String.valueOf(tps);
 
 		sender.sendMessage(TextUtils.title("Full debug info"));
-		sender.sendMessage(" Server uptime: " + MathUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
+		sender.sendMessage(" Server uptime: " + TimeUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
 		sender.sendMessage(" Server TPS: " + strTps);
 		sender.sendMessage("");
 		sender.sendMessage(" Worlds loaded: " + Bukkit.getWorlds().size());
@@ -323,6 +324,11 @@ public class CommandDebug implements Listener {
 		args.getSender().sendMessage(Strings.TITLE + "There are " + conflict + " conflicting commands" + (conflict == 0 ? "" : " - Conflicting plugins:"));
 		for (final String s : conflictingPlugins)
 			args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + s);
+	}
+	
+
+	@CommandHandler(name = "debug.reset", permission = "debug", description = "Resets a player's settings. Resets Config etc.", isListed = false)
+	public void reset(final CommandArgs args) {
 	}
 
 	boolean physics = true;

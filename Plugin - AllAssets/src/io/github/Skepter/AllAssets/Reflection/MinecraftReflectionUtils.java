@@ -57,6 +57,7 @@ public class MinecraftReflectionUtils {
 
 	/* Misc & other objects */
 	final private String packageName;
+	final private String obcPackageName;
 	final public String authLibPackageName = "net.minecraft.util.com.mojang.authlib";
 	final public Object dedicatedServer;
 	final public Object worldServer;
@@ -102,6 +103,7 @@ public class MinecraftReflectionUtils {
 		dedicatedServer = ReflectionUtils.getPrivateField(craftServer, "console");
 		worldServer = craftWorldClass.getMethod("getHandle").invoke(player.getWorld());
 		packageName = dedicatedServer.getClass().getPackage().getName();
+		obcPackageName = Bukkit.getServer().getClass().getPackage().getName();
 
 		/* Create the class instances */
 		packetClass = getNMSClass("Packet");
@@ -136,6 +138,12 @@ public class MinecraftReflectionUtils {
 	 * the dedicated server */
 	public Class<?> getNMSClass(final String className) throws ClassNotFoundException {
 		return (Class.forName(packageName + "." + className));
+	}
+	
+	/** Retrieves a net.minecraft.server class by using the dynamic package from
+	 * the dedicated server */
+	public Class<?> getOBCClass(final String className) throws ClassNotFoundException {
+		return (Class.forName(obcPackageName + "." + className));
 	}
 
 	/** Sends an outgoing packet (From server to client) */

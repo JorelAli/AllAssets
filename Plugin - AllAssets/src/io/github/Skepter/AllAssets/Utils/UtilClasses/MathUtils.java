@@ -31,9 +31,6 @@
  *******************************************************************************/
 package io.github.Skepter.AllAssets.Utils.UtilClasses;
 
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-
-import java.util.Date;
 import java.util.Random;
 
 public class MathUtils {
@@ -84,32 +81,5 @@ public class MathUtils {
 		value = value * factor;
 		final long tmp = Math.round(value);
 		return (double) tmp / factor;
-	}
-
-	/** Formats date. Format it in the format of 'you have played since <time>'
-	 * Doesn't count the 0's
-	 * 
-	 * @param date - The long date in milliseconds
-	 * @return the formatted date in String form */
-	public static String formatDate(final long date) {
-		final long days = MILLISECONDS.toDays(date);
-		final long hours = MILLISECONDS.toHours(date) - (days * 86400);
-		final long minutes = MILLISECONDS.toMinutes(date) - (days * 86400) - (hours * 3600);
-		final long seconds = MILLISECONDS.toSeconds(date) - (days * 86400) - (hours * 3600) - (minutes * 60);
-		final StringBuilder builder = new StringBuilder();
-		if (days != 0)
-			builder.append(days + " days ");
-		if (hours != 0)
-			builder.append(hours + " hours ");
-		if (minutes != 0)
-			builder.append(minutes + " minutes ");
-		if (seconds != 0)
-			builder.append(seconds + " seconds ");
-		return builder.toString();
-	}
-
-	public static String formatDateAtASpecificPointInTime(final long dateTime) {
-		final long l = new Date().getTime() - dateTime;
-		return formatDate(l);
 	}
 }

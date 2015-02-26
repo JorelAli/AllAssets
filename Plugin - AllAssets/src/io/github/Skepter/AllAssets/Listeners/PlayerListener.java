@@ -44,7 +44,7 @@ import io.github.Skepter.AllAssets.Tasks.AnyLeashTask;
 import io.github.Skepter.AllAssets.Tasks.InstantRespawnTask;
 import io.github.Skepter.AllAssets.Utils.Strings;
 import io.github.Skepter.AllAssets.Utils.UtilClasses.FireworkUtils;
-import io.github.Skepter.AllAssets.Utils.UtilClasses.MathUtils;
+import io.github.Skepter.AllAssets.Utils.UtilClasses.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -112,7 +112,7 @@ public class PlayerListener implements Listener {
 			if (ConfigHandler.features().getBoolean("UniquePlayers"))
 				event.getPlayer().sendMessage(Strings.TITLE + Bukkit.getOfflinePlayers().length + " unique players have joined this server");
 			if (ConfigHandler.features().getBoolean("TotalTime"))
-				event.getPlayer().sendMessage(Strings.TITLE + "Total time played: " + MathUtils.formatDate(user.getTotalTimePlayed()));
+				event.getPlayer().sendMessage(Strings.TITLE + "Total time played: " + TimeUtils.formatDate(user.getTotalTimePlayed()));
 			if (ConfigHandler.features().getBoolean("FireworkOnJoin"))
 				for (int i = 0; i < new Random().nextInt(5); i++)
 					FireworkUtils.spawnRandomFirework(event.getPlayer().getLocation());

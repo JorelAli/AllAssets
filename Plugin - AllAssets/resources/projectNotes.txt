@@ -1,8 +1,5 @@
 Project notes:
 
-StaffChat feature 
-
-
 Potion GUI
 dump cosmetic features - heads/block head/trails etc.
 
@@ -14,7 +11,6 @@ Commands:
 //Ascend/Descend
 Command:up
 Command:down
-Command:tp
 Command:tpa
 Command:tpahere
 Command:tpall
@@ -23,7 +19,6 @@ Command:tptoggle
 Command:back
 Command:go
 Command:world
-Command:worlds
 Command:tpaccept
 Command:tpdeny
 Command:tppos
@@ -35,11 +30,6 @@ Command:home
 Command:sethome
 Command:delhome
 
-Command:fly
-Command:gmc
-Command:gms
-Command:gma
-Command:gamemode
 Command:set
 
 Command:w
@@ -90,12 +80,8 @@ Command:payall
 Command:pay
 Command:take
 Command:set <balance>
-Command:bal
-Command:baltop
 
 Command:ignite
-Command:extinguish
-Command:launch (projectile)
 Command:hat
 Command:near
 Command:kill
@@ -109,14 +95,10 @@ Command:unfreeze
 
 Command:help
 Command:info (simple info from a yml file)
-Command:aio
 Command:helpop
 Command:item
 Command:online
 Command:player (who, whois)
-
-Command:debug
-Command:log
 
 Command:ignore (darkGray messages)
 Command:mail
@@ -124,17 +106,11 @@ Command:me
 Command:msg
 Command:reply
 
-Command:invsee
-Command:enderchest
 Command:repair
 Command:repairall
 Command:kit (create, delete, kitName)
 
 Command:time
-Command:playertime (check ptime!)
-
-Command:weather (tab)
-Command:pweather (tab)
 
 Command:break
 Command:spawner
