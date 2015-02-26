@@ -89,7 +89,10 @@ public class MinecraftReflectionUtils {
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
 		entityHumanClass = nmsPlayer.getClass().getSuperclass();
 		getConnection = ReflectionUtils.getFieldValue(nmsPlayer, "playerConnection");
-		craftServer = Bukkit.getServer();
+		
+		obcPackageName = Bukkit.getServer().getClass().getPackage().getName();
+		
+		craftServer = getOBCClass("CraftServer").cast(Bukkit.getServer());
 		craftWorldClass = player.getWorld().getClass();
 
 		/* Get the player's ping and locale */
@@ -103,7 +106,6 @@ public class MinecraftReflectionUtils {
 		dedicatedServer = ReflectionUtils.getPrivateFieldValue(craftServer, "console");
 		worldServer = craftWorldClass.getMethod("getHandle").invoke(player.getWorld());
 		packageName = dedicatedServer.getClass().getPackage().getName();
-		obcPackageName = Bukkit.getServer().getClass().getPackage().getName();
 
 		/* Create the class instances */
 		packetClass = getNMSClass("Packet");

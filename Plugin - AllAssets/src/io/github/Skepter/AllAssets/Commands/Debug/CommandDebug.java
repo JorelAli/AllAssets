@@ -38,6 +38,9 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
+import io.github.skepter.allassets.api.utils.Debugger;
+import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.reflection.ReflectionUtils;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.utils.EncryptionUtils;
 import io.github.skepter.allassets.utils.Files;
@@ -48,7 +51,6 @@ import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
-import io.github.skepter.allassets.utils.utilclasses.WorldUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -59,6 +61,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -67,6 +70,7 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -285,25 +289,38 @@ public class CommandDebug implements Listener {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
 	public void unloadWorld(final CommandArgs args) {
-		if (args.getArgs().length != 1) {
-			ErrorUtils.notEnoughArguments(args.getSender());
-			return;
-		}
-		WorldUtils utils = null;
 		try {
-			utils = new WorldUtils(args.getPlayer());
-		} catch (Exception e1) {
-		}
-		try {
-			utils.forceUnloadWorld();
+			Player player = args.getPlayer();
+			MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
+
+			Object handle = utils.worldServer;
+			Object craftServer = ReflectionUtils.getPrivateFieldValue(handle, "server");
+			for (java.lang.reflect.Field f : craftServer.getClass().getFields()) {
+				player.sendMessage(f.getName());
+				if (f.getName().equals("worlds")) {
+					f.setAccessible(true);
+					Map<String, World> cbWorlds = (Map<String, World>) f.get(craftServer);
+					Debugger.printMap(cbWorlds);
+				}
+
+			}
+
+			Map<String, World> cbWorlds = (Map<String, World>) ReflectionUtils.getPrivateFieldValue(craftServer, "worlds");
+			cbWorlds.remove(player.getWorld().getName().toLowerCase());
+			ReflectionUtils.setFinalStaticField(ReflectionUtils.getPrivateField(utils.craftServer, "worlds"), cbWorlds);
+
+			Object console = ReflectionUtils.getPrivateFieldValue(craftServer, "console");
+			List<?> worlds = (List<?>) ReflectionUtils.getPrivateFieldValue(console, "worlds");
+			worlds.remove(worlds.indexOf(handle));
+			ReflectionUtils.setPrivateField(console, "worlds", worlds);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	/* Used to debug the Log feature */
 	//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")
@@ -346,7 +363,6 @@ public class CommandDebug implements Listener {
 		for (final String s : conflictingPlugins)
 			args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + s);
 	}
-	
 
 	@CommandHandler(name = "debug.reset", permission = "debug", description = "Resets a player's settings. Resets Config etc.", isListed = false)
 	public void reset(final CommandArgs args) {

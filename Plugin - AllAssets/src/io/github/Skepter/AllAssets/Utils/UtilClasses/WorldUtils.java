@@ -1,8 +1,5 @@
 package io.github.skepter.allassets.utils.utilclasses;
 
-import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
-import io.github.skepter.allassets.reflection.ReflectionUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,8 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -44,25 +39,6 @@ public class WorldUtils {
 		if (playerStatsFile.exists()) {
 			playerStatsFile.delete();
 		}
-	}
-
-	public void forceUnloadWorld() throws Exception {
-		MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
-
-		Object handle = utils.worldServer;
-		
-		for(java.lang.reflect.Method m : utils.craftServer.getClass().getMethods())
-			player.sendMessage(m.getName());
-		
-		Object console = utils.craftServer.getClass().getMethod("getServer").invoke(null, (Object[]) null);
-		List<?> worlds = (List<?>) ReflectionUtils.getFieldValue(console, "worlds");
-		worlds.remove(worlds.indexOf(handle));
-		ReflectionUtils.setPrivateField(console, "worlds", worlds);
-
-		@SuppressWarnings("unchecked")
-		Map<String, World> cbWorlds = (Map<String, World>) ReflectionUtils.getPrivateFieldValue(utils.craftServer, "worlds");
-		cbWorlds.remove(world.getName().toLowerCase());
-		ReflectionUtils.setFinalStaticField(ReflectionUtils.getPrivateField(utils.craftServer, "worlds"), cbWorlds);
 	}
 
 	public void unloadWorld() {
