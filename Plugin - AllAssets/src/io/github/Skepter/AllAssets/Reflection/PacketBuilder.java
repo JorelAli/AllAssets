@@ -39,7 +39,7 @@ import org.bukkit.entity.Player;
 public class PacketBuilder {
 
 	public enum PacketType {
-		PLAY_OUT_CHAT, PLAY_OUT_NAMED_ENTITY_SPAWN, PLAY_IN_CLIENT_COMMAND, PLAY_OUT_BED, PLAY_OUT_ANIMATION;
+		PLAY_OUT_CHAT, PLAY_OUT_NAMED_ENTITY_SPAWN, PLAY_IN_CLIENT_COMMAND, PLAY_OUT_BED, PLAY_OUT_ANIMATION, PLAY_OUT_OPEN_WINDOW;
 	}
 
 	public enum PacketDirection {
@@ -77,6 +77,9 @@ public class PacketBuilder {
 				break;
 			case PLAY_OUT_NAMED_ENTITY_SPAWN:
 				packet = utils.emptyPacketPlayOutNamedEntitySpawn;
+				break;
+			case PLAY_OUT_OPEN_WINDOW:
+				packet = utils.emptyPacketPlayOutOpenWindow;
 				break;
 			default:
 				break;

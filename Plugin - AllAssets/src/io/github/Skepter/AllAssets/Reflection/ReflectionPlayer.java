@@ -31,6 +31,8 @@ package io.github.skepter.allassets.reflection;
 
 import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 
+import java.lang.reflect.Method;
+
 import org.bukkit.entity.Player;
 
 public class ReflectionPlayer {
@@ -39,7 +41,51 @@ public class ReflectionPlayer {
 		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
 	}
 
-	public static void doAnimation(final Player player, final AnimationType type) {
+	private Player player;
+
+	public ReflectionPlayer(final Player player) {
+		this.player = player;
+	}
+
+	public void openAnvil() {
+		try {
+			MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
+
+			Method method = utils.nmsPlayer.getClass().getDeclaredMethod("openTileEntity", utils.getNMSClass("ITileEntityContainer"));
+
+			Class<?> tileEntityContainerAnvilClass = utils.getNMSClass("TileEntityContainerAnvil");
+			Object world = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getSuperclass().getSuperclass(), "world");
+//			Object inventory = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass(), "inventory");
+
+			Object tileEntityContainerAnvil = tileEntityContainerAnvilClass.getConstructor(utils.getNMSClass("World"), utils.getNMSClass("BlockPosition")).newInstance(world, null);
+			Object activeContainer = ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getDeclaredField("activeContainer"));
+			ReflectionUtils.setPerfectField(activeContainer, activeContainer.getClass().getSuperclass(), "checkReachable", false);
+
+//			Constructor<?> blockPosition = utils.getNMSClass("BlockPosition").getConstructor(int.class, int.class, int.class);
+//			Object defaultBlockPosition = blockPosition.newInstance(0, 0, 0);
+
+//			Constructor<?> c = utils.getNMSClass("ContainerAnvil").getConstructor(utils.getNMSClass("PlayerInventory"), utils.getNMSClass("World"), utils.getNMSClass("BlockPosition"), utils.getNMSClass("EntityHuman"));
+//			Object anvilContainer = c.newInstance(inventory, world, defaultBlockPosition, utils.nmsPlayer);
+//
+//			Method m = utils.getOBCClass("event.CraftEventFactory").getDeclaredMethod("callInventoryOpenEvent", utils.getNMSClass("EntityPlayer"), utils.getNMSClass("Container"));
+//			m.invoke(utils.nmsPlayer, utils.nmsPlayer, anvilContainer);
+
+			new PacketBuilder(player, PacketType.PLAY_OUT_OPEN_WINDOW).set("a", (int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter")).set("b", (String) "minecraft:anvil").set("c", utils.chatSerialize("Repairing")).set("d", (int) 9);
+
+			//			ReflectionUtils.setPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass(), "activeContainer", anvilContainer);
+			ReflectionUtils.setPerfectField(activeContainer, activeContainer.getClass().getSuperclass(), "windowId", ((int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter")));
+
+			//			activeContainer.getClass().getDeclaredMethod("addSlotListener", utils.nmsPlayer.getClass()).invoke(activeContainer, utils.nmsPlayer);
+
+			method.invoke(utils.nmsPlayer, tileEntityContainerAnvil);
+			//ReflectionUtils.setPerfectField(o, o.getClass().getSuperclass(), "", (int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void doAnimation(final AnimationType type) {
 		try {
 			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 			Object animationPacket = utils.emptyPacketPlayOutAnimation;
@@ -80,12 +126,12 @@ public class ReflectionPlayer {
 		}
 	}
 
-	public static void putToBed(final Player player) {
+	public void putToBed() {
 		new PacketBuilder(player, PacketType.PLAY_OUT_BED).set("a", player.getEntityId()).setLocation("b", "c", "d", player.getLocation()).send();
 	}
 
-	public static void awakeFromBed(final Player player) {
-		doAnimation(player, AnimationType.LEAVE_BED);
+	public void awakeFromBed() {
+		doAnimation(AnimationType.LEAVE_BED);
 	}
 
 }

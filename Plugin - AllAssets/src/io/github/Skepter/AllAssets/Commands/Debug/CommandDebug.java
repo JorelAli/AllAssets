@@ -40,6 +40,7 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.reflection.ReflectionPlayer;
 import io.github.skepter.allassets.reflection.ReflectionUtils;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.utils.EncryptionUtils;
@@ -54,8 +55,6 @@ import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -294,28 +293,13 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.anvil", permission = "debug", description = "Unloads a world")
 	public void openAnvil(final CommandArgs args) {
 		try {
-			MinecraftReflectionUtils utils = new MinecraftReflectionUtils(args.getPlayer());
-
-			Method method = utils.nmsPlayer.getClass().getDeclaredMethod("openTileEntity", utils.getNMSClass("ITileEntityContainer"));
-			
-//			Class<?> blockPositionClass = utils.getNMSClass("BlockPosition");
-//			Constructor<?> blockPositionConstructor = blockPositionClass.getConstructor(int.class, int.class, int.class);
-//			Object blockpos = blockPositionConstructor.newInstance(null, null, null);
-			
-			Class<?> tileEntityContainerAnvilClass = utils.getNMSClass("TileEntityContainerAnvil");
-			Constructor<?> tileEntityContainerAnvilConstructor = tileEntityContainerAnvilClass.getConstructor(utils.getNMSClass("World"), utils.getNMSClass("BlockPosition"));
-			Object tileEntityContainerAnvil = tileEntityContainerAnvilConstructor.newInstance(ReflectionUtils.getPrivateField(utils.nmsPlayer, "world"), null);
-			
-			method.invoke(utils.nmsPlayer, tileEntityContainerAnvil);
-			Object o = ReflectionUtils.getPrivateField(utils.nmsPlayer, "activeContainer");
-			ReflectionUtils.setPrivateField(o, "checkReachable", false);
-						
-			//		getHandle().openTileEntity(new TileEntityContainerWorkbench(getHandle().world, new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ())));
-			//		getHandle().activeContainer.checkReachable = false;
+			new ReflectionPlayer(args.getPlayer()).openAnvil();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
