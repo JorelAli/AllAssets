@@ -34,11 +34,18 @@
 package io.github.skepter.allassets.commands.administration;
 
 import io.github.skepter.allassets.CommandFramework;
-import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.utils.InputParser;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CommandSpawnMob {
@@ -47,6 +54,7 @@ public class CommandSpawnMob {
 		framework.registerCommands(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob")
 	public void command(final CommandArgs args) {
 		//TODO finish
@@ -54,12 +62,21 @@ public class CommandSpawnMob {
 		if (player != null) {
 			switch (args.getArgs().length) {
 			case 0:
+				printHelp(player);
 				return;
 			case 1:
+				Block b = player.getTargetBlock(null, 256);
+				Block spawnLocation = b.getRelative(BlockFace.UP);
+				player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation.getLocation()), new InputParser(args.getArgs()[0]).parseMob());
 				return;
 			}
 			ErrorUtils.tooManyArguments(player);
 			return;
 		}
+	}
+	
+	@Help(name="Spawnmob")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Spawnmob", "/spawnmob <mob> - spawns a mob");
 	}
 }
