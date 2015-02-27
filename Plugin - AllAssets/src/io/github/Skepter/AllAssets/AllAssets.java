@@ -73,6 +73,7 @@ import io.github.skepter.allassets.commands.administration.CommandOplist;
 import io.github.skepter.allassets.commands.administration.CommandRemove;
 import io.github.skepter.allassets.commands.administration.CommandSignEdit;
 import io.github.skepter.allassets.commands.administration.CommandSpawnItem;
+import io.github.skepter.allassets.commands.administration.CommandSpawnMob;
 import io.github.skepter.allassets.commands.administration.CommandTime;
 import io.github.skepter.allassets.commands.administration.CommandWeather;
 import io.github.skepter.allassets.commands.cosmetics.CommandGlow;
@@ -420,6 +421,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SpawnItem"))
 			new CommandSpawnItem(framework);
+		if (ConfigHandler.features().getBoolean("SpawnMob"))
+			new CommandSpawnMob(framework);
 		if (ConfigHandler.features().getBoolean("Time"))
 			new CommandTime(framework);
 		if (ConfigHandler.features().getBoolean("Tp"))
