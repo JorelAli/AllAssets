@@ -34,12 +34,14 @@
 package io.github.skepter.allassets.commands.administration;
 
 import io.github.skepter.allassets.CommandFramework;
-import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+
+import java.util.HashSet;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -52,23 +54,22 @@ public class CommandSignEdit {
 		framework.registerCommands(this);
 	}
 
-	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "signedit", description = "Allows you to edit signs")
 	public void command(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			if (args.getArgs().length > 1) {
 				if (TextUtils.isInteger(args.getArgs()[0]))
-					if (player.getTargetBlock(null, 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(null, 256).getType().equals(Material.WALL_SIGN)) {
-						final Sign sign = (Sign) player.getTargetBlock(null, 256).getState();
+					if (player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.WALL_SIGN)) {
+						final Sign sign = (Sign) player.getTargetBlock(new HashSet<Material>(), 256).getState();
 						final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
 						sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, ConfigHandler.features().getBoolean("ChatColor") ? ChatColor.translateAlternateColorCodes('&', s.substring(0, s.length() - 1)) : s.substring(0, s.length() - 1));
 						sign.update();
 
 					}
 			} else if (TextUtils.isInteger(args.getArgs()[0])) {
-				if (player.getTargetBlock(null, 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(null, 256).getType().equals(Material.WALL_SIGN)) {
-					final Sign sign = (Sign) player.getTargetBlock(null, 256).getState();
+				if (player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.WALL_SIGN)) {
+					final Sign sign = (Sign) player.getTargetBlock(new HashSet<Material>(), 256).getState();
 					sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, "");
 					sign.update();
 				}

@@ -43,6 +43,9 @@ import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import java.util.HashSet;
+
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
@@ -54,7 +57,6 @@ public class CommandSpawnMob {
 		framework.registerCommands(this);
 	}
 
-	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob")
 	public void command(final CommandArgs args) {
 		//TODO finish
@@ -65,7 +67,7 @@ public class CommandSpawnMob {
 				printHelp(player);
 				return;
 			case 1:
-				Block b = player.getTargetBlock(null, 256);
+				Block b = player.getTargetBlock(new HashSet<Material>(), 256);
 				Block spawnLocation = b.getRelative(BlockFace.UP);
 				player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation.getLocation()), new InputParser(args.getArgs()[0]).parseMob());
 				return;

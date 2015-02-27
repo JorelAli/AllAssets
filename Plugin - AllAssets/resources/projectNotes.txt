@@ -40,7 +40,6 @@ Command:seen
 Command:suicide
 Command:lookup
 Command:furnace
-Command:workbench
 Command:vanish
 Command:rvanish
 Command:jail
@@ -61,21 +60,12 @@ Command:setServermotd (setListings motd)
 Command:xp
 Command:level
 Command:worldGenerationCommands - tree etc..?
-Command:chearchat
 Command:broadcast
-Command:forcechat
-Command:head
-Command:oplist
-Command:rename
-Command:signedit
 Command:cook
 Command:socialspy (seemessages, seemsg)
-Command:su (console - non-OP)
 Command:list (debug.txt)
 Command:erase
 Command:give
-Command:enchant
-(opp.txt etc.)
 Command:payall
 Command:pay
 Command:take
@@ -86,10 +76,7 @@ Command:hat
 Command:near
 Command:kill
 Command:killall (mobs)
-Command:bind
-Command:unbind
 Command:infinite (toggle)
-Command:spawnentity
 Command:freeze
 Command:unfreeze
 

@@ -54,6 +54,8 @@ import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -285,6 +287,32 @@ public class CommandDebug implements Listener {
 			final byte[] bytes = FileUtils.loadBytesSecurely(new File(Files.getStorage(), "data.bin"));
 			System.out.println("Decrypted message: " + ec.decrypt(bytes));
 		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@CommandHandler(name = "debug.anvil", permission = "debug", description = "Unloads a world")
+	public void openAnvil(final CommandArgs args) {
+		try {
+			MinecraftReflectionUtils utils = new MinecraftReflectionUtils(args.getPlayer());
+
+			Method method = utils.nmsPlayer.getClass().getDeclaredMethod("openTileEntity", utils.getNMSClass("ITileEntityContainer"));
+			
+//			Class<?> blockPositionClass = utils.getNMSClass("BlockPosition");
+//			Constructor<?> blockPositionConstructor = blockPositionClass.getConstructor(int.class, int.class, int.class);
+//			Object blockpos = blockPositionConstructor.newInstance(null, null, null);
+			
+			Class<?> tileEntityContainerAnvilClass = utils.getNMSClass("TileEntityContainerAnvil");
+			Constructor<?> tileEntityContainerAnvilConstructor = tileEntityContainerAnvilClass.getConstructor(utils.getNMSClass("World"), utils.getNMSClass("BlockPosition"));
+			Object tileEntityContainerAnvil = tileEntityContainerAnvilConstructor.newInstance(ReflectionUtils.getPrivateField(utils.nmsPlayer, "world"), null);
+			
+			method.invoke(utils.nmsPlayer, tileEntityContainerAnvil);
+			Object o = ReflectionUtils.getPrivateField(utils.nmsPlayer, "activeContainer");
+			ReflectionUtils.setPrivateField(o, "checkReachable", false);
+						
+			//		getHandle().openTileEntity(new TileEntityContainerWorkbench(getHandle().world, new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ())));
+			//		getHandle().activeContainer.checkReachable = false;
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

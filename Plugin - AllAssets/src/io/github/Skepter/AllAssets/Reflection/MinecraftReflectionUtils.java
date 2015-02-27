@@ -31,8 +31,6 @@
  *******************************************************************************/
 package io.github.skepter.allassets.reflection;
 
-import java.util.UUID;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -58,7 +56,6 @@ public class MinecraftReflectionUtils {
 	/* Misc & other objects */
 	final private String packageName;
 	final private String obcPackageName;
-	final public String authLibPackageName = "net.minecraft.util.com.mojang.authlib";
 	final public Object dedicatedServer;
 	final public Object worldServer;
 
@@ -67,7 +64,6 @@ public class MinecraftReflectionUtils {
 	final public Class<?> iChatBaseComponentClass;
 	final public Class<?> packetClass;
 	final public Class<?> enumClientCommandClass;
-	final public Class<?> gameProfileClass;
 	final public Class<?> minecraftServerClass;
 	final public Class<?> nmsWorldClass;
 	final public Class<?> entityHumanClass;
@@ -111,7 +107,6 @@ public class MinecraftReflectionUtils {
 		packetClass = getNMSClass("Packet");
 		iChatBaseComponentClass = getNMSClass("IChatBaseComponent");
 		enumClientCommandClass = getNMSClass("EnumClientCommand");
-		gameProfileClass = Class.forName(authLibPackageName + ".GameProfile");
 		minecraftServerClass = dedicatedServer.getClass().getSuperclass();
 		nmsWorldClass = worldServer.getClass().getSuperclass();
 		abilities = entityHumanClass.getField("abilities").get(nmsPlayer);
@@ -129,11 +124,6 @@ public class MinecraftReflectionUtils {
 	/** Serialises a String (JSON stuff) */
 	public Object chatSerialize(final String string) throws Exception {
 		return emptyChatSerializer.getClass().getMethod("a", String.class).invoke(emptyChatSerializer, string);
-	}
-
-	/** Creates a new GameProfile instance */
-	public Object getGameProfile() throws Exception {
-		return gameProfileClass.getConstructor(UUID.class, String.class).newInstance(player.getUniqueId(), player.getName());
 	}
 
 	/** Retrieves a net.minecraft.server class by using the dynamic package from
