@@ -44,7 +44,6 @@ import io.github.skepter.allassets.commandlisteners.CommandStaffChat;
 import io.github.skepter.allassets.commands.CommandClear;
 import io.github.skepter.allassets.commands.CommandEnderchest;
 import io.github.skepter.allassets.commands.CommandGhost;
-import io.github.skepter.allassets.commands.CommandGlow;
 import io.github.skepter.allassets.commands.CommandGrief;
 import io.github.skepter.allassets.commands.CommandHelp;
 import io.github.skepter.allassets.commands.CommandMore;
@@ -76,6 +75,8 @@ import io.github.skepter.allassets.commands.administration.CommandSignEdit;
 import io.github.skepter.allassets.commands.administration.CommandSpawnItem;
 import io.github.skepter.allassets.commands.administration.CommandTime;
 import io.github.skepter.allassets.commands.administration.CommandWeather;
+import io.github.skepter.allassets.commands.cosmetics.CommandGlow;
+import io.github.skepter.allassets.commands.cosmetics.CommandHead;
 import io.github.skepter.allassets.commands.debug.CommandBatch;
 import io.github.skepter.allassets.commands.debug.CommandDebug;
 import io.github.skepter.allassets.commands.debug.CommandPing;
@@ -377,6 +378,8 @@ public class AllAssets extends JavaPlugin {
 				r(new CommandGod(framework));
 		if (ConfigHandler.features().getBoolean("Grief"))
 			new CommandGrief(framework);
+		if (ConfigHandler.features().getBoolean("Head"))
+			new CommandHead(framework);
 		if (ConfigHandler.features().getBoolean("Inventory"))
 			new CommandInventory(framework);
 		if (ConfigHandler.features().getBoolean("Launch"))

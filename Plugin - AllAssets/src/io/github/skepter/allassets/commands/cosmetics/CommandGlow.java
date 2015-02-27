@@ -27,87 +27,43 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.skepter.allassets.commands.administration;
+/*******************************************************************************
+ *******************************************************************************/
+/*******************************************************************************
+ *******************************************************************************/
+package io.github.skepter.allassets.commands.cosmetics;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.api.builders.ItemBuilder;
-import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-public class CommandSpawnItem {
+public class CommandGlow {
 
-	public CommandSpawnItem(final CommandFramework framework) {
+	public CommandGlow(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	public static Map<String, ItemStack> items = new HashMap<String, ItemStack>();
-
-	@CommandHandler(name = "spawnitem", aliases = { "si" }, permission = "spawnitem", description = "Spawns a custom item")
+	@CommandHandler(name = "glow", permission = "glow", description = "Makes the item in your hand glow")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-
-			switch (args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				break;
-			case 1:
-				ItemStack is = getItem(args.getArgs()[0]);
-				if (is != null) {
-					player.getInventory().addItem(is);
-					player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
-				} else
-					ErrorUtils.error(player, "Item not found");
-				return;
-
-			}
-			return;
-		}
-	}
-
-	private ItemStack getItem(String arg) {
-		for (String string : items.keySet()) {
-			if (string.equalsIgnoreCase(arg))
-				return items.get(string);
-		}
-		return null;
-	}
-
-	@CommandHandler(name = "spawnitem.list", permission = "spawnitem", description = "Shows a list of items to spawn")
-	public void startAnnouncer(final CommandArgs args) {
-		args.getSender().sendMessage(TextUtils.title("Items"));
-		for (Entry<String, ItemStack> entry : items.entrySet()) {
-			args.getSender().sendMessage(Strings.ACCENT_COLOR + entry.getKey());
+			if (!player.getItemInHand().getType().isBlock()) {
+				if (new ItemBuilder(player.getItemInHand()).hasGlow()) {
+					player.setItemInHand(new ItemBuilder(player.getItemInHand()).removeGlow().build());
+					player.sendMessage(Strings.TITLE + "Your item is no longer glowing!");
+				} else {
+					player.setItemInHand(new ItemBuilder(player.getItemInHand()).addGlow().build());
+					player.sendMessage(Strings.TITLE + "Your item is now glowing!");
+				}
+			} else
+				ErrorUtils.error(player, "You cannot make that item glow!");
 		}
 		return;
 	}
-
-	@Completer(name = "spawnitem")
-	public List<String> onTab(final CommandArgs args) {
-		List<String> i = new ArrayList<String>();
-		i.addAll(items.keySet());
-		return i;
-	}
-
-	@Help(name = "Spawnitem")
-	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Spawnitem", "/spawnitem list - shows a list of items to spawn", "/spawnitem <itemName> - spawns a custom item");
-	}
-
 }

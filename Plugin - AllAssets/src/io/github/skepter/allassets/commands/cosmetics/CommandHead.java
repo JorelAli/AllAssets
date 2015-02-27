@@ -31,39 +31,57 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands;
+package io.github.skepter.allassets.commands.cosmetics;
 
 import io.github.skepter.allassets.CommandFramework;
-import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.api.builders.ItemBuilder;
+import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
-public class CommandGlow {
+public class CommandHead {
 
-	public CommandGlow(final CommandFramework framework) {
+	public CommandHead(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "glow", permission = "glow", description = "Makes the item in your hand glow")
+	@SuppressWarnings("deprecation")
+	@CommandHandler(name = "head", permission = "head", description = "Spawns in a head")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			if (!player.getItemInHand().getType().isBlock()) {
-				if (new ItemBuilder(player.getItemInHand()).hasGlow()) {
-					player.setItemInHand(new ItemBuilder(player.getItemInHand()).removeGlow().build());
-					player.sendMessage(Strings.TITLE + "Your item is no longer glowing!");
-				} else {
-					player.setItemInHand(new ItemBuilder(player.getItemInHand()).addGlow().build());
-					player.sendMessage(Strings.TITLE + "Your item is now glowing!");
-				}
-			} else
-				ErrorUtils.error(player, "You cannot make that item glow!");
+			switch(args.getArgs().length) {
+			case 0:
+				printHelp(player);
+				return;
+			case 1:
+				ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+				SkullMeta skull = (SkullMeta) head.getItemMeta();
+				skull.setOwner(args.getArgs()[0]);
+				head.setItemMeta(skull);
+				player.getInventory().addItem(head);
+				player.updateInventory();
+				player.sendMessage(Strings.TITLE + "Spawned in " + args.getArgs()[0] + "'s head");
+				return;
+			default:
+				ErrorUtils.tooManyArguments(player);
+				return;
+			}
 		}
 		return;
+	}
+	
+	@Help(name="Head")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Head", "/head <player> - spawns in <player>'s head");
 	}
 }
