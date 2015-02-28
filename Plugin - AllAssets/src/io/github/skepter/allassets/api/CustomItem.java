@@ -65,13 +65,17 @@ public abstract class CustomItem implements Listener {
 		CommandSpawnItem.items.put(itemName, itemStack);
 	}
 
-	public abstract void leftClickBlock(Player player);
+	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	public abstract boolean leftClickBlock(Player player);
 
-	public abstract void rightClickBlock(Player player);
+	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	public abstract boolean rightClickBlock(Player player);
 
-	public abstract void leftClickAir(Player player);
+	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	public abstract boolean leftClickAir(Player player);
 
-	public abstract void rightClickAir(Player player);
+	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	public abstract boolean rightClickAir(Player player);
 
 	public Block getInteractedBlock(Player player) {
 		return block;
@@ -83,19 +87,22 @@ public abstract class CustomItem implements Listener {
 		try {
 			if (permission == null || event.getPlayer().hasPermission(permission))
 				if (event.getPlayer().getItemInHand().equals(itemStack)) {
-					event.setCancelled(true);
 					switch (event.getAction()) {
 					case LEFT_CLICK_AIR:
-						leftClickAir(event.getPlayer());
+						if(leftClickAir(event.getPlayer()));
+						event.setCancelled(true);
 						break;
 					case LEFT_CLICK_BLOCK:
-						leftClickBlock(event.getPlayer());
+						if(leftClickBlock(event.getPlayer()));
+						event.setCancelled(true);
 						break;
 					case RIGHT_CLICK_AIR:
-						rightClickAir(event.getPlayer());
+						if(rightClickAir(event.getPlayer()));
+						event.setCancelled(true);
 						break;
 					case RIGHT_CLICK_BLOCK:
-						rightClickBlock(event.getPlayer());
+						if(rightClickBlock(event.getPlayer()));
+						event.setCancelled(true);
 						break;
 					case PHYSICAL:
 						break;
