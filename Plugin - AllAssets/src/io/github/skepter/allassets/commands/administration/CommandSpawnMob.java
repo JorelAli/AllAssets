@@ -85,6 +85,6 @@ public class CommandSpawnMob {
 
 	@Help(name = "Spawnmob")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Spawnmob", "/spawnmob <mob> - spawns a mob");
+		TextUtils.printHelp(sender, "Spawnmob", "/spawnmob <mob> - spawns a mob", "/spawnmob <mob> <amount> - spawns <amount> of mobs");
 	}
 }
