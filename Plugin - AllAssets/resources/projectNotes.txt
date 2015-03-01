@@ -30,8 +30,6 @@ Command:home
 Command:sethome
 Command:delhome
 
-Command:set
-
 Command:w
 Command:rules
 Command:check

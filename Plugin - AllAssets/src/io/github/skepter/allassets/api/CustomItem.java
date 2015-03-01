@@ -65,16 +65,20 @@ public abstract class CustomItem implements Listener {
 		CommandSpawnItem.items.put(itemName, itemStack);
 	}
 
-	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	/** Return true to cancel the event (Return false if you want nothing to
+	 * happen) */
 	public abstract boolean leftClickBlock(Player player);
 
-	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	/** Return true to cancel the event (Return false if you want nothing to
+	 * happen) */
 	public abstract boolean rightClickBlock(Player player);
 
-	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	/** Return true to cancel the event (Return false if you want nothing to
+	 * happen) */
 	public abstract boolean leftClickAir(Player player);
 
-	/** Return true to cancel the event (Return false if you want nothing to happen) */
+	/** Return true to cancel the event (Return false if you want nothing to
+	 * happen) */
 	public abstract boolean rightClickAir(Player player);
 
 	public Block getInteractedBlock(Player player) {
@@ -84,32 +88,29 @@ public abstract class CustomItem implements Listener {
 	@EventHandler
 	public void onClick(PlayerInteractEvent event) {
 		this.block = event.getClickedBlock();
-		try {
-			if (permission == null || event.getPlayer().hasPermission(permission))
-				if (event.getPlayer().getItemInHand().equals(itemStack)) {
-					switch (event.getAction()) {
-					case LEFT_CLICK_AIR:
-						if(leftClickAir(event.getPlayer()));
+		if (permission == null || event.getPlayer().hasPermission(permission))
+			if (event.getPlayer().getItemInHand().equals(itemStack)) {
+				switch (event.getAction()) {
+				case LEFT_CLICK_AIR:
+					if (leftClickAir(event.getPlayer()))
 						event.setCancelled(true);
-						break;
-					case LEFT_CLICK_BLOCK:
-						if(leftClickBlock(event.getPlayer()));
+					break;
+				case LEFT_CLICK_BLOCK:
+					if (leftClickBlock(event.getPlayer()))
 						event.setCancelled(true);
-						break;
-					case RIGHT_CLICK_AIR:
-						if(rightClickAir(event.getPlayer()));
+					break;
+				case RIGHT_CLICK_AIR:
+					if (rightClickAir(event.getPlayer()))
 						event.setCancelled(true);
-						break;
-					case RIGHT_CLICK_BLOCK:
-						if(rightClickBlock(event.getPlayer()));
+					break;
+				case RIGHT_CLICK_BLOCK:
+					if (rightClickBlock(event.getPlayer()))
 						event.setCancelled(true);
-						break;
-					case PHYSICAL:
-						break;
+					break;
+				case PHYSICAL:
+					break;
 
-					}
 				}
-		} catch (NullPointerException e) {
-		}
+			}
 	}
 }
