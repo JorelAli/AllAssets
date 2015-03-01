@@ -15,8 +15,6 @@ Command:tpa
 Command:tpahere
 Command:tpall
 Command:tpaall
-Command:tptoggle
-Command:back
 Command:go
 Command:world
 Command:tpaccept
