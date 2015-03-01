@@ -309,7 +309,7 @@ public class TextUtils {
 	}
 
 	public static void printInformation(final CommandSender sender, final String title, final SeperatorType type, final String info) {
-		sender.sendMessage(title + type.getString() + info);
+		sender.sendMessage(Strings.ACCENT_COLOR + title + type.getString() + Strings.HOUSE_STYLE_COLOR + info);
 	}
 
 	public enum SeperatorType {
