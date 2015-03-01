@@ -188,6 +188,7 @@ public class ConfigHandler {
 		features.set("Tp", "true");
 		features.set("Tphere", "true");
 		features.set("Weather", "true");
+		features.set("Whois", "true");
 		features.set("Worlds", "true");
 		features.set("Workbench", "true");
 
