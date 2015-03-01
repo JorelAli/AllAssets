@@ -105,7 +105,7 @@ public class ItemUtils {
 		}
 	}
 
-	public static boolean isArmour(final ItemStack item) {
+	public static boolean isArmor(final ItemStack item) {
 		switch (item.getType()) {
 		case DIAMOND_HELMET:
 		case IRON_HELMET:

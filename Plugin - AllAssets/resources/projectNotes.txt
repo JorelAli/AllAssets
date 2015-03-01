@@ -7,6 +7,8 @@ whena  palyer joins, tell them when they last joined
 when a player joins, tell them which players left/were on recently
 AFKMEssage - send a message to a person when they are no longer afk
 
+title command thingy 1.8 yeah massive awesome
+
 Commands:
 //Ascend/Descend
 Command:up

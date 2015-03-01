@@ -101,6 +101,7 @@ public class TextUtils {
 	 * 
 	 * @param s
 	 * @return */
+	@Deprecated
 	public static boolean containsSwear(final String s) {
 		final String[] swearWords = new String[] { "fuck", "shit", "bitch", "cunt", "penis", "vagina", "porn" };
 		for (final String str : swearWords)
@@ -338,8 +339,8 @@ public class TextUtils {
 
 	public static String booleanToString(final boolean b) {
 		if (b)
-			return ChatColor.GREEN + "yes";
+			return GREEN + "yes";
 		else
-			return ChatColor.RED + "no";
+			return RED + "no";
 	}
 }

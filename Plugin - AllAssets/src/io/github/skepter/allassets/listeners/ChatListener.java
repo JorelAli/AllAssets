@@ -55,6 +55,7 @@ public class ChatListener implements Listener {
 			}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void playerSwearEvent(final AsyncPlayerChatEvent event) {
 		if (ConfigHandler.features().getBoolean("AntiSwear"))

@@ -222,9 +222,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AllAssets extends JavaPlugin {
 	
 	/***********************************************************************/
-	/*                    Put new commands in here                         */
+	/**                    Put new commands in here                       **/
 	
 	private void devRegister(CommandFramework framework) {
+		
+		//// Tundraboy ////
+		
+		
+		//// Skepter ////
 		//new CommandName(framework);
 	}
 	
