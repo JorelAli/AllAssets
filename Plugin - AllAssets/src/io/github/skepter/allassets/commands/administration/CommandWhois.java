@@ -65,8 +65,8 @@ public class CommandWhois {
 				Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 				User user = new User(target);
 				player.sendMessage(TextUtils.title("Whois " + target.getCustomName()));
-				if (!target.getCustomName().equals(target.getName()))
-					TextUtils.printInformation(player, "Real name", SeperatorType.COLON, target.getName());
+//				if (!target.getCustomName().equals(target.getName()))
+//					TextUtils.printInformation(player, "Real name", SeperatorType.COLON, target.getName());
 				TextUtils.printInformation(player, "UUID", SeperatorType.COLON, target.getUniqueId().toString());
 				TextUtils.printInformation(player, "Total time played", SeperatorType.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
 				TextUtils.printInformation(player, "Has godmode", SeperatorType.COLON, TextUtils.booleanToString(CommandGod.players.contains(target.getUniqueId())));
