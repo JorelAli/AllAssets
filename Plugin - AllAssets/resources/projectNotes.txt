@@ -46,7 +46,7 @@ Command:ban
 Command:tempban
 Command:banip
 Command:nick
-Command:remove
+Command:remove (items)
 Command:painting (sets painting)
 Command:motd (show motd)
 Command:setmotd (set motd)

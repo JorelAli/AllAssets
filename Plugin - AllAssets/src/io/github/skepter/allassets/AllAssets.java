@@ -80,6 +80,7 @@ import io.github.skepter.allassets.commands.administration.CommandWeather;
 import io.github.skepter.allassets.commands.administration.CommandWhois;
 import io.github.skepter.allassets.commands.cosmetics.CommandGlow;
 import io.github.skepter.allassets.commands.cosmetics.CommandHead;
+import io.github.skepter.allassets.commands.cosmetics.CommandNickname;
 import io.github.skepter.allassets.commands.debug.CommandBatch;
 import io.github.skepter.allassets.commands.debug.CommandDebug;
 import io.github.skepter.allassets.commands.debug.CommandPing;
@@ -394,6 +395,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandMore(framework);
 		if (ConfigHandler.features().getBoolean("Near"))
 			new CommandNear(framework);
+		if (ConfigHandler.features().getBoolean("Nickname"))
+			new CommandNickname(framework);
 		if (ConfigHandler.features().getBoolean("Oplist"))
 			new CommandOplist(framework);
 		if (ConfigHandler.features().getBoolean("Ping"))

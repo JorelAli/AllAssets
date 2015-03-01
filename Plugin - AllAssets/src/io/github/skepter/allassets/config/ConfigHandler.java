@@ -176,6 +176,7 @@ public class ConfigHandler {
 		features.set("Log", "true");
 		features.set("More", "true");
 		features.set("Near", "true");
+		features.set("Nickname", "true");
 		features.set("Oplist", "true");
 		features.set("Ping", "true");
 		features.set("Plugins", "true");
