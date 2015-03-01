@@ -68,6 +68,7 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -215,7 +216,7 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
 		try {
-			Chunk c = args.getPlayer().getWorld().getChunkAt(args.getPlayer().getLocation());
+			Chunk c = args.getPlayer().getWorld().getChunkAt(args.getPlayer().getTargetBlock(new HashSet<Material>(), 256));
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
 		} catch (Exception e) {
 		}
