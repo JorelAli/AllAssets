@@ -70,8 +70,12 @@ public class ServerListingListener implements Listener {
 
 		for (final UUID u : UUIDData.getValues()) {
 			final OfflineUser user = new OfflineUser(Bukkit.getOfflinePlayer(u));
-			if (user.getPlayer().getName().equals(event.getName()))
-				user.setIPs(Arrays.asList(new String[] { save }));
+			try {
+				if (user.getPlayer().getName().equals(event.getName()))
+					user.setIPs(Arrays.asList(new String[] { save }));
+			} catch (Exception e) {
+				/* User is not found */
+			}
 		}
 	}
 }
