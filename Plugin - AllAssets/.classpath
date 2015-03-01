@@ -5,7 +5,6 @@
 	<classpathentry kind="lib" path="D:/Applications/eclipse/External Libraries/Minecraft/Vault.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_60"/>
 	<classpathentry kind="lib" path="D:/Applications/eclipse/External Libraries/Minecraft/spigot-1.8-R0.1-SNAPSHOT-latest.jar"/>
-	<classpathentry kind="lib" path="E:/downloads/spigot-1.8-R0.1-SNAPSHOT-latest.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

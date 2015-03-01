@@ -61,8 +61,8 @@ public class CommandWhois {
 				return;
 			case 1:
 				Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-				TextUtils.title("whois" + args.getArgs()[0]);
-				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "UUID:" + target.getUniqueId().toString());
+				player.sendMessage(TextUtils.title("Whois " + args.getArgs()[0]));
+				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "UUID: " + target.getUniqueId().toString());
 			}
 		}
 		return;
