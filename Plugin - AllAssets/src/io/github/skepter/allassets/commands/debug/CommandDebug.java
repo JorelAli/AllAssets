@@ -67,6 +67,7 @@ import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -211,6 +212,15 @@ public class CommandDebug implements Listener {
 		});
 	}
 
+	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
+	public void regen(final CommandArgs args) {
+		try {
+			Chunk c = args.getPlayer().getWorld().getChunkAt(args.getPlayer().getLocation());
+			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
+		} catch (Exception e) {
+		}
+	}
+
 	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection")
 	public void clean(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
@@ -298,8 +308,6 @@ public class CommandDebug implements Listener {
 			e.printStackTrace();
 		}
 	}
-	
-	
 
 	@SuppressWarnings("unchecked")
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
