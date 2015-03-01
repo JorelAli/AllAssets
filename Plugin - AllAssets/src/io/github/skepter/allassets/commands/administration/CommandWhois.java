@@ -34,12 +34,14 @@
 package io.github.skepter.allassets.commands.administration;
 
 import io.github.skepter.allassets.CommandFramework;
-import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -61,8 +63,10 @@ public class CommandWhois {
 				return;
 			case 1:
 				Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-				player.sendMessage(TextUtils.title("Whois " + args.getArgs()[0]));
+				User user = new User(target);
+				player.sendMessage(TextUtils.title("Whois " + target.getName()));
 				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "UUID: " + target.getUniqueId().toString());
+				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "Total time played: " + TimeUtils.formatDate(user.getTotalTimePlayed()));
 			}
 		}
 		return;
