@@ -49,7 +49,7 @@ public class PlayerRequest {
 		PlayerRequest.information = information;
 		if (to instanceof Conversable) {
 			final ConversationFactory conversationFactory = new ConversationFactory(AllAssets.instance()).withModality(true).withFirstPrompt(new YesNoPrompt()).withEscapeSequence("/quit").withTimeout(10);
-			conversationFactory.buildConversation((Conversable) to).begin();
+			conversationFactory.buildConversation(to).begin();
 		}
 	}
 

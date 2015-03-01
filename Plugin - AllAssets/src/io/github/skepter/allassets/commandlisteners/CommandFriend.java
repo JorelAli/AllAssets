@@ -100,7 +100,7 @@ public class CommandFriend implements Listener{
 			return;
 		}
 		Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-		new PlayerRequest(player, target, "Do you want to add " + target.getName() + " add a friend?", -1L);
+		new PlayerRequest(player, target, "add you as a friend. Do you accept " + target.getName() + "'s request?", -1L);
 	}
 	
 	@EventHandler

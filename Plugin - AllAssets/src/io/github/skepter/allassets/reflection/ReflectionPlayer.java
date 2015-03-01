@@ -70,7 +70,7 @@ public class ReflectionPlayer {
 //			Method m = utils.getOBCClass("event.CraftEventFactory").getDeclaredMethod("callInventoryOpenEvent", utils.getNMSClass("EntityPlayer"), utils.getNMSClass("Container"));
 //			m.invoke(utils.nmsPlayer, utils.nmsPlayer, anvilContainer);
 
-			new PacketBuilder(player, PacketType.PLAY_OUT_OPEN_WINDOW).set("a", (int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter")).set("b", (String) "minecraft:anvil").set("c", utils.chatSerialize("Repairing")).set("d", (int) 9);
+			new PacketBuilder(player, PacketType.PLAY_OUT_OPEN_WINDOW).set("a", (int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter")).set("b", "minecraft:anvil").set("c", utils.chatSerialize("Repairing")).set("d", 9);
 
 			//			ReflectionUtils.setPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass(), "activeContainer", anvilContainer);
 			ReflectionUtils.setPerfectField(activeContainer, activeContainer.getClass().getSuperclass(), "windowId", ((int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter")));
