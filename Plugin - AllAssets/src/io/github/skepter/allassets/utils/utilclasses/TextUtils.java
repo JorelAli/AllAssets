@@ -317,4 +317,11 @@ public class TextUtils {
 
 		}
 	}
+	
+	public static String booleanToString(final boolean b) {
+		if(b)
+			return ChatColor.GREEN + "yes";
+		else
+			return ChatColor.RED + "no";
+	}
 }
