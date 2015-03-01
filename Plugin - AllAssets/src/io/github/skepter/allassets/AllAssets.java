@@ -51,6 +51,7 @@ import io.github.skepter.allassets.commands.CommandNear;
 import io.github.skepter.allassets.commands.CommandPTime;
 import io.github.skepter.allassets.commands.CommandPWeather;
 import io.github.skepter.allassets.commands.CommandRename;
+import io.github.skepter.allassets.commands.CommandSuicide;
 import io.github.skepter.allassets.commands.CommandWorkbench;
 import io.github.skepter.allassets.commands.administration.CommandAllAssets;
 import io.github.skepter.allassets.commands.administration.CommandAnnouncer;
@@ -425,6 +426,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandSpawnItem(framework);
 		if (ConfigHandler.features().getBoolean("SpawnMob"))
 			new CommandSpawnMob(framework);
+		if (ConfigHandler.features().getBoolean("Suicide"))
+			new CommandSuicide(framework);
 		if (ConfigHandler.features().getBoolean("Time"))
 			new CommandTime(framework);
 		if (ConfigHandler.features().getBoolean("Tp"))

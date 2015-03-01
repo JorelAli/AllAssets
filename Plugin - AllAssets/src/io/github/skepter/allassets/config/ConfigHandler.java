@@ -193,6 +193,7 @@ public class ConfigHandler {
 		features.set("SpawnItem", "true");
 		features.set("SpawnMob", "true");
 		features.set("StaffChat", "true");
+		features.set("Suicide", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Tp", "true");
 		features.set("Tphere", "true");

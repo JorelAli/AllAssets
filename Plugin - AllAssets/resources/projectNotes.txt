@@ -33,7 +33,6 @@ Command:rules
 Command:check
 Command:afk
 Command:seen
-Command:suicide
 Command:lookup
 Command:furnace
 Command:vanish
@@ -49,7 +48,6 @@ Command:banip
 Command:nick
 Command:remove
 Command:painting (sets painting)
-Command:clear (inv)
 Command:motd (show motd)
 Command:setmotd (set motd)
 Command:setServermotd (setListings motd)
@@ -69,7 +67,6 @@ Command:set <balance>
 
 Command:ignite
 Command:hat
-Command:near
 Command:kill
 Command:killall (mobs)
 Command:infinite (toggle)
@@ -81,7 +78,6 @@ Command:info (simple info from a yml file)
 Command:helpop
 Command:item
 Command:online
-Command:player (who, whois)
 
 Command:ignore (darkGray messages)
 Command:mail

@@ -31,60 +31,28 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands.administration;
+package io.github.skepter.allassets.commands;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.misc.Help;
-import io.github.skepter.allassets.utils.InputParser;
-import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
-import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import java.util.HashSet;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandSpawnMob {
+public class CommandSuicide {
 
-	public CommandSpawnMob(final CommandFramework framework) {
+	public CommandSuicide(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob")
-	public void command(final CommandArgs args) {
+	@CommandHandler(name = "suicide", permission = "suicide", description = "Kills yourself")
+	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			switch (args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				return;
-			case 1:
-				Block b = player.getTargetBlock(new HashSet<Material>(), 256);
-				Block spawnLocation = b.getRelative(BlockFace.UP);
-				player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation.getLocation()), new InputParser(args.getArgs()[0]).parseMob());
-				return;
-			case 2:
-				Block b1 = player.getTargetBlock(new HashSet<Material>(), 256);
-				Block spawnLocation1 = b1.getRelative(BlockFace.UP);
-				if (TextUtils.isInteger(args.getArgs()[1]))
-					for (int i = 0; i < Integer.parseInt(args.getArgs()[1]); i++)
-						player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation1.getLocation()), new InputParser(args.getArgs()[0]).parseMob());
-				ErrorUtils.notAnInteger(player);
-			}
-			ErrorUtils.tooManyArguments(player);
-			return;
+			player.setHealth(0);
 		}
-	}
-
-	@Help(name = "Spawnmob")
-	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Spawnmob", "/spawnmob <mob> - spawns a mob");
+		return;
 	}
 }
+
