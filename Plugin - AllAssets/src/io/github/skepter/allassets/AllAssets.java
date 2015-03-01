@@ -220,6 +220,15 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 @SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
+	
+	/***********************************************************************/
+	/*                    Put new commands in here                         */
+	
+	private void devRegister(CommandFramework framework) {
+		//new CommandName(framework);
+	}
+	
+	/***********************************************************************/
 
 	/* The master switch - used for debug purposes*/
 	public static boolean masterSwitch = false;
@@ -478,6 +487,8 @@ public class AllAssets extends JavaPlugin {
 		//Buggy and deprecated until fixed
 		//r(new BlockPoweredListener());
 
+		devRegister(framework);
+		
 		/** Reloading stuff */
 
 		/* Update NotificationsBoard for all admins */

@@ -50,7 +50,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class CommandGod implements Listener {
 
-	public List<UUID> godPlayers = new ArrayList<UUID>();
+	public static List<UUID> players = new ArrayList<UUID>();
 
 	public CommandGod(final CommandFramework framework) {
 		framework.registerCommands(this);
@@ -65,11 +65,11 @@ public class CommandGod implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (godPlayers.contains(player.getUniqueId())) {
-			godPlayers.remove(player.getUniqueId());
+		if (players.contains(player.getUniqueId())) {
+			players.remove(player.getUniqueId());
 			player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");
 		} else {
-			godPlayers.add(player.getUniqueId());
+			players.add(player.getUniqueId());
 			player.sendMessage(Strings.TITLE + "A higher power falls upon you");
 		}
 		return;
@@ -79,7 +79,7 @@ public class CommandGod implements Listener {
 	public void playerHurt(final EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player) event.getEntity();
-			if (godPlayers.contains(player.getUniqueId())) {
+			if (players.contains(player.getUniqueId())) {
 				event.setDamage(0);
 				event.setCancelled(true);
 			}

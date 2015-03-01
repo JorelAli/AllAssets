@@ -307,6 +307,24 @@ public class TextUtils {
 		return overallString.replace(textPart, color + textPart);
 	}
 
+	public static void printInformation(final CommandSender sender, final String title, final SeperatorType type, final String info) {
+		sender.sendMessage(title + type.getString() + info);
+	}
+
+	public enum SeperatorType {
+		DASH(" - "), COLON(": ");
+
+		String str;
+
+		SeperatorType(String str) {
+			this.str = str;
+		}
+
+		public String getString() {
+			return str;
+		}
+	}
+
 	public static void printHelp(final CommandSender sender, final String title, final String... help) {
 		sender.sendMessage(title(title + " help"));
 		for (final String string : help) {
@@ -317,9 +335,9 @@ public class TextUtils {
 
 		}
 	}
-	
+
 	public static String booleanToString(final boolean b) {
-		if(b)
+		if (b)
 			return ChatColor.GREEN + "yes";
 		else
 			return ChatColor.RED + "no";

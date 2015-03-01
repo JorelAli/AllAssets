@@ -38,9 +38,10 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.commandlisteners.CommandGod;
 import io.github.skepter.allassets.misc.Help;
-import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
 import org.bukkit.command.CommandSender;
@@ -63,10 +64,17 @@ public class CommandWhois {
 			case 1:
 				Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 				User user = new User(target);
-				player.sendMessage(TextUtils.title("Whois " + target.getName()));
-				player.sendMessage(Strings.ACCENT_COLOR + "UUID: " + Strings.HOUSE_STYLE_COLOR + target.getUniqueId().toString());
-				player.sendMessage(Strings.ACCENT_COLOR + "Total time played: " + Strings.HOUSE_STYLE_COLOR + TimeUtils.formatDate(user.getTotalTimePlayed()));
-				player.sendMessage("");
+				player.sendMessage(TextUtils.title("Whois " + target.getCustomName()));
+				if (!target.getCustomName().equals(target.getName()))
+					TextUtils.printInformation(player, "Real name", SeperatorType.COLON, target.getName());
+				TextUtils.printInformation(player, "UUID", SeperatorType.COLON, target.getUniqueId().toString());
+				TextUtils.printInformation(player, "Total time played", SeperatorType.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
+				TextUtils.printInformation(player, "Has godmode", SeperatorType.COLON, TextUtils.booleanToString(CommandGod.players.contains(target.getUniqueId())));
+				TextUtils.printInformation(player, "Is viewing console", SeperatorType.COLON, TextUtils.booleanToString(CommandConsoleLog.players.contains(target.getUniqueId())));
+				TextUtils.printInformation(player, "Has fly mode", SeperatorType.COLON, TextUtils.booleanToString(target.getAllowFlight()));
+				TextUtils.printInformation(player, "Gamemode", SeperatorType.COLON, TextUtils.capitalize(target.getGameMode().name()));
+				TextUtils.printInformation(player, "Is op", SeperatorType.COLON, TextUtils.booleanToString(target.isOp()));
+				TextUtils.printInformation(player, "Is AFK", SeperatorType.COLON, TextUtils.booleanToString(user.isAFK()));
 			}
 		}
 		return;
