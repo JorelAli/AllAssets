@@ -269,6 +269,7 @@ public class User {
 
 	public void setFriendList(List<UUID> friends) {
 		playerData.getDataFile().set("friends", friends);
+		playerData.saveDataFile();
 	}
 
 	public boolean canTp() {

@@ -32,7 +32,7 @@ public class PlayerRequest {
 	/** Use -1 as the timeout for an infinite timeout */
 	public PlayerRequest(Player from, Player to, String information, long timeout) {
 		hasExpired = false;
-		if (timeout != -1) {
+		if (timeout != -1L) {
 			from.sendMessage(Strings.TITLE + "Your request will expire in " + (timeout / 1000) + " seconds");
 			Bukkit.getScheduler().runTaskLater(AllAssets.instance(), new Runnable() {
 				@Override

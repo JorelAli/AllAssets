@@ -43,6 +43,7 @@ import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,7 +52,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class CommandFriend implements Listener{
+public class CommandFriend implements Listener {
 
 	public CommandFriend(final CommandFramework framework) {
 		framework.registerCommands(this);
@@ -68,7 +69,7 @@ public class CommandFriend implements Listener{
 		}
 		printHelp(player);
 	}
-	
+
 	@CommandHandler(name = "friend.list", aliases = { "friends" }, permission = "friend", description = "Show a list of all of your friends")
 	public void onList(final CommandArgs args) {
 		Player player = null;
@@ -80,12 +81,12 @@ public class CommandFriend implements Listener{
 		}
 		User user = new User(player);
 		List<UUID> friends = user.getFriendList();
-		for(UUID u : friends) {
+		for (UUID u : friends) {
 			OfflineUser offlineFriend = new OfflineUser(u);
-			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " +  offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
-		}		
+			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " + offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
+		}
 	}
-	
+
 	@CommandHandler(name = "friend.add", permission = "friend", description = "Add a friend")
 	public void addFriend(final CommandArgs args) {
 		Player player = null;
@@ -95,25 +96,29 @@ public class CommandFriend implements Listener{
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if(PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]) == null) {
+		if (PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]) == null) {
 			ErrorUtils.playerNotFound(player, args.getArgs()[0]);
 			return;
 		}
 		Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+		player.sendMessage(Strings.TITLE + "You have sent a friend request to " + target.getName());
 		new PlayerRequest(player, target, "add you as a friend. Do you accept " + target.getName() + "'s request?", -1L);
 	}
-	
+
 	@EventHandler
 	public void onAccept(PlayerRequestEvent event) {
-		if(event.getResult()) {
+		if (event.getResult()) {
 			User user = new User(event.getFrom());
-			user.setFriendList(Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
+			if (!user.getFriendList().isEmpty())
+				user.setFriendList(Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
+			else
+				user.setFriendList(Arrays.asList(event.getTo().getUniqueId()));
 		}
-		
+
 	}
-	
-	@Help(name="Friend")
+
+	@Help(name = "Friend")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Friend", "/friend list - lists your friends");
+		TextUtils.printHelp(sender, "Friend", "/friend add <player> - adds <player> as a friend",  "/friend list - lists your friends");
 	}
 }
