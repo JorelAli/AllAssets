@@ -96,6 +96,7 @@ public class PlayerListener implements Listener {
 
 		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
+		user.setCanTP(true);
 		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
 			final List<String> ips = user.IPs();
 			if (!ips.isEmpty())

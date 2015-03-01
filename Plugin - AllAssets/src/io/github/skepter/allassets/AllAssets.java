@@ -92,6 +92,7 @@ import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandTp;
+import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
 import io.github.skepter.allassets.commands.teleportation.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
 import io.github.skepter.allassets.config.ConfigHandler;
@@ -430,6 +431,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandTp(framework);
 		if (ConfigHandler.features().getBoolean("Tphere"))
 			new CommandTphere(framework);
+		if (ConfigHandler.features().getBoolean("TpToggle"))
+			new CommandTpToggle(framework);
 		if (ConfigHandler.features().getBoolean("Weather"))
 			new CommandWeather(framework);
 		if (ConfigHandler.features().getBoolean("Whois"))

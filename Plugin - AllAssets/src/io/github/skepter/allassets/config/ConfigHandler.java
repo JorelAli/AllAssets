@@ -35,18 +35,17 @@ import io.github.skepter.allassets.utils.Strings;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Map.Entry;
 
 public class ConfigHandler {
 
 	private static SimpleConfigManager configManager;
 	private static SimpleConfigManager featuresManager;
-
 	private static SimpleConfigManager messagesManager;
 	private static SimpleConfigManager announcerManager;
 
 	private static SimpleConfig config;
 	private static SimpleConfig features;
-
 	private static SimpleConfig messages;
 	private static SimpleConfig announcer;
 
@@ -72,15 +71,25 @@ public class ConfigHandler {
 			messages = messagesManager.getNewConfig("messages.yml");
 
 		if (!new File(AllAssets.instance().getDataFolder(), "features.yml").exists())
-			createFeatures();
-		else
+			createFeatures("features.yml", features, featuresManager);
+		else {
 			features = featuresManager.getNewConfig("features.yml");
+			/** Auto update Features.yml */
+			SimpleConfig tempFeatures;
+			SimpleConfigManager tempFeaturesManager = new SimpleConfigManager(AllAssets.instance());
+			tempFeatures = tempFeaturesManager.getNewConfig("tempFeatures.yml");
+			createFeatures("tempFeatures.yml", tempFeatures, tempFeaturesManager);
+			for (Entry<String, Object> entry : tempFeatures.getValues().entrySet())
+				if (!features.contains(entry.getKey()))
+					features.set(entry.getKey(), entry.getValue());
+			tempFeatures.getFile().delete();
+		}
 
 		if (!new File(Files.getStorage(), "announcer.yml").exists())
 			createAnnouncer();
 		else
 			announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
-		//find a way to check for missing keys in configurations perhaps? - that way it can 'auto update'
+
 	}
 
 	private void createAnnouncer() {
@@ -121,10 +130,10 @@ public class ConfigHandler {
 		messages.set("serverListMOTD", "'&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'");
 	}
 
-	private static void createFeatures() {
+	private static void createFeatures(String fileName, SimpleConfig features, SimpleConfigManager featuresManager) {
 		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
-		features = featuresManager.getNewConfig("features.yml", header);
+		features = featuresManager.getNewConfig(fileName, header);
 
 		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false");
 		features.set("AllAssets", "true");
@@ -176,7 +185,7 @@ public class ConfigHandler {
 		features.set("Reload", "false"); // default to FALSE when actually exported Nav
 		features.set("Remove", "true");
 		features.set("Rename", "true");
-//		features.set("Restore", "true");
+		//		features.set("Restore", "true");
 		features.set("SetSpawn", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
@@ -187,6 +196,7 @@ public class ConfigHandler {
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Tp", "true");
 		features.set("Tphere", "true");
+		features.set("TpToggle", "true");
 		features.set("Weather", "true");
 		features.set("Whois", "true");
 		features.set("Worlds", "true");
@@ -219,7 +229,7 @@ public class ConfigHandler {
 		//		features.set("Instant eating", "false", new String[] { "Instants", "Instantly carry out actions" });
 		//		features.set("Instant bows", "false");
 
-		features.set("JoinActions", "true", "---nJoin Actions ---", "Actions to be carried out when a player joins");
+		features.set("JoinActions", "true", "---Join Actions ---", "Actions to be carried out when a player joins");
 		features.set("UniquePlayers", "true", "Display the amount of unique players that have joined");
 		features.set("TotalTime", "true", "Display the total time the player has played");
 		features.set("FireworkOnJoin", "true", "JoinActions in features.yml must be turned on");
@@ -227,6 +237,7 @@ public class ConfigHandler {
 
 		features.set("BlockHeads", "true", "--- Cosmetics ---", "Cosmetic features to comply with the EULA");
 		//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
+
 	}
 
 	public static SimpleConfig config() {
@@ -264,7 +275,7 @@ public class ConfigHandler {
 		if (features != null)
 			return features;
 		else {
-			createFeatures();
+			createFeatures("features.yml", features, featuresManager);
 			return features;
 		}
 	}

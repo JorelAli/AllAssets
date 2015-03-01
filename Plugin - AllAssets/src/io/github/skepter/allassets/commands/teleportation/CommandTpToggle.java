@@ -31,49 +31,35 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands.administration;
+package io.github.skepter.allassets.commands.teleportation;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.User;
-import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandWhois {
+public class CommandTpToggle {
 
-	public CommandWhois(final CommandFramework framework) {
+	public CommandTpToggle(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "whois", aliases = { "who" }, permission = "whois", description = "Find a user's true indentity")
-	public void onCommand(final CommandArgs args) {
+	@CommandHandler(name = "tptoggle", permission = "tptoggle", description = "Toggles your teleportation status")
+	public void command(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			switch (args.getArgs().length) {
-			case 0:
-				printHelp(args.getSender());
-				return;
-			case 1:
-				Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-				User user = new User(target);
-				player.sendMessage(TextUtils.title("Whois " + target.getName()));
-				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "UUID: " + target.getUniqueId().toString());
-				player.sendMessage(Strings.HOUSE_STYLE_COLOR + "Total time played: " + TimeUtils.formatDate(user.getTotalTimePlayed()));
+			User user = new User(player);
+			if (user.canTp()) {
+				user.setCanTP(false);
+				player.sendMessage(Strings.TITLE + "TpToggle off. Players can not teleport to you");
+			} else {
+				user.setCanTP(true);
+				player.sendMessage(Strings.TITLE + "TpToggle on. Players can teleport to you");
 			}
 		}
-		return;
 	}
-
-	@Help(name = "Whois")
-	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Whois", "/whois <player> - finds information about the player");
-	}
-
 }
