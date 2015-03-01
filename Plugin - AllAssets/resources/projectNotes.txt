@@ -20,7 +20,6 @@ Command:world
 Command:tpaccept
 Command:tpdeny
 Command:tppos
-Command:spawn
 Command:setspawn
 Command:warp
 Command:setwarp
@@ -31,9 +30,8 @@ Command:delhome
 Command:w
 Command:rules
 Command:check
-Command:afk
 Command:seen
-Command:lookup
+Command:lookup (info?)
 Command:furnace
 Command:vanish
 Command:rvanish
@@ -45,7 +43,6 @@ Command:kick
 Command:ban
 Command:tempban
 Command:banip
-Command:nick
 Command:remove (items)
 Command:painting (sets painting)
 Command:motd (show motd)

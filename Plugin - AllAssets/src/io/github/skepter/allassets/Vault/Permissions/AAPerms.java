@@ -67,79 +67,77 @@ public class AAPerms extends Permission {
 	}
 
 	@Override
-	public String[] getPlayerGroups(final String paramString1, final String paramString2) {
+	public String[] getPlayerGroups(final String world, final String playerName) {
 
 		return null;
 	}
 
 	@Override
-	public String getPrimaryGroup(final String paramString1, final String paramString2) {
+	public String getPrimaryGroup(final String world, final String playerName) {
 
 		return null;
 	}
 
 	@Override
-	public boolean groupAdd(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean groupAdd(final String world, final String group, final String permission) {
 
 		return false;
 	}
 
 	@Override
-	public boolean groupHas(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean groupHas(final String world, final String group, final String permission) {
 
 		return false;
 	}
 
 	@Override
-	public boolean groupRemove(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean groupRemove(final String world, final String group, final String permission) {
 
 		return false;
 	}
 
 	@Override
 	public boolean hasGroupSupport() {
-
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean hasSuperPermsCompat() {
+		return false;
+	}
+
+	@Override
+	public boolean playerAdd(final String world, final String player, final String permission) {
 
 		return false;
 	}
 
 	@Override
-	public boolean playerAdd(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean playerAddGroup(final String world, final String player, final String group) {
 
 		return false;
 	}
 
 	@Override
-	public boolean playerAddGroup(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean playerHas(final String world, final String player, final String permission) {
 
 		return false;
 	}
 
 	@Override
-	public boolean playerHas(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean playerInGroup(final String world, final String player, final String group) {
 
 		return false;
 	}
 
 	@Override
-	public boolean playerInGroup(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean playerRemove(final String world, final String player, final String permission) {
 
 		return false;
 	}
 
 	@Override
-	public boolean playerRemove(final String paramString1, final String paramString2, final String paramString3) {
-
-		return false;
-	}
-
-	@Override
-	public boolean playerRemoveGroup(final String paramString1, final String paramString2, final String paramString3) {
+	public boolean playerRemoveGroup(final String world, final String player, final String group) {
 
 		return false;
 	}

@@ -96,11 +96,13 @@ public class PermissionDataManager extends CustomConfig {
 		super(new File(Files.getStorage(), "PermissionData.yml"), "Permissions");
 	}
 
+	/** dataName = player or group name*/
 	public List<String> getWorldPermissions(final String worldName, final GroupDataType type, final String dataName) {
 		final String path = getPath(type, "Worlds.", worldName) + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
+	/** dataName = player or group name*/
 	public List<String> getGlobalPermissions(final GroupDataType type, final String dataName) {
 		final String path = getPath(type, "Global.") + dataName + ".Permissions";
 		return getDataFile().getStringList(path);

@@ -48,9 +48,6 @@ public class Permission {
 	public static void unregisterPlayer(final Player player) {
 		player.removeAttachment(map.get(player));
 	}
-	
-	//You know, is this really needed? One can use PEX or GroupManager or whatever nowadays...
-	//Probably. PEX and GM are fantastic permission plugins, but are sometimes hard to use
 
 	/*
 	 * Finally! After figuring out how to use the VaultAPI, I can begin working on a permission section :D
@@ -76,56 +73,4 @@ public class Permission {
 	 * 
 	 * save/load - store in .yml for easy cheesy management
 	 */
-	
-	/* Sample format:
-	 * 
-	 * Worlds:
-	 *   <WorldName>:
-	 *     Groups:
-	 *       <GroupName>:
-	 *         Permissions:
-	 *           - permsList
-	 *         Prefix: [prefix]
-	 *         Suffix: [suffix]
-	 *       <GroupName>:
-	 *         Permissions:
-	 *           - permsList
-	 *         Prefix: [prefix]
-	 *         Suffix: [suffix]
-	 *     Players:
-	 *     	 <PlayerName>:
-	 *         Permissions:
-	 *           - permsList
-	 *         Prefix: [prefix]
-	 *         Suffix: [suffix]
-	 *       <PlayerName>:
-	 *         Permissions:
-	 *           - permsList
-	 *         Prefix: [prefix]
-	 *         Suffix: [suffix]
-	 * Global:
-	 *   Groups:
-	 *     <GroupName>:
-	 *       Permissions:
-	 *         - permsList
-	 *       Prefix: [prefix]
-	 *       Suffix: [suffix]
-	 *     <GroupName>:
-	 *       Permissions:
-	 *         - permsList
-	 *       Prefix: [prefix]
-	 *       Suffix: [suffix]
-	 *   Players:
-	 *     <PlayerName>:
-	 *       Permissions:
-	 *       - permsList
-	 *       Prefix: [prefix]
-	 *       Suffix: [suffix]
-	 *     <PlayerName>:
-	 *       Permissions:
-	 *         - permsList
-	 *       Prefix: [prefix]
-	 *       Suffix: [suffix]     
-	 */
-
 }
