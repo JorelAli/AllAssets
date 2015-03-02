@@ -118,6 +118,7 @@ import io.github.skepter.allassets.listeners.StopCommandListener;
 import io.github.skepter.allassets.misc.EnchantGlow;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.reflection.VaultReflection;
+import io.github.skepter.allassets.sqlite.SQLite;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
@@ -220,19 +221,18 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 @SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
-	
+
 	/***********************************************************************/
-	/**                    Put new commands in here                       **/
-	
+	/** Put new commands in here **/
+
 	private void devRegister(CommandFramework framework) {
-		
+
 		//// Tundraboy ////
-		
-		
+
 		//// Skepter ////
 		//new CommandName(framework);
 	}
-	
+
 	/***********************************************************************/
 
 	/* The master switch - used for debug purposes*/
@@ -246,8 +246,8 @@ public class AllAssets extends JavaPlugin {
 	/* Vault variables */
 	public boolean hasVault = false;
 	public Permission permission = null;
-
 	public Map<UUID, Long> tempTimeMap;
+	public SQLite sqlite;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -283,6 +283,8 @@ public class AllAssets extends JavaPlugin {
 				e.printStackTrace();
 			}
 
+		sqlite.close();
+		
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
 				CommandDiscoArmor.toggleArmor(player);
@@ -303,7 +305,6 @@ public class AllAssets extends JavaPlugin {
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener(this));
 
-		
 		this.saveResource("ItemData.csv", true);
 
 		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
@@ -493,7 +494,7 @@ public class AllAssets extends JavaPlugin {
 		//r(new BlockPoweredListener());
 
 		devRegister(framework);
-		
+
 		/** Reloading stuff */
 
 		/* Update NotificationsBoard for all admins */
@@ -521,7 +522,7 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info(Strings.NO_COLOR_TITLE + "AllAssets has been enabled successfully");
 		Bukkit.broadcast(Strings.TITLE + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
-		
+
 		/* Post load stuff */
 		if (masterSwitch)
 			dev(true);
@@ -535,6 +536,11 @@ public class AllAssets extends JavaPlugin {
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
 		new ConfigHandler();
+
+		File file = new File(Files.getStorage(), "bannedplayers.db");
+		sqlite = new SQLite(file);
+		sqlite.open();
+		sqlite.execute("CREATE TABLE IF NOT EXISTS BANNEDPLAYERS (banner VARCHAR(16), bannedPlayer VARCHAR(16), banMessage VARCHAR(256), time BIGINT);");
 		getLogger().info("+---------------------------------+");
 
 	}

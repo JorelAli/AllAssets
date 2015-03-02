@@ -27,7 +27,7 @@
  *
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
-package io.github.skepter.allassets.Vault.Permissions;
+package io.github.skepter.allassets.vault.permissions;
 
 import io.github.skepter.allassets.api.CustomConfig;
 import io.github.skepter.allassets.utils.Files;

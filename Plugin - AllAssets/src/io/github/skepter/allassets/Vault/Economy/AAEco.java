@@ -1,4 +1,4 @@
-package io.github.skepter.allassets.Vault.Economy;
+package io.github.skepter.allassets.vault.economy;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.reflection.VaultReflection;

@@ -1,10 +1,10 @@
 package io.github.skepter.allassets.reflection;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.Vault.Chat.AAChat;
-import io.github.skepter.allassets.Vault.Economy.AAEco;
-import io.github.skepter.allassets.Vault.Permissions.AAPerms;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.vault.chat.AAChat;
+import io.github.skepter.allassets.vault.economy.AAEco;
+import io.github.skepter.allassets.vault.permissions.AAPerms;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

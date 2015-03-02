@@ -1,4 +1,4 @@
-package io.github.skepter.allassets.Vault.Chat;
+package io.github.skepter.allassets.vault.chat;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.reflection.VaultReflection;

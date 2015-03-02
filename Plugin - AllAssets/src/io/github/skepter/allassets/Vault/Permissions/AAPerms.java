@@ -1,4 +1,4 @@
-package io.github.skepter.allassets.Vault.Permissions;
+package io.github.skepter.allassets.vault.permissions;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.reflection.VaultReflection;
