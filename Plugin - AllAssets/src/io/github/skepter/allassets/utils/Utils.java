@@ -33,7 +33,10 @@ package io.github.skepter.allassets.utils;
 
 import io.github.skepter.allassets.AllAssets;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -51,5 +54,13 @@ public class Utils {
 	public static <T> List<T> add(List<T> list, T type) {
 		list.add(type);
 		return list;
+	}
+	
+	public static <A, B> Map<B, A> reverse(Map<A, B> map) {
+		Map<B, A> newMap = new HashMap<B, A>();
+		for(Entry<A, B> entry : map.entrySet()) {
+			newMap.put(entry.getValue(), entry.getKey());
+		}
+		return newMap;
 	}
 }

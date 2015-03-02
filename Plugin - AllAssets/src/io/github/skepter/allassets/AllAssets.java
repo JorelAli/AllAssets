@@ -118,7 +118,7 @@ import io.github.skepter.allassets.listeners.StopCommandListener;
 import io.github.skepter.allassets.misc.EnchantGlow;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.reflection.VaultReflection;
-import io.github.skepter.allassets.sqlite.SQLite;
+import io.github.skepter.allassets.sqlite.SQLiteLoader;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
@@ -247,7 +247,6 @@ public class AllAssets extends JavaPlugin {
 	public boolean hasVault = false;
 	public Permission permission = null;
 	public Map<UUID, Long> tempTimeMap;
-	public SQLite sqlite;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -283,7 +282,7 @@ public class AllAssets extends JavaPlugin {
 				e.printStackTrace();
 			}
 
-		sqlite.close();
+		new SQLiteLoader().shutDown();
 		
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
@@ -537,10 +536,7 @@ public class AllAssets extends JavaPlugin {
 		framework = new CommandFramework(this);
 		new ConfigHandler();
 
-		File file = new File(Files.getStorage(), "bannedplayers.db");
-		sqlite = new SQLite(file);
-		sqlite.open();
-		sqlite.execute("CREATE TABLE IF NOT EXISTS BANNEDPLAYERS (banner VARCHAR(16), bannedPlayer VARCHAR(16), banMessage VARCHAR(256), time BIGINT);");
+		new SQLiteLoader().init();
 		getLogger().info("+---------------------------------+");
 
 	}
