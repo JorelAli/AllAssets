@@ -3,10 +3,6 @@ who banned the player as well as the banned player, along
 with the reason for their ban (TextUtils.getMsgFromArgs() 
 and the CustomConfig class)
 
-* Hat - A simple /hat sets the item in their hand onto 
-their head. (player.getInventory().setHelmet() and 
-player.getItemInHand())
-
 * Broadcast - A really easy broadcast system. I want the 
 broadcast 'prefix' to be set in either the config.yml or 
 messages.yml. I haven't decided yet. Until then, keep it 
