@@ -41,8 +41,7 @@ import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import java.io.File;
 import java.util.List;
 
-import net.md_5.bungee.api.ChatColor;
-
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class CommandRules {
@@ -63,6 +62,11 @@ public class CommandRules {
 	}
 
 	/* Add Rules remove */
+	
+	/* By having the name of the command followed by a . and then another word, it can
+	 * act as a new command 'argument'. For example, if the user types /rules add, it would
+	 * execute this code. The arguments start from 0 again, so 
+	 * /rules add hi -> args.getArgs()[0] == hi*/
 	@CommandHandler(name = "rules.add", permission = "rules.add", description = "Adds a new rule")
 	public void onAdd(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
@@ -75,6 +79,9 @@ public class CommandRules {
 		return;
 	}
 
+	/* Uses custom configuration to store rules. It's in this class
+	 * since this is the only class where rules will be used. It's a private
+	 * class since it's only used in this class. */
 	private class Rules extends CustomConfig {
 		public Rules() {
 			super(new File(Files.getStorage(), "rules.yml"), "rules");

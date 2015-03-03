@@ -73,6 +73,10 @@ public class CommandWorld {
 		return;
 	}
 
+	/* Completer must use CamelCase name for the command.
+	 * It returns a List<String> and it MUST have CommandArgs in the method.
+	 * Here, I get a list of all of the worlds loaded, put their names into a
+	 * new List<String> and return that. */
 	@Completer(name = "World")
 	public List<String> onComplete(final CommandArgs args) {
 		List<String> list = new ArrayList<String>();
