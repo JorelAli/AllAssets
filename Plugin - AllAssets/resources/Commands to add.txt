@@ -9,14 +9,6 @@ messages.yml. I haven't decided yet. Until then, keep it
 hardcoded (String prefix = [THE PREFIX]) Put some color 
 into it :)
 
-* Rules - Reading off of a custom rules.yml file. Simple 
-as that. Adding /rules add and /rules remove to add/remove 
-rules on the go for admins
-
-* World - Teleport to different worlds (Bukkit.getWorld(String name)). 
-Teleport them to the world spawnpoint (world.getSpawnLocation() and 
-player.teleport(Location loc))
-
 * Go - A 'jump' command (similar to WorldEdit's compass which 
 teleports you directly to the location they are looking at 
-(player.getTargetBlock(new HashSet<Material>(), 256).getLocation)
+(player.getTargetBlock(new HashSet<Material>(), 256).getLocation())

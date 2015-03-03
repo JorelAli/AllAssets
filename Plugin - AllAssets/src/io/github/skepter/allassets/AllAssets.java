@@ -51,6 +51,7 @@ import io.github.skepter.allassets.commands.CommandNear;
 import io.github.skepter.allassets.commands.CommandPTime;
 import io.github.skepter.allassets.commands.CommandPWeather;
 import io.github.skepter.allassets.commands.CommandRename;
+import io.github.skepter.allassets.commands.CommandRules;
 import io.github.skepter.allassets.commands.CommandSuicide;
 import io.github.skepter.allassets.commands.CommandWorkbench;
 import io.github.skepter.allassets.commands.administration.CommandAllAssets;
@@ -97,6 +98,7 @@ import io.github.skepter.allassets.commands.teleportation.CommandSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandTp;
 import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
 import io.github.skepter.allassets.commands.teleportation.CommandTphere;
+import io.github.skepter.allassets.commands.teleportation.CommandWorld;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
@@ -232,6 +234,8 @@ public class AllAssets extends JavaPlugin {
 
 		//// Skepter ////
 		new CommandHat(framework);
+		new CommandWorld(framework);
+		new CommandRules(framework);
 	}
 
 	/***********************************************************************/

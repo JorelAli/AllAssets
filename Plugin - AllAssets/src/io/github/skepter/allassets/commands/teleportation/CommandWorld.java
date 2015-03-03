@@ -28,28 +28,61 @@
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
 
-package io.github.skepter.allassets.commands.cosmetics;
+package io.github.skepter.allassets.commands.teleportation;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandHat {
+public class CommandWorld {
 
-	public CommandHat(final CommandFramework framework) {
+	public CommandWorld(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "hat", permission = "hat", description = "Puts the item in your hand on your head")
+	@CommandHandler(name = "world", aliases = { "tpworld" }, permission = "world", description = "Teleports you to a certain world")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			player.getInventory().setHelmet(player.getItemInHand());
-			player.updateInventory();
+			switch (args.getArgs().length) {
+			case 0:
+				printHelp(player);
+				return;
+			case 1:
+				for (World world : Bukkit.getWorlds())
+					if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
+						player.teleport(world.getSpawnLocation());
+						player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
+					}
+				return;
+			}
 		}
 		return;
+	}
+
+	@Completer(name = "World")
+	public List<String> onComplete(final CommandArgs args) {
+		List<String> list = new ArrayList<String>();
+		for (World world : Bukkit.getWorlds())
+			list.add(world.getName());
+		return list;
+	}
+
+	@Help(name = "World")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "World", "/world <worldName> - Teleports you to that world");
 	}
 }

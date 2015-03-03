@@ -28,28 +28,56 @@
  * If you are to break from these implications, future use of this plugin will be forbidden.
  *******************************************************************************/
 
-package io.github.skepter.allassets.commands.cosmetics;
+package io.github.skepter.allassets.commands;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.CustomConfig;
+import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+
+import java.io.File;
+import java.util.List;
+
+import net.md_5.bungee.api.ChatColor;
 
 import org.bukkit.entity.Player;
 
-public class CommandHat {
+public class CommandRules {
 
-	public CommandHat(final CommandFramework framework) {
+	public CommandRules(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "hat", permission = "hat", description = "Puts the item in your hand on your head")
+	@CommandHandler(name = "rules", permission = "rules", description = "Displays the server rules")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			player.getInventory().setHelmet(player.getItemInHand());
-			player.updateInventory();
+			player.sendMessage(TextUtils.title("Rules"));
+			for (String string : new Rules().getDataFile().getStringList("rules"))
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', string));
 		}
 		return;
+	}
+
+	/* Add Rules remove */
+	@CommandHandler(name = "rules.add", permission = "rules.add", description = "Adds a new rule")
+	public void onAdd(final CommandArgs args) {
+		Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			Rules rules = new Rules();
+			List<String> currentRules = rules.getDataFile().getStringList("rules");
+			currentRules.add(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length));
+			rules.getDataFile().set("rules", currentRules);
+		}
+		return;
+	}
+
+	private class Rules extends CustomConfig {
+		public Rules() {
+			super(new File(Files.getStorage(), "rules.yml"), "rules");
+		}
 	}
 }
