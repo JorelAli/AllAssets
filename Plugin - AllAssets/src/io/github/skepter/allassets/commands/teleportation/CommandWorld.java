@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -64,7 +65,8 @@ public class CommandWorld {
 			case 1:
 				for (World world : Bukkit.getWorlds())
 					if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
-						player.teleport(world.getSpawnLocation());
+						Location target = new Location(world, world.getSpawnLocation().getX(), world.getSpawnLocation().getY(), world.getSpawnLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
+						player.teleport(target);
 						player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
 					}
 				return;
