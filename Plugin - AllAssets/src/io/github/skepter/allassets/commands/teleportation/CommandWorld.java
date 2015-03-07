@@ -79,7 +79,7 @@ public class CommandWorld {
 	 * It returns a List<String> and it MUST have CommandArgs in the method.
 	 * Here, I get a list of all of the worlds loaded, put their names into a
 	 * new List<String> and return that. */
-	@Completer(name = "World")
+	@Completer(name = "world")
 	public List<String> onComplete(final CommandArgs args) {
 		List<String> list = new ArrayList<String>();
 		for (World world : Bukkit.getWorlds())

@@ -34,20 +34,23 @@
 package io.github.skepter.allassets.commands.fun;
 
 import io.github.skepter.allassets.CommandFramework;
-import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
+import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fireball;
-import org.bukkit.entity.Fish;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SmallFireball;
@@ -56,7 +59,6 @@ import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.entity.WitherSkull;
 
-@SuppressWarnings("deprecation")
 public class CommandLaunch {
 
 	public CommandLaunch(final CommandFramework framework) {
@@ -67,47 +69,106 @@ public class CommandLaunch {
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			if (!(args.getArgs().length == 1))
+			if (args.getArgs().length < 1) {
 				ErrorUtils.notEnoughArguments(player);
-			switch (args.getArgs()[0].toLowerCase()) {
-			case "arrow":
-				player.launchProjectile(Arrow.class);
-				break;
-			case "egg":
-				player.launchProjectile(Egg.class);
-				break;
-			case "enderpearl":
-				player.launchProjectile(EnderPearl.class);
-				break;
-			case "fireball":
-				player.launchProjectile(Fireball.class);
-				break;
-			case "fish":
-				player.launchProjectile(Fish.class);
-				break;
-			case "largefireball":
-				player.launchProjectile(LargeFireball.class);
-				break;
-			case "smallfireball":
-				player.launchProjectile(SmallFireball.class);
-				break;
-			case "snowball":
-				player.launchProjectile(Snowball.class);
-				break;
-			case "thrownexpbottle":
-				player.launchProjectile(ThrownExpBottle.class);
-				break;
-			case "thrownpotion":
-				player.launchProjectile(ThrownPotion.class);
-				break;
-			case "witherskull":
-				player.launchProjectile(WitherSkull.class);
-				break;
-			case "bluewitherskull":
-				player.launchProjectile(WitherSkull.class).setCharged(true);
-				break;
+				return;
+			}
+			switch (args.getArgs().length) {
+			case 0:
 			default:
-				break;
+				
+			case 1:
+				switch (args.getArgs()[0].toLowerCase()) {
+				case "arrow":
+					player.launchProjectile(Arrow.class);
+					break;
+				case "egg":
+					player.launchProjectile(Egg.class);
+					break;
+				case "enderpearl":
+					player.launchProjectile(EnderPearl.class);
+					break;
+				case "fireball":
+					player.launchProjectile(Fireball.class);
+					break;
+				case "largefireball":
+					player.launchProjectile(LargeFireball.class);
+					break;
+				case "smallfireball":
+					player.launchProjectile(SmallFireball.class);
+					break;
+				case "snowball":
+					player.launchProjectile(Snowball.class);
+					break;
+				case "thrownexpbottle":
+					player.launchProjectile(ThrownExpBottle.class);
+					break;
+				case "thrownpotion":
+					player.launchProjectile(ThrownPotion.class);
+					break;
+				case "witherskull":
+					player.launchProjectile(WitherSkull.class);
+					break;
+				case "bluewitherskull":
+					player.launchProjectile(WitherSkull.class).setCharged(true);
+					break;
+				default:
+					break;
+				}
+			case 2:
+				if (TextUtils.isInteger(args.getArgs()[1])) {
+					int m = Integer.parseInt(args.getArgs()[1]);
+					switch (args.getArgs()[0].toLowerCase()) {
+					case "arrow":
+						Entity arrow = player.launchProjectile(Arrow.class);
+						arrow.setVelocity(arrow.getVelocity().multiply(m));
+						break;
+					case "egg":
+						Entity egg = player.launchProjectile(Egg.class);
+						egg.setVelocity(egg.getVelocity().multiply(m));
+						break;
+					case "enderpearl":
+						Entity enderpearl = player.launchProjectile(EnderPearl.class);
+						enderpearl.setVelocity(enderpearl.getVelocity().multiply(m));
+						break;
+					case "fireball":
+						Fireball fireball = player.launchProjectile(Fireball.class);
+						fireball.setYield(m);
+						break;
+					case "largefireball":
+						LargeFireball largeFireball = player.launchProjectile(LargeFireball.class);
+						largeFireball.setYield(m);
+						break;
+					case "smallfireball":
+						SmallFireball smallFireball = player.launchProjectile(SmallFireball.class);
+						smallFireball.setYield(m);
+						break;
+					case "snowball":
+						Entity snowball = player.launchProjectile(Snowball.class);
+						snowball.setVelocity(snowball.getVelocity().multiply(m));
+						break;
+					case "thrownexpbottle":
+						Entity xpBottle = player.launchProjectile(ThrownExpBottle.class);
+						xpBottle.setVelocity(xpBottle.getVelocity().multiply(m));
+						break;
+					case "thrownpotion":
+						Entity potion = player.launchProjectile(ThrownPotion.class);
+						potion.setVelocity(potion.getVelocity().multiply(m));
+						break;
+					case "witherskull":
+						WitherSkull witherSkull = player.launchProjectile(WitherSkull.class);
+						witherSkull.setYield(m);
+						break;
+					case "bluewitherskull":
+						WitherSkull blueWitherSkull = player.launchProjectile(WitherSkull.class);
+						blueWitherSkull.setCharged(true);
+						blueWitherSkull.setYield(m);
+						break;
+					default:
+						break;
+					}
+				}
+
 			}
 		}
 	}
@@ -119,7 +180,6 @@ public class CommandLaunch {
 		list.add("egg");
 		list.add("enderpearl");
 		list.add("fireball");
-		list.add("fish");
 		list.add("largefireball");
 		list.add("smallfireball");
 		list.add("snowball");
@@ -128,6 +188,11 @@ public class CommandLaunch {
 		list.add("witherskull");
 		list.add("bluewitherskull");
 		return list;
+	}
+	
+	@Help(name="Launch")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Launch", "/launch <projectile> - launches a projectile", "/launch <projectile> <value> - launches a projectile. If possible, the value will set the explosion size (fireball/witherskull), or set the speed (arrow/snowball)");
 	}
 
 }
