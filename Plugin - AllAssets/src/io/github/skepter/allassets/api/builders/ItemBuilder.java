@@ -33,6 +33,7 @@ package io.github.skepter.allassets.api.builders;
 
 import io.github.skepter.allassets.misc.EnchantGlow;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -110,6 +111,8 @@ public class ItemBuilder {
 	/** Adds a new lore to the existing item */
 	public ItemBuilder addLore(final String... lore) {
 		List<String> currentLore = getLore();
+		if(currentLore == null || currentLore.isEmpty())
+			currentLore = new ArrayList<String>();
 		for(String str : lore)
 			currentLore.add(str);
 		setLore(currentLore);
