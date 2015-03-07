@@ -230,24 +230,27 @@ public class CommandDebug implements Listener {
 		} catch (Exception e) {
 		}
 	}
-	
+
 	@CommandHandler(name = "debug.remove", permission = "debug", description = "Removes all entities in a 256 block range.")
 	public void remove(final CommandArgs args) {
-		
 		try {
-			for(Entity e : args.getPlayer().getNearbyEntities(256, 256, 256))
-				if(!(e instanceof Player))
+			int count = 0;
+			for (Entity e : args.getPlayer().getNearbyEntities(256, 256, 256))
+				if (!(e instanceof Player)) {
 					e.remove();
+					count++;
+				}
+			args.getPlayer().sendMessage(Strings.TITLE + "Cleared " + count + " entities");
 		} catch (Exception e) {
 		}
 	}
-	
-//	@EventHandler
-//	public void onFish(PlayerFishEvent event) {
-//		if(event.getState().equals(State.IN_GROUND)) {
-//			event.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(event.getPlayer().getLocation(), event.getHook().getLocation()));
-//		}
-//	}
+
+	//	@EventHandler
+	//	public void onFish(PlayerFishEvent event) {
+	//		if(event.getState().equals(State.IN_GROUND)) {
+	//			event.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(event.getPlayer().getLocation(), event.getHook().getLocation()));
+	//		}
+	//	}
 
 	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection")
 	public void clean(final CommandArgs args) {
@@ -475,6 +478,8 @@ public class CommandDebug implements Listener {
 		list.add("ram");
 		list.add("clean");
 		list.add("physics");
+		list.add("remove");
+		list.add("explosions");
 		list.add("conflicts");
 		list.add("testencrypt");
 		list.add("testdecrypt");
