@@ -39,7 +39,6 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.misc.Help;
-import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.ArrayList;
@@ -69,14 +68,10 @@ public class CommandLaunch {
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			if (args.getArgs().length < 1) {
-				ErrorUtils.notEnoughArguments(player);
-				return;
-			}
 			switch (args.getArgs().length) {
 			case 0:
 			default:
-				
+				printHelp(player);
 			case 1:
 				switch (args.getArgs()[0].toLowerCase()) {
 				case "arrow":
@@ -156,13 +151,10 @@ public class CommandLaunch {
 						potion.setVelocity(potion.getVelocity().multiply(m));
 						break;
 					case "witherskull":
-						WitherSkull witherSkull = player.launchProjectile(WitherSkull.class);
-						witherSkull.setYield(m);
+						player.launchProjectile(WitherSkull.class);
 						break;
 					case "bluewitherskull":
-						WitherSkull blueWitherSkull = player.launchProjectile(WitherSkull.class);
-						blueWitherSkull.setCharged(true);
-						blueWitherSkull.setYield(m);
+						player.launchProjectile(WitherSkull.class).setCharged(true);
 						break;
 					default:
 						break;
@@ -192,7 +184,7 @@ public class CommandLaunch {
 	
 	@Help(name="Launch")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Launch", "/launch <projectile> - launches a projectile", "/launch <projectile> <value> - launches a projectile. If possible, the value will set the explosion size (fireball/witherskull), or set the speed (arrow/snowball)");
+		TextUtils.printHelp(sender, "Launch", "/launch <projectile> - launches a projectile", "/launch <projectile> <value> - launches a projectile. If possible, the value will set the explosion size (fireball), or set the speed (arrow/snowball)");
 	}
 
 }
