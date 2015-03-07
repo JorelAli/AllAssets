@@ -74,7 +74,9 @@ public class CommandSpawnMob {
 				if (TextUtils.isInteger(args.getArgs()[1]))
 					for (int i = 0; i < Integer.parseInt(args.getArgs()[1]); i++)
 						player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation1.getLocation()), new InputParser(args.getArgs()[0]).parseMob());
-				ErrorUtils.notAnInteger(player);
+				else
+					ErrorUtils.notAnInteger(player);
+				return;
 			}
 			ErrorUtils.tooManyArguments(player);
 			return;
