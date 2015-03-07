@@ -233,6 +233,16 @@ public class CommandDebug implements Listener {
 		}
 	}
 	
+	@CommandHandler(name = "debug.remove", permission = "debug", description = "Removes all entities in a 256 block range.")
+	public void remove(final CommandArgs args) {
+		try {
+			for(Entity e : args.getPlayer().getNearbyEntities(256, 256, 256))
+				if(!(e instanceof Player))
+					e.remove();
+		} catch (Exception e) {
+		}
+	}
+	
 	@EventHandler
 	public void onFish(PlayerFishEvent event) {
 		if(event.getState().equals(State.IN_GROUND)) {
