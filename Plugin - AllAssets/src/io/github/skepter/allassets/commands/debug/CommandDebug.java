@@ -228,7 +228,7 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.velocity", permission = "debug", description = "Tests the velocity")
 	public void velocity(final CommandArgs args) {
 		try {
-			args.getPlayer().setVelocity(VectorUtils.getVectorBetween(args.getPlayer().getLocation(), PlayerUtils.getTargetBlock(args.getPlayer()).getLocation()).multiply(2));
+			args.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(args.getPlayer().getLocation(), PlayerUtils.getTargetBlock(args.getPlayer()).getLocation()).multiply(2));
 		} catch (Exception e) {
 		}
 	}
@@ -236,7 +236,7 @@ public class CommandDebug implements Listener {
 	@EventHandler
 	public void onFish(PlayerFishEvent event) {
 		if(event.getState().equals(State.IN_GROUND)) {
-			event.getPlayer().setVelocity(VectorUtils.getVectorBetween(event.getPlayer().getLocation(), event.getHook().getLocation()));
+			event.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(event.getPlayer().getLocation(), event.getHook().getLocation()));
 		}
 	}
 
