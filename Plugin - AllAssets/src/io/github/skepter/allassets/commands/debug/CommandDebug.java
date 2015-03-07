@@ -81,8 +81,6 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -235,6 +233,7 @@ public class CommandDebug implements Listener {
 	
 	@CommandHandler(name = "debug.remove", permission = "debug", description = "Removes all entities in a 256 block range.")
 	public void remove(final CommandArgs args) {
+		
 		try {
 			for(Entity e : args.getPlayer().getNearbyEntities(256, 256, 256))
 				if(!(e instanceof Player))
@@ -243,12 +242,12 @@ public class CommandDebug implements Listener {
 		}
 	}
 	
-	@EventHandler
-	public void onFish(PlayerFishEvent event) {
-		if(event.getState().equals(State.IN_GROUND)) {
-			event.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(event.getPlayer().getLocation(), event.getHook().getLocation()));
-		}
-	}
+//	@EventHandler
+//	public void onFish(PlayerFishEvent event) {
+//		if(event.getState().equals(State.IN_GROUND)) {
+//			event.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(event.getPlayer().getLocation(), event.getHook().getLocation()));
+//		}
+//	}
 
 	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection")
 	public void clean(final CommandArgs args) {
