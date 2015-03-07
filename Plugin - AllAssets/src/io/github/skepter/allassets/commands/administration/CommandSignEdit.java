@@ -39,9 +39,8 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-
-import java.util.HashSet;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -60,16 +59,16 @@ public class CommandSignEdit {
 		if (player != null) {
 			if (args.getArgs().length > 1) {
 				if (TextUtils.isInteger(args.getArgs()[0]))
-					if (player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.WALL_SIGN)) {
-						final Sign sign = (Sign) player.getTargetBlock(new HashSet<Material>(), 256).getState();
+					if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
+						final Sign sign = (Sign) PlayerUtils.getTargetBlock(player).getState();
 						final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
 						sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, ConfigHandler.features().getBoolean("ChatColor") ? ChatColor.translateAlternateColorCodes('&', s.substring(0, s.length() - 1)) : s.substring(0, s.length() - 1));
 						sign.update();
 
 					}
 			} else if (TextUtils.isInteger(args.getArgs()[0])) {
-				if (player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.SIGN_POST) || player.getTargetBlock(new HashSet<Material>(), 256).getType().equals(Material.WALL_SIGN)) {
-					final Sign sign = (Sign) player.getTargetBlock(new HashSet<Material>(), 256).getState();
+				if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
+					final Sign sign = (Sign) PlayerUtils.getTargetBlock(player).getState();
 					sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, "");
 					sign.update();
 				}

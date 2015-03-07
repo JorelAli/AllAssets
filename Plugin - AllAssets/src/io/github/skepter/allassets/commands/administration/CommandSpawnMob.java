@@ -41,11 +41,9 @@ import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.InputParser;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import java.util.HashSet;
-
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.CommandSender;
@@ -66,12 +64,12 @@ public class CommandSpawnMob {
 				printHelp(player);
 				return;
 			case 1:
-				Block b = player.getTargetBlock(new HashSet<Material>(), 256);
+				Block b = PlayerUtils.getTargetBlock(player);
 				Block spawnLocation = b.getRelative(BlockFace.UP);
 				player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation.getLocation()), new InputParser(args.getArgs()[0]).parseMob());
 				return;
 			case 2:
-				Block b1 = player.getTargetBlock(new HashSet<Material>(), 256);
+				Block b1 = PlayerUtils.getTargetBlock(player);
 				Block spawnLocation1 = b1.getRelative(BlockFace.UP);
 				if (TextUtils.isInteger(args.getArgs()[1]))
 					for (int i = 0; i < Integer.parseInt(args.getArgs()[1]); i++)

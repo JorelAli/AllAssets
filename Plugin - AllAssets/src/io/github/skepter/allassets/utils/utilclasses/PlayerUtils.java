@@ -38,13 +38,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import net.minecraft.server.v1_8_R1.Material;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.util.BlockIterator;
 
 public class PlayerUtils {
 
+	/** Gets the target block. No longer messing around with hashsets and who
+	 * else knows what nonsense. */
+	public static Block getTargetBlock(final Player player, int range) {
+		BlockIterator itr = new BlockIterator(player, range);
+		Block target = itr.next();
+		while (itr.hasNext()) {
+			target = itr.next();
+			if (target.getType().equals(Material.AIR))
+				continue;
+			break;
+		}
+		return target;
+	}
 	
+	/** Gets the target block. Range defaults to 256 */
+	public static Block getTargetBlock(final Player player) {
+		BlockIterator itr = new BlockIterator(player, 256);
+		Block target = itr.next();
+		while (itr.hasNext()) {
+			target = itr.next();
+			if (target.getType().equals(Material.AIR))
+				continue;
+			break;
+		}
+		return target;
+	}
+
 	/** Gets the player from the name. Returns null if player not found */
 	public static Player getOnlinePlayerFromString(final String string) {
 		for (final Player p : getOnlinePlayers())
@@ -56,7 +86,8 @@ public class PlayerUtils {
 	//cache data from the world data files and install them into the UUID map
 	//ensure that duplicates are NOT added! (use a set)
 
-	/** Retrieves the list of offline player names using Bukkit's getOfflinePlayers() */
+	/** Retrieves the list of offline player names using Bukkit's
+	 * getOfflinePlayers() */
 	public static List<String> getAllOfflinePlayerNames() {
 		final List<String> playerNames = new ArrayList<String>();
 		for (final OfflinePlayer p : getOfflinePlayers())

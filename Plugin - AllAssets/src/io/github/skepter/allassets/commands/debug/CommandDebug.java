@@ -50,10 +50,10 @@ import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 import io.github.skepter.allassets.utils.utilclasses.VectorUtils;
-import io.github.skepter.allassets.utils.utilclasses.VectorUtils.GravityType;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -81,6 +81,8 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerFishEvent.State;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -217,23 +219,24 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
 		try {
-			@SuppressWarnings("deprecation")
-			Chunk c = args.getPlayer().getWorld().getChunkAt(args.getPlayer().getTargetBlock(new HashSet<Byte>(), 256).getLocation());
+			Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
 		} catch (Exception e) {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "debug.velocity", permission = "debug", description = "Tests the parabolic velocity")
+	@CommandHandler(name = "debug.velocity", permission = "debug", description = "Tests the velocity")
 	public void velocity(final CommandArgs args) {
 		try {
-			int height = 20;
-			if (args.getArgs().length == 1)
-				if (TextUtils.isInteger(args.getArgs()[0]))
-					height = Integer.parseInt(args.getArgs()[0]);
-			args.getPlayer().setVelocity(VectorUtils.calculateParabolicVelocity(GravityType.PLAYER, args.getPlayer().getLocation(), args.getPlayer().getTargetBlock(new HashSet<Byte>(), 256).getLocation(), height));
+			args.getPlayer().setVelocity(VectorUtils.getVectorBetween(args.getPlayer().getLocation(), PlayerUtils.getTargetBlock(args.getPlayer()).getLocation()).multiply(2));
 		} catch (Exception e) {
+		}
+	}
+	
+	@EventHandler
+	public void onFish(PlayerFishEvent event) {
+		if(event.getState().equals(State.IN_GROUND)) {
+			event.getPlayer().setVelocity(VectorUtils.getVectorBetween(event.getPlayer().getLocation(), event.getHook().getLocation()));
 		}
 	}
 
