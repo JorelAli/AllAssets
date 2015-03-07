@@ -84,7 +84,7 @@ public class CommandBind implements Listener {
 		ItemBuilder builder = new ItemBuilder(player.getItemInHand());
 		final String[] command = TextUtils.getMsgFromArgs(args.getArgs(), 0, args.getArgs().length);
 		String lore = "/" + TextUtils.join(command, " ");
-		builder.setLore(lore);//addLore(lore);
+		builder.addLore(lore);//setLore(lore);
 		try {
 			builder.addGlow();
 		} catch (final Exception e) {

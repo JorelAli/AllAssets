@@ -53,6 +53,7 @@ import io.github.skepter.allassets.commands.CommandPWeather;
 import io.github.skepter.allassets.commands.CommandRename;
 import io.github.skepter.allassets.commands.CommandRules;
 import io.github.skepter.allassets.commands.CommandSuicide;
+import io.github.skepter.allassets.commands.CommandTitle;
 import io.github.skepter.allassets.commands.CommandWorkbench;
 import io.github.skepter.allassets.commands.administration.CommandAllAssets;
 import io.github.skepter.allassets.commands.administration.CommandAnnouncer;
@@ -236,6 +237,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandHat(framework);
 		new CommandWorld(framework);
 		new CommandRules(framework);
+		new CommandTitle(framework);
 	}
 
 	/***********************************************************************/

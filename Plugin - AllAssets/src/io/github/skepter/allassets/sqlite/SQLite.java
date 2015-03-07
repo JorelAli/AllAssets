@@ -1,6 +1,7 @@
 package io.github.skepter.allassets.sqlite;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,19 +10,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/** SQLite class taken straight from NecessaryExtrasCore 
- * Good thing that Skepter owns that xD */
+/** SQLite class taken straight from NecessaryExtrasCore Good thing that Skepter
+ * owns that xD */
 public class SQLite {
-	
+
 	private String DatabaseURL;
 	private Connection Connection;
 
-	public SQLite(File DatabaseFile) {
-		if (!DatabaseFile.getParentFile().exists()) {
-			DatabaseFile.getParentFile().mkdir();
-		}
+	public SQLite(File databaseFile) {
+		if (!databaseFile.getParentFile().exists())
+			databaseFile.getParentFile().mkdir();
 
-		DatabaseURL = "jdbc:sqlite:" + DatabaseFile.getAbsolutePath();
+		if (!databaseFile.exists())
+			try {
+				databaseFile.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+		DatabaseURL = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
 
 		try {
 			Class.forName("org.sqlite.JDBC");

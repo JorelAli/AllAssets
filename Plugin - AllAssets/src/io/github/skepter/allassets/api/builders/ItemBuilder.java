@@ -110,7 +110,8 @@ public class ItemBuilder {
 	/** Adds a new lore to the existing item */
 	public ItemBuilder addLore(final String... lore) {
 		List<String> currentLore = getLore();
-		currentLore.addAll(Arrays.asList(lore));
+		for(String str : lore)
+			currentLore.add(str);
 		setLore(currentLore);
 		return builder;
 	}
