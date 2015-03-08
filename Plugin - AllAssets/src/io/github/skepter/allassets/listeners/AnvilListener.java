@@ -34,6 +34,7 @@ import org.bukkit.event.inventory.InventoryType;
 
 public class AnvilListener implements Listener {
 
+	/** Prevents crashes with Anvils and custom Enchantments */
 	@EventHandler
 	public void onBlockRedstoneChange(final InventoryClickEvent event) {
 		if (event.getInventory().getType().equals(InventoryType.ANVIL)) {
@@ -42,5 +43,4 @@ public class AnvilListener implements Listener {
 			}
 		}
 	}
-
 }

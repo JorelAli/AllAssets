@@ -55,9 +55,9 @@ public class CommandButcher {
 			for (final String s : args.getArgs()) {
 				if (s.contains("-l"))
 					lightning = true;
-				if (s.contains("-p"))
+				if (s.contains("-p") || s.contains("-a"))
 					passive = true;
-				if (s.contains("-h"))
+				if (s.contains("-h") || s.contains("-m"))
 					hostile = true;
 				if (s.contains("-e"))
 					explosion = true;

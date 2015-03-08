@@ -25,22 +25,55 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.config.ConfigHandler;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.block.BlockPhysicsEvent;
 
 public class BlockPoweredListener implements Listener {
 
 	@EventHandler
-	public void onBlockRedstoneChange(final BlockRedstoneEvent event) {
-		final Block block = event.getBlock();
-		if ((event.getNewCurrent() > 0) && block.getType().equals(Material.OBSIDIAN))
-			if (ConfigHandler.features().getBoolean("PoweredBlocks.Glowstone"))
-				block.setType(Material.GLOWSTONE);
-	}
+	public void onBlockRedstoneChange(final BlockPhysicsEvent event) {
+		BlockFace[] adjFaces = { BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN };
 
+		for (BlockFace adjFace : adjFaces) {
+			Block block = event.getBlock().getRelative(adjFace);
+			if (block.isBlockPowered()) {
+				switch (block.getType()) {
+				case PUMPKIN:
+					block.setType(Material.JACK_O_LANTERN);
+					break;
+				case OBSIDIAN:
+					block.setType(Material.GLOWSTONE);
+					break;
+				case NETHERRACK:
+					block.getRelative(BlockFace.UP).setType(Material.FIRE);
+					break;
+				default:
+					break;
+				}
+			} else {
+				boolean b = false;
+				for (BlockFace bf : adjFaces)
+					if (event.getBlock().getRelative(bf).getType().equals(Material.REDSTONE_WIRE))
+						b = true;
+				if (b)
+					switch (block.getType()) {
+					case JACK_O_LANTERN:
+						block.setType(Material.PUMPKIN);
+						break;
+					case GLOWSTONE:
+						block.setType(Material.OBSIDIAN);
+						break;
+					case NETHERRACK:
+						block.getRelative(BlockFace.UP).setType(Material.AIR);
+						break;
+					default:
+						break;
+					}
+			}
+		}
+	}
 }

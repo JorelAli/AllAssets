@@ -100,6 +100,7 @@ import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
 import io.github.skepter.allassets.libs.ComphenixsGhostFactory;
 import io.github.skepter.allassets.listeners.AnvilListener;
+import io.github.skepter.allassets.listeners.BlockPoweredListener;
 import io.github.skepter.allassets.listeners.ChatListener;
 import io.github.skepter.allassets.listeners.CommandCooldownListener;
 import io.github.skepter.allassets.listeners.ConsoleSayListener;
@@ -234,6 +235,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandTitle(framework);
 		new CommandGo(framework);
 		r(new CommandBan(framework));
+		r(new BlockPoweredListener());
 	}
 
 	/***********************************************************************/
@@ -493,7 +495,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
 			r(new ServerListingListener());
 		//Buggy and deprecated until fixed
-		//r(new BlockPoweredListener());
+		
 
 		devRegister(framework);
 
