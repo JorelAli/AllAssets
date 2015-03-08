@@ -93,6 +93,7 @@ import io.github.skepter.allassets.commands.fun.CommandDiscoArmor;
 import io.github.skepter.allassets.commands.fun.CommandFakeDeop;
 import io.github.skepter.allassets.commands.fun.CommandFakeOp;
 import io.github.skepter.allassets.commands.fun.CommandLaunch;
+import io.github.skepter.allassets.commands.sql.CommandBan;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
@@ -240,6 +241,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandRules(framework);
 		new CommandTitle(framework);
 		new CommandGo(framework);
+		r(new CommandBan(framework));
 	}
 
 	/***********************************************************************/

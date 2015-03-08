@@ -12,6 +12,7 @@ public class SQLiteBan extends SQLiteManager {
 
 	public void banPlayer(Player banner, Player bannedPlayer, String message) {
 		sqlite.execute("INSERT INTO BANNEDPLAYERS(banner, bannedPlayer, banMessage, time) VALUES('" + banner.getName() + "', '" + bannedPlayer.getName() + "', '" + message + "', '" + String.valueOf(System.currentTimeMillis()) + "');");
+		bannedPlayer.kickPlayer(message);
 	}
 
 	public boolean isBanned(String username) {
@@ -23,12 +24,12 @@ public class SQLiteBan extends SQLiteManager {
 		return true;
 	}
 
-	/*
-	 * CREATE TABLE IF NOT EXISTS NE (playername VARCHAR(16), canSee BOOLEAN, isLogging BOOLEAN, isLoggingConsole BOOLEAN, isFrozen BOOLEAN);
-	 * 		sqlite.execute("INSERT INTO NE(playername, canSee, isLogging, isLoggingConsole, isFrozen) VALUES('" + player.getName() + "', 'false', 'false', 'false', 'false';");
-		ResultSet result = sqlite.executeQuery("SELECT " + key + " FROM NE WHERE " + where + "='" + value + "';");
-
-	 */
+	public String getBannedMessage(String username) {
+		if(isBanned(username)) {
+			return sqlite.resultToString(sqlite.executeQuery("SELECT * FROM " + tableName() + " WHERE bannedPlayer='" + username + "';"), "banMessage");
+		}
+		return null;
+	}
 
 	@Override
 	public void createTable() {
