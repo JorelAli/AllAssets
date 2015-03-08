@@ -39,7 +39,7 @@ public class CommandGo {
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			player.teleport(PlayerUtils.getTargetBlock(player).getLocation());
+			player.teleport(PlayerUtils.getTargetBlock(player, 500).getLocation());
 		}
 		return;
 	}

@@ -41,7 +41,8 @@ public class SQLiteLoader {
 	}
 	
 	public void init() {
-		sqliteMap.put(new SQLite(new File(Files.getStorage(), "bannedplayers.db")), new SQLiteBan());
+		SQLite ban = new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
+		sqliteMap.put(ban, new SQLiteBan(ban));
 		
 		for(Entry<SQLite, SQLiteManager> e : sqliteMap.entrySet()) {
 			e.getKey().open();
