@@ -45,7 +45,7 @@ public class CommandSetSpawn {
 		if (player != null) {
 			int x = player.getLocation().getBlockX(), y = player.getLocation().getBlockY(), z = player.getLocation().getBlockZ();
 			player.getWorld().setSpawnLocation(x, y, z);
-			player.sendMessage(Strings.TITLE + "Set spawn location to [" + x + ", " + y + ", " + z + "]");
+			player.sendMessage(Strings.TITLE + "Set spawn location for " + player.getWorld().getName() + "to [" + x + ", " + y + ", " + z + "]");
 		}
 	}
 }
