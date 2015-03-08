@@ -94,6 +94,7 @@ import io.github.skepter.allassets.commands.fun.CommandFakeDeop;
 import io.github.skepter.allassets.commands.fun.CommandFakeOp;
 import io.github.skepter.allassets.commands.fun.CommandLaunch;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
+import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandTp;
@@ -238,6 +239,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandWorld(framework);
 		new CommandRules(framework);
 		new CommandTitle(framework);
+		new CommandGo(framework);
 	}
 
 	/***********************************************************************/
