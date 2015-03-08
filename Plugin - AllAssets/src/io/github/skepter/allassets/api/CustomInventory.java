@@ -21,29 +21,52 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.Plugin;
 
-public class CustomInventory {
+public class CustomInventory implements Listener {
 
 	// Stuff goes here. Yeah. Something along the lines of a custom Inventory.
 	//Other stuff goes here. Perhaps a CustomItemStack item which does a certain
 	//action when it's inside this certain inventory
 
 	private Inventory inv;
+	private Map<Integer, CustomItemStack> itemMap;
 
 	/** Rows = number of rows to have. 1 row = 9 slots. */
-	public CustomInventory(String title, int rows) {
+	public CustomInventory(Plugin plugin, String title, int rows) {
+		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
+		itemMap = new HashMap<Integer,CustomItemStack>();
 		inv = Bukkit.createInventory(null, rows * 9, title);
 	}
 	
+	public void addCustomItemStack(CustomItemStack is, int location) {
+		inv.setItem(location, is.getItemStack());
+		itemMap.put(location, is);
+	}
+	
 	public void addCustomItemStack(CustomItemStack is) {
-		
+		itemMap.put(inv.firstEmpty(), is);
+		inv.addItem(is.getItemStack());
 	}
 
 	public void open(Player... players) {
 		for (Player player : players)
 			player.openInventory(inv);
+	}
+	
+	@EventHandler
+	public void onClick(InventoryClickEvent event) {
+		if(event.getInventory().equals(inv)) {
+			itemMap.get(event.getSlot()).clickAction();
+		}
 	}
 }
