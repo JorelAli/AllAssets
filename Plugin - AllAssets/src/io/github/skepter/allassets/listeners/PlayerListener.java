@@ -3,7 +3,7 @@
  * Skepter's licence
  * Copyright 2015 
  *
- * AllAssets was created by Skepter (http://skepter.github.io/).
+ * AllAssets was created by Skepter and Tundra (http://skepter.github.io/).
  *
  * You are able to:
  * * View AllAsset's source code on github
