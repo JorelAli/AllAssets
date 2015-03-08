@@ -29,7 +29,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.vault.permissions;
+package io.github.skepter.allassets.Vault.Permissions;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.utils.PlayerMap;
