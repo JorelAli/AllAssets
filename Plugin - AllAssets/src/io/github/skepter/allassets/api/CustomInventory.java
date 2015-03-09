@@ -21,6 +21,8 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
+import io.github.skepter.allassets.utils.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,14 +49,14 @@ public class CustomInventory implements Listener {
 	}
 
 	public void addCustomItemStack(CustomItemStack is, int location) {
-		is.setInventory(inv);
+		is.setInventory(this);
 		inv.setItem(location, is.getItemStack());
 		itemMap.put(location, is);
 	}
 
 	public void addCustomItemStack(CustomItemStack is) {
 		if (!(inv.firstEmpty() == -1)) {
-			is.setInventory(inv);
+			is.setInventory(this);
 			itemMap.put(inv.firstEmpty(), is);
 			inv.addItem(is.getItemStack());
 		}
@@ -64,6 +66,12 @@ public class CustomInventory implements Listener {
 	public void open(Player... players) {
 		for (Player player : players)
 			player.openInventory(inv);
+	}
+	
+	public static void updateInventory(Player player, CustomItemStack itemStack) {
+		int slot = Utils.reverse(itemStack.getInventory().itemMap).get(itemStack);
+		itemStack.getInventory().inv.setItem(slot, itemStack.getItemStack());
+		player.openInventory(itemStack.getInventory().inv);
 	}
 
 	@EventHandler

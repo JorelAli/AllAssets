@@ -1,5 +1,6 @@
 package io.github.skepter.allassets.test;
 
+import io.github.skepter.allassets.api.CustomInventory;
 import io.github.skepter.allassets.api.CustomItemStack;
 import io.github.skepter.allassets.api.builders.ItemBuilder;
 
@@ -33,6 +34,7 @@ public class VanishPlayersItemStack extends CustomItemStack {
 			vanishedPlayers.remove(player.getUniqueId());
 			setItemStack(new ItemBuilder(Material.ENDER_PEARL).setDisplayName("Vanish players").build());
 			Bukkit.broadcastMessage("Players are now visible");
+			CustomInventory.updateInventory(player, this);
 			for (Player target : Bukkit.getOnlinePlayers())
 				player.showPlayer(target);
 		} else {
@@ -40,6 +42,7 @@ public class VanishPlayersItemStack extends CustomItemStack {
 			vanishedPlayers.add(player.getUniqueId());
 			setItemStack(new ItemBuilder(Material.EYE_OF_ENDER).setDisplayName("Unvanish players").build());
 			Bukkit.broadcastMessage("Players are now invisible");
+			CustomInventory.updateInventory(player, this);
 			for (Player target : Bukkit.getOnlinePlayers())
 				player.hidePlayer(target);
 		}
