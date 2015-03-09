@@ -28,6 +28,7 @@ package io.github.skepter.allassets.config;
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -96,9 +97,6 @@ public class UUIDData {
 
 	/** @return UUID: PlayerName */
 	public static Map<UUID, String> getReversedUUIDMap() {
-		final Map<UUID, String> reversedMap = new HashMap<UUID, String>();
-		for (final Map.Entry<String, UUID> entry : getUUIDMap().entrySet())
-			reversedMap.put(entry.getValue(), entry.getKey());
-		return reversedMap;
+		return Utils.reverse(getUUIDMap());
 	}
 }

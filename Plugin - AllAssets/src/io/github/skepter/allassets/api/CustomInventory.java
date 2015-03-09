@@ -21,8 +21,6 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
-import io.github.skepter.allassets.utils.Utils;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +38,10 @@ public class CustomInventory implements Listener {
 
 	private Inventory inv;
 	private Map<Integer, CustomItemStack> itemMap;
+
+	public Map<Integer, CustomItemStack> getItemMap() {
+		return itemMap;
+	}
 
 	/** Rows = number of rows to have. 1 row = 9 slots. */
 	public CustomInventory(JavaPlugin plugin, String title, int rows) {
@@ -62,16 +64,14 @@ public class CustomInventory implements Listener {
 		}
 		//couldn't add itemStack, no room ):
 	}
-
+	
+	public Inventory getInventory() {
+		return inv;
+	}
+	
 	public void open(Player... players) {
 		for (Player player : players)
 			player.openInventory(inv);
-	}
-	
-	public static void updateInventory(Player player, CustomItemStack itemStack) {
-		int slot = Utils.reverse(itemStack.getInventory().itemMap).get(itemStack);
-		itemStack.getInventory().inv.setItem(slot, itemStack.getItemStack());
-		player.openInventory(itemStack.getInventory().inv);
 	}
 
 	@EventHandler

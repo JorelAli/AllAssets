@@ -21,6 +21,8 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
+import io.github.skepter.allassets.utils.Utils;
+
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -39,11 +41,17 @@ public abstract class CustomItemStack {
 
 	public abstract void clickAction(Player player);
 
-	public CustomInventory getInventory() {
+	public CustomInventory getCustomInventory() {
 		return inv;
 	}
 	
 	public void setInventory(CustomInventory inv) {
 		this.inv = inv;
+	}
+	
+	public void updateInventory(Player player) {
+		int slot = Utils.reverse(getCustomInventory().getItemMap()).get(this);
+		getCustomInventory().getInventory().setItem(slot, getItemStack());
+		player.openInventory(getCustomInventory().getInventory());
 	}
 }
