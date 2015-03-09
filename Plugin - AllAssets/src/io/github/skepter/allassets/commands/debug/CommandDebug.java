@@ -30,11 +30,13 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
+import io.github.skepter.allassets.api.CustomInventory;
 import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.reflection.ReflectionPlayer;
 import io.github.skepter.allassets.reflection.ReflectionUtils;
 import io.github.skepter.allassets.tasks.TPS;
+import io.github.skepter.allassets.test.VanishPlayersItemStack;
 import io.github.skepter.allassets.utils.EncryptionUtils;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.IDReader;
@@ -211,6 +213,16 @@ public class CommandDebug implements Listener {
 		try {
 			Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
+		} catch (Exception e) {
+		}
+	}
+	
+	@CommandHandler(name = "debug.inv", permission = "debug", description = "Test the custom inventory")
+	public void inv(final CommandArgs args) {
+		try {
+			CustomInventory inv = new CustomInventory(AllAssets.instance(), "My custom inv", 1);
+			inv.addCustomItemStack(new VanishPlayersItemStack());
+			inv.open(args.getPlayer());
 		} catch (Exception e) {
 		}
 	}

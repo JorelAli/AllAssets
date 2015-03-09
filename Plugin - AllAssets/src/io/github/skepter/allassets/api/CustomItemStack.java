@@ -21,22 +21,22 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class CustomItemStack {
 
-	// Stuff.
-
 	private ItemStack is;
-
-	public CustomItemStack(ItemStack is) {
-		this.is = is;
-	}
 
 	public ItemStack getItemStack() {
 		return is;
 	}
+	
+	public void setItemStack(ItemStack is) {
+		this.is = is;
+	}
 
-	public abstract void clickAction();
+	public abstract void clickAction(Player player);
 
+	
 }
