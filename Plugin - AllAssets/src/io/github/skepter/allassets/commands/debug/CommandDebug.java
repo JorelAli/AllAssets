@@ -249,13 +249,6 @@ public class CommandDebug implements Listener {
 		}
 	}
 
-	//	@EventHandler
-	//	public void onFish(PlayerFishEvent event) {
-	//		if(event.getState().equals(State.IN_GROUND)) {
-	//			event.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(event.getPlayer().getLocation(), event.getHook().getLocation()));
-	//		}
-	//	}
-
 	@CommandHandler(name = "debug.clean", permission = "debug", description = "Cleans garbage collection")
 	public void clean(final CommandArgs args) {
 		final CommandSender sender = args.getSender();

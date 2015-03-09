@@ -47,12 +47,14 @@ public class CustomInventory implements Listener {
 	}
 
 	public void addCustomItemStack(CustomItemStack is, int location) {
+		is.setInventory(inv);
 		inv.setItem(location, is.getItemStack());
 		itemMap.put(location, is);
 	}
 
 	public void addCustomItemStack(CustomItemStack is) {
 		if (!(inv.firstEmpty() == -1)) {
+			is.setInventory(inv);
 			itemMap.put(inv.firstEmpty(), is);
 			inv.addItem(is.getItemStack());
 		}
@@ -67,8 +69,10 @@ public class CustomInventory implements Listener {
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
 		if (event.getInventory().equals(inv)) {
-			if (!event.getInventory().getItem(event.getSlot()).equals(Material.AIR))
+			if (!event.getInventory().getItem(event.getSlot()).equals(Material.AIR)) {
+				Bukkit.broadcastMessage("inv clicked");
 				itemMap.get(event.getSlot()).clickAction(Bukkit.getPlayer(event.getWhoClicked().getUniqueId()));
+			}
 		}
 	}
 }

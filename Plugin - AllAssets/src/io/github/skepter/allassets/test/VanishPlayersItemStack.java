@@ -14,23 +14,33 @@ import org.bukkit.entity.Player;
 public class VanishPlayersItemStack extends CustomItemStack {
 
 	private List<UUID> vanishedPlayers;
-	
+	//I'm working on it.....
+
 	public VanishPlayersItemStack() {
 		setItemStack(new ItemBuilder(Material.ENDER_PEARL).setDisplayName("Vanish players").build());
-		vanishedPlayers = new ArrayList<UUID>();
+		if (vanishedPlayers == null)
+			vanishedPlayers = new ArrayList<UUID>();
+		else {
+//			for(UUID u : vanishedPlayers) {
+//				setItemStack(new ItemBuilder(Material.EYE_OF_ENDER).setDisplayName("Unvanish players").build());
+//			}
+		}
 	}
 
 	@Override
 	public void clickAction(Player player) {
-		if(vanishedPlayers.contains(player.getUniqueId())) {
+		if (vanishedPlayers.contains(player.getUniqueId())) {
 			vanishedPlayers.remove(player.getUniqueId());
 			setItemStack(new ItemBuilder(Material.ENDER_PEARL).setDisplayName("Vanish players").build());
-			for(Player target : Bukkit.getOnlinePlayers())
+			Bukkit.broadcastMessage("Players are now visible");
+			for (Player target : Bukkit.getOnlinePlayers())
 				player.showPlayer(target);
 		} else {
+			//this never shows. I'm working on it.
 			vanishedPlayers.add(player.getUniqueId());
 			setItemStack(new ItemBuilder(Material.EYE_OF_ENDER).setDisplayName("Unvanish players").build());
-			for(Player target : Bukkit.getOnlinePlayers())
+			Bukkit.broadcastMessage("Players are now invisible");
+			for (Player target : Bukkit.getOnlinePlayers())
 				player.hidePlayer(target);
 		}
 	}

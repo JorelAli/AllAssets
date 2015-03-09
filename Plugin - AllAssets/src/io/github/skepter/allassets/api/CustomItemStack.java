@@ -22,11 +22,13 @@
 package io.github.skepter.allassets.api;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public abstract class CustomItemStack {
 
 	private ItemStack is;
+	private Inventory inv;
 
 	public ItemStack getItemStack() {
 		return is;
@@ -38,5 +40,11 @@ public abstract class CustomItemStack {
 
 	public abstract void clickAction(Player player);
 
+	public Inventory getInventory() {
+		return inv;
+	}
 	
+	public void setInventory(Inventory inv) {
+		this.inv = inv;
+	}
 }
