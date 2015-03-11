@@ -21,9 +21,10 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
+import io.github.skepter.allassets.api.utils.PlayerMap;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import net.minecraft.server.v1_8_R1.Material;
 
@@ -37,33 +38,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CustomInventory implements Listener {
 
+	private static PlayerMap<CustomInventory> inventoryMap;
 	private Inventory inv;
-	//turn into PlayerMap
-	private static Map<UUID, CustomInventory> inventoryMap;
-
-	public Map<UUID, CustomInventory> getInventoryMap() {
-		return inventoryMap;
-	}
 
 	private Map<Integer, CustomItemStack> itemMap;
-
-	public Map<Integer, CustomItemStack> getItemMap() {
-		return itemMap;
-	}
 
 	/** Rows = number of rows to have. 1 row = 9 slots. */
 	public CustomInventory(JavaPlugin plugin, String title, int rows) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		itemMap = new HashMap<Integer, CustomItemStack>();
 		if (inventoryMap == null)
-			inventoryMap = new HashMap<UUID, CustomInventory>();
+			inventoryMap = new PlayerMap<CustomInventory>(plugin);
 		inv = Bukkit.createInventory(null, rows * 9, title);
-	}
-
-	public void addCustomItemStack(CustomItemStack is, int location) {
-		is.setInventory(this);
-		inv.setItem(location, is.getItemStack());
-		itemMap.put(location, is);
 	}
 
 	public void addCustomItemStack(CustomItemStack is) {
@@ -75,29 +61,22 @@ public class CustomInventory implements Listener {
 		//couldn't add itemStack, no room ):
 	}
 
+	public void addCustomItemStack(CustomItemStack is, int location) {
+		is.setInventory(this);
+		inv.setItem(location, is.getItemStack());
+		itemMap.put(location, is);
+	}
+
 	public Inventory getInventory() {
 		return inv;
 	}
 
-	public void update(Player player) {
-		inventoryMap.put(player.getUniqueId(), this);
+	public PlayerMap<CustomInventory> getInventoryMap() {
+		return inventoryMap;
 	}
 
-	public void open(Player... players) {
-		for (Player player : players) {
-			if (inventoryMap.containsKey(player.getUniqueId())) {
-				player.openInventory(inventoryMap.get(player.getUniqueId()).inv);
-			} else {
-				openNew(player);
-			}
-		}
-	}
-
-	public void openNew(Player... players) {
-		for (Player player : players) {
-			player.openInventory(inv);
-			inventoryMap.put(player.getUniqueId(), this);
-		}
+	public Map<Integer, CustomItemStack> getItemMap() {
+		return itemMap;
 	}
 
 	@EventHandler
@@ -107,5 +86,26 @@ public class CustomInventory implements Listener {
 				itemMap.get(event.getSlot()).clickAction(Bukkit.getPlayer(event.getWhoClicked().getUniqueId()));
 			}
 		}
+	}
+
+	public void open(Player... players) {
+		for (Player player : players) {
+			if (inventoryMap.containsKey(player.getUniqueId())) {
+				player.openInventory(inventoryMap.get(player).inv);
+			} else {
+				openNew(player);
+			}
+		}
+	}
+
+	public void openNew(Player... players) {
+		for (Player player : players) {
+			player.openInventory(inv);
+			inventoryMap.put(player, this);
+		}
+	}
+
+	public void update(Player player) {
+		inventoryMap.put(player, this);
 	}
 }
