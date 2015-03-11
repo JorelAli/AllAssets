@@ -65,8 +65,8 @@ public class SQLiteBan extends SQLiteManager {
 	}
 
 	public boolean isBanned(String username) {
-		PreparedStatement s = sqlite.prepareStatement("SELECT * FROM ? WHERE bannedPlayer=?;");
 		try {
+			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM ? WHERE bannedPlayer=?;");
 			s.setString(1, tableName());
 			s.setString(2, username);
 			s.executeQuery();

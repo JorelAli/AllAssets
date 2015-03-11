@@ -50,8 +50,12 @@ public abstract class CustomItemStack {
 	}
 	
 	public void updateInventory(Player player) {
+		//continue working on this.....
 		int slot = Utils.reverse(getCustomInventory().getItemMap()).get(this);
 		getCustomInventory().getInventory().setItem(slot, getItemStack());
-		player.openInventory(getCustomInventory().getInventory());
+		getCustomInventory().update(player);
+		setInventory(getCustomInventory().getInventoryMap().get(player.getUniqueId()));
+		getCustomInventory().open(player);
+//		player.openInventory(getCustomInventory().getInventory());
 	}
 }

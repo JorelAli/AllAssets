@@ -23,6 +23,7 @@ package io.github.skepter.allassets.api;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import net.minecraft.server.v1_8_R1.Material;
 
@@ -37,6 +38,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CustomInventory implements Listener {
 
 	private Inventory inv;
+	//turn into PlayerMap
+	private Map<UUID, CustomInventory> inventoryMap;
+	
+	public Map<UUID, CustomInventory> getInventoryMap() {
+		return inventoryMap;
+	}
+
 	private Map<Integer, CustomItemStack> itemMap;
 
 	public Map<Integer, CustomItemStack> getItemMap() {
@@ -47,6 +55,7 @@ public class CustomInventory implements Listener {
 	public CustomInventory(JavaPlugin plugin, String title, int rows) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		itemMap = new HashMap<Integer, CustomItemStack>();
+		inventoryMap = new HashMap<UUID, CustomInventory>();
 		inv = Bukkit.createInventory(null, rows * 9, title);
 	}
 
@@ -64,21 +73,36 @@ public class CustomInventory implements Listener {
 		}
 		//couldn't add itemStack, no room ):
 	}
-	
+
 	public Inventory getInventory() {
 		return inv;
 	}
 	
+	public void update(Player player) {
+		inventoryMap.put(player.getUniqueId(), this);
+	}
+
 	public void open(Player... players) {
-		for (Player player : players)
+		for (Player player : players) {
+			if (inventoryMap.containsKey(player.getUniqueId()))
+				player.openInventory(inventoryMap.get(player.getUniqueId()).inv);
+			else {
+				openNew(player);
+			}
+		}
+	}
+
+	public void openNew(Player... players) {
+		for (Player player : players) {
 			player.openInventory(inv);
+			inventoryMap.put(player.getUniqueId(), this);
+		}
 	}
 
 	@EventHandler
 	public void onClick(InventoryClickEvent event) {
 		if (event.getInventory().equals(inv)) {
 			if (!event.getInventory().getItem(event.getSlot()).equals(Material.AIR)) {
-				Bukkit.broadcastMessage("inv clicked");
 				itemMap.get(event.getSlot()).clickAction(Bukkit.getPlayer(event.getWhoClicked().getUniqueId()));
 			}
 		}
