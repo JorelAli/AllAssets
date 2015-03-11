@@ -116,7 +116,6 @@ import io.github.skepter.allassets.listeners.StopCommandListener;
 import io.github.skepter.allassets.misc.EnchantGlow;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.reflection.VaultReflection;
-import io.github.skepter.allassets.sqlite.SQLiteLoader;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
@@ -286,7 +285,8 @@ public class AllAssets extends JavaPlugin {
 				e.printStackTrace();
 			}
 
-		new SQLiteLoader().shutDown();
+		/* Too buggy to be worth testing */
+//		new SQLiteLoader().shutDown();
 		
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
@@ -540,7 +540,8 @@ public class AllAssets extends JavaPlugin {
 		framework = new CommandFramework(this);
 		new ConfigHandler();
 
-		new SQLiteLoader().init();
+		/* Too buggy to be worth testing */
+//		new SQLiteLoader().init();
 		getLogger().info("+---------------------------------+");
 
 	}

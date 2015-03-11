@@ -39,8 +39,8 @@ public class CustomInventory implements Listener {
 
 	private Inventory inv;
 	//turn into PlayerMap
-	private Map<UUID, CustomInventory> inventoryMap;
-	
+	private static Map<UUID, CustomInventory> inventoryMap;
+
 	public Map<UUID, CustomInventory> getInventoryMap() {
 		return inventoryMap;
 	}
@@ -55,7 +55,8 @@ public class CustomInventory implements Listener {
 	public CustomInventory(JavaPlugin plugin, String title, int rows) {
 		Bukkit.getServer().getPluginManager().registerEvents(this, plugin);
 		itemMap = new HashMap<Integer, CustomItemStack>();
-		inventoryMap = new HashMap<UUID, CustomInventory>();
+		if (inventoryMap == null)
+			inventoryMap = new HashMap<UUID, CustomInventory>();
 		inv = Bukkit.createInventory(null, rows * 9, title);
 	}
 
@@ -77,16 +78,16 @@ public class CustomInventory implements Listener {
 	public Inventory getInventory() {
 		return inv;
 	}
-	
+
 	public void update(Player player) {
 		inventoryMap.put(player.getUniqueId(), this);
 	}
 
 	public void open(Player... players) {
 		for (Player player : players) {
-			if (inventoryMap.containsKey(player.getUniqueId()))
+			if (inventoryMap.containsKey(player.getUniqueId())) {
 				player.openInventory(inventoryMap.get(player.getUniqueId()).inv);
-			else {
+			} else {
 				openNew(player);
 			}
 		}
