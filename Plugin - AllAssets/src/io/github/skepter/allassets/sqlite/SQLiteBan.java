@@ -22,8 +22,10 @@
 package io.github.skepter.allassets.sqlite;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class SQLiteBan extends SQLiteManager {
@@ -69,7 +71,8 @@ public class SQLiteBan extends SQLiteManager {
 			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM ? WHERE bannedPlayer=?;");
 			s.setString(1, tableName());
 			s.setString(2, username);
-			s.executeQuery();
+			ResultSet r = s.executeQuery();
+			Bukkit.broadcastMessage("IsBanned for " + username + r);
 		} catch (SQLException e) {
 			return false;
 		}

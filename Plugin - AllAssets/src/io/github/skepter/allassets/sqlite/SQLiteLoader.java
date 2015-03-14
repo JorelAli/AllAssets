@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.bukkit.Bukkit;
+
 /** Loads SQLite classes. Used to open and close SQLite databases.
  * Register new SQLite classes inside the init() method. */
 public class SQLiteLoader {
@@ -42,11 +44,13 @@ public class SQLiteLoader {
 	
 	public void init() {
 		SQLite ban = new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
-		sqliteMap.put(ban, new SQLiteBan(ban));
+		SQLiteManager banManager = new SQLiteBan(ban);
+		sqliteMap.put(ban, banManager);
 		
 		for(Entry<SQLite, SQLiteManager> e : sqliteMap.entrySet()) {
 			e.getKey().open();
 			e.getValue().createTable();
+			Bukkit.getLogger().info("Opened SQLite table: " + banManager.tableName());
 		}
 	}
 	

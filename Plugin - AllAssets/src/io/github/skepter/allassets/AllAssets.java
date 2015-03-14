@@ -85,6 +85,7 @@ import io.github.skepter.allassets.commands.fun.CommandDiscoArmor;
 import io.github.skepter.allassets.commands.fun.CommandFakeDeop;
 import io.github.skepter.allassets.commands.fun.CommandFakeOp;
 import io.github.skepter.allassets.commands.fun.CommandLaunch;
+import io.github.skepter.allassets.commands.sql.CommandBan;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
@@ -116,6 +117,7 @@ import io.github.skepter.allassets.listeners.StopCommandListener;
 import io.github.skepter.allassets.misc.EnchantGlow;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.reflection.VaultReflection;
+import io.github.skepter.allassets.sqlite.SQLiteLoader;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
@@ -232,7 +234,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandRules(framework);
 		new CommandTitle(framework);
 		new CommandGo(framework);
-//		r(new CommandBan(framework));
+		r(new CommandBan(framework));
 		r(new BlockPoweredListener());
 	}
 
@@ -286,7 +288,7 @@ public class AllAssets extends JavaPlugin {
 			}
 
 		/* Too buggy to be worth testing */
-//		new SQLiteLoader().shutDown();
+		new SQLiteLoader().shutDown();
 		
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
@@ -541,7 +543,7 @@ public class AllAssets extends JavaPlugin {
 		new ConfigHandler();
 
 		/* Too buggy to be worth testing */
-//		new SQLiteLoader().init();
+		new SQLiteLoader().init();
 		getLogger().info("+---------------------------------+");
 
 	}
