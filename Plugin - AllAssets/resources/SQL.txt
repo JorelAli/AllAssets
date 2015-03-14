@@ -1,0 +1,17 @@
+--- SQL information ---
+
+[Where it will be used]
+SQL will be used for storing massive information about players.
+For example, we will be using SQL to store:
+* Economy information
+  - Recent purchases perhaps?
+* Permission information
+* Banned players
+
+We will NOT use it to store:
+* Chat information
+
+-----------------------
+In 0.8 Alpha, we're gonna implement
+MySQL as an option for SQLite (default to SQLite if not
+chosen) (Have some option to 'convert' from SQLite to MySQL)
