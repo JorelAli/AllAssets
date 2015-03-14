@@ -64,8 +64,8 @@ public class CommandDiscoArmor {
 
 	public static void toggleArmor(Player player) {
 		if (map.containsKey(player.getUniqueId())) {
-			Bukkit.getScheduler().cancelTask((int) map.get(player.getUniqueId(), 1));
-			player.getInventory().setArmorContents((ItemStack[]) map.get(player.getUniqueId(), 2));
+			Bukkit.getScheduler().cancelTask((int) map.getValue1(player.getUniqueId()));
+			player.getInventory().setArmorContents((ItemStack[]) map.getValue2(player.getUniqueId()));
 			map.remove(player.getUniqueId());
 			player.sendMessage(Strings.TITLE + "Your disco armor was removed");
 		} else {

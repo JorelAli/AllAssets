@@ -25,7 +25,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class SQLiteBan extends SQLiteManager {
@@ -36,18 +35,13 @@ public class SQLiteBan extends SQLiteManager {
 		this.sqlite = sqlite;
 	}
 
-	public SQLiteBan() {
-		this.sqlite = new SQLiteLoader().sqliteFromClass(this);
-	}
-
 	public void banPlayer(Player banner, Player bannedPlayer, String message) {
-		PreparedStatement s = sqlite.prepareStatement("INSERT INTO ? (banner, bannedPlayer, banMessage, time) VALUES(?, ?, ?, ?);");
+		PreparedStatement s = sqlite.prepareStatement("INSERT INTO " + tableName() + " (banner, bannedPlayer, banMessage, time) VALUES(?, ?, ?, ?);");
 		try {
-			s.setString(1, tableName());
-			s.setString(2, banner.getName());
-			s.setString(3, bannedPlayer.getName());
-			s.setString(4, message);
-			s.setLong(5, System.currentTimeMillis());
+			s.setString(1, banner.getName());
+			s.setString(2, bannedPlayer.getName());
+			s.setString(3, message);
+			s.setLong(4, System.currentTimeMillis());
 			s.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,10 +50,9 @@ public class SQLiteBan extends SQLiteManager {
 	}
 
 	public void unbanPlayer(String username) {
-		PreparedStatement s = sqlite.prepareStatement("DELETE FROM ? WHERE playername=?;");
+		PreparedStatement s = sqlite.prepareStatement("DELETE FROM " + tableName() + " WHERE playername=?;");
 		try {
-			s.setString(1, tableName());
-			s.setString(2, username);
+			s.setString(1, username);
 			s.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -68,12 +61,13 @@ public class SQLiteBan extends SQLiteManager {
 
 	public boolean isBanned(String username) {
 		try {
-			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM ? WHERE bannedPlayer=?;");
-			s.setString(1, tableName());
-			s.setString(2, username);
+			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM " + tableName() + " WHERE bannedPlayer=?;");
+			s.setString(1, username);
 			ResultSet r = s.executeQuery();
-			Bukkit.broadcastMessage("IsBanned for " + username + r);
+			if (r.getRow() == 0 && !r.next())
+				return false;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -81,10 +75,9 @@ public class SQLiteBan extends SQLiteManager {
 
 	public String getBannedMessage(String username) {
 		if (isBanned(username)) {
-			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM ? WHERE bannedPlayer=?;");
+			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM " + tableName() + " WHERE bannedPlayer=?;");
 			try {
-				s.setString(1, tableName());
-				s.setString(2, username);
+				s.setString(1, username);
 				return sqlite.resultToString(s.executeQuery(), "banMessage");
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -95,10 +88,9 @@ public class SQLiteBan extends SQLiteManager {
 
 	public long getBannedTime(String username) {
 		if (isBanned(username)) {
-			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM ? WHERE bannedPlayer=?;");
+			PreparedStatement s = sqlite.prepareStatement("SELECT * FROM " + tableName() + " WHERE bannedPlayer=?;");
 			try {
-				s.setString(1, tableName());
-				s.setString(2, username);
+				s.setString(1, username);
 				return Long.valueOf(sqlite.resultToString(s.executeQuery(), "time"));
 			} catch (SQLException e) {
 				e.printStackTrace();

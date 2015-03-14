@@ -63,7 +63,7 @@ public class CommandHelp {
 		for (final Object key : map.keySet())
 			if (String.valueOf(key).equals(lookup))
 				try {
-					((Method) map.get(lookup, 1)).invoke(map.get(lookup, 2), args.getSender());
+					((Method) map.getValue1(lookup)).invoke(map.getValue2(lookup), args.getSender());
 					return;
 				} catch (final Exception e) {
 					e.printStackTrace();
@@ -76,7 +76,7 @@ public class CommandHelp {
 	@Completer(name="help")
 	public List<String> onComplete(final CommandArgs args) {
 		List<String> helpTopics = new ArrayList<String>();
-		for(Entry<Object, List<Object>> entry : map.entrySet()) {
+		for(Entry<String, List<Object>> entry : map.entrySet()) {
 			helpTopics.add(String.valueOf(entry.getKey()));
 		}
 		return helpTopics;

@@ -21,50 +21,56 @@
  ******************************************************************************/
 package io.github.skepter.allassets.sqlite;
 
+import io.github.skepter.allassets.utils.DoubleMap;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Utils;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.bukkit.Bukkit;
 
 /** Loads SQLite classes. Used to open and close SQLite databases.
  * Register new SQLite classes inside the init() method. */
 public class SQLiteLoader {
 
-	private static Map<SQLite, SQLiteManager> sqliteMap;
+	public enum SQLiteType {
+		BAN;
+	}
+
+	private static DoubleMap<SQLiteType, SQLite, SQLiteManager> sqliteMap;
 
 	public SQLiteLoader() {
 		if (sqliteMap == null)
-			sqliteMap = new HashMap<SQLite, SQLiteManager>();
+			sqliteMap = new DoubleMap<SQLiteType, SQLite, SQLiteManager>();
 	}
 	
 	public void init() {
-		SQLite ban = new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
+		SQLite ban = getSQLite(SQLiteType.BAN);
 		SQLiteManager banManager = new SQLiteBan(ban);
-		sqliteMap.put(ban, banManager);
-		
-		for(Entry<SQLite, SQLiteManager> e : sqliteMap.entrySet()) {
-			e.getKey().open();
-			e.getValue().createTable();
-			Bukkit.getLogger().info("Opened SQLite table: " + banManager.tableName());
-		}
+		sqliteMap.put(SQLiteType.BAN, ban, banManager);
+		sqliteMap.getValue1(SQLiteType.BAN).open();
+		sqliteMap.getValue2(SQLiteType.BAN).createTable();
 	}
 	
 	public void shutDown() {
-		for(SQLite sql : sqliteMap.keySet()) {
-			sql.close();
-		}
+		sqliteMap.getValue1(SQLiteType.BAN).close();
 	}
 	
 	public SQLite sqliteFromClass(SQLiteManager m) {
-		return Utils.reverse(sqliteMap).get(m);
+		return Utils.reverseValue2(sqliteMap).getValue1(m);
 	}
 	
-	public Map<SQLite, SQLiteManager> getMap() {
+	private SQLite getSQLite(SQLiteType t) {
+		switch(t) {
+		case BAN:
+			return new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
+		}
+		return null;
+	}
+	
+	public SQLiteManager getSQLiteManager(SQLiteType t) {
+		return sqliteMap.getValue2(t);
+	}
+	
+	public DoubleMap<SQLiteType, SQLite, SQLiteManager> getMap() {
 		return sqliteMap;
 	}
 }

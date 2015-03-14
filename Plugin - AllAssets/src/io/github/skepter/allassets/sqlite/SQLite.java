@@ -31,13 +31,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+
 /** SQLite class taken straight from NecessaryExtrasCore Good thing that Skepter
  * owns that xD */
 public class SQLite {
 
 	private String DatabaseURL;
 	private Connection Connection;
-
+	private File databaseFile;
+	
 	public SQLite(File databaseFile) {
 		if (!databaseFile.getParentFile().exists())
 			databaseFile.getParentFile().mkdir();
@@ -48,6 +51,8 @@ public class SQLite {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+		
+		this.databaseFile = databaseFile;
 
 		DatabaseURL = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
 
@@ -62,6 +67,7 @@ public class SQLite {
 	public void open() {
 		try {
 			Connection = DriverManager.getConnection(DatabaseURL);
+			Bukkit.getLogger().info("Opening database " + databaseFile.getName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

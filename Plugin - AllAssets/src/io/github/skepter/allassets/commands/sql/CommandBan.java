@@ -27,6 +27,9 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.sqlite.SQLiteBan;
+import io.github.skepter.allassets.sqlite.SQLiteLoader;
+import io.github.skepter.allassets.sqlite.SQLiteLoader.SQLiteType;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import org.bukkit.command.CommandSender;
@@ -39,16 +42,20 @@ import org.bukkit.event.player.PlayerLoginEvent.Result;
 public class CommandBan implements Listener {
 
 	private SQLiteBan sqlite;
-	
+
 	public CommandBan(final CommandFramework framework) {
 		framework.registerCommands(this);
-		sqlite = new SQLiteBan();
+		sqlite = (SQLiteBan) new SQLiteLoader().getSQLiteManager(SQLiteType.BAN);
 	}
 
 	@CommandHandler(name = "ban", permission = "ban", description = "Bans a player")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
+			if (args.getArgs().length < 1) {
+				ErrorUtils.notEnoughArguments(player);
+				return;
+			}
 			Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 			if (target != null) {
 				sqlite.banPlayer(player, target, TextUtils.getMsgStringFromArgs(args.getArgs(), 1, args.getArgs().length));
@@ -56,10 +63,10 @@ public class CommandBan implements Listener {
 		}
 		return;
 	}
-	
+
 	@EventHandler
 	public void onJoin(PlayerLoginEvent event) {
-		if(sqlite.isBanned(event.getPlayer().getName()))
+		if (sqlite.isBanned(event.getPlayer().getName()))
 			event.disallow(Result.KICK_BANNED, sqlite.getBannedMessage(event.getPlayer().getName()));
 	}
 

@@ -36,24 +36,27 @@ import java.util.Set;
 public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 
 	private static final long serialVersionUID = -6951127285757902765L;
-	private final Map<Object, List<Object>> map = new HashMap<Object, List<Object>>();
+	private final Map<A, List<Object>> map = new HashMap<A, List<Object>>();
 
 	public void put(final A key, final B value1, final C value2) {
 		//TODO check CURRENT values to allow for custom 'overlapping'
-		map.put(key, Arrays.asList(new Object[] { value1, value2}));
+		map.put(key, Arrays.asList(new Object[] { value1, value2 }));
 		return;
 	}
 
-	public Set<Object> keySet() {
+	public Set<A> keySet() {
 		return map.keySet();
 	}
 
-	public Set<Entry<Object, List<Object>>> entrySet() {
+	public Set<Entry<A, List<Object>>> entrySet() {
 		return map.entrySet();
+	}
+	
+	public DoubleMap<A, B, C> getDoubleMap() {
+		return this;
 	}
 
 	/** Gets a list of values
-	 * 
 	 * @return The list of values as a List of objects */
 	public List<List<Object>> values() {
 		final List<List<Object>> list = new ArrayList<List<Object>>();
@@ -66,17 +69,31 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 		map.remove(key);
 		return;
 	}
-
-	/** Gets the object from a key and value
-	 * 
-	 * @param key - The key to 'search'
-	 * @param value - The value to find. Max = 5
-	 * @return The object stored in the UltraMap */
-	public Object get(final A key, final int value) {
-		if ((value > 5) || (value == 0))
-			return null;
-		else
-			return map.get(key).get(value - 1);
+	
+	public Map<A, B> getValue1Map() {
+		Map<A, B> tMap = new HashMap<A, B>();
+		for(A a : keySet()) {
+			tMap.put(a, getValue1(a));
+		}
+		return tMap;
+	}
+	
+	public Map<A, C> getValue2Map() {
+		Map<A, C> tMap = new HashMap<A, C>();
+		for(A a : keySet()) {
+			tMap.put(a, getValue2(a));
+		}
+		return tMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public B getValue1(final A key) {
+		return (B) map.get(key).get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public C getValue2(final A key) {
+		return (C) map.get(key).get(1);
 	}
 
 	public void clear() {
@@ -84,7 +101,7 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 		return;
 	}
 
-	public boolean containsKey(final Object key) {
+	public boolean containsKey(final A key) {
 		if (keySet().contains(key))
 			return true;
 		else
@@ -111,5 +128,4 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 					return true;
 		return false;
 	}
-
 }

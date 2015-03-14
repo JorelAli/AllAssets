@@ -55,4 +55,20 @@ public class Utils {
 		}
 		return newMap;
 	}
+	
+	public static <B, C, A> DoubleMap<B, C, A> reverseValue1(DoubleMap<A, B, C> map) {
+		DoubleMap<B, C, A> tMap = new DoubleMap<B, C, A>();
+		for(A key : map.keySet()) {
+			tMap.put(map.getValue1(key), map.getValue2(key), key);
+		}
+		return tMap;
+	}
+	
+	public static <C, B, A> DoubleMap<C, B, A> reverseValue2(DoubleMap<A, B, C> map) {
+		DoubleMap<C, B, A> tMap = new DoubleMap<C, B, A>();
+		for(A key : map.keySet()) {
+			tMap.put(map.getValue2(key), map.getValue1(key), key);
+		}
+		return tMap;
+	}
 }
