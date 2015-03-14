@@ -21,7 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.api;
 
-import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 
 import java.io.File;

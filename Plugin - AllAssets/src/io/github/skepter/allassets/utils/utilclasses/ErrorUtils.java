@@ -24,7 +24,7 @@
 package io.github.skepter.allassets.utils.utilclasses;
 
 import static io.github.skepter.allassets.config.ConfigHandler.getMsg;
-import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.utils.Strings;
 

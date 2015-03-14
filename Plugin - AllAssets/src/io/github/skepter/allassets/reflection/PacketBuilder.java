@@ -21,7 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.reflection;
 
-import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 
 import org.bukkit.Location;

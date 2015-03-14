@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.api.LogEvent;
+import io.github.skepter.allassets.api.events.LogEvent;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 

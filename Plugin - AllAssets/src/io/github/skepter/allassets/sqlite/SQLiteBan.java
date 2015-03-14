@@ -21,10 +21,15 @@
  ******************************************************************************/
 package io.github.skepter.allassets.sqlite;
 
+import io.github.skepter.allassets.api.events.BanEvent;
+import io.github.skepter.allassets.utils.Strings;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SQLiteBan extends SQLiteManager {
@@ -35,22 +40,27 @@ public class SQLiteBan extends SQLiteManager {
 		this.sqlite = sqlite;
 	}
 
-	public void banPlayer(Player banner, Player bannedPlayer, String message) {
+	public void banPlayer(CommandSender banner, Player bannedPlayer, String reason) {
 		PreparedStatement s = sqlite.prepareStatement("INSERT INTO " + tableName() + " (banner, bannedPlayer, banMessage, time) VALUES(?, ?, ?, ?);");
 		try {
-			s.setString(1, banner.getName());
-			s.setString(2, bannedPlayer.getName());
-			s.setString(3, message);
-			s.setLong(4, System.currentTimeMillis());
-			s.execute();
+			BanEvent event = new BanEvent(banner, bannedPlayer, reason);
+			Bukkit.getPluginManager().callEvent(event);
+			if (!event.isCancelled()) {
+				s.setString(1, event.getBanner().getName());
+				s.setString(2, event.getBannedPlayer().getName());
+				s.setString(3, event.getReason());
+				s.setLong(4, System.currentTimeMillis());
+				s.execute();
+				bannedPlayer.kickPlayer(event.getReason());
+				Bukkit.broadcastMessage(Strings.TITLE + event.getBannedPlayer().getName() + " was banned by " + event.getBanner().getName() + " for " + event.getReason());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		bannedPlayer.kickPlayer(message);
 	}
 
 	public void unbanPlayer(String username) {
-		PreparedStatement s = sqlite.prepareStatement("DELETE FROM " + tableName() + " WHERE playername=?;");
+		PreparedStatement s = sqlite.prepareStatement("DELETE FROM " + tableName() + " WHERE bannedPlayer=?;");
 		try {
 			s.setString(1, username);
 			s.execute();

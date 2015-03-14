@@ -24,7 +24,7 @@
 package io.github.skepter.allassets.listeners;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.api.LogEvent.LogType;
+import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.config.ConfigHandler;
