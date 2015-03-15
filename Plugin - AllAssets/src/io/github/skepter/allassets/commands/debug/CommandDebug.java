@@ -276,18 +276,21 @@ public class CommandDebug implements Listener {
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 
 						//Removes unnecessary blocks to speed up process :D
-						for (Block b : blocks) {
+						for (Block b : blocks)
 							if (b.getType().equals(mat))
 								blocks.remove(b);
-						}
+
 						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
-						//splits up the task into 250 'chunks' (sets 250 blocks at a time)
-						int divisor = 250;
+						//splits up the task into 100 'chunks' (sets 100 blocks at a time)
+						int divisor = 100;
 
 						//Clean up the rest of the blocks which didn't get finished
 						//E.g. we have 104 blocks, 4 of them won't be set since
 						//104 divided by 100 = 1 (remainder 4)
-						for (Block b : blocks.subList((blocks.size() - divisor) + (blocks.size() % divisor), blocks.size()))
+						if (blocks.size() < divisor)
+							for (Block b : blocks)
+								b.setType(mat);
+						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
 							b.setType(mat);
 
 						//advanced for loop. Don't panic, it just loops through all of the blocks.
