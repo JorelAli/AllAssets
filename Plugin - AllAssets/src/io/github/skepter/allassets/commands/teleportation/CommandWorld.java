@@ -56,7 +56,7 @@ public class CommandWorld {
 			case 1:
 				for (World world : Bukkit.getWorlds())
 					if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
-						LocationUtils.teleport(world.getSpawnLocation(), player);
+						new LocationUtils(world.getSpawnLocation()).teleport(player);
 						player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
 					}
 				return;

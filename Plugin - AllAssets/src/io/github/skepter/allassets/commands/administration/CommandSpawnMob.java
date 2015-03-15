@@ -73,7 +73,7 @@ public class CommandSpawnMob {
 	private void spawnmob(Player player, String mob) {
 		Block b = PlayerUtils.getLastTwoTargetBlocks(player).get(1);
 		Block spawnLocation = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0)));
-		player.getWorld().spawnEntity(LocationUtils.getCenter(spawnLocation.getLocation()), new InputParser(mob).parseMob());
+		player.getWorld().spawnEntity(new LocationUtils(spawnLocation.getLocation()).getCenter(), new InputParser(mob).parseMob());
 	}
 
 	@Help(name = "Spawnmob")

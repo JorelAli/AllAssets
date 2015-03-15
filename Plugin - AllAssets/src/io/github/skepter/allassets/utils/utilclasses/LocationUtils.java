@@ -35,13 +35,19 @@ import org.bukkit.entity.Player;
 
 public class LocationUtils {
 
+	private Location location;
+	
+	public LocationUtils(Location location) {
+		this.location = location;
+	}
+	
 	/* Used to calculate locations
 	 * E.g. exact spawn location for a mob
 	 * Location to teleport a player using asc/desc
 	 * Checking if the target location is safe or not */
 
-	public static boolean isSafeStrict(final Location location) {
-		final List<Block> nearbyBlocks = getCube(location, 3);
+	public boolean isSafeStrict(final Location location) {
+		final List<Block> nearbyBlocks = getCube(3);
 		for (final Block block : nearbyBlocks)
 			if (block.getType().equals(Material.LAVA)) {
 
@@ -55,24 +61,24 @@ public class LocationUtils {
 	 * @param location
 	 * @param player
 	 */
-	public static void teleport(final Location location, final Player player) {
+	public void teleport(final Player player) {
 		Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
 		player.teleport(target);
 	}
 
-	public static List<Block> getCube(final Location origin, final int size) {
-		final int minX = origin.getBlockX() - (size / 2);
-		final int minY = origin.getBlockY() - (size / 2);
-		final int minZ = origin.getBlockZ() - (size / 2);
+	public List<Block> getCube(final int size) {
+		final int minX = location.getBlockX() - (size / 2);
+		final int minY = location.getBlockY() - (size / 2);
+		final int minZ = location.getBlockZ() - (size / 2);
 		final List<Block> blocks = new ArrayList<Block>();
 		for (int x = minX; x < (minX + size); x++)
 			for (int y = minY; y < (minY + size); y++)
 				for (int z = minZ; z < (minZ + size); z++)
-					blocks.add(origin.getWorld().getBlockAt(x, y, z));
+					blocks.add(location.getWorld().getBlockAt(x, y, z));
 		return blocks;
 	}
 
-	public static List<Entity> getNearbyEntities(final Location location, final int radius) {
+	public List<Entity> getNearbyEntities(final int radius) {
 		final List<Entity> entityList = new ArrayList<Entity>();
 		for (final Entity entity : location.getWorld().getEntities())
 			if (entity.getLocation().distance(location) <= radius)
@@ -81,24 +87,24 @@ public class LocationUtils {
 	}
 
 	//temporary Nav
-	public static Entity[] getNearbyEntitiesTemp(final Location l, final int radius) {
+	public Entity[] getNearbyEntitiesTemp(final int radius) {
 		final int chunkRadius = radius < 16 ? 1 : (radius - (radius % 16)) / 16;
 		final HashSet<Entity> radiusEntities = new HashSet<Entity>();
 		for (int chX = 0 - chunkRadius; chX <= chunkRadius; chX++)
 			for (int chZ = 0 - chunkRadius; chZ <= chunkRadius; chZ++) {
-				final int x = (int) l.getX(), y = (int) l.getY(), z = (int) l.getZ();
-				for (final Entity e : new Location(l.getWorld(), x + (chX * 16), y, z + (chZ * 16)).getChunk().getEntities())
-					if ((e.getLocation().distance(l) <= radius) && (e.getLocation().getBlock() != l.getBlock()))
+				final int x = (int) location.getX(), y = (int) location.getY(), z = (int) location.getZ();
+				for (final Entity e : new Location(location.getWorld(), x + (chX * 16), y, z + (chZ * 16)).getChunk().getEntities())
+					if ((e.getLocation().distance(location) <= radius) && (e.getLocation().getBlock() != location.getBlock()))
 						radiusEntities.add(e);
 			}
 		return radiusEntities.toArray(new Entity[radiusEntities.size()]);
 	}
 
-	public static Location getCenter(final Location loc) {
-		return new Location(loc.getWorld(), getCenter(loc.getBlockX()), getCenter(loc.getBlockY()), getCenter(loc.getBlockZ()));
+	public Location getCenter() {
+		return new Location(location.getWorld(), getCenter(location.getBlockX()), getCenter(location.getBlockY()), getCenter(location.getBlockZ()));
 	}
 
-	private static double getCenter(final int location) {
+	private double getCenter(final int location) {
 		final double newLocation = location;
 		return newLocation + 0.5D;
 	}

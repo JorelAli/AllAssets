@@ -25,9 +25,11 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class CommandGo {
@@ -40,9 +42,9 @@ public class CommandGo {
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			Location targetLoc = PlayerUtils.getTargetBlock(player, 500).getLocation();
-			player.getWorld().strikeLightning(targetLoc);
-			player.teleport(new Location(player.getWorld(), targetLoc.getX(), targetLoc.getY(), targetLoc.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+			Block b = PlayerUtils.getLastTwoTargetBlocks(player).get(1);
+			Location location = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0))).getLocation();
+			new LocationUtils(location).teleport(player);
 		}
 		return;
 	}

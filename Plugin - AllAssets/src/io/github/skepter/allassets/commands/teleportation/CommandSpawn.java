@@ -43,7 +43,7 @@ public class CommandSpawn {
 	public void command(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			LocationUtils.teleport(player.getWorld().getSpawnLocation(), player);
+			new LocationUtils(player.getWorld().getSpawnLocation()).teleport(player);
 		}
 
 	}

@@ -53,7 +53,7 @@ public class CommandCommandBlock implements Listener {
 		if (args.getSender() instanceof BlockCommandSender) {
 			final BlockCommandSender sender = (BlockCommandSender) args.getSender();
 			final ItemStack is = ItemSerializer.fromString(args.getArgs()[0]);
-			FireworkUtils.spawnFireworkFromItemStack(LocationUtils.getCenter(sender.getBlock().getLocation()), is);
+			FireworkUtils.spawnFireworkFromItemStack(new LocationUtils(sender.getBlock().getLocation()).getCenter(), is);
 		}
 		return;
 	}
