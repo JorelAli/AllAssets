@@ -38,6 +38,7 @@ import io.github.skepter.allassets.commands.CommandClear;
 import io.github.skepter.allassets.commands.CommandEnderchest;
 import io.github.skepter.allassets.commands.CommandGhost;
 import io.github.skepter.allassets.commands.CommandGrief;
+import io.github.skepter.allassets.commands.CommandHeal;
 import io.github.skepter.allassets.commands.CommandHelp;
 import io.github.skepter.allassets.commands.CommandMore;
 import io.github.skepter.allassets.commands.CommandNear;
@@ -238,6 +239,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandGo(framework);
 		new CommandUnban(framework);
 		new CommandBroadcast(framework);
+		new CommandHeal(framework);
 		r(new CommandBan(framework));
 		r(new BlockPoweredListener());
 	}
