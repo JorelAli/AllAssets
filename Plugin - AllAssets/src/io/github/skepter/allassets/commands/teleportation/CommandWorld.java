@@ -50,16 +50,16 @@ public class CommandWorld {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				return;
-			case 1:
-				for (World world : Bukkit.getWorlds())
-					if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
-						new LocationUtils(world.getSpawnLocation()).teleport(player);
-						player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
-					}
-				return;
+				case 0:
+					printHelp(player);
+					return;
+				case 1:
+					for (World world : Bukkit.getWorlds())
+						if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
+							new LocationUtils(world.getSpawnLocation()).teleport(player);
+							player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
+						}
+					return;
 			}
 		}
 		return;

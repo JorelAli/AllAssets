@@ -54,18 +54,18 @@ public class CommandGamemode {
 
 	private void doCycleGameMode(final Player player) {
 		switch (player.getGameMode()) {
-		case SURVIVAL:
-			doGameMode(player, "creative");
-			break;
-		case ADVENTURE:
-			doGameMode(player, "survival");
-			break;
-		case CREATIVE:
-			doGameMode(player, "adventure");
-			break;
-		default:
-			doGameMode(player, "survival");
-			break;
+			case SURVIVAL:
+				doGameMode(player, "creative");
+				break;
+			case ADVENTURE:
+				doGameMode(player, "survival");
+				break;
+			case CREATIVE:
+				doGameMode(player, "adventure");
+				break;
+			default:
+				doGameMode(player, "survival");
+				break;
 		}
 
 	}
@@ -100,12 +100,12 @@ public class CommandGamemode {
 		if (TextUtils.isInteger(s)) {
 			final int i = Integer.parseInt(s);
 			switch (i) {
-			case 0:
-				return GameMode.SURVIVAL;
-			case 1:
-				return GameMode.CREATIVE;
-			case 2:
-				return GameMode.ADVENTURE;
+				case 0:
+					return GameMode.SURVIVAL;
+				case 1:
+					return GameMode.CREATIVE;
+				case 2:
+					return GameMode.ADVENTURE;
 			}
 		} else {
 			if (s.toLowerCase().startsWith("s"))

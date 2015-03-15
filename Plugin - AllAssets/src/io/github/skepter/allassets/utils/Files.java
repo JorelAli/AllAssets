@@ -34,7 +34,7 @@ public class Files {
 			file.mkdirs();
 		return file;
 	}
-	
+
 	/** Returns the storage folder to backing up worlds */
 	public static File getWorldDataStorage() {
 		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Worlds");

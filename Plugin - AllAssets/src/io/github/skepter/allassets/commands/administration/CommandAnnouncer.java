@@ -50,7 +50,7 @@ public class CommandAnnouncer {
 	@CommandHandler(name = "announcer", aliases = { "announce" }, permission = "announcer", description = "Configure the scheduled announcer")
 	public void onCommand(final CommandArgs args) {
 		printHelp(args.getSender());
-		return; 
+		return;
 	}
 
 	@CommandHandler(name = "announcer.start", permission = "announcer", description = "Start the announcer")
@@ -96,8 +96,8 @@ public class CommandAnnouncer {
 		}
 		ConfigHandler.announcer().set(String.valueOf(ID), data);
 	}
-	
-	@Help(name="Announcer")
+
+	@Help(name = "Announcer")
 	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "Announcer", "/announcer start - starts the announcer", "/announcer stop - stops the announcer", "/announcer list - lists all announcements", "/announcer add <message> - adds a new message to the announcer", "/announcer remove <ID> - removes a message from the announcer based on its ID (use /announcer list to find the announcement ID)");
 	}

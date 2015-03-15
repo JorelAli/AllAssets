@@ -57,48 +57,48 @@ public class CommandBackup {
 	@CommandHandler(name = "backup", permission = "backup", description = "Backs up a world")
 	public void onCommand(final CommandArgs args) {
 		switch (args.getArgs().length) {
-		case 0:
-			ErrorUtils.notEnoughArguments(args.getSender());
-			return;
-		case 1:
-			if (args.getArgs()[0].equalsIgnoreCase("list")) {
-				args.getSender().sendMessage(TextUtils.title("List of worlds"));
-				for (final World world : Bukkit.getWorlds())
-					args.getSender().sendMessage(world.getName());
+			case 0:
+				ErrorUtils.notEnoughArguments(args.getSender());
 				return;
-			} else {
-				World world = null;
-				try {
-					world = Bukkit.getWorld(args.getArgs()[0]);
-				} catch (final Exception e) {
-					ErrorUtils.worldNotFound(args.getSender(), args.getArgs()[0]);
+			case 1:
+				if (args.getArgs()[0].equalsIgnoreCase("list")) {
+					args.getSender().sendMessage(TextUtils.title("List of worlds"));
+					for (final World world : Bukkit.getWorlds())
+						args.getSender().sendMessage(world.getName());
+					return;
+				} else {
+					World world = null;
+					try {
+						world = Bukkit.getWorld(args.getArgs()[0]);
+					} catch (final Exception e) {
+						ErrorUtils.worldNotFound(args.getSender(), args.getArgs()[0]);
+						return;
+					}
+					final World w = world;
+
+					for (final File file : Files.getWorldBackupStorage().listFiles())
+						if (file.isDirectory())
+							if (file.getName().equals(world.getName())) {
+								args.getSender().sendMessage(Strings.TITLE + "There is already a backup for " + world.getName() + ", backing it up again will lose the previous backup");
+								new YesNoConversation(args.getSender(), new BackupPrompt(w), "Do you want to continue?");
+								return;
+							} else
+								break;
+					Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
+						@Override
+						public void run() {
+							try {
+								FileUtils.copyDirectory(w.getWorldFolder(), new File(Files.getWorldBackupStorage(), w.getName()));
+								args.getSender().sendMessage(Strings.TITLE + w.getName() + " was backed up successfully ");
+							} catch (final IOException e) {
+								ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
+								return;
+							}
+						}
+					});
+
 					return;
 				}
-				final World w = world;
-
-				for (final File file : Files.getWorldBackupStorage().listFiles())
-					if (file.isDirectory())
-						if (file.getName().equals(world.getName())) {
-							args.getSender().sendMessage(Strings.TITLE + "There is already a backup for " + world.getName() + ", backing it up again will lose the previous backup");
-							new YesNoConversation(args.getSender(), new BackupPrompt(w), "Do you want to continue?");
-							return;
-						} else
-							break;
-				Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
-					@Override
-					public void run() {
-						try {
-							FileUtils.copyDirectory(w.getWorldFolder(), new File(Files.getWorldBackupStorage(), w.getName()));
-							args.getSender().sendMessage(Strings.TITLE + w.getName() + " was backed up successfully ");
-						} catch (final IOException e) {
-							ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
-							return;
-						}
-					}
-				});
-				
-				return;
-			}
 		}
 	}
 

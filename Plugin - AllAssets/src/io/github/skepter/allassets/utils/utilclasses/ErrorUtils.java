@@ -82,7 +82,7 @@ public class ErrorUtils {
 	public static void onCooldown(final CommandSender sender, final long seconds) {
 		sender.sendMessage(Strings.ERROR + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
 	}
-	
+
 	public static void worldNotFound(final CommandSender sender, final String worldName) {
 		sender.sendMessage(Strings.ERROR + worldName + " could not be found!");
 	}
@@ -90,7 +90,7 @@ public class ErrorUtils {
 	public static void conversableError(final Conversable forWhom, final String msg) {
 		forWhom.sendRawMessage(Strings.ERROR + msg);
 	}
-	
+
 	public static void printErrorToConsole(final String msg) {
 		Bukkit.getLogger().severe(msg);
 		CommandLog.addLog(msg, LogType.ERROR);

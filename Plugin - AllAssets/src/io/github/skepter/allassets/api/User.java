@@ -49,7 +49,7 @@ public class User {
 
 	public User(final Player p) {
 		player = p;
-		
+
 		try {
 			playerData = new PlayerData(player);
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class User {
 			}
 		}, 20L);
 	}
-	
+
 	public int getPing() {
 		/* Delay it by 1 tick for accurate results */
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new PingTask(player), 1L);
@@ -99,14 +99,14 @@ public class User {
 	public String getLanguage(final Player p) {
 		try {
 			switch (new MinecraftReflectionUtils(p).locale.toLowerCase()) {
-			case "de_de":
-				return "de";
-			case "sv_se":
-				return "sv";
-			case "nl_nl":
-				return "nl";
-			case "fr_fr":
-				return "fr";
+				case "de_de":
+					return "de";
+				case "sv_se":
+					return "sv";
+				case "nl_nl":
+					return "nl";
+				case "fr_fr":
+					return "fr";
 			}
 		} catch (final Exception e) {
 			return "en";
@@ -117,7 +117,7 @@ public class User {
 	/** Gets a list of every user's file and loads them as OfflineUsers */
 	public static List<User> onlineUsers() {
 		final List<User> userList = new ArrayList<User>();
-		for(Player player : Bukkit.getOnlinePlayers()) {
+		for (Player player : Bukkit.getOnlinePlayers()) {
 			userList.add(new User(player));
 		}
 		return userList;
@@ -253,7 +253,7 @@ public class User {
 	public List<UUID> getFriendList() {
 		List<String> str = playerData.getDataFile().getStringList("friends");
 		List<UUID> list = new ArrayList<UUID>();
-		for(String s : str) {
+		for (String s : str) {
 			list.add(UUID.fromString(s));
 		}
 		return list;

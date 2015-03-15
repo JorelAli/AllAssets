@@ -40,7 +40,7 @@ public class SQLite {
 	private String DatabaseURL;
 	private Connection Connection;
 	private File databaseFile;
-	
+
 	public SQLite(File databaseFile) {
 		if (!databaseFile.getParentFile().exists())
 			databaseFile.getParentFile().mkdir();
@@ -51,7 +51,7 @@ public class SQLite {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-		
+
 		this.databaseFile = databaseFile;
 
 		DatabaseURL = "jdbc:sqlite:" + databaseFile.getAbsolutePath();

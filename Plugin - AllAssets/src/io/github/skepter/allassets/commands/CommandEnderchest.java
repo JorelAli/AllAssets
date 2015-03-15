@@ -43,14 +43,14 @@ public class CommandEnderchest {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				player.openInventory(player.getEnderChest());
-				return;
-			case 1:
-				Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
-				if (target != null) {
-					player.openInventory(target.getEnderChest());
-				}
+				case 0:
+					player.openInventory(player.getEnderChest());
+					return;
+				case 1:
+					Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+					if (target != null) {
+						player.openInventory(target.getEnderChest());
+					}
 			}
 			return;
 		}

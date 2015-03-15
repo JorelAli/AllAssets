@@ -103,7 +103,7 @@ public class EncryptionUtils {
 		}
 		return string;
 	}
-	
+
 	/** Decrypts a byte[] into its original string form
 	 * 
 	 * @param bytesToDecrypt - The byte[] with the encrypted data

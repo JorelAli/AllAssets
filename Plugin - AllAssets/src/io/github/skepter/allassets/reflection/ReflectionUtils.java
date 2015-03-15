@@ -36,7 +36,7 @@ public class ReflectionUtils {
 		}
 		return null;
 	}
-	
+
 	public static void setPerfectField(final Object object, final Class<?> clazz, final String fieldName, final Object value) {
 		try {
 			for (Field f : clazz.getFields())

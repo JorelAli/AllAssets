@@ -42,17 +42,17 @@ public class BlockPoweredListener implements Listener {
 			Block block = event.getBlock().getRelative(adjFace);
 			if (block.isBlockPowered()) {
 				switch (block.getType()) {
-				case PUMPKIN:
-					block.setType(Material.JACK_O_LANTERN);
-					break;
-				case OBSIDIAN:
-					block.setType(Material.GLOWSTONE);
-					break;
-				case NETHERRACK:
-					block.getRelative(BlockFace.UP).setType(Material.FIRE);
-					break;
-				default:
-					break;
+					case PUMPKIN:
+						block.setType(Material.JACK_O_LANTERN);
+						break;
+					case OBSIDIAN:
+						block.setType(Material.GLOWSTONE);
+						break;
+					case NETHERRACK:
+						block.getRelative(BlockFace.UP).setType(Material.FIRE);
+						break;
+					default:
+						break;
 				}
 			} else {
 				boolean b = false;
@@ -61,17 +61,17 @@ public class BlockPoweredListener implements Listener {
 						b = true;
 				if (b)
 					switch (block.getType()) {
-					case JACK_O_LANTERN:
-						block.setType(Material.PUMPKIN);
-						break;
-					case GLOWSTONE:
-						block.setType(Material.OBSIDIAN);
-						break;
-					case NETHERRACK:
-						block.getRelative(BlockFace.UP).setType(Material.AIR);
-						break;
-					default:
-						break;
+						case JACK_O_LANTERN:
+							block.setType(Material.PUMPKIN);
+							break;
+						case GLOWSTONE:
+							block.setType(Material.OBSIDIAN);
+							break;
+						case NETHERRACK:
+							block.getRelative(BlockFace.UP).setType(Material.AIR);
+							break;
+						default:
+							break;
 					}
 			}
 		}

@@ -48,28 +48,28 @@ public class CommandGhost {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				if (AllAssets.instance().ghostFactory.isGhost(player)) {
-					AllAssets.instance().ghostFactory.setGhost(player, false);
-					player.sendMessage(Strings.TITLE + "Ghost mode disabled");
-				} else {
-					AllAssets.instance().ghostFactory.setGhost(player, true);
-					player.sendMessage(Strings.TITLE + "Ghost mode enabled");
-				}
-				return;
-			case 1:
-				final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-				if (target == null) {
-					ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-				}
-				if (AllAssets.instance().ghostFactory.isGhost(target)) {
-					AllAssets.instance().ghostFactory.setGhost(target, false);
-					target.sendMessage(Strings.TITLE + "Ghost mode disabled");
-				} else {
-					AllAssets.instance().ghostFactory.setGhost(target, true);
-					target.sendMessage(Strings.TITLE + "Ghost mode enabled");
-				}
-				return;
+				case 0:
+					if (AllAssets.instance().ghostFactory.isGhost(player)) {
+						AllAssets.instance().ghostFactory.setGhost(player, false);
+						player.sendMessage(Strings.TITLE + "Ghost mode disabled");
+					} else {
+						AllAssets.instance().ghostFactory.setGhost(player, true);
+						player.sendMessage(Strings.TITLE + "Ghost mode enabled");
+					}
+					return;
+				case 1:
+					final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+					if (target == null) {
+						ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+					}
+					if (AllAssets.instance().ghostFactory.isGhost(target)) {
+						AllAssets.instance().ghostFactory.setGhost(target, false);
+						target.sendMessage(Strings.TITLE + "Ghost mode disabled");
+					} else {
+						AllAssets.instance().ghostFactory.setGhost(target, true);
+						target.sendMessage(Strings.TITLE + "Ghost mode enabled");
+					}
+					return;
 			}
 			ErrorUtils.tooManyArguments(player);
 		}

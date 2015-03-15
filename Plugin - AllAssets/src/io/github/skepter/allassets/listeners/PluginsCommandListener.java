@@ -45,42 +45,42 @@ public class PluginsCommandListener implements Listener {
 	public void commandExecuteEvent(final PlayerCommandPreprocessEvent event) {
 		final String cmd = event.getMessage().split(" ")[0].replace("/", "").toLowerCase();
 		switch (cmd) {
-		case "pl":
-		case "plugins":
-		case "plugin":
-		case "?":
-			if (event.getPlayer().hasPermission("AllAssets.plugins")) {
-				event.setCancelled(true);
-				event.getPlayer().sendMessage(TextUtils.title("Plugins"));
-				event.getPlayer().sendMessage(Strings.TITLE + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
-				final List<String> pluginList = new ArrayList<String>();
-				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
-					if (ConfigHandler.config().getBoolean("pluginsShowAuthors")) {
-						String authors = "";
-						for (final String s : plugin.getDescription().getAuthors())
-							authors = authors + s + ", ";
-						if (authors.length() != 0)
-							authors = authors.substring(0, authors.length() - 2);
+			case "pl":
+			case "plugins":
+			case "plugin":
+			case "?":
+				if (event.getPlayer().hasPermission("AllAssets.plugins")) {
+					event.setCancelled(true);
+					event.getPlayer().sendMessage(TextUtils.title("Plugins"));
+					event.getPlayer().sendMessage(Strings.TITLE + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
+					final List<String> pluginList = new ArrayList<String>();
+					for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
+						if (ConfigHandler.config().getBoolean("pluginsShowAuthors")) {
+							String authors = "";
+							for (final String s : plugin.getDescription().getAuthors())
+								authors = authors + s + ", ";
+							if (authors.length() != 0)
+								authors = authors.substring(0, authors.length() - 2);
+							else
+								authors = "undefined";
+							if (plugin.isEnabled())
+								pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);
+							else
+								pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);
+						} else if (plugin.isEnabled())
+							pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
 						else
-							authors = "undefined";
-						if (plugin.isEnabled())
-							pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);
-						else
-							pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);
-					} else if (plugin.isEnabled())
-						pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
-					else
-						pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
-				Collections.sort(pluginList);
-				for (final String s : pluginList) {
-					final String[] str = s.split("\n");
-					for (final String m : str)
-						event.getPlayer().sendMessage(m);
-				}
+							pluginList.add(ChatColor.RED + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion());
+					Collections.sort(pluginList);
+					for (final String s : pluginList) {
+						final String[] str = s.split("\n");
+						for (final String m : str)
+							event.getPlayer().sendMessage(m);
+					}
 
-			}
-		default:
-			return;
+				}
+			default:
+				return;
 		}
 	}
 }

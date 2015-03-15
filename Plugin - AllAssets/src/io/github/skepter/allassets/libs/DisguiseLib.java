@@ -2,6 +2,8 @@ package io.github.skepter.allassets.libs;
 
 import io.github.skepter.allassets.libs.ReflectionUtilsDarkBlade2.PackageType;
 
+import java.util.Collection;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -85,7 +87,21 @@ public class DisguiseLib {
 
 	/** @param players players that will see the disguise happening. The rest will
 	 * see the disguised player as player... */
-	private void sendDisguise(Player... players) {
+	public void sendDisguise(Player... players) {
+		for (Player P : players) {
+			if (P.equals(disguised))
+				continue;
+			try {
+				sendDisguise(P);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/** @param players players that will see the disguise happening. The rest will
+	 * see the disguised player as player... */
+	public void sendDisguise(Collection<? extends Player> players) {
 		for (Player P : players) {
 			if (P.equals(disguised))
 				continue;
@@ -152,11 +168,11 @@ public class DisguiseLib {
 	//Forget this as well :3
 	private Object handleSpecialTypes(EntityDisguise type, Object entity) throws Exception {
 		switch (type) {
-		case WITHER_SKELETON:
-			ReflectionUtilsDarkBlade2.invokeMethod(entity, "setSkeletonType", 1);
-			break;
-		default:
-			break;
+			case WITHER_SKELETON:
+				ReflectionUtilsDarkBlade2.invokeMethod(entity, "setSkeletonType", 1);
+				break;
+			default:
+				break;
 		}
 		return entity;
 	}

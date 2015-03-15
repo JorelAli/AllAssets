@@ -21,9 +21,6 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.fun;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -36,6 +33,10 @@ import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -50,21 +51,35 @@ public class CommandDisguise {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				return;
-			case 1:
-				if (exists(args.getArgs()[0]))
-					new DisguiseLib(player, EntityDisguise.valueOf(args.getArgs()[0].toUpperCase()));
-				else
-					ErrorUtils.error(player, "That mob doesn't exist!");
-				return;
-			case 2:
-				if (exists(args.getArgs()[0]))
-					new DisguiseLib(player, EntityDisguise.valueOf(args.getArgs()[0].toUpperCase()), args.getArgs()[1]);
-				else
-					ErrorUtils.error(player, "That mob doesn't exist!");
-				return;
+				case 0:
+					printHelp(player);
+					return;
+				case 1: {
+					if (exists(args.getArgs()[0])) {
+						DisguiseLib d = new DisguiseLib(player, EntityDisguise.valueOf(args.getArgs()[0].toUpperCase()));
+						d.setItemInHand(player.getItemInHand());
+						d.setHelmet(player.getInventory().getHelmet());
+						d.setChestplate(player.getInventory().getChestplate());
+						d.setLeggings(player.getInventory().getLeggings());
+						d.setBoots(player.getInventory().getBoots());
+						d.sendDisguise(Bukkit.getOnlinePlayers());
+					} else
+						ErrorUtils.error(player, "That mob doesn't exist!");
+					return;
+				}
+				case 2: {
+					if (exists(args.getArgs()[0])) {
+						DisguiseLib d = new DisguiseLib(player, EntityDisguise.valueOf(args.getArgs()[0].toUpperCase()), args.getArgs()[0]);
+						d.setItemInHand(player.getItemInHand());
+						d.setHelmet(player.getInventory().getHelmet());
+						d.setChestplate(player.getInventory().getChestplate());
+						d.setLeggings(player.getInventory().getLeggings());
+						d.setBoots(player.getInventory().getBoots());
+						d.sendDisguise(Bukkit.getOnlinePlayers());
+					} else
+						ErrorUtils.error(player, "That mob doesn't exist!");
+					return;
+				}
 			}
 		}
 		return;

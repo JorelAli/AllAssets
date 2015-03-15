@@ -45,46 +45,46 @@ public class CommandConfig {
 		 * 
 		 * - */
 		switch (args.getArgs().length) {
-		case 0:
-		case 3:
-			//tut
-			args.getSender().sendMessage("usage:");
-			args.getSender().sendMessage("/config list - view list of configs");
-			args.getSender().sendMessage("/config view - show list of config data");
-			args.getSender().sendMessage("/config view <configName> - view list of configName's data");
-			args.getSender().sendMessage("/config set <configName> <key> <value> - sets data");
-			return;
-		case 1:
-			switch (args.getArgs()[0].toLowerCase()) {
-			case "list":
-				args.getSender().sendMessage(Strings.TITLE + "Config, Features");
-			case "view":
-				args.getSender().sendMessage(TextUtils.title("Config"));
-				for (final String key : ConfigHandler.config().getKeys())
-					args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
-			}
-			return;
-		case 2:
-			if (args.getArgs()[0].equalsIgnoreCase("view"))
-				switch (args.getArgs()[1].toLowerCase()) {
-				case "config":
-					args.getSender().sendMessage(TextUtils.title("Config"));
-					for (final String key : ConfigHandler.config().getKeys())
-						args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
-				case "features":
-					args.getSender().sendMessage(TextUtils.title("Features"));
-					for (final String key : ConfigHandler.features().getKeys())
-						args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.features().get(key)));
+			case 0:
+			case 3:
+				//tut
+				args.getSender().sendMessage("usage:");
+				args.getSender().sendMessage("/config list - view list of configs");
+				args.getSender().sendMessage("/config view - show list of config data");
+				args.getSender().sendMessage("/config view <configName> - view list of configName's data");
+				args.getSender().sendMessage("/config set <configName> <key> <value> - sets data");
+				return;
+			case 1:
+				switch (args.getArgs()[0].toLowerCase()) {
+					case "list":
+						args.getSender().sendMessage(Strings.TITLE + "Config, Features");
+					case "view":
+						args.getSender().sendMessage(TextUtils.title("Config"));
+						for (final String key : ConfigHandler.config().getKeys())
+							args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
 				}
-			return;
-		case 4:
-			if (args.getArgs()[0].equalsIgnoreCase("set"))
-				switch (args.getArgs()[1].toLowerCase()) {
-				case "config":
-					//what if they want to do a string........... use underscores?
-				case "features":
+				return;
+			case 2:
+				if (args.getArgs()[0].equalsIgnoreCase("view"))
+					switch (args.getArgs()[1].toLowerCase()) {
+						case "config":
+							args.getSender().sendMessage(TextUtils.title("Config"));
+							for (final String key : ConfigHandler.config().getKeys())
+								args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
+						case "features":
+							args.getSender().sendMessage(TextUtils.title("Features"));
+							for (final String key : ConfigHandler.features().getKeys())
+								args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.features().get(key)));
+					}
+				return;
+			case 4:
+				if (args.getArgs()[0].equalsIgnoreCase("set"))
+					switch (args.getArgs()[1].toLowerCase()) {
+						case "config":
+							//what if they want to do a string........... use underscores?
+						case "features":
 
-				}
+					}
 		}
 		return;
 	}

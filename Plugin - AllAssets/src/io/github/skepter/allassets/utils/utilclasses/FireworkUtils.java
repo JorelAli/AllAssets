@@ -72,12 +72,12 @@ public class FireworkUtils {
 	public static Color getRandomColor() {
 		return getColor(new Random().nextInt(17));
 	}
-	
+
 	public static void spawnFireworkFromItemStack(final Location loc, final ItemStack itemStack) {
 		final Firework firework = (Firework) loc.getWorld().spawnEntity(loc, EntityType.FIREWORK);
 		final FireworkMeta fireworkMeta = firework.getFireworkMeta();
 		final FireworkMeta meta = (FireworkMeta) itemStack.getItemMeta();
-		for(final FireworkEffect effect : meta.getEffects())
+		for (final FireworkEffect effect : meta.getEffects())
 			fireworkMeta.addEffect(effect);
 		fireworkMeta.setPower(meta.getPower());
 		firework.setFireworkMeta(fireworkMeta);

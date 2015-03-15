@@ -64,7 +64,7 @@ public class CommandFirework implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-				
+
 		player.openInventory(FireworkInventories.chooseType());
 		return;
 	}
@@ -75,65 +75,65 @@ public class CommandFirework implements Listener {
 		if (event.getAction().equals(InventoryAction.PICKUP_ALL)) {
 			final ItemStack item = event.getInventory().getItem(event.getSlot());
 			switch (event.getInventory().getName()) {
-			case "Firework - Type":
-				if (check(event)) {
-					final FireworkBuilder builder = new FireworkBuilder(1);
-					builder.setType(parseType(item));
-					map.put(player, builder);
-					player.openInventory(FireworkInventories.chooseColor(false));
-				}
-				break;
-			case "Firework - Color":
-				if (check(event)) {
-					final FireworkBuilder builder = map.get(player);
-					builder.addColor(parseColor(item));
-					map.put(player, builder);
-					player.openInventory(FireworkInventories.chooseColor(true));
-				}
-				break;
-			case "Firework - Fade":
-				if (check(event)) {
-					final FireworkBuilder builder = map.get(player);
-					builder.addFade(parseColor(item));
-					map.put(player, builder);
-					player.openInventory(FireworkInventories.anotherColor());
-				}
-				break;
-			case "Do you want another color?":
-				if (check(event))
-					if (parseBoolean(item))
+				case "Firework - Type":
+					if (check(event)) {
+						final FireworkBuilder builder = new FireworkBuilder(1);
+						builder.setType(parseType(item));
+						map.put(player, builder);
 						player.openInventory(FireworkInventories.chooseColor(false));
-					else
-						player.openInventory(FireworkInventories.chooseFlicker(false));
-				break;
-			case "Do you want flickering?":
-				if (check(event)) {
-					final FireworkBuilder builder = map.get(player);
-					if (parseBoolean(item))
-						builder.addFlicker();
-					map.put(player, builder);
-					player.openInventory(FireworkInventories.chooseFlicker(true));
-				}
-				break;
-			case "Do you want a trail?":
-				if (check(event)) {
-					final FireworkBuilder builder = map.get(player);
-					if (parseBoolean(item))
-						builder.addTrail();
-					map.put(player, builder);
-					player.openInventory(FireworkInventories.choosePower());
-				}
-				break;
-			case "Choose a power size":
-				if (check(event)) {
-					final FireworkBuilder builder = map.get(player);
-					builder.setPower(parsePower(item));
-					map.remove(player);
-					player.getInventory().addItem(builder.build());
-					player.sendMessage(Strings.TITLE + "Firework created!");
-					player.closeInventory();
-				}
-				break;
+					}
+					break;
+				case "Firework - Color":
+					if (check(event)) {
+						final FireworkBuilder builder = map.get(player);
+						builder.addColor(parseColor(item));
+						map.put(player, builder);
+						player.openInventory(FireworkInventories.chooseColor(true));
+					}
+					break;
+				case "Firework - Fade":
+					if (check(event)) {
+						final FireworkBuilder builder = map.get(player);
+						builder.addFade(parseColor(item));
+						map.put(player, builder);
+						player.openInventory(FireworkInventories.anotherColor());
+					}
+					break;
+				case "Do you want another color?":
+					if (check(event))
+						if (parseBoolean(item))
+							player.openInventory(FireworkInventories.chooseColor(false));
+						else
+							player.openInventory(FireworkInventories.chooseFlicker(false));
+					break;
+				case "Do you want flickering?":
+					if (check(event)) {
+						final FireworkBuilder builder = map.get(player);
+						if (parseBoolean(item))
+							builder.addFlicker();
+						map.put(player, builder);
+						player.openInventory(FireworkInventories.chooseFlicker(true));
+					}
+					break;
+				case "Do you want a trail?":
+					if (check(event)) {
+						final FireworkBuilder builder = map.get(player);
+						if (parseBoolean(item))
+							builder.addTrail();
+						map.put(player, builder);
+						player.openInventory(FireworkInventories.choosePower());
+					}
+					break;
+				case "Choose a power size":
+					if (check(event)) {
+						final FireworkBuilder builder = map.get(player);
+						builder.setPower(parsePower(item));
+						map.remove(player);
+						player.getInventory().addItem(builder.build());
+						player.sendMessage(Strings.TITLE + "Firework created!");
+						player.closeInventory();
+					}
+					break;
 			}
 		}
 	}
@@ -149,10 +149,10 @@ public class CommandFirework implements Listener {
 	private boolean parseBoolean(final ItemStack item) {
 		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
-			case "Yes":
-				return true;
-			case "No":
-				return false;
+				case "Yes":
+					return true;
+				case "No":
+					return false;
 			}
 		return false;
 	}
@@ -167,16 +167,16 @@ public class CommandFirework implements Listener {
 	private Type parseType(final ItemStack item) {
 		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
-			case "Creeper":
-				return Type.CREEPER;
-			case "Ball":
-				return Type.BALL;
-			case "Large Ball":
-				return Type.BALL_LARGE;
-			case "Burst":
-				return Type.BURST;
-			case "Star":
-				return Type.STAR;
+				case "Creeper":
+					return Type.CREEPER;
+				case "Ball":
+					return Type.BALL;
+				case "Large Ball":
+					return Type.BALL_LARGE;
+				case "Burst":
+					return Type.BURST;
+				case "Star":
+					return Type.STAR;
 			}
 		else
 			return Type.BALL;
@@ -186,38 +186,38 @@ public class CommandFirework implements Listener {
 	private Color parseColor(final ItemStack item) {
 		if ((item != null) && item.hasItemMeta() && item.getItemMeta().hasDisplayName())
 			switch (item.getItemMeta().getDisplayName()) {
-			case "Black":
-				return DyeColor.BLACK.getFireworkColor();
-			case "Gray":
-				return DyeColor.GRAY.getFireworkColor();
-			case "Silver":
-				return DyeColor.SILVER.getFireworkColor();
-			case "Brown":
-				return DyeColor.BROWN.getFireworkColor();
-			case "Light Blue":
-				return DyeColor.LIGHT_BLUE.getFireworkColor();
-			case "Blue":
-				return DyeColor.BLUE.getFireworkColor();
-			case "Cyan":
-				return DyeColor.CYAN.getFireworkColor();
-			case "Lime":
-				return DyeColor.LIME.getFireworkColor();
-			case "Green":
-				return DyeColor.GREEN.getFireworkColor();
-			case "Magenta":
-				return DyeColor.MAGENTA.getFireworkColor();
-			case "Purple":
-				return DyeColor.PURPLE.getFireworkColor();
-			case "Pink":
-				return DyeColor.PINK.getFireworkColor();
-			case "Red":
-				return DyeColor.RED.getFireworkColor();
-			case "Orange":
-				return DyeColor.ORANGE.getFireworkColor();
-			case "Yellow":
-				return DyeColor.YELLOW.getFireworkColor();
-			case "White":
-				return DyeColor.WHITE.getFireworkColor();
+				case "Black":
+					return DyeColor.BLACK.getFireworkColor();
+				case "Gray":
+					return DyeColor.GRAY.getFireworkColor();
+				case "Silver":
+					return DyeColor.SILVER.getFireworkColor();
+				case "Brown":
+					return DyeColor.BROWN.getFireworkColor();
+				case "Light Blue":
+					return DyeColor.LIGHT_BLUE.getFireworkColor();
+				case "Blue":
+					return DyeColor.BLUE.getFireworkColor();
+				case "Cyan":
+					return DyeColor.CYAN.getFireworkColor();
+				case "Lime":
+					return DyeColor.LIME.getFireworkColor();
+				case "Green":
+					return DyeColor.GREEN.getFireworkColor();
+				case "Magenta":
+					return DyeColor.MAGENTA.getFireworkColor();
+				case "Purple":
+					return DyeColor.PURPLE.getFireworkColor();
+				case "Pink":
+					return DyeColor.PINK.getFireworkColor();
+				case "Red":
+					return DyeColor.RED.getFireworkColor();
+				case "Orange":
+					return DyeColor.ORANGE.getFireworkColor();
+				case "Yellow":
+					return DyeColor.YELLOW.getFireworkColor();
+				case "White":
+					return DyeColor.WHITE.getFireworkColor();
 			}
 		else
 			return Color.WHITE;

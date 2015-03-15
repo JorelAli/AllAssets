@@ -372,7 +372,7 @@ public class SimpleConfig {
 	public void reloadConfig() {
 		this.config = YamlConfiguration.loadConfiguration(manager.getConfigContent(file));
 	}
-	
+
 	public File getFile() {
 		return file;
 	}
@@ -387,7 +387,7 @@ public class SimpleConfig {
 	public Set<String> getKeys() {
 		return this.config.getKeys(false);
 	}
-	
+
 	public Map<String, Object> getValues() {
 		return this.config.getValues(false);
 	}

@@ -95,7 +95,7 @@ public class PlayerListener implements Listener {
 			ips.add(event.getPlayer().getAddress().getHostName());
 			user.setIPs(ips);
 		}
-		
+
 		user.refreshPing();
 
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());

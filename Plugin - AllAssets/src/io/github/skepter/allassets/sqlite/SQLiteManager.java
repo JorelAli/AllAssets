@@ -25,7 +25,7 @@ package io.github.skepter.allassets.sqlite;
 public abstract class SQLiteManager {
 
 	public abstract void createTable();
-	
+
 	public abstract String tableName();
-	
+
 }

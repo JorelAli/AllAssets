@@ -51,25 +51,25 @@ public class CommandSpawnMob {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				return;
-			case 1:
-				spawnmob(player, args.getArgs()[0]);
-				return;
-			case 2:
-				if (TextUtils.isInteger(args.getArgs()[1]))
-					for (int i = 0; i < Integer.parseInt(args.getArgs()[1]); i++)
-						spawnmob(player, args.getArgs()[0]);
-				else
-					ErrorUtils.notAnInteger(player);
-				return;
+				case 0:
+					printHelp(player);
+					return;
+				case 1:
+					spawnmob(player, args.getArgs()[0]);
+					return;
+				case 2:
+					if (TextUtils.isInteger(args.getArgs()[1]))
+						for (int i = 0; i < Integer.parseInt(args.getArgs()[1]); i++)
+							spawnmob(player, args.getArgs()[0]);
+					else
+						ErrorUtils.notAnInteger(player);
+					return;
 			}
 			ErrorUtils.tooManyArguments(player);
 			return;
 		}
 	}
-	
+
 	private void spawnmob(Player player, String mob) {
 		Block b = PlayerUtils.getLastTwoTargetBlocks(player).get(1);
 		Block spawnLocation = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0)));

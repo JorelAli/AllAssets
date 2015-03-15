@@ -27,8 +27,8 @@ import io.github.skepter.allassets.utils.Utils;
 
 import java.io.File;
 
-/** Loads SQLite classes. Used to open and close SQLite databases.
- * Register new SQLite classes inside the init() method. */
+/** Loads SQLite classes. Used to open and close SQLite databases. Register new
+ * SQLite classes inside the init() method. */
 public class SQLiteLoader {
 
 	public enum SQLiteType {
@@ -41,7 +41,7 @@ public class SQLiteLoader {
 		if (sqliteMap == null)
 			sqliteMap = new DoubleMap<SQLiteType, SQLite, SQLiteManager>();
 	}
-	
+
 	public void init() {
 		SQLite ban = getSQLite(SQLiteType.BAN);
 		SQLiteManager banManager = new SQLiteBan(ban);
@@ -49,27 +49,27 @@ public class SQLiteLoader {
 		sqliteMap.getValue1(SQLiteType.BAN).open();
 		sqliteMap.getValue2(SQLiteType.BAN).createTable();
 	}
-	
+
 	public void shutDown() {
 		sqliteMap.getValue1(SQLiteType.BAN).close();
 	}
-	
+
 	public SQLite sqliteFromClass(SQLiteManager m) {
 		return Utils.reverseValue2(sqliteMap).getValue1(m);
 	}
-	
+
 	private SQLite getSQLite(SQLiteType t) {
-		switch(t) {
-		case BAN:
-			return new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
+		switch (t) {
+			case BAN:
+				return new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
 		}
 		return null;
 	}
-	
+
 	public SQLiteManager getSQLiteManager(SQLiteType t) {
 		return sqliteMap.getValue2(t);
 	}
-	
+
 	public DoubleMap<SQLiteType, SQLite, SQLiteManager> getMap() {
 		return sqliteMap;
 	}

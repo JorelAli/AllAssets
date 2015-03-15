@@ -45,32 +45,32 @@ public class CommandFly {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				if (player.getAllowFlight()) {
-					player.setAllowFlight(false);
-					player.setFlying(false);
-					player.sendMessage(Strings.TITLE + "Flying disabled");
-
-				} else {
-					player.setAllowFlight(true);
-					player.sendMessage(Strings.TITLE + "Flying enabled");
-				}
-				return;
-			case 1:
-				final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-				if (target != null) {
-					if (target.getAllowFlight()) {
-						target.setAllowFlight(false);
+				case 0:
+					if (player.getAllowFlight()) {
+						player.setAllowFlight(false);
 						player.setFlying(false);
-						target.sendMessage(Strings.TITLE + "Flying disabled");
+						player.sendMessage(Strings.TITLE + "Flying disabled");
+
 					} else {
-						target.setAllowFlight(true);
-						target.sendMessage(Strings.TITLE + "Flying enabled");
+						player.setAllowFlight(true);
+						player.sendMessage(Strings.TITLE + "Flying enabled");
 					}
 					return;
-				} else
-					ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
-				return;
+				case 1:
+					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
+					if (target != null) {
+						if (target.getAllowFlight()) {
+							target.setAllowFlight(false);
+							player.setFlying(false);
+							target.sendMessage(Strings.TITLE + "Flying disabled");
+						} else {
+							target.setAllowFlight(true);
+							target.sendMessage(Strings.TITLE + "Flying enabled");
+						}
+						return;
+					} else
+						ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+					return;
 			}
 			ErrorUtils.tooManyArguments(player);
 		}

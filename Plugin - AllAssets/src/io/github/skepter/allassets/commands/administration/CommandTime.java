@@ -48,42 +48,42 @@ public class CommandTime {
 	@CommandHandler(name = "time", permission = "time", description = "Sets the world time")
 	public void onCommand(final CommandArgs args) {
 		switch (args.getArgs().length) {
-		case 0:
-			ErrorUtils.notEnoughArguments(args.getSender());
-		case 1:
-			int time = 0;
-			try {
-				if (!TextUtils.isInteger(args.getArgs()[0]))
-					ErrorUtils.notAnInteger(args.getSender());
-				time = Integer.parseInt(args.getArgs()[0]);
-				args.getSender().sendMessage(Strings.TITLE + "Time set to " + args.getArgs()[0]);
-				return;
-			} catch (final NumberFormatException e) {
-				switch (args.getArgs()[0].toLowerCase()) {
-				case "day":
-					time = 1000;
-					args.getSender().sendMessage(Strings.TITLE + "Time set to day");
-					break;
-				case "midday":
-					time = 6000;
-					args.getSender().sendMessage(Strings.TITLE + "Time set to midday");
-					break;
-				case "night":
-					time = 14000;
-					args.getSender().sendMessage(Strings.TITLE + "Time set to night");
-					break;
-				case "midnight":
-					time = 18000;
-					args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
-					break;
-				default:
-					ErrorUtils.error(args.getSender(), "Couldn't set the time!");
+			case 0:
+				ErrorUtils.notEnoughArguments(args.getSender());
+			case 1:
+				int time = 0;
+				try {
+					if (!TextUtils.isInteger(args.getArgs()[0]))
+						ErrorUtils.notAnInteger(args.getSender());
+					time = Integer.parseInt(args.getArgs()[0]);
+					args.getSender().sendMessage(Strings.TITLE + "Time set to " + args.getArgs()[0]);
 					return;
+				} catch (final NumberFormatException e) {
+					switch (args.getArgs()[0].toLowerCase()) {
+						case "day":
+							time = 1000;
+							args.getSender().sendMessage(Strings.TITLE + "Time set to day");
+							break;
+						case "midday":
+							time = 6000;
+							args.getSender().sendMessage(Strings.TITLE + "Time set to midday");
+							break;
+						case "night":
+							time = 14000;
+							args.getSender().sendMessage(Strings.TITLE + "Time set to night");
+							break;
+						case "midnight":
+							time = 18000;
+							args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
+							break;
+						default:
+							ErrorUtils.error(args.getSender(), "Couldn't set the time!");
+							return;
+					}
 				}
-			}
-			for (final World world : Bukkit.getWorlds())
-				world.setTime(time);
-			return;
+				for (final World world : Bukkit.getWorlds())
+					world.setTime(time);
+				return;
 		}
 		return;
 	}

@@ -44,28 +44,28 @@ public class CommandGive {
 	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "give", aliases = { "i", "item" }, permission = "give", description = "Gives items")
 	public void onCommand(final CommandArgs args) {
-//		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
-//		try {
-//			args.getPlayer().getInventory().addItem(iF.toStack());
-//		} catch (final IllegalArgumentException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		} catch (final Exception e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//		//give <player> <item> <amount>
-		switch(args.getArgs().length) {
-		case 1:
-		case 2:
-			return;
-		case 3:
-			try {
-				Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-				player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		//		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
+		//		try {
+		//			args.getPlayer().getInventory().addItem(iF.toStack());
+		//		} catch (final IllegalArgumentException e1) {
+		//			// TODO Auto-generated catch block
+		//			e1.printStackTrace();
+		//		} catch (final Exception e1) {
+		//			// TODO Auto-generated catch block
+		//			e1.printStackTrace();
+		//		}
+		//		//give <player> <item> <amount>
+		switch (args.getArgs().length) {
+			case 1:
+			case 2:
+				return;
+			case 3:
+				try {
+					Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+					player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 		}
 	}
 }

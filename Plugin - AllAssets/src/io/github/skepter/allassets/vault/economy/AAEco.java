@@ -69,15 +69,13 @@ public class AAEco implements Economy {
 			}
 		}
 	}
-	
+
 	private final static Logger log = Bukkit.getLogger();
 	private AllAssets allAssetsPlugin;
-	
+
 	private final String name = "AAEco";
 
-	
 	private final EconomyResponse bankEconomyResponse = new EconomyResponse(0.0D, 0.0D, ResponseType.NOT_IMPLEMENTED, name + " does not support banks!");
-	
 
 	public AAEco(final Plugin plugin) {
 		if (this.allAssetsPlugin == null) {

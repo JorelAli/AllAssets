@@ -44,45 +44,45 @@ public class CommandPWeather {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				return;
-			case 1:
-				switch (args.getArgs()[0].toLowerCase()) {
-				case "downfall":
-				case "rain":
-					player.setPlayerWeather(WeatherType.DOWNFALL);
-					break;
-				case "clear":
-				case "sun":
-				case "day":
-					player.setPlayerWeather(WeatherType.CLEAR);
-					break;
-				case "reset":
-				case "normal":
-					player.resetPlayerWeather();
-					break;
-				}
-				return;
-			case 2:
-				Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
-				if (target != null) {
+				case 0:
+					return;
+				case 1:
 					switch (args.getArgs()[0].toLowerCase()) {
-					case "downfall":
-					case "rain":
-						target.setPlayerWeather(WeatherType.DOWNFALL);
-						break;
-					case "clear":
-					case "sun":
-					case "day":
-						target.setPlayerWeather(WeatherType.CLEAR);
-						break;
-					case "reset":
-					case "normal":
-						target.resetPlayerWeather();
-						break;
+						case "downfall":
+						case "rain":
+							player.setPlayerWeather(WeatherType.DOWNFALL);
+							break;
+						case "clear":
+						case "sun":
+						case "day":
+							player.setPlayerWeather(WeatherType.CLEAR);
+							break;
+						case "reset":
+						case "normal":
+							player.resetPlayerWeather();
+							break;
 					}
-				}
-				return;
+					return;
+				case 2:
+					Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+					if (target != null) {
+						switch (args.getArgs()[0].toLowerCase()) {
+							case "downfall":
+							case "rain":
+								target.setPlayerWeather(WeatherType.DOWNFALL);
+								break;
+							case "clear":
+							case "sun":
+							case "day":
+								target.setPlayerWeather(WeatherType.CLEAR);
+								break;
+							case "reset":
+							case "normal":
+								target.resetPlayerWeather();
+								break;
+						}
+					}
+					return;
 			}
 		}
 		return;

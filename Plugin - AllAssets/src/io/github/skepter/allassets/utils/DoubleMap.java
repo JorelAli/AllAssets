@@ -51,12 +51,13 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 	public Set<Entry<A, List<Object>>> entrySet() {
 		return map.entrySet();
 	}
-	
+
 	public DoubleMap<A, B, C> getDoubleMap() {
 		return this;
 	}
 
 	/** Gets a list of values
+	 * 
 	 * @return The list of values as a List of objects */
 	public List<List<Object>> values() {
 		final List<List<Object>> list = new ArrayList<List<Object>>();
@@ -69,28 +70,28 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 		map.remove(key);
 		return;
 	}
-	
+
 	public Map<A, B> getValue1Map() {
 		Map<A, B> tMap = new HashMap<A, B>();
-		for(A a : keySet()) {
+		for (A a : keySet()) {
 			tMap.put(a, getValue1(a));
 		}
 		return tMap;
 	}
-	
+
 	public Map<A, C> getValue2Map() {
 		Map<A, C> tMap = new HashMap<A, C>();
-		for(A a : keySet()) {
+		for (A a : keySet()) {
 			tMap.put(a, getValue2(a));
 		}
 		return tMap;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public B getValue1(final A key) {
 		return (B) map.get(key).get(0);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public C getValue2(final A key) {
 		return (C) map.get(key).get(1);

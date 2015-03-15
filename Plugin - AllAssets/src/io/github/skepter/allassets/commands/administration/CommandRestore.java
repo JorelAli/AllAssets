@@ -58,21 +58,21 @@ public class CommandRestore {
 	@CommandHandler(name = "restore", aliases = { "revert" }, permission = "restore", description = "Restores a backed up a world")
 	public void onCommand(final CommandArgs args) {
 		switch (args.getArgs().length) {
-		case 0:
-			ErrorUtils.notEnoughArguments(args.getSender());
-			return;
-		case 1:
-			if (args.getArgs()[0].equalsIgnoreCase("list")) {
-				args.getSender().sendMessage(TextUtils.title("List of worlds"));
-				for (final File file : Files.getWorldBackupStorage().listFiles())
-					args.getSender().sendMessage(file.getName());
+			case 0:
+				ErrorUtils.notEnoughArguments(args.getSender());
 				return;
-			} else {
-				for (final File file : Files.getWorldBackupStorage().listFiles())
-					if (args.getArgs()[0].equalsIgnoreCase(file.getName()))
-						new YesNoConversation(args.getSender(), new RestorePrompt(args.getArgs()[0].toLowerCase()), "Are you sure you want to restore this world? Your previous world cannot be recovered!");
-				return;
-			}
+			case 1:
+				if (args.getArgs()[0].equalsIgnoreCase("list")) {
+					args.getSender().sendMessage(TextUtils.title("List of worlds"));
+					for (final File file : Files.getWorldBackupStorage().listFiles())
+						args.getSender().sendMessage(file.getName());
+					return;
+				} else {
+					for (final File file : Files.getWorldBackupStorage().listFiles())
+						if (args.getArgs()[0].equalsIgnoreCase(file.getName()))
+							new YesNoConversation(args.getSender(), new RestorePrompt(args.getArgs()[0].toLowerCase()), "Are you sure you want to restore this world? Your previous world cannot be recovered!");
+					return;
+				}
 		}
 	}
 
@@ -107,7 +107,7 @@ public class CommandRestore {
 					o.getClass().getMethod("e", String.class).invoke(o, world);
 				} catch (Exception e) {
 				}
-								final WorldUtils wUtils = new WorldUtils(world);
+				final WorldUtils wUtils = new WorldUtils(world);
 				//				utils.unloadWorld();
 				//				Bukkit.unloadWorld(world, true);
 				Bukkit.getScheduler().runTaskLaterAsynchronously(AllAssets.instance(), new Runnable() {
@@ -117,7 +117,7 @@ public class CommandRestore {
 							//							utils.deleteWorld();
 							//							if (new File(world).exists())
 							//								new File(world).delete();
-														wUtils.copyWorld(new File(Files.getWorldBackupStorage(), world));
+							wUtils.copyWorld(new File(Files.getWorldBackupStorage(), world));
 							//							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(world));
 							Bukkit.getServer().createWorld(new WorldCreator(world));
 							context.getForWhom().sendRawMessage(Strings.TITLE + world + " was restored successfully");

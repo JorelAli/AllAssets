@@ -49,26 +49,26 @@ public class CommandPTime {
 					return;
 				} catch (final NumberFormatException e) {
 					switch (args.getArgs()[0].toLowerCase()) {
-					case "day":
-						player.setPlayerTime(1000, false);
-						player.sendMessage(Strings.TITLE + "Time set to day");
-						break;
-					case "midday":
-						player.setPlayerTime(6000, false);
-						player.sendMessage(Strings.TITLE + "Time set to midday");
-						break;
-					case "night":
-						player.setPlayerTime(14000, false);
-						player.sendMessage(Strings.TITLE + "Time set to night");
-						break;
-					case "midnight":
-						player.setPlayerTime(18000, false);
-						player.sendMessage(Strings.TITLE + "Time set to midnight");
-						break;
-					case "reset":
-					case "normal:":
-						player.resetPlayerTime();
-						break;
+						case "day":
+							player.setPlayerTime(1000, false);
+							player.sendMessage(Strings.TITLE + "Time set to day");
+							break;
+						case "midday":
+							player.setPlayerTime(6000, false);
+							player.sendMessage(Strings.TITLE + "Time set to midday");
+							break;
+						case "night":
+							player.setPlayerTime(14000, false);
+							player.sendMessage(Strings.TITLE + "Time set to night");
+							break;
+						case "midnight":
+							player.setPlayerTime(18000, false);
+							player.sendMessage(Strings.TITLE + "Time set to midnight");
+							break;
+						case "reset":
+						case "normal:":
+							player.resetPlayerTime();
+							break;
 					}
 					return;
 				}
@@ -86,30 +86,30 @@ public class CommandPTime {
 					return;
 				} catch (final NumberFormatException e) {
 					switch (args.getArgs()[0].toLowerCase()) {
-					case "day":
-						target.setPlayerTime(1000, false);
-						player.sendMessage(Strings.TITLE + "Time set to day");
-						target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to day");
-						break;
-					case "midday":
-						target.setPlayerTime(6000, false);
-						player.sendMessage(Strings.TITLE + "Time set to midday");
-						target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to midday");
-						break;
-					case "night":
-						target.setPlayerTime(14000, false);
-						player.sendMessage(Strings.TITLE + "Time set to night");
-						target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to night");
-						break;
-					case "midnight":
-						target.setPlayerTime(18000, false);
-						player.sendMessage(Strings.TITLE + "Time set to midnight");
-						target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to midnight");
-						break;
-					case "reset":
-					case "normal:":
-						target.resetPlayerTime();
-						break;
+						case "day":
+							target.setPlayerTime(1000, false);
+							player.sendMessage(Strings.TITLE + "Time set to day");
+							target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to day");
+							break;
+						case "midday":
+							target.setPlayerTime(6000, false);
+							player.sendMessage(Strings.TITLE + "Time set to midday");
+							target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to midday");
+							break;
+						case "night":
+							target.setPlayerTime(14000, false);
+							player.sendMessage(Strings.TITLE + "Time set to night");
+							target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to night");
+							break;
+						case "midnight":
+							target.setPlayerTime(18000, false);
+							player.sendMessage(Strings.TITLE + "Time set to midnight");
+							target.sendMessage(Strings.NO_COLOR_TITLE + player.getName() + " set your time to midnight");
+							break;
+						case "reset":
+						case "normal:":
+							target.resetPlayerTime();
+							break;
 					}
 					return;
 				}

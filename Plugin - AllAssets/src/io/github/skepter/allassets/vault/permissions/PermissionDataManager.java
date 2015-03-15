@@ -88,13 +88,13 @@ public class PermissionDataManager extends CustomConfig {
 		super(new File(Files.getStorage(), "PermissionData.yml"), "Permissions");
 	}
 
-	/** dataName = player or group name*/
+	/** dataName = player or group name */
 	public List<String> getWorldPermissions(final String worldName, final GroupDataType type, final String dataName) {
 		final String path = getPath(type, "Worlds.", worldName) + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
-	/** dataName = player or group name*/
+	/** dataName = player or group name */
 	public List<String> getGlobalPermissions(final GroupDataType type, final String dataName) {
 		final String path = getPath(type, "Global.") + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
@@ -112,36 +112,36 @@ public class PermissionDataManager extends CustomConfig {
 
 	private String getAffix(final Affix affix, String path) {
 		switch (affix) {
-		case PREFIX:
-			path = path + "Prefix";
-			break;
-		case SUFFIX:
-			path = path + "Suffix";
-			break;
+			case PREFIX:
+				path = path + "Prefix";
+				break;
+			case SUFFIX:
+				path = path + "Suffix";
+				break;
 		}
 		return path;
 	}
 
 	private String getPath(final GroupDataType type, String path) {
 		switch (type) {
-		case GROUP:
-			path = path + ".Groups.";
-			break;
-		case PLAYER:
-			path = path + ".Players.";
-			break;
+			case GROUP:
+				path = path + ".Groups.";
+				break;
+			case PLAYER:
+				path = path + ".Players.";
+				break;
 		}
 		return path;
 	}
 
 	private String getPath(final GroupDataType type, String path, final String worldName) {
 		switch (type) {
-		case GROUP:
-			path = path + worldName + ".Groups.";
-			break;
-		case PLAYER:
-			path = path + worldName + ".Players.";
-			break;
+			case GROUP:
+				path = path + worldName + ".Groups.";
+				break;
+			case PLAYER:
+				path = path + worldName + ".Players.";
+				break;
 		}
 		return path;
 	}

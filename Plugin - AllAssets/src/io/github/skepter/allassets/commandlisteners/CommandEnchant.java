@@ -65,32 +65,32 @@ public class CommandEnchant implements Listener {
 		final Player player = (Player) event.getWhoClicked();
 		if (event.getAction().equals(InventoryAction.PICKUP_SOME))
 			switch (event.getInventory().getName()) {
-			case "Enchant - Armor":
-				if (event.getSlot() == 53) {
-					player.openInventory(EnchantmentInventories.page2()); // page 2
-					return;
-				} else if (event.getSlot() == 52) {
-					player.openInventory(EnchantmentInventories.page1()); // page 4
-					return;
-				}
-				doEnchant(player, event);
-			case "Enchant - Tools":
-				if (event.getSlot() == 26) {
-					player.openInventory(EnchantmentInventories.page2()); // page 3
-					return;
-				} else if (event.getSlot() == 25) {
-					player.openInventory(EnchantmentInventories.page1()); // page 1
-					return;
-				}
-				doEnchant(player, event);
-			case "Enchant - Weapons":
-				if (event.getSlot() == 53) {
-					player.openInventory(EnchantmentInventories.page2()); // page 4
-					return;
-				} else if (event.getSlot() == 52) {
-					player.openInventory(EnchantmentInventories.page1()); // page 2
-					return;
-				}
+				case "Enchant - Armor":
+					if (event.getSlot() == 53) {
+						player.openInventory(EnchantmentInventories.page2()); // page 2
+						return;
+					} else if (event.getSlot() == 52) {
+						player.openInventory(EnchantmentInventories.page1()); // page 4
+						return;
+					}
+					doEnchant(player, event);
+				case "Enchant - Tools":
+					if (event.getSlot() == 26) {
+						player.openInventory(EnchantmentInventories.page2()); // page 3
+						return;
+					} else if (event.getSlot() == 25) {
+						player.openInventory(EnchantmentInventories.page1()); // page 1
+						return;
+					}
+					doEnchant(player, event);
+				case "Enchant - Weapons":
+					if (event.getSlot() == 53) {
+						player.openInventory(EnchantmentInventories.page2()); // page 4
+						return;
+					} else if (event.getSlot() == 52) {
+						player.openInventory(EnchantmentInventories.page1()); // page 2
+						return;
+					}
 			}
 	}
 

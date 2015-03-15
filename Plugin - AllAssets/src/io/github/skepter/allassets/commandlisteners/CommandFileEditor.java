@@ -77,22 +77,22 @@ public class CommandFileEditor implements Listener {
 			return;
 		}
 		switch (args.getArgs().length) {
-		case 0:
-		case 1:
-			openInventory(player, new File("."));
-			directoryMap.put(player, ".");
-			return;
-		case 2:
-			final File dataFile = new File(fileMap.get(player));
-			final YamlConfiguration config = new YamlConfiguration();
-			try {
-				config.load(dataFile);
-			} catch (final Exception e) {
-				ErrorUtils.error(player, "That file could not be read!");
+			case 0:
+			case 1:
+				openInventory(player, new File("."));
+				directoryMap.put(player, ".");
 				return;
-			}
-			new YesNoConversation(player, new EditFilePrompt(dataFile, config, args.getArgs()[0], args.getArgs()[1]), "Are you sure you want to change " + args.getArgs()[0] + " to " + args.getArgs()[1] + " - this cannot be undone!");
-			return;
+			case 2:
+				final File dataFile = new File(fileMap.get(player));
+				final YamlConfiguration config = new YamlConfiguration();
+				try {
+					config.load(dataFile);
+				} catch (final Exception e) {
+					ErrorUtils.error(player, "That file could not be read!");
+					return;
+				}
+				new YesNoConversation(player, new EditFilePrompt(dataFile, config, args.getArgs()[0], args.getArgs()[1]), "Are you sure you want to change " + args.getArgs()[0] + " to " + args.getArgs()[1] + " - this cannot be undone!");
+				return;
 		}
 
 	}
@@ -131,34 +131,34 @@ public class CommandFileEditor implements Listener {
 				final String dM = directoryMap.get(player);
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
-				case BOOK:
-					directoryMap.put(player, openInventory(player, new File(dM, File.separator + new ItemBuilder(item).getDisplayName())));
-					return;
-					/* If they click an arrow, go up another level */
-				case ARROW:
-					/* Prevents them idiots from getting out of the server folder and causing havoc :) */
-					if (Arrays.asList(new File(dM).list()).contains("server.properties"))
+					case BOOK:
+						directoryMap.put(player, openInventory(player, new File(dM, File.separator + new ItemBuilder(item).getDisplayName())));
 						return;
-					directoryMap.put(player, openInventory(player, new File(dM).getParentFile()));
-					return;
-					/* Read the file */
-				case PAPER:
-					player.closeInventory();
-					final File dataFile = new File(dM, new ItemBuilder(item).getDisplayName());
-					if (dataFile.getName().contains(".yml")) {
-						final YamlConfiguration config = new YamlConfiguration();
-						try {
-							config.load(dataFile);
-						} catch (final Exception e) {
-							ErrorUtils.error(player, "That file could not be read!");
+						/* If they click an arrow, go up another level */
+					case ARROW:
+						/* Prevents them idiots from getting out of the server folder and causing havoc :) */
+						if (Arrays.asList(new File(dM).list()).contains("server.properties"))
+							return;
+						directoryMap.put(player, openInventory(player, new File(dM).getParentFile()));
+						return;
+						/* Read the file */
+					case PAPER:
+						player.closeInventory();
+						final File dataFile = new File(dM, new ItemBuilder(item).getDisplayName());
+						if (dataFile.getName().contains(".yml")) {
+							final YamlConfiguration config = new YamlConfiguration();
+							try {
+								config.load(dataFile);
+							} catch (final Exception e) {
+								ErrorUtils.error(player, "That file could not be read!");
+								return;
+							}
+							fileMap.put(player, dataFile.getAbsolutePath());
+							player.sendMessage(Strings.TITLE + dataFile.getName() + " chosen. Use /fe <setting> <value> to edit the file.");
 							return;
 						}
-						fileMap.put(player, dataFile.getAbsolutePath());
-						player.sendMessage(Strings.TITLE + dataFile.getName() + " chosen. Use /fe <setting> <value> to edit the file.");
+					default:
 						return;
-					}
-				default:
-					return;
 				}
 
 			}

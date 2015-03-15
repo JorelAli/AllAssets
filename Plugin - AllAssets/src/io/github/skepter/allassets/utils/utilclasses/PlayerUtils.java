@@ -23,8 +23,8 @@
  *******************************************************************************/
 package io.github.skepter.allassets.utils.utilclasses;
 
-import static org.bukkit.Bukkit.getOfflinePlayers;
 import static org.bukkit.Bukkit.getOnlinePlayers;
+import static org.bukkit.Bukkit.getOfflinePlayers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,23 +57,17 @@ public class PlayerUtils {
 	public static Block getTargetBlock(final Player player) {
 		return getTargetBlock(player, 120);
 	}
-	
-	/**
-	 * get(0) = closest to player
-	 * get(1) = farthest from player
-	 */
+
+	/** get(0) = closest to player get(1) = farthest from player */
 	public static List<Block> getLastTwoTargetBlocks(final Player player) {
 		return getLastTwoTargetBlocks(player, 120);
 	}
-	
-	/**
-	 * get(0) = closest to player
-	 * get(1) = farthest from player
+
+	/** get(0) = closest to player get(1) = farthest from player
 	 * 
-	 * If the range is -1, it will have pretty much no limit (15,000)
-	 */
+	 * If the range is -1, it will have pretty much no limit (15,000) */
 	public static List<Block> getLastTwoTargetBlocks(final Player player, int range) {
-		if(range == -1)
+		if (range == -1)
 			range = 15000;
 		BlockIterator itr = new BlockIterator(player, range);
 		Block target = itr.next();

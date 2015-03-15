@@ -83,24 +83,24 @@ public abstract class CustomItem implements Listener {
 		if (permission == null || event.getPlayer().hasPermission(permission))
 			if (event.getPlayer().getItemInHand().equals(itemStack)) {
 				switch (event.getAction()) {
-				case LEFT_CLICK_AIR:
-					if (leftClickAir(event.getPlayer()))
-						event.setCancelled(true);
-					break;
-				case LEFT_CLICK_BLOCK:
-					if (leftClickBlock(event.getPlayer()))
-						event.setCancelled(true);
-					break;
-				case RIGHT_CLICK_AIR:
-					if (rightClickAir(event.getPlayer()))
-						event.setCancelled(true);
-					break;
-				case RIGHT_CLICK_BLOCK:
-					if (rightClickBlock(event.getPlayer()))
-						event.setCancelled(true);
-					break;
-				case PHYSICAL:
-					break;
+					case LEFT_CLICK_AIR:
+						if (leftClickAir(event.getPlayer()))
+							event.setCancelled(true);
+						break;
+					case LEFT_CLICK_BLOCK:
+						if (leftClickBlock(event.getPlayer()))
+							event.setCancelled(true);
+						break;
+					case RIGHT_CLICK_AIR:
+						if (rightClickAir(event.getPlayer()))
+							event.setCancelled(true);
+						break;
+					case RIGHT_CLICK_BLOCK:
+						if (rightClickBlock(event.getPlayer()))
+							event.setCancelled(true);
+						break;
+					case PHYSICAL:
+						break;
 
 				}
 			}

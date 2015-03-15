@@ -36,11 +36,11 @@ import org.bukkit.entity.Player;
 public class LocationUtils {
 
 	private Location location;
-	
+
 	public LocationUtils(Location location) {
 		this.location = location;
 	}
-	
+
 	/* Used to calculate locations
 	 * E.g. exact spawn location for a mob
 	 * Location to teleport a player using asc/desc
@@ -55,12 +55,12 @@ public class LocationUtils {
 		//nearbyEntities zombies etc.
 		return false;
 	}
-	
-	/**
-	 * Teleports a player, but keeps the pitch and yaw so they don't end up looking in some weird direction
+
+	/** Teleports a player, but keeps the pitch and yaw so they don't end up
+	 * looking in some weird direction
+	 * 
 	 * @param location
-	 * @param player
-	 */
+	 * @param player */
 	public void teleport(final Player player) {
 		Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
 		player.teleport(target);

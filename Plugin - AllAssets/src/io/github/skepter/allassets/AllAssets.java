@@ -298,7 +298,7 @@ public class AllAssets extends JavaPlugin {
 
 		/* Too buggy to be worth testing */
 		new SQLiteLoader().shutDown();
-		
+
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
 				CommandDiscoArmor.toggleArmor(player);
@@ -505,7 +505,6 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
 			r(new ServerListingListener());
 		//Buggy and deprecated until fixed
-		
 
 		devRegister(framework);
 

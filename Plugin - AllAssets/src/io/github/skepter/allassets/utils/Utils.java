@@ -42,31 +42,31 @@ public class Utils {
 	public static Object getMetadata(final Entity entity, final String key) {
 		return entity.getMetadata(key);
 	}
-	
+
 	public static <T> List<T> add(List<T> list, T type) {
 		list.add(type);
 		return list;
 	}
-	
+
 	public static <A, B> Map<B, A> reverse(Map<A, B> map) {
 		Map<B, A> newMap = new HashMap<B, A>();
-		for(Entry<A, B> entry : map.entrySet()) {
+		for (Entry<A, B> entry : map.entrySet()) {
 			newMap.put(entry.getValue(), entry.getKey());
 		}
 		return newMap;
 	}
-	
+
 	public static <B, C, A> DoubleMap<B, C, A> reverseValue1(DoubleMap<A, B, C> map) {
 		DoubleMap<B, C, A> tMap = new DoubleMap<B, C, A>();
-		for(A key : map.keySet()) {
+		for (A key : map.keySet()) {
 			tMap.put(map.getValue1(key), map.getValue2(key), key);
 		}
 		return tMap;
 	}
-	
+
 	public static <C, B, A> DoubleMap<C, B, A> reverseValue2(DoubleMap<A, B, C> map) {
 		DoubleMap<C, B, A> tMap = new DoubleMap<C, B, A>();
-		for(A key : map.keySet()) {
+		for (A key : map.keySet()) {
 			tMap.put(map.getValue2(key), map.getValue1(key), key);
 		}
 		return tMap;

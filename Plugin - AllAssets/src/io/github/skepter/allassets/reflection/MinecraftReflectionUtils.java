@@ -78,9 +78,9 @@ public class MinecraftReflectionUtils {
 		nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
 		entityHumanClass = nmsPlayer.getClass().getSuperclass();
 		getConnection = ReflectionUtils.getFieldValue(nmsPlayer, "playerConnection");
-		
+
 		obcPackageName = Bukkit.getServer().getClass().getPackage().getName();
-		
+
 		craftServer = getOBCClass("CraftServer").cast(Bukkit.getServer());
 		craftWorldClass = player.getWorld().getClass();
 
@@ -125,7 +125,7 @@ public class MinecraftReflectionUtils {
 	public Class<?> getNMSClass(final String className) throws ClassNotFoundException {
 		return (Class.forName(packageName + "." + className));
 	}
-	
+
 	/** Retrieves a net.minecraft.server class by using the dynamic package from
 	 * the dedicated server */
 	public Class<?> getOBCClass(final String className) throws ClassNotFoundException {
@@ -137,7 +137,8 @@ public class MinecraftReflectionUtils {
 		getConnection.getClass().getMethod("sendPacket", packetClass).invoke(getConnection, packet);
 	}
 
-	/** Sends an incoming packet (From client to server) - An example would be the instant revive */
+	/** Sends an incoming packet (From client to server) - An example would be
+	 * the instant revive */
 	public void sendIncomingPacket(final Object packet) throws Exception {
 		getConnection.getClass().getMethod("a", packet.getClass()).invoke(getConnection, packet);
 	}

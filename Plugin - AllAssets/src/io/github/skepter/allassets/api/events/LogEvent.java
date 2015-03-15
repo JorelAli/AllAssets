@@ -24,10 +24,7 @@ package io.github.skepter.allassets.api.events;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-/**
- * @author Skepter
- *
- */
+/** @author Skepter */
 public class LogEvent extends Event {
 
 	private static final HandlerList handlers = new HandlerList();

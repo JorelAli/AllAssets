@@ -47,20 +47,20 @@ public class ReflectionPlayer {
 
 			Class<?> tileEntityContainerAnvilClass = utils.getNMSClass("TileEntityContainerAnvil");
 			Object world = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getSuperclass().getSuperclass(), "world");
-//			Object inventory = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass(), "inventory");
+			//			Object inventory = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass(), "inventory");
 
 			Object tileEntityContainerAnvil = tileEntityContainerAnvilClass.getConstructor(utils.getNMSClass("World"), utils.getNMSClass("BlockPosition")).newInstance(world, null);
 			Object activeContainer = ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getDeclaredField("activeContainer"));
 			ReflectionUtils.setPerfectField(activeContainer, activeContainer.getClass().getSuperclass(), "checkReachable", false);
 
-//			Constructor<?> blockPosition = utils.getNMSClass("BlockPosition").getConstructor(int.class, int.class, int.class);
-//			Object defaultBlockPosition = blockPosition.newInstance(0, 0, 0);
+			//			Constructor<?> blockPosition = utils.getNMSClass("BlockPosition").getConstructor(int.class, int.class, int.class);
+			//			Object defaultBlockPosition = blockPosition.newInstance(0, 0, 0);
 
-//			Constructor<?> c = utils.getNMSClass("ContainerAnvil").getConstructor(utils.getNMSClass("PlayerInventory"), utils.getNMSClass("World"), utils.getNMSClass("BlockPosition"), utils.getNMSClass("EntityHuman"));
-//			Object anvilContainer = c.newInstance(inventory, world, defaultBlockPosition, utils.nmsPlayer);
-//
-//			Method m = utils.getOBCClass("event.CraftEventFactory").getDeclaredMethod("callInventoryOpenEvent", utils.getNMSClass("EntityPlayer"), utils.getNMSClass("Container"));
-//			m.invoke(utils.nmsPlayer, utils.nmsPlayer, anvilContainer);
+			//			Constructor<?> c = utils.getNMSClass("ContainerAnvil").getConstructor(utils.getNMSClass("PlayerInventory"), utils.getNMSClass("World"), utils.getNMSClass("BlockPosition"), utils.getNMSClass("EntityHuman"));
+			//			Object anvilContainer = c.newInstance(inventory, world, defaultBlockPosition, utils.nmsPlayer);
+			//
+			//			Method m = utils.getOBCClass("event.CraftEventFactory").getDeclaredMethod("callInventoryOpenEvent", utils.getNMSClass("EntityPlayer"), utils.getNMSClass("Container"));
+			//			m.invoke(utils.nmsPlayer, utils.nmsPlayer, anvilContainer);
 
 			new PacketBuilder(player, PacketType.PLAY_OUT_OPEN_WINDOW).set("a", (int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter")).set("b", "minecraft:anvil").set("c", utils.chatSerialize("Repairing")).set("d", 9);
 
@@ -85,32 +85,32 @@ public class ReflectionPlayer {
 			ReflectionUtils.setPrivateField(animationPacket, "a", player.getEntityId());
 			int animationID = 0;
 			switch (type) {
-			case CRITICAL_EFFECT:
-				animationID = 4;
-				break;
-			case CROUCH:
-				animationID = 104;
-				break;
-			case DAMAGE:
-				animationID = 1;
-				break;
-			case EAT_FOOD:
-				animationID = 3;
-				break;
-			case LEAVE_BED:
-				animationID = 2;
-				break;
-			case MAGIC_EFFECT:
-				animationID = 5;
-				break;
-			case SWING_ARM:
-				animationID = 0;
-				break;
-			case UNCROUCH:
-				animationID = 105;
-				break;
-			default:
-				break;
+				case CRITICAL_EFFECT:
+					animationID = 4;
+					break;
+				case CROUCH:
+					animationID = 104;
+					break;
+				case DAMAGE:
+					animationID = 1;
+					break;
+				case EAT_FOOD:
+					animationID = 3;
+					break;
+				case LEAVE_BED:
+					animationID = 2;
+					break;
+				case MAGIC_EFFECT:
+					animationID = 5;
+					break;
+				case SWING_ARM:
+					animationID = 0;
+					break;
+				case UNCROUCH:
+					animationID = 105;
+					break;
+				default:
+					break;
 			}
 			ReflectionUtils.setPrivateField(animationPacket, "b", Integer.valueOf(animationID));
 			utils.sendOutgoingPacket(animationPacket);

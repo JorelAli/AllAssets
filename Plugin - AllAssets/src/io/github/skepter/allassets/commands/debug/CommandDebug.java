@@ -229,18 +229,18 @@ public class CommandDebug implements Listener {
 		if (wePlayers.contains(e.getPlayer().getUniqueId())) {
 			int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
 			switch (e.getAction()) {
-			case LEFT_CLICK_BLOCK:
-				pos1.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
-				e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
-				e.setCancelled(true);
-				break;
-			case RIGHT_CLICK_BLOCK:
-				pos2.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
-				e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
-				e.setCancelled(true);
-				break;
-			default:
-				break;
+				case LEFT_CLICK_BLOCK:
+					pos1.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+					e.setCancelled(true);
+					break;
+				case RIGHT_CLICK_BLOCK:
+					pos2.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+					e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
+					e.setCancelled(true);
+					break;
+				default:
+					break;
 
 			}
 		}
@@ -270,49 +270,49 @@ public class CommandDebug implements Listener {
 				//Uses a switch statement (in other words, if the player types /debug we set)
 				switch (args.getArgs()[0]) {
 				//If they type /debug we set
-				case "set":
-					//gets all of the blocks between the two points
-					List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
-					final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-					
-					//Removes unnecessary blocks to speed up process :D
-					for (Block b : blocks) {
-						if (b.getType().equals(mat))
-							blocks.remove(b);
-					}
-					args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
-					//splits up the task into 250 'chunks' (sets 250 blocks at a time)
-					int divisor = 250;
-					
-					//Clean up the rest of the blocks which didn't get finished
-					//E.g. we have 104 blocks, 4 of them won't be set since
-					//104 divided by 100 = 1 (remainder 4)
-					for (Block b : blocks.subList((blocks.size() - divisor) + (blocks.size() % divisor), blocks.size()))
-						b.setType(mat);
+					case "set":
+						//gets all of the blocks between the two points
+						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 
-					//advanced for loop. Don't panic, it just loops through all of the blocks.
-					for (int i = 0; i < blocks.size() - divisor; i += divisor) {
+						//Removes unnecessary blocks to speed up process :D
+						for (Block b : blocks) {
+							if (b.getType().equals(mat))
+								blocks.remove(b);
+						}
+						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
+						//splits up the task into 250 'chunks' (sets 250 blocks at a time)
+						int divisor = 250;
 
-						//Gets all of the blocks (since we have 'chunked' them together
-						//get the 'chunked' blocks
-						final List<Block> blocksList = blocks.subList(i, i + divisor);
+						//Clean up the rest of the blocks which didn't get finished
+						//E.g. we have 104 blocks, 4 of them won't be set since
+						//104 divided by 100 = 1 (remainder 4)
+						for (Block b : blocks.subList((blocks.size() - divisor) + (blocks.size() % divisor), blocks.size()))
+							b.setType(mat);
 
-						//Use a delayed task to set the blocks. Setting them all at once
-						//creates lots of server lag for more blocks.
-						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+						//advanced for loop. Don't panic, it just loops through all of the blocks.
+						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
 
-							@Override
-							public void run() {
-								//Sets the blocks.
-								for (Block b : blocksList)
-									b.setType(mat);
-							}
-							//Uses some maths to calculate when to do the next delayed task
-						}, (i / divisor) * 5);
-					}
+							//Gets all of the blocks (since we have 'chunked' them together
+							//get the 'chunked' blocks
+							final List<Block> blocksList = blocks.subList(i, i + divisor);
 
-					//We're inside a switch statement. We exit it by using break (advanced)
-					break;
+							//Use a delayed task to set the blocks. Setting them all at once
+							//creates lots of server lag for more blocks.
+							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+
+								@Override
+								public void run() {
+									//Sets the blocks.
+									for (Block b : blocksList)
+										b.setType(mat);
+								}
+								//Uses some maths to calculate when to do the next delayed task
+							}, (i / divisor) * 5);
+						}
+
+						//We're inside a switch statement. We exit it by using break (advanced)
+						break;
 				}
 		} catch (Exception e) {
 		}

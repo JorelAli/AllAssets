@@ -48,19 +48,19 @@ public class CommandExtinguish {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				Sphere sphere = new Sphere(player.getLocation(), 120, Material.FIRE);
-				for (Block b : sphere.getBlocks())
-					b.setType(Material.AIR);
-				return;
-			case 1:
-				if (TextUtils.isInteger(args.getArgs()[0])) {
-					Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]), Material.FIRE);
-					for (Block b : sphereWithCustomRadius.getBlocks())
+				case 0:
+					Sphere sphere = new Sphere(player.getLocation(), 120, Material.FIRE);
+					for (Block b : sphere.getBlocks())
 						b.setType(Material.AIR);
-				} else
-					ErrorUtils.notAnInteger(args.getSender());
-				return;
+					return;
+				case 1:
+					if (TextUtils.isInteger(args.getArgs()[0])) {
+						Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]), Material.FIRE);
+						for (Block b : sphereWithCustomRadius.getBlocks())
+							b.setType(Material.AIR);
+					} else
+						ErrorUtils.notAnInteger(args.getSender());
+					return;
 			}
 			ErrorUtils.tooManyArguments(player);
 		}

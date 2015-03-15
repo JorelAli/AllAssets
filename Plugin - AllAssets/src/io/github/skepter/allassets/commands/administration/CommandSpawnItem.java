@@ -56,17 +56,17 @@ public class CommandSpawnItem {
 		if (player != null) {
 
 			switch (args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				break;
-			case 1:
-				ItemStack is = getItem(args.getArgs()[0]);
-				if (is != null) {
-					player.getInventory().addItem(is);
-					player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
-				} else
-					ErrorUtils.error(player, "Item not found");
-				return;
+				case 0:
+					printHelp(player);
+					break;
+				case 1:
+					ItemStack is = getItem(args.getArgs()[0]);
+					if (is != null) {
+						player.getInventory().addItem(is);
+						player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
+					} else
+						ErrorUtils.error(player, "Item not found");
+					return;
 
 			}
 			return;

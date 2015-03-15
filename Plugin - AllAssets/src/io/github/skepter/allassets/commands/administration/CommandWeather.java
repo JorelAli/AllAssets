@@ -50,49 +50,49 @@ public class CommandWeather {
 			}
 			if (args.getArgs().length == 1)
 				switch (args.getArgs()[0].toLowerCase()) {
-				case "downfall":
-				case "rain":
-					player.getWorld().setStorm(true);
-					player.getWorld().setThundering(false);
-					player.sendMessage(Strings.TITLE + "Weather set to downfall");
-					break;
-				case "clear":
-				case "sun":
-					player.getWorld().setStorm(false);
-					player.getWorld().setThundering(false);
-					player.sendMessage(Strings.TITLE + "Weather set to clear");
-					break;
-				case "thunder":
-					player.getWorld().setThundering(true);
-					player.sendMessage(Strings.TITLE + "Weather set to thunder");
-					break;
+					case "downfall":
+					case "rain":
+						player.getWorld().setStorm(true);
+						player.getWorld().setThundering(false);
+						player.sendMessage(Strings.TITLE + "Weather set to downfall");
+						break;
+					case "clear":
+					case "sun":
+						player.getWorld().setStorm(false);
+						player.getWorld().setThundering(false);
+						player.sendMessage(Strings.TITLE + "Weather set to clear");
+						break;
+					case "thunder":
+						player.getWorld().setThundering(true);
+						player.sendMessage(Strings.TITLE + "Weather set to thunder");
+						break;
 				}
 			return;
 		} else {
 			if (args.getArgs().length == 1)
 				switch (args.getArgs()[0].toLowerCase()) {
-				case "downfall":
-				case "rain":
-					for (final World world : Bukkit.getWorlds()) {
-						world.setStorm(true);
-						world.setThundering(false);
-						args.getSender().sendMessage(Strings.TITLE + "Weather set to downfall");
-						break;
-					}
-				case "clear":
-				case "sun":
-					for (final World world : Bukkit.getWorlds()) {
-						world.setStorm(false);
-						world.setThundering(false);
-						args.getSender().sendMessage(Strings.TITLE + "Weather set to clear");
-						break;
-					}
-				case "thunder":
-					for (final World world : Bukkit.getWorlds()) {
-						world.setThundering(true);
-						args.getSender().sendMessage(Strings.TITLE + "Weather set to thunder");
-						break;
-					}
+					case "downfall":
+					case "rain":
+						for (final World world : Bukkit.getWorlds()) {
+							world.setStorm(true);
+							world.setThundering(false);
+							args.getSender().sendMessage(Strings.TITLE + "Weather set to downfall");
+							break;
+						}
+					case "clear":
+					case "sun":
+						for (final World world : Bukkit.getWorlds()) {
+							world.setStorm(false);
+							world.setThundering(false);
+							args.getSender().sendMessage(Strings.TITLE + "Weather set to clear");
+							break;
+						}
+					case "thunder":
+						for (final World world : Bukkit.getWorlds()) {
+							world.setThundering(true);
+							args.getSender().sendMessage(Strings.TITLE + "Weather set to thunder");
+							break;
+						}
 				}
 			return;
 		}

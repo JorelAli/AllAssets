@@ -111,6 +111,6 @@ public class CommandFriend implements Listener {
 
 	@Help(name = "Friend")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Friend", "/friend add <player> - adds <player> as a friend",  "/friend list - lists your friends");
+		TextUtils.printHelp(sender, "Friend", "/friend add <player> - adds <player> as a friend", "/friend list - lists your friends");
 	}
 }

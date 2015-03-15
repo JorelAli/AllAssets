@@ -48,7 +48,7 @@ public class AnnouncerTask implements Runnable {
 				count = 0;
 				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getAnnouncer(count)));
 			}
-			
+
 	}
 
 	private String getAnnouncer(final int ID) {

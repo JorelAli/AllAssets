@@ -34,7 +34,7 @@ public abstract class CustomItemStack {
 	public ItemStack getItemStack() {
 		return is;
 	}
-	
+
 	public void setItemStack(ItemStack is) {
 		this.is = is;
 	}
@@ -44,11 +44,11 @@ public abstract class CustomItemStack {
 	public CustomInventory getCustomInventory() {
 		return inv;
 	}
-	
+
 	public void setInventory(CustomInventory inv) {
 		this.inv = inv;
 	}
-	
+
 	public void updateInventory(Player player) {
 		int slot = Utils.reverse(getCustomInventory().getItemMap()).get(this);
 		getCustomInventory().getInventory().setItem(slot, getItemStack());

@@ -86,7 +86,7 @@ public class EnchantmentInventories {
 		final ItemStack aquaaffinity = new ItemStack(Material.DIAMOND_HELMET);
 		aquaaffinity.addUnsafeEnchantment(Enchantment.WATER_WORKER, 1);
 		map.put(14, aquaaffinity);
-		
+
 		map.put(52, new ItemBuilder(Material.ARROW).setDisplayName(Strings.HOUSE_STYLE_COLOR + "Previous Page").addGlow().build());
 		map.put(53, new ItemBuilder(Material.ARROW).setDisplayName(Strings.HOUSE_STYLE_COLOR + "Next Page").addGlow().build());
 

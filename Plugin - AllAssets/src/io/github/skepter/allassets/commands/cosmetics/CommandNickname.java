@@ -48,18 +48,18 @@ public class CommandNickname {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				if (!player.getCustomName().equals(player.getName())) {
-					player.setCustomName(player.getName());
-					player.sendMessage(Strings.TITLE + "Removed your nickname");
-				}
-				printHelp(player);
-				return;
-			case 1:
-				String username = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
-				player.setCustomName(ChatColor.translateAlternateColorCodes('&', username));
-				player.sendMessage(Strings.TITLE + "Set your nickname to" + ChatColor.translateAlternateColorCodes('&', username));
-				player.setCustomNameVisible(true);
+				case 0:
+					if (!player.getCustomName().equals(player.getName())) {
+						player.setCustomName(player.getName());
+						player.sendMessage(Strings.TITLE + "Removed your nickname");
+					}
+					printHelp(player);
+					return;
+				case 1:
+					String username = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+					player.setCustomName(ChatColor.translateAlternateColorCodes('&', username));
+					player.sendMessage(Strings.TITLE + "Set your nickname to" + ChatColor.translateAlternateColorCodes('&', username));
+					player.setCustomNameVisible(true);
 			}
 		}
 		return;

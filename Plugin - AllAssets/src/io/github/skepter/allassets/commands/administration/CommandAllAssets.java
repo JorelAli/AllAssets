@@ -98,8 +98,8 @@ public class CommandAllAssets {
 		//		Bukkit.getPluginManager().disablePlugin(AllAssets.instance());
 		//		return;
 	}
-	
-	@Help(name="AllAssets")
+
+	@Help(name = "AllAssets")
 	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "AllAssets", "/allassets commands - shows a list of commands", "/allassets reload - reloads the entire plugin");
 	}

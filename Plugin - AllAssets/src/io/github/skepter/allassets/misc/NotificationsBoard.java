@@ -50,10 +50,10 @@ public class NotificationsBoard {
 	public NotificationsBoard(final Player player) {
 		this.player = player;
 	}
-	
+
 	@Deprecated
 	public static void updateAll() {
-		for(Player p : Bukkit.getOnlinePlayers()) {
+		for (Player p : Bukkit.getOnlinePlayers()) {
 			new NotificationsBoard(p).updateBoard();
 		}
 	}
@@ -87,7 +87,7 @@ public class NotificationsBoard {
 	public static void addGriefLog() {
 		griefLogCount++;
 	}
-	
+
 	public static void clearSpamLogs() {
 		spamLogCount = 0;
 	}

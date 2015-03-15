@@ -96,7 +96,7 @@ public class CommandBind implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		
+
 		ItemBuilder builder = new ItemBuilder(player.getItemInHand());
 		final List<String> lore = builder.getLore();
 		if (!TextUtils.isInteger(args.getArgs()[0])) {

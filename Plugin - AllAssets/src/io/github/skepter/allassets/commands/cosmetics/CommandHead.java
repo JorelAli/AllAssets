@@ -50,28 +50,28 @@ public class CommandHead {
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			switch(args.getArgs().length) {
-			case 0:
-				printHelp(player);
-				return;
-			case 1:
-				ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-				SkullMeta skull = (SkullMeta) head.getItemMeta();
-				skull.setOwner(args.getArgs()[0]);
-				head.setItemMeta(skull);
-				player.getInventory().addItem(head);
-				player.updateInventory();
-				player.sendMessage(Strings.TITLE + "Spawned in " + args.getArgs()[0] + "'s head");
-				return;
-			default:
-				ErrorUtils.tooManyArguments(player);
-				return;
+			switch (args.getArgs().length) {
+				case 0:
+					printHelp(player);
+					return;
+				case 1:
+					ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+					SkullMeta skull = (SkullMeta) head.getItemMeta();
+					skull.setOwner(args.getArgs()[0]);
+					head.setItemMeta(skull);
+					player.getInventory().addItem(head);
+					player.updateInventory();
+					player.sendMessage(Strings.TITLE + "Spawned in " + args.getArgs()[0] + "'s head");
+					return;
+				default:
+					ErrorUtils.tooManyArguments(player);
+					return;
 			}
 		}
 		return;
 	}
-	
-	@Help(name="Head")
+
+	@Help(name = "Head")
 	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "Head", "/head <player> - spawns in <player>'s head");
 	}

@@ -55,26 +55,26 @@ public class PacketBuilder {
 				direction = PacketDirection.SERVER_TO_CLIENT;
 
 			switch (type) {
-			case PLAY_IN_CLIENT_COMMAND:
-				packet = utils.emptyPacketPlayInClientCommand;
-				break;
-			case PLAY_OUT_ANIMATION:
-				packet = utils.emptyPacketPlayOutAnimation;
-				break;
-			case PLAY_OUT_BED:
-				packet = utils.emptyPacketPlayOutBed;
-				break;
-			case PLAY_OUT_CHAT:
-				packet = utils.emptyPacketPlayOutChat;
-				break;
-			case PLAY_OUT_NAMED_ENTITY_SPAWN:
-				packet = utils.emptyPacketPlayOutNamedEntitySpawn;
-				break;
-			case PLAY_OUT_OPEN_WINDOW:
-				packet = utils.emptyPacketPlayOutOpenWindow;
-				break;
-			default:
-				break;
+				case PLAY_IN_CLIENT_COMMAND:
+					packet = utils.emptyPacketPlayInClientCommand;
+					break;
+				case PLAY_OUT_ANIMATION:
+					packet = utils.emptyPacketPlayOutAnimation;
+					break;
+				case PLAY_OUT_BED:
+					packet = utils.emptyPacketPlayOutBed;
+					break;
+				case PLAY_OUT_CHAT:
+					packet = utils.emptyPacketPlayOutChat;
+					break;
+				case PLAY_OUT_NAMED_ENTITY_SPAWN:
+					packet = utils.emptyPacketPlayOutNamedEntitySpawn;
+					break;
+				case PLAY_OUT_OPEN_WINDOW:
+					packet = utils.emptyPacketPlayOutOpenWindow;
+					break;
+				default:
+					break;
 			}
 
 			packet = packet.getClass().getConstructor().newInstance();
@@ -100,13 +100,12 @@ public class PacketBuilder {
 		return builder;
 	}
 
-	/**
-	 * Sets 3 parameters to a location
+	/** Sets 3 parameters to a location
+	 * 
 	 * @param x - the name of the x field
 	 * @param y - the name of the y field
 	 * @param z - the name of the z field
-	 * @param data - the Location object.
-	 */
+	 * @param data - the Location object. */
 	public PacketBuilder setLocation(final String x, final String y, final String z, final Location data) {
 		setInt(x, (int) data.getX());
 		setInt(y, (int) data.getY());

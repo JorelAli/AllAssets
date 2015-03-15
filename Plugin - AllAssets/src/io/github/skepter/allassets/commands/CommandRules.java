@@ -53,7 +53,7 @@ public class CommandRules {
 	}
 
 	/* Add Rules remove */
-	
+
 	/* By having the name of the command followed by a . and then another word, it can
 	 * act as a new command 'argument'. For example, if the user types /rules add, it would
 	 * execute this code. The arguments start from 0 again, so 

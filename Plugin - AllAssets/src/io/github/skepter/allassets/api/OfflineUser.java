@@ -37,7 +37,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
 
 public class OfflineUser {
-	
+
 	OfflinePlayer player;
 	PlayerData playerData;
 
@@ -67,7 +67,7 @@ public class OfflineUser {
 		}
 		playerData = new PlayerData(player);
 	}
-	
+
 	public OfflinePlayer getPlayer() {
 		return player;
 	}
@@ -200,7 +200,7 @@ public class OfflineUser {
 	public List<UUID> getFriendList() {
 		List<String> str = playerData.getDataFile().getStringList("friends");
 		List<UUID> list = new ArrayList<UUID>();
-		for(String s : str) {
+		for (String s : str) {
 			list.add(UUID.fromString(s));
 		}
 		return list;

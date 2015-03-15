@@ -41,11 +41,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-/**
- * Retrieves UUID's from the UUIDMap.yml file 
- * @author Skepter
- *
- */
+/** Retrieves UUID's from the UUIDMap.yml file
+ * 
+ * @author Skepter */
 public class UUIDData {
 
 	private static FileConfiguration dataFile = null;

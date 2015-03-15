@@ -40,7 +40,7 @@ public class PlayerGetter {
 		}
 		return player;
 	}
-	
+
 	public static Player getTarget(CommandSender player, String playerName) {
 		Player target = null;
 		try {
@@ -50,5 +50,5 @@ public class PlayerGetter {
 		}
 		return target;
 	}
-	
+
 }

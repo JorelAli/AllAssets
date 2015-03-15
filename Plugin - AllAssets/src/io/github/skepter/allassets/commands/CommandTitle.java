@@ -53,9 +53,8 @@ public class CommandTitle {
 		return;
 	}
 
-	@Help(name="Title")
+	@Help(name = "Title")
 	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "Title", "/title <message> - broadcast <message>");
 	}
 }
-

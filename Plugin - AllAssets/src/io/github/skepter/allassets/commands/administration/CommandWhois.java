@@ -50,21 +50,21 @@ public class CommandWhois {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
-			case 0:
-				printHelp(args.getSender());
-				return;
-			case 1:
-				Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-				User user = new User(target);
-				player.sendMessage(TextUtils.title("Whois " + target.getName()));
-				TextUtils.printInformation(player, "UUID", SeperatorType.COLON, target.getUniqueId().toString());
-				TextUtils.printInformation(player, "Total time played", SeperatorType.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
-				TextUtils.printInformation(player, "Has godmode", SeperatorType.COLON, TextUtils.booleanToString(CommandGod.players.contains(target.getUniqueId())));
-				TextUtils.printInformation(player, "Is viewing console", SeperatorType.COLON, TextUtils.booleanToString(CommandConsoleLog.players.contains(target.getUniqueId())));
-				TextUtils.printInformation(player, "Has fly mode", SeperatorType.COLON, TextUtils.booleanToString(target.getAllowFlight()));
-				TextUtils.printInformation(player, "Gamemode", SeperatorType.COLON, TextUtils.capitalize(target.getGameMode().name().toLowerCase()));
-				TextUtils.printInformation(player, "Is op", SeperatorType.COLON, TextUtils.booleanToString(target.isOp()));
-				TextUtils.printInformation(player, "Is AFK", SeperatorType.COLON, TextUtils.booleanToString(user.isAFK()));
+				case 0:
+					printHelp(args.getSender());
+					return;
+				case 1:
+					Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
+					User user = new User(target);
+					player.sendMessage(TextUtils.title("Whois " + target.getName()));
+					TextUtils.printInformation(player, "UUID", SeperatorType.COLON, target.getUniqueId().toString());
+					TextUtils.printInformation(player, "Total time played", SeperatorType.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
+					TextUtils.printInformation(player, "Has godmode", SeperatorType.COLON, TextUtils.booleanToString(CommandGod.players.contains(target.getUniqueId())));
+					TextUtils.printInformation(player, "Is viewing console", SeperatorType.COLON, TextUtils.booleanToString(CommandConsoleLog.players.contains(target.getUniqueId())));
+					TextUtils.printInformation(player, "Has fly mode", SeperatorType.COLON, TextUtils.booleanToString(target.getAllowFlight()));
+					TextUtils.printInformation(player, "Gamemode", SeperatorType.COLON, TextUtils.capitalize(target.getGameMode().name().toLowerCase()));
+					TextUtils.printInformation(player, "Is op", SeperatorType.COLON, TextUtils.booleanToString(target.isOp()));
+					TextUtils.printInformation(player, "Is AFK", SeperatorType.COLON, TextUtils.booleanToString(user.isAFK()));
 			}
 		}
 		return;

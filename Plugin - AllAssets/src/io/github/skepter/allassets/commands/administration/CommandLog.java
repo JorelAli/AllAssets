@@ -77,19 +77,19 @@ public class CommandLog {
 		final LogEvent event = new LogEvent(s, type);
 		List<String> log = null;
 		switch (type) {
-		case CHAT:
-			log = chatLog;
-			break;
-		case ERROR:
-			log = errorLog;
-			break;
-		case GRIEF:
-			log = griefLog;
-			break;
-		case OTHER:
-		default:
-			log = otherLog;
-			break;
+			case CHAT:
+				log = chatLog;
+				break;
+			case ERROR:
+				log = errorLog;
+				break;
+			case GRIEF:
+				log = griefLog;
+				break;
+			case OTHER:
+			default:
+				log = otherLog;
+				break;
 		}
 		Bukkit.getServer().getPluginManager().callEvent(event);
 		log.add(s);

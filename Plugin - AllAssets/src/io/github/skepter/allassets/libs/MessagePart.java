@@ -54,15 +54,15 @@ final class MessagePart {
 			for (final ChatColor style : styles) {
 				String styleName;
 				switch (style) {
-				case MAGIC:
-					styleName = "obfuscated";
-					break;
-				case UNDERLINE:
-					styleName = "underlined";
-					break;
-				default:
-					styleName = style.name().toLowerCase();
-					break;
+					case MAGIC:
+						styleName = "obfuscated";
+						break;
+					case UNDERLINE:
+						styleName = "underlined";
+						break;
+					default:
+						styleName = style.name().toLowerCase();
+						break;
 				}
 				json.name(styleName).value(true);
 			}

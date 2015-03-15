@@ -62,7 +62,7 @@ public class CustomConfig {
 				CommandLog.addLog("Error saving data file for " + usage + "! ", LogType.ERROR);
 			}
 	}
-	
+
 	public File getFile() {
 		return dataFile;
 	}
