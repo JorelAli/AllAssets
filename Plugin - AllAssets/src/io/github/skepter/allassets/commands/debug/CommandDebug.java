@@ -272,12 +272,12 @@ public class CommandDebug implements Listener {
 				//If they type /debug we set
 					case "set":
 						//gets all of the blocks between the two points
-						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-
-						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
+						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()), mat);
 						//splits up the task into 250 'chunks' (sets 250 blocks at a time)
 						int divisor = 250;
+
+						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 
 						//Clean up the rest of the blocks which didn't get finished
 						//E.g. we have 255 blocks, 5 of them won't be set since
