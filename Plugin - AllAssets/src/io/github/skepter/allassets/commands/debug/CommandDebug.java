@@ -229,8 +229,18 @@ public class CommandDebug implements Listener {
 		if (wePlayers.contains(e.getPlayer().getUniqueId())) {
 			int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
 			switch (e.getAction()) {
+				case LEFT_CLICK_AIR:
+					pos1.put(e.getPlayer().getUniqueId(), PlayerUtils.getTargetBlock(e.getPlayer()).getLocation());
+					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+					e.setCancelled(true);
+					break;
 				case LEFT_CLICK_BLOCK:
 					pos1.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+					e.setCancelled(true);
+					break;
+				case RIGHT_CLICK_AIR:
+					pos2.put(e.getPlayer().getUniqueId(), PlayerUtils.getTargetBlock(e.getPlayer()).getLocation());
 					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
 					e.setCancelled(true);
 					break;
