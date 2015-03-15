@@ -273,17 +273,24 @@ public class CommandDebug implements Listener {
 				case "set":
 					//gets all of the blocks between the two points
 					List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
-					args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize( Material.getMaterial(Integer.parseInt(args.getArgs()[1])).name().toLowerCase()));
+					final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
+					
+					//Removes unnecessary blocks to speed up process :D
+					for (Block b : blocks) {
+						if (b.getType().equals(mat))
+							blocks.remove(b);
+					}
+					args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
 					//splits up the task into 250 'chunks' (sets 250 blocks at a time)
 					int divisor = 250;
-					
+
 					//advanced for loop. Don't panic, it just loops through all of the blocks.
 					for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-						
+
 						//Gets all of the blocks (since we have 'chunked' them together
 						//get the 'chunked' blocks
 						final List<Block> blocksList = blocks.subList(i, i + divisor);
-						
+
 						//Use a delayed task to set the blocks. Setting them all at once
 						//creates lots of server lag for more blocks.
 						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
@@ -292,18 +299,18 @@ public class CommandDebug implements Listener {
 							public void run() {
 								//Sets the blocks.
 								for (Block b : blocksList)
-									b.setType(Material.getMaterial(Integer.parseInt(args.getArgs()[1])));
+									b.setType(mat);
 							}
 							//Uses some maths to calculate when to do the next delayed task
 						}, (i / divisor) * 5);
 					}
-					
+
 					//Clean up the rest of the blocks which didn't get finished
 					//E.g. we have 104 blocks, 4 of them won't be set since
 					//104 divided by 100 = 1 (remainder 4)
 					for (Block b : blocks.subList(blocks.size() - divisor, blocks.size()))
-						b.setType(Material.getMaterial(Integer.parseInt(args.getArgs()[1])));
-					
+						b.setType(mat);
+
 					//We're inside a switch statement. We exit it by using break (advanced)
 					break;
 				}
