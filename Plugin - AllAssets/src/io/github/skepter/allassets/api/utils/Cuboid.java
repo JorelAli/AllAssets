@@ -49,22 +49,24 @@ public class Cuboid {
 							blocks.add(loc1.getWorld().getBlockAt(x, y, z));
 		return blocks;
 	}
-	
-	/**
-	 * Gets information for WE regen
-	 */
+
+	/** Gets information for WE regen */
 	public static List<Block> getChunkData(Location loc1, Location loc2) {
 		List<Block> blocks = new ArrayList<Block>();
 
 		int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
 		int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
 
+		int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		int y = topBlockY - bottomBlockY;
+
 		int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
 		int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
 
 		for (int x = bottomBlockX; x <= topBlockX; x++)
 			for (int z = bottomBlockZ; z <= topBlockZ; z++)
-							blocks.add(loc1.getWorld().getBlockAt(x, 0, z));
+				blocks.add(loc1.getWorld().getBlockAt(x, y, z));
 		return blocks;
 	}
 }
