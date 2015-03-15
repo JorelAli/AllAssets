@@ -325,12 +325,14 @@ public class CommandDebug implements Listener {
 						break;
 					}
 					//must find more efficient method.
-//					case "regen":
-//						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
-//						for (Block b : blocks) {
-//							Chunk c = args.getPlayer().getWorld().getChunkAt(b);
-//							args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
-//						}
+					case "regen":
+						List<Block> blocks = Cuboid.getChunkData(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+						Set<Chunk> chunks = new HashSet<Chunk>();
+						for (Block b : blocks) {
+							chunks.add(args.getPlayer().getWorld().getChunkAt(b));
+						}
+						for (Chunk c : chunks)
+							args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
 				}
 		} catch (Exception e) {
 		}
