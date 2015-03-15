@@ -31,6 +31,7 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.api.CustomInventory;
+import io.github.skepter.allassets.api.utils.Cuboid;
 import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.reflection.ReflectionPlayer;
@@ -60,12 +61,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -76,6 +80,7 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -208,6 +213,105 @@ public class CommandDebug implements Listener {
 			}
 		});
 	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Worldedit like function																																				   //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//Simple toggles and maps to store player information 
+	private List<UUID> wePlayers = new ArrayList<UUID>();
+	private Map<UUID, Location> pos1 = new HashMap<UUID, Location>();
+	private Map<UUID, Location> pos2 = new HashMap<UUID, Location>();
+
+	//Adds the positions to the maps when they click whatever.
+	@EventHandler
+	public void we(PlayerInteractEvent e) {
+		if (wePlayers.contains(e.getPlayer().getUniqueId())) {
+			int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
+			switch (e.getAction()) {
+			case LEFT_CLICK_BLOCK:
+				pos1.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+				e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+				e.setCancelled(true);
+				break;
+			case RIGHT_CLICK_BLOCK:
+				pos2.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+				e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
+				e.setCancelled(true);
+				break;
+			default:
+				break;
+
+			}
+		}
+	}
+
+	//main command
+	@SuppressWarnings("deprecation")
+	//Since we have a . here, it counts it as a separate argument and resets the args.
+	//Only available in AllAssets. Don't worry too much about it
+	//This changes the command from /debug <info> to /debug we <info>
+	@CommandHandler(name = "debug.we", permission = "debug", description = "WorldEdit")
+	public void we(final CommandArgs args) {
+		try {
+			//Toggles if they have worldedit mode on or not
+			if (args.getArgs().length == 0)
+				if (wePlayers.contains(args.getPlayer().getUniqueId())) {
+					wePlayers.remove(args.getPlayer().getUniqueId());
+					args.getPlayer().sendMessage("WorldEdit mode off");
+					return;
+				} else {
+					wePlayers.add(args.getPlayer().getUniqueId());
+					args.getPlayer().sendMessage("WorldEdit mode on");
+					return;
+				}
+			else
+				//sets the blocks. Only has the (//set) feature as of now
+				//Uses a switch statement (in other words, if the player types /debug we set)
+				switch (args.getArgs()[0]) {
+				//If they type /debug we set
+				case "set":
+					//gets all of the blocks between the two points
+					List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+					
+					//splits up the task into 100 'chunks' (sets 100 blocks at a time)
+					int divisor = 100;
+					
+					//advanced for loop. Don't panic, it just loops through all of the blocks.
+					for (int i = 0; i < blocks.size() - divisor; i += divisor) {
+						
+						//Gets all of the blocks (since we have 'chunked' them together
+						//get the 'chunked' blocks
+						final List<Block> blocksList = blocks.subList(i, i + divisor);
+						
+						//Use a delayed task to set the blocks. Setting them all at once
+						//creates lots of server lag for more blocks.
+						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+
+							@Override
+							public void run() {
+								//Sets the blocks.
+								for (Block b : blocksList)
+									b.setType(Material.getMaterial(Integer.parseInt(args.getArgs()[1])));
+							}
+							//Uses some maths to calculate when to do the next delayed task
+						}, (i / divisor) * 5);
+					}
+					
+					//Clean up the rest of the blocks which didn't get finished
+					//E.g. we have 104 blocks, 4 of them won't be set since
+					//104 divided by 100 = 1 (remainder 4)
+					for (Block b : blocks.subList(blocks.size() - divisor, blocks.size()))
+						b.setType(Material.getMaterial(Integer.parseInt(args.getArgs()[1])));
+					
+					//We're inside a switch statement. We exit it by using break (advanced)
+					break;
+				}
+		} catch (Exception e) {
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
@@ -492,6 +596,8 @@ public class CommandDebug implements Listener {
 		list.add("testdecrypt");
 		list.add("testid");
 		list.add("set");
+		list.add("regen");
+		list.add("inv");
 		return list;
 	}
 
