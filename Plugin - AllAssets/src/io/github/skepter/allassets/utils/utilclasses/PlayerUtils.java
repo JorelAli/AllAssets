@@ -53,17 +53,9 @@ public class PlayerUtils {
 		return target;
 	}
 
-	/** Gets the target block. Range defaults to 256 */
+	/** Gets the target block. Range defaults to 120 */
 	public static Block getTargetBlock(final Player player) {
-		BlockIterator itr = new BlockIterator(player, 256);
-		Block target = itr.next();
-		while (itr.hasNext()) {
-			target = itr.next();
-			if (target.getType().equals(Material.AIR))
-				continue;
-			break;
-		}
-		return target;
+		return getTargetBlock(player, 120);
 	}
 
 	/** Gets the player from the name. Returns null if player not found */
