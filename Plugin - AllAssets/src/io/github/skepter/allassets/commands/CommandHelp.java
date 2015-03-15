@@ -30,7 +30,9 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.utils.DoubleMap;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -58,8 +60,8 @@ public class CommandHelp {
 		//check plugin info
 		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
-				//TODO: format this
-				args.getSender().sendMessage(plugin.getDescription().getDescription());
+				args.getSender().sendMessage(TextUtils.title(plugin.getName()));
+				args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + plugin.getDescription().getDescription());
 				return;
 			}
 
