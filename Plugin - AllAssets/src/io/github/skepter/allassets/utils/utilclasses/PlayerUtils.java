@@ -63,7 +63,19 @@ public class PlayerUtils {
 	 * get(1) = farthest from player
 	 */
 	public static List<Block> getLastTwoTargetBlocks(final Player player) {
-		BlockIterator itr = new BlockIterator(player, 120);
+		return getLastTwoTargetBlocks(player, 120);
+	}
+	
+	/**
+	 * get(0) = closest to player
+	 * get(1) = farthest from player
+	 * 
+	 * If the range is -1, it will have pretty much no limit (15,000)
+	 */
+	public static List<Block> getLastTwoTargetBlocks(final Player player, int range) {
+		if(range == -1)
+			range = 15000;
+		BlockIterator itr = new BlockIterator(player, range);
 		Block target = itr.next();
 		Block previous = null;
 		while (itr.hasNext()) {

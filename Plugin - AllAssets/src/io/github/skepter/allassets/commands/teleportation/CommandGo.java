@@ -25,10 +25,12 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
-import org.bukkit.Location;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -42,11 +44,16 @@ public class CommandGo {
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			Block b = PlayerUtils.getLastTwoTargetBlocks(player).get(1);
-			Location location = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0))).getLocation();
-			new LocationUtils(location).teleport(player);
+			Block b = PlayerUtils.getLastTwoTargetBlocks(player, -1).get(1);
+			Block target = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player, -1).get(0)));
+			if (target.getType().equals(Material.AIR)) {
+				if (b.getType().equals(Material.AIR) && !player.getGameMode().equals(GameMode.CREATIVE)) {
+					ErrorUtils.error(player, "Could not jump!");
+					return;
+				}
+			}
+			new LocationUtils(new LocationUtils(target.getLocation()).getCenter()).teleport(player);
 		}
 		return;
 	}
 }
-
