@@ -84,6 +84,7 @@ import io.github.skepter.allassets.commands.debug.CommandPing;
 import io.github.skepter.allassets.commands.economy.CommandBalance;
 import io.github.skepter.allassets.commands.economy.CommandBalancetop;
 import io.github.skepter.allassets.commands.fun.CommandDiscoArmor;
+import io.github.skepter.allassets.commands.fun.CommandDisguise;
 import io.github.skepter.allassets.commands.fun.CommandFakeDeop;
 import io.github.skepter.allassets.commands.fun.CommandFakeOp;
 import io.github.skepter.allassets.commands.fun.CommandLaunch;
@@ -159,6 +160,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @BukkitDev Desht - ExperienceUtils
  * @BukkitDev DPOHVAR - ReflectionUtils
  * @BukkitDev RainoBot97 - SimpleScoreboard
+ * @BukkitDev mine-cart - DisguiseLib (fillpant)
  * @idkwho - TabText
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
@@ -240,6 +242,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandUnban(framework);
 		new CommandBroadcast(framework);
 		new CommandHeal(framework);
+		new CommandDisguise(framework);
 		r(new CommandBan(framework));
 		r(new BlockPoweredListener());
 	}

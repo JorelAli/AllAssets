@@ -86,7 +86,7 @@ public class CommandHelp {
 			for (final Object key : map.keySet())
 				if (String.valueOf(key).equals(lookup))
 					try {
-						((Method) map.getValue1(lookup)).invoke(map.getValue2(lookup), args.getSender());
+						map.getValue1(lookup).invoke(map.getValue2(lookup), args.getSender());
 						return;
 					} catch (final Exception e) {
 						e.printStackTrace();
