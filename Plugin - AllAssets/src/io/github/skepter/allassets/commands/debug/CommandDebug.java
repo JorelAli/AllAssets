@@ -283,6 +283,12 @@ public class CommandDebug implements Listener {
 					args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
 					//splits up the task into 250 'chunks' (sets 250 blocks at a time)
 					int divisor = 250;
+					
+					//Clean up the rest of the blocks which didn't get finished
+					//E.g. we have 104 blocks, 4 of them won't be set since
+					//104 divided by 100 = 1 (remainder 4)
+					for (Block b : blocks.subList((blocks.size() - divisor) + (blocks.size() % divisor), blocks.size()))
+						b.setType(mat);
 
 					//advanced for loop. Don't panic, it just loops through all of the blocks.
 					for (int i = 0; i < blocks.size() - divisor; i += divisor) {
@@ -305,12 +311,6 @@ public class CommandDebug implements Listener {
 						}, (i / divisor) * 5);
 					}
 
-					//Clean up the rest of the blocks which didn't get finished
-					//E.g. we have 104 blocks, 4 of them won't be set since
-					//104 divided by 100 = 1 (remainder 4)
-					for (Block b : blocks.subList(blocks.size() - divisor, blocks.size()))
-						b.setType(mat);
-
 					//We're inside a switch statement. We exit it by using break (advanced)
 					break;
 				}
@@ -318,7 +318,9 @@ public class CommandDebug implements Listener {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// End of Worldedit like function																																				   //
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
