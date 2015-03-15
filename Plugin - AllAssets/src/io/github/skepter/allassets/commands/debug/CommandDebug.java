@@ -270,7 +270,7 @@ public class CommandDebug implements Listener {
 				//Uses a switch statement (in other words, if the player types /debug we set)
 				switch (args.getArgs()[0]) {
 				//If they type /debug we set
-					case "set":
+					case "set": {
 						//gets all of the blocks between the two points
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()), mat);
@@ -323,6 +323,14 @@ public class CommandDebug implements Listener {
 
 						//We're inside a switch statement. We exit it by using break (advanced)
 						break;
+					}
+					//must find more efficient method.
+//					case "regen":
+//						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+//						for (Block b : blocks) {
+//							Chunk c = args.getPlayer().getWorld().getChunkAt(b);
+//							args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
+//						}
 				}
 		} catch (Exception e) {
 		}
