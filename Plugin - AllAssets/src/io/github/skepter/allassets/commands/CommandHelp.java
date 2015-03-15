@@ -57,42 +57,52 @@ public class CommandHelp {
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command")
 	public void onCommand(final CommandArgs args) {
-		//check plugin info
-		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
-			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
-				args.getSender().sendMessage(TextUtils.title(plugin.getName()));
-				String authors = "";
-				for (final String s : plugin.getDescription().getAuthors())
-					authors = authors + s + ", ";
-				if (authors.length() != 0)
-					authors = authors.substring(0, authors.length() - 2);
-				else
-					authors = "undefined";
-				TextUtils.printInformation(args.getSender(), "Authors", SeperatorType.COLON, authors);
-				TextUtils.printInformation(args.getSender(), "Version", SeperatorType.COLON, plugin.getDescription().getVersion());
-				TextUtils.printInformation(args.getSender(), "Description", SeperatorType.COLON, plugin.getDescription().getDescription());
-				return;
-			}
-
-		//check @Help annotations
-		final String lookup = args.getArgs()[0].toLowerCase();
-		for (final Object key : map.keySet())
-			if (String.valueOf(key).equals(lookup))
-				try {
-					((Method) map.getValue1(lookup)).invoke(map.getValue2(lookup), args.getSender());
+		switch(args.getArgs().length) {
+		case 0:
+			args.getSender().sendMessage(TextUtils.title("Help"));
+			for(Plugin plugin : Bukkit.getPluginManager().getPlugins())
+				TextUtils.printInformation(args.getSender(), plugin.getName(), SeperatorType.COLON, "Show information about " + plugin.getName());
+			break;
+		case 1:
+			//check plugin info
+			for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
+				if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
+					args.getSender().sendMessage(TextUtils.title(plugin.getName()));
+					String authors = "";
+					for (final String s : plugin.getDescription().getAuthors())
+						authors = authors + s + ", ";
+					if (authors.length() != 0)
+						authors = authors.substring(0, authors.length() - 2);
+					else
+						authors = "undefined";
+					TextUtils.printInformation(args.getSender(), "Authors", SeperatorType.COLON, authors);
+					TextUtils.printInformation(args.getSender(), "Version", SeperatorType.COLON, plugin.getDescription().getVersion());
+					TextUtils.printInformation(args.getSender(), "Description", SeperatorType.COLON, plugin.getDescription().getDescription());
 					return;
-				} catch (final Exception e) {
-					e.printStackTrace();
 				}
 
-		//check available helptopics
-		for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
-			if (topic.getName().equalsIgnoreCase(args.getArgs()[0])) {
-				args.getSender().sendMessage(topic.getFullText(args.getSender()));
-				return;
-			}
+			//check @Help annotations
+			final String lookup = args.getArgs()[0].toLowerCase();
+			for (final Object key : map.keySet())
+				if (String.valueOf(key).equals(lookup))
+					try {
+						((Method) map.getValue1(lookup)).invoke(map.getValue2(lookup), args.getSender());
+						return;
+					} catch (final Exception e) {
+						e.printStackTrace();
+					}
 
-		ErrorUtils.error(args.getSender(), "Could not find that!");
+			//check available helptopics
+			for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
+				if (topic.getName().equalsIgnoreCase(args.getArgs()[0])) {
+					args.getSender().sendMessage(topic.getFullText(args.getSender()));
+					return;
+				}
+
+			ErrorUtils.error(args.getSender(), "Could not find that!");
+			break;
+		}
+		
 		return;
 	}
 
