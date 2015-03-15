@@ -229,21 +229,25 @@ public class CommandDebug implements Listener {
 		if (wePlayers.contains(e.getPlayer().getUniqueId())) {
 			int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
 			switch (e.getAction()) {
-				case LEFT_CLICK_AIR:
-					pos1.put(e.getPlayer().getUniqueId(), PlayerUtils.getTargetBlock(e.getPlayer()).getLocation());
-					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+				case LEFT_CLICK_AIR: {
+					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
+					pos1.put(e.getPlayer().getUniqueId(), l);
+					e.getPlayer().sendMessage("pos1 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
 					e.setCancelled(true);
 					break;
+				}
 				case LEFT_CLICK_BLOCK:
 					pos1.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
 					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
 					e.setCancelled(true);
 					break;
-				case RIGHT_CLICK_AIR:
-					pos2.put(e.getPlayer().getUniqueId(), PlayerUtils.getTargetBlock(e.getPlayer()).getLocation());
-					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+				case RIGHT_CLICK_AIR: {
+					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
+					pos2.put(e.getPlayer().getUniqueId(), l);
+					e.getPlayer().sendMessage("pos2 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
 					e.setCancelled(true);
 					break;
+				}
 				case RIGHT_CLICK_BLOCK:
 					pos2.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
 					e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
