@@ -29,6 +29,7 @@ import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.libs.DisguiseLib;
 import io.github.skepter.allassets.libs.EntityDisguise;
 import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
@@ -63,6 +64,7 @@ public class CommandDisguise {
 						d.setLeggings(player.getInventory().getLeggings());
 						d.setBoots(player.getInventory().getBoots());
 						d.sendDisguise(Bukkit.getOnlinePlayers());
+						player.sendMessage(Strings.TITLE + "You have been disguised as a " + TextUtils.capitalize(d.getType().name().toLowerCase()));
 					} else
 						ErrorUtils.error(player, "That mob doesn't exist!");
 					return;
@@ -76,6 +78,7 @@ public class CommandDisguise {
 						d.setLeggings(player.getInventory().getLeggings());
 						d.setBoots(player.getInventory().getBoots());
 						d.sendDisguise(Bukkit.getOnlinePlayers());
+						player.sendMessage(Strings.TITLE + "You have been disguised as a " + TextUtils.capitalize(d.getType().name().toLowerCase()));
 					} else
 						ErrorUtils.error(player, "That mob doesn't exist!");
 					return;
