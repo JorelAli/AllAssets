@@ -30,9 +30,9 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.utils.DoubleMap;
-import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -61,7 +61,16 @@ public class CommandHelp {
 		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
 				args.getSender().sendMessage(TextUtils.title(plugin.getName()));
-				args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + plugin.getDescription().getDescription());
+				String authors = "";
+				for (final String s : plugin.getDescription().getAuthors())
+					authors = authors + s + ", ";
+				if (authors.length() != 0)
+					authors = authors.substring(0, authors.length() - 2);
+				else
+					authors = "undefined";
+				TextUtils.printInformation(args.getSender(), "Authors", SeperatorType.COLON, authors);
+				TextUtils.printInformation(args.getSender(), "Version", SeperatorType.COLON, plugin.getDescription().getVersion());
+				TextUtils.printInformation(args.getSender(), "Description", SeperatorType.COLON, plugin.getDescription().getDescription());
 				return;
 			}
 
