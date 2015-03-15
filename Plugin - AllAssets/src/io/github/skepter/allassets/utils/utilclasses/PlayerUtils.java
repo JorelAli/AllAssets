@@ -30,9 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import net.minecraft.server.v1_8_R1.Material;
-
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -53,7 +52,7 @@ public class PlayerUtils {
 		}
 		return target;
 	}
-	
+
 	/** Gets the target block. Range defaults to 256 */
 	public static Block getTargetBlock(final Player player) {
 		BlockIterator itr = new BlockIterator(player, 256);
