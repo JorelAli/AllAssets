@@ -289,6 +289,18 @@ public class CommandDebug implements Listener {
 							b.setType(mat);
 
 						//advanced for loop. Don't panic, it just loops through all of the blocks.
+						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									args.getPlayer().sendMessage(Strings.TITLE + "Complete!");
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+
+						}, (blocks.size() - divisor) / divisor * 5);
 						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
 
 							//Gets all of the blocks (since we have 'chunked' them together
