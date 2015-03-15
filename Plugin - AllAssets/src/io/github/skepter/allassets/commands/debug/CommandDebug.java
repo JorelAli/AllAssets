@@ -275,18 +275,13 @@ public class CommandDebug implements Listener {
 						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 
-						//Removes unnecessary blocks to speed up process :D
-						for (Block b : blocks)
-							if (b.getType().equals(mat))
-								blocks.remove(b);
-
 						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()));
-						//splits up the task into 100 'chunks' (sets 100 blocks at a time)
-						int divisor = 100;
+						//splits up the task into 250 'chunks' (sets 250 blocks at a time)
+						int divisor = 250;
 
 						//Clean up the rest of the blocks which didn't get finished
-						//E.g. we have 104 blocks, 4 of them won't be set since
-						//104 divided by 100 = 1 (remainder 4)
+						//E.g. we have 255 blocks, 5 of them won't be set since
+						//255 divided by 250 = 1 (remainder 5)
 						if (blocks.size() < divisor)
 							for (Block b : blocks)
 								b.setType(mat);
