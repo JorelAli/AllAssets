@@ -39,6 +39,7 @@ public class CommandHeal {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			player.setHealth(20D);
+			player.setFireTicks(0);
 			player.setFoodLevel(20);
 		}
 		return;

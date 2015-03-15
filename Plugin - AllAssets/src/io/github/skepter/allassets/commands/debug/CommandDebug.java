@@ -64,6 +64,7 @@ import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -216,7 +217,7 @@ public class CommandDebug implements Listener {
 		} catch (Exception e) {
 		}
 	}
-	
+
 	@CommandHandler(name = "debug.inv", permission = "debug", description = "Test the custom inventory")
 	public void inv(final CommandArgs args) {
 		try {
@@ -231,6 +232,15 @@ public class CommandDebug implements Listener {
 	public void velocity(final CommandArgs args) {
 		try {
 			args.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(args.getPlayer().getLocation(), PlayerUtils.getTargetBlock(args.getPlayer()).getLocation()).multiply(2));
+		} catch (Exception e) {
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@CommandHandler(name = "debug.set", permission = "debug", description = "Does something........")
+	public void set(final CommandArgs args) {
+		try {
+			args.getPlayer().sendBlockChange(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation(), Material.DIAMOND_BLOCK, (byte) 0);
 		} catch (Exception e) {
 		}
 	}
@@ -481,6 +491,7 @@ public class CommandDebug implements Listener {
 		list.add("testencrypt");
 		list.add("testdecrypt");
 		list.add("testid");
+		list.add("set");
 		return list;
 	}
 
