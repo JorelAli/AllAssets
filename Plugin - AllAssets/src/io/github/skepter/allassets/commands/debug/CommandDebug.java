@@ -273,9 +273,9 @@ public class CommandDebug implements Listener {
 				case "set":
 					//gets all of the blocks between the two points
 					List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
-					
-					//splits up the task into 100 'chunks' (sets 100 blocks at a time)
-					int divisor = 100;
+					args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize( Material.getMaterial(Integer.parseInt(args.getArgs()[1])).name().toLowerCase()));
+					//splits up the task into 250 'chunks' (sets 250 blocks at a time)
+					int divisor = 250;
 					
 					//advanced for loop. Don't panic, it just loops through all of the blocks.
 					for (int i = 0; i < blocks.size() - divisor; i += divisor) {
