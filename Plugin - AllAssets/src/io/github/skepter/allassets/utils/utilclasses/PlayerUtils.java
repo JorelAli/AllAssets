@@ -57,6 +57,27 @@ public class PlayerUtils {
 	public static Block getTargetBlock(final Player player) {
 		return getTargetBlock(player, 120);
 	}
+	
+	/**
+	 * get(0) = closest to player
+	 * get(1) = farthest from player
+	 */
+	public static List<Block> getLastTwoTargetBlocks(final Player player) {
+		BlockIterator itr = new BlockIterator(player, 120);
+		Block target = itr.next();
+		Block previous = null;
+		while (itr.hasNext()) {
+			previous = target;
+			target = itr.next();
+			if (target.getType().equals(Material.AIR))
+				continue;
+			break;
+		}
+		List<Block> blocks = new ArrayList<Block>();
+		blocks.add(previous);
+		blocks.add(target);
+		return blocks;
+	}
 
 	/** Gets the player from the name. Returns null if player not found */
 	public static Player getOnlinePlayerFromString(final String string) {
