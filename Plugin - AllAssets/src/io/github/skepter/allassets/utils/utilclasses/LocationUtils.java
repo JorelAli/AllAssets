@@ -31,6 +31,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 public class LocationUtils {
 
@@ -47,6 +48,16 @@ public class LocationUtils {
 			}
 		//nearbyEntities zombies etc.
 		return false;
+	}
+	
+	/**
+	 * Teleports a player, but keeps the pitch and yaw so they don't end up looking in some weird direction
+	 * @param location
+	 * @param player
+	 */
+	public static void teleport(final Location location, final Player player) {
+		Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
+		player.teleport(target);
 	}
 
 	public static List<Block> getCube(final Location origin, final int size) {

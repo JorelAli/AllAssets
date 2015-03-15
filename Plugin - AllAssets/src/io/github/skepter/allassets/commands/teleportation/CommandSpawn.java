@@ -29,8 +29,8 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class CommandSpawn {
@@ -43,8 +43,7 @@ public class CommandSpawn {
 	public void command(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			Location target = new Location(player.getWorld(), player.getWorld().getSpawnLocation().getX(), player.getWorld().getSpawnLocation().getY(), player.getWorld().getSpawnLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
-			player.teleport(target);
+			LocationUtils.teleport(player.getWorld().getSpawnLocation(), player);
 		}
 
 	}

@@ -1,14 +1,5 @@
-* Ban - I want a custom data file which stores the person 
-who banned the player as well as the banned player, along 
-with the reason for their ban (TextUtils.getMsgFromArgs() 
-and the CustomConfig class)
-
 * Broadcast - A really easy broadcast system. I want the 
 broadcast 'prefix' to be set in either the config.yml or 
 messages.yml. I haven't decided yet. Until then, keep it 
 hardcoded (String prefix = [THE PREFIX]) Put some color 
 into it :)
-
-* Go - A 'jump' command (similar to WorldEdit's compass which 
-teleports you directly to the location they are looking at 
-(player.getTargetBlock(new HashSet<Material>(), 256).getLocation())

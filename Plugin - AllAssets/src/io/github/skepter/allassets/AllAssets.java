@@ -33,6 +33,7 @@ import io.github.skepter.allassets.commandlisteners.CommandFriend;
 import io.github.skepter.allassets.commandlisteners.CommandGod;
 import io.github.skepter.allassets.commandlisteners.CommandSilence;
 import io.github.skepter.allassets.commandlisteners.CommandStaffChat;
+import io.github.skepter.allassets.commands.CommandBroadcast;
 import io.github.skepter.allassets.commands.CommandClear;
 import io.github.skepter.allassets.commands.CommandEnderchest;
 import io.github.skepter.allassets.commands.CommandGhost;
@@ -236,6 +237,7 @@ public class AllAssets extends JavaPlugin {
 		new CommandTitle(framework);
 		new CommandGo(framework);
 		new CommandUnban(framework);
+		new CommandBroadcast(framework);
 		r(new CommandBan(framework));
 		r(new BlockPoweredListener());
 	}

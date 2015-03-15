@@ -28,13 +28,13 @@ import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -56,8 +56,7 @@ public class CommandWorld {
 			case 1:
 				for (World world : Bukkit.getWorlds())
 					if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
-						Location target = new Location(world, world.getSpawnLocation().getX(), world.getSpawnLocation().getY(), world.getSpawnLocation().getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
-						player.teleport(target);
+						LocationUtils.teleport(world.getSpawnLocation(), player);
 						player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
 					}
 				return;

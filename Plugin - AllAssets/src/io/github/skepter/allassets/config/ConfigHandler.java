@@ -110,6 +110,7 @@ public class ConfigHandler {
 		config.set("debugMode", "false", "Enables debugging messages and features");
 		config.set("randomAnnouncer", "true", "Selects announcements at random");
 		config.set("announcerTime", "300", "The delay between each announcement in seconds");
+		config.set("broadcastPrefix", "&1[&bBroadcast&1]&b", "The prefix for broadcasts");
 	}
 
 	private static void createMessages() {

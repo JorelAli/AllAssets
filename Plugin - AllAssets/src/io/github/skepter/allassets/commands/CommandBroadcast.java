@@ -19,32 +19,38 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-package io.github.skepter.allassets.commands.teleportation;
+package io.github.skepter.allassets.commands;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
+import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 
-public class CommandGo {
+public class CommandBroadcast {
 
-	public CommandGo(final CommandFramework framework) {
+	public CommandBroadcast(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "go", aliases = { "jump", "j" }, permission = "go", description = "Teleport to where you are pointing")
+	@CommandHandler(name = "broadcast", aliases = { "bc" }, permission = "broadcast", description = "Broadcasts a message")
 	public void onCommand(final CommandArgs args) {
-		Player player = PlayerGetter.getPlayer(args);
-		if (player != null) {
-			Location targetLoc = PlayerUtils.getTargetBlock(player, 500).getLocation();
-			player.getWorld().strikeLightning(targetLoc);
-			player.teleport(new Location(player.getWorld(), targetLoc.getX(), targetLoc.getY(), targetLoc.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+		if (args.getArgs().length == 0) {
+			printHelp(args.getSender());
+			return;
+		} else {
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigHandler.config().getString("broadcastPrefix").trim() + " " + TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		}
 		return;
 	}
-}
 
+	@Help(name = "Broadcast")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Broadcast", "/broadcast <message> - broadcasts a message to the entire server");
+	}
+}

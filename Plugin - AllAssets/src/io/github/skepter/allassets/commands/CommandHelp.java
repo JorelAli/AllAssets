@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
+import org.bukkit.help.HelpTopic;
 import org.bukkit.plugin.Plugin;
 
 public class CommandHelp {
@@ -54,11 +55,15 @@ public class CommandHelp {
 
 	@CommandHandler(name = "help", permission = "help", description = "Shows help for a command")
 	public void onCommand(final CommandArgs args) {
+		//check plugin info
 		for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
-			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName()))
-				//parse plugin data
+			if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
+				//TODO: format this
+				args.getSender().sendMessage(plugin.getDescription().getDescription());
 				return;
+			}
 
+		//check @Help annotations
 		final String lookup = args.getArgs()[0].toLowerCase();
 		for (final Object key : map.keySet())
 			if (String.valueOf(key).equals(lookup))
@@ -69,18 +74,25 @@ public class CommandHelp {
 					e.printStackTrace();
 				}
 
+		//check available helptopics
+		for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
+			if (topic.getName().equalsIgnoreCase(args.getArgs()[0])) {
+				args.getSender().sendMessage(topic.getFullText(args.getSender()));
+				return;
+			}
+
 		ErrorUtils.error(args.getSender(), "Could not find that!");
 		return;
 	}
-	
-	@Completer(name="help")
+
+	@Completer(name = "help")
 	public List<String> onComplete(final CommandArgs args) {
 		List<String> helpTopics = new ArrayList<String>();
-		for(Entry<String, List<Object>> entry : map.entrySet()) {
+		for (Entry<String, List<Object>> entry : map.entrySet()) {
 			helpTopics.add(String.valueOf(entry.getKey()));
 		}
 		return helpTopics;
-		
+
 	}
 
 }
