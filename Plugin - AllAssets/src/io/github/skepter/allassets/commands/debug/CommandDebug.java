@@ -74,6 +74,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -226,6 +227,8 @@ public class CommandDebug implements Listener {
 	//Adds the positions to the maps when they click whatever.
 	@EventHandler
 	public void we(PlayerInteractEvent e) {
+		e.setUseInteractedBlock(Result.ALLOW);
+		e.setUseItemInHand(Result.ALLOW);
 		if (wePlayers.contains(e.getPlayer().getUniqueId())) {
 			switch (e.getAction()) {
 				case LEFT_CLICK_AIR: {
