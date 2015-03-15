@@ -1,0 +1,4 @@
+/debug we - turn on worldedit
+[left click] - set first position
+[right click] - set second position
+/debug we set <number> - sets all of the blocks between position 1 and position 2 to <number> (e.g. 1 = stone, 89 = glowstone)
