@@ -34,6 +34,8 @@ import io.github.skepter.allassets.api.CustomInventory;
 import io.github.skepter.allassets.api.utils.Cuboid;
 import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.reflection.PacketBuilder;
+import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 import io.github.skepter.allassets.reflection.ReflectionPlayer;
 import io.github.skepter.allassets.reflection.ReflectionUtils;
 import io.github.skepter.allassets.tasks.TPS;
@@ -74,6 +76,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -82,9 +85,12 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.help.HelpTopic;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 public class CommandDebug implements Listener {
 
@@ -366,6 +372,50 @@ public class CommandDebug implements Listener {
 		try {
 			Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
+		} catch (Exception e) {
+		}
+	}
+
+	private List<UUID> items = new ArrayList<UUID>();
+	private Map<UUID, Material> itemMap = new HashMap<UUID, Material>();
+
+	@EventHandler
+	public void onMove(PlayerMoveEvent event) {
+		if (items.contains(event.getPlayer().getUniqueId())) {
+			final WitherSkull base = event.getPlayer().getLocation().getWorld().spawn(event.getPlayer().getLocation(), WitherSkull.class);
+			base.setDirection(new Vector(0, 0, 0));
+			base.setVelocity(new Vector(0, 0, 0));
+			final Entity e = event.getPlayer().getLocation().getWorld().dropItem(event.getPlayer().getLocation(), new ItemStack(itemMap.get(event.getPlayer().getUniqueId())));
+			base.setPassenger(e);			
+			
+			for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+				PacketBuilder builder = new PacketBuilder(p, PacketType.PLAY_OUT_ENTITY_DESTROY);
+				builder.set("a", new int[] { base.getEntityId() });
+				builder.send();
+			}
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@CommandHandler(name = "debug.item", permission = "debug", description = "Makes items follow you")
+	public void item(final CommandArgs args) {
+		try {
+			switch (args.getArgs().length) {
+				case 0:
+					if (items.contains(args.getPlayer().getUniqueId())) {
+						items.remove(args.getPlayer().getUniqueId());
+						args.getPlayer().sendMessage("Item mode off");
+						return;
+					} else {
+						items.add(args.getPlayer().getUniqueId());
+						args.getPlayer().sendMessage("Item mode on");
+						return;
+					}
+				case 1:
+					itemMap.put(args.getPlayer().getUniqueId(), Material.getMaterial(Integer.parseInt(args.getArgs()[0])));
+					break;
+			}
+
 		} catch (Exception e) {
 		}
 	}

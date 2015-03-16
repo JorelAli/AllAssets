@@ -69,6 +69,7 @@ public class MinecraftReflectionUtils {
 	final public Object emptyPacketPlayOutBed;
 	final public Object emptyPacketPlayOutAnimation;
 	final public Object emptyPacketPlayOutOpenWindow;
+	final public Object emptyPacketPlayOutEntityDestroy;
 
 	/** Creates a new instance of ReflectionUtils and prepares the classes and
 	 * stuff */
@@ -113,6 +114,7 @@ public class MinecraftReflectionUtils {
 		emptyPacketPlayOutBed = getNMSClass("PacketPlayOutBed").newInstance();
 		emptyPacketPlayOutAnimation = getNMSClass("PacketPlayOutAnimation").newInstance();
 		emptyPacketPlayOutOpenWindow = getNMSClass("PacketPlayOutOpenWindow").newInstance();
+		emptyPacketPlayOutEntityDestroy = getNMSClass("PacketPlayOutEntityDestroy").newInstance();
 	}
 
 	/** Serialises a String (JSON stuff) */
