@@ -47,59 +47,59 @@ public class ErrorUtils {
 	}
 
 	public static void cannotLeashMob(final Player player) {
-		player.sendMessage("You cannot put a leash on that mob");
+		player.sendMessage(Strings.ERROR + "You cannot put a leash on that mob");
 	}
 	
 	public static void cannotReloadAllAssets(final Player player) {
-		player.sendMessage("You cannot reload AllAssets. Use /AllAssets reload instead.");
+		player.sendMessage(Strings.ERROR + "You cannot reload AllAssets. Use /AllAssets reload instead.");
 	}
 	
 	public static void itemInHandIsNull(final Player player) {
-		player.sendMessage("The item in your hand cannot be nothing!");
+		player.sendMessage(Strings.ERROR + "The item in your hand cannot be nothing!");
 	}
 
 	public static void logError(final Player player, String message) {
-		player.sendMessage("An error appeared in the log: " + message);
+		player.sendMessage(Strings.ERROR + "An error appeared in the log: " + message);
 	}
 
 	public static void cannotFindHelpTopic(final CommandSender sender) {
-		sender.sendMessage("Could not find that!");
+		sender.sendMessage(Strings.ERROR + "Could not find that!");
 	}
 
 	public static void cannotJump(final Player player) {
-		player.sendMessage("Could not jump to that location!");
+		player.sendMessage(Strings.ERROR + "Could not jump to that location!");
 	}
 
 	public static void cannotUndisguise(final Player player) {
-		player.sendMessage("There was an error whilst trying to remove your disguise");
+		player.sendMessage(Strings.ERROR + "There was an error whilst trying to remove your disguise");
 	}
 
 	public static void inexistantMob(final Player player) {
-		player.sendMessage("That mob doesn't exist!");
+		player.sendMessage(Strings.ERROR + "That mob doesn't exist!");
 	}
 
 	public static void batchLimit(final Player player, int limit) {
-		player.sendMessage("Batch amount cannot be larger than " + limit + "!");
+		player.sendMessage(Strings.ERROR + "Batch amount cannot be larger than " + limit + "!");
 	}
 
 	public static void cannotSetTime(final CommandSender sender) {
-		sender.sendMessage("There was an error whilst setting the world time");
+		sender.sendMessage(Strings.ERROR + "There was an error whilst setting the world time");
 	}
 
 	public static void cannotGlowItem(final Player player) {
-		player.sendMessage("You cannot make that item glow!");
+		player.sendMessage(Strings.ERROR + "You cannot make that item glow!");
 	}
 
 	public static void itemNotFound(final Player player) {
-		player.sendMessage("That item could not be found!");
+		player.sendMessage(Strings.ERROR + "That item could not be found!");
 	}
 
 	public static void backupError(final CommandSender sender) {
-		sender.sendMessage("There was an error whilst backing up the world");
+		sender.sendMessage(Strings.ERROR + "There was an error whilst backing up the world");
 	}
 
 	public static void cannotReadFile(final Player player) {
-		player.sendMessage("That file could not be read!");
+		player.sendMessage(Strings.ERROR + "That file could not be read!");
 	}
 
 	public static void notAnInteger(final CommandSender commandSender) {
