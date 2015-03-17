@@ -49,7 +49,7 @@ public class CommandRename {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			if ((player.getItemInHand() == null) || player.getItemInHand().getType().equals(Material.AIR)) {
-				ErrorUtils.error(player, "The item in your hand cannot be nothing!");
+				ErrorUtils.itemInHandIsNull(player);
 				return;
 			}
 			if (args.getArgs().length == 0) {

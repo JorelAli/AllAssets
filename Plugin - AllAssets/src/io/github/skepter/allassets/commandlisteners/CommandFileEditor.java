@@ -88,7 +88,7 @@ public class CommandFileEditor implements Listener {
 				try {
 					config.load(dataFile);
 				} catch (final Exception e) {
-					ErrorUtils.error(player, "That file could not be read!");
+					ErrorUtils.cannotReadFile(player);
 					return;
 				}
 				new YesNoConversation(player, new EditFilePrompt(dataFile, config, args.getArgs()[0], args.getArgs()[1]), "Are you sure you want to change " + args.getArgs()[0] + " to " + args.getArgs()[1] + " - this cannot be undone!");
@@ -110,7 +110,7 @@ public class CommandFileEditor implements Listener {
 		try {
 			config.load(dataFile);
 		} catch (final Exception e) {
-			ErrorUtils.error(player, "That file could not be read!");
+			ErrorUtils.cannotReadFile(player);
 		}
 		final List<String> list = new ArrayList<String>();
 		for (final String string : config.getKeys(true))
@@ -150,7 +150,7 @@ public class CommandFileEditor implements Listener {
 							try {
 								config.load(dataFile);
 							} catch (final Exception e) {
-								ErrorUtils.error(player, "That file could not be read!");
+								ErrorUtils.cannotReadFile(player);
 								return;
 							}
 							fileMap.put(player, dataFile.getAbsolutePath());

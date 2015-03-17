@@ -66,7 +66,7 @@ public class CommandDisguise {
 						d.sendDisguise(Bukkit.getOnlinePlayers());
 						player.sendMessage(Strings.TITLE + "You have been disguised as a " + TextUtils.capitalize(d.getType().name().toLowerCase()));
 					} else
-						ErrorUtils.error(player, "That mob doesn't exist!");
+						ErrorUtils.inexistantMob(player);
 					return;
 				}
 				case 2: {
@@ -80,7 +80,7 @@ public class CommandDisguise {
 						d.sendDisguise(Bukkit.getOnlinePlayers());
 						player.sendMessage(Strings.TITLE + "You have been disguised as a " + TextUtils.capitalize(d.getType().name().toLowerCase()));
 					} else
-						ErrorUtils.error(player, "That mob doesn't exist!");
+						ErrorUtils.inexistantMob(player);
 					return;
 				}
 			}

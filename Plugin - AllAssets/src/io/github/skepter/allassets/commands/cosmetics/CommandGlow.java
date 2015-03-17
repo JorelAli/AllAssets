@@ -54,7 +54,7 @@ public class CommandGlow {
 					player.sendMessage(Strings.TITLE + "Your item is now glowing!");
 				}
 			} else
-				ErrorUtils.error(player, "You cannot make that item glow!");
+				ErrorUtils.cannotGlowItem(player);
 		}
 		return;
 	}

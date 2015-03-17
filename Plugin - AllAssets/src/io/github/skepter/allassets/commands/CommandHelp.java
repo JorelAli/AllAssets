@@ -99,7 +99,7 @@ public class CommandHelp {
 						return;
 					}
 
-				ErrorUtils.error(args.getSender(), "Could not find that!");
+				ErrorUtils.cannotFindHelpTopic(args.getSender());
 				break;
 		}
 

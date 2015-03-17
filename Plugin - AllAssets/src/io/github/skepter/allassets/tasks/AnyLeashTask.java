@@ -43,7 +43,7 @@ public class AnyLeashTask implements Runnable {
 	@Override
 	public void run() {
 		if (!(entity).setLeashHolder(player))
-			ErrorUtils.error(player, "You cannot put a leash on that mob");
+			ErrorUtils.cannotLeashMob(player);
 	}
 
 }

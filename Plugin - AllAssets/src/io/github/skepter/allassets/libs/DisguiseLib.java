@@ -10,11 +10,16 @@ import org.bukkit.inventory.ItemStack;
 
 /** @author fillpant, Blame him! */
 public class DisguiseLib {
+
 	private static final String bukkitversion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
 	private String customName;
 	private EntityDisguise type;
 	private Player disguised;
 	private ItemStack hand, helm, chst, leg, boot;
+
+	public DisguiseLib(Player p) {
+		this(p, null);
+	}
 
 	/** @param p player to disguise
 	 * @param type Entity type of disguise */
@@ -145,7 +150,7 @@ public class DisguiseLib {
 	}
 
 	//Dont mind this
-	private void sendPacket(Player p, Object pack) throws Exception {
+	private void sendPacket(Player p, Object pack) throws ReflectiveOperationException {
 		Class<?> packet = Class.forName("net.minecraft.server." + bukkitversion + ".Packet");
 		Class<?> craftPlayer = Class.forName("org.bukkit.craftbukkit." + bukkitversion + ".entity.CraftPlayer");
 		Object handle = craftPlayer.getMethod("getHandle").invoke(p);
@@ -154,7 +159,7 @@ public class DisguiseLib {
 	}
 
 	//Dont mind this too.
-	private void sendArmorContentPackets(Player to, int entityID, int slot, ItemStack item) throws Exception {
+	private void sendArmorContentPackets(Player to, int entityID, int slot, ItemStack item) throws ReflectiveOperationException {
 		PackageType type;
 		if (bukkitversion.startsWith("v1_7_"))
 			type = PackageType.CRAFTBUKKIT;
@@ -166,7 +171,7 @@ public class DisguiseLib {
 	}
 
 	//Forget this as well :3
-	private Object handleSpecialTypes(EntityDisguise type, Object entity) throws Exception {
+	private Object handleSpecialTypes(EntityDisguise type, Object entity) throws ReflectiveOperationException {
 		switch (type) {
 			case WITHER_SKELETON:
 				ReflectionUtilsDarkBlade2.invokeMethod(entity, "setSkeletonType", 1);
@@ -175,6 +180,17 @@ public class DisguiseLib {
 				break;
 		}
 		return entity;
+	}
+
+	public void removeDisguise() throws ReflectiveOperationException {
+		Object ppoed = ReflectionUtilsDarkBlade2.instantiateObject("PacketPlayOutEntityDestroy", PackageType.MINECRAFT_SERVER, new int[] { disguised.getEntityId() });
+		Object ppones = ReflectionUtilsDarkBlade2.instantiateObject("PacketPlayOutNamedEntitySpawn", PackageType.MINECRAFT_SERVER, ReflectionUtilsDarkBlade2.invokeMethod(disguised, "getHandle", (Object[]) null));
+		for (Player p : Bukkit.getOnlinePlayers()) {
+			if (p.equals(disguised))
+				continue;
+			sendPacket(p, ppoed);
+			sendPacket(p, ppones);
+		}
 	}
 
 	/*To be documented,*/

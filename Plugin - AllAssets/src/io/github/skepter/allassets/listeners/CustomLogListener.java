@@ -44,7 +44,7 @@ public class CustomLogListener implements Listener {
 				NotificationsBoard.addErrorLog();
 				for (final Player p : Bukkit.getOnlinePlayers())
 					if (p.hasPermission("AllAssets.log"))
-						ErrorUtils.error(p, "An error appeared in the log: " + event.getMessage());
+						ErrorUtils.logError(p, event.getMessage());
 				break;
 			case GRIEF:
 				break;

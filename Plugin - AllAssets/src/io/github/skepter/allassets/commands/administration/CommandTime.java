@@ -77,7 +77,7 @@ public class CommandTime {
 							args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
 							break;
 						default:
-							ErrorUtils.error(args.getSender(), "Couldn't set the time!");
+							ErrorUtils.cannotSetTime(args.getSender());
 							return;
 					}
 				}

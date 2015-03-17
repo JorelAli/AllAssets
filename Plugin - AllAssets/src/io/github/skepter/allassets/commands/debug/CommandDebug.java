@@ -369,7 +369,7 @@ public class CommandDebug implements Listener {
 
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
-		try {
+		try {  
 			Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
 		} catch (Exception e) {

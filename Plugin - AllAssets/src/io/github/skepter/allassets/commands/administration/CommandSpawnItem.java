@@ -65,7 +65,7 @@ public class CommandSpawnItem {
 						player.getInventory().addItem(is);
 						player.sendMessage(Strings.TITLE + "Spawned in a " + new ItemBuilder(is).getDisplayName());
 					} else
-						ErrorUtils.error(player, "Item not found");
+						ErrorUtils.itemNotFound(player);
 					return;
 
 			}

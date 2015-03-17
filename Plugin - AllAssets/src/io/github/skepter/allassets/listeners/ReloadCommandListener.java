@@ -47,7 +47,7 @@ public class ReloadCommandListener implements Listener {
 			}
 			if (args.length == 2) {
 				if (args[1].equalsIgnoreCase("AllAssets")) {
-					ErrorUtils.error(event.getPlayer(), "You cannot reload AllAssets. Use /allassets reload instead");
+					ErrorUtils.cannotReloadAllAssets(event.getPlayer());
 					return;
 				}
 				try {

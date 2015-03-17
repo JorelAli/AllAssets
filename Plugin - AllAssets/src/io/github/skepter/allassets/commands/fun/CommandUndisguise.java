@@ -19,40 +19,34 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-package io.github.skepter.allassets.commands.teleportation;
+package io.github.skepter.allassets.commands.fun;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.libs.DisguiseLib;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
-import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
-import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class CommandGo {
+public class CommandUndisguise {
 
-	public CommandGo(final CommandFramework framework) {
+	public CommandUndisguise(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "go", aliases = { "jump", "j" }, permission = "go", description = "Teleport to where you are pointing")
+	@CommandHandler(name = "undisguise", permission = "undisguise", description = "Undisguise and become a player again")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			Block b = PlayerUtils.getLastTwoTargetBlocks(player, -1).get(1);
-			Block target = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player, -1).get(0)));
-			if (target.getType().equals(Material.AIR)) {
-				if (b.getType().equals(Material.AIR) && !player.getGameMode().equals(GameMode.CREATIVE)) {
-					ErrorUtils.cannotJump(player);
-					return;
-				}
+			try {
+				new DisguiseLib(player).removeDisguise();
+				player.sendMessage(Strings.TITLE + "Your disguise have been removed successfully");
+			} catch (ReflectiveOperationException e) {
+				ErrorUtils.cannotUndisguise(player);
 			}
-			new LocationUtils(new LocationUtils(target.getLocation()).getCenter()).teleport(player);
 		}
 		return;
 	}

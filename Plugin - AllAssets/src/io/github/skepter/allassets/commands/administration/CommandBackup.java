@@ -91,7 +91,7 @@ public class CommandBackup {
 								FileUtils.copyDirectory(w.getWorldFolder(), new File(Files.getWorldBackupStorage(), w.getName()));
 								args.getSender().sendMessage(Strings.TITLE + w.getName() + " was backed up successfully ");
 							} catch (final IOException e) {
-								ErrorUtils.error(args.getSender(), "There was an error whilst backing up the world");
+								ErrorUtils.backupError(args.getSender());
 								return;
 							}
 						}
