@@ -34,7 +34,7 @@ public class ReflectionPlayer {
 	}
 	
 	public enum GameStateEffects {
-		INVALID_BED, END_RAINING, BEGIN_RAINING, CHANGE_GAMEMODE, ENTER_CREDITS, DEMO_MESSAGE, ARROW_HIT, FADE_VALUE, FADE_TIME, MOB_APPEARANCE;
+		INVALID_BED, END_RAINING, BEGIN_RAINING, CHANGE_GAMEMODE, ENTER_CREDITS, DEMO_MESSAGE, ARROW_HIT, FADE_VALUE, FADE_TIME, ELDER_GUARDIAN_APPEARANCE;
 	}
 
 	private Player player;
@@ -159,7 +159,7 @@ public class ReflectionPlayer {
 				case INVALID_BED:
 					effectCode = 0;
 					break;
-				case MOB_APPEARANCE:
+				case ELDER_GUARDIAN_APPEARANCE:
 					effectCode = 10;
 					break;
 				default:
