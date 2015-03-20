@@ -31,10 +31,10 @@ import org.bukkit.entity.Player;
 public class PacketBuilder {
 
 	public enum PacketType {
-		PLAY_OUT_CHAT, PLAY_OUT_NAMED_ENTITY_SPAWN, PLAY_IN_CLIENT_COMMAND, PLAY_OUT_BED, PLAY_OUT_ANIMATION, PLAY_OUT_OPEN_WINDOW, PLAY_OUT_ENTITY_DESTROY;
+		PLAY_OUT_CHAT, PLAY_OUT_NAMED_ENTITY_SPAWN, PLAY_IN_CLIENT_COMMAND, PLAY_OUT_BED, PLAY_OUT_ANIMATION, PLAY_OUT_OPEN_WINDOW, PLAY_OUT_ENTITY_DESTROY, PLAY_OUT_GAME_STATE_CHANGE;
 	}
 
-	public enum PacketDirection {
+	private enum PacketDirection {
 		CLIENT_TO_SERVER, SERVER_TO_CLIENT;
 	}
 
@@ -75,6 +75,9 @@ public class PacketBuilder {
 					break;
 				case PLAY_OUT_ENTITY_DESTROY:
 					packet = utils.emptyPacketPlayOutEntityDestroy;
+				case PLAY_OUT_GAME_STATE_CHANGE:
+					packet = utils.emptyPacketPlayOutGameStateChange;
+					break;
 				default:
 					break;
 			}

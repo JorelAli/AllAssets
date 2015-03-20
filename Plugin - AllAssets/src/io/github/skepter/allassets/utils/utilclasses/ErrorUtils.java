@@ -36,114 +36,125 @@ import org.bukkit.entity.Player;
 public class ErrorUtils {
 
 	//Externalise Strings next.
-	
+
 	public static void cantEnchant(final Player player) {
-		player.sendMessage(Strings.ERROR + getMsg("cantEnchant"));
+		error(player, getMsg("cantEnchant"));
 	}
 
-	@Deprecated
-	public static void error(final CommandSender sender, final String msg) {
+	private static void error(final CommandSender sender, final String msg) {
 		sender.sendMessage(Strings.ERROR + msg);
 	}
 
 	public static void cannotLeashMob(final Player player) {
-		player.sendMessage(Strings.ERROR + "You cannot put a leash on that mob");
+		error(player, "You cannot put a leash on that mob");
 	}
-	
+
 	public static void cannotReloadAllAssets(final Player player) {
-		player.sendMessage(Strings.ERROR + "You cannot reload AllAssets. Use /AllAssets reload instead.");
+		error(player, "You cannot reload AllAssets. Use /AllAssets reload instead.");
 	}
-	
+
 	public static void itemInHandIsNull(final Player player) {
-		player.sendMessage(Strings.ERROR + "The item in your hand cannot be nothing!");
+		error(player, "The item in your hand cannot be nothing!");
 	}
 
 	public static void logError(final Player player, String message) {
-		player.sendMessage(Strings.ERROR + "An error appeared in the log: " + message);
+		error(player, "An error appeared in the log: " + message);
 	}
 
 	public static void cannotFindHelpTopic(final CommandSender sender) {
-		sender.sendMessage(Strings.ERROR + "Could not find that!");
+		error(sender, "Could not find that!");
 	}
 
 	public static void cannotJump(final Player player) {
-		player.sendMessage(Strings.ERROR + "Could not jump to that location!");
+		error(player, "Could not jump to that location!");
 	}
 
 	public static void cannotUndisguise(final Player player) {
-		player.sendMessage(Strings.ERROR + "There was an error whilst trying to remove your disguise");
+		error(player, "There was an error whilst trying to remove your disguise");
 	}
 
 	public static void inexistantMob(final Player player) {
-		player.sendMessage(Strings.ERROR + "That mob doesn't exist!");
+		error(player, "That mob doesn't exist!");
 	}
 
 	public static void batchLimit(final Player player, int limit) {
-		player.sendMessage(Strings.ERROR + "Batch amount cannot be larger than " + limit + "!");
+		error(player, "Batch amount cannot be larger than " + limit + "!");
 	}
 
 	public static void cannotSetTime(final CommandSender sender) {
-		sender.sendMessage(Strings.ERROR + "There was an error whilst setting the world time");
+		error(sender, "There was an error whilst setting the world time");
 	}
 
 	public static void cannotGlowItem(final Player player) {
-		player.sendMessage(Strings.ERROR + "You cannot make that item glow!");
+		error(player, "You cannot make that item glow!");
 	}
 
 	public static void itemNotFound(final Player player) {
-		player.sendMessage(Strings.ERROR + "That item could not be found!");
+		error(player, "That item could not be found!");
 	}
 
 	public static void backupError(final CommandSender sender) {
-		sender.sendMessage(Strings.ERROR + "There was an error whilst backing up the world");
+		error(sender, "There was an error whilst backing up the world");
 	}
 
 	public static void cannotReadFile(final Player player) {
-		player.sendMessage(Strings.ERROR + "That file could not be read!");
+		error(player, "That file could not be read!");
 	}
 
-	public static void notAnInteger(final CommandSender commandSender) {
-		commandSender.sendMessage(Strings.ERROR + getMsg("notANumber"));
+	public static void notAnInteger(final CommandSender sender) {
+		error(sender, getMsg("notANumber"));
 	}
 
-	public static void notEnoughArguments(final CommandSender commandSender) {
-		commandSender.sendMessage(Strings.ERROR + "Not enough arguments - use /help <command>!");
+	public static void numberTooBig(final CommandSender sender) {
+		error(sender, "That number is too big!");
+	}
+	
+	public static void cannotShowNextPage(final Player player) {
+		error(player, "You have no data selected, cannot show next page!");
 	}
 
-	public static void playerNotFound(final CommandSender commandSender, final String target) {
-		commandSender.sendMessage(Strings.ERROR + target + " is offline");
+	public static void numberTooSmall(final CommandSender sender) {
+		error(sender, "That number is too small!");
+	}
+
+	public static void notEnoughArguments(final CommandSender sender) {
+		error(sender, "Not enough arguments - use /help <command>!");
+	}
+
+	public static void playerNotFound(final CommandSender sender, final String target) {
+		error(sender, target + " is offline");
 	}
 
 	public static void pluginNotFound(final CommandSender player, final String plugin) {
-		player.sendMessage(Strings.ERROR + "Couldn't find the plugin " + plugin + "!");
+		error(player, "Couldn't find the plugin " + plugin + "!");
 	}
 
 	public static void tooManyArguments(final Player player) {
-		player.sendMessage(Strings.ERROR + "Too many arguments - use /help <command>!");
+		error(player, "Too many arguments - use /help <command>!");
 	}
 
 	public static void tptoggle(final Player player, final String target) {
-		player.sendMessage(Strings.ERROR + target + " has turned teleporting off");
+		error(player, target + " has turned teleporting off");
 	}
 
 	public static void wrongConstruction(final Player player, final String construction) {
-		player.sendMessage(Strings.ERROR + "Wrong construction, use the format: " + construction);
+		error(player, "Wrong construction, use the format: " + construction);
 	}
 
 	public static void playerOnly(final CommandSender sender) {
-		sender.sendMessage(Strings.ERROR + "You must be ingame in order to use that command");
+		error(sender, "You must be ingame in order to use that command");
 	}
 
 	public static void generalCommandError(final CommandSender sender) {
-		sender.sendMessage(Strings.ERROR + "There was an error while executing the command");
+		error(sender, "There was an error while executing the command");
 	}
 
 	public static void onCooldown(final CommandSender sender, final long seconds) {
-		sender.sendMessage(Strings.ERROR + "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
+		error(sender, "You are on cooldown, you cannot use that command for another " + seconds + " seconds");
 	}
 
 	public static void worldNotFound(final CommandSender sender, final String worldName) {
-		sender.sendMessage(Strings.ERROR + worldName + " could not be found!");
+		error(sender, worldName + " could not be found!");
 	}
 
 	public static void conversableError(final Conversable forWhom, final String msg) {

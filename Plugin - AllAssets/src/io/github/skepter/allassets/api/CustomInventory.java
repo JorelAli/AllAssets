@@ -49,6 +49,8 @@ public class CustomInventory implements Listener {
 		itemMap = new HashMap<Integer, CustomItemStack>();
 		if (inventoryMap == null)
 			inventoryMap = new PlayerMap<CustomInventory>(plugin);
+		if(title.length() >= 32)
+			title = title.substring(0, 32);
 		inv = Bukkit.createInventory(null, rows * 9, title);
 	}
 

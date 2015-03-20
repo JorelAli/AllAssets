@@ -193,7 +193,7 @@ public class TextUtils {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
 		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
-			ErrorUtils.error(sender, "That number is too small!");
+			ErrorUtils.numberTooSmall(sender);
 			return 0;
 		}
 
@@ -210,7 +210,7 @@ public class TextUtils {
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
 		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
 		if (pageNumberToShow > amountOfPages) {
-			ErrorUtils.error(sender, "That number is too large!");
+			ErrorUtils.numberTooBig(sender);
 			return 0;
 		}
 
@@ -229,7 +229,7 @@ public class TextUtils {
 		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
 
 		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
-			ErrorUtils.error(sender, "That number is too small!");
+			ErrorUtils.numberTooSmall(sender);
 			return 0;
 		}
 
@@ -246,7 +246,7 @@ public class TextUtils {
 			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
 		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
 		if (pageNumberToShow > amountOfPages) {
-			ErrorUtils.error(sender, "That number is too large!");
+			ErrorUtils.numberTooBig(sender);
 			return 0;
 		}
 

@@ -32,6 +32,10 @@ public class ReflectionPlayer {
 	public enum AnimationType {
 		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
 	}
+	
+	public enum GameStateEffects {
+		INVALID_BED, END_RAINING, BEGIN_RAINING, CHANGE_GAMEMODE, ENTER_CREDITS, DEMO_MESSAGE, ARROW_HIT, FADE_VALUE, FADE_TIME, MOB_APPEARANCE;
+	}
 
 	private Player player;
 
@@ -79,10 +83,7 @@ public class ReflectionPlayer {
 
 	public void doAnimation(final AnimationType type) {
 		try {
-			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
-			Object animationPacket = utils.emptyPacketPlayOutAnimation;
-			animationPacket = animationPacket.getClass().getConstructor().newInstance();
-			ReflectionUtils.setPrivateField(animationPacket, "a", player.getEntityId());
+			PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_ANIMATION);
 			int animationID = 0;
 			switch (type) {
 				case CRITICAL_EFFECT:
@@ -112,8 +113,59 @@ public class ReflectionPlayer {
 				default:
 					break;
 			}
-			ReflectionUtils.setPrivateField(animationPacket, "b", Integer.valueOf(animationID));
-			utils.sendOutgoingPacket(animationPacket);
+			packet.set("a", player.getUniqueId()).setInt("b", animationID).send();
+		} catch (final Exception exception) {
+		}
+	}
+	
+	/**
+	 * Take case when setting values!
+	 * Use 0 if no value is required:
+	 * @param effect The game effect to use
+	 * @param value CHANGE_GAMEMODE: 0 = survival, 1 = creative, 2 = adventure, 3 = spectator
+	 * @param value DEMO_MESSAGE: 0 = welcome screen, 101 = controls, 102 = jump control, 103 = inventory control
+	 * @param value FADE_VALUE: 1 = dark, 0 = bright;
+	 * @param value FADE_TIME: ticks for the sky to fade 
+	 */
+	public void doGameStateChange(final GameStateEffects effect, int value) {
+		try {
+			PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_GAME_STATE_CHANGE);
+			int effectCode = 0;
+			switch(effect) {
+				case ARROW_HIT:
+					effectCode = 6;
+					break;
+				case BEGIN_RAINING:
+					effectCode = 2;
+					break;
+				case CHANGE_GAMEMODE:
+					effectCode = 3;
+					break;
+				case DEMO_MESSAGE:
+					effectCode = 5;
+					break;
+				case END_RAINING:
+					effectCode = 2;
+					break;
+				case ENTER_CREDITS:
+					effectCode = 4;
+					break;
+				case FADE_TIME:
+					effectCode = 8;
+					break;
+				case FADE_VALUE:
+					effectCode = 7;
+					break;
+				case INVALID_BED:
+					effectCode = 0;
+					break;
+				case MOB_APPEARANCE:
+					effectCode = 10;
+					break;
+				default:
+					break;
+			}
+			packet.setInt("b", effectCode).set("c", Float.valueOf(value)).send();
 		} catch (final Exception exception) {
 		}
 	}

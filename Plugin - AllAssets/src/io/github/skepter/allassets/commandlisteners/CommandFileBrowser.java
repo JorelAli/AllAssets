@@ -90,7 +90,7 @@ public class CommandFileBrowser implements Listener {
 					arg = Integer.parseInt(args.getArgs()[0]);
 
 				if (dataMap.get(player) == null) {
-					ErrorUtils.error(player, "You have no data, cannot show next page!");
+					ErrorUtils.cannotShowNextPage(player);
 					return;
 				}
 				TextUtils.paginate(player, dataMap.get(player), 10, arg);
@@ -133,7 +133,7 @@ public class CommandFileBrowser implements Listener {
 							try {
 								config.load(dataFile);
 							} catch (final Exception e) {
-								ErrorUtils.error(player, "That file could not be read!");
+								ErrorUtils.cannotReadFile(player);
 								return;
 							}
 							final List<String> list = new ArrayList<String>();

@@ -37,6 +37,7 @@ import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.reflection.PacketBuilder;
 import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 import io.github.skepter.allassets.reflection.ReflectionPlayer;
+import io.github.skepter.allassets.reflection.ReflectionPlayer.GameStateEffects;
 import io.github.skepter.allassets.reflection.ReflectionUtils;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.VanishPlayersItemStack;
@@ -367,6 +368,17 @@ public class CommandDebug implements Listener {
 	// End of Worldedit like function																																				   //
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
+	public void gsc(final CommandArgs args) {
+		try {  
+			ReflectionPlayer p = new ReflectionPlayer(args.getPlayer());
+			GameStateEffects eff = GameStateEffects.valueOf(args.getArgs()[0]);
+			
+			p.doGameStateChange(eff, Integer.parseInt(args.getArgs()[1]));
+		} catch (Exception e) {
+		}
+	}
+	
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
 		try {  
@@ -696,6 +708,7 @@ public class CommandDebug implements Listener {
 		list.add("set");
 		list.add("regen");
 		list.add("inv");
+		list.add("gsc");
 		return list;
 	}
 
