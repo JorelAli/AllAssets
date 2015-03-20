@@ -145,7 +145,7 @@ public class ReflectionPlayer {
 					effectCode = 5;
 					break;
 				case END_RAINING:
-					effectCode = 2;
+					effectCode = 1;
 					break;
 				case ENTER_CREDITS:
 					effectCode = 4;
