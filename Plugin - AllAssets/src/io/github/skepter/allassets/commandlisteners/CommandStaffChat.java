@@ -32,9 +32,8 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -50,7 +49,7 @@ public class CommandStaffChat implements Listener {
 		framework.registerCommands(this);
 	}
 
-	private final List<UUID> players = new ArrayList<UUID>();
+	private final CopyOnWriteArrayList<UUID> players = new CopyOnWriteArrayList<UUID>();
 
 	@CommandHandler(name = "staffchat", aliases = { "sc", "adminchat", "ac", "a" }, permission = "staffchat", description = "Toggles the staff chat")
 	public void onCommand(final CommandArgs args) {

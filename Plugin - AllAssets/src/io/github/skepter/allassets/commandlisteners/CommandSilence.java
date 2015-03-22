@@ -32,9 +32,8 @@ import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -48,7 +47,7 @@ public class CommandSilence implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public List<UUID> players = new ArrayList<UUID>();
+	public CopyOnWriteArrayList<UUID> players = new CopyOnWriteArrayList<UUID>();
 
 	@CommandHandler(name = "silence", permission = "silence", description = "Silences a player")
 	public void onCommand(final CommandArgs args) {
