@@ -32,8 +32,8 @@ import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import net.md_5.bungee.api.ChatColor;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -52,13 +52,13 @@ public class CommandNickname {
 					if (!player.getCustomName().equals(player.getName())) {
 						player.setCustomName(player.getName());
 						player.sendMessage(Strings.TITLE + "Removed your nickname");
-					}
-					printHelp(player);
+					} else
+						printHelp(player);
 					return;
 				case 1:
-					String username = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+					String username = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length).trim();
 					player.setCustomName(ChatColor.translateAlternateColorCodes('&', username));
-					player.sendMessage(Strings.TITLE + "Set your nickname to" + ChatColor.translateAlternateColorCodes('&', username));
+					player.sendMessage(Strings.TITLE + "Set your nickname to " + ChatColor.translateAlternateColorCodes('&', username));
 					player.setCustomNameVisible(true);
 			}
 		}

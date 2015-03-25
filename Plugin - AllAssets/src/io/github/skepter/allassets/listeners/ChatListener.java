@@ -56,6 +56,13 @@ public class ChatListener implements Listener {
 				event.getRecipients().clear();
 			}
 	}
+	
+	@EventHandler
+	public void playerNickname(final AsyncPlayerChatEvent event) {
+		if(event.getPlayer().getCustomName() != null) {
+			event.setFormat(ChatColor.WHITE + "<" + event.getPlayer().getCustomName() + ChatColor.WHITE + "> " + event.getMessage());
+		}
+	}
 
 	@EventHandler
 	public void playerUseColorEvent(final AsyncPlayerChatEvent event) {

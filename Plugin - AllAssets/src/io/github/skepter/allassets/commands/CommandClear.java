@@ -41,7 +41,7 @@ public class CommandClear {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "clear", aliases = { "c", "ci" }, permission = "clear", description = "Clears your inventory")
+	@CommandHandler(name = "clear", aliases = { "c", "ci", "clearinventory" }, permission = "clear", description = "Clears your inventory")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
