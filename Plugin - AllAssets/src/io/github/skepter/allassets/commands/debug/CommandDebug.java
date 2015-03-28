@@ -393,6 +393,16 @@ public class CommandDebug implements Listener {
 						}
 						break;
 					}
+					case "expand":
+					case "max": {
+						Location a = pos1.get(args.getPlayer());
+						Location b = pos2.get(args.getPlayer());
+						a.setY(256);
+						b.setY(0);
+						pos1.put(args.getPlayer(), a);
+						pos2.put(args.getPlayer(), b);
+						args.getPlayer().sendMessage(Strings.TITLE + "Expanded selection");
+					}
 				}
 
 			}
