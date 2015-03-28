@@ -60,6 +60,9 @@ public class ChatListener implements Listener {
 	@EventHandler
 	public void playerNickname(final AsyncPlayerChatEvent event) {
 		if(event.getPlayer().getCustomName() != null) {
+			if (ConfigHandler.features().getBoolean("ChatColor"))
+				if (event.getPlayer().hasPermission("AllAssets.chatColor"))
+					event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 			event.setFormat(ChatColor.WHITE + "<" + event.getPlayer().getCustomName() + ChatColor.WHITE + "> " + event.getMessage());
 		}
 	}
