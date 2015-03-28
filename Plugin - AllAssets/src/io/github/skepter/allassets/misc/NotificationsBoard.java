@@ -38,7 +38,7 @@ public class NotificationsBoard {
 	private static int errorLogCount;
 	private static int spamLogCount;
 	private static int griefLogCount;
-	private static String playerName;
+	private static String tpPlayerName;
 
 	static {
 		errorLogCount = 0;
@@ -65,8 +65,8 @@ public class NotificationsBoard {
 		board.add("Spam Logs", spamLogCount);
 		board.add("Grief Logs", griefLogCount);
 
-		if (!playerName.equals(""))
-			board.add(ChatColor.YELLOW + playerName + " tried to tp to you");
+		if (!tpPlayerName.equals(""))
+			board.add(ChatColor.YELLOW + tpPlayerName + " tried to tp to you");
 
 		board.build();
 		board.send(player);
@@ -94,11 +94,11 @@ public class NotificationsBoard {
 
 	/** A player tried to tp to you, but you have tp toggled off */
 	public static void someoneTriedToTPButGotDenied(final String pName) {
-		playerName = pName;
+		tpPlayerName = pName;
 	}
 
 	public static void clearPlayerName() {
-		playerName = "";
+		tpPlayerName = "";
 	}
 
 }

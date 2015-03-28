@@ -1,5 +1,1 @@
-* Broadcast - A really easy broadcast system. I want the 
-broadcast 'prefix' to be set in either the config.yml or 
-messages.yml. I haven't decided yet. Until then, keep it 
-hardcoded (String prefix = [THE PREFIX]) Put some color 
-into it :)
+* Helpop. Come on tundra, I need you here buddy!

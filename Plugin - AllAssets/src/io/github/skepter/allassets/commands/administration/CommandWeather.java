@@ -28,6 +28,8 @@ package io.github.skepter.allassets.commands.administration;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.reflection.ReflectionPlayer;
+import io.github.skepter.allassets.reflection.ReflectionPlayer.GameStateEffects;
 import io.github.skepter.allassets.utils.Strings;
 
 import org.bukkit.Bukkit;
@@ -60,6 +62,7 @@ public class CommandWeather {
 					case "sun":
 						player.getWorld().setStorm(false);
 						player.getWorld().setThundering(false);
+						new ReflectionPlayer(player).doGameStateChange(GameStateEffects.END_RAINING, 0);
 						player.sendMessage(Strings.TITLE + "Weather set to clear");
 						break;
 					case "thunder":
@@ -109,6 +112,7 @@ public class CommandWeather {
 			}
 			player.getWorld().setStorm(false);
 			player.getWorld().setThundering(false);
+			new ReflectionPlayer(player).doGameStateChange(GameStateEffects.END_RAINING, 0);
 			player.sendMessage(Strings.TITLE + "Weather set to clear");
 		} else
 			for (final World world : Bukkit.getWorlds()) {

@@ -494,7 +494,7 @@ public class AllAssets extends JavaPlugin {
 		r(new PlayerListener());
 		r(new CustomUnknownCommandListener());
 		r(new AnvilListener());
-		//TODO put into a thingymajig
+
 		r(new StopCommandListener());
 		if (ConfigHandler.features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
