@@ -34,6 +34,7 @@ import io.github.skepter.allassets.api.CustomInventory;
 import io.github.skepter.allassets.api.builders.ItemBuilder;
 import io.github.skepter.allassets.api.utils.Cuboid;
 import io.github.skepter.allassets.api.utils.Debugger;
+import io.github.skepter.allassets.api.utils.PlayerMap;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.reflection.PacketBuilder;
 import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
@@ -229,10 +230,10 @@ public class CommandDebug implements Listener {
 
 	//Simple toggles and maps to store player information 
 	private List<UUID> wePlayers = new ArrayList<UUID>();
-	private Map<UUID, Location> pos1 = new HashMap<UUID, Location>();
-	private Map<UUID, Location> pos2 = new HashMap<UUID, Location>();
-	private ItemStack wand = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("Wand").setLore("Left click to set position 1", "Right click to set position 2").build();
-	
+	private PlayerMap<Location> pos1 = new PlayerMap<Location>(AllAssets.instance());
+	private PlayerMap<Location> pos2 = new PlayerMap<Location>(AllAssets.instance());
+	private ItemStack wand = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("Wand").setLore("Left click to set position 1", "Right click to set position 2").addGlow().build();
+
 	//Adds the positions to the maps when they click whatever.
 	@EventHandler
 	public void we(PlayerInteractEvent e) {
@@ -242,28 +243,28 @@ public class CommandDebug implements Listener {
 			switch (e.getAction()) {
 				case LEFT_CLICK_AIR: {
 					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
-					pos1.put(e.getPlayer().getUniqueId(), l);
+					pos1.put(e.getPlayer(), l);
 					e.getPlayer().sendMessage("pos1 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
 					e.setCancelled(true);
 					break;
 				}
 				case LEFT_CLICK_BLOCK: {
 					int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
-					pos1.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+					pos1.put(e.getPlayer(), e.getClickedBlock().getLocation());
 					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
 					e.setCancelled(true);
 					break;
 				}
 				case RIGHT_CLICK_AIR: {
 					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
-					pos2.put(e.getPlayer().getUniqueId(), l);
+					pos2.put(e.getPlayer(), l);
 					e.getPlayer().sendMessage("pos2 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
 					e.setCancelled(true);
 					break;
 				}
 				case RIGHT_CLICK_BLOCK: {
 					int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
-					pos2.put(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+					pos2.put(e.getPlayer(), e.getClickedBlock().getLocation());
 					e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
 					e.setCancelled(true);
 					break;
@@ -273,7 +274,7 @@ public class CommandDebug implements Listener {
 			}
 		}
 	}
-	
+
 	@CommandHandler(name = "debug.wand", permission = "debug", description = "Wand")
 	public void wand(final CommandArgs args) {
 		try {
@@ -301,7 +302,7 @@ public class CommandDebug implements Listener {
 				switch (args.getArgs()[0]) {
 					case "set": {
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()), mat);
+						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()), mat);
 
 						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 						if (blocks.size() < divisor)
@@ -332,7 +333,7 @@ public class CommandDebug implements Listener {
 						break;
 					}
 					case "regen": {
-						List<Block> blocks = Cuboid.getChunkData(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+						List<Block> blocks = Cuboid.getChunkData(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()));
 						Set<Chunk> chunks = new HashSet<Chunk>();
 						for (Block b : blocks) {
 							chunks.add(args.getPlayer().getWorld().getChunkAt(b));
@@ -345,7 +346,7 @@ public class CommandDebug implements Listener {
 					case "repl": {
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 						final Material matToReplaceWith = Material.getMaterial(Integer.parseInt(args.getArgs()[2]));
-						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()));
 						args.getPlayer().sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 						if (blocks.size() < divisor)
 							for (Block b : blocks)
