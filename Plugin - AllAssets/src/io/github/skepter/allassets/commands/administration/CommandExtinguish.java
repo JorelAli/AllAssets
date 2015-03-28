@@ -30,6 +30,7 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.utils.Sphere;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
@@ -52,12 +53,14 @@ public class CommandExtinguish {
 					Sphere sphere = new Sphere(player.getLocation(), 120, Material.FIRE);
 					for (Block b : sphere.getBlocks())
 						b.setType(Material.AIR);
+					player.sendMessage(Strings.TITLE + sphere.getBlocks().size() + " fires removed");
 					return;
 				case 1:
 					if (TextUtils.isInteger(args.getArgs()[0])) {
 						Sphere sphereWithCustomRadius = new Sphere(player.getLocation(), Integer.parseInt(args.getArgs()[0]), Material.FIRE);
 						for (Block b : sphereWithCustomRadius.getBlocks())
 							b.setType(Material.AIR);
+						player.sendMessage(Strings.TITLE + sphereWithCustomRadius.getBlocks().size() + " fires removed");
 					} else
 						ErrorUtils.notAnInteger(args.getSender());
 					return;

@@ -31,6 +31,7 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import org.bukkit.ChatColor;
@@ -55,11 +56,20 @@ public class CommandNickname {
 					} else
 						printHelp(player);
 					return;
-				case 1:
+			}
+			if (args.getArgs().length > 0) {
+				if (PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]) != null) {
+					Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
+					String username = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length).trim();
+					target.setCustomName(ChatColor.translateAlternateColorCodes('&', username));
+					target.sendMessage(Strings.TITLE + "Set your nickname to " + ChatColor.translateAlternateColorCodes('&', username));
+					target.setCustomNameVisible(true);
+				} else {
 					String username = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length).trim();
 					player.setCustomName(ChatColor.translateAlternateColorCodes('&', username));
 					player.sendMessage(Strings.TITLE + "Set your nickname to " + ChatColor.translateAlternateColorCodes('&', username));
 					player.setCustomNameVisible(true);
+				}
 			}
 		}
 		return;
