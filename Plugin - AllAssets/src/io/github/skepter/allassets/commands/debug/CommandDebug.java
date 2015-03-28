@@ -244,31 +244,31 @@ public class CommandDebug implements Listener {
 		if (wmPlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wmt)) {
 			switch (e.getAction()) {
 				case LEFT_CLICK_AIR: {
+					e.setCancelled(true);
 					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
 					pos1.put(e.getPlayer(), l);
 					e.getPlayer().sendMessage("pos1 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
-					e.setCancelled(true);
 					break;
 				}
 				case LEFT_CLICK_BLOCK: {
+					e.setCancelled(true);
 					int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
 					pos1.put(e.getPlayer(), e.getClickedBlock().getLocation());
 					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
-					e.setCancelled(true);
 					break;
 				}
 				case RIGHT_CLICK_AIR: {
+					e.setCancelled(true);
 					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
 					pos2.put(e.getPlayer(), l);
 					e.getPlayer().sendMessage("pos2 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
-					e.setCancelled(true);
 					break;
 				}
 				case RIGHT_CLICK_BLOCK: {
+					e.setCancelled(true);
 					int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
 					pos2.put(e.getPlayer(), e.getClickedBlock().getLocation());
 					e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
-					e.setCancelled(true);
 					break;
 				}
 				default:

@@ -66,7 +66,7 @@ public class CommandHelp {
 			case 1:
 				//check plugin info
 				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
-					if (args.getArgs()[0].equalsIgnoreCase(plugin.getName())) {
+					if (args.getArgs()[0].toLowerCase().equals(plugin.getName().toLowerCase())) {
 						args.getSender().sendMessage(TextUtils.title(plugin.getName()));
 						String authors = "";
 						for (final String s : plugin.getDescription().getAuthors())
