@@ -23,46 +23,55 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands;
+package io.github.skepter.allassets.commands.other;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-public class CommandClear {
+@Deprecated
+public class CommandGhost {
 
-	public CommandClear(final CommandFramework framework) {
+	public CommandGhost(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "clear", aliases = { "c", "ci", "clearinventory" }, permission = "clear", description = "Clears your inventory")
-	public void onCommand(final CommandArgs args) {
+	@CommandHandler(name = "ghost", aliases = { "semivanish" }, permission = "ghost", description = "Allows you to turn into a ghost")
+	public void command(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			if (ConfigHandler.config().getBoolean("clearArmor")) {
-				if (args.getArgs().length == 0)
-					player.getInventory().clear();
-				else if (args.getArgs().length == 1) {
-					//TODO try/catch exception e
+			switch (args.getArgs().length) {
+				case 0:
+					if (AllAssets.instance().ghostFactory.isGhost(player)) {
+						AllAssets.instance().ghostFactory.setGhost(player, false);
+						player.sendMessage(Strings.TITLE + "Ghost mode disabled");
+					} else {
+						AllAssets.instance().ghostFactory.setGhost(player, true);
+						player.sendMessage(Strings.TITLE + "Ghost mode enabled");
+					}
+					return;
+				case 1:
 					final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-					target.getInventory().clear();
-				}
-			} else if (args.getArgs().length == 0) {
-				final ItemStack[] temp = player.getInventory().getArmorContents();
-				player.getInventory().clear();
-				player.getInventory().setArmorContents(temp);
-			} else if (args.getArgs().length == 1) {
-				final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-				final ItemStack[] temp = target.getInventory().getArmorContents();
-				target.getInventory().clear();
-				target.getInventory().setArmorContents(temp);
+					if (target == null) {
+						ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+					}
+					if (AllAssets.instance().ghostFactory.isGhost(target)) {
+						AllAssets.instance().ghostFactory.setGhost(target, false);
+						target.sendMessage(Strings.TITLE + "Ghost mode disabled");
+					} else {
+						AllAssets.instance().ghostFactory.setGhost(target, true);
+						target.sendMessage(Strings.TITLE + "Ghost mode enabled");
+					}
+					return;
 			}
+			ErrorUtils.tooManyArguments(player);
 		}
 		return;
 	}

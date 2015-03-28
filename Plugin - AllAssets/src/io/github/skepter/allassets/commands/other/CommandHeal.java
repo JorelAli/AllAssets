@@ -19,11 +19,7 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package io.github.skepter.allassets.commands;
+package io.github.skepter.allassets.commands.other;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
@@ -32,18 +28,20 @@ import io.github.skepter.allassets.PlayerGetter;
 
 import org.bukkit.entity.Player;
 
-public class CommandMore {
+public class CommandHeal {
 
-	public CommandMore(final CommandFramework framework) {
+	public CommandHeal(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "more", permission = "more", description = "Sets your itemstack size to 64")
+	@CommandHandler(name = "heal", permission = "heal", description = "Heals yourself")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
-		if (player != null)
-			player.getItemInHand().setAmount(64);
+		if (player != null) {
+			player.setHealth(20D);
+			player.setFireTicks(0);
+			player.setFoodLevel(20);
+		}
 		return;
 	}
-
 }

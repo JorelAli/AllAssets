@@ -21,7 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets;
 
-import io.github.skepter.allassets.commands.CommandHelp;
+import io.github.skepter.allassets.commands.other.CommandHelp;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
