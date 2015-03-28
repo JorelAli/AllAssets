@@ -92,7 +92,7 @@ public class CustomInventory implements Listener {
 
 	public void open(Player... players) {
 		for (Player player : players) {
-			if (inventoryMap.containsKey(player.getUniqueId())) {
+			if (inventoryMap.containsPlayer(player.getUniqueId())) {
 				player.openInventory(inventoryMap.get(player).inv);
 			} else {
 				openNew(player);

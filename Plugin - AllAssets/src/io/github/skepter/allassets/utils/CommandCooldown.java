@@ -54,7 +54,7 @@ public class CommandCooldown {
 	}
 
 	public static boolean isOnCooldown(final Player player, final String command) {
-		if (cooldownPlayer.containsKey(player))
+		if (cooldownPlayer.containsPlayer(player))
 			if (command.equals(cooldownPlayer.get(player)))
 				return true;
 		return false;

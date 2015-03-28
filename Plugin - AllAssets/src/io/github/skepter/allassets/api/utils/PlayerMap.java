@@ -69,14 +69,21 @@ public class PlayerMap<T> implements Listener, Cloneable, Serializable {
 		map.clear();
 	}
 
-	public boolean containsKey(final Object key) {
+	public boolean containsPlayer(final UUID key) {
 		if (map.containsKey(key))
 			return true;
 		else
 			return false;
 	}
+	
+	public boolean containsPlayer(final Player key) {
+		if (map.containsKey(key.getUniqueId()))
+			return true;
+		else
+			return false;
+	}
 
-	public Set<UUID> keySet() {
+	public Set<UUID> getPlayers() {
 		return map.keySet();
 	}
 
