@@ -92,6 +92,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -271,6 +273,17 @@ public class CommandDebug implements Listener {
 				}
 				default:
 					break;
+			}
+		}
+	}
+
+	@EventHandler
+	public void zoomEvent(PlayerMoveEvent e) {
+		if (wmPlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wmt)) {
+			if (e.getPlayer().isSneaking()) {
+				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 100));
+			} else {
+				e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
 			}
 		}
 	}
