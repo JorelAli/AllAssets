@@ -19,31 +19,42 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-/*******************************************************************************
- *******************************************************************************/
-package io.github.skepter.allassets.commands;
+package io.github.skepter.allassets.commands.other;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.libs.Title;
+import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandSuicide {
+public class CommandTitle {
 
-	public CommandSuicide(final CommandFramework framework) {
+	public CommandTitle(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "suicide", permission = "suicide", description = "Kills yourself")
+	@CommandHandler(name = "title", permission = "title", description = "Broadcasts a title")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			player.setHealth(0);
+			Title title = new Title(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length));
+			title.setFadeInTime(3);
+			title.setStayTime(5);
+			title.setFadeOutTime(3);
+			title.setTitleColor(ChatColor.AQUA);
+			title.broadcast();
 		}
 		return;
+	}
+
+	@Help(name = "Title")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Title", "/title <message> - broadcast <message>");
 	}
 }

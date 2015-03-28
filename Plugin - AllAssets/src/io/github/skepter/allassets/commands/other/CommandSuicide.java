@@ -23,67 +23,26 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands;
+package io.github.skepter.allassets.commands.other;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 
-import org.bukkit.WeatherType;
 import org.bukkit.entity.Player;
 
-public class CommandPWeather {
+public class CommandSuicide {
 
-	public CommandPWeather(final CommandFramework framework) {
+	public CommandSuicide(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "pweather", aliases = { "playerweather" }, permission = "pweather", description = "Sets your weather")
+	@CommandHandler(name = "suicide", permission = "suicide", description = "Kills yourself")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			switch (args.getArgs().length) {
-				case 0:
-					return;
-				case 1:
-					switch (args.getArgs()[0].toLowerCase()) {
-						case "downfall":
-						case "rain":
-							player.setPlayerWeather(WeatherType.DOWNFALL);
-							break;
-						case "clear":
-						case "sun":
-						case "day":
-							player.setPlayerWeather(WeatherType.CLEAR);
-							break;
-						case "reset":
-						case "normal":
-							player.resetPlayerWeather();
-							break;
-					}
-					return;
-				case 2:
-					Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
-					if (target != null) {
-						switch (args.getArgs()[0].toLowerCase()) {
-							case "downfall":
-							case "rain":
-								target.setPlayerWeather(WeatherType.DOWNFALL);
-								break;
-							case "clear":
-							case "sun":
-							case "day":
-								target.setPlayerWeather(WeatherType.CLEAR);
-								break;
-							case "reset":
-							case "normal":
-								target.resetPlayerWeather();
-								break;
-						}
-					}
-					return;
-			}
+			player.setHealth(0);
 		}
 		return;
 	}

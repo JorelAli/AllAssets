@@ -19,7 +19,7 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-package io.github.skepter.allassets.commands;
+package io.github.skepter.allassets.commands.other;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
