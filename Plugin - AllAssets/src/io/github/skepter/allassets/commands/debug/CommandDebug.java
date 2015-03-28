@@ -315,7 +315,7 @@ public class CommandDebug implements Listener {
 				switch (args.getArgs()[0]) {
 					case "set": {
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()), mat);
+						List<Block> blocks = Cuboid.blocksFromTwoPointsEx(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()), mat);
 
 						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 						if (blocks.size() < divisor)
@@ -359,15 +359,13 @@ public class CommandDebug implements Listener {
 					case "repl": {
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 						final Material matToReplaceWith = Material.getMaterial(Integer.parseInt(args.getArgs()[2]));
-						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()));
+						List<Block> blocks = Cuboid.blocksFromTwoPointsInc(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()), mat);
 						args.getPlayer().sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 						if (blocks.size() < divisor)
 							for (Block b : blocks)
-								if (b.getType() == mat)
-									b.setType(matToReplaceWith);
-						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
-							if (b.getType() == mat)
 								b.setType(matToReplaceWith);
+						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
+							b.setType(matToReplaceWith);
 
 						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 
@@ -389,8 +387,7 @@ public class CommandDebug implements Listener {
 								@Override
 								public void run() {
 									for (Block b : blocksList)
-										if (b.getType() == mat)
-											b.setType(matToReplaceWith);
+										b.setType(matToReplaceWith);
 								}
 							}, (i / divisor) * 5);
 						}
