@@ -275,7 +275,7 @@ public class CommandDebug implements Listener {
 		}
 	}
 
-	@CommandHandler(name = "debug.wmt", aliases = {"wand"}, permission = "debug", description = "Gives you the world modifier tool")
+	@CommandHandler(name = "debug.wmt", aliases = { "wand" }, permission = "debug", description = "Gives you the world modifier tool")
 	public void wand(final CommandArgs args) {
 		try {
 			args.getPlayer().setItemInHand(wmt);
@@ -284,7 +284,7 @@ public class CommandDebug implements Listener {
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "debug.wm", permission = "debug", description = "World Modifier")
+	@CommandHandler(name = "debug.wm", aliases = { "wm" }, permission = "debug", description = "World Modifier")
 	public void wm(final CommandArgs args) {
 		try {
 			if (args.getArgs().length == 0)
