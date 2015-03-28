@@ -225,21 +225,21 @@ public class CommandDebug implements Listener {
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Worldedit like function																																				   //
+	// World Modifier 																																						   //
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//Simple toggles and maps to store player information 
-	private List<UUID> wePlayers = new ArrayList<UUID>();
+	private List<UUID> wmPlayers = new ArrayList<UUID>();
 	private PlayerMap<Location> pos1 = new PlayerMap<Location>(AllAssets.instance());
 	private PlayerMap<Location> pos2 = new PlayerMap<Location>(AllAssets.instance());
-	private ItemStack wand = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("Wand").setLore("Left click to set position 1", "Right click to set position 2").addGlow().build();
+	private ItemStack wmt = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("World Modifier tool").setLore("Left click to set position 1", "Right click to set position 2").addGlow().build();
 
 	//Adds the positions to the maps when they click whatever.
 	@EventHandler
 	public void we(PlayerInteractEvent e) {
 		e.setUseInteractedBlock(Result.ALLOW);
 		e.setUseItemInHand(Result.ALLOW);
-		if (wePlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wand)) {
+		if (wmPlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wmt)) {
 			switch (e.getAction()) {
 				case LEFT_CLICK_AIR: {
 					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
@@ -275,26 +275,26 @@ public class CommandDebug implements Listener {
 		}
 	}
 
-	@CommandHandler(name = "debug.wand", permission = "debug", description = "Wand")
+	@CommandHandler(name = "debug.wmt", aliases = {"wand"}, permission = "debug", description = "Gives you the world modifier tool")
 	public void wand(final CommandArgs args) {
 		try {
-			args.getPlayer().setItemInHand(wand);
+			args.getPlayer().setItemInHand(wmt);
 		} catch (Exception e) {
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "debug.we", permission = "debug", description = "WorldEdit")
-	public void we(final CommandArgs args) {
+	@CommandHandler(name = "debug.wm", permission = "debug", description = "World Modifier")
+	public void wm(final CommandArgs args) {
 		try {
 			if (args.getArgs().length == 0)
-				if (wePlayers.contains(args.getPlayer().getUniqueId())) {
-					wePlayers.remove(args.getPlayer().getUniqueId());
-					args.getPlayer().sendMessage("WorldEdit mode off");
+				if (wmPlayers.contains(args.getPlayer().getUniqueId())) {
+					wmPlayers.remove(args.getPlayer().getUniqueId());
+					args.getPlayer().sendMessage("World Modifier mode off");
 					return;
 				} else {
-					wePlayers.add(args.getPlayer().getUniqueId());
-					args.getPlayer().sendMessage("WorldEdit mode on");
+					wmPlayers.add(args.getPlayer().getUniqueId());
+					args.getPlayer().sendMessage("World Modifier mode on");
 					return;
 				}
 			else {
@@ -391,7 +391,7 @@ public class CommandDebug implements Listener {
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// End of Worldedit like function																																				   //
+	// End of World Modifier																																				   //
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
