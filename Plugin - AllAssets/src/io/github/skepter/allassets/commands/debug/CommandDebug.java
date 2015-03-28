@@ -31,6 +31,7 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.api.CustomInventory;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
 import io.github.skepter.allassets.api.utils.Cuboid;
 import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
@@ -230,13 +231,14 @@ public class CommandDebug implements Listener {
 	private List<UUID> wePlayers = new ArrayList<UUID>();
 	private Map<UUID, Location> pos1 = new HashMap<UUID, Location>();
 	private Map<UUID, Location> pos2 = new HashMap<UUID, Location>();
-
+	private ItemStack wand = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("Wand").setLore("Left click to set position 1", "Right click to set position 2").build();
+	
 	//Adds the positions to the maps when they click whatever.
 	@EventHandler
 	public void we(PlayerInteractEvent e) {
 		e.setUseInteractedBlock(Result.ALLOW);
 		e.setUseItemInHand(Result.ALLOW);
-		if (wePlayers.contains(e.getPlayer().getUniqueId())) {
+		if (wePlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wand)) {
 			switch (e.getAction()) {
 				case LEFT_CLICK_AIR: {
 					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
@@ -271,16 +273,19 @@ public class CommandDebug implements Listener {
 			}
 		}
 	}
+	
+	@CommandHandler(name = "debug.wand", permission = "debug", description = "Wand")
+	public void wand(final CommandArgs args) {
+		try {
+			args.getPlayer().setItemInHand(wand);
+		} catch (Exception e) {
+		}
+	}
 
-	//main command
 	@SuppressWarnings("deprecation")
-	//Since we have a . here, it counts it as a separate argument and resets the args.
-	//Only available in AllAssets. Don't worry too much about it
-	//This changes the command from /debug <info> to /debug we <info>
 	@CommandHandler(name = "debug.we", permission = "debug", description = "WorldEdit")
 	public void we(final CommandArgs args) {
 		try {
-			//Toggles if they have worldedit mode on or not
 			if (args.getArgs().length == 0)
 				if (wePlayers.contains(args.getPlayer().getUniqueId())) {
 					wePlayers.remove(args.getPlayer().getUniqueId());
@@ -292,31 +297,19 @@ public class CommandDebug implements Listener {
 					return;
 				}
 			else {
-				//sets the blocks. Only has the (//set) feature as of now
-				//Uses a switch statement (in other words, if the player types /debug we set)
 				int divisor = 1000;
 				switch (args.getArgs()[0]) {
-				//If they type /debug we set
 					case "set": {
-						//gets all of the blocks between the two points
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()), mat);
-						//splits up the task into 250 'chunks' (sets 250 blocks at a time)
 
 						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
-
-						//Clean up the rest of the blocks which didn't get finished
-						//E.g. we have 255 blocks, 5 of them won't be set since
-						//255 divided by 250 = 1 (remainder 5)
 						if (blocks.size() < divisor)
 							for (Block b : blocks)
 								b.setType(mat);
 						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
 							b.setType(mat);
-
-						//advanced for loop. Don't panic, it just loops through all of the blocks.
 						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
 							@Override
 							public void run() {
 								try {
@@ -325,32 +318,19 @@ public class CommandDebug implements Listener {
 									e.printStackTrace();
 								}
 							}
-
 						}, (blocks.size() - divisor) / divisor * 5);
 						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-
-							//Gets all of the blocks (since we have 'chunked' them together
-							//get the 'chunked' blocks
 							final List<Block> blocksList = blocks.subList(i, i + divisor);
-
-							//Use a delayed task to set the blocks. Setting them all at once
-							//creates lots of server lag for more blocks.
 							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
 								@Override
 								public void run() {
-									//Sets the blocks.
 									for (Block b : blocksList)
 										b.setType(mat);
 								}
-								//Uses some maths to calculate when to do the next delayed task
 							}, (i / divisor) * 5);
 						}
-
-						//We're inside a switch statement. We exit it by using break (advanced)
 						break;
 					}
-					//must find more efficient method.
 					case "regen": {
 						List<Block> blocks = Cuboid.getChunkData(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
 						Set<Chunk> chunks = new HashSet<Chunk>();
