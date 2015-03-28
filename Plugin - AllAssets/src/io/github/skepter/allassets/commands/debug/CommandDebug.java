@@ -291,9 +291,10 @@ public class CommandDebug implements Listener {
 					args.getPlayer().sendMessage("WorldEdit mode on");
 					return;
 				}
-			else
+			else {
 				//sets the blocks. Only has the (//set) feature as of now
 				//Uses a switch statement (in other words, if the player types /debug we set)
+				int divisor = 1000;
 				switch (args.getArgs()[0]) {
 				//If they type /debug we set
 					case "set": {
@@ -301,9 +302,8 @@ public class CommandDebug implements Listener {
 						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
 						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()), mat);
 						//splits up the task into 250 'chunks' (sets 250 blocks at a time)
-						int divisor = 250;
 
-						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
+						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 
 						//Clean up the rest of the blocks which didn't get finished
 						//E.g. we have 255 blocks, 5 of them won't be set since
@@ -351,7 +351,7 @@ public class CommandDebug implements Listener {
 						break;
 					}
 					//must find more efficient method.
-					case "regen":
+					case "regen": {
 						List<Block> blocks = Cuboid.getChunkData(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
 						Set<Chunk> chunks = new HashSet<Chunk>();
 						for (Block b : blocks) {
@@ -359,7 +359,52 @@ public class CommandDebug implements Listener {
 						}
 						for (Chunk c : chunks)
 							args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
+						break;
+					}
+					case "replace":
+					case "repl": {
+						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
+						final Material matToReplaceWith = Material.getMaterial(Integer.parseInt(args.getArgs()[2]));
+						List<Block> blocks = Cuboid.blocksFromTwoPoints(pos1.get(args.getPlayer().getUniqueId()), pos2.get(args.getPlayer().getUniqueId()));
+						args.getPlayer().sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
+						if (blocks.size() < divisor)
+							for (Block b : blocks)
+								if (b.getType() == mat)
+									b.setType(matToReplaceWith);
+						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
+							if (b.getType() == mat)
+								b.setType(matToReplaceWith);
+
+						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+
+							@Override
+							public void run() {
+								try {
+									args.getPlayer().sendMessage(Strings.TITLE + "Complete!");
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+
+						}, (blocks.size() - divisor) / divisor * 5);
+						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
+							final List<Block> blocksList = blocks.subList(i, i + divisor);
+
+							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+
+								@Override
+								public void run() {
+									for (Block b : blocksList)
+										if (b.getType() == mat)
+											b.setType(matToReplaceWith);
+								}
+							}, (i / divisor) * 5);
+						}
+						break;
+					}
 				}
+
+			}
 		} catch (Exception e) {
 		}
 	}
@@ -370,18 +415,18 @@ public class CommandDebug implements Listener {
 
 	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
 	public void gsc(final CommandArgs args) {
-		try {  
+		try {
 			ReflectionPlayer p = new ReflectionPlayer(args.getPlayer());
 			GameStateEffects eff = GameStateEffects.valueOf(args.getArgs()[0]);
-			
+
 			p.doGameStateChange(eff, Integer.parseInt(args.getArgs()[1]));
 		} catch (Exception e) {
 		}
 	}
-	
+
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
-		try {  
+		try {
 			Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
 		} catch (Exception e) {
@@ -398,8 +443,8 @@ public class CommandDebug implements Listener {
 			base.setDirection(new Vector(0, 0, 0));
 			base.setVelocity(new Vector(0, 0, 0));
 			final Entity e = event.getPlayer().getLocation().getWorld().dropItem(event.getPlayer().getLocation(), new ItemStack(itemMap.get(event.getPlayer().getUniqueId())));
-			base.setPassenger(e);			
-			
+			base.setPassenger(e);
+
 			for (Player p : Bukkit.getServer().getOnlinePlayers()) {
 				PacketBuilder builder = new PacketBuilder(p, PacketType.PLAY_OUT_ENTITY_DESTROY);
 				builder.set("a", new int[] { base.getEntityId() });
