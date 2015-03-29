@@ -1,5 +1,5 @@
 name: AllAssets
 main: io.github.skepter.allassets.AllAssets
-version: 0.65 Alpha
+version: 0.7 Alpha
 description: AllAssets is a large scale plugin that will add almost everything your server could need to get started. Whether you need the basic core commands or if you need an API for plugins to work, AllAssets gets the job done.
 authors: [Skepter, Tundra]

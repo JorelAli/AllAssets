@@ -137,6 +137,7 @@ public class ConfigHandler {
 		features.set("Balancetop", "true");
 		features.set("Batch", "true");
 		features.set("Bind", "true");
+		features.set("Broadcast", "true");
 		features.set("Butcher", "true");
 		features.set("ChestSearch", "true");
 		features.set("Clear", "true");
@@ -145,6 +146,7 @@ public class ConfigHandler {
 		features.set("Debug", "true");
 		features.set("Disable", "true");
 		features.set("DiscoArmor", "true");
+		features.set("Disguise", "true");
 		features.set("Enable", "true");
 		features.set("Enchant", "true");
 		features.set("Enderchest", "true");
@@ -161,9 +163,12 @@ public class ConfigHandler {
 		features.set("Gamemode", "true");
 		features.set("Ghost", "true");
 		features.set("Glow", "true");
+		features.set("Go", "true");
 		features.set("God", "true");
 		features.set("Grief", "true");
+		features.set("Hat", "true");
 		features.set("Head", "true");
+		features.set("Heal", "true");
 		features.set("Inventory", "true");
 		features.set("Launch", "true");
 		features.set("Log", "true");
@@ -180,6 +185,7 @@ public class ConfigHandler {
 		features.set("Remove", "true");
 		features.set("Rename", "true");
 		//		features.set("Restore", "true");
+		features.set("Rules", "true");
 		features.set("SetSpawn", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
@@ -194,6 +200,7 @@ public class ConfigHandler {
 		features.set("TpToggle", "true");
 		features.set("Weather", "true");
 		features.set("Whois", "true");
+		features.set("World", "true");
 		features.set("Worlds", "true");
 		features.set("Workbench", "true");
 

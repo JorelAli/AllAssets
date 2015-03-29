@@ -86,10 +86,7 @@ import io.github.skepter.allassets.commands.other.CommandPWeather;
 import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRules;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
-import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
-import io.github.skepter.allassets.commands.sql.CommandBan;
-import io.github.skepter.allassets.commands.sql.CommandUnban;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
@@ -234,17 +231,12 @@ public class AllAssets extends JavaPlugin {
 		//// Tundraboy ////
 
 		//// Skepter ////
-		new CommandHat(framework);
-		new CommandWorld(framework);
-		new CommandRules(framework);
-		new CommandTitle(framework);
-		new CommandGo(framework);
-		new CommandUnban(framework);
-		new CommandBroadcast(framework);
-		new CommandHeal(framework);
-		new CommandDisguise(framework);
-		r(new CommandBan(framework));
-		r(new BlockPoweredListener());
+
+		//Title, ban and unban will not be available for V 0.7A
+		//new CommandTitle(framework);
+		//new CommandUnban(framework);
+		//r(new CommandBan(framework));
+
 	}
 
 	/***********************************************************************/
@@ -357,6 +349,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandBatch(framework);
 		if (ConfigHandler.features().getBoolean("Bind"))
 			r(new CommandBind(framework));
+		if (ConfigHandler.features().getBoolean("Broadcast"))
+			new CommandBroadcast(framework);
 		if (ConfigHandler.features().getBoolean("Butcher"))
 			new CommandButcher(framework);
 		if (ConfigHandler.features().getBoolean("ChestSearch"))
@@ -373,6 +367,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandDisable(framework);
 		if (ConfigHandler.features().getBoolean("DiscoArmor"))
 			new CommandDiscoArmor(framework);
+		if (ConfigHandler.features().getBoolean("Disguise"))
+			new CommandDisguise(framework);
 		if (ConfigHandler.features().getBoolean("Enable"))
 			new CommandEnable(framework);
 		if (ConfigHandler.features().getBoolean("Enchant"))
@@ -405,6 +401,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandGhost(framework);
 		if (ConfigHandler.features().getBoolean("Glow"))
 			new CommandGlow(framework);
+		if (ConfigHandler.features().getBoolean("Go"))
+			new CommandGo(framework);
 		if (ConfigHandler.features().getBoolean("God"))
 			if (ConfigHandler.config().getBoolean("useNMSGod"))
 				new CommandNMSGod(framework);
@@ -412,8 +410,12 @@ public class AllAssets extends JavaPlugin {
 				r(new CommandGod(framework));
 		if (ConfigHandler.features().getBoolean("Grief"))
 			new CommandGrief(framework);
+		if (ConfigHandler.features().getBoolean("Hat"))
+			new CommandHat(framework);
 		if (ConfigHandler.features().getBoolean("Head"))
 			new CommandHead(framework);
+		if (ConfigHandler.features().getBoolean("Heal"))
+			new CommandHeal(framework);
 		if (ConfigHandler.features().getBoolean("Inventory"))
 			new CommandInventory(framework);
 		if (ConfigHandler.features().getBoolean("Launch"))
@@ -444,6 +446,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandRename(framework);
 		//		if (ConfigHandler.features().getBoolean("Restore"))
 		//			new CommandRestore(framework);
+		if (ConfigHandler.features().getBoolean("Rules"))
+			new CommandRules(framework);
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
@@ -472,6 +476,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandWeather(framework);
 		if (ConfigHandler.features().getBoolean("Whois"))
 			new CommandWhois(framework);
+		if (ConfigHandler.features().getBoolean("World"))
+			new CommandWorld(framework);
 		if (ConfigHandler.features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
 		if (ConfigHandler.features().getBoolean("Workbench"))
@@ -494,6 +500,7 @@ public class AllAssets extends JavaPlugin {
 		r(new PlayerListener());
 		r(new CustomUnknownCommandListener());
 		r(new AnvilListener());
+		r(new BlockPoweredListener());
 
 		r(new StopCommandListener());
 		if (ConfigHandler.features().getBoolean("ConsoleSay"))
