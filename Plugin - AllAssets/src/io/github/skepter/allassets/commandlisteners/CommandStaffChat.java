@@ -33,7 +33,7 @@ import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -49,7 +49,7 @@ public class CommandStaffChat implements Listener {
 		framework.registerCommands(this);
 	}
 
-	private final CopyOnWriteArrayList<UUID> players = new CopyOnWriteArrayList<UUID>();
+	private final CopyOnWriteArraySet<UUID> players = new CopyOnWriteArraySet<UUID>();
 
 	@CommandHandler(name = "staffchat", aliases = { "sc", "adminchat", "ac", "a" }, permission = "staffchat", description = "Toggles the staff chat")
 	public void onCommand(final CommandArgs args) {
@@ -60,8 +60,7 @@ public class CommandStaffChat implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (players.contains(player.getUniqueId())) {
-			players.remove(player.getUniqueId());
+		if (players.remove(player.getUniqueId())) {
 			player.sendMessage(Strings.TITLE + "Staff chat is now off");
 		} else {
 			players.add(player.getUniqueId());

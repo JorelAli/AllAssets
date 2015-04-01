@@ -31,8 +31,8 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.utils.Strings;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
@@ -43,14 +43,15 @@ public class CommandConsoleLog {
 		framework.registerCommands(this);
 	}
 
-	public static List<UUID> players = new ArrayList<UUID>();
+	//TODO this should be a commandListener..........?
+	
+	public static Set<UUID> players = new HashSet<UUID>();
 
 	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console")
 	public void onCommand(final CommandArgs args) {
 		Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
-			if (players.contains(player.getUniqueId())) {
-				players.remove(player.getUniqueId());
+			if (players.remove(player.getUniqueId())) {
 				player.sendMessage(Strings.TITLE + "You are no longer viewing the console");
 			} else {
 				players.add(player.getUniqueId());

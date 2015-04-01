@@ -32,7 +32,9 @@ import io.github.skepter.allassets.tasks.PingTask;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -250,16 +252,16 @@ public class User {
 		return playerData.getDataFile().getBoolean("afk");
 	}
 
-	public List<UUID> getFriendList() {
+	public Set<UUID> getFriendList() {
 		List<String> str = playerData.getDataFile().getStringList("friends");
-		List<UUID> list = new ArrayList<UUID>();
+		Set<UUID> list = new HashSet<UUID>();
 		for (String s : str) {
 			list.add(UUID.fromString(s));
 		}
 		return list;
 	}
 
-	public void setFriendList(List<UUID> friends) {
+	public void setFriendList(Set<UUID> friends) {
 		playerData.getDataFile().set("friends", friends);
 		playerData.saveDataFile();
 	}

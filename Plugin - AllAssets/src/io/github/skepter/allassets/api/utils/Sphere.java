@@ -85,8 +85,7 @@ public class Sphere {
 		final Sphere sphere = new Sphere(center, radius - 1);
 		final ArrayList<Block> blocks = getBlocks();
 		for (final Block c : sphere.getBlocks())
-			if (blocks.contains(c))
-				blocks.remove(c);
+			blocks.remove(c);
 		return blocks;
 	}
 

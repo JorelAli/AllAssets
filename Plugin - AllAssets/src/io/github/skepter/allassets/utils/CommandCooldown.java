@@ -26,8 +26,8 @@ package io.github.skepter.allassets.utils;
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.utils.PlayerMap;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
@@ -37,7 +37,7 @@ public class CommandCooldown {
 
 	private static PlayerMap<String> cooldownPlayer = new PlayerMap<String>(AllAssets.instance());
 
-	private static List<UUID> cooldownPlayers = new ArrayList<UUID>();
+	private static Set<UUID> cooldownPlayers = new HashSet<UUID>();
 	private static PlayerMap<Long> cooldownTimeMap = new PlayerMap<Long>(AllAssets.instance());
 
 	public CommandCooldown(final Player player, final long time, final String command) {

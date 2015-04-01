@@ -25,8 +25,8 @@ package io.github.skepter.allassets.utils;
 
 import io.github.skepter.allassets.AllAssets;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -43,7 +43,7 @@ public class Utils {
 		return entity.getMetadata(key);
 	}
 
-	public static <T> List<T> add(List<T> list, T type) {
+	public static <T> Collection<T> add(Collection<T> list, T type) {
 		list.add(type);
 		return list;
 	}

@@ -231,7 +231,7 @@ public class CommandDebug implements Listener {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//Simple toggles and maps to store player information 
-	private List<UUID> wmPlayers = new ArrayList<UUID>();
+	private Set<UUID> wmPlayers = new HashSet<UUID>();
 	private PlayerMap<Location> pos1 = new PlayerMap<Location>(AllAssets.instance());
 	private PlayerMap<Location> pos2 = new PlayerMap<Location>(AllAssets.instance());
 	private ItemStack wmt = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("World Modifier tool").setLore("Left click to set position 1", "Right click to set position 2").addGlow().build();
@@ -301,8 +301,7 @@ public class CommandDebug implements Listener {
 	public void wm(final CommandArgs args) {
 		try {
 			if (args.getArgs().length == 0)
-				if (wmPlayers.contains(args.getPlayer().getUniqueId())) {
-					wmPlayers.remove(args.getPlayer().getUniqueId());
+				if (wmPlayers.remove(args.getPlayer().getUniqueId())) {
 					args.getPlayer().sendMessage("World Modifier mode off");
 					return;
 				} else {
@@ -434,7 +433,7 @@ public class CommandDebug implements Listener {
 		}
 	}
 
-	private List<UUID> items = new ArrayList<UUID>();
+	private Set<UUID> items = new HashSet<UUID>();
 	private Map<UUID, Material> itemMap = new HashMap<UUID, Material>();
 
 	@EventHandler
@@ -460,8 +459,7 @@ public class CommandDebug implements Listener {
 		try {
 			switch (args.getArgs().length) {
 				case 0:
-					if (items.contains(args.getPlayer().getUniqueId())) {
-						items.remove(args.getPlayer().getUniqueId());
+					if (items.remove(args.getPlayer().getUniqueId())) {
 						args.getPlayer().sendMessage("Item mode off");
 						return;
 					} else {

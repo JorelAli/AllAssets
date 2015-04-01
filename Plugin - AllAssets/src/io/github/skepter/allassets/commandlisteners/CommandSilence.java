@@ -33,7 +33,7 @@ import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -47,7 +47,7 @@ public class CommandSilence implements Listener {
 		framework.registerCommands(this);
 	}
 
-	public CopyOnWriteArrayList<UUID> players = new CopyOnWriteArrayList<UUID>();
+	public CopyOnWriteArraySet<UUID> players = new CopyOnWriteArraySet<UUID>();
 
 	@CommandHandler(name = "silence", permission = "silence", description = "Silences a player")
 	public void onCommand(final CommandArgs args) {
@@ -59,8 +59,7 @@ public class CommandSilence implements Listener {
 			return;
 		}
 
-		if (players.contains(player.getUniqueId())) {
-			players.remove(player.getUniqueId());
+		if (players.remove(player.getUniqueId())) {
 			args.getSender().sendMessage(Strings.TITLE + player.getName() + " is no longer silenced");
 		} else {
 			players.add(player.getUniqueId());

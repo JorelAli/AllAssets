@@ -31,10 +31,10 @@ import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -77,8 +77,8 @@ public class UUIDData {
 		}
 	}
 
-	public static List<UUID> getValues() {
-		final List<UUID> uuidList = new ArrayList<UUID>();
+	public static Set<UUID> getValues() {
+		final Set<UUID> uuidList = new HashSet<UUID>();
 		for (final String s : getDataFile().getKeys(true))
 			uuidList.add(UUID.fromString(getDataFile().getString(s)));
 		return uuidList;

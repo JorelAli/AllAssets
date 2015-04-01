@@ -31,8 +31,8 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.entity.Player;
@@ -42,7 +42,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class CommandGod implements Listener {
 
-	public static List<UUID> players = new ArrayList<UUID>();
+	public static Set<UUID> players = new HashSet<UUID>();
 
 	public CommandGod(final CommandFramework framework) {
 		framework.registerCommands(this);
@@ -57,8 +57,7 @@ public class CommandGod implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		if (players.contains(player.getUniqueId())) {
-			players.remove(player.getUniqueId());
+		if (players.remove(player.getUniqueId())) {
 			player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");
 		} else {
 			players.add(player.getUniqueId());

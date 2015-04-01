@@ -3,8 +3,8 @@ package io.github.skepter.allassets.test;
 import io.github.skepter.allassets.api.CustomItemStack;
 import io.github.skepter.allassets.api.builders.ItemBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -13,18 +13,17 @@ import org.bukkit.entity.Player;
 
 public class VanishPlayersItemStack extends CustomItemStack {
 
-	private List<UUID> vanishedPlayers;
+	private Set<UUID> vanishedPlayers;
 
 	public VanishPlayersItemStack() {
 		setItemStack(new ItemBuilder(Material.ENDER_PEARL).setDisplayName("Vanish players").build());
 		if (vanishedPlayers == null)
-			vanishedPlayers = new ArrayList<UUID>();
+			vanishedPlayers = new HashSet<UUID>();
 	}
 
 	@Override
 	public void clickAction(Player player) {
-		if (vanishedPlayers.contains(player.getUniqueId())) {
-			vanishedPlayers.remove(player.getUniqueId());
+		if (vanishedPlayers.remove(player.getUniqueId())) {
 			setItemStack(new ItemBuilder(Material.ENDER_PEARL).setDisplayName("Vanish players").build());
 			Bukkit.broadcastMessage("Players are now visible");
 			updateInventory(player);

@@ -35,8 +35,8 @@ import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.command.CommandSender;
@@ -72,7 +72,7 @@ public class CommandFriend implements Listener {
 			return;
 		}
 		User user = new User(player);
-		List<UUID> friends = user.getFriendList();
+		Set<UUID> friends = user.getFriendList();
 		for (UUID u : friends) {
 			OfflineUser offlineFriend = new OfflineUser(u);
 			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " + offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
@@ -98,13 +98,17 @@ public class CommandFriend implements Listener {
 	}
 
 	@EventHandler
-	public void onAccept(PlayerRequestEvent event) {
+	public void onAccept(final PlayerRequestEvent event) {
 		if (event.getResult()) {
 			User user = new User(event.getFrom());
 			if (!user.getFriendList().isEmpty())
-				user.setFriendList(Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
+				user.setFriendList((Set<UUID>) Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
 			else
-				user.setFriendList(Arrays.asList(event.getTo().getUniqueId()));
+				user.setFriendList(new HashSet<UUID>() {
+					private static final long serialVersionUID = 1L; {
+						add(event.getTo().getUniqueId());
+					}
+				});
 		}
 
 	}
