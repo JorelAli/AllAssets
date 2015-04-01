@@ -76,6 +76,7 @@ import io.github.skepter.allassets.commands.other.CommandBroadcast;
 import io.github.skepter.allassets.commands.other.CommandClear;
 import io.github.skepter.allassets.commands.other.CommandEnderchest;
 import io.github.skepter.allassets.commands.other.CommandGhost;
+import io.github.skepter.allassets.commands.other.CommandGive;
 import io.github.skepter.allassets.commands.other.CommandGrief;
 import io.github.skepter.allassets.commands.other.CommandHeal;
 import io.github.skepter.allassets.commands.other.CommandHelp;
@@ -86,7 +87,10 @@ import io.github.skepter.allassets.commands.other.CommandPWeather;
 import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRules;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
+import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
+import io.github.skepter.allassets.commands.sql.CommandBan;
+import io.github.skepter.allassets.commands.sql.CommandUnban;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
@@ -162,41 +166,39 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @GitHub RainoBoy97 - SimpleScoreboard
  * @GitHub Kezz101 - MySQL-WTFAIR
  * @GitHub atesin - TabText
-
+ * 
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  * 
- * 
  * @authors Skepter, Tundra */
 
-// Explore the ResourceBundle for setting Locale
-
 /*
+ * Explore the ResourceBundle for setting Locale
+ * 
  * Add more methods to IDReader
  * Move it to API perhaps?
  * Add methods to retrieve the ID as an integer
  * Use it with that other tool ITemNames or something to send debug messages
  * add it to the config 
  * fix up CommandGive because only having 3 variables isn't good enough!
- */
-
-//color customisation -
-
-//normalColor: 9
-//emphasisColor: b
-//@ajcozzo
-
-//recent players command - like seen, but for recent players
-//do YesNo conversation for payments etc. (/pay
-//friend list to find friends etc.
-//a way to parse PARTS  of a player's name in commands
-//play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
-//work on documentation - ensure EVERYTHING is REALLY clear.
-/* - Things NOT to export when releasing Alpha version - Permissions
+ *
+ * Color customisation -
+ *
+ * normalColor: 9
+ * emphasisColor: b
+ * @ajcozzo
+ * 
+ * recent players command - like seen, but for recent players
+ * do YesNo conversation for payments etc. (/pay
+ * friend list to find friends etc.
+ * a way to parse PARTS  of a player's name in commands
+ * play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
+ * work on documentation - ensure EVERYTHING is REALLY clear.
+ * 
+ * - Things NOT to export when releasing Alpha version - Permissions
  * ExperienceUtils ItemNames MessagePart Fanciful IPUtils Reflections (All of
- * the Libs) TabText Resources Builds */
-
-/*
+ * the Libs) TabText Resources Builds 
+ *
  * Climb vines
  * check out commandBin
  * recipes command
@@ -204,18 +206,15 @@ import org.bukkit.plugin.java.JavaPlugin;
  * disposal chest
  * custom swords with poison perhaps & arrows perhaps
  * jail
- * redstone light netherrack/pumpkins/glowstone
  *
- */
-
-/*highlight text utility
+ * highlight text utility
  * When a player says your username, send you (message) that message,
  * but with your username highlighted.
  * 
  * e.g. Skepter says "Hello amoniuszko20"
  * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
- * but on Skepter's screen, it's totally normal */
-/*
+ * but on Skepter's screen, it's totally normal
+ *
  * A data accessing class which caches all of the data for each player
  * and then saves NEW data.
  * When using /reload (for aa), it then recaches all of the data - hence
@@ -236,10 +235,12 @@ public class AllAssets extends JavaPlugin {
 
 		//// Skepter ////
 
-		//Title, ban and unban will not be available for V 0.7A
-		//new CommandTitle(framework);
-		//new CommandUnban(framework);
-		//r(new CommandBan(framework));
+		new CommandTitle(framework);
+		new CommandUnban(framework);
+		r(new CommandBan(framework));
+		new CommandGive(framework);
+		new CommandHelp(framework);
+		r(new CommandCommandBlock(framework));
 
 	}
 
@@ -249,10 +250,12 @@ public class AllAssets extends JavaPlugin {
 	public static boolean masterSwitch = false;
 	public Chat chat = null;
 	public Economy economy = null;
+
 	/* Other stuff */
 	public CommandFramework framework;
 
 	public ComphenixsGhostFactory ghostFactory;
+
 	/* Vault variables */
 	public boolean hasVault = false;
 	public Permission permission = null;
@@ -260,18 +263,6 @@ public class AllAssets extends JavaPlugin {
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
-	}
-
-	/** Dev block - runs devvy stuff
-	 * 
-	 * @param loadTime - true means load at the END, false means load NORMALLY */
-	private void dev(final boolean loadTime) {
-		if (!loadTime) {
-			//			new CommandGive(framework);
-			new CommandHelp(framework);
-			r(new CommandCommandBlock(framework));
-		} else
-			new VaultReflection().loadAAEco();
 	}
 
 	@Override
@@ -302,7 +293,6 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info(Strings.NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
 
-	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void onEnable() {
 		getLogger().info("+---------------------------------+");
@@ -310,12 +300,11 @@ public class AllAssets extends JavaPlugin {
 
 		/* Some names will be removed - depends on whatever is in the Libs package */
 		getLogger().info("AllAssets, created by Skepter and Tundra");
-		//getLogger().info("Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
 
-		this.saveResource("ItemData.csv", true);
+		saveResource("ItemData.csv", true);
 
 		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
@@ -331,11 +320,7 @@ public class AllAssets extends JavaPlugin {
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
 
-		/** All variables should have been initialised now */
-
-		//		if (masterSwitch)
-		dev(false);
-		//Nav
+		/* All variables should have been initialised now */
 
 		/* This is the features.yml file which enables/disables features according to the users will */
 		getLogger().info("Initializing commands according to features.yml");
@@ -516,7 +501,6 @@ public class AllAssets extends JavaPlugin {
 			r(new SkeletonArrowListener());
 		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
 			r(new ServerListingListener());
-		//Buggy and deprecated until fixed
 
 		devRegister(framework);
 
@@ -538,8 +522,11 @@ public class AllAssets extends JavaPlugin {
 
 		/* Update tempTimeMap.bin file */
 		try {
-			if (new File(getDataFolder(), "tempTimeMap.bin").exists())
-				tempTimeMap = (Map<UUID, Long>) FileUtils.load(new File(Files.getStorage(), "tempTimeMap.bin"));
+			if (new File(getDataFolder(), "tempTimeMap.bin").exists()) {
+				@SuppressWarnings("unchecked")
+				Map<UUID, Long> m = (Map<UUID, Long>) FileUtils.load(new File(Files.getStorage(), "tempTimeMap.bin"));
+				tempTimeMap = m;
+			}
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -547,10 +534,6 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info(Strings.NO_COLOR_TITLE + "AllAssets has been enabled successfully");
 		Bukkit.broadcast(Strings.TITLE + "Plugin reloaded!", "AllAssets.allassets");
 		getLogger().info("+---------------------------------+");
-
-		/* Post load stuff */
-		if (masterSwitch)
-			dev(true);
 		postLoad();
 	}
 
@@ -569,7 +552,7 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	private void postLoad() {
-
+		new VaultReflection().loadAAEco();
 	}
 
 	/* Easy system to add listeners */

@@ -1,14 +1,8 @@
 Release date information (from Skepter)
 
-I want to get version 0.7 Alpha of AllAssets complete in the next 10 days or so. 
-In 10 days time (20th March) until April (2nd April), I'll be away. From 2nd April 
-until 27th April, I'll be away on my Easter holiday which will be jam packed of revision 
+From 2nd April until 27th April, I'll be away on my Easter holiday which will be jam packed of revision 
 for the exams which start in May (8th May) until June (19th June). And then I'll do 
 something like relaxing until around 9th July where my school ends.
-
-So. In other words, you have 10 days to ask all of the questions you could ever 
-possibly want because on the 22nd March, I want to push out version 0.7Alpha. 
-I'm giving you 10 days since I'll be available within those 10 days. 
 
 I want a decent Title API (in /libs/ folder) to be finished (see CommandTitle) which 
 will add subtitles and other variable information. I want trails and a PotionGUI completed 
