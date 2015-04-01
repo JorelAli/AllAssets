@@ -144,22 +144,25 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** AllAssets plugin, version 0.65 Alpha
+/** AllAssets plugin, version 0.7 Alpha
  * 
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
  * 
- * @BukkitForums Plo124 - IPUtils
- * @BukkitDev AmoebaMan - ReflectionUtil (DarkBlade12)
- * @BukkitDev mkremins - 'Fanciful' Messaging format
- * @BukkitDev Minnymin3 - CommandFramework class
- * @BukkitDev Comphenix - GhostFactory
  * @BukkitDev Logout400 - SimpleConfig, SimpleConfigManager
- * @BukkitDev Desht - ExperienceUtils
- * @BukkitDev DPOHVAR - ReflectionUtils
- * @BukkitDev RainoBot97 - SimpleScoreboard
- * @BukkitDev mine-cart - DisguiseLib (fillpant)
- * @idkwho - TabText
+ * @BukkitDev mine-care - DisguiseLib (fillpant)
+ * 
+ * @GitHub Plo124 - IPUtils
+ * @GitHub DarkBlade12 - ReflectionUtil
+ * @GitHub mkremins - 'Fanciful' Messaging format
+ * @GitHub minnymin3 - CommandFramework class
+ * @GitHub aadnk - GhostFactory (Comphenix)
+ * @GitHub desht - ExperienceUtils
+ * @GitHub DPOH-VAR - ReflectionUtils
+ * @GitHub RainoBoy97 - SimpleScoreboard
+ * @GitHub Kezz101 - MySQL-WTFAIR
+ * @GitHub atesin - TabText
+
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  * 
