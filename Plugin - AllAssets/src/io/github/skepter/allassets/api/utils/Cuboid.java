@@ -71,7 +71,7 @@ public class Cuboid {
 		return blocks;
 	}
 
-	/** Gets information for WE regen */
+	/** Gets information for WM regen */
 	public static List<Block> getChunkData(Location loc1, Location loc2) {
 		List<Block> blocks = new ArrayList<Block>();
 

@@ -105,6 +105,7 @@ import io.github.skepter.allassets.listeners.BlockPoweredListener;
 import io.github.skepter.allassets.listeners.ChatListener;
 import io.github.skepter.allassets.listeners.CommandCooldownListener;
 import io.github.skepter.allassets.listeners.ConsoleSayListener;
+import io.github.skepter.allassets.listeners.CustomLogListener;
 import io.github.skepter.allassets.listeners.CustomUnknownCommandListener;
 import io.github.skepter.allassets.listeners.LogListener;
 import io.github.skepter.allassets.listeners.MultiCommandListener;
@@ -501,6 +502,7 @@ public class AllAssets extends JavaPlugin {
 		r(new CustomUnknownCommandListener());
 		r(new AnvilListener());
 		r(new BlockPoweredListener());
+		r(new CustomLogListener());
 
 		r(new StopCommandListener());
 		if (ConfigHandler.features().getBoolean("ConsoleSay"))
