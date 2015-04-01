@@ -309,7 +309,7 @@ public class AllAssets extends JavaPlugin {
 		//getLogger().info("Special thanks to: Plo124, AmoebaMan, mkremins, Minnymin3, Comphenix, Logout400, Desht, DPOHVAR and RainoBot97");
 
 		/* A method of dealing with console errors and stuff ... I hope */
-		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener(this));
+		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
 
 		this.saveResource("ItemData.csv", true);
 

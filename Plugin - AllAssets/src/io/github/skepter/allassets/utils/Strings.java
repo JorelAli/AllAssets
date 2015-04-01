@@ -37,5 +37,9 @@ public class Strings {
 	public final static String SHORT_NO_COLOR_TITLE = "[AA] ";
 	public final static String ACCENT_COLOR = WHITE + "";
 	public final static String HOUSE_STYLE_COLOR = AQUA + "";
+	
+	public static String customTitle(String title) {
+		return BLUE + "[" + AQUA + title + BLUE + "]" + WHITE + " ";
+	}
 
 }
