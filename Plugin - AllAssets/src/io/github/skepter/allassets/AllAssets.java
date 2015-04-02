@@ -237,9 +237,10 @@ public class AllAssets extends JavaPlugin {
 
 		new CommandTitle(framework);
 		new CommandUnban(framework);
-		r(new CommandBan(framework));
 		new CommandGive(framework);
 		new CommandHelp(framework);
+		
+		r(new CommandBan(framework));
 		r(new CommandCommandBlock(framework));
 
 	}
@@ -295,7 +296,7 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		getLogger().info("+---------------------------------+");
+		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
 
 		/* Some names will be removed - depends on whatever is in the Libs package */
@@ -533,13 +534,13 @@ public class AllAssets extends JavaPlugin {
 
 		getLogger().info(Strings.NO_COLOR_TITLE + "AllAssets has been enabled successfully");
 		Bukkit.broadcast(Strings.TITLE + "Plugin reloaded!", "AllAssets.allassets");
-		getLogger().info("+---------------------------------+");
+		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		postLoad();
 	}
 
 	@Override
 	public void onLoad() {
-		getLogger().info("+---------------------------------+");
+		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		getLogger().info("Preparing AllAssets for enabling...");
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
@@ -547,7 +548,7 @@ public class AllAssets extends JavaPlugin {
 
 		/* Too buggy to be worth testing */
 		new SQLiteLoader().init();
-		getLogger().info("+---------------------------------+");
+		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 
 	}
 
