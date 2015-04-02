@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -71,10 +71,10 @@ public class CommandFriend implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		User user = new User(player);
-		Set<UUID> friends = user.getFriendList();
-		for (UUID u : friends) {
-			OfflineUser offlineFriend = new OfflineUser(u);
+		final User user = new User(player);
+		final Set<UUID> friends = user.getFriendList();
+		for (final UUID u : friends) {
+			final OfflineUser offlineFriend = new OfflineUser(u);
 			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " + offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
 		}
 	}
@@ -92,7 +92,7 @@ public class CommandFriend implements Listener {
 			ErrorUtils.playerNotFound(player, args.getArgs()[0]);
 			return;
 		}
-		Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+		final Player target = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
 		player.sendMessage(Strings.TITLE + "You have sent a friend request to " + target.getName());
 		new PlayerRequest(player, target, "add you as a friend. Do you accept " + target.getName() + "'s request?", -1L);
 	}
@@ -100,12 +100,13 @@ public class CommandFriend implements Listener {
 	@EventHandler
 	public void onAccept(final PlayerRequestEvent event) {
 		if (event.getResult()) {
-			User user = new User(event.getFrom());
+			final User user = new User(event.getFrom());
 			if (!user.getFriendList().isEmpty())
 				user.setFriendList((Set<UUID>) Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
 			else
 				user.setFriendList(new HashSet<UUID>() {
-					private static final long serialVersionUID = 1L; {
+					private static final long serialVersionUID = 1L;
+					{
 						add(event.getTo().getUniqueId());
 					}
 				});

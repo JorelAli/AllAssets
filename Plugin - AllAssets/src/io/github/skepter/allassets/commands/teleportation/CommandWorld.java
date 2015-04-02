@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -47,21 +47,20 @@ public class CommandWorld {
 
 	@CommandHandler(name = "world", aliases = { "tpworld" }, permission = "world", description = "Teleports you to a certain world")
 	public void onCommand(final CommandArgs args) {
-		Player player = PlayerGetter.getPlayer(args);
-		if (player != null) {
+		final Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
 			switch (args.getArgs().length) {
 				case 0:
 					printHelp(player);
 					return;
 				case 1:
-					for (World world : Bukkit.getWorlds())
+					for (final World world : Bukkit.getWorlds())
 						if (args.getArgs()[0].equalsIgnoreCase(world.getName())) {
 							new LocationUtils(world.getSpawnLocation()).teleport(player);
 							player.sendMessage(Strings.TITLE + "You have been teleported to " + world.getName());
 						}
 					return;
 			}
-		}
 		return;
 	}
 
@@ -71,8 +70,8 @@ public class CommandWorld {
 	 * new List<String> and return that. */
 	@Completer(name = "world")
 	public List<String> onComplete(final CommandArgs args) {
-		List<String> list = new ArrayList<String>();
-		for (World world : Bukkit.getWorlds())
+		final List<String> list = new ArrayList<String>();
+		for (final World world : Bukkit.getWorlds())
 			list.add(world.getName());
 		return list;
 	}

@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -53,11 +53,15 @@ public class ErrorUtils {
 		error(player, "You cannot reload AllAssets. Use /AllAssets reload instead.");
 	}
 
+	public static void cannotGiveItem(final Player player) {
+		error(player, "Your inventory is full. Cannot give item!");
+	}
+
 	public static void itemInHandIsNull(final Player player) {
 		error(player, "The item in your hand cannot be nothing!");
 	}
 
-	public static void logError(final Player player, String message) {
+	public static void logError(final Player player, final String message) {
 		error(player, "An error appeared in the log: " + message);
 	}
 
@@ -77,7 +81,7 @@ public class ErrorUtils {
 		error(player, "That mob doesn't exist!");
 	}
 
-	public static void batchLimit(final Player player, int limit) {
+	public static void batchLimit(final Player player, final int limit) {
 		error(player, "Batch amount cannot be larger than " + limit + "!");
 	}
 
@@ -108,7 +112,7 @@ public class ErrorUtils {
 	public static void numberTooBig(final CommandSender sender) {
 		error(sender, "That number is too big!");
 	}
-	
+
 	public static void cannotShowNextPage(final Player player) {
 		error(player, "You have no data selected, cannot show next page!");
 	}

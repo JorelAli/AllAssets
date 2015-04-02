@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -48,10 +48,10 @@ public class PlayerRequest {
 	private boolean hasExpired;
 
 	/* to -> from */
-	private Map<UUID, UUID> playerMap;
+	private final Map<UUID, UUID> playerMap;
 
 	/** Use -1 as the timeout for an infinite timeout */
-	public PlayerRequest(Player from, Player to, String information, long timeout) {
+	public PlayerRequest(final Player from, final Player to, final String information, final long timeout) {
 		hasExpired = false;
 		if (timeout != -1L) {
 			from.sendMessage(Strings.TITLE + "Your request will expire in " + (timeout / 1000) + " seconds");
@@ -95,7 +95,7 @@ public class PlayerRequest {
 		private Player to;
 		private boolean result;
 
-		public PlayerRequestEvent(PlayerRequest request, Player from, Player to, boolean result) {
+		public PlayerRequestEvent(final PlayerRequest request, final Player from, final Player to, final boolean result) {
 			this.setFrom(from);
 			this.setTo(to);
 			this.setResult(result);
@@ -115,7 +115,7 @@ public class PlayerRequest {
 			return from;
 		}
 
-		public void setFrom(Player from) {
+		public void setFrom(final Player from) {
 			this.from = from;
 		}
 
@@ -123,7 +123,7 @@ public class PlayerRequest {
 			return to;
 		}
 
-		public void setTo(Player to) {
+		public void setTo(final Player to) {
 			this.to = to;
 		}
 
@@ -131,7 +131,7 @@ public class PlayerRequest {
 			return result;
 		}
 
-		public void setResult(boolean result) {
+		public void setResult(final boolean result) {
 			this.result = result;
 		}
 
@@ -139,7 +139,7 @@ public class PlayerRequest {
 			return request;
 		}
 
-		public void setRequest(PlayerRequest request) {
+		public void setRequest(final PlayerRequest request) {
 			this.request = request;
 		}
 

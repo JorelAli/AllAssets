@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -60,7 +60,7 @@ public class CommandHelp {
 		switch (args.getArgs().length) {
 			case 0:
 				args.getSender().sendMessage(TextUtils.title("Help"));
-				for (Plugin plugin : Bukkit.getPluginManager().getPlugins())
+				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
 					TextUtils.printInformation(args.getSender(), plugin.getName(), SeperatorType.COLON, "Show information about " + plugin.getName());
 				break;
 			case 1:
@@ -93,7 +93,7 @@ public class CommandHelp {
 						}
 
 				//check available helptopics
-				for (HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
+				for (final HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
 					if (topic.getName().equalsIgnoreCase(args.getArgs()[0])) {
 						args.getSender().sendMessage(topic.getFullText(args.getSender()));
 						return;
@@ -108,10 +108,9 @@ public class CommandHelp {
 
 	@Completer(name = "help")
 	public List<String> onComplete(final CommandArgs args) {
-		List<String> helpTopics = new ArrayList<String>();
-		for (Entry<String, List<Object>> entry : map.entrySet()) {
+		final List<String> helpTopics = new ArrayList<String>();
+		for (final Entry<String, List<Object>> entry : map.entrySet())
 			helpTopics.add(String.valueOf(entry.getKey()));
-		}
 		return helpTopics;
 
 	}

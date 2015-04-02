@@ -9,17 +9,17 @@ import org.bukkit.block.Block;
 
 public class Cuboid {
 
-	public static List<Block> blocksFromTwoPoints(Location loc1, Location loc2) {
-		List<Block> blocks = new ArrayList<Block>();
+	public static List<Block> blocksFromTwoPoints(final Location loc1, final Location loc2) {
+		final List<Block> blocks = new ArrayList<Block>();
 
-		int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
-		int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
 
-		int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-		int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
 
-		int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
-		int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
 
 		for (int x = bottomBlockX; x <= topBlockX; x++)
 			for (int z = bottomBlockZ; z <= topBlockZ; z++)
@@ -29,61 +29,61 @@ public class Cuboid {
 		return blocks;
 	}
 
-	public static List<Block> blocksFromTwoPointsEx(Location loc1, Location loc2, Material... excludedBlocks) {
-		List<Block> blocks = new ArrayList<Block>();
+	public static List<Block> blocksFromTwoPointsEx(final Location loc1, final Location loc2, final Material... excludedBlocks) {
+		final List<Block> blocks = new ArrayList<Block>();
 
-		int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
-		int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
 
-		int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-		int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
 
-		int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
-		int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
 
 		for (int x = bottomBlockX; x <= topBlockX; x++)
 			for (int z = bottomBlockZ; z <= topBlockZ; z++)
 				for (int y = bottomBlockY; y <= topBlockY; y++)
-					for (Material m : excludedBlocks)
+					for (final Material m : excludedBlocks)
 						if (!(loc1.getWorld().getBlockAt(x, y, z).getType() == m))
 							blocks.add(loc1.getWorld().getBlockAt(x, y, z));
 		return blocks;
 	}
-	
-	public static List<Block> blocksFromTwoPointsInc(Location loc1, Location loc2, Material... includedBlocks) {
-		List<Block> blocks = new ArrayList<Block>();
 
-		int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
-		int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+	public static List<Block> blocksFromTwoPointsInc(final Location loc1, final Location loc2, final Material... includedBlocks) {
+		final List<Block> blocks = new ArrayList<Block>();
 
-		int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-		int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
 
-		int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
-		int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+
+		final int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
 
 		for (int x = bottomBlockX; x <= topBlockX; x++)
 			for (int z = bottomBlockZ; z <= topBlockZ; z++)
 				for (int y = bottomBlockY; y <= topBlockY; y++)
-					for (Material m : includedBlocks)
+					for (final Material m : includedBlocks)
 						if (loc1.getWorld().getBlockAt(x, y, z).getType() == m)
 							blocks.add(loc1.getWorld().getBlockAt(x, y, z));
 		return blocks;
 	}
 
 	/** Gets information for WM regen */
-	public static List<Block> getChunkData(Location loc1, Location loc2) {
-		List<Block> blocks = new ArrayList<Block>();
+	public static List<Block> getChunkData(final Location loc1, final Location loc2) {
+		final List<Block> blocks = new ArrayList<Block>();
 
-		int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
-		int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
+		final int bottomBlockX = (loc1.getBlockX() > loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
 
-		int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-		int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
-		int y = topBlockY - bottomBlockY;
+		final int topBlockY = (loc1.getBlockY() < loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int bottomBlockY = (loc1.getBlockY() > loc2.getBlockY() ? loc2.getBlockY() : loc1.getBlockY());
+		final int y = topBlockY - bottomBlockY;
 
-		int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
-		int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int topBlockZ = (loc1.getBlockZ() < loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
+		final int bottomBlockZ = (loc1.getBlockZ() > loc2.getBlockZ() ? loc2.getBlockZ() : loc1.getBlockZ());
 
 		for (int x = bottomBlockX; x <= topBlockX; x++)
 			for (int z = bottomBlockZ; z <= topBlockZ; z++)

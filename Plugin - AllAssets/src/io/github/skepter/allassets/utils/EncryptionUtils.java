@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -39,7 +39,7 @@ public class EncryptionUtils {
 	private String encryptionKey;
 
 	/** Creates a new Encryption utility instance using a custom key.
-	 * 
+	 *
 	 * @param key - The key to use */
 	public EncryptionUtils(final String key) {
 		encryptionKey = makeCompatible(key);
@@ -77,7 +77,7 @@ public class EncryptionUtils {
 	}
 
 	/** Encrypts a String into a byte[]
-	 * 
+	 *
 	 * @param stringToEncrypt - The string to encrypt
 	 * @return byte[] with encrypted data */
 	public byte[] encrypt(String stringToEncrypt) {
@@ -105,7 +105,7 @@ public class EncryptionUtils {
 	}
 
 	/** Decrypts a byte[] into its original string form
-	 * 
+	 *
 	 * @param bytesToDecrypt - The byte[] with the encrypted data
 	 * @return String with decrypted data */
 	public String decrypt(final byte[] bytesToDecrypt) {

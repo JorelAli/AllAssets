@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -41,7 +41,7 @@ import org.bukkit.event.player.PlayerLoginEvent.Result;
 
 public class CommandBan implements Listener {
 
-	private SQLiteBan sqlite;
+	private final SQLiteBan sqlite;
 
 	public CommandBan(final CommandFramework framework) {
 		framework.registerCommands(this);
@@ -54,15 +54,14 @@ public class CommandBan implements Listener {
 			ErrorUtils.notEnoughArguments(args.getSender());
 			return;
 		}
-		Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
-		if (target != null) {
+		final Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+		if (target != null)
 			sqlite.banPlayer(args.getSender(), target, TextUtils.getMsgStringFromArgs(args.getArgs(), 1, args.getArgs().length));
-		}
 		return;
 	}
 
 	@EventHandler
-	public void onJoin(PlayerLoginEvent event) {
+	public void onJoin(final PlayerLoginEvent event) {
 		if (sqlite.isBanned(event.getPlayer().getName()))
 			event.disallow(Result.KICK_BANNED, sqlite.getBannedMessage(event.getPlayer().getName()));
 	}

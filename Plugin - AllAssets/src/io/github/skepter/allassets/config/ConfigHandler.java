@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -68,10 +68,10 @@ public class ConfigHandler {
 			features = featuresManager.getNewConfig("features.yml");
 			/** Auto update Features.yml */
 			SimpleConfig tempFeatures;
-			SimpleConfigManager tempFeaturesManager = new SimpleConfigManager(AllAssets.instance());
+			final SimpleConfigManager tempFeaturesManager = new SimpleConfigManager(AllAssets.instance());
 			tempFeatures = tempFeaturesManager.getNewConfig("tempFeatures.yml");
 			createFeatures("tempFeatures.yml", tempFeatures, tempFeaturesManager);
-			for (Entry<String, Object> entry : tempFeatures.getValues().entrySet())
+			for (final Entry<String, Object> entry : tempFeatures.getValues().entrySet())
 				if (!features.contains(entry.getKey()))
 					features.set(entry.getKey(), entry.getValue());
 			tempFeatures.getFile().delete();
@@ -123,7 +123,7 @@ public class ConfigHandler {
 		messages.set("serverListMOTD", "'&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'");
 	}
 
-	private static void createFeatures(String fileName, SimpleConfig features, SimpleConfigManager featuresManager) {
+	private static void createFeatures(final String fileName, SimpleConfig features, final SimpleConfigManager featuresManager) {
 		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
 		features = featuresManager.getNewConfig(fileName, header);
@@ -218,7 +218,7 @@ public class ConfigHandler {
 		features.set("AnyLeash", "true", "Allows you to put leads on any mob");
 		features.set("PickupSkeletonArrows", "false", "Allows you to pick up skeleton arrows");
 		features.set("ServerListMOTDCustomisation", "true");
-		//glowstone, obby; netherrack, fire; pumpkin,jackolantern 
+		//glowstone, obby; netherrack, fire; pumpkin,jackolantern
 		features.set("PoweredBlocks.Glowstone", "true");
 		features.set("PoweredBlocks.Netherrack", "true");
 		features.set("PoweredBlocks.Pumpkin", "true");

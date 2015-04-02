@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -73,9 +73,9 @@ public class CommandBind implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		ItemBuilder builder = new ItemBuilder(player.getItemInHand());
+		final ItemBuilder builder = new ItemBuilder(player.getItemInHand());
 		final String[] command = TextUtils.getMsgFromArgs(args.getArgs(), 0, args.getArgs().length);
-		String lore = "/" + TextUtils.join(command, " ");
+		final String lore = "/" + TextUtils.join(command, " ");
 		builder.addLore(lore);//setLore(lore);
 		try {
 			builder.addGlow();
@@ -97,7 +97,7 @@ public class CommandBind implements Listener {
 			return;
 		}
 
-		ItemBuilder builder = new ItemBuilder(player.getItemInHand());
+		final ItemBuilder builder = new ItemBuilder(player.getItemInHand());
 		final List<String> lore = builder.getLore();
 		if (!TextUtils.isInteger(args.getArgs()[0])) {
 			ErrorUtils.notAnInteger(player);

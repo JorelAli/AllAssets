@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -57,7 +57,7 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 	}
 
 	/** Gets a list of values
-	 * 
+	 *
 	 * @return The list of values as a List of objects */
 	public List<List<Object>> values() {
 		final List<List<Object>> list = new ArrayList<List<Object>>();
@@ -72,18 +72,16 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 	}
 
 	public Map<A, B> getValue1Map() {
-		Map<A, B> tMap = new HashMap<A, B>();
-		for (A a : keySet()) {
+		final Map<A, B> tMap = new HashMap<A, B>();
+		for (final A a : keySet())
 			tMap.put(a, getValue1(a));
-		}
 		return tMap;
 	}
 
 	public Map<A, C> getValue2Map() {
-		Map<A, C> tMap = new HashMap<A, C>();
-		for (A a : keySet()) {
+		final Map<A, C> tMap = new HashMap<A, C>();
+		for (final A a : keySet())
 			tMap.put(a, getValue2(a));
-		}
 		return tMap;
 	}
 
@@ -110,7 +108,7 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 	}
 
 	/** Looks for a value - pretty normal. Enter the int value to lookup
-	 * 
+	 *
 	 * @param value
 	 * @return */
 	public boolean containsValue(final Object objectToFind, final int value) {
@@ -119,7 +117,7 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 	}
 
 	/** Similar to containsValue() but looks through the entire map
-	 * 
+	 *
 	 * @param objectToFind
 	 * @return */
 	public boolean containsValueDeep(final Object objectToFind) {

@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -37,18 +37,18 @@ import org.bukkit.Bukkit;
  * owns that xD */
 public class SQLite {
 
-	private String DatabaseURL;
+	private final String DatabaseURL;
 	private Connection Connection;
-	private File databaseFile;
+	private final File databaseFile;
 
-	public SQLite(File databaseFile) {
+	public SQLite(final File databaseFile) {
 		if (!databaseFile.getParentFile().exists())
 			databaseFile.getParentFile().mkdir();
 
 		if (!databaseFile.exists())
 			try {
 				databaseFile.createNewFile();
-			} catch (IOException e1) {
+			} catch (final IOException e1) {
 				e1.printStackTrace();
 			}
 
@@ -58,7 +58,7 @@ public class SQLite {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e) {
+		} catch (final ClassNotFoundException e) {
 			System.out.println("No SQLite JDBC Driver available!");
 			e.printStackTrace();
 		}
@@ -68,85 +68,82 @@ public class SQLite {
 		try {
 			Connection = DriverManager.getConnection(DatabaseURL);
 			Bukkit.getLogger().info("Opening database " + databaseFile.getName());
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void close() {
-		if (Connection != null) {
+		if (Connection != null)
 			try {
 				Connection.close();
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				e.printStackTrace();
 			}
-		}
 	}
 
-	public void execute(String Query) {
+	public void execute(final String Query) {
 		try {
 			Connection.createStatement().execute(Query);
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public ResultSet executeQuery(String Query) {
+	public ResultSet executeQuery(final String Query) {
 		Statement Statement = null;
 		try {
 			Statement = Connection.createStatement();
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		ResultSet Result = null;
 		try {
 			Result = Statement.executeQuery(Query);
 			return Result;
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		try {
 			Statement.close();
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public PreparedStatement prepareStatement(String Query) {
+	public PreparedStatement prepareStatement(final String Query) {
 		try {
 			return Connection.prepareStatement(Query);
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	public ArrayList<String> resultToArray(ResultSet result, String data) {
-		ArrayList<String> arr = new ArrayList<String>();
+	public ArrayList<String> resultToArray(final ResultSet result, final String data) {
+		final ArrayList<String> arr = new ArrayList<String>();
 		try {
-			while (result.next()) {
+			while (result.next())
 				arr.add(result.getString(data));
-			}
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		try {
 			result.close();
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return arr;
 	}
 
-	public String resultToString(ResultSet result, String data) {
+	public String resultToString(final ResultSet result, final String data) {
 		try {
-			if (result.next()) {
+			if (result.next())
 				return result.getString(data);
-			} else {
+			else
 				return null;
-			}
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
 		return null;

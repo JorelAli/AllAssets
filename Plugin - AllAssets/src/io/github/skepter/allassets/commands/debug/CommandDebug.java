@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -31,10 +31,7 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.api.CustomInventory;
-import io.github.skepter.allassets.api.builders.ItemBuilder;
-import io.github.skepter.allassets.api.utils.Cuboid;
 import io.github.skepter.allassets.api.utils.Debugger;
-import io.github.skepter.allassets.api.utils.PlayerMap;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.reflection.PacketBuilder;
 import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
@@ -71,29 +68,23 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
-import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
@@ -226,218 +217,31 @@ public class CommandDebug implements Listener {
 		});
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// World Modifier 																																						   //
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	//Simple toggles and maps to store player information 
-	private Set<UUID> wmPlayers = new HashSet<UUID>();
-	private PlayerMap<Location> pos1 = new PlayerMap<Location>(AllAssets.instance());
-	private PlayerMap<Location> pos2 = new PlayerMap<Location>(AllAssets.instance());
-	private ItemStack wmt = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("World Modifier tool").setLore("Left click to set position 1", "Right click to set position 2").addGlow().build();
-
-	//Adds the positions to the maps when they click whatever.
-	@EventHandler
-	public void we(PlayerInteractEvent e) {
-		e.setUseInteractedBlock(Result.ALLOW);
-		e.setUseItemInHand(Result.ALLOW);
-		if (wmPlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wmt)) {
-			switch (e.getAction()) {
-				case LEFT_CLICK_AIR: {
-					e.setCancelled(true);
-					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
-					pos1.put(e.getPlayer(), l);
-					e.getPlayer().sendMessage("pos1 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
-					break;
-				}
-				case LEFT_CLICK_BLOCK: {
-					e.setCancelled(true);
-					int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
-					pos1.put(e.getPlayer(), e.getClickedBlock().getLocation());
-					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
-					break;
-				}
-				case RIGHT_CLICK_AIR: {
-					e.setCancelled(true);
-					Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
-					pos2.put(e.getPlayer(), l);
-					e.getPlayer().sendMessage("pos2 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
-					break;
-				}
-				case RIGHT_CLICK_BLOCK: {
-					e.setCancelled(true);
-					int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
-					pos2.put(e.getPlayer(), e.getClickedBlock().getLocation());
-					e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
-					break;
-				}
-				default:
-					break;
-			}
-		}
-	}
-
-	@EventHandler
-	public void zoomEvent(PlayerMoveEvent e) {
-		if (wmPlayers.contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(wmt)) {
-			if (e.getPlayer().isSneaking()) {
-				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 100));
-			} else {
-				e.getPlayer().removePotionEffect(PotionEffectType.SLOW);
-			}
-		}
-	}
-
-	@CommandHandler(name = "debug.wmt", aliases = { "wand" }, permission = "debug", description = "Gives you the world modifier tool")
-	public void wand(final CommandArgs args) {
-		try {
-			args.getPlayer().setItemInHand(wmt);
-		} catch (Exception e) {
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	@CommandHandler(name = "debug.wm", aliases = { "wm" }, permission = "debug", description = "World Modifier")
-	public void wm(final CommandArgs args) {
-		try {
-			if (args.getArgs().length == 0)
-				if (wmPlayers.remove(args.getPlayer().getUniqueId())) {
-					args.getPlayer().sendMessage("World Modifier mode off");
-					return;
-				} else {
-					wmPlayers.add(args.getPlayer().getUniqueId());
-					args.getPlayer().sendMessage("World Modifier mode on");
-					return;
-				}
-			else {
-				int divisor = 1000;
-				switch (args.getArgs()[0]) {
-					case "set": {
-						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-						List<Block> blocks = Cuboid.blocksFromTwoPointsEx(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()), mat);
-
-						args.getPlayer().sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(mat.name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
-						if (blocks.size() < divisor)
-							for (Block b : blocks)
-								b.setType(mat);
-						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
-							b.setType(mat);
-						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-							@Override
-							public void run() {
-								try {
-									args.getPlayer().sendMessage(Strings.TITLE + "Complete!");
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						}, (blocks.size() - divisor) / divisor * 5);
-						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-							final List<Block> blocksList = blocks.subList(i, i + divisor);
-							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-								@Override
-								public void run() {
-									for (Block b : blocksList)
-										b.setType(mat);
-								}
-							}, (i / divisor) * 5);
-						}
-						break;
-					}
-					case "regen": {
-						List<Block> blocks = Cuboid.getChunkData(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()));
-						Set<Chunk> chunks = new HashSet<Chunk>();
-						for (Block b : blocks) {
-							chunks.add(args.getPlayer().getWorld().getChunkAt(b));
-						}
-						for (Chunk c : chunks)
-							args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
-						break;
-					}
-					case "replace":
-					case "repl": {
-						final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-						final Material matToReplaceWith = Material.getMaterial(Integer.parseInt(args.getArgs()[2]));
-						List<Block> blocks = Cuboid.blocksFromTwoPointsInc(pos1.get(args.getPlayer()), pos2.get(args.getPlayer()), mat);
-						args.getPlayer().sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
-						if (blocks.size() < divisor)
-							for (Block b : blocks)
-								b.setType(matToReplaceWith);
-						for (Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
-							b.setType(matToReplaceWith);
-
-						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
-							@Override
-							public void run() {
-								try {
-									args.getPlayer().sendMessage(Strings.TITLE + "Complete!");
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-
-						}, (blocks.size() - divisor) / divisor * 5);
-						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-							final List<Block> blocksList = blocks.subList(i, i + divisor);
-
-							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
-								@Override
-								public void run() {
-									for (Block b : blocksList)
-										b.setType(matToReplaceWith);
-								}
-							}, (i / divisor) * 5);
-						}
-						break;
-					}
-					case "expand":
-					case "max": {
-						Location a = pos1.get(args.getPlayer());
-						Location b = pos2.get(args.getPlayer());
-						a.setY(256);
-						b.setY(0);
-						pos1.put(args.getPlayer(), a);
-						pos2.put(args.getPlayer(), b);
-						args.getPlayer().sendMessage(Strings.TITLE + "Expanded selection");
-					}
-				}
-
-			}
-		} catch (Exception e) {
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// End of World Modifier																																				   //
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
 	public void gsc(final CommandArgs args) {
 		try {
-			ReflectionPlayer p = new ReflectionPlayer(args.getPlayer());
-			GameStateEffects eff = GameStateEffects.valueOf(args.getArgs()[0]);
+			final ReflectionPlayer p = new ReflectionPlayer(args.getPlayer());
+			final GameStateEffects eff = GameStateEffects.valueOf(args.getArgs()[0]);
 
 			p.doGameStateChange(eff, Integer.parseInt(args.getArgs()[1]));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
 		try {
-			Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
+			final Chunk c = args.getPlayer().getWorld().getChunkAt(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation());
 			args.getPlayer().getWorld().regenerateChunk(c.getX(), c.getZ());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
-	private Set<UUID> items = new HashSet<UUID>();
-	private Map<UUID, Material> itemMap = new HashMap<UUID, Material>();
+	private final Set<UUID> items = new HashSet<UUID>();
+	private final Map<UUID, Material> itemMap = new HashMap<UUID, Material>();
 
 	@EventHandler
-	public void onMove(PlayerMoveEvent event) {
+	public void onMove(final PlayerMoveEvent event) {
 		if (items.contains(event.getPlayer().getUniqueId())) {
 			final WitherSkull base = event.getPlayer().getLocation().getWorld().spawn(event.getPlayer().getLocation(), WitherSkull.class);
 			base.setDirection(new Vector(0, 0, 0));
@@ -445,8 +249,8 @@ public class CommandDebug implements Listener {
 			final Entity e = event.getPlayer().getLocation().getWorld().dropItem(event.getPlayer().getLocation(), new ItemStack(itemMap.get(event.getPlayer().getUniqueId())));
 			base.setPassenger(e);
 
-			for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-				PacketBuilder builder = new PacketBuilder(p, PacketType.PLAY_OUT_ENTITY_DESTROY);
+			for (final Player p : Bukkit.getServer().getOnlinePlayers()) {
+				final PacketBuilder builder = new PacketBuilder(p, PacketType.PLAY_OUT_ENTITY_DESTROY);
 				builder.set("a", new int[] { base.getEntityId() });
 				builder.send();
 			}
@@ -472,17 +276,17 @@ public class CommandDebug implements Listener {
 					break;
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
 	@CommandHandler(name = "debug.inv", permission = "debug", description = "Test the custom inventory")
 	public void inv(final CommandArgs args) {
 		try {
-			CustomInventory inv = new CustomInventory(AllAssets.instance(), "My custom inv", 1);
+			final CustomInventory inv = new CustomInventory(AllAssets.instance(), "My custom inv", 1);
 			inv.addCustomItemStack(new VanishPlayersItemStack());
 			inv.open(args.getPlayer());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
@@ -490,7 +294,7 @@ public class CommandDebug implements Listener {
 	public void velocity(final CommandArgs args) {
 		try {
 			args.getPlayer().setVelocity(VectorUtils.getVectorBetweenExpensive(args.getPlayer().getLocation(), PlayerUtils.getTargetBlock(args.getPlayer()).getLocation()).multiply(2));
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
@@ -499,7 +303,7 @@ public class CommandDebug implements Listener {
 	public void set(final CommandArgs args) {
 		try {
 			args.getPlayer().sendBlockChange(PlayerUtils.getTargetBlock(args.getPlayer()).getLocation(), Material.DIAMOND_BLOCK, (byte) 0);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
@@ -507,13 +311,13 @@ public class CommandDebug implements Listener {
 	public void remove(final CommandArgs args) {
 		try {
 			int count = 0;
-			for (Entity e : args.getPlayer().getNearbyEntities(256, 256, 256))
+			for (final Entity e : args.getPlayer().getNearbyEntities(256, 256, 256))
 				if (!(e instanceof Player)) {
 					e.remove();
 					count++;
 				}
 			args.getPlayer().sendMessage(Strings.TITLE + "Cleared " + count + " entities");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
@@ -600,7 +404,7 @@ public class CommandDebug implements Listener {
 	public void openAnvil(final CommandArgs args) {
 		try {
 			new ReflectionPlayer(args.getPlayer()).openAnvil();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -609,31 +413,31 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
 	public void unloadWorld(final CommandArgs args) {
 		try {
-			Player player = args.getPlayer();
-			MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
+			final Player player = args.getPlayer();
+			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 
-			Object handle = utils.worldServer;
-			Object craftServer = ReflectionUtils.getPrivateFieldValue(handle, "server");
-			for (java.lang.reflect.Field f : craftServer.getClass().getFields()) {
+			final Object handle = utils.worldServer;
+			final Object craftServer = ReflectionUtils.getPrivateFieldValue(handle, "server");
+			for (final java.lang.reflect.Field f : craftServer.getClass().getFields()) {
 				player.sendMessage(f.getName());
 				if (f.getName().equals("worlds")) {
 					f.setAccessible(true);
-					Map<String, World> cbWorlds = (Map<String, World>) f.get(craftServer);
+					final Map<String, World> cbWorlds = (Map<String, World>) f.get(craftServer);
 					Debugger.printMap(cbWorlds);
 				}
 
 			}
 
-			Map<String, World> cbWorlds = (Map<String, World>) ReflectionUtils.getPrivateFieldValue(craftServer, "worlds");
+			final Map<String, World> cbWorlds = (Map<String, World>) ReflectionUtils.getPrivateFieldValue(craftServer, "worlds");
 			cbWorlds.remove(player.getWorld().getName().toLowerCase());
 			ReflectionUtils.setFinalStaticField(ReflectionUtils.getPrivateField(utils.craftServer, "worlds"), cbWorlds);
 
-			Object console = ReflectionUtils.getPrivateFieldValue(craftServer, "console");
-			List<?> worlds = (List<?>) ReflectionUtils.getPrivateFieldValue(console, "worlds");
+			final Object console = ReflectionUtils.getPrivateFieldValue(craftServer, "console");
+			final List<?> worlds = (List<?>) ReflectionUtils.getPrivateFieldValue(console, "worlds");
 			worlds.remove(worlds.indexOf(handle));
 			ReflectionUtils.setPrivateField(console, "worlds", worlds);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -711,7 +515,7 @@ public class CommandDebug implements Listener {
 	}
 
 	@EventHandler
-	public void onExplode(EntityExplodeEvent event) {
+	public void onExplode(final EntityExplodeEvent event) {
 		if (!explosions) {
 			event.setCancelled(true);
 			event.setYield(0.0F);
@@ -719,19 +523,19 @@ public class CommandDebug implements Listener {
 	}
 
 	@EventHandler
-	public void onPhysics(BlockPhysicsEvent event) {
+	public void onPhysics(final BlockPhysicsEvent event) {
 		if (!physics)
 			event.setCancelled(true);
 	}
 
 	@EventHandler
-	public void onBlockFall(EntityChangeBlockEvent event) {
+	public void onBlockFall(final EntityChangeBlockEvent event) {
 		if (!physics)
 			event.setCancelled(true);
 	}
 
 	@EventHandler
-	public void onLiquidFlow(BlockFromToEvent event) {
+	public void onLiquidFlow(final BlockFromToEvent event) {
 		if (!physics)
 			event.setCancelled(true);
 	}

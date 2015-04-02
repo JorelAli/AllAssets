@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -59,9 +59,9 @@ public class CommandSilence implements Listener {
 			return;
 		}
 
-		if (players.remove(player.getUniqueId())) {
+		if (players.remove(player.getUniqueId()))
 			args.getSender().sendMessage(Strings.TITLE + player.getName() + " is no longer silenced");
-		} else {
+		else {
 			players.add(player.getUniqueId());
 			args.getSender().sendMessage(Strings.TITLE + player.getName() + " is now silenced");
 		}
@@ -70,7 +70,7 @@ public class CommandSilence implements Listener {
 
 	@EventHandler
 	public void playerInteract(final AsyncPlayerChatEvent event) {
-		for (UUID u : players)
+		for (final UUID u : players)
 			event.getRecipients().remove(Bukkit.getPlayer(u));
 	}
 

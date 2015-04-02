@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -32,12 +32,12 @@ public class ReflectionPlayer {
 	public enum AnimationType {
 		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
 	}
-	
+
 	public enum GameStateEffects {
 		INVALID_BED, END_RAINING, BEGIN_RAINING, CHANGE_GAMEMODE, ENTER_CREDITS, DEMO_MESSAGE, ARROW_HIT, FADE_VALUE, FADE_TIME, ELDER_GUARDIAN_APPEARANCE;
 	}
 
-	private Player player;
+	private final Player player;
 
 	public ReflectionPlayer(final Player player) {
 		this.player = player;
@@ -45,16 +45,16 @@ public class ReflectionPlayer {
 
 	public void openAnvil() {
 		try {
-			MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
+			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 
-			Method method = utils.nmsPlayer.getClass().getDeclaredMethod("openTileEntity", utils.getNMSClass("ITileEntityContainer"));
+			final Method method = utils.nmsPlayer.getClass().getDeclaredMethod("openTileEntity", utils.getNMSClass("ITileEntityContainer"));
 
-			Class<?> tileEntityContainerAnvilClass = utils.getNMSClass("TileEntityContainerAnvil");
-			Object world = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getSuperclass().getSuperclass(), "world");
+			final Class<?> tileEntityContainerAnvilClass = utils.getNMSClass("TileEntityContainerAnvil");
+			final Object world = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getSuperclass().getSuperclass(), "world");
 			//			Object inventory = ReflectionUtils.getPerfectField(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass(), "inventory");
 
-			Object tileEntityContainerAnvil = tileEntityContainerAnvilClass.getConstructor(utils.getNMSClass("World"), utils.getNMSClass("BlockPosition")).newInstance(world, null);
-			Object activeContainer = ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getDeclaredField("activeContainer"));
+			final Object tileEntityContainerAnvil = tileEntityContainerAnvilClass.getConstructor(utils.getNMSClass("World"), utils.getNMSClass("BlockPosition")).newInstance(world, null);
+			final Object activeContainer = ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, utils.nmsPlayer.getClass().getSuperclass().getDeclaredField("activeContainer"));
 			ReflectionUtils.setPerfectField(activeContainer, activeContainer.getClass().getSuperclass(), "checkReachable", false);
 
 			//			Constructor<?> blockPosition = utils.getNMSClass("BlockPosition").getConstructor(int.class, int.class, int.class);
@@ -76,14 +76,14 @@ public class ReflectionPlayer {
 			method.invoke(utils.nmsPlayer, tileEntityContainerAnvil);
 			//ReflectionUtils.setPerfectField(o, o.getClass().getSuperclass(), "", (int) ReflectionUtils.getPrivateFieldValue(utils.nmsPlayer, "containerCounter"));
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void doAnimation(final AnimationType type) {
 		try {
-			PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_ANIMATION);
+			final PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_ANIMATION);
 			int animationID = 0;
 			switch (type) {
 				case CRITICAL_EFFECT:
@@ -117,21 +117,21 @@ public class ReflectionPlayer {
 		} catch (final Exception exception) {
 		}
 	}
-	
-	/**
-	 * Take case when setting values!
-	 * Use 0 if no value is required:
+
+	/** Take case when setting values! Use 0 if no value is required:
+	 * 
 	 * @param effect The game effect to use
-	 * @param value CHANGE_GAMEMODE: 0 = survival, 1 = creative, 2 = adventure, 3 = spectator
-	 * @param value DEMO_MESSAGE: 0 = welcome screen, 101 = controls, 102 = jump control, 103 = inventory control
+	 * @param value CHANGE_GAMEMODE: 0 = survival, 1 = creative, 2 = adventure,
+	 * 3 = spectator
+	 * @param value DEMO_MESSAGE: 0 = welcome screen, 101 = controls, 102 = jump
+	 * control, 103 = inventory control
 	 * @param value FADE_VALUE: 1 = dark, 0 = bright;
-	 * @param value FADE_TIME: ticks for the sky to fade 
-	 */
-	public void doGameStateChange(final GameStateEffects effect, int value) {
+	 * @param value FADE_TIME: ticks for the sky to fade */
+	public void doGameStateChange(final GameStateEffects effect, final int value) {
 		try {
-			PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_GAME_STATE_CHANGE);
+			final PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_GAME_STATE_CHANGE);
 			int effectCode = 0;
-			switch(effect) {
+			switch (effect) {
 				case ARROW_HIT:
 					effectCode = 6;
 					break;

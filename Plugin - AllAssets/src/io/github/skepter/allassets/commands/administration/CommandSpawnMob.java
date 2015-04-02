@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -48,7 +48,7 @@ public class CommandSpawnMob {
 
 	@CommandHandler(name = "spawnmob", aliases = { "mob", "smob", "monster" }, permission = "spawnmob", description = "Allows you to spawn mob")
 	public void command(final CommandArgs args) {
-		Player player = PlayerGetter.getPlayer(args);
+		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {
 				case 0:
@@ -70,9 +70,9 @@ public class CommandSpawnMob {
 		}
 	}
 
-	private void spawnmob(Player player, String mob) {
-		Block b = PlayerUtils.getLastTwoTargetBlocks(player).get(1);
-		Block spawnLocation = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0)));
+	private void spawnmob(final Player player, final String mob) {
+		final Block b = PlayerUtils.getLastTwoTargetBlocks(player).get(1);
+		final Block spawnLocation = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0)));
 		player.getWorld().spawnEntity(new LocationUtils(spawnLocation.getLocation()).getCenter(), new InputParser(mob).parseMob());
 	}
 

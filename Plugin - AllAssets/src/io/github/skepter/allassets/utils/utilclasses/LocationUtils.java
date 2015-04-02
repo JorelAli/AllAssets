@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -35,9 +35,9 @@ import org.bukkit.entity.Player;
 
 public class LocationUtils {
 
-	private Location location;
+	private final Location location;
 
-	public LocationUtils(Location location) {
+	public LocationUtils(final Location location) {
 		this.location = location;
 	}
 
@@ -58,11 +58,11 @@ public class LocationUtils {
 
 	/** Teleports a player, but keeps the pitch and yaw so they don't end up
 	 * looking in some weird direction
-	 * 
+	 *
 	 * @param location
 	 * @param player */
 	public void teleport(final Player player) {
-		Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
+		final Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
 		player.teleport(target);
 	}
 

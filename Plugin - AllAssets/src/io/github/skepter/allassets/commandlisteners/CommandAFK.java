@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -65,10 +65,10 @@ public class CommandAFK implements Listener {
 	}
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
+	public void onJoin(final PlayerJoinEvent event) {
 		//TODO add to the features file
-		StringBuilder builder = new StringBuilder();
-		for (Player player : Bukkit.getOnlinePlayers())
+		final StringBuilder builder = new StringBuilder();
+		for (final Player player : Bukkit.getOnlinePlayers())
 			if (new User(player).isAFK())
 				builder.append(player.getName() + ", ");
 		if (!builder.toString().isEmpty())

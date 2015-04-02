@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -57,7 +57,7 @@ public class Sphere {
 				for (int Z = -radius; Z < radius; Z++)
 					if (Math.sqrt((X * X) + (Y * Y) + (Z * Z)) <= radius) {
 						final Block block = center.getWorld().getBlockAt(X + center.getBlockX(), Y + center.getBlockY(), Z + center.getBlockZ());
-						for (Material m : type)
+						for (final Material m : type)
 							if (block.getType().equals(m))
 								sphere.add(block);
 					}
@@ -100,7 +100,7 @@ public class Sphere {
 
 	/** Checks if the sphere contains this location EXACTLY */
 	public boolean containsPrecise(final Location loc) {
-		double x = loc.getX(), y = loc.getY(), z = loc.getZ();
+		final double x = loc.getX(), y = loc.getY(), z = loc.getZ();
 		if (Math.sqrt((x * x) + (y * y) + (z * z)) <= radius)
 			return false;
 		else
@@ -110,7 +110,7 @@ public class Sphere {
 	/** Checks if the sphere contains this location. May be off by some decimal
 	 * places as it rounds to the closest block. */
 	public boolean contains(final Location loc) {
-		int x = loc.getBlockX(), y = loc.getBlockY(), z = loc.getBlockZ();
+		final int x = loc.getBlockX(), y = loc.getBlockY(), z = loc.getBlockZ();
 		if (Math.sqrt((x * x) + (y * y) + (z * z)) <= radius)
 			return false;
 		else

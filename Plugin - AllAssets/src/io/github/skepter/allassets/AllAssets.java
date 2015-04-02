@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -148,14 +148,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import commandadvanced.worldmodifier.WM_Methods;
+import commandadvanced.worldmodifier.Wand;
+
 /** AllAssets plugin, version 0.7 Alpha
- * 
+ *
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
- * 
+ *
  * @BukkitDev Logout400 - SimpleConfig, SimpleConfigManager
  * @BukkitDev mine-care - DisguiseLib (fillpant)
- * 
+ *
  * @GitHub Plo124 - IPUtils
  * @GitHub DarkBlade12 - ReflectionUtil
  * @GitHub mkremins - 'Fanciful' Messaging format
@@ -166,20 +169,20 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @GitHub RainoBoy97 - SimpleScoreboard
  * @GitHub Kezz101 - MySQL-WTFAIR
  * @GitHub atesin - TabText
- * 
+ *
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
- * 
+ *
  * @authors Skepter, Tundra */
 
 /*
  * Explore the ResourceBundle for setting Locale
- * 
+ *
  * Add more methods to IDReader
  * Move it to API perhaps?
  * Add methods to retrieve the ID as an integer
  * Use it with that other tool ITemNames or something to send debug messages
- * add it to the config 
+ * add it to the config
  * fix up CommandGive because only having 3 variables isn't good enough!
  *
  * Color customisation -
@@ -187,17 +190,17 @@ import org.bukkit.plugin.java.JavaPlugin;
  * normalColor: 9
  * emphasisColor: b
  * @ajcozzo
- * 
+ *
  * recent players command - like seen, but for recent players
  * do YesNo conversation for payments etc. (/pay
  * friend list to find friends etc.
  * a way to parse PARTS  of a player's name in commands
  * play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
  * work on documentation - ensure EVERYTHING is REALLY clear.
- * 
+ *
  * - Things NOT to export when releasing Alpha version - Permissions
  * ExperienceUtils ItemNames MessagePart Fanciful IPUtils Reflections (All of
- * the Libs) TabText Resources Builds 
+ * the Libs) TabText Resources Builds
  *
  * Climb vines
  * check out commandBin
@@ -210,7 +213,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * highlight text utility
  * When a player says your username, send you (message) that message,
  * but with your username highlighted.
- * 
+ *
  * e.g. Skepter says "Hello amoniuszko20"
  * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
  * but on Skepter's screen, it's totally normal
@@ -220,7 +223,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * When using /reload (for aa), it then recaches all of the data - hence
  * making super speedy data delivery.
  * When a player leaves, remove them from the data?
- * 
+ *
  * clean up configHandler - it's so damn freaking messy!
  */
 @SuppressWarnings("deprecation")
@@ -229,19 +232,27 @@ public class AllAssets extends JavaPlugin {
 	/***********************************************************************/
 	/** Put new commands in here **/
 
-	private void devRegister(CommandFramework framework) {
+	private void devRegister(final CommandFramework framework) {
 
 		//// Tundraboy ////
 
 		//// Skepter ////
+		{
+			//Commands
+			new CommandTitle(framework);
+			new CommandUnban(framework);
+			new CommandGive(framework);
+			new CommandHelp(framework);
 
-		new CommandTitle(framework);
-		new CommandUnban(framework);
-		new CommandGive(framework);
-		new CommandHelp(framework);
-		
-		r(new CommandBan(framework));
-		r(new CommandCommandBlock(framework));
+			//Listeners
+			r(new CommandBan(framework));
+			r(new CommandCommandBlock(framework));
+
+			//WorldModifier
+			r(new Wand(framework));
+
+			new WM_Methods(framework);
+		}
 
 	}
 
@@ -525,7 +536,7 @@ public class AllAssets extends JavaPlugin {
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists()) {
 				@SuppressWarnings("unchecked")
-				Map<UUID, Long> m = (Map<UUID, Long>) FileUtils.load(new File(Files.getStorage(), "tempTimeMap.bin"));
+				final Map<UUID, Long> m = (Map<UUID, Long>) FileUtils.load(new File(Files.getStorage(), "tempTimeMap.bin"));
 				tempTimeMap = m;
 			}
 		} catch (final Exception e) {

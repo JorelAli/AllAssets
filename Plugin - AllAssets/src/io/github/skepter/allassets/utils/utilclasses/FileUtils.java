@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -86,43 +86,37 @@ public class FileUtils {
 		return Base64Coder.decodeString((String) result);
 	}
 
-	public static final void copy(File source, File destination) throws IOException {
-		if (source.isDirectory()) {
+	public static final void copy(final File source, final File destination) throws IOException {
+		if (source.isDirectory())
 			copyDirectory(source, destination);
-		} else {
+		else
 			copyFile(source, destination);
-		}
 	}
 
-	public static final void copyDirectory(File source, File destination) throws IOException {
-		if (!source.isDirectory()) {
+	public static final void copyDirectory(final File source, final File destination) throws IOException {
+		if (!source.isDirectory())
 			throw new IllegalArgumentException("Source (" + source.getPath() + ") must be a directory.");
-		}
 
-		if (!source.exists()) {
+		if (!source.exists())
 			throw new IllegalArgumentException("Source directory (" + source.getPath() + ") doesn't exist.");
-		}
 
-		if (destination.exists()) {
+		if (destination.exists())
 			throw new IllegalArgumentException("Destination (" + destination.getPath() + ") exists.");
-		}
 
 		destination.mkdirs();
-		File[] files = source.listFiles();
+		final File[] files = source.listFiles();
 
-		for (File file : files) {
-			if (file.isDirectory()) {
+		for (final File file : files)
+			if (file.isDirectory())
 				copyDirectory(file, new File(destination, file.getName()));
-			} else {
+			else
 				copyFile(file, new File(destination, file.getName()));
-			}
-		}
 	}
 
 	@SuppressWarnings("resource")
-	public static final void copyFile(File source, File destination) throws IOException {
-		FileChannel sourceChannel = new FileInputStream(source).getChannel();
-		FileChannel targetChannel = new FileOutputStream(destination).getChannel();
+	public static final void copyFile(final File source, final File destination) throws IOException {
+		final FileChannel sourceChannel = new FileInputStream(source).getChannel();
+		final FileChannel targetChannel = new FileOutputStream(destination).getChannel();
 		sourceChannel.transferTo(0, sourceChannel.size(), targetChannel);
 		sourceChannel.close();
 		targetChannel.close();

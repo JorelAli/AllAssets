@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -29,7 +29,7 @@ public class MathUtils {
 
 	/** Checks if a number is between another number. E.g. between(5, 2, 10)
 	 * would give true because 5 is between 2 and 10.
-	 * 
+	 *
 	 * @param i - The number to check
 	 * @param min - The smaller number
 	 * @param max - The larger number
@@ -44,7 +44,7 @@ public class MathUtils {
 	}
 
 	/** Returns a random number between a minimum and maximum value
-	 * 
+	 *
 	 * @param min - The minimum value
 	 * @param max - The maximum value
 	 * @return a random integer between that number */
@@ -53,7 +53,7 @@ public class MathUtils {
 	}
 
 	/** Rounds up to next multiple
-	 * 
+	 *
 	 * @param value - Value to round up
 	 * @param factor - Factor (e.g. factor of 10 rounds up to nearest 10)
 	 * @return value. */

@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -49,9 +49,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Get new configuration with header
-	 * 
+	 *
 	 * @param filePath - Path to file
-	 * 
+	 *
 	 * @return - New SimpleConfig */
 	public SimpleConfig getNewConfig(final String filePath, final String[] header) {
 
@@ -71,18 +71,18 @@ public class SimpleConfigManager {
 	}
 
 	/** Get new configuration
-	 * 
+	 *
 	 * @param filePath - Path to file
-	 * 
+	 *
 	 * @return - New SimpleConfig */
 	public SimpleConfig getNewConfig(final String filePath) {
 		return this.getNewConfig(filePath, null);
 	}
 
 	/** Get configuration file from string
-	 * 
+	 *
 	 * @param file - File path
-	 * 
+	 *
 	 * @return - New file object */
 	private File getConfigFile(final String file) {
 
@@ -106,9 +106,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Create new file for config and copy resource into it
-	 * 
+	 *
 	 * @param file - Path to file
-	 * 
+	 *
 	 * @param resource - Resource to copy */
 	public void prepareFile(final String filePath, final String resource) {
 
@@ -132,16 +132,16 @@ public class SimpleConfigManager {
 	}
 
 	/** Create new file for config without resource
-	 * 
+	 *
 	 * @param file - File to create */
 	public void prepareFile(final String filePath) {
 		this.prepareFile(filePath, null);
 	}
 
 	/** Adds header block to config
-	 * 
+	 *
 	 * @param file - Config file
-	 * 
+	 *
 	 * @param header - Header lines */
 	public void setHeader(final File file, final String[] header) {
 
@@ -195,9 +195,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Read file and make comments SnakeYAML friendly
-	 * 
+	 *
 	 * @param filePath - Path to file
-	 * 
+	 *
 	 * @return - File as Input Stream */
 	public InputStream getConfigContent(final File file) {
 
@@ -237,9 +237,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Get comments from file
-	 * 
+	 *
 	 * @param file - File
-	 * 
+	 *
 	 * @return - Comments number */
 	private int getCommentsNum(final File file) {
 
@@ -267,9 +267,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Get config content from file
-	 * 
+	 *
 	 * @param filePath - Path to file
-	 * 
+	 *
 	 * @return - readied file */
 	public InputStream getConfigContent(final String filePath) {
 		return this.getConfigContent(this.getConfigFile(filePath));
@@ -336,9 +336,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Saves configuration to file
-	 * 
+	 *
 	 * @param configString - Config string
-	 * 
+	 *
 	 * @param file - Config file */
 	public void saveConfig(final String configString, final File file) {
 		final String configuration = this.prepareConfigString(configString);
@@ -360,9 +360,9 @@ public class SimpleConfigManager {
 	}
 
 	/** Copy resource from Input Stream to file
-	 * 
+	 *
 	 * @param resource - Resource from .jar
-	 * 
+	 *
 	 * @param file - File to write */
 	private void copyResource(final InputStream resource, final File file) {
 

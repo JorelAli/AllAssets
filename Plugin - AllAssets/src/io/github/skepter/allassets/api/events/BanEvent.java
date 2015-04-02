@@ -10,11 +10,11 @@ public class BanEvent extends Event implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
 	private boolean cancelled;
-	private CommandSender banner;
-	private Player bannedPlayer;
-	private String reason;
+	private final CommandSender banner;
+	private final Player bannedPlayer;
+	private final String reason;
 
-	public BanEvent(CommandSender banner, Player bannedPlayer, String reason) {
+	public BanEvent(final CommandSender banner, final Player bannedPlayer, final String reason) {
 		this.banner = banner;
 		this.bannedPlayer = bannedPlayer;
 		this.reason = reason;
@@ -35,7 +35,7 @@ public class BanEvent extends Event implements Cancellable {
 	}
 
 	@Override
-	public void setCancelled(boolean b) {
+	public void setCancelled(final boolean b) {
 		cancelled = b;
 	}
 

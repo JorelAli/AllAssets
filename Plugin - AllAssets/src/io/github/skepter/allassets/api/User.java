@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -54,7 +54,7 @@ public class User {
 
 		try {
 			playerData = new PlayerData(player);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			CommandLog.addLog("Error retrieving " + p.getName() + "'s data file", LogType.ERROR);
 		}
 	}
@@ -119,9 +119,8 @@ public class User {
 	/** Gets a list of every user's file and loads them as OfflineUsers */
 	public static List<User> onlineUsers() {
 		final List<User> userList = new ArrayList<User>();
-		for (Player player : Bukkit.getOnlinePlayers()) {
+		for (final Player player : Bukkit.getOnlinePlayers())
 			userList.add(new User(player));
-		}
 		return userList;
 	}
 
@@ -253,15 +252,14 @@ public class User {
 	}
 
 	public Set<UUID> getFriendList() {
-		List<String> str = playerData.getDataFile().getStringList("friends");
-		Set<UUID> list = new HashSet<UUID>();
-		for (String s : str) {
+		final List<String> str = playerData.getDataFile().getStringList("friends");
+		final Set<UUID> list = new HashSet<UUID>();
+		for (final String s : str)
 			list.add(UUID.fromString(s));
-		}
 		return list;
 	}
 
-	public void setFriendList(Set<UUID> friends) {
+	public void setFriendList(final Set<UUID> friends) {
 		playerData.getDataFile().set("friends", friends);
 		playerData.saveDataFile();
 	}
@@ -273,7 +271,7 @@ public class User {
 	/*
 	 * last play = maths with ticks lived? add feature where you can set
 	 * waypoints: /waypoint <set/reset> - sets the compass pointing location
-	 * 
+	 *
 	 * feature where you can add holograms??
 	 */
 }

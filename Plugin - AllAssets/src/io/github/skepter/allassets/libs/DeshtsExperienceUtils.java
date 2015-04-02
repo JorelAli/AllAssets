@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -32,15 +32,15 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.entity.Player;
 
 /** @author desht
- * 
+ *
  * Adapted from ExperienceUtils code originally in ScrollingMenuSign.
- * 
+ *
  * Credit to nisovin
  * (http://forums.bukkit.org/threads/experienceutils-make-giving
  * -taking-exp-a-bit-more-intuitive.54450/#post-1067480) for an implementation
  * that avoids the problems of getTotalExperience(), which doesn't work properly
  * after a player has enchanted something.
- * 
+ *
  * Credit to comphenix for further contributions: See
  * http://forums.bukkit.org/threads
  * /ExperienceUtils-was-experienceutils-make-giving
@@ -61,7 +61,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Create a new ExperienceUtils for the given player.
-	 * 
+	 *
 	 * @param player the player for this ExperienceUtils object
 	 * @throws IllegalArgumentException if the player is null */
 	public DeshtsExperienceUtils(final Player player) {
@@ -75,14 +75,14 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Get the current hard max level for which calculations will be done.
-	 * 
+	 *
 	 * @return the current hard max level */
 	public static int getHardMaxLevel() {
 		return hardMaxLevel;
 	}
 
 	/** Set the current hard max level for which calculations will be done.
-	 * 
+	 *
 	 * @param hardMaxLevel the new hard max level */
 	public static void setHardMaxLevel(final int hardMaxLevel) {
 		DeshtsExperienceUtils.hardMaxLevel = hardMaxLevel;
@@ -90,7 +90,7 @@ public class DeshtsExperienceUtils {
 
 	/** Initialize the XP lookup table. See
 	 * http://minecraft.gamepedia.com/Experience
-	 * 
+	 *
 	 * @param maxLevel The highest level handled by the lookup tables */
 	private static void initLookupTables(final int maxLevel) {
 		xpTotalToReachLevel = new int[maxLevel];
@@ -102,7 +102,7 @@ public class DeshtsExperienceUtils {
 	/** Calculate the level that the given XP quantity corresponds to, without
 	 * using the lookup tables. This is needed if getLevelForExp() is called
 	 * with an XP quantity beyond the range of the existing lookup tables.
-	 * 
+	 *
 	 * @param exp
 	 * @return */
 	private static int calculateLevelForExp(final int exp) {
@@ -119,7 +119,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Get the Player associated with this ExperienceUtils.
-	 * 
+	 *
 	 * @return the Player object
 	 * @throws IllegalStateException if the player is no longer online */
 	public Player getPlayer() {
@@ -132,7 +132,7 @@ public class DeshtsExperienceUtils {
 	/** Adjust the player's XP by the given amount in an intelligent fashion.
 	 * Works around some of the non-intuitive behaviour of the basic Bukkit
 	 * player.giveExp() method.
-	 * 
+	 *
 	 * @param amt Amount of XP, may be negative */
 	public void changeExp(final int amt) {
 		changeExp((double) amt);
@@ -141,21 +141,21 @@ public class DeshtsExperienceUtils {
 	/** Adjust the player's XP by the given amount in an intelligent fashion.
 	 * Works around some of the non-intuitive behaviour of the basic Bukkit
 	 * player.giveExp() method.
-	 * 
+	 *
 	 * @param amt Amount of XP, may be negative */
 	public void changeExp(final double amt) {
 		setExp(getCurrentFractionalXP(), amt);
 	}
 
 	/** Set the player's experience
-	 * 
+	 *
 	 * @param amt Amount of XP, should not be negative */
 	public void setExp(final int amt) {
 		setExp(0, amt);
 	}
 
 	/** Set the player's fractional experience.
-	 * 
+	 *
 	 * @param amt Amount of XP, should not be negative */
 	public void setExp(final double amt) {
 		setExp(0, amt);
@@ -180,7 +180,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Get the player's current XP total.
-	 * 
+	 *
 	 * @return the player's total XP */
 	public int getCurrentExp() {
 		final Player player = getPlayer();
@@ -191,7 +191,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Get the player's current fractional XP.
-	 * 
+	 *
 	 * @return The player's total XP with fractions. */
 	private double getCurrentFractionalXP() {
 		final Player player = getPlayer();
@@ -202,7 +202,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Checks if the player has the given amount of XP.
-	 * 
+	 *
 	 * @param amt The amount to check for.
 	 * @return true if the player has enough XP, false otherwise */
 	public boolean hasExp(final int amt) {
@@ -210,7 +210,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Checks if the player has the given amount of fractional XP.
-	 * 
+	 *
 	 * @param amt The amount to check for.
 	 * @return true if the player has enough XP, false otherwise */
 	public boolean hasExp(final double amt) {
@@ -218,7 +218,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Get the level that the given amount of XP falls within.
-	 * 
+	 *
 	 * @param exp the amount to check for
 	 * @return the level that a player with this amount total XP would be
 	 * @throws IllegalArgumentException if the given XP is less than 0 */
@@ -237,7 +237,7 @@ public class DeshtsExperienceUtils {
 
 	/** Retrieves the amount of experience the experience bar can hold at the
 	 * given level.
-	 * 
+	 *
 	 * @param level the level to check
 	 * @return the amount of experience at this level in the level bar
 	 * @throws IllegalArgumentException if the level is less than 0 */
@@ -247,7 +247,7 @@ public class DeshtsExperienceUtils {
 	}
 
 	/** Return the total XP needed to be the given level.
-	 * 
+	 *
 	 * @param level The level to check for.
 	 * @return The amount of XP needed for the level.
 	 * @throws IllegalArgumentException if the level is less than 0 or greater

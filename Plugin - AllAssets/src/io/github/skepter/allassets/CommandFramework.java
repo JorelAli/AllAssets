@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -61,11 +61,11 @@ import org.bukkit.plugin.SimplePluginManager;
 
 /** Command Framework - CommandFramework <br>
  * The main command framework class used for controlling the framework.
- * 
+ *
  * Some features have been added/modified for the use of AllAssets However,
  * minnymin3 deserves pretty much all of the credit since he (or she) wrote the
  * majority of the class.
- * 
+ *
  * @author minnymin3 (and Skepter) */
 public class CommandFramework {
 
@@ -77,7 +77,7 @@ public class CommandFramework {
 	private final Set<String> cmds = new HashSet<String>();
 
 	/** Initializes the command framework and sets up the command maps
-	 * 
+	 *
 	 * @param plugin */
 	public CommandFramework(final Plugin plugin) {
 		this.plugin = plugin;
@@ -95,7 +95,7 @@ public class CommandFramework {
 	}
 
 	/** Handles commands. Used in the onCommand method in your JavaPlugin class
-	 * 
+	 *
 	 * @param sender The {@link org.bukkit.command.CommandSender} parsed from
 	 * onCommand
 	 * @param label The label parsed from onCommand
@@ -134,7 +134,7 @@ public class CommandFramework {
 
 	/** Registers all command and completer methods inside of the object. Similar
 	 * to Bukkit's registerEvents method.
-	 * 
+	 *
 	 * @param obj The object to register the commands of */
 	public void registerCommands(final Object obj) {
 		for (final Method m : obj.getClass().getMethods())
@@ -231,12 +231,12 @@ public class CommandFramework {
 	/** Command Framework - Command <br>
 	 * The command annotation used to designate methods as commands. All methods
 	 * should have a single CommandArgs argument
-	 * 
+	 *
 	 * Things you can put in: name - name of the command permission - command
 	 * permissions noPerm - message to send if you don't have the permission
 	 * aliases - command aliases description - command description usage -
 	 * command usage
-	 * 
+	 *
 	 * @author minnymin3 */
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
@@ -245,34 +245,34 @@ public class CommandFramework {
 		/** The name of the command. If it is a sub command then its values would
 		 * be separated by periods. ie. a command that would be a subcommand of
 		 * test would be 'test.subcommandname'
-		 * 
+		 *
 		 * @return */
 		public String name();
 
 		/** Gets the required permission of the command
-		 * 
+		 *
 		 * @return */
 		public String permission() default "";
 
 		/** A list of alternate names that the command is executed under. See
 		 * name() for details on how names work
-		 * 
+		 *
 		 * @return */
 		public String[] aliases() default {};
 
 		/** The description that will appear in /help of the command
-		 * 
+		 *
 		 * @return */
 		public String description() default "";
 
 		/** The usage that will appear in /help (commandname)
-		 * 
+		 *
 		 * @return */
 		public String usage() default "Use <command>";
 
 		/** A custom annotation that decides weather or not the command is listed
 		 * in /aio commands or not
-		 * 
+		 *
 		 * @return */
 		public boolean isListed() default true; //Nav
 	}
@@ -281,7 +281,7 @@ public class CommandFramework {
 	 * The completer annotation used to designate methods as command completers.
 	 * All methods should have a single CommandArgs argument and return a String
 	 * List object
-	 * 
+	 *
 	 * @author minnymin3 */
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
@@ -290,13 +290,13 @@ public class CommandFramework {
 		/** The command that this completer completes. If it is a sub command
 		 * then its values would be separated by periods. ie. a command that
 		 * would be a subcommand of test would be 'test.subcommandname'
-		 * 
+		 *
 		 * @return */
 		String name();
 
 		/** A list of alternate names that the completer is executed under. See
 		 * name() for details on how names work
-		 * 
+		 *
 		 * @return */
 		String[] aliases() default {};
 
@@ -305,7 +305,7 @@ public class CommandFramework {
 	/** Command Framework - BukkitCommand <br>
 	 * An implementation of Bukkit's Command class allowing for registering of
 	 * commands without plugin.yml
-	 * 
+	 *
 	 * @author minnymin3 */
 	class BukkitCommand extends org.bukkit.command.Command {
 
@@ -314,7 +314,7 @@ public class CommandFramework {
 		private final CommandExecutor executor;
 
 		/** A slimmed down PluginCommand
-		 * 
+		 *
 		 * @param label
 		 * @param owner */
 		protected BukkitCommand(final String label, final Plugin owner) {
@@ -381,7 +381,7 @@ public class CommandFramework {
 	/** Command Framework - BukkitCompleter <br>
 	 * An implementation of the TabCompleter class allowing for multiple tab
 	 * completers per command
-	 * 
+	 *
 	 * @author minnymin3 */
 	class BukkitCompleter implements TabCompleter {
 
@@ -418,7 +418,7 @@ public class CommandFramework {
 	/** Command Framework - CommandArgs <br>
 	 * This class is passed to the command methods and contains various
 	 * utilities as well as the command info.
-	 * 
+	 *
 	 * @author minnymin3 */
 	public class CommandArgs {
 
@@ -443,21 +443,21 @@ public class CommandFramework {
 		}
 
 		/** Gets the command sender
-		 * 
+		 *
 		 * @return sender */
 		public CommandSender getSender() {
 			return sender;
 		}
 
 		/** Gets the original command object
-		 * 
+		 *
 		 * @return */
 		public org.bukkit.command.Command getCommand() {
 			return command;
 		}
 
 		/** Gets the label including sub command labels of this command
-		 * 
+		 *
 		 * @return Something like 'test.subcommand' */
 		public String getLabel() {
 			return label;
@@ -467,7 +467,7 @@ public class CommandFramework {
 		 * label was test.subcommand and the arguments were subcommand foo foo,
 		 * it would only return 'foo foo' because 'subcommand' is part of the
 		 * command
-		 * 
+		 *
 		 * @return */
 		public String[] getArgs() {
 			return args;

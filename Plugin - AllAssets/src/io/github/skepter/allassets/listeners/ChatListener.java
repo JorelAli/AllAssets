@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -56,10 +56,10 @@ public class ChatListener implements Listener {
 				event.getRecipients().clear();
 			}
 	}
-	
+
 	@EventHandler
 	public void playerNickname(final AsyncPlayerChatEvent event) {
-		if(event.getPlayer().getCustomName() != null) {
+		if (event.getPlayer().getCustomName() != null) {
 			if (ConfigHandler.features().getBoolean("ChatColor"))
 				if (event.getPlayer().hasPermission("AllAssets.chatColor"))
 					event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
@@ -84,47 +84,42 @@ public class ChatListener implements Listener {
 			if (sum.contains("+")) {
 				sum = sum.replace('+', ':');
 				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
 					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) + Integer.parseInt(arr[1])));
-				} else {
+				else
 					ErrorUtils.notAnInteger(event.getPlayer());
-				}
 			}
 			if (sum.contains("-")) {
 				sum = sum.replace('-', ':');
 				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
 					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) - Integer.parseInt(arr[1])));
-				} else {
+				else
 					ErrorUtils.notAnInteger(event.getPlayer());
-				}
 			}
 			if (sum.contains("*")) {
 				sum = sum.replace('*', ':');
 				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
 					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) * Integer.parseInt(arr[1])));
-				} else {
+				else
 					ErrorUtils.notAnInteger(event.getPlayer());
-				}
 			}
 			if (sum.contains("/")) {
 				sum = sum.replace('/', ':');
 				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
 					event.setMessage(event.getMessage() + " = " + (new Double(Integer.parseInt(arr[0])) / new Double(Integer.parseInt(arr[1]))));
-				} else {
+				else
 					ErrorUtils.notAnInteger(event.getPlayer());
-				}
 			}
 			if (sum.contains("^")) {
 				sum = sum.replace('^', ':');
 				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1])) {
+				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
 					event.setMessage(event.getMessage() + " = " + new BigInteger(arr[0]).pow(Integer.parseInt(arr[1])).toString());
-				} else {
+				else
 					ErrorUtils.notAnInteger(event.getPlayer());
-				}
 			}
 		}
 	}

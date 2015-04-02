@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -31,7 +31,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 /** Minecraft 1.8 Title
- * 
+ *
  * @version 1.0.4
  * @author Maxim Van de Wynckel */
 public class Title {
@@ -57,27 +57,27 @@ public class Title {
 	private static final Map<Class<?>, Class<?>> CORRESPONDING_TYPES = new HashMap<Class<?>, Class<?>>();
 
 	/** Create a new 1.8 title
-	 * 
+	 *
 	 * @param title Title */
-	public Title(String title) {
+	public Title(final String title) {
 		this.title = title;
 		loadClasses();
 	}
 
 	/** Create a new 1.8 title
-	 * 
+	 *
 	 * @param title Title text
 	 * @param subtitle Subtitle text */
-	public Title(String title, String subtitle) {
+	public Title(final String title, final String subtitle) {
 		this.title = title;
 		this.subtitle = subtitle;
 		loadClasses();
 	}
 
 	/** Copy 1.8 title
-	 * 
+	 *
 	 * @param title Title */
-	public Title(Title title) {
+	public Title(final Title title) {
 		// Copy title
 		this.title = title.title;
 		this.subtitle = title.subtitle;
@@ -91,13 +91,13 @@ public class Title {
 	}
 
 	/** Create a new 1.8 title
-	 * 
+	 *
 	 * @param title Title text
 	 * @param subtitle Subtitle text
 	 * @param fadeInTime Fade in time
 	 * @param stayTime Stay on screen time
 	 * @param fadeOutTime Fade out time */
-	public Title(String title, String subtitle, int fadeInTime, int stayTime, int fadeOutTime) {
+	public Title(final String title, final String subtitle, final int fadeInTime, final int stayTime, final int fadeOutTime) {
 		this.title = title;
 		this.subtitle = subtitle;
 		this.fadeInTime = fadeInTime;
@@ -115,65 +115,65 @@ public class Title {
 	}
 
 	/** Set title text
-	 * 
+	 *
 	 * @param title Title */
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
 	/** Get title text
-	 * 
+	 *
 	 * @return Title text */
 	public String getTitle() {
 		return this.title;
 	}
 
 	/** Set subtitle text
-	 * 
+	 *
 	 * @param subtitle Subtitle text */
-	public void setSubtitle(String subtitle) {
+	public void setSubtitle(final String subtitle) {
 		this.subtitle = subtitle;
 	}
 
 	/** Get subtitle text
-	 * 
+	 *
 	 * @return Subtitle text */
 	public String getSubtitle() {
 		return this.subtitle;
 	}
 
 	/** Set the title color
-	 * 
+	 *
 	 * @param color Chat color */
-	public void setTitleColor(ChatColor color) {
+	public void setTitleColor(final ChatColor color) {
 		this.titleColor = color;
 	}
 
 	/** Set the subtitle color
-	 * 
+	 *
 	 * @param color Chat color */
-	public void setSubtitleColor(ChatColor color) {
+	public void setSubtitleColor(final ChatColor color) {
 		this.subtitleColor = color;
 	}
 
 	/** Set title fade in time
-	 * 
+	 *
 	 * @param time Time */
-	public void setFadeInTime(int time) {
+	public void setFadeInTime(final int time) {
 		this.fadeInTime = time;
 	}
 
 	/** Set title fade out time
-	 * 
+	 *
 	 * @param time Time */
-	public void setFadeOutTime(int time) {
+	public void setFadeOutTime(final int time) {
 		this.fadeOutTime = time;
 	}
 
 	/** Set title stay time
-	 * 
+	 *
 	 * @param time Time */
-	public void setStayTime(int time) {
+	public void setStayTime(final int time) {
 		this.stayTime = time;
 	}
 
@@ -188,18 +188,18 @@ public class Title {
 	}
 
 	/** Send the title to a player
-	 * 
+	 *
 	 * @param player Player */
-	public void send(Player player) {
+	public void send(final Player player) {
 		if (packetTitle != null) {
 			// First reset previous settings
 			resetTitle(player);
 			try {
 				// Send timings first
-				Object handle = getHandle(player);
-				Object connection = getField(handle.getClass(), "playerConnection").get(handle);
-				Object[] actions = packetActions.getEnumConstants();
-				Method sendPacket = getMethod(connection.getClass(), "sendPacket");
+				final Object handle = getHandle(player);
+				final Object connection = getField(handle.getClass(), "playerConnection").get(handle);
+				final Object[] actions = packetActions.getEnumConstants();
+				final Method sendPacket = getMethod(connection.getClass(), "sendPacket");
 				Object packet = packetTitle.getConstructor(packetActions, chatBaseComponent, Integer.TYPE, Integer.TYPE, Integer.TYPE).newInstance(actions[2], null, fadeInTime * (ticks ? 1 : 20), stayTime * (ticks ? 1 : 20), fadeOutTime * (ticks ? 1 : 20));
 				// Send if set
 				if (fadeInTime != -1 && fadeOutTime != -1 && stayTime != -1)
@@ -215,7 +215,7 @@ public class Title {
 					packet = packetTitle.getConstructor(packetActions, chatBaseComponent).newInstance(actions[1], serialized);
 					sendPacket.invoke(connection, packet);
 				}
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -223,58 +223,57 @@ public class Title {
 
 	/** Broadcast the title to all players */
 	public void broadcast() {
-		for (Player p : Bukkit.getOnlinePlayers()) {
+		for (final Player p : Bukkit.getOnlinePlayers())
 			send(p);
-		}
 	}
 
 	/** Clear the title
-	 * 
+	 *
 	 * @param player Player */
-	public void clearTitle(Player player) {
+	public void clearTitle(final Player player) {
 		try {
 			// Send timings first
-			Object handle = getHandle(player);
-			Object connection = getField(handle.getClass(), "playerConnection").get(handle);
-			Object[] actions = packetActions.getEnumConstants();
-			Method sendPacket = getMethod(connection.getClass(), "sendPacket");
-			Object packet = packetTitle.getConstructor(packetActions, chatBaseComponent).newInstance(actions[3], null);
+			final Object handle = getHandle(player);
+			final Object connection = getField(handle.getClass(), "playerConnection").get(handle);
+			final Object[] actions = packetActions.getEnumConstants();
+			final Method sendPacket = getMethod(connection.getClass(), "sendPacket");
+			final Object packet = packetTitle.getConstructor(packetActions, chatBaseComponent).newInstance(actions[3], null);
 			sendPacket.invoke(connection, packet);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/** Reset the title settings
-	 * 
+	 *
 	 * @param player Player */
-	public void resetTitle(Player player) {
+	public void resetTitle(final Player player) {
 		try {
 			// Send timings first
-			Object handle = getHandle(player);
-			Object connection = getField(handle.getClass(), "playerConnection").get(handle);
-			Object[] actions = packetActions.getEnumConstants();
-			Method sendPacket = getMethod(connection.getClass(), "sendPacket");
-			Object packet = packetTitle.getConstructor(packetActions, chatBaseComponent).newInstance(actions[4], null);
+			final Object handle = getHandle(player);
+			final Object connection = getField(handle.getClass(), "playerConnection").get(handle);
+			final Object[] actions = packetActions.getEnumConstants();
+			final Method sendPacket = getMethod(connection.getClass(), "sendPacket");
+			final Object packet = packetTitle.getConstructor(packetActions, chatBaseComponent).newInstance(actions[4], null);
 			sendPacket.invoke(connection, packet);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private Class<?> getPrimitiveType(Class<?> clazz) {
+	private Class<?> getPrimitiveType(final Class<?> clazz) {
 		return CORRESPONDING_TYPES.containsKey(clazz) ? CORRESPONDING_TYPES.get(clazz) : clazz;
 	}
 
-	private Class<?>[] toPrimitiveTypeArray(Class<?>[] classes) {
-		int a = classes != null ? classes.length : 0;
-		Class<?>[] types = new Class<?>[a];
+	private Class<?>[] toPrimitiveTypeArray(final Class<?>[] classes) {
+		final int a = classes != null ? classes.length : 0;
+		final Class<?>[] types = new Class<?>[a];
 		for (int i = 0; i < a; i++)
 			types[i] = getPrimitiveType(classes[i]);
 		return types;
 	}
 
-	private static boolean equalsTypeArray(Class<?>[] a, Class<?>[] o) {
+	private static boolean equalsTypeArray(final Class<?>[] a, final Class<?>[] o) {
 		if (a.length != o.length)
 			return false;
 		for (int i = 0; i < a.length; i++)
@@ -283,19 +282,19 @@ public class Title {
 		return true;
 	}
 
-	private Object getHandle(Object obj) {
+	private Object getHandle(final Object obj) {
 		try {
 			return getMethod("getHandle", obj.getClass()).invoke(obj);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	private Method getMethod(String name, Class<?> clazz, Class<?>... paramTypes) {
-		Class<?>[] t = toPrimitiveTypeArray(paramTypes);
-		for (Method m : clazz.getMethods()) {
-			Class<?>[] types = toPrimitiveTypeArray(m.getParameterTypes());
+	private Method getMethod(final String name, final Class<?> clazz, final Class<?>... paramTypes) {
+		final Class<?>[] t = toPrimitiveTypeArray(paramTypes);
+		for (final Method m : clazz.getMethods()) {
+			final Class<?>[] types = toPrimitiveTypeArray(m.getParameterTypes());
 			if (m.getName().equals(name) && equalsTypeArray(types, t))
 				return m;
 		}
@@ -303,35 +302,35 @@ public class Title {
 	}
 
 	private String getVersion() {
-		String name = Bukkit.getServer().getClass().getPackage().getName();
-		String version = name.substring(name.lastIndexOf('.') + 1) + ".";
+		final String name = Bukkit.getServer().getClass().getPackage().getName();
+		final String version = name.substring(name.lastIndexOf('.') + 1) + ".";
 		return version;
 	}
 
-	private Class<?> getNMSClass(String className) {
-		String fullName = "net.minecraft.server." + getVersion() + className;
+	private Class<?> getNMSClass(final String className) {
+		final String fullName = "net.minecraft.server." + getVersion() + className;
 		Class<?> clazz = null;
 		try {
 			clazz = Class.forName(fullName);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 		return clazz;
 	}
 
-	private Field getField(Class<?> clazz, String name) {
+	private Field getField(final Class<?> clazz, final String name) {
 		try {
-			Field field = clazz.getDeclaredField(name);
+			final Field field = clazz.getDeclaredField(name);
 			field.setAccessible(true);
 			return field;
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
-	private Method getMethod(Class<?> clazz, String name, Class<?>... args) {
-		for (Method m : clazz.getMethods())
+	private Method getMethod(final Class<?> clazz, final String name, final Class<?>... args) {
+		for (final Method m : clazz.getMethods())
 			if (m.getName().equals(name) && (args.length == 0 || ClassListEqual(args, m.getParameterTypes()))) {
 				m.setAccessible(true);
 				return m;
@@ -339,7 +338,7 @@ public class Title {
 		return null;
 	}
 
-	private boolean ClassListEqual(Class<?>[] l1, Class<?>[] l2) {
+	private boolean ClassListEqual(final Class<?>[] l1, final Class<?>[] l2) {
 		boolean equal = true;
 		if (l1.length != l2.length)
 			return false;

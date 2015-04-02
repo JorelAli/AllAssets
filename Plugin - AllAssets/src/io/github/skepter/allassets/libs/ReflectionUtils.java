@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -79,7 +79,7 @@ public class ReflectionUtils {
 
 	/** Get class for name. Replace {nms} to net.minecraft.server.V*. Replace
 	 * {cb} to org.bukkit.craftbukkit.V*. Replace {nm} to net.minecraft
-	 * 
+	 *
 	 * @param classes possible class paths
 	 * @return RefClass object
 	 * @throws RuntimeException if no class found */
@@ -94,7 +94,7 @@ public class ReflectionUtils {
 	}
 
 	/** get RefClass object by real class
-	 * 
+	 *
 	 * @param clazz class
 	 * @return RefClass based on passed class */
 	public static RefClass getRefClass(final Class clazz) {
@@ -106,7 +106,7 @@ public class ReflectionUtils {
 		private final Class<?> clazz;
 
 		/** get passed class
-		 * 
+		 *
 		 * @return class */
 		public Class<?> getRealClass() {
 			return clazz;
@@ -117,7 +117,7 @@ public class ReflectionUtils {
 		}
 
 		/** see {@link Class#isInstance(Object)}
-		 * 
+		 *
 		 * @param object the object to check
 		 * @return true if object is an instance of this class */
 		public boolean isInstance(final Object object) {
@@ -125,7 +125,7 @@ public class ReflectionUtils {
 		}
 
 		/** get existing method by name and types
-		 * 
+		 *
 		 * @param name name
 		 * @param types method parameters. can be Class or RefClass
 		 * @return RefMethod object
@@ -152,7 +152,7 @@ public class ReflectionUtils {
 		}
 
 		/** get existing constructor by types
-		 * 
+		 *
 		 * @param types parameters. can be Class or RefClass
 		 * @return RefMethod object
 		 * @throws RuntimeException if constructor not found */
@@ -178,7 +178,7 @@ public class ReflectionUtils {
 		}
 
 		/** find method by type parameters
-		 * 
+		 *
 		 * @param types parameters. can be Class or RefClass
 		 * @return RefMethod object
 		 * @throws RuntimeException if method not found */
@@ -209,7 +209,7 @@ public class ReflectionUtils {
 		}
 
 		/** find method by name
-		 * 
+		 *
 		 * @param names possible names of method
 		 * @return RefMethod object
 		 * @throws RuntimeException if method not found */
@@ -225,7 +225,7 @@ public class ReflectionUtils {
 		}
 
 		/** find method by return value
-		 * 
+		 *
 		 * @param type type of returned value
 		 * @throws RuntimeException if method not found
 		 * @return RefMethod */
@@ -234,7 +234,7 @@ public class ReflectionUtils {
 		}
 
 		/** find method by return value
-		 * 
+		 *
 		 * @param type type of returned value
 		 * @return RefMethod
 		 * @throws RuntimeException if method not found */
@@ -251,7 +251,7 @@ public class ReflectionUtils {
 		}
 
 		/** find constructor by number of arguments
-		 * 
+		 *
 		 * @param number number of arguments
 		 * @return RefConstructor
 		 * @throws RuntimeException if constructor not found */
@@ -266,7 +266,7 @@ public class ReflectionUtils {
 		}
 
 		/** get field by name
-		 * 
+		 *
 		 * @param name field name
 		 * @return RefField
 		 * @throws RuntimeException if field not found */
@@ -283,7 +283,7 @@ public class ReflectionUtils {
 		}
 
 		/** find field by type
-		 * 
+		 *
 		 * @param type field type
 		 * @return RefField
 		 * @throws RuntimeException if field not found */
@@ -292,7 +292,7 @@ public class ReflectionUtils {
 		}
 
 		/** find field by type
-		 * 
+		 *
 		 * @param type field type
 		 * @return RefField
 		 * @throws RuntimeException if field not found */
@@ -334,7 +334,7 @@ public class ReflectionUtils {
 		}
 
 		/** apply method to object
-		 * 
+		 *
 		 * @param e object to which the method is applied
 		 * @return RefExecutor with method call(...) */
 		public RefExecutor of(final Object e) {
@@ -342,7 +342,7 @@ public class ReflectionUtils {
 		}
 
 		/** call static method
-		 * 
+		 *
 		 * @param params sent parameters
 		 * @return return value */
 		public Object call(final Object... params) {
@@ -361,7 +361,7 @@ public class ReflectionUtils {
 			}
 
 			/** apply method for selected object
-			 * 
+			 *
 			 * @param params sent parameters
 			 * @return return value
 			 * @throws RuntimeException if something went wrong */
@@ -395,7 +395,7 @@ public class ReflectionUtils {
 		}
 
 		/** create new instance with constructor
-		 * 
+		 *
 		 * @param params parameters for constructor
 		 * @return new object
 		 * @throws RuntimeException if something went wrong */
@@ -432,7 +432,7 @@ public class ReflectionUtils {
 		}
 
 		/** apply fiend for object
-		 * 
+		 *
 		 * @param e applied object
 		 * @return RefExecutor with getter and setter */
 		public RefExecutor of(final Object e) {
@@ -447,7 +447,7 @@ public class ReflectionUtils {
 			}
 
 			/** set field value for applied object
-			 * 
+			 *
 			 * @param param value */
 			public void set(final Object param) {
 				try {
@@ -458,7 +458,7 @@ public class ReflectionUtils {
 			}
 
 			/** get field value for applied object
-			 * 
+			 *
 			 * @return value of field */
 			public Object get() {
 				try {

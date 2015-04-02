@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -29,29 +29,29 @@ import java.util.Map;
 
 /** <pre>
  * TabText: class to write column formatted text in minecraft chat area
- * 
+ *
  * - it splits each field and trims or fill with spaces to adjust tabs
- * 
+ *
  * general usage example:
- * 
+ *
  * - create a multiline string similar to csv format and create a TabText object with it
  * - use line feed "\n" (ascii 10) as line separator and grave accent "`" (ascii 96) as field separator
  * - you can use some format codes, see http://minecraft.gamepedia.com/Formatting_codes
  * - DO NOT USE LOWERCASE CODES OR BOLD FORMAT BECAUSE IT CAN BREAK SPACING
- * 
+ *
  * - // example
  * - multilineString  = "PLAYER------`RATE------`RANK------\n";
  * - multilineString += "�EJohn`10.01`1�R\n";
  * - multilineString += "Doe`-9.30`2";
- * 
+ *
  * - TabText tt = new TabText(multilineString);
  * - int numPages = tt.setPageHeight(pageHeight); // set page height and get number of pages
  * - tt.setTabs(10, 18, ...); // horizontal tabs positions
  * - tt.sortByFields(-2, 1); // sort by second column descending, then by first
  * - printedText = tt.getPage(desiredPage, (boolean) monospace); // get your formatted page, for console or chat area
- * 
- * see each method javadoc for additional details 
- * 
+ *
+ * see each method javadoc for additional details
+ *
  * @version 5
  * @author atesin#gmail,com
  * </pre> */
@@ -63,6 +63,11 @@ public class TabText {
 	private String[] lines;
 	@SuppressWarnings("serial")
 	private final Map<Integer, String> charList = new HashMap<Integer, String>() {
+		/**
+		 *
+		 */
+		private static final long serialVersionUID = -9096898438188305676L;
+
 		{
 			put(-6, "�");
 			put(2, "!.,:;i|");
@@ -88,7 +93,7 @@ public class TabText {
 
 	/** set page height and get number of pages according to it, for later use
 	 * with getPage()
-	 * 
+	 *
 	 * @param chatHeight lines you want for each page, no more than 10
 	 * recommended
 	 * @return number of pages your text will have */
@@ -100,7 +105,7 @@ public class TabText {
 
 	/** set horizontal positions of "`" separators, considering 6px chars and 53
 	 * chars max
-	 * 
+	 *
 	 * @param tabs an integer list with desired tab column positions */
 	public void setTabs(final int... tabs) {
 		final int[] tabs2 = new int[tabs.length + 1];
@@ -115,7 +120,7 @@ public class TabText {
 
 	/** append chars with its width to be checked too, default width = 6 so you
 	 * may only use for width != 6 chars
-	 * 
+	 *
 	 * @param chars a string with the chars to be added (careful with unicode or
 	 * ansi chars, do some tests before)
 	 * @param charsWidth horizontal space in pixels each char occupies */
@@ -128,7 +133,7 @@ public class TabText {
 	}
 
 	/** get your formatted page, for chat area or console
-	 * 
+	 *
 	 * @param page desired page number (0 = all in one), considering
 	 * preconfigured page height
 	 * @param monospace true if fonts are fixed width (for server console) or
@@ -189,7 +194,7 @@ public class TabText {
 	// PIXEL WIDTH CALCULATION METHODS
 
 	/** returns substring, in chars or pixels, considering format codes
-	 * 
+	 *
 	 * @param str input string
 	 * @param len desired string length
 	 * @param mono true if lenght will be in chars (for console) or false if
@@ -213,7 +218,7 @@ public class TabText {
 	}
 
 	/** returns character total width, considering format codes, internal use
-	 * 
+	 *
 	 * @param ch the character to check
 	 * @param mono true for result in chars or false for result in pixels
 	 * @return character width depending of "mono" */
@@ -232,7 +237,7 @@ public class TabText {
 
 	/** sort lines by column values, string or numeric, IF SORT BY DECIMALS IT
 	 * MUST HAVE SAME DECIMAL POSITIONS
-	 * 
+	 *
 	 * @param keys a list of column numbers criteria where 1 represents first
 	 * columnn and so, negative numbers means descending order */
 	public void sortByFields(final int... keys) {

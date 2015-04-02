@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -102,7 +102,7 @@ public class ComphenixsGhostFactory {
 
 	/** Add the given player to this ghost manager. This ensures that it can see
 	 * ghosts, and later become one.
-	 * 
+	 *
 	 * @param player - the player to add to the ghost manager. */
 	public void addPlayer(final Player player) {
 		validateState();
@@ -114,7 +114,7 @@ public class ComphenixsGhostFactory {
 
 	/** Determine if the given player is tracked by this ghost manager and is a
 	 * ghost.
-	 * 
+	 *
 	 * @param player - the player to test.
 	 * @return TRUE if it is, FALSE otherwise. */
 	public boolean isGhost(final Player player) {
@@ -123,7 +123,7 @@ public class ComphenixsGhostFactory {
 
 	/** Determine if the current player is tracked by this ghost manager, or is a
 	 * ghost.
-	 * 
+	 *
 	 * @param player - the player to check.
 	 * @return TRUE if it is, FALSE otherwise. */
 	public boolean hasPlayer(final Player player) {
@@ -132,7 +132,7 @@ public class ComphenixsGhostFactory {
 	}
 
 	/** Set wheter or not a given player is a ghost.
-	 * 
+	 *
 	 * @param player - the player to set as a ghost.
 	 * @param isGhost - TRUE to make the given player into a ghost, FALSE
 	 * otherwise. */
@@ -152,7 +152,7 @@ public class ComphenixsGhostFactory {
 
 	/** Remove the given player from the manager, turning it back into the living
 	 * and making it unable to see ghosts.
-	 * 
+	 *
 	 * @param player - the player to remove from the ghost manager. */
 	public void removePlayer(final Player player) {
 		validateState();
@@ -161,7 +161,7 @@ public class ComphenixsGhostFactory {
 	}
 
 	/** Retrieve every ghost currently tracked by this manager.
-	 * 
+	 *
 	 * @return Every tracked ghost. */
 	public OfflinePlayer[] getGhosts() {
 		validateState();
@@ -175,7 +175,7 @@ public class ComphenixsGhostFactory {
 	}
 
 	/** Retrieve every ghost and every player that can see ghosts.
-	 * 
+	 *
 	 * @return Every ghost or every observer. */
 	public OfflinePlayer[] getMembers() {
 		validateState();

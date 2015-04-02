@@ -22,19 +22,19 @@ public class VanishPlayersItemStack extends CustomItemStack {
 	}
 
 	@Override
-	public void clickAction(Player player) {
+	public void clickAction(final Player player) {
 		if (vanishedPlayers.remove(player.getUniqueId())) {
 			setItemStack(new ItemBuilder(Material.ENDER_PEARL).setDisplayName("Vanish players").build());
 			Bukkit.broadcastMessage("Players are now visible");
 			updateInventory(player);
-			for (Player target : Bukkit.getOnlinePlayers())
+			for (final Player target : Bukkit.getOnlinePlayers())
 				player.showPlayer(target);
 		} else {
 			vanishedPlayers.add(player.getUniqueId());
 			setItemStack(new ItemBuilder(Material.EYE_OF_ENDER).setDisplayName("Unvanish players").build());
 			Bukkit.broadcastMessage("Players are now invisible");
 			updateInventory(player);
-			for (Player target : Bukkit.getOnlinePlayers())
+			for (final Player target : Bukkit.getOnlinePlayers())
 				player.hidePlayer(target);
 		}
 	}

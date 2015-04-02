@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -36,19 +36,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemBuilder {
 
-	private ItemStack itemStack;
-	private ItemMeta meta;
-	private ItemBuilder builder;
+	private final ItemStack itemStack;
+	private final ItemMeta meta;
+	private final ItemBuilder builder;
 
 	/** Creates a new ItemBuilder with a material. The amount is defaulted to 1 */
-	public ItemBuilder(Material material) {
+	public ItemBuilder(final Material material) {
 		this.itemStack = new ItemStack(material);
 		this.meta = itemStack.getItemMeta();
 		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with a material and an amount */
-	public ItemBuilder(Material material, int amount) {
+	public ItemBuilder(final Material material, final int amount) {
 		this.itemStack = new ItemStack(material, amount);
 		this.meta = itemStack.getItemMeta();
 		builder = this;
@@ -56,21 +56,21 @@ public class ItemBuilder {
 
 	/** Creates a new ItemBuilder with a material and a data value. The amount is
 	 * defaulted to 1 */
-	public ItemBuilder(Material material, short data) {
+	public ItemBuilder(final Material material, final short data) {
 		this.itemStack = new ItemStack(material, 1, data);
 		this.meta = itemStack.getItemMeta();
 		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with a material, an amount and a data value */
-	public ItemBuilder(Material material, int amount, short data) {
+	public ItemBuilder(final Material material, final int amount, final short data) {
 		this.itemStack = new ItemStack(material, amount, data);
 		this.meta = itemStack.getItemMeta();
 		builder = this;
 	}
 
 	/** Creates a new ItemBuilder with an ItemStack */
-	public ItemBuilder(ItemStack itemStack) {
+	public ItemBuilder(final ItemStack itemStack) {
 		this.itemStack = itemStack;
 		this.meta = itemStack.getItemMeta();
 		builder = this;
@@ -105,14 +105,14 @@ public class ItemBuilder {
 		List<String> currentLore = getLore();
 		if (currentLore == null || currentLore.isEmpty())
 			currentLore = new ArrayList<String>();
-		for (String str : lore)
+		for (final String str : lore)
 			currentLore.add(str);
 		setLore(currentLore);
 		return builder;
 	}
 
 	/** Adds an enchantment to the item */
-	public ItemBuilder addEnchantment(final Enchantment enchantment, int power) {
+	public ItemBuilder addEnchantment(final Enchantment enchantment, final int power) {
 		meta.addEnchant(enchantment, power, true);
 		return builder;
 	}

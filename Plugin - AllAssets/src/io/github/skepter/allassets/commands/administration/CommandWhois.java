@@ -1,21 +1,21 @@
 /*******************************************************************************
  * Skepter's Licence
  * Copyright © 2015
- * 
+ *
  * AllAssets, created by Skepter and Tundra
- * 
+ *
  * You are able to:
  * * View AllAssets' source code on GitHub
  * * Experiment with the code as you wish
  * * Download the .jar files supplied on GitHub for your server
- * 
+ *
  * You are NOT allowed to:
  * * Sell AllAssets - It is COMPLETELY free for ALL users
  * * Claim it as your own. AllAssets is created by Skepter and Tundra
  * * Distribute it on any other website
  * * Decompile the code - It's pointless, time consuming and the source code is already on GitHub
  * * Steal the code from GitHub. Just ask and we're more than likely to let you copy some of it
- * 
+ *
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
@@ -47,15 +47,15 @@ public class CommandWhois {
 
 	@CommandHandler(name = "whois", aliases = { "who" }, permission = "whois", description = "Find a user's true indentity")
 	public void onCommand(final CommandArgs args) {
-		Player player = PlayerGetter.getPlayer(args);
-		if (player != null) {
+		final Player player = PlayerGetter.getPlayer(args);
+		if (player != null)
 			switch (args.getArgs().length) {
 				case 0:
 					printHelp(args.getSender());
 					return;
 				case 1:
-					Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-					User user = new User(target);
+					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
+					final User user = new User(target);
 					player.sendMessage(TextUtils.title("Whois " + target.getName()));
 					TextUtils.printInformation(player, "UUID", SeperatorType.COLON, target.getUniqueId().toString());
 					TextUtils.printInformation(player, "Total time played", SeperatorType.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
@@ -66,7 +66,6 @@ public class CommandWhois {
 					TextUtils.printInformation(player, "Is op", SeperatorType.COLON, TextUtils.booleanToString(target.isOp()));
 					TextUtils.printInformation(player, "Is AFK", SeperatorType.COLON, TextUtils.booleanToString(user.isAFK()));
 			}
-		}
 		return;
 	}
 
