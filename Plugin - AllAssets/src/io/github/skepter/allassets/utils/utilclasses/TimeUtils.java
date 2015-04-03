@@ -46,15 +46,15 @@ public class TimeUtils {
 	}
 
 	public long getHours() {
-		return MILLISECONDS.toHours(time) - (getDays() * 86400);
+		return ((time / (1000 * 60 * 60)) % 24);
 	}
 
 	public long getMinutes() {
-		return MILLISECONDS.toMinutes(time) - (getDays() * 86400) - (getHours() * 3600);
+		return ((time / (1000 * 60)) % 60);
 	}
 
 	public long getSeconds() {
-		return MILLISECONDS.toSeconds(time) - (getDays() * 86400) - (getHours() * 3600) - (getMinutes() * 60);
+		return (time / 1000) % 60;
 	}
 
 	public long getTotalDays() {
