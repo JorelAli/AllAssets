@@ -127,17 +127,17 @@ public class CommandDebug implements Listener {
 			strTps = ChatColor.RED + String.valueOf(tps);
 
 		sender.sendMessage(TextUtils.title("Full debug info"));
-		sender.sendMessage(" Server uptime: " + TimeUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
-		sender.sendMessage(" Server TPS: " + strTps);
+		sender.sendMessage("Server uptime: " + TimeUtils.formatDateAtASpecificPointInTime(ManagementFactory.getRuntimeMXBean().getStartTime()));
+		sender.sendMessage("Server TPS: " + strTps);
 		sender.sendMessage("");
-		sender.sendMessage(" Worlds loaded: " + Bukkit.getWorlds().size());
-		sender.sendMessage(" Items:");
+		sender.sendMessage("Worlds loaded: " + Bukkit.getWorlds().size());
+		sender.sendMessage("Items:");
 		for (final World w : Bukkit.getWorlds()) {
 			int i = 0;
 			for (final Entity e : w.getEntities())
 				if (e instanceof Item)
 					i++;
-			sender.sendMessage(" " + w.getName() + ": " + i + " items / " + w.getEntities().size() + " entities");
+			sender.sendMessage(" • " + w.getName() + ": " + i + " items / " + w.getEntities().size() + " entities");
 		}
 		int i = 0;
 		int en = 0;
@@ -148,30 +148,30 @@ public class CommandDebug implements Listener {
 				else
 					en++;
 		final int all = i + en;
-		sender.sendMessage(" " + i + " items out of " + all + " overall entities");
+		sender.sendMessage("" + i + " items out of " + all + " overall entities");
 		sender.sendMessage("");
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("RAM"));
-		sender.sendMessage(" Maximum RAM: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + "MB");
-		sender.sendMessage(" Total RAM: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + "MB");
-		sender.sendMessage(" Free RAM: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + "MB");
-		sender.sendMessage(" Available processors (cores): " + Runtime.getRuntime().availableProcessors());
+		sender.sendMessage("Maximum RAM: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + "MB");
+		sender.sendMessage("Total RAM: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + "MB");
+		sender.sendMessage("Free RAM: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + "MB");
+		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 		sender.sendMessage("");
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("OS"));
-		sender.sendMessage(" Operating system: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("os.name"));
-		sender.sendMessage(" OS architecture: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("os.arch"));
-		sender.sendMessage(" Java version: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("java.version"));
+		sender.sendMessage("Operating system: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("os.name"));
+		sender.sendMessage("OS architecture: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("os.arch"));
+		sender.sendMessage("Java version: " + ManagementFactory.getRuntimeMXBean().getSystemProperties().get("java.version"));
 		sender.sendMessage("");
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("Bukkit"));
 		if (Bukkit.getVersion().toLowerCase().contains("spigot"))
-			sender.sendMessage(" Bukkit system: Spigot");
+			sender.sendMessage("Bukkit system: Spigot");
 		else if (Bukkit.getVersion().toLowerCase().contains("mcpc"))
-			sender.sendMessage(" Bukkit system: MCPC");
+			sender.sendMessage("Bukkit system: MCPC");
 		else if (Bukkit.getVersion().toLowerCase().contains("forge"))
-			sender.sendMessage(" Bukkit system: Forge");
+			sender.sendMessage("Bukkit system: Forge");
 		else
-			sender.sendMessage(" Bukkit system: CraftBukkit");
-		sender.sendMessage(" Suitable for Minecraft version " + TextUtils.stringBetween(Bukkit.getVersion(), "(MC: ", ")"));
-		sender.sendMessage(" Using API version " + Bukkit.getBukkitVersion());
+			sender.sendMessage("Bukkit system: CraftBukkit");
+		sender.sendMessage("Suitable for Minecraft version " + TextUtils.stringBetween(Bukkit.getVersion(), "(MC: ", ")"));
+		sender.sendMessage("Using API version " + Bukkit.getBukkitVersion());
 		sender.sendMessage("");
 		sender.sendMessage(TextUtils.nonIndentedSubTitle("Threads"));
 		Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
