@@ -80,6 +80,7 @@ import io.github.skepter.allassets.commands.other.CommandGive;
 import io.github.skepter.allassets.commands.other.CommandGrief;
 import io.github.skepter.allassets.commands.other.CommandHeal;
 import io.github.skepter.allassets.commands.other.CommandHelp;
+import io.github.skepter.allassets.commands.other.CommandHelpop;
 import io.github.skepter.allassets.commands.other.CommandMore;
 import io.github.skepter.allassets.commands.other.CommandNear;
 import io.github.skepter.allassets.commands.other.CommandPTime;
@@ -242,6 +243,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandUnban(framework);
 			new CommandGive(framework);
 			new CommandHelp(framework);
+			new CommandHelpop(framework);
 
 			//Listeners
 			r(new CommandBan(framework));
