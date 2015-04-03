@@ -1,4 +1,3 @@
-* Helpop. Come on tundra, I need you here buddy!
 * Ticket system
 * Staff - show list of staff
 * Website - show website info
