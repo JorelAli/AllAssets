@@ -100,6 +100,8 @@ import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
 import io.github.skepter.allassets.commands.teleportation.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.CommandWorld;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
+import io.github.skepter.allassets.commands.worldmodifier.WM_Methods;
+import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
@@ -147,9 +149,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import commandadvanced.worldmodifier.WM_Methods;
-import commandadvanced.worldmodifier.Wand;
 
 /** AllAssets plugin, version 0.7 Alpha
  *
