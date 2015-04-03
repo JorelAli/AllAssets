@@ -1,1 +1,6 @@
 * Helpop. Come on tundra, I need you here buddy!
+* Ticket system
+* Staff - show list of staff
+* Website - show website info
+* Vote - show voting website (maybe top voters as well?)
+* Donate - show donation info
