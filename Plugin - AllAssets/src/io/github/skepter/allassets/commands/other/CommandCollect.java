@@ -25,6 +25,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.utils.Sphere;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -50,14 +51,19 @@ public class CommandCollect {
 					return;
 				case 1:
 					if (TextUtils.isInteger(args.getArgs()[0])) {
-						int i = Integer.parseInt(args.getArgs()[0]);
-						for (Entity e : player.getNearbyEntities(i, i, i))
-							if (e instanceof Item) {
-								if (player.getInventory().firstEmpty() != -1)
-									return;
-								player.getInventory().addItem(((Item) e).getItemStack());
-								e.remove();
+						
+						Sphere sphere = new Sphere(player.getLocation(), 20);
+						for (Entity e : player.getNearbyEntities(20, 20, 20)) {
+							if (sphere.contains(e.getLocation())) {
+								if (e instanceof Item) {
+									if (player.getInventory().firstEmpty() == -1) {
+										return;
+									}
+									player.getInventory().addItem(((Item) e).getItemStack());
+									e.remove();
+								}
 							}
+						}
 					} else
 						ErrorUtils.notAnInteger(player);
 			}
