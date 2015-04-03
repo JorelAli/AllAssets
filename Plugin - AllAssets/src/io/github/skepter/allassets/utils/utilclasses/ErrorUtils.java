@@ -44,6 +44,10 @@ public class ErrorUtils {
 	private static void error(final CommandSender sender, final String msg) {
 		sender.sendMessage(Strings.ERROR + msg);
 	}
+	
+	private static void error(final CommandSender sender, final String title, final String msg) {
+		sender.sendMessage(Strings.ERROR + msg);
+	}
 
 	public static void cannotLeashMob(final Player player) {
 		error(player, "You cannot put a leash on that mob");
@@ -62,7 +66,7 @@ public class ErrorUtils {
 	}
 
 	public static void logError(final Player player, final String message) {
-		error(player, "An error appeared in the log: " + message);
+		error(player, "Log error", message);
 	}
 
 	public static void cannotFindHelpTopic(final CommandSender sender) {

@@ -41,5 +41,9 @@ public class Strings {
 	public static String customTitle(final String title) {
 		return BLUE + "[" + AQUA + title + BLUE + "]" + WHITE + " ";
 	}
+	
+	public static String customError(final String title) {
+		return DARK_RED + "[" + RED + title + DARK_RED + "]" + RED + " ";
+	}
 
 }
