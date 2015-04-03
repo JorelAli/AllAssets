@@ -256,7 +256,7 @@ public class AllAssets extends JavaPlugin {
 			//WorldModifier
 			r(new Wand(framework));
 			new WM_Methods(framework);
-			
+
 			//Other
 			new SuperPickaxe(this, new ItemStack(Material.DIAMOND_PICKAXE), "SuperPickaxe");
 		}
@@ -308,6 +308,8 @@ public class AllAssets extends JavaPlugin {
 		for (final Player player : Bukkit.getOnlinePlayers())
 			if (CommandDiscoArmor.hasArmor(player))
 				CommandDiscoArmor.toggleArmor(player);
+		for (final Player player : Bukkit.getOnlinePlayers())
+			PlayerListener.leaveAction(player);
 		EnchantGlow.unLoad();
 		getLogger().info(Strings.NO_COLOR_TITLE + getDescription().getVersion() + " has been disabled successfully");
 	}
@@ -571,7 +573,7 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	private void postLoad() {
-//		new VaultReflection().loadAAEco();
+		//		new VaultReflection().loadAAEco();
 	}
 
 	/* Easy system to add listeners */

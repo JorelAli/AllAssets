@@ -121,7 +121,10 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void playerLeave(final PlayerQuitEvent event) {
-		final Player player = event.getPlayer();
+		leaveAction(event.getPlayer());
+	}
+	
+	public static void leaveAction(Player player) {
 		player.resetPlayerTime();
 		player.resetPlayerWeather();
 		final User user = new User(player);

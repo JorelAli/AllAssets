@@ -53,9 +53,10 @@ public class CommandCollect {
 						int i = Integer.parseInt(args.getArgs()[0]);
 						for (Entity e : player.getNearbyEntities(i, i, i))
 							if (e instanceof Item) {
-								Item it = (Item) e;
 								if (player.getInventory().firstEmpty() != -1)
-									it.getItemStack();
+									return;
+								player.getInventory().addItem(((Item) e).getItemStack());
+								e.remove();
 							}
 					} else
 						ErrorUtils.notAnInteger(player);
