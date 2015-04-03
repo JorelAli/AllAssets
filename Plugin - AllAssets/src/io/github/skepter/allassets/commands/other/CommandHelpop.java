@@ -43,7 +43,7 @@ public class CommandHelpop {
 		if (player != null) {
 			for(Player p : Bukkit.getOnlinePlayers())
 				if(p.hasPermission("AllAssets.helpop.receive"))
-					p.sendMessage(Strings.customTitle("HelpOp" + TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+					p.sendMessage(Strings.customTitle("HelpOp - " + player.getName()) + TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length));
 			player.sendMessage(Strings.TITLE + "Helpop message sent!");
 		}
 		return;

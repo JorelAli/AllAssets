@@ -46,7 +46,7 @@ public class ErrorUtils {
 	}
 	
 	private static void error(final CommandSender sender, final String title, final String msg) {
-		sender.sendMessage(Strings.ERROR + msg);
+		sender.sendMessage(Strings.customError(title) + msg);
 	}
 
 	public static void cannotLeashMob(final Player player) {
