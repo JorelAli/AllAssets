@@ -74,6 +74,7 @@ import io.github.skepter.allassets.commands.fun.CommandFakeOp;
 import io.github.skepter.allassets.commands.fun.CommandLaunch;
 import io.github.skepter.allassets.commands.other.CommandBroadcast;
 import io.github.skepter.allassets.commands.other.CommandClear;
+import io.github.skepter.allassets.commands.other.CommandCollect;
 import io.github.skepter.allassets.commands.other.CommandEnderchest;
 import io.github.skepter.allassets.commands.other.CommandGhost;
 import io.github.skepter.allassets.commands.other.CommandGive;
@@ -246,6 +247,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandGive(framework);
 			new CommandHelp(framework);
 			new CommandHelpop(framework);
+			new CommandCollect(framework);
 
 			//Listeners
 			r(new CommandBan(framework));
