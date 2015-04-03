@@ -48,7 +48,6 @@ public class Paginator {
 
 	/** Creates a new Paginator with a List<String>
 	 *
-	 * @param sender - The person executing the command (or use Player)
 	 * @param textData - The data with text
 	 * @param pageSize - The size of the page to show to the sender */
 	public Paginator(final List<String> textData, final int pageSize) {
@@ -57,9 +56,8 @@ public class Paginator {
 		doPreconditions();
 	}
 
-	/** Creates a new Paginator with a Set<String>, then organised the textData
+	/** Creates a new Paginator with a Set<String>, then organises the textData
 	 *
-	 * @param sender - The person executing the command (or use Player)
 	 * @param textData - The data with text
 	 * @param pageSize - The size of the page to show to the sender */
 	public Paginator(final Set<String> textData, final int pageSize) {
@@ -83,7 +81,7 @@ public class Paginator {
 		else
 			pages.put(1, textData.subList(0, pageSize));
 
-		for (int i = 2; i < maxPageNumber; i++)
+		for (int i = 2; i <= maxPageNumber; i++)
 			try {
 				//20 - 30
 				//30 - 40
