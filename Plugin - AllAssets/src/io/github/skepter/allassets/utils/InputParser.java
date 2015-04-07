@@ -21,7 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.utils;
 
-import io.github.skepter.allassets.utils.Handlers.BlockInfo;
+import io.github.skepter.allassets.utils.Tools.BlockInfo;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -36,7 +36,7 @@ public class InputParser {
 	
 	
 	@SuppressWarnings("deprecation")
-	public BlockInfo parseBlock() {
+	public BlockInfo parseBlockInfo() {
 		String[] data = IDReader.readID(inputString).split(":");
 		return new BlockInfo(Material.getMaterial(Integer.parseInt(data[0])), Byte.parseByte(data[1]));
 	}
