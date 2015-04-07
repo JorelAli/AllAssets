@@ -60,6 +60,10 @@ public class PlayerMap<T> implements Listener, Cloneable, Serializable {
 	public T get(final Player player) {
 		return map.get(player.getUniqueId());
 	}
+	
+	public T get(final UUID uuid) {
+		return map.get(uuid);
+	}
 
 	public void remove(final Player player) {
 		map.remove(player.getUniqueId());

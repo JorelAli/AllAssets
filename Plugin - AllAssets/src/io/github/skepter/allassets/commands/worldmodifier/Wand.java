@@ -25,17 +25,20 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -45,48 +48,52 @@ public class Wand implements Listener {
 		framework.registerCommands(this);
 	}
 
+	private ItemStack wmt = new ItemBuilder(Material.DIAMOND_AXE).setDisplayName("World Modifier tool").setLore("Left click to set position 1", "Right click to set position 2").addGlow().build();
+
 	@EventHandler
 	public void wandUse(final PlayerInteractEvent e) {
 		e.setUseInteractedBlock(Result.ALLOW);
 		e.setUseItemInHand(Result.ALLOW);
-		if (WorldModifierHandler.getWmPlayers().contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(WorldModifierHandler.getTool()))
+		WorldModifierHandler handler = new WorldModifierHandler(e.getPlayer());
+		WorldModifierData data = handler.getData();
+		if (handler.hasWorldModifierEnabled() || e.getPlayer().getItemInHand().equals(wmt))
 			switch (e.getAction()) {
-				case LEFT_CLICK_AIR: {
-					e.setCancelled(true);
-					final Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
-					WorldModifierHandler.getPos1().put(e.getPlayer(), l);
-					e.getPlayer().sendMessage("pos1 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
-					break;
-				}
-				case LEFT_CLICK_BLOCK: {
-					e.setCancelled(true);
-					final int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
-					WorldModifierHandler.getPos1().put(e.getPlayer(), e.getClickedBlock().getLocation());
-					e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
-					break;
-				}
-				case RIGHT_CLICK_AIR: {
-					e.setCancelled(true);
-					final Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
-					WorldModifierHandler.getPos2().put(e.getPlayer(), l);
-					e.getPlayer().sendMessage("pos2 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
-					break;
-				}
-				case RIGHT_CLICK_BLOCK: {
-					e.setCancelled(true);
-					final int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
-					WorldModifierHandler.getPos2().put(e.getPlayer(), e.getClickedBlock().getLocation());
-					e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
-					break;
-				}
-				default:
-					break;
+			case LEFT_CLICK_AIR: {
+				e.setCancelled(true);
+				final Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
+				data.setPos1(l);
+				e.getPlayer().sendMessage("pos1 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
+				break;
+			}
+			case LEFT_CLICK_BLOCK: {
+				e.setCancelled(true);
+				final int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
+				data.setPos1(e.getClickedBlock().getLocation());
+				e.getPlayer().sendMessage("pos1 = [" + x + ", " + y + ", " + z + "]");
+				break;
+			}
+			case RIGHT_CLICK_AIR: {
+				e.setCancelled(true);
+				final Location l = PlayerUtils.getTargetBlock(e.getPlayer()).getLocation();
+				data.setPos2(l);
+				e.getPlayer().sendMessage("pos2 = [" + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ() + "]");
+				break;
+			}
+			case RIGHT_CLICK_BLOCK: {
+				e.setCancelled(true);
+				final int x = e.getClickedBlock().getX(), y = e.getClickedBlock().getY(), z = e.getClickedBlock().getZ();
+				data.setPos2(e.getClickedBlock().getLocation());
+				e.getPlayer().sendMessage("pos2 = [" + x + ", " + y + ", " + z + "]");
+				break;
+			}
+			default:
+				break;
 			}
 	}
 
 	@EventHandler
 	public void zoomEvent(final PlayerMoveEvent e) {
-		if (WorldModifierHandler.getWmPlayers().contains(e.getPlayer().getUniqueId()) || e.getPlayer().getItemInHand().equals(WorldModifierHandler.getTool()))
+		if (new WorldModifierHandler(e.getPlayer()).hasWorldModifierEnabled() || e.getPlayer().getItemInHand().equals(wmt))
 			if (e.getPlayer().isSneaking())
 				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 100));
 			else
@@ -97,7 +104,7 @@ public class Wand implements Listener {
 	public void wand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
-			if (!PlayerUtils.setItemInHand(player, WorldModifierHandler.getTool()))
+			if (!PlayerUtils.setItemInHand(player, wmt))
 				ErrorUtils.cannotGiveItem(player);
 			else
 				player.sendMessage(Strings.TITLE + "Successfully given you the world modifier tool");
