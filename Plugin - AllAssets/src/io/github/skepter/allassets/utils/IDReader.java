@@ -35,31 +35,22 @@ public class IDReader {
 
 		final File csvFile = new File(AllAssets.instance().getDataFolder(), "ItemData.csv");
 		BufferedReader br = null;
-		String line = "";
+		
 		final String cvsSplitBy = "\t";
-
 		try {
 			br = new BufferedReader(new FileReader(csvFile));
 		} catch (final FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String line = "";
 		try {
 			while ((line = br.readLine()) != null) {
-
-				// use comma as separator
 				final String[] data = line.split(cvsSplitBy);
 				if (data[0].equalsIgnoreCase(str))
 					return data[1] + ":" + data[2];
 			}
-		} catch (final IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
 			br.close();
 		} catch (final IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
