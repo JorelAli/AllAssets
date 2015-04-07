@@ -120,16 +120,23 @@ public class WM_Methods {
 				}
 				case "replace":
 				case "repl": {
-					final Material mat = Material.getMaterial(Integer.parseInt(args.getArgs()[1]));
-					final Material matToReplaceWith = Material.getMaterial(Integer.parseInt(args.getArgs()[2]));
+					final BlockInfo info = new InputParser(args.getArgs()[1]).parseBlockInfo();
+					final BlockInfo info2 = new InputParser(args.getArgs()[2]).parseBlockInfo();
+
+					final Material mat = info.getMaterial();
+					final Material matToReplaceWith = info2.getMaterial();
 					final List<Block> blocks = Cuboid.blocksFromTwoPointsInc(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player), mat);
 					WorldModifierHandler.getPreviousAction().put(player, Cuboid.blocksFromTwoPoints(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player)));
 					player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 					if (blocks.size() < divisor)
-						for (final Block b : blocks)
+						for (final Block b : blocks) {
 							b.setType(matToReplaceWith);
-					for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size()))
+							b.setData(info2.getData());
+						}
+					for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
 						b.setType(matToReplaceWith);
+						b.setData(info2.getData());
+					}
 
 					Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 
@@ -150,8 +157,10 @@ public class WM_Methods {
 
 							@Override
 							public void run() {
-								for (final Block b : blocksList)
+								for (final Block b : blocksList) {
 									b.setType(matToReplaceWith);
+									b.setData(info2.getData());
+								}
 							}
 						}, (i / divisor) * 5);
 					}
