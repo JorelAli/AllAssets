@@ -58,23 +58,19 @@ public class WM_Methods {
 	@CommandHandler(name = "worldmodifier", aliases = { "wm" }, permission = "worldmodifier", description = "World Modifier")
 	public void wm(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
+		final WorldModifierHandler handler = new WorldModifierHandler(player);
+		final WorldModifierData data = handler.getData();
+		Cuboid cuboid = new Cuboid(data);
 		if (player != null) {
 			if (args.getArgs().length == 0)
-				if (WorldModifierHandler.getWmPlayers().remove(player.getUniqueId())) {
-					player.sendMessage("World Modifier mode off");
-					return;
-				} else {
-					WorldModifierHandler.getWmPlayers().add(player.getUniqueId());
-					player.sendMessage("World Modifier mode on");
-					return;
-				}
+				handler.toggleWorldModifierState();
 			else {
 				final int divisor = 1000;
 				switch (args.getArgs()[0]) {
 				case "set": {
 					final BlockInfo info = new InputParser(args.getArgs()[1]).parseBlockInfo();
-					final List<Block> blocks = Cuboid.blocksFromTwoPointsEx(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player), info.getMaterial());
-					WorldModifierHandler.getPreviousAction().put(player, Cuboid.blocksFromTwoPoints(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player)));
+					final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info.getMaterial());
+					data.setPreviousAction(cuboid.blocksFromTwoPoints());
 					player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 					if (blocks.size() < divisor)
 						for (final Block b : blocks) {
@@ -110,7 +106,7 @@ public class WM_Methods {
 					break;
 				}
 				case "regen": {
-					final List<Block> blocks = Cuboid.getChunkData(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player));
+					final List<Block> blocks = cuboid.getChunkData();
 					final Set<Chunk> chunks = new HashSet<Chunk>();
 					for (final Block b : blocks)
 						chunks.add(player.getWorld().getChunkAt(b));
@@ -125,8 +121,8 @@ public class WM_Methods {
 
 					final Material mat = info.getMaterial();
 					final Material matToReplaceWith = info2.getMaterial();
-					final List<Block> blocks = Cuboid.blocksFromTwoPointsInc(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player), mat);
-					WorldModifierHandler.getPreviousAction().put(player, Cuboid.blocksFromTwoPoints(WorldModifierHandler.getPos1().get(player), WorldModifierHandler.getPos2().get(player)));
+					final List<Block> blocks = cuboid.blocksFromTwoPointsInc(mat);
+					data.setPreviousAction(cuboid.blocksFromTwoPoints());
 					player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 					if (blocks.size() < divisor)
 						for (final Block b : blocks) {
@@ -168,16 +164,16 @@ public class WM_Methods {
 				}
 				case "expand":
 				case "max": {
-					final Location a = WorldModifierHandler.getPos1().get(player);
-					final Location b = WorldModifierHandler.getPos2().get(player);
+					final Location a = data.getPos1();
+					final Location b = data.getPos2();
 					a.setY(256);
 					b.setY(0);
-					WorldModifierHandler.getPos1().put(player, a);
-					WorldModifierHandler.getPos2().put(player, b);
+					data.setPos1(a);
+					data.setPos2(b);
 					player.sendMessage(Strings.TITLE + "Expanded selection");
 				}
 				case "undo": {
-					List<Block> blocks = WorldModifierHandler.getPreviousAction().get(player);
+					List<Block> blocks = data.getPreviousAction();
 					player.sendMessage(Strings.TITLE + "Undoing..." + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
 					if (blocks.size() < divisor)
 						for (final Block b : blocks)

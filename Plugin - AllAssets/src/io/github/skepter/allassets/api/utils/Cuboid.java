@@ -1,5 +1,7 @@
 package io.github.skepter.allassets.api.utils;
 
+import io.github.skepter.allassets.commands.worldmodifier.WorldModifierData;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,16 @@ import org.bukkit.block.Block;
 
 public class Cuboid {
 
-	public static List<Block> blocksFromTwoPoints(final Location loc1, final Location loc2) {
+	private Location loc1;
+	private Location loc2;
+	
+	public Cuboid(WorldModifierData data) {
+		loc1 = data.getPos1();
+		loc2 = data.getPos2();
+		
+	}
+	
+	public List<Block> blocksFromTwoPoints() {
 		final List<Block> blocks = new ArrayList<Block>();
 
 		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
@@ -29,7 +40,7 @@ public class Cuboid {
 		return blocks;
 	}
 
-	public static List<Block> blocksFromTwoPointsEx(final Location loc1, final Location loc2, final Material... excludedBlocks) {
+	public List<Block> blocksFromTwoPointsEx(final Material... excludedBlocks) {
 		final List<Block> blocks = new ArrayList<Block>();
 
 		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
@@ -50,7 +61,7 @@ public class Cuboid {
 		return blocks;
 	}
 
-	public static List<Block> blocksFromTwoPointsInc(final Location loc1, final Location loc2, final Material... includedBlocks) {
+	public List<Block> blocksFromTwoPointsInc(final Material... includedBlocks) {
 		final List<Block> blocks = new ArrayList<Block>();
 
 		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
@@ -72,7 +83,7 @@ public class Cuboid {
 	}
 
 	/** Gets information for WM regen */
-	public static List<Block> getChunkData(final Location loc1, final Location loc2) {
+	public List<Block> getChunkData() {
 		final List<Block> blocks = new ArrayList<Block>();
 
 		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());

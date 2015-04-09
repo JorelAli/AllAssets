@@ -32,6 +32,10 @@ public class WorldModifierHandler {
 	public void setWorldModifierEnabled() {
 		wmPlayers.add(uuid);
 	}
+	
+	public void setWorldModifierDisabled() {
+		wmPlayers.remove(uuid);
+	}
 
 	public WorldModifierData getData() {
 		if (!map.containsPlayer(uuid))
