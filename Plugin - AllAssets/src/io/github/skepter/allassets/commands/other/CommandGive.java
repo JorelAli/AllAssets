@@ -28,7 +28,10 @@ package io.github.skepter.allassets.commands.other;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.utils.IDReader;
+import io.github.skepter.allassets.utils.InputParser;
+import io.github.skepter.allassets.utils.tools.BlockInfo;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.Material;
@@ -57,6 +60,18 @@ public class CommandGive {
 		//		//give <player> <item> <amount>
 		switch (args.getArgs().length) {
 			case 1:
+				try {
+					final Player player = PlayerGetter.getPlayer(args);
+					if(player != null) {
+						BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
+						ItemStack is = new ItemStack(input.getMaterial(), 64);
+						is.setDurability(input.getData());
+						player.getInventory().addItem(is);	
+					}
+					
+				} catch (final Exception e) {
+					e.printStackTrace();
+				}
 			case 2:
 				return;
 			case 3:
