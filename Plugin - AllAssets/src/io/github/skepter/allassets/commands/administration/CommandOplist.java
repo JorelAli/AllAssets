@@ -54,7 +54,7 @@ public class CommandOplist {
 			args.getSender().sendMessage(TextUtils.title("Operators"));
 		for (final String operator : operators) {
 			final String[] op = operator.split(":");
-			if (PlayerUtils.isOnline(op[0]))
+			if (PlayerUtils.isOnlineExact(op[0]))
 				args.getSender().sendMessage(ChatColor.GREEN + "[Online] " + ChatColor.WHITE + op[0] + " (" + op[1] + ")");
 			else
 				args.getSender().sendMessage(ChatColor.RED + "[Offline] " + ChatColor.WHITE + (op[0] == null ? "Couldn't find username" : op[0]) + " (" + op[1] + ")");

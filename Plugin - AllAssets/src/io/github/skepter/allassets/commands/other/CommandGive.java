@@ -29,13 +29,11 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.utils.IDReader;
 import io.github.skepter.allassets.utils.InputParser;
 import io.github.skepter.allassets.utils.tools.BlockInfo;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -45,26 +43,12 @@ public class CommandGive {
 		framework.registerCommands(this);
 	}
 
-	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "give", aliases = { "i", "item" }, permission = "give", description = "Gives items")
 	public void onCommand(final CommandArgs args) {
-		//		final ItemInfo iF = net.milkbowl.vault.item.Items.itemByString(args.getArgs()[0]);
-		//		try {
-		//			args.getPlayer().getInventory().addItem(iF.toStack());
-		//		} catch (final IllegalArgumentException e1) {
-		//			// TODO Auto-generated catch block
-		//			e1.printStackTrace();
-		//		} catch (final Exception e1) {
-		//			// TODO Auto-generated catch block
-		//			e1.printStackTrace();
-		//		}
-		//		//give <player> <item> <amount>
-		switch (args.getArgs().length) {
-		case 1:
-			try {
-				final Player player = PlayerGetter.getPlayer(args);
-				if (player != null) {
-
+		final Player player = PlayerGetter.getPlayer(args);
+		if (player != null) {
+			switch (args.getArgs().length) {
+				case 1: {
 					BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
 					if (input != null) {
 						ItemStack is = new ItemStack(input.getMaterial(), 64);
@@ -72,36 +56,44 @@ public class CommandGive {
 						player.getInventory().addItem(is);
 					} else
 						ErrorUtils.itemNotFound(player);
-				}
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-			return;
-		case 2:
-			try {
-				final Player player = PlayerGetter.getPlayer(args);
-				if (player != null) {
 
-					BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
-					if (input != null) {
-						ItemStack is = new ItemStack(input.getMaterial(), Integer.parseInt(args.getArgs()[1]));
-						is.setDurability(input.getData());
-						player.getInventory().addItem(is);
-					} else
-						ErrorUtils.itemNotFound(player);
+					return;
 				}
-			} catch (final Exception e) {
-				e.printStackTrace();
+				case 2: {
+					if (PlayerUtils.isOnline(args.getArgs()[0])) {
+						BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
+						if (input != null) {
+							ItemStack is = new ItemStack(input.getMaterial(), 64);
+							is.setDurability(input.getData());
+							player.getInventory().addItem(is);
+						} else
+							ErrorUtils.itemNotFound(player);
+						return;
+					} else {
+						BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
+						if (input != null) {
+							ItemStack is = new ItemStack(input.getMaterial(), Integer.parseInt(args.getArgs()[1]));
+							is.setDurability(input.getData());
+							player.getInventory().addItem(is);
+						} else
+							ErrorUtils.itemNotFound(player);
+					}
+					return;
+				}
+				case 3: {
+					Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
+					if(target != null) {
+						BlockInfo input = new InputParser(args.getArgs()[1]).parseBlockInfo();
+						if (input != null) {
+							ItemStack is = new ItemStack(input.getMaterial(), Integer.parseInt(args.getArgs()[2]));
+							is.setDurability(input.getData());
+							player.getInventory().addItem(is);
+						} else
+							ErrorUtils.itemNotFound(player);
+					}
+					return;
+				}
 			}
-			return;
-		case 3:
-			try {
-				final Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-				player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
-			} catch (final Exception e) {
-				e.printStackTrace();
-			}
-			return;
 		}
 	}
 }

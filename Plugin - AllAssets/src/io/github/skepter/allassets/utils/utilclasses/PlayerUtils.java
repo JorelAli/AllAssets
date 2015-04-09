@@ -135,9 +135,16 @@ public class PlayerUtils {
 		return null;
 	}
 
-	public static boolean isOnline(final String player) {
+	public static boolean isOnlineExact(final String player) {
 		for (final Player p : getOnlinePlayers())
 			if (p.getName().equals(player))
+				return true;
+		return false;
+	}
+	
+	public static boolean isOnline(final String string) {
+		for (final Player p : getOnlinePlayers())
+			if (p.getName().equalsIgnoreCase(string) || p.getName().toLowerCase().startsWith(string.toLowerCase()))
 				return true;
 		return false;
 	}
