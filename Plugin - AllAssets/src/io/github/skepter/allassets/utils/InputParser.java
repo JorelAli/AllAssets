@@ -21,7 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.utils;
 
-import io.github.skepter.allassets.utils.Tools1.BlockInfo;
+import io.github.skepter.allassets.utils.tools.BlockInfo;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
