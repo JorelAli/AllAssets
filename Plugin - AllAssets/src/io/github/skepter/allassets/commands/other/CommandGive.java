@@ -32,6 +32,7 @@ import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.utils.IDReader;
 import io.github.skepter.allassets.utils.InputParser;
 import io.github.skepter.allassets.utils.tools.BlockInfo;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.Material;
@@ -59,28 +60,48 @@ public class CommandGive {
 		//		}
 		//		//give <player> <item> <amount>
 		switch (args.getArgs().length) {
-			case 1:
-				try {
-					final Player player = PlayerGetter.getPlayer(args);
-					if(player != null) {
-						BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
+		case 1:
+			try {
+				final Player player = PlayerGetter.getPlayer(args);
+				if (player != null) {
+
+					BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
+					if (input != null) {
 						ItemStack is = new ItemStack(input.getMaterial(), 64);
 						is.setDurability(input.getData());
-						player.getInventory().addItem(is);	
-					}
-					
-				} catch (final Exception e) {
-					e.printStackTrace();
+						player.getInventory().addItem(is);
+					} else
+						ErrorUtils.itemNotFound(player);
 				}
-			case 2:
-				return;
-			case 3:
-				try {
-					final Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-					player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
-				} catch (final Exception e) {
-					e.printStackTrace();
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		case 2:
+			try {
+				final Player player = PlayerGetter.getPlayer(args);
+				if (player != null) {
+
+					BlockInfo input = new InputParser(args.getArgs()[0]).parseBlockInfo();
+					if (input != null) {
+						ItemStack is = new ItemStack(input.getMaterial(), Integer.parseInt(args.getArgs()[1]));
+						is.setDurability(input.getData());
+						player.getInventory().addItem(is);
+					} else
+						ErrorUtils.itemNotFound(player);
 				}
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		case 3:
+			try {
+				final Player player = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+				player.getInventory().addItem(new ItemStack(Material.getMaterial(Integer.parseInt(IDReader.readID(args.getArgs()[1].split(":")[0]))), Integer.parseInt(args.getArgs()[2])));
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+			return;
 		}
 	}
 }

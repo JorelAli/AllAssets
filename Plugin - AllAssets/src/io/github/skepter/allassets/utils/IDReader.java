@@ -22,6 +22,7 @@
 package io.github.skepter.allassets.utils;
 
 import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +33,8 @@ import java.io.IOException;
 public class IDReader {
 
 	public static String readID(final String str) {
-
+		if(TextUtils.isInteger(str))
+			return str + ":0";
 		final File csvFile = new File(AllAssets.instance().getDataFolder(), "ItemData.csv");
 		BufferedReader br = null;
 		

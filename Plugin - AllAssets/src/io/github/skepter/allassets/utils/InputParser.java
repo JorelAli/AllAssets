@@ -33,12 +33,16 @@ public class InputParser {
 	public InputParser(final String inputString) {
 		this.inputString = inputString;
 	}
-	
-	
+
 	@SuppressWarnings("deprecation")
 	public BlockInfo parseBlockInfo() {
-		String[] data = IDReader.readID(inputString).split(":");
-		return new BlockInfo(Material.getMaterial(Integer.parseInt(data[0])), Byte.parseByte(data[1]));
+		String d = IDReader.readID(inputString);
+		if (d != null) {
+			String[] data = d.split(":");
+			if (data != null)
+				return new BlockInfo(Material.getMaterial(Integer.parseInt(data[0])), Byte.parseByte(data[1]));
+		}
+		return null;
 	}
 
 	public EntityType parseMob() {
@@ -50,18 +54,18 @@ public class InputParser {
 		} catch (final Exception e) {
 		}
 		switch (inputString.toLowerCase()) {
-			case "zombiepigman":
-			case "pigzombie":
-				return EntityType.PIG_ZOMBIE;
-			case "enderdragon":
-			case "dragon":
-				return EntityType.ENDER_DRAGON;
-			case "mooshroom":
-			case "mushroomcow":
-				return EntityType.MUSHROOM_COW;
-			case "golem":
-			case "irongolem":
-				return EntityType.IRON_GOLEM;
+		case "zombiepigman":
+		case "pigzombie":
+			return EntityType.PIG_ZOMBIE;
+		case "enderdragon":
+		case "dragon":
+			return EntityType.ENDER_DRAGON;
+		case "mooshroom":
+		case "mushroomcow":
+			return EntityType.MUSHROOM_COW;
+		case "golem":
+		case "irongolem":
+			return EntityType.IRON_GOLEM;
 		}
 		return EntityType.UNKNOWN;
 	}
