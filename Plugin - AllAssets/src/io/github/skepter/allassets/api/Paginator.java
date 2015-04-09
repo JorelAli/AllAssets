@@ -71,27 +71,15 @@ public class Paginator {
 
 	private void doPreconditions() {
 		shownPageNumber = 0;
-		maxPageNumber = MathUtils.toInt(MathUtils.roundUp(textData.size(), pageSize)) / pageSize;
+		maxPageNumber = (MathUtils.toInt(MathUtils.roundUp(textData.size(), pageSize)) / pageSize) - 1;
 		pages = new HashMap<Integer, List<String>>();
 
 		Debugger.printVariable("pageNum", maxPageNumber);
 
-		if (textData.size() < pageSize)
-			pages.put(1, textData);
-		else
-			pages.put(1, textData.subList(0, pageSize));
-
-		for (int i = 2; i <= maxPageNumber; i++)
-			try {
-				//20 - 30
-				//30 - 40
-				pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
-			} catch (final Exception e) {
-				pages.put(i, textData.subList(i * pageSize, textData.size() - 1));
-				System.out.println("Error: " + i);
-			}
-
-		Debugger.printMap(pages);
+		List<List<String>> l = splitList(textData, pageSize);
+		for (int i = 0; i < l.size(); i++) {
+			pages.put(i, l.get(i));
+		}
 	}
 
 	public void send(final CommandSender sender, int pageNumberToShow) {
@@ -113,5 +101,23 @@ public class Paginator {
 
 	public int getMaxPageNumber() {
 		return maxPageNumber;
+	}
+
+	private <T> List<List<T>> splitList(List<T> list, int maxListSize) {
+		List<List<T>> splittedList = new ArrayList<List<T>>();
+		int itemsRemaining = list.size();
+		int start = 0;
+
+		while (itemsRemaining != 0) {
+			int end = itemsRemaining >= maxListSize ? (start + maxListSize) : (start + itemsRemaining);
+
+			splittedList.add(list.subList(start, end));
+
+			int sizeOfFinalList = end - start;
+			itemsRemaining = itemsRemaining - sizeOfFinalList;
+			start = start + sizeOfFinalList;
+		}
+
+		return splittedList;
 	}
 }
