@@ -8,7 +8,7 @@ import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.utils.Cuboid;
 import io.github.skepter.allassets.utils.InputParser;
 import io.github.skepter.allassets.utils.Strings;
-import io.github.skepter.allassets.utils.Tools.BlockInfo;
+import io.github.skepter.allassets.utils.Tools1.BlockInfo;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.HashSet;
