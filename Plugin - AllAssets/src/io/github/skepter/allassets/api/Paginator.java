@@ -23,7 +23,6 @@ package io.github.skepter.allassets.api;
 
 import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.WHITE;
-import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
@@ -73,9 +72,6 @@ public class Paginator {
 		shownPageNumber = 0;
 		maxPageNumber = (MathUtils.toInt(MathUtils.roundUp(textData.size(), pageSize)) / pageSize) - 1;
 		pages = new HashMap<Integer, List<String>>();
-
-		Debugger.printVariable("pageNum", maxPageNumber);
-
 		List<List<String>> l = splitList(textData, pageSize);
 		for (int i = 0; i < l.size(); i++) {
 			pages.put(i, l.get(i));
