@@ -228,7 +228,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  * making super speedy data delivery.
  * When a player leaves, remove them from the data?
  *
- * clean up configHandler - it's so damn freaking messy!
  */
 @SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
@@ -239,7 +238,10 @@ public class AllAssets extends JavaPlugin {
 	private void devRegister(final CommandFramework framework) {
 
 		//// Tundraboy ////
-
+		{
+			
+		}
+		
 		//// Skepter ////
 		{
 			//Commands

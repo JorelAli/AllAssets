@@ -54,9 +54,12 @@ public class CommandSeen {
 				case 1:
 					OfflinePlayer target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 					if (target != null) {
-						player.sendMessage(Strings.TITLE + "Last seen " + target.getName() + " " + TimeUtils.formatDate(new OfflineUser(target).getTimeSinceLastPlay()));
-					} else
-						ErrorUtils.playerNotFound(player, args.getArgs()[0]);
+						long t = new OfflineUser(target).getTimeSinceLastPlay();
+						if (t != 0)
+							player.sendMessage(Strings.TITLE + "Last seen " + target.getName() + " " + TimeUtils.formatDate(System.currentTimeMillis() - (t)));
+						else
+							ErrorUtils.playerNotFound(player, args.getArgs()[0]);
+					}
 			}
 		return;
 	}
