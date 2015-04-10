@@ -245,6 +245,7 @@ public class AllAssets extends JavaPlugin {
 		//// Skepter ////
 		{
 			//Commands
+			new CommandTop(framework);
 			new CommandTitle(framework);
 			new CommandUnban(framework);
 			new CommandGive(framework);
