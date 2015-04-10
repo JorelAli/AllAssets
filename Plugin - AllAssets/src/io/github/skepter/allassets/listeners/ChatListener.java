@@ -26,6 +26,7 @@ package io.github.skepter.allassets.listeners;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
@@ -81,10 +82,11 @@ public class ChatListener implements Listener {
 	@EventHandler
 	public void calculate(final AsyncPlayerChatEvent event) {
 		if (event.getMessage().startsWith("sum: ")) {
-			final ScriptEngineManager engineManager = new ScriptEngineManager();
-			final ScriptEngine engine = engineManager.getEngineByName("JavaScript");
+			final ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
+			String parsedOut = event.getMessage().replace("pi", "Math.PI").replace("e", "Math.E").replace("sqrt", "Math.sqrt").replace("pow", "Math.pow");
 			try {
-				event.getPlayer().sendMessage(String.valueOf(engine.eval(event.getMessage())));
+				event.getPlayer().sendMessage(Strings.HOUSE_STYLE_COLOR + event.getMessage().substring(5, event.getMessage().length()));
+				event.getPlayer().sendMessage(Strings.ACCENT_COLOR + "= " + String.valueOf(engine.eval(parsedOut)));
 			} catch (ScriptException e) {
 				ErrorUtils.cannotCalculateExpression(event.getPlayer());
 			}
