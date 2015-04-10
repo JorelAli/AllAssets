@@ -121,9 +121,17 @@ public class PlayerUtils {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static OfflinePlayer getOfflinePlayerFromString(final String string) {
+	public static OfflinePlayer getOfflinePlayerFromStringExact(final String string) {
 		for (final OfflinePlayer p : getOfflinePlayers())
 			if (p.getName().equalsIgnoreCase(string))
+				return p;
+		return Bukkit.getOfflinePlayer(string);
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static OfflinePlayer getOfflinePlayerFromString(final String string) {
+		for (final OfflinePlayer p : getOfflinePlayers())
+			if (p.getName().equalsIgnoreCase(string) || p.getName().toLowerCase().startsWith(string.toLowerCase()))
 				return p;
 		return Bukkit.getOfflinePlayer(string);
 	}

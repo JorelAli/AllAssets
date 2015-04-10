@@ -88,6 +88,7 @@ import io.github.skepter.allassets.commands.other.CommandPTime;
 import io.github.skepter.allassets.commands.other.CommandPWeather;
 import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRules;
+import io.github.skepter.allassets.commands.other.CommandSeen;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
 import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
@@ -248,6 +249,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandHelp(framework);
 			new CommandHelpop(framework);
 			new CommandCollect(framework);
+			new CommandSeen(framework);
 
 			//Listeners
 			r(new CommandBan(framework));

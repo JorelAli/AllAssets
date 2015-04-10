@@ -50,7 +50,7 @@ public class OfflineUser {
 
 	public OfflineUser(final String s) {
 		try {
-			player = PlayerUtils.getOfflinePlayerFromString(s);
+			player = PlayerUtils.getOfflinePlayerFromStringExact(s);
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

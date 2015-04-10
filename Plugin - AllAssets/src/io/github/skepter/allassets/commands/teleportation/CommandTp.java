@@ -53,7 +53,7 @@ public class CommandTp {
 				return;
 			}
 			final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-			final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
+			final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromStringExact(args.getArgs()[0]);
 			if (offlineTarget == null && onlineTarget == null) {
 				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
 				return;
