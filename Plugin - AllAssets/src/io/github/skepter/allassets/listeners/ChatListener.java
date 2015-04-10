@@ -83,10 +83,11 @@ public class ChatListener implements Listener {
 	public void calculate(final AsyncPlayerChatEvent event) {
 		if (event.getMessage().startsWith("sum: ")) {
 			final ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-			String parsedOut = event.getMessage().replace("pi", "Math.PI").replace("e", "Math.E").replace("sqrt", "Math.sqrt").replace("pow", "Math.pow");
+			String parsedOut = event.getMessage().replace("pi", "Math.PI").replace("e", "Math.E").replace("sqrt", "Math.sqrt").replace("root", "Math.sqrt").replace("pow", "Math.pow");
 			try {
+				String out = String.valueOf(engine.eval(parsedOut));
 				event.getPlayer().sendMessage(Strings.HOUSE_STYLE_COLOR + event.getMessage().substring(5, event.getMessage().length()));
-				event.getPlayer().sendMessage(Strings.ACCENT_COLOR + "= " + String.valueOf(engine.eval(parsedOut)));
+				event.getPlayer().sendMessage(Strings.ACCENT_COLOR + "= " + out);
 			} catch (ScriptException e) {
 				ErrorUtils.cannotCalculateExpression(event.getPlayer());
 			}
