@@ -31,9 +31,9 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
-import net.minecraft.server.v1_8_R1.Material;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 public class CommandTop {
@@ -48,16 +48,18 @@ public class CommandTop {
 		if (player != null) {
 			final Location l = player.getLocation();
 			for (int i = l.getBlockY(); i < player.getWorld().getMaxHeight(); i++) {
-				if (new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ()).getBlock().getType().equals(Material.AIR)) {
-					if (new Location(player.getWorld(), l.getBlockX(), i + 1, l.getBlockZ()).getBlock().getType().equals(Material.AIR)) {
-						player.teleport(new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ())).getCenter());
-						break;
-					}
+				Location l1 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ())).getCenter();
+				Location l2 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 1, l.getBlockZ())).getCenter();
+				Location l3 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 2, l.getBlockZ())).getCenter();
+				if (!l1.getBlock().getType().equals(Material.AIR) && l2.getBlock().getType().equals(Material.AIR) && l3.getBlock().getType().equals(Material.AIR)) {
+					
+					new LocationUtils(new LocationUtils(l2).getCenter()).teleport(player);
+					player.sendMessage(Strings.TITLE + "Teleported to the next level");
+					break;
 				}
 			}
-			player.sendMessage(Strings.TITLE + "Teleported to the next level");
+
 		}
 		return;
 	}
-
 }
