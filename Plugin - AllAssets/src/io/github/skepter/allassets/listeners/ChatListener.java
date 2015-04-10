@@ -29,7 +29,9 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import java.math.BigInteger;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -77,50 +79,16 @@ public class ChatListener implements Listener {
 	//TODO add to features/config
 
 	@EventHandler
-	public void playerSumEvent(final AsyncPlayerChatEvent event) {
-		if (event.getMessage().startsWith("sum(") && event.getMessage().endsWith(")")) {
-			String sum = event.getMessage().replace("sum(", "").replace(")", "").replace(" ", "");
-			String arr[] = null;
-			if (sum.contains("+")) {
-				sum = sum.replace('+', ':');
-				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
-					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) + Integer.parseInt(arr[1])));
-				else
-					ErrorUtils.notAnInteger(event.getPlayer());
+	public void calculate(final AsyncPlayerChatEvent event) {
+		if (event.getMessage().startsWith("sum: ")) {
+			final ScriptEngineManager engineManager = new ScriptEngineManager();
+			final ScriptEngine engine = engineManager.getEngineByName("JavaScript");
+			try {
+				event.getPlayer().sendMessage(String.valueOf(engine.eval(event.getMessage())));
+			} catch (ScriptException e) {
+				ErrorUtils.cannotCalculateExpression(event.getPlayer());
 			}
-			if (sum.contains("-")) {
-				sum = sum.replace('-', ':');
-				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
-					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) - Integer.parseInt(arr[1])));
-				else
-					ErrorUtils.notAnInteger(event.getPlayer());
-			}
-			if (sum.contains("*")) {
-				sum = sum.replace('*', ':');
-				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
-					event.setMessage(event.getMessage() + " = " + (Integer.parseInt(arr[0]) * Integer.parseInt(arr[1])));
-				else
-					ErrorUtils.notAnInteger(event.getPlayer());
-			}
-			if (sum.contains("/")) {
-				sum = sum.replace('/', ':');
-				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
-					event.setMessage(event.getMessage() + " = " + (new Double(Integer.parseInt(arr[0])) / new Double(Integer.parseInt(arr[1]))));
-				else
-					ErrorUtils.notAnInteger(event.getPlayer());
-			}
-			if (sum.contains("^")) {
-				sum = sum.replace('^', ':');
-				arr = sum.split(":");
-				if (TextUtils.isInteger(arr[0]) && TextUtils.isInteger(arr[1]))
-					event.setMessage(event.getMessage() + " = " + new BigInteger(arr[0]).pow(Integer.parseInt(arr[1])).toString());
-				else
-					ErrorUtils.notAnInteger(event.getPlayer());
-			}
+			event.setCancelled(true);
 		}
 	}
 }

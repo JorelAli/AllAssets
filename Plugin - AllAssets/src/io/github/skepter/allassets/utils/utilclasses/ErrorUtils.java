@@ -44,7 +44,7 @@ public class ErrorUtils {
 	private static void error(final CommandSender sender, final String msg) {
 		sender.sendMessage(Strings.ERROR + msg);
 	}
-	
+
 	private static void error(final CommandSender sender, final String title, final String msg) {
 		sender.sendMessage(Strings.customError(title) + msg);
 	}
@@ -162,7 +162,7 @@ public class ErrorUtils {
 	}
 
 	public static void worldNotFound(final CommandSender sender, final String worldName) {
-		error(sender, worldName + " could not be found!");
+		error(sender, worldName + "could not be found!");
 	}
 
 	public static void conversableError(final Conversable forWhom, final String msg) {
@@ -172,5 +172,9 @@ public class ErrorUtils {
 	public static void printErrorToConsole(final String msg) {
 		Bukkit.getLogger().severe(msg);
 		CommandLog.addLog(msg, LogType.ERROR);
+	}
+
+	public static void cannotCalculateExpression(Player player) {
+		error(player, "Cannot calculate expression!");
 	}
 }
