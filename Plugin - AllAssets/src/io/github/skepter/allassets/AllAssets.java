@@ -98,6 +98,7 @@ import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandSpawn;
+import io.github.skepter.allassets.commands.teleportation.CommandTop;
 import io.github.skepter.allassets.commands.teleportation.CommandTp;
 import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
 import io.github.skepter.allassets.commands.teleportation.CommandTphere;
