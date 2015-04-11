@@ -100,16 +100,16 @@ public enum Item {
 	 * @param input Can be a String (name), ##:## or ##
 	 * @return An Item match, or null if it cannot find a match */
 	public static Item match(String input) {
-			String n = input.replace(" ", "");
-			for (Item i : Item.values()) {
-				if(i.getName().replace(" ", "").equalsIgnoreCase(n))
+		String n = input.replace(" ", "");
+		for (Item i : Item.values()) {
+			if (i.getName().replace(" ", "").equalsIgnoreCase(n))
+				return i;
+			for (String str : i.getAliases()) {
+				if (str.replace(" ", "").equalsIgnoreCase(n)) {
 					return i;
-				for (String str : i.getAliases()) {
-					if (str.replace(" ", "").equalsIgnoreCase(n)) {
-						return i;
-					}
 				}
 			}
+		}
 		if (input.matches("\\d+:\\d+")) {
 			for (Item i : Item.values())
 				if (i.getId() == Integer.parseInt(input.split(":")[0]) && i.getMeta() == Integer.parseInt(input.split(":")[1]))
