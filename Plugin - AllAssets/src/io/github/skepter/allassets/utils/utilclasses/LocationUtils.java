@@ -103,6 +103,10 @@ public class LocationUtils {
 	public Location getCenter() {
 		return new Location(location.getWorld(), getCenter(location.getBlockX()), getCenter(location.getBlockY()), getCenter(location.getBlockZ()));
 	}
+	
+	public Location getCenterForTeleporting() {
+		return new Location(location.getWorld(), getCenter(location.getBlockX()), location.getBlockY(), getCenter(location.getBlockZ()));
+	}
 
 	private double getCenter(final int location) {
 		final double newLocation = location;

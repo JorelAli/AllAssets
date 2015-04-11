@@ -36,30 +36,28 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class CommandTop {
+public class CommandAscend {
 
-	public CommandTop(final CommandFramework framework) {
+	public CommandAscend(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "top", permission = "top", description = "Teleports you to the top level")
+	@CommandHandler(name = "ascend", aliases = { "up" }, permission = "ascend", description = "Teleports you upwards")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			final Location l = player.getLocation();
-			int i = player.getWorld().getMaxHeight();
-			while (i >= l.getBlockY()) {
+			for (int i = l.getBlockY(); i < player.getWorld().getMaxHeight(); i++) {
 				Location l1 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ())).getCenter();
 				Location l2 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 1, l.getBlockZ())).getCenter();
 				Location l3 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 2, l.getBlockZ())).getCenter();
-				if (!l3.getBlock().getType().equals(Material.AIR) && l2.getBlock().getType().equals(Material.AIR) && l1.getBlock().getType().equals(Material.AIR)) {
-					Location l4 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 3, l.getBlockZ())).getCenter();
-					new LocationUtils(new LocationUtils(l4).getCenterForTeleporting()).teleport(player);
-					player.sendMessage(Strings.TITLE + "Teleported to the top level");
+				if (!l1.getBlock().getType().equals(Material.AIR) && l2.getBlock().getType().equals(Material.AIR) && l3.getBlock().getType().equals(Material.AIR)) {
+					new LocationUtils(new LocationUtils(l2).getCenterForTeleporting()).teleport(player);
+					player.sendMessage(Strings.TITLE + "Teleported to the next level");
 					break;
 				}
-				i--;
 			}
+
 		}
 		return;
 	}

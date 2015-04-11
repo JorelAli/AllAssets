@@ -95,6 +95,7 @@ import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
 import io.github.skepter.allassets.commands.sql.CommandBan;
 import io.github.skepter.allassets.commands.sql.CommandUnban;
+import io.github.skepter.allassets.commands.teleportation.CommandAscend;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
@@ -249,6 +250,7 @@ public class AllAssets extends JavaPlugin {
 			//Commands
 			new CommandCalculate(framework);
 			new CommandTop(framework);
+			new CommandAscend(framework);
 			new CommandTitle(framework);
 			new CommandUnban(framework);
 			new CommandGive(framework);
