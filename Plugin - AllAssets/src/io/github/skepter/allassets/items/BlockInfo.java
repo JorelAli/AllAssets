@@ -1,4 +1,4 @@
-package io.github.skepter.allassets.utils.tools;
+package io.github.skepter.allassets.items;
 
 import org.bukkit.Material;
 

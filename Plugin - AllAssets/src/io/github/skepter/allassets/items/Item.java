@@ -2,8 +2,6 @@ package io.github.skepter.allassets.items;
 
 import org.bukkit.Material;
 
-import io.github.skepter.allassets.utils.tools.BlockInfo;
-
 public enum Item {
 
 	AIR(0, 0, "Air"),

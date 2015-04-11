@@ -29,8 +29,8 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.items.BlockInfo;
 import io.github.skepter.allassets.utils.InputParser;
-import io.github.skepter.allassets.utils.tools.BlockInfo;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
