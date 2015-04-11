@@ -26,13 +26,7 @@ package io.github.skepter.allassets.listeners;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.config.ConfigHandler;
-import io.github.skepter.allassets.utils.Strings;
-import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
@@ -78,20 +72,4 @@ public class ChatListener implements Listener {
 	}
 
 	//TODO add to features/config
-
-	@EventHandler
-	public void calculate(final AsyncPlayerChatEvent event) {
-		if (event.getMessage().startsWith("sum: ")) {
-			final ScriptEngine engine = new ScriptEngineManager().getEngineByName("JavaScript");
-			String parsedOut = event.getMessage().replace("pi", "Math.PI").replace("e", "Math.E").replace("sqrt", "Math.sqrt").replace("root", "Math.sqrt").replace("pow", "Math.pow");
-			try {
-				String out = String.valueOf(engine.eval(parsedOut));
-				event.getPlayer().sendMessage(Strings.HOUSE_STYLE_COLOR + event.getMessage().substring(5, event.getMessage().length()));
-				event.getPlayer().sendMessage(Strings.ACCENT_COLOR + "= " + out);
-			} catch (ScriptException e) {
-				ErrorUtils.cannotCalculateExpression(event.getPlayer());
-			}
-			event.setCancelled(true);
-		}
-	}
 }
