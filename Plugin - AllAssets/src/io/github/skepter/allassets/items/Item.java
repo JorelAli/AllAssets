@@ -1,5 +1,9 @@
 package io.github.skepter.allassets.items;
 
+import org.bukkit.Material;
+
+import io.github.skepter.allassets.utils.tools.BlockInfo;
+
 public enum Item {
 
 	AIR(0, 0, "Air"),
@@ -42,41 +46,79 @@ public enum Item {
 	STILL_LAVA(11, 0, "Stationary lava", "stationarylava", "stilllava"),
 
 	SAND(12, 0, "Sand"),
-	RED_SAND(12, 1, "Red sand", "rsand");
+	RED_SAND(12, 1, "Red sand", "rsand"),
+	GRAVEL(13, 0, "Gravel"),
+	GOLD_ORE(14, 0, "Gold ore", "oregold", "gore"),
+	IRON_ORE(15, 0, "Iron ore", "oreiron", "iore"),
+	COAL_ORE(16, 0, "Coal ore", "orecoal", "core"),
+
+	//Big gap over here
+
+	DIAMOND(264, 0, "Diamond"),
+	IRON_INGOT(265, 0, "Iron ingot", "iron"),
+	GOLD_INGOT(266, 0, "Gold ingot", "gold"),
+
+	SIGN(323, 0, "Sign");
 
 	private final int id;
 	private final int meta;
 	private final String name;
 	private final String[] aliases;
+	private final BlockInfo info;
 
+	public int getId() {
+		return id;
+	}
+
+	public int getMeta() {
+		return meta;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String[] getAliases() {
+		return aliases;
+	}
+
+	public BlockInfo getInfo() {
+		return info;
+	}
+
+	@SuppressWarnings("deprecation")
 	Item(int id, int meta, String name, String... aliases) {
 		this.id = id;
 		this.meta = meta;
 		this.name = name;
 		this.aliases = aliases;
+		this.info = new BlockInfo(Material.getMaterial(id), (byte) meta);
 	}
 
-	public Item match(String name) {
-		String n = name.replace(" ", "");
-		for (Item i : Item.values()) {
-			for (String str : i.aliases) {
-				String s = str.replace(" ", "");
-				if (s.equalsIgnoreCase(n) || s.equalsIgnoreCase(i.name.replace(" ", "")))
+	/** Finds the item from the input
+	 * 
+	 * @param input Can be a String (name), ##:## or ##
+	 * @return An Item match, or null if it cannot find a match */
+	public static Item match(String input) {
+			String n = input.replace(" ", "");
+			for (Item i : Item.values()) {
+				if(i.getName().replace(" ", "").equalsIgnoreCase(n))
 					return i;
+				for (String str : i.getAliases()) {
+					if (str.replace(" ", "").equalsIgnoreCase(n)) {
+						return i;
+					}
+				}
 			}
+		if (input.matches("\\d+:\\d+")) {
+			for (Item i : Item.values())
+				if (i.getId() == Integer.parseInt(input.split(":")[0]) && i.getMeta() == Integer.parseInt(input.split(":")[1]))
+					return i;
+		} else if (input.matches("\\d")) {
+			for (Item i : Item.values())
+				if (i.getId() == Integer.parseInt(input))
+					return i;
 		}
-
-		if (name.matches("\\d+:\\d+")) 
-			for (Item i : Item.values()) 
-				if (i.id == Integer.parseInt(name.split(":")[0]) && i.meta == Integer.parseInt(name.split(":")[1]))
-					return i;
-			
-		if(name.matches("\\d"))
-			for(Item i : Item.values())
-				if(i.id == Integer.parseInt(name))
-					return i;
-
-		//Error :(
 		return null;
 	}
 

@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.utils;
 
+import io.github.skepter.allassets.items.Item;
 import io.github.skepter.allassets.utils.tools.BlockInfo;
 
 import org.bukkit.Material;
@@ -34,8 +35,16 @@ public class InputParser {
 		this.inputString = inputString;
 	}
 
-	@SuppressWarnings("deprecation")
 	public BlockInfo parseBlockInfo() {
+		Item i = Item.match(inputString);
+		if (i != null)
+			return Item.match(inputString).getInfo();
+		else
+			return null;
+	}
+
+	@Deprecated
+	public BlockInfo parseBlockInfoOld() {
 		String d = IDReader.readID(inputString);
 		if (d != null) {
 			String[] data = d.split(":");
@@ -54,18 +63,18 @@ public class InputParser {
 		} catch (final Exception e) {
 		}
 		switch (inputString.toLowerCase()) {
-		case "zombiepigman":
-		case "pigzombie":
-			return EntityType.PIG_ZOMBIE;
-		case "enderdragon":
-		case "dragon":
-			return EntityType.ENDER_DRAGON;
-		case "mooshroom":
-		case "mushroomcow":
-			return EntityType.MUSHROOM_COW;
-		case "golem":
-		case "irongolem":
-			return EntityType.IRON_GOLEM;
+			case "zombiepigman":
+			case "pigzombie":
+				return EntityType.PIG_ZOMBIE;
+			case "enderdragon":
+			case "dragon":
+				return EntityType.ENDER_DRAGON;
+			case "mooshroom":
+			case "mushroomcow":
+				return EntityType.MUSHROOM_COW;
+			case "golem":
+			case "irongolem":
+				return EntityType.IRON_GOLEM;
 		}
 		return EntityType.UNKNOWN;
 	}
