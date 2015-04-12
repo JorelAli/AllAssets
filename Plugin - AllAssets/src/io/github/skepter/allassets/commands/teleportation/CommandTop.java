@@ -48,13 +48,12 @@ public class CommandTop {
 		if (player != null) {
 			final Location l = player.getLocation();
 			int i = player.getWorld().getMaxHeight();
-			while (i >= l.getBlockY()) {
+			while (i >= 0) {
 				Location l1 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ())).getCenter();
 				Location l2 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 1, l.getBlockZ())).getCenter();
 				Location l3 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 2, l.getBlockZ())).getCenter();
-				if (!l3.getBlock().getType().equals(Material.AIR) && l2.getBlock().getType().equals(Material.AIR) && l1.getBlock().getType().equals(Material.AIR)) {
-					Location l4 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 3, l.getBlockZ())).getCenter();
-					new LocationUtils(new LocationUtils(l4).getCenterForTeleporting()).teleport(player);
+				if (!l1.getBlock().getType().equals(Material.AIR) && l2.getBlock().getType().equals(Material.AIR) && l3.getBlock().getType().equals(Material.AIR)) {
+					new LocationUtils(new LocationUtils(l2).getCenterForTeleporting()).teleport(player);
 					player.sendMessage(Strings.TITLE + "Teleported to the top level");
 					break;
 				}
