@@ -29,12 +29,14 @@ import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.api.Paginator;
 import io.github.skepter.allassets.api.utils.PlayerMap;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.ItemUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,6 +59,8 @@ import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 
 @SuppressWarnings("deprecation")
 public class CommandFileBrowser implements Listener {
@@ -93,7 +97,7 @@ public class CommandFileBrowser implements Listener {
 					ErrorUtils.cannotShowNextPage(player);
 					return;
 				}
-				TextUtils.paginate(player, dataMap.get(player), 10, arg);
+				new Paginator(dataMap.get(player), 10).send(player, arg);
 				return;
 		}
 
@@ -111,7 +115,7 @@ public class CommandFileBrowser implements Listener {
 				final Player player = (Player) event.getWhoClicked();
 				final String dM = directoryMap.get(player);
 				switch (item.getType()) {
-					/* If they click a book, open that directory */
+				/* If they click a book, open that directory */
 					case BOOK:
 						directoryMap.put(player, openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
 						return;
@@ -123,7 +127,7 @@ public class CommandFileBrowser implements Listener {
 						directoryMap.put(player, openInventory(player, new File(dM).getParentFile()));
 						return;
 						/* Read the file */
-					case PAPER:
+					case PAPER: {
 						player.closeInventory();
 						final File dataFile = new File(dM, ItemUtils.getDisplayName(item));
 						player.sendMessage(TextUtils.title(dataFile.getName()));
@@ -138,7 +142,7 @@ public class CommandFileBrowser implements Listener {
 							}
 							final List<String> list = new ArrayList<String>();
 							for (final String key : config.getKeys(true))
-								list.add(ChatColor.AQUA + key + ChatColor.WHITE + ": " + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
+								list.add(Strings.HOUSE_STYLE_COLOR + key + Strings.ACCENT_COLOR + SeperatorType.COLON + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
 							dataMap.put(player, list);
 						}
 						if (dataFile.getName().contains(".txt")) {
@@ -156,27 +160,34 @@ public class CommandFileBrowser implements Listener {
 							prop.load(inputStream);
 							final List<String> list = new ArrayList<String>();
 							for (final Object key : prop.keySet())
-								list.add(ChatColor.AQUA + key.toString() + ChatColor.WHITE + ": " + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
+								list.add(Strings.HOUSE_STYLE_COLOR + key.toString() + Strings.ACCENT_COLOR + SeperatorType.COLON + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
 							dataMap.put(player, list);
 						}
-						/* Paginate data */
-						if (dataMap.get(player).size() < 10)
-							for (final String s : dataMap.get(player))
-								player.sendMessage(s);
-						else {
-
-							/* If pages = 1 and there is only 1 page, DO NOT SHOW THIS XD*/
-							//TODO ASAP!!!!!!
-							//final int pages = TextUtils.paginate(player, dataMap.get(player), 10, 1);
-							TextUtils.paginate(player, dataMap.get(player), 10, 1);
-							//if (pages != 0 && )
-							player.sendMessage(Strings.TITLE + "Use /filebrowser <page number> to go to the next page");
-						}
-						return;
+						break;
+					}
+					case EMPTY_MAP: {
+						player.closeInventory();
+						player.sendMessage(TextUtils.title(ItemUtils.getDisplayName(item)));
+						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(ItemUtils.getDisplayName(item)).getDescription();
+						List<String> list = new ArrayList<String>();
+						list.add(p.getMain());
+						list.add(p.getFullName());
+						list.add(p.getDescription());
+						list.addAll(p.getAuthors());
+						dataMap.put(player, list);
+						break;
+					}
 					default:
-						return;
+						break;
 				}
-
+				/* Paginate data */
+				if (dataMap.get(player).size() < 10)
+					for (final String s : dataMap.get(player))
+						player.sendMessage(s);
+				else {
+					new Paginator(dataMap.get(player), 10).send(player, 1);
+					player.sendMessage(Strings.TITLE + "Use /filebrowser <page number> to go to the next page");
+				}
 			}
 		} catch (final Exception e) {
 			System.out.println("Error");
@@ -206,6 +217,9 @@ public class CommandFileBrowser implements Listener {
 					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.PAPER, 1), file.getName()));
 			if (file.isDirectory())
 				inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.BOOK, 1), file.getName()));
+			if (file.getName().equals("AllAssets.jar"))
+				for (Plugin p : Bukkit.getPluginManager().getPlugins())
+					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.EMPTY_MAP, 1), p.getName()));
 		}
 		if (!Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)));
