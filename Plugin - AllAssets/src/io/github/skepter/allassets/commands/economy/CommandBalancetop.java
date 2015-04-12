@@ -30,6 +30,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.Paginator;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -76,7 +77,7 @@ public class CommandBalancetop {
 				ErrorUtils.notAnInteger(player);
 				return;
 			}
-			TextUtils.paginate(player, balanceList, 10, Integer.parseInt(args.getArgs()[0]));
+			new Paginator(balanceList, 10).send(player, Integer.parseInt(args.getArgs()[0]));
 		}
 	}
 

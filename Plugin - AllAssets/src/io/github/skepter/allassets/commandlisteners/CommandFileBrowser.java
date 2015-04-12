@@ -35,6 +35,7 @@ import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.ItemUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
+import io.github.skepter.allassets.utils.utilclasses.PluginUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
@@ -170,10 +171,14 @@ public class CommandFileBrowser implements Listener {
 						player.sendMessage(TextUtils.title(ItemUtils.getDisplayName(item)));
 						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(ItemUtils.getDisplayName(item)).getDescription();
 						List<String> list = new ArrayList<String>();
-						list.add(p.getMain());
-						list.add(p.getFullName());
-						list.add(p.getDescription());
-						list.addAll(p.getAuthors());
+						String s = SeperatorType.COLON.getString();
+						list.add(Strings.HOUSE_STYLE_COLOR + "Main" + Strings.ACCENT_COLOR + s + p.getMain());
+						list.add(Strings.HOUSE_STYLE_COLOR + "Name" + Strings.ACCENT_COLOR + s + p.getName());
+						list.add(Strings.HOUSE_STYLE_COLOR + "Version" + Strings.ACCENT_COLOR + s + p.getVersion());
+						list.add(Strings.HOUSE_STYLE_COLOR + "Description" + Strings.ACCENT_COLOR + s + p.getDescription());
+						list.add(Strings.HOUSE_STYLE_COLOR + "Authors" + Strings.ACCENT_COLOR + s + PluginUtils.getAuthors(p));
+						list.add(Strings.HOUSE_STYLE_COLOR + "Dependencies" + Strings.ACCENT_COLOR + s + TextUtils.listToString(p.getDepend()));
+						list.add(Strings.HOUSE_STYLE_COLOR + "Soft dependencies" + Strings.ACCENT_COLOR + s + TextUtils.listToString(p.getSoftDepend()));
 						dataMap.put(player, list);
 						break;
 					}

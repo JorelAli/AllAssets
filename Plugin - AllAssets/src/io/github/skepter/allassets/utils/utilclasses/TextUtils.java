@@ -27,7 +27,6 @@ import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.BLUE;
 import static org.bukkit.ChatColor.GREEN;
 import static org.bukkit.ChatColor.RED;
-import static org.bukkit.ChatColor.WHITE;
 import static org.bukkit.ChatColor.stripColor;
 import io.github.skepter.allassets.utils.Strings;
 
@@ -41,11 +40,8 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -183,79 +179,6 @@ public class TextUtils {
 		return BLUE + "[" + AQUA + s + BLUE + "]";
 	}
 
-	/** @param sender - The person sending to send the data to
-	 * @param textData - The data to send
-	 * @param pageSize - The size of each page (how many lines of data to show)
-	 * @param pageNumberToShow - The page number to show
-	 * @return The max number of pages */
-	@Deprecated
-	public static int paginate(final CommandSender sender, final List<String> textData, final int pageSize, final int pageNumberToShow) {
-		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
-
-		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
-			ErrorUtils.numberTooSmall(sender);
-			return 0;
-		}
-
-		final int amountOfPages = textData.size() / pageSize;
-		final int amountOfLinesOfExtraData = textData.size() % pageSize;
-
-		/* error could appear here -.- */
-		if (textData.size() < pageSize)
-			pages.put(1, textData);
-		else
-			pages.put(1, textData.subList(0, pageSize - 1));
-
-		for (int i = 2; i < amountOfPages; i++)
-			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
-		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
-		if (pageNumberToShow > amountOfPages) {
-			ErrorUtils.numberTooBig(sender);
-			return 0;
-		}
-
-		sender.sendMessage(Strings.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
-		for (final String s : pages.get(pageNumberToShow))
-			sender.sendMessage(s);
-		return amountOfPages;
-	}
-
-	/* One of these pagination ones are deprecated and I can't remember which one! */
-	@Deprecated
-	public static int paginate(final CommandSender sender, final Set<String> data, final int pageSize, final int pageNumberToShow) {
-		final List<String> textData = new ArrayList<String>();
-		textData.addAll(data);
-		Collections.sort(textData);
-		final HashMap<Integer, List<String>> pages = new HashMap<Integer, List<String>>();
-
-		if ((pageNumberToShow == 0) || (pageNumberToShow < 0)) {
-			ErrorUtils.numberTooSmall(sender);
-			return 0;
-		}
-
-		final int amountOfPages = textData.size() / pageSize;
-		final int amountOfLinesOfExtraData = textData.size() % pageSize;
-
-		/* error could appear here -.- */
-		if (textData.size() < pageSize)
-			pages.put(1, textData);
-		else
-			pages.put(1, textData.subList(0, pageSize - 1));
-
-		for (int i = 2; i < amountOfPages; i++)
-			pages.put(i, textData.subList(i * pageSize, (i + 1) * pageSize));
-		pages.put(pages.size() + 1, textData.subList(textData.size() - amountOfLinesOfExtraData, textData.size()));
-		if (pageNumberToShow > amountOfPages) {
-			ErrorUtils.numberTooBig(sender);
-			return 0;
-		}
-
-		sender.sendMessage(Strings.TITLE + "Showing page " + AQUA + pageNumberToShow + WHITE + "/" + AQUA + amountOfPages);
-		for (final String s : pages.get(pageNumberToShow))
-			sender.sendMessage(s);
-		return amountOfPages;
-	}
-
 	public static String stringBetween(final String overallString, final String firstString, final int index) {
 		final String s = overallString.substring(overallString.indexOf(firstString) + firstString.length(), index);
 		return s;
@@ -287,7 +210,18 @@ public class TextUtils {
 			return Arrays.asList(new String[] { stringBetween(str, beginTag, endTag) });
 		}
 	}
-
+	
+	public static String listToString(List<String> list) {
+		String out = "";
+		for (final String s : list)
+			out = out + s + ", ";
+		if (out.length() != 0)
+			out = out.substring(0, out.length() - 2);
+		else
+			out = "";
+		return out;
+	}
+	
 	public static String replace(final String input, final int startindex, final int endindex, final String replacement) {
 		final String first = input.substring(0, startindex);
 		final String end = input.substring(endindex);
@@ -329,7 +263,6 @@ public class TextUtils {
 			final String part1 = Strings.ACCENT_COLOR + strs[0];
 			final String part2 = Strings.HOUSE_STYLE_COLOR + strs[1];
 			sender.sendMessage(part1 + " -" + part2);
-
 		}
 	}
 
