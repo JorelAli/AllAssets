@@ -30,10 +30,10 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.api.Paginator;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
 import io.github.skepter.allassets.api.utils.PlayerMap;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
-import io.github.skepter.allassets.utils.utilclasses.ItemUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 import io.github.skepter.allassets.utils.utilclasses.PluginUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -63,7 +63,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 
-@SuppressWarnings("deprecation")
 public class CommandFileBrowser implements Listener {
 
 	public CommandFileBrowser(final CommandFramework framework) {
@@ -118,7 +117,7 @@ public class CommandFileBrowser implements Listener {
 				switch (item.getType()) {
 				/* If they click a book, open that directory */
 					case BOOK:
-						directoryMap.put(player, openInventory(player, new File(dM, File.separator + ItemUtils.getDisplayName(item))));
+						directoryMap.put(player, openInventory(player, new File(dM, File.separator + new ItemBuilder(item).getDisplayName())));
 						return;
 						/* If they click an arrow, go up another level */
 					case ARROW:
@@ -130,7 +129,7 @@ public class CommandFileBrowser implements Listener {
 						/* Read the file */
 					case PAPER: {
 						player.closeInventory();
-						final File dataFile = new File(dM, ItemUtils.getDisplayName(item));
+						final File dataFile = new File(dM, new ItemBuilder(item).getDisplayName());
 						player.sendMessage(TextUtils.title(dataFile.getName()));
 						/* Only allow .yml, .txt, .properties files as they are each read differently */
 						if (dataFile.getName().contains(".yml")) {
@@ -168,8 +167,8 @@ public class CommandFileBrowser implements Listener {
 					}
 					case EMPTY_MAP: {
 						player.closeInventory();
-						player.sendMessage(TextUtils.title(ItemUtils.getDisplayName(item)));
-						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(ItemUtils.getDisplayName(item)).getDescription();
+						player.sendMessage(TextUtils.title(new ItemBuilder(item).getDisplayName()));
+						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(new ItemBuilder(item).getDisplayName()).getDescription();
 						List<String> list = new ArrayList<String>();
 						String s = SeperatorType.COLON.getString();
 						list.add(Strings.HOUSE_STYLE_COLOR + "Main" + Strings.ACCENT_COLOR + s + p.getMain());
@@ -221,15 +220,15 @@ public class CommandFileBrowser implements Listener {
 		for (final File file : currentDirectory.listFiles()) {
 			for (final String s : supportedFileTypes)
 				if (file.getName().contains(s))
-					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.PAPER, 1), file.getName()));
+					inv.addItem(new ItemBuilder(new ItemStack(Material.PAPER, 1)).setDisplayName(file.getName()).build());
 			if (file.isDirectory())
-				inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.BOOK, 1), file.getName()));
+				inv.addItem(new ItemBuilder(new ItemStack(Material.BOOK, 1)).setDisplayName(file.getName()).build());
 			if (file.getName().equals("AllAssets.jar"))
 				for (Plugin p : Bukkit.getPluginManager().getPlugins())
-					inv.addItem(ItemUtils.setDisplayName(new ItemStack(Material.EMPTY_MAP, 1), p.getName()));
+					inv.addItem(new ItemBuilder(new ItemStack(Material.EMPTY_MAP, 1)).setDisplayName(p.getName()).build());
 		}
 		if (!Arrays.asList(currentDirectory.list()).contains("server.properties"))
-			inv.setItem(inv.getSize() - 1, ItemUtils.setDisplayName(new ItemStack(Material.ARROW), "Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)));
+			inv.setItem(inv.getSize() - 1, new ItemBuilder(new ItemStack(Material.ARROW)).setDisplayName("Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)).build());
 		player.openInventory(inv);
 		return currentDirectory.getAbsolutePath();
 	}

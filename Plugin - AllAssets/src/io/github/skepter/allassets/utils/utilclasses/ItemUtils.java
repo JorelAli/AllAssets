@@ -23,12 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.utils.utilclasses;
 
-import io.github.skepter.allassets.misc.EnchantGlow;
-
-import java.util.Arrays;
-
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemUtils {
 
@@ -123,50 +118,5 @@ public class ItemUtils {
 			default:
 				return false;
 		}
-	}
-
-	/** Deprecated - Use ItemBuilder */
-	@Deprecated
-	public static ItemStack setDisplayName(final ItemStack itemStack, final String name) {
-		final ItemMeta meta = itemStack.getItemMeta();
-		meta.setDisplayName(name);
-		itemStack.setItemMeta(meta);
-		return itemStack;
-	}
-
-	/** Deprecated - Use ItemBuilder */
-	@Deprecated
-	public static String getDisplayName(final ItemStack itemStack) {
-		final ItemMeta meta = itemStack.getItemMeta();
-		return meta.getDisplayName();
-	}
-
-	/** Deprecated - Use ItemBuilder */
-	@Deprecated
-	public static ItemStack setLore(final ItemStack itemStack, final String... lore) {
-		final ItemMeta meta = itemStack.getItemMeta();
-		meta.setLore(Arrays.asList(lore));
-		itemStack.setItemMeta(meta);
-		return itemStack;
-	}
-
-	/** Deprecated - Use ItemBuilder */
-	@Deprecated
-	public static ItemStack addGlow(final ItemStack itemStack) {
-		EnchantGlow.addGlow(itemStack, "");
-		return itemStack;
-	}
-
-	/** Deprecated - Use ItemBuilder */
-	@Deprecated
-	public static ItemStack removeGlow(final ItemStack itemStack) {
-		EnchantGlow.removeGlow(itemStack, "");
-		return itemStack;
-	}
-
-	/** Deprecated - Use ItemBuilder */
-	@Deprecated
-	public static boolean hasGlow(final ItemStack itemStack) {
-		return EnchantGlow.hasGlow(itemStack);
 	}
 }
