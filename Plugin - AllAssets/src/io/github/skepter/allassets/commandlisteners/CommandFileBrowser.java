@@ -177,8 +177,10 @@ public class CommandFileBrowser implements Listener {
 						list.add(Strings.HOUSE_STYLE_COLOR + "Version" + Strings.ACCENT_COLOR + s + p.getVersion());
 						list.add(Strings.HOUSE_STYLE_COLOR + "Description" + Strings.ACCENT_COLOR + s + p.getDescription());
 						list.add(Strings.HOUSE_STYLE_COLOR + "Authors" + Strings.ACCENT_COLOR + s + PluginUtils.getAuthors(p));
-						list.add(Strings.HOUSE_STYLE_COLOR + "Dependencies" + Strings.ACCENT_COLOR + s + TextUtils.listToString(p.getDepend()));
-						list.add(Strings.HOUSE_STYLE_COLOR + "Soft dependencies" + Strings.ACCENT_COLOR + s + TextUtils.listToString(p.getSoftDepend()));
+						if (!TextUtils.listToString(p.getDepend()).equals(""))
+							list.add(Strings.HOUSE_STYLE_COLOR + "Dependencies" + Strings.ACCENT_COLOR + s + TextUtils.listToString(p.getDepend()));
+						if (!TextUtils.listToString(p.getSoftDepend()).equals(""))
+							list.add(Strings.HOUSE_STYLE_COLOR + "Soft dependencies" + Strings.ACCENT_COLOR + s + TextUtils.listToString(p.getSoftDepend()));
 						dataMap.put(player, list);
 						break;
 					}
