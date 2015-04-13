@@ -243,23 +243,14 @@ public class AllAssets extends JavaPlugin {
 
 		//// Tundraboy ////
 		{
-			
+
 		}
-		
+
 		//// Skepter ////
 		{
 			//Commands
-			new CommandDescend(framework);
-			new CommandCalculate(framework);
-			new CommandTop(framework);
-			new CommandAscend(framework);
 			new CommandTitle(framework);
 			new CommandUnban(framework);
-			new CommandGive(framework);
-			new CommandHelp(framework);
-			new CommandHelpop(framework);
-			new CommandCollect(framework);
-			new CommandSeen(framework);
 
 			//Listeners
 			r(new CommandBan(framework));
@@ -363,6 +354,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandAllAssets(framework);
 		if (ConfigHandler.features().getBoolean("Announcer"))
 			new CommandAnnouncer(framework);
+		if (ConfigHandler.features().getBoolean("Ascend"))
+			new CommandAscend(framework);
 		if (ConfigHandler.features().getBoolean("Back"))
 			new CommandBack(framework);
 		if (ConfigHandler.features().getBoolean("Backup"))
@@ -375,16 +368,22 @@ public class AllAssets extends JavaPlugin {
 			new CommandBroadcast(framework);
 		if (ConfigHandler.features().getBoolean("Butcher"))
 			new CommandButcher(framework);
+		if (ConfigHandler.features().getBoolean("Calculate"))
+			new CommandCalculate(framework);
 		if (ConfigHandler.features().getBoolean("ChestSearch"))
 			new CommandChestSearch(framework);
 		if (ConfigHandler.features().getBoolean("Clear"))
 			new CommandClear(framework);
 		if (ConfigHandler.features().getBoolean("ClearChat"))
 			new CommandClearchat(framework);
+		if (ConfigHandler.features().getBoolean("Collect"))
+			new CommandCollect(framework);
 		if (ConfigHandler.features().getBoolean("ConsoleLog"))
 			new CommandConsoleLog(framework);
 		if (ConfigHandler.features().getBoolean("Debug"))
 			r(new CommandDebug(framework));
+		if (ConfigHandler.features().getBoolean("Descend"))
+			new CommandDescend(framework);
 		if (ConfigHandler.features().getBoolean("Disable"))
 			new CommandDisable(framework);
 		if (ConfigHandler.features().getBoolean("DiscoArmor"))
@@ -421,6 +420,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandGamemode(framework);
 		if (ConfigHandler.features().getBoolean("Ghost"))
 			new CommandGhost(framework);
+		if (ConfigHandler.features().getBoolean("Give"))
+			new CommandGive(framework);
 		if (ConfigHandler.features().getBoolean("Glow"))
 			new CommandGlow(framework);
 		if (ConfigHandler.features().getBoolean("Go"))
@@ -438,6 +439,10 @@ public class AllAssets extends JavaPlugin {
 			new CommandHead(framework);
 		if (ConfigHandler.features().getBoolean("Heal"))
 			new CommandHeal(framework);
+		if (ConfigHandler.features().getBoolean("Help"))
+			new CommandHelp(framework);
+		if (ConfigHandler.features().getBoolean("Helpop"))
+			new CommandHelpop(framework);
 		if (ConfigHandler.features().getBoolean("Inventory"))
 			new CommandInventory(framework);
 		if (ConfigHandler.features().getBoolean("Launch"))
@@ -470,6 +475,8 @@ public class AllAssets extends JavaPlugin {
 		//			new CommandRestore(framework);
 		if (ConfigHandler.features().getBoolean("Rules"))
 			new CommandRules(framework);
+		if (ConfigHandler.features().getBoolean("Seen"))
+			new CommandSeen(framework);
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
@@ -488,6 +495,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandSuicide(framework);
 		if (ConfigHandler.features().getBoolean("Time"))
 			new CommandTime(framework);
+		if (ConfigHandler.features().getBoolean("Top"))
+			new CommandTop(framework);
 		if (ConfigHandler.features().getBoolean("Tp"))
 			new CommandTp(framework);
 		if (ConfigHandler.features().getBoolean("Tphere"))

@@ -131,6 +131,7 @@ public class ConfigHandler {
 		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false");
 		features.set("AllAssets", "true");
 		features.set("Announcer", "true");
+		features.set("Ascend", "true");
 		features.set("Back", "true");
 		features.set("Backup", "true");
 		features.set("Balance", "true");
@@ -139,11 +140,14 @@ public class ConfigHandler {
 		features.set("Bind", "true");
 		features.set("Broadcast", "true");
 		features.set("Butcher", "true");
+		features.set("Calculate", "true");
 		features.set("ChestSearch", "true");
 		features.set("Clear", "true");
 		features.set("ClearChat", "true");
+		features.set("Collect", "true");
 		features.set("ConsoleLog", "true");
 		features.set("Debug", "true");
+		features.set("Descend", "true");
 		features.set("Disable", "true");
 		features.set("DiscoArmor", "true");
 		features.set("Disguise", "true");
@@ -162,6 +166,7 @@ public class ConfigHandler {
 		features.set("Friend", "true");
 		features.set("Gamemode", "true");
 		features.set("Ghost", "true");
+		features.set("Give", "true");
 		features.set("Glow", "true");
 		features.set("Go", "true");
 		features.set("God", "true");
@@ -169,6 +174,8 @@ public class ConfigHandler {
 		features.set("Hat", "true");
 		features.set("Head", "true");
 		features.set("Heal", "true");
+		features.set("Help", "true");
+		features.set("Helpop", "true");
 		features.set("Inventory", "true");
 		features.set("Launch", "true");
 		features.set("Log", "true");
@@ -186,6 +193,7 @@ public class ConfigHandler {
 		features.set("Rename", "true");
 		//		features.set("Restore", "true");
 		features.set("Rules", "true");
+		features.set("Seen", "true");
 		features.set("SetSpawn", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
@@ -195,6 +203,7 @@ public class ConfigHandler {
 		features.set("StaffChat", "true");
 		features.set("Suicide", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
+		features.set("Top", "true");
 		features.set("Tp", "true");
 		features.set("Tphere", "true");
 		features.set("TpToggle", "true");
