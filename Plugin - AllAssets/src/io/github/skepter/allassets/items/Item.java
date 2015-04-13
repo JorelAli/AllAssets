@@ -52,6 +52,10 @@ public enum Item {
 
 	//Big gap over here
 
+	COMMAND_BLOCK(137, 0, "Command block", "cmdblock"),
+	
+	//And here
+	
 	QUARTZ(155, 0, "Quartz"),
 	CHISELED_QUARTZ(155, 1, "Chiseled quartz", "chiseledquartz", "cquartz"),
 	PILLAR_QUARTZ(155, 2, "Pillar quartz", "pillarquartz", "pquartz"),
