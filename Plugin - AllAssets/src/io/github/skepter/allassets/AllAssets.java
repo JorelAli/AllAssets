@@ -150,7 +150,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** AllAssets plugin, version 0.7 Alpha
+/** AllAssets plugin, version 0.7.2 Alpha
  *
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -318,8 +318,6 @@ public class AllAssets extends JavaPlugin {
 
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
-
-		saveResource("ItemData.csv", true);
 
 		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
