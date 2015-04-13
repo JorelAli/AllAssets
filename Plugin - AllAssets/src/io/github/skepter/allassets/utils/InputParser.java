@@ -24,7 +24,6 @@ package io.github.skepter.allassets.utils;
 import io.github.skepter.allassets.items.BlockInfo;
 import io.github.skepter.allassets.items.Item;
 
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 public class InputParser {
@@ -41,17 +40,6 @@ public class InputParser {
 			return Item.match(inputString).getInfo();
 		else
 			return null;
-	}
-
-	@Deprecated
-	public BlockInfo parseBlockInfoOld() {
-		String d = IDReader.readID(inputString);
-		if (d != null) {
-			String[] data = d.split(":");
-			if (data != null)
-				return new BlockInfo(Material.getMaterial(Integer.parseInt(data[0])), Byte.parseByte(data[1]));
-		}
-		return null;
 	}
 
 	public EntityType parseMob() {

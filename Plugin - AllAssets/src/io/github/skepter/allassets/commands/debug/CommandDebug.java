@@ -42,7 +42,6 @@ import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.VanishPlayersItemStack;
 import io.github.skepter.allassets.utils.EncryptionUtils;
 import io.github.skepter.allassets.utils.Files;
-import io.github.skepter.allassets.utils.IDReader;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
@@ -361,12 +360,6 @@ public class CommandDebug implements Listener {
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
 
-	@CommandHandler(name = "debug.testid", permission = "debug", description = "Runs a test")
-	public void testID(final CommandArgs args) {
-		System.out.println(args.getArgs()[0]);
-		args.getSender().sendMessage("The ID for " + args.getArgs()[0] + " is " + IDReader.readID(args.getArgs()[0]));
-	}
-
 	@CommandHandler(name = "debug.testencrypt", permission = "debug", description = "Runs a test")
 	public void testEncrypt(final CommandArgs args) {
 		if (args.getArgs().length != 2) {
@@ -552,7 +545,6 @@ public class CommandDebug implements Listener {
 		list.add("conflicts");
 		list.add("testencrypt");
 		list.add("testdecrypt");
-		list.add("testid");
 		list.add("set");
 		list.add("regen");
 		list.add("inv");
