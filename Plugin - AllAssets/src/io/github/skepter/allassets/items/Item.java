@@ -52,6 +52,12 @@ public enum Item {
 
 	//Big gap over here
 
+	QUARTZ(155, 0, "Quartz"),
+	CHISELED_QUARTZ(155, 1, "Chiseled quartz", "chiseledquartz", "cquartz"),
+	PILLAR_QUARTZ(155, 2, "Pillar quartz", "pillarquartz", "pquartz"),
+
+	//And here
+
 	DIAMOND(264, 0, "Diamond"),
 	IRON_INGOT(265, 0, "Iron ingot", "iron"),
 	GOLD_INGOT(266, 0, "Gold ingot", "gold"),
