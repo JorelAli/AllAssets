@@ -167,6 +167,15 @@ public class TextUtils {
 			return false;
 		}
 	}
+	
+	public static boolean isFloat(final String s) {
+		try {
+			Float.parseFloat(s);
+			return true;
+		} catch (final NumberFormatException e) {
+			return false;
+		}
+	}
 
 	public static String join(final String[] arr, final String seperator) {
 		String s = "";

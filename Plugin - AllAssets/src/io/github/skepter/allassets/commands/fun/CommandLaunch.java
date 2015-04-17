@@ -104,8 +104,8 @@ public class CommandLaunch {
 							break;
 					}
 				case 2:
-					if (TextUtils.isInteger(args.getArgs()[1])) {
-						final int m = Integer.parseInt(args.getArgs()[1]);
+					if (TextUtils.isInteger(args.getArgs()[1]) || TextUtils.isFloat(args.getArgs()[1])) {
+						final float m = Float.parseFloat(args.getArgs()[1]);
 						switch (args.getArgs()[0].toLowerCase()) {
 							case "arrow":
 								final Entity arrow = player.launchProjectile(Arrow.class);
