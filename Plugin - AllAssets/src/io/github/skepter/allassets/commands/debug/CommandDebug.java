@@ -364,9 +364,8 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.actionmsg", permission = "debug", description = "Sends a message with the action bar")
 	public void actionmsg(final CommandArgs args) {
 		try {
-			
-			args.getPlayer().sendMessage(JSON.getJSON(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
-			new ReflectionPlayer(args.getPlayer()).sendActionBar(JSON.getJSON(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+			String msg = JSON.getJSON(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length));
+			new ReflectionPlayer(args.getPlayer()).sendActionBar(msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

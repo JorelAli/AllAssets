@@ -8,11 +8,13 @@ import java.util.regex.Pattern;
 import org.bukkit.ChatColor;
 
 public class JSON {
+
 	/** @author werter318
-	 * @param title
+	 * @param message
 	 * @return String */
-	public static String getJSON(String title) {
+	public static String getJSON(String message) {
 		char colorChar = '&';
+		message = parse(colorChar, message);
 		//char colorChar = ChatColor.COLOR_CHAR;
 
 		String template = "{text:\"TEXT\",color:COLOR,bold:BOLD,underlined:UNDERLINED,italic:ITALIC,strikethrough:STRIKETHROUGH,obfuscated:OBFUSCATED,extra:[EXTRA]}";
@@ -23,22 +25,22 @@ public class JSON {
 		int first = 0;
 		int last = 0;
 
-		while ((first = title.indexOf(colorChar, last)) != -1) {
+		while ((first = message.indexOf(colorChar, last)) != -1) {
 			int offset = 2;
-			while ((last = title.indexOf(colorChar, first + offset)) - 2 == first) {
+			while ((last = message.indexOf(colorChar, first + offset)) - 2 == first) {
 				offset += 2;
 			}
 
 			if (last == -1) {
-				parts.add(title.substring(first));
+				parts.add(message.substring(first));
 				break;
 			} else {
-				parts.add(title.substring(first, last));
+				parts.add(message.substring(first, last));
 			}
 		}
 
 		if (parts.isEmpty()) {
-			parts.add(title);
+			parts.add(message);
 		}
 
 		Pattern colorFinder = Pattern.compile("(" + colorChar + "([a-f0-9]))");
@@ -46,7 +48,7 @@ public class JSON {
 			json = (json.isEmpty() ? template : json.replace("EXTRA", template));
 
 			Matcher matcher = colorFinder.matcher(part);
-			ChatColor color = (matcher.find() ? ChatColor.getByChar(matcher.group().charAt(1)) : ChatColor.BLACK);
+			ChatColor color = (matcher.find() ? ChatColor.getByChar(String.valueOf(matcher.group().charAt(1))) : ChatColor.WHITE);
 
 			json = json.replace("COLOR", color.name().toLowerCase());
 			json = json.replace("BOLD", String.valueOf(part.contains(ChatColor.BOLD.toString())));
@@ -61,5 +63,22 @@ public class JSON {
 		json = json.replace(",extra:[EXTRA]", "");
 
 		return json;
+	}
+
+	private static String parse(char code, String message) {
+		String out = message;
+//		Pattern colorFinder = Pattern.compile("(" + code + "([a-f0-9]))");
+//		Matcher matcher = colorFinder.matcher(out);
+//		while (!matcher.hitEnd()) {
+//			if (matcher.find()) {
+//				System.out.println(matcher.group());
+//				ChatColor color = ChatColor.getByChar(String.valueOf(matcher.group().charAt(1)));
+//				System.out.println(color.name());
+//				System.out.println(color.toString());
+//				out = out.replaceAll("(" + code + "([a-z0-9]))", color.toString());
+//			}
+//		}
+//		System.out.println("Out: " + out);
+		return out;
 	}
 }
