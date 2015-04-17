@@ -135,6 +135,24 @@ public enum Item {
 	CHISELED_QUARTZ(155, 1, "Chiseled quartz", "chiseledquartz", "cquartz"),
 	PILLAR_QUARTZ(155, 2, "Pillar quartz", "pillarquartz", "pquartz"),
 
+	//Stained glass panes
+	STAINED_GLASS_PANE(95, 0, "Stained glass pane", "white stained glass pane", "white glass pane"),
+	ORANGE_STAINED_GLASS_PANE(95, 1, "Orange stained glass pane", "orange glass pane"),
+	MAGENTA_STAINED_GLASS_PANE(95, 2, "Magenta stained glass pane", "light purple stained glass pane", "magenta glass pane"),
+	LIGHT_BLUE_STAINED_GLASS_PANE(95, 3, "Light blue stained glass pane", "light blue glass pane"),
+	YELLOW_STAINED_GLASS_PANE(95, 4, "Yellow stained glass pane", "yellow glass pane"),
+	LIME_STAINED_GLASS_PANE(95, 5, "Lime stained glass pane", "light green stained glass pane", "light green glass pane", "lime glass pane"),
+	PINK_STAINED_GLASS_PANE(95, 6, "Pink stained glass pane", "pink glass pane"),
+	GRAY_STAINED_GLASS_PANE(95, 7, "Gray stained glass pane", "dark gray stained glass pane", "grey stained glass pane", "dark grey stained glass pane", "gray glass pane", "dark gray glass pane", "grey glass pane", "dark grey glass pane"),
+	LIGHT_GREY_STAINED_GLASS_PANE(95, 8, "Light gray stained glass pane", "light grey stained glass pane", "light gray glass pane", "light grey glass pane"),
+	CYAN_STAINED_GLASS_PANE(95, 9, "Cyan stained glass pane", "cyan glass pane"),
+	PURPLE_STAINED_GLASS_PANE(95, 10, "Purple stained glass pane", "dark purple stained glass pane", "lilac stained glass pane", "purple glass pane", "dark purple glass pane"),
+	BLUE_STAINED_GLASS_PANE(95, 11, "Blue stained glass pane", "dark blue stained glass pane", "blue glass pane", "dark blue glass pane"),
+	BROWN_STAINED_GLASS_PANE(95, 12, "Brown stained glass pane", "brown glass pane"),
+	GREEN_STAINED_GLASS_PANE(95, 13, "Green stained glass pane", "dark green stained glass pane", "green glass pane", "dark green glass pane"),
+	RED_STAINED_GLASS_PANE(95, 14, "Red stained glass pane", "red glass pane"),
+	BLACK_STAINED_GLASS_PANE(95, 15, "Black stained glass pane", "black glass pane"),
+
 	//And here
 
 	DIAMOND(264, 0, "Diamond"),
