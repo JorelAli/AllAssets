@@ -32,6 +32,7 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.api.CustomInventory;
 import io.github.skepter.allassets.api.utils.Debugger;
+import io.github.skepter.allassets.libs.JSON;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.reflection.PacketBuilder;
 import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
@@ -360,6 +361,17 @@ public class CommandDebug implements Listener {
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
 	}
 
+	@CommandHandler(name = "debug.actionmsg", permission = "debug", description = "Sends a message with the action bar")
+	public void actionmsg(final CommandArgs args) {
+		try {
+			
+			args.getPlayer().sendMessage(JSON.getJSON(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+			new ReflectionPlayer(args.getPlayer()).sendActionBar(JSON.getJSON(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@CommandHandler(name = "debug.testencrypt", permission = "debug", description = "Runs a test")
 	public void testEncrypt(final CommandArgs args) {
 		if (args.getArgs().length != 2) {
@@ -549,6 +561,7 @@ public class CommandDebug implements Listener {
 		list.add("regen");
 		list.add("inv");
 		list.add("gsc");
+		list.add("actionmsg");
 		return list;
 	}
 

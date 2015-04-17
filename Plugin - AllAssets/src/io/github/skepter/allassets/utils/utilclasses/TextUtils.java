@@ -167,7 +167,7 @@ public class TextUtils {
 			return false;
 		}
 	}
-	
+
 	public static boolean isFloat(final String s) {
 		try {
 			Float.parseFloat(s);
@@ -219,7 +219,7 @@ public class TextUtils {
 			return Arrays.asList(new String[] { stringBetween(str, beginTag, endTag) });
 		}
 	}
-	
+
 	public static String listToString(List<String> list) {
 		String out = "";
 		for (final String s : list)
@@ -230,7 +230,7 @@ public class TextUtils {
 			out = "";
 		return out;
 	}
-	
+
 	public static String replace(final String input, final int startindex, final int endindex, final String replacement) {
 		final String first = input.substring(0, startindex);
 		final String end = input.substring(endindex);
@@ -252,7 +252,8 @@ public class TextUtils {
 	}
 
 	public enum SeperatorType {
-		DASH(" - "), COLON(": ");
+		DASH(" - "),
+		COLON(": ");
 
 		String str;
 

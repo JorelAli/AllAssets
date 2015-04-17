@@ -30,17 +30,47 @@ import org.bukkit.entity.Player;
 public class ReflectionPlayer {
 
 	public enum AnimationType {
-		SWING_ARM, DAMAGE, LEAVE_BED, EAT_FOOD, CRITICAL_EFFECT, MAGIC_EFFECT, CROUCH, UNCROUCH;
+		SWING_ARM,
+		DAMAGE,
+		LEAVE_BED,
+		EAT_FOOD,
+		CRITICAL_EFFECT,
+		MAGIC_EFFECT,
+		CROUCH,
+		UNCROUCH;
 	}
 
 	public enum GameStateEffects {
-		INVALID_BED, END_RAINING, BEGIN_RAINING, CHANGE_GAMEMODE, ENTER_CREDITS, DEMO_MESSAGE, ARROW_HIT, FADE_VALUE, FADE_TIME, ELDER_GUARDIAN_APPEARANCE;
+		INVALID_BED(0),
+		END_RAINING(1),
+		BEGIN_RAINING(2),
+		CHANGE_GAMEMODE(3),
+		ENTER_CREDITS(4),
+		DEMO_MESSAGE(5),
+		ARROW_HIT(6),
+		FADE_VALUE(7),
+		FADE_TIME(8),
+		ELDER_GUARDIAN_APPEARANCE(10);
+
+		private final int id;
+
+		GameStateEffects(int id) {
+			this.id = id;
+		}
 	}
 
 	private final Player player;
 
 	public ReflectionPlayer(final Player player) {
 		this.player = player;
+	}
+
+	public void sendActionBar(String message) {
+		try {
+			new PacketBuilder(player, PacketType.PLAY_OUT_CHAT).set("a", new MinecraftReflectionUtils(player).chatSerialize(message)).set("b", (byte) 2).send();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void openAnvil() {
@@ -130,41 +160,7 @@ public class ReflectionPlayer {
 	public void doGameStateChange(final GameStateEffects effect, final int value) {
 		try {
 			final PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_GAME_STATE_CHANGE);
-			int effectCode = 0;
-			switch (effect) {
-				case ARROW_HIT:
-					effectCode = 6;
-					break;
-				case BEGIN_RAINING:
-					effectCode = 2;
-					break;
-				case CHANGE_GAMEMODE:
-					effectCode = 3;
-					break;
-				case DEMO_MESSAGE:
-					effectCode = 5;
-					break;
-				case END_RAINING:
-					effectCode = 1;
-					break;
-				case ENTER_CREDITS:
-					effectCode = 4;
-					break;
-				case FADE_TIME:
-					effectCode = 8;
-					break;
-				case FADE_VALUE:
-					effectCode = 7;
-					break;
-				case INVALID_BED:
-					effectCode = 0;
-					break;
-				case ELDER_GUARDIAN_APPEARANCE:
-					effectCode = 10;
-					break;
-				default:
-					break;
-			}
+			int effectCode = effect.id;
 			packet.setInt("b", effectCode).set("c", Float.valueOf(value)).send();
 		} catch (final Exception exception) {
 		}
