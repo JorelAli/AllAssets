@@ -38,9 +38,14 @@ public enum Item {
 	DARK_OAK_SAPLING(6, 5, "Dark oak sapling"),
 
 	BEDROCK(7, 0, "Bedrock", "adminium"),
+
+	@Deprecated
 	FLOWING_WATER(8, 0, "Flowing water", "water block", "flowingwater"),
+	@Deprecated
 	STILL_WATER(9, 0, "Stationary water", "stationarywater", "stillwater"),
+	@Deprecated
 	FLOWING_LAVA(10, 0, "Flowing lava", "lava block", "flowinglava"),
+	@Deprecated
 	STILL_LAVA(11, 0, "Stationary lava", "stationarylava", "stilllava"),
 
 	SAND(12, 0, "Sand"),
@@ -106,9 +111,9 @@ public enum Item {
 	GREEN_WOOL(35, 13, "Green wool", "dark green wool", "gwool"),
 	RED_WOOL(35, 14, "Red wool", "rwool"),
 	BLACK_WOOL(35, 15, "Black wool"),
-	
+
 	//Where's block 36 :P
-	
+
 	//Flowers
 	DANDELION(37, 0, "Dandelion", "yellow flower"),
 	POPPY(38, 0, "Poppy", "rose", "red flower"),
@@ -120,8 +125,46 @@ public enum Item {
 	WHITE_TULIP(38, 6, "White tulip", "wtulip"),
 	PINK_TULIP(38, 7, "Pink tulip", "ptulip", "pink flower"),
 	OXEYE_DAISY(38, 8, "Oxeye daisy", "daisy"),
-	
+
+	BROWN_MUSHROOM(39, 0, "Brown mushroom", "mushroom"),
+	RED_MUSHROOM(40, 0, "Red mushroom"),
+
+	GOLD_BLOCK(41, 0, "Gold block", "golden block"),
+	IRON_BLOCK(42, 0, "Iron block"),
+
+	//double slabs
+
+	//Single slabs
+	STONE_SLAB(44, 0, "Stone slab", "slab"),
+	SANDSTONE_SLAB(44, 1, "Sandstone slab", "sand slab"),
+	WOODEN_SLAB(44, 2, "Wooden slab", "wood slab", "log slab"),
+	COBBLESTONE_SLAB(44, 3, "Cobblestone slab", "cobble slab"),
+	BRICK_SLAB(44, 4, "Brick slab"),
+	STONE_BRICK_SLAB(44, 5, "Stone brick slab", "sbrick slab"),
+	NETHER_BRICK_SLAB(44, 6, "Nether brick slab", "nbrick slab", "nether slab"),
+	QUARTZ_SLAB(44, 7, "Quartz slab", "qslab"),
+
+	BRICKS(45, 0, "Bricks", "Brick block"),
 	TNT(46, 0, "TNT"),
+	BOOKSHELF(47, 0, "Bookshelf", "books"),
+	MOSS_STONE(48, 0, "Moss stone", "mossy cobblestone", "mossy cobblestone", "mcobble"),
+	OBSIDIAN(49, 0, "Obsidian", "obby"),
+
+	//Why is torch ID 50 when it's an item?!
+	TORCH(50, 0, "Torch"),
+
+	@Deprecated
+	FIRE(51, 0, "Fire", "fire block"),
+
+	MONSTER_SPAWNER(52, 0, "Monster spawner", "mob spawner", "spawner"),
+	OAK_WOOD_STAIRS(53, 0, "Oak wood stairs", "stairs", "wooden stairs", "wood stairs", "oak stairs"),
+	CHEST(54, 0, "Chest", "double chest"),
+	REDSTONE_WIRE(55, 0, "Redstone wire"),
+
+	DIAMOND_ORE(56, 0, "Diamond ore", "dore"),
+	DIAMOND_BLOCK(57, 0, "Diamond block", "dblock"),
+	CRAFTING_TABLE(58, 0, "Crafting table", "workbench"),
+	WHEAT_CROPS(59, 0, "Wheat crops"),
 
 	//Stained glass
 	STAINED_GLASS(95, 0, "Stained glass", "white stained glass", "white glass"),
@@ -159,7 +202,17 @@ public enum Item {
 	YELLOW_STAINED_GLASS_PANE(160, 4, "Yellow stained glass pane", "yellow glass pane"),
 	LIME_STAINED_GLASS_PANE(160, 5, "Lime stained glass pane", "light green stained glass pane", "light green glass pane", "lime glass pane"),
 	PINK_STAINED_GLASS_PANE(160, 6, "Pink stained glass pane", "pink glass pane"),
-	GRAY_STAINED_GLASS_PANE(160, 7, "Gray stained glass pane", "dark gray stained glass pane", "grey stained glass pane", "dark grey stained glass pane", "gray glass pane", "dark gray glass pane", "grey glass pane", "dark grey glass pane"),
+	GRAY_STAINED_GLASS_PANE(
+			160,
+			7,
+			"Gray stained glass pane",
+			"dark gray stained glass pane",
+			"grey stained glass pane",
+			"dark grey stained glass pane",
+			"gray glass pane",
+			"dark gray glass pane",
+			"grey glass pane",
+			"dark grey glass pane"),
 	LIGHT_GREY_STAINED_GLASS_PANE(160, 8, "Light gray stained glass pane", "light grey stained glass pane", "light gray glass pane", "light grey glass pane"),
 	CYAN_STAINED_GLASS_PANE(160, 9, "Cyan stained glass pane", "cyan glass pane"),
 	PURPLE_STAINED_GLASS_PANE(160, 10, "Purple stained glass pane", "dark purple stained glass pane", "lilac stained glass pane", "purple glass pane", "dark purple glass pane"),
@@ -168,7 +221,7 @@ public enum Item {
 	GREEN_STAINED_GLASS_PANE(160, 13, "Green stained glass pane", "dark green stained glass pane", "green glass pane", "dark green glass pane"),
 	RED_STAINED_GLASS_PANE(160, 14, "Red stained glass pane", "red glass pane"),
 	BLACK_STAINED_GLASS_PANE(160, 15, "Black stained glass pane", "black glass pane"),
-	
+
 	STAINED_CARPET(171, 0, "Stained carpet", "white carpet", "white carpet"),
 	ORANGE_STAINED_CARPET(171, 1, "Orange carpet", "orange carpet"),
 	MAGENTA_STAINED_CARPET(171, 2, "Magenta carpet", "light purple carpet", "magenta carpet"),
@@ -196,8 +249,7 @@ public enum Item {
 
 	WATER_BUCKET(326, 0, "Water bucket", "water"),
 	LAVA_BUCKET(327, 0, "Lava bucket", "lava");
-	
-	
+
 	private final int id;
 	private final int meta;
 	private final String name;
@@ -222,6 +274,10 @@ public enum Item {
 
 	public BlockInfo getInfo() {
 		return info;
+	}
+
+	public boolean isBlock() {
+		return (getId() <= 256);
 	}
 
 	@SuppressWarnings("deprecation")
