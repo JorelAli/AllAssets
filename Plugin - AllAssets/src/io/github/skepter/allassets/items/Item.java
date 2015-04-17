@@ -38,9 +38,9 @@ public enum Item {
 	DARK_OAK_SAPLING(6, 5, "Dark oak sapling"),
 
 	BEDROCK(7, 0, "Bedrock", "adminium"),
-	FLOWING_WATER(8, 0, "Flowing water", "water", "flowingwater"),
+	FLOWING_WATER(8, 0, "Flowing water", "water block", "flowingwater"),
 	STILL_WATER(9, 0, "Stationary water", "stationarywater", "stillwater"),
-	FLOWING_LAVA(10, 0, "Flowing lava", "lava", "flowinglava"),
+	FLOWING_LAVA(10, 0, "Flowing lava", "lava block", "flowinglava"),
 	STILL_LAVA(11, 0, "Stationary lava", "stationarylava", "stilllava"),
 
 	SAND(12, 0, "Sand"),
@@ -106,6 +106,8 @@ public enum Item {
 	GREEN_WOOL(35, 13, "Green wool", "dark green wool", "gwool"),
 	RED_WOOL(35, 14, "Red wool", "rwool"),
 	BLACK_WOOL(35, 15, "Black wool"),
+	
+	TNT(46, 0, "TNT"),
 
 	//Stained glass
 	STAINED_GLASS(95, 0, "Stained glass", "white stained glass", "white glass"),
@@ -176,8 +178,12 @@ public enum Item {
 	IRON_INGOT(265, 0, "Iron ingot", "iron"),
 	GOLD_INGOT(266, 0, "Gold ingot", "gold"),
 
-	SIGN(323, 0, "Sign");
+	SIGN(323, 0, "Sign"),
 
+	WATER_BUCKET(326, 0, "Water bucket", "water"),
+	LAVA_BUCKET(327, 0, "Lava bucket", "lava");
+	
+	
 	private final int id;
 	private final int meta;
 	private final String name;
