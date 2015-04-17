@@ -107,6 +107,20 @@ public enum Item {
 	RED_WOOL(35, 14, "Red wool", "rwool"),
 	BLACK_WOOL(35, 15, "Black wool"),
 	
+	//Where's block 36 :P
+	
+	//Flowers
+	DANDELION(37, 0, "Dandelion", "yellow flower"),
+	POPPY(38, 0, "Poppy", "rose", "red flower"),
+	BLUE_ORCHID(38, 1, "Blue orchid", "orchid", "blue flowers", "blue flower"),
+	ALLIUM(38, 2, "Allium", "purple flower"),
+	AZURE_BLUET(38, 3, "Azure bluet", "azure", "white flowers"),
+	RED_TULIP(38, 4, "Red tulip", "rtulip"),
+	ORANGE_TULIP(38, 5, "Orange tulip", "otulip", "orange flower"),
+	WHITE_TULIP(38, 6, "White tulip", "wtulip"),
+	PINK_TULIP(38, 7, "Pink tulip", "ptulip", "pink flower"),
+	OXEYE_DAISY(38, 8, "Oxeye daisy", "daisy"),
+	
 	TNT(46, 0, "TNT"),
 
 	//Stained glass
