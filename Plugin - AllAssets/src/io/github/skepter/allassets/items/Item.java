@@ -15,7 +15,7 @@ public enum Item {
 	ANDESITE(1, 5, "Andesite"),
 	POLISHED_ANDESITE(1, 6, "Polished andesite", "pandesite"),
 
-	GRASS(2, 0, "Grass"),
+	GRASS(2, 0, "Grass", "grass block"),
 	DIRT(3, 0, "Dirt"),
 	COARSE_DIRT(3, 1, "Coarse dirt", "coarsedirt"),
 	PODZOL(3, 2, "Podzol", "podzol"),
@@ -49,6 +49,65 @@ public enum Item {
 	GOLD_ORE(14, 0, "Gold ore", "oregold", "gore"),
 	IRON_ORE(15, 0, "Iron ore", "oreiron", "iore"),
 	COAL_ORE(16, 0, "Coal ore", "orecoal", "core"),
+	
+	//Logs (Wood)
+	LOG(17, 0, "Log"),
+	SPRUCE_LOG(17, 1, "Spruce log"),
+	BIRCH_LOG(17, 2, "Birch log"),
+	JUNGLE_LOG(17, 3, "Jungle log"),
+	
+	//Leaves
+	LEAVES(18, 0, "Leaves"),
+	SPRUCE_LEAVES(18, 1, "Spruce leaves"),
+	BIRCH_LEAVES(18, 2, "Birch leaves"),
+	JUNGLE_LEAVES(18, 3, "Jungle leaves"),
+	
+	SPONGE(19, 0, "Sponge"),
+	WET_SPONGE(19, 1, "Wet sponge", "wsponge"),
+	GLASS(20, 0, "Glass"),
+	LAPIS_LAZULI_ORE(21, 0, "Lapis lazuli ore", "lapis ore", "lore"),
+	LAPIS_LAZULI_BLOCK(22, 0, "Lapis lazuli block", "lapis block"),
+	DISPENSER(23, 0, "Dispenser"),
+	SANDSTONE(24, 0, "Sandstone"),
+	CHISELED_SANDSTONE(24, 1, "Chiseled sandstone", "csandstone"),
+	SMOOTH_SANDSTONE(24, 2, "Smooth sandstone", "ssandstone"),
+	NOTE_BLOCK(25, 0, "Note block"),
+	
+	/** Uh... is this even an item?! */
+	BED(26, 0, "Bed block"),
+	POWERED_RAIL(27, 0, "Powered rail", "prail"),
+	DETECTOR_RAIL(28, 0, "Detector rail", "drail"),
+	STICKY_PISTON(29, 0, "Sticky piston", "spiston"),
+	COBWEB(30, 0, "Cobweb", "web"),
+	DEAD_SHRUB(31, 0, "Dead shrub", "dead bush", "dead leaf", "dead leaves"),
+	TALL_GRASS(31, 1, "Tall grass"),
+	FERN(31, 2, "Fern"),
+	DEAD_BUSH(32, 0, "Dead bush"),
+	PISTON(33, 0, "Piston"),
+	
+	/** Erm... I'm wondering if we should remove these.... */
+	PISTON_HEAD(34, 0, "Piston head"),
+	
+	//Wool
+	WOOL(35, 0, "Wool", "white wool"),
+	ORANGE_WOOL(35, 1, "Orange wool", "owool"),
+	MAGENTA_WOOL(35, 2, "Magenta wool", "light purple wool"),
+	LIGHT_BLUE_WOOL(35, 3, "Light blue wool"),
+	YELLOW_WOOL(35, 4, "Yello wool", "ywool"),
+	LIME_WOOL(35, 5, "Lime wool", "light green wool"),
+	PINK_WOOL(35, 6, "Pink wool", "pwool"),
+	//I'm sorry, I'm British and like the British English spelling too :P
+	GRAY_WOOL(35, 7, "Gray wool", "dark gray wool", "grey wool", "dark grey wool"),
+	LIGHT_GREY_WOOl(35, 8, "Light gray wool", "light grey wool"),
+	CYAN_WOOL(35, 9, "Cyan wool", "cwool"),
+	PURPLE_WOOL(35, 10, "Purple wool", "dark purple wool", "lilac wool"),
+	BLUE_WOOL(35, 11, "Blue wool", "dark blue wool"),
+	BROWN_WOOL(35, 12, "Brown wool"),
+	GREEN_WOOL(35, 13, "Green wool", "dark green wool", "gwool"),
+	RED_WOOL(35, 14, "Red wool", "rwool"),
+	BLACK_WOOL(35, 15, "Black wool"),
+	
+	
 
 	//Big gap over here
 
