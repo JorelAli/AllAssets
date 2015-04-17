@@ -64,6 +64,7 @@ public class CommandLaunch {
 				case 0:
 				default:
 					printHelp(player);
+					break;
 				case 1:
 					switch (args.getArgs()[0].toLowerCase()) {
 						case "arrow":
