@@ -78,7 +78,7 @@ public enum Item {
 	SMOOTH_SANDSTONE(24, 2, "Smooth sandstone", "ssandstone"),
 	NOTE_BLOCK(25, 0, "Note block"),
 
-	/** Uh... is this even an item?! */
+	@Deprecated
 	BED(26, 0, "Bed block"),
 	POWERED_RAIL(27, 0, "Powered rail", "prail"),
 	DETECTOR_RAIL(28, 0, "Detector rail", "drail"),
@@ -90,7 +90,7 @@ public enum Item {
 	DEAD_BUSH(32, 0, "Dead bush"),
 	PISTON(33, 0, "Piston"),
 
-	/** Erm... I'm wondering if we should remove these.... */
+	@Deprecated
 	PISTON_HEAD(34, 0, "Piston head"),
 
 	//Wool
@@ -149,8 +149,6 @@ public enum Item {
 	BOOKSHELF(47, 0, "Bookshelf", "books"),
 	MOSS_STONE(48, 0, "Moss stone", "mossy cobblestone", "mossy cobblestone", "mcobble"),
 	OBSIDIAN(49, 0, "Obsidian", "obby"),
-
-	//Why is torch ID 50 when it's an item?!
 	TORCH(50, 0, "Torch"),
 
 	@Deprecated
@@ -165,6 +163,51 @@ public enum Item {
 	DIAMOND_BLOCK(57, 0, "Diamond block", "dblock"),
 	CRAFTING_TABLE(58, 0, "Crafting table", "workbench"),
 	WHEAT_CROPS(59, 0, "Wheat crops"),
+	FARMLAND(60, 0, "Farmland", "tilled dirt"),
+	FURNACE(61, 0, "Furnace"),
+	BURNING_FURNACE(62, 0, "Burning furnace", "on furnace"),
+	@Deprecated
+	STANDING_SIGN_BLOCK(63, 0, "Standing sign block"),
+	@Deprecated
+	OAK_DOOR_BLOCK(64, 0, "Oak door block"),
+	LADDER(65, 0, "Ladder"),
+	RAIL(66, 0, "Rail"),
+	COBBLESTONE_STAIRS(67, 0, "Cobblestone stairs", "cobble stairs"),
+	@Deprecated
+	WALL_MOUNTED_SIGN_BLOCK(68, 0, "Wall-mounted sign block"),
+	LEVER(69, 0, "Lever", "switch"),
+	STONE_PRESSURE_PLATE(70, 0, "Stone pressure plate", "pressure plate"),
+	@Deprecated
+	IRON_DOOR_BLOCK(71, 0, "Iron door block"),
+	WOODEN_PRESSURE_PLATE(72, 0, "Wooden pressure plate", "wood pressure plate"),
+	
+	REDSTONE_ORE(73, 0, "Redstone ore", "redore", "rore"),
+	@Deprecated
+	GLOWING_REDSTONE_ORE(74, 0, "Glowing redstone ore", "on redstone ore"),
+	@Deprecated
+	UNLIT_REDSTONE_TORCH(75, 0, "Redstone torch (off)", "unlit redstone torch", "off redstone torch"),
+	REDSTONE_TORCH(76, 0, "Redstone torch (on)", "redstone torch", "lit redstone torch", "on redstone torch"),
+	STONE_BUTTON(77, 0, "Stone button", "button"),
+	SNOW_LAYER(78, 0, "Snow layer"),
+	ICE(79, 0, "Ice"),
+	SNOW_BLOCK(80, 0, "Snow block", "snow"),
+	CACTUS(81, 0, "Cactus", "cacti"),
+	CLAY(82, 0, "Clay"),
+	//note how this is sugar caneS, but the item will be sugar cane (without the s)
+	SUGAR_CANE_BLOCK(83, 0, "Sugar cane block", "reeds", "sugar canes"),
+	JUKEBOX(84, 0, "Jukebox", "music box"),
+	OAK_FENCE(85, 0, "Oak fence", "fence", "wood fence", "wooden fence"),
+	PUMPKIN(86, 0, "Pumpkin"),
+	NETHERRACK(87, 0, "Netherrack", "hellstone", "bloodstone", "hellrock"),
+	SOUL_SAND(88, 0, "Soul sand"),
+	GLOWSTONE(89, 0, "Glowstone"),
+	@Deprecated
+	NETHER_PORTAL(90, 0, "Nether portal", "portal"),
+	JACK_O_LANTERN(91, 0, "Jack o'Lantern", "jack o lantern", "lit pumpkin", "on pumpkin"),
+	@Deprecated
+	CAKE_BLOCK(92, 0, "Cake block"),
+	REDSTONE_REPEATER_BLOCK(93, 0, "Unpowered repeater"),
+	POWERED_REDSTONE_REPEATER_BLOCK(94, 0, "Powered repeater"),
 
 	//Stained glass
 	STAINED_GLASS(95, 0, "Stained glass", "white stained glass", "white glass"),
@@ -202,17 +245,7 @@ public enum Item {
 	YELLOW_STAINED_GLASS_PANE(160, 4, "Yellow stained glass pane", "yellow glass pane"),
 	LIME_STAINED_GLASS_PANE(160, 5, "Lime stained glass pane", "light green stained glass pane", "light green glass pane", "lime glass pane"),
 	PINK_STAINED_GLASS_PANE(160, 6, "Pink stained glass pane", "pink glass pane"),
-	GRAY_STAINED_GLASS_PANE(
-			160,
-			7,
-			"Gray stained glass pane",
-			"dark gray stained glass pane",
-			"grey stained glass pane",
-			"dark grey stained glass pane",
-			"gray glass pane",
-			"dark gray glass pane",
-			"grey glass pane",
-			"dark grey glass pane"),
+	GRAY_STAINED_GLASS_PANE(160, 7, "Gray stained glass pane", "dark gray stained glass pane", "grey stained glass pane", "dark grey stained glass pane", "gray glass pane", "dark gray glass pane", "grey glass pane", "dark grey glass pane"),
 	LIGHT_GREY_STAINED_GLASS_PANE(160, 8, "Light gray stained glass pane", "light grey stained glass pane", "light gray glass pane", "light grey glass pane"),
 	CYAN_STAINED_GLASS_PANE(160, 9, "Cyan stained glass pane", "cyan glass pane"),
 	PURPLE_STAINED_GLASS_PANE(160, 10, "Purple stained glass pane", "dark purple stained glass pane", "lilac stained glass pane", "purple glass pane", "dark purple glass pane"),
