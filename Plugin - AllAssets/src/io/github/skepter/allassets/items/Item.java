@@ -238,10 +238,10 @@ public enum Item {
 	CHISELED_STONE_BRICK_MONSTER_EGG(97, 5, "Chiseled stone brick monster egg", "chiseled stone mob egg", "chiseled stone mob"),
 
 	//Stone bricks
-	STONE_BRICK(97, 0, "Stone brick", "stone brick", "stone brick", "sbrick"),
-	MOSSY_STONE_BRICK(97, 1, "Mossy stone brick", "mossy stone", "mossy stone", "mossy sbrick"),
-	CRACKED_STONE_BRICK(97, 2, "Cracked stone brick", "cracked stone", "cracked stone", "cracked sbrick", "cbrick"),
-	CHISELED_STONE_BRICK(97, 3, "Chiseled stone brick", "chiseled stone", "chiseled stone", "chiseled sbrick", "chbrick"),
+	STONE_BRICK(98, 0, "Stone brick", "stone brick", "stone brick", "sbrick"),
+	MOSSY_STONE_BRICK(98, 1, "Mossy stone brick", "mossy stone", "mossy stone", "mossy sbrick"),
+	CRACKED_STONE_BRICK(98, 2, "Cracked stone brick", "cracked stone", "cracked stone", "cracked sbrick", "cbrick"),
+	CHISELED_STONE_BRICK(98, 3, "Chiseled stone brick", "chiseled stone", "chiseled stone", "chiseled sbrick", "chbrick"),
 
 	BROWN_MUSHROOM_BLOCK(99, 0, "Brown mushroom block", "mushroom block"),
 	RED_MUSHROOM_BLOCK(100, 0, "Red mushroom block"),
