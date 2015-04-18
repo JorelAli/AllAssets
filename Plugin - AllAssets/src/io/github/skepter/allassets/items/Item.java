@@ -227,6 +227,39 @@ public enum Item {
 	RED_STAINED_GLASS(95, 14, "Red stained glass", "red glass"),
 	BLACK_STAINED_GLASS(95, 15, "Black stained glass", "black glass"),
 
+	WOODEN_TRAPDOOR(96, 0, "Wooden trapdoor", "trapdoor", "wood trapdoor"),
+	
+	//Stone monster eggs
+	STONE_MONSTER_EGG(97, 0, "Stone monster egg", "stone mob egg", "stone mob"),
+	COBBLESTONESTONE_MONSTER_EGG(97, 1, "Cobblestone monster egg", "Ccbble mob egg", "cobble mob"),
+	STONE_BRICK_MONSTER_EGG(97, 2, "Stone brick monster egg", "stone brick mob egg", "stone brick mob"),
+	MOSSY_STONE_BRICK_MONSTER_EGG(97, 3, "Mossy stone brick monster egg", "mossy stone mob egg", "mossy stone mob"),
+	CRACKED_STONE_BRICK_MONSTER_EGG(97, 4, "Cracked stone brick monster egg", "cracked stone mob egg", "cracked stone mob"),
+	CHISELED_STONE_BRICK_MONSTER_EGG(97, 5, "Chiseled stone brick monster egg", "chiseled stone mob egg", "chiseled stone mob"),
+	
+	//Stone bricks
+	STONE_BRICK(97, 0, "Stone brick", "stone brick", "stone brick", "sbrick"),
+	MOSSY_STONE_BRICK(97, 1, "Mossy stone brick", "mossy stone", "mossy stone", "mossy sbrick"),
+	CRACKED_STONE_BRICK(97, 2, "Cracked stone brick", "cracked stone", "cracked stone", "cracked sbrick", "cbrick"),
+	CHISELED_STONE_BRICK(97, 3, "Chiseled stone brick", "chiseled stone", "chiseled stone", "chiseled sbrick", "chbrick"),
+	
+	BROWN_MUSHROOM_BLOCK(99, 0, "Brown mushroom block", "mushroom block"),
+	RED_MUSHROOM_BLOCK(100, 0, "Red mushroom block"),
+	IRON_BARS(101, 0, "Iron bars"),
+	GLASS_PANE(102, 0, "Glass pane", "glass panes"),
+	MELON_BLOCK(103, 0, "Melon block", "watermelon block"),
+	PUMPKIN_STEM(104, 0, "Pumpkin stem"),
+	MELON_STEM(105, 0, "Melon stem", "watermelon stem"),
+	VINES(106, 0, "Vines", "vine"),
+	FENCE_GATE(107, 0, "Fence gate", "oak fence gate", "wooden fence gate", "wood fence gate"),
+	BRICK_STAIRS(108, 0, "Brick stairs", "brick stair"),
+	STONE_BRICK_STAIRS(109, 0, "Stone brick stairs", "stone brick stair"),
+	MYCELIUM(110, 0, "Mycelium"),
+	//I often spell it as lilly, so to prevent confusion...
+	LILY_PAD(111, 0, "Lily pad", "water lily", "lilly pad", "lily", "lilly"),
+	NETHER_BRICK_BLOCK(112, 0, "Nether brick", "nether brick block", "nether bricks"),
+	
+	
 	//Big gap over here
 
 	COMMAND_BLOCK(137, 0, "Command block", "cmdblock"),
