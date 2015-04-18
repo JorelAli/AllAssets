@@ -15,6 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -65,6 +66,10 @@ public class WM_Methods {
 			else {
 //				final int divisor = 1000;
 				switch (args.getArgs()[0]) {
+					case "cut": {
+						Bukkit.dispatchCommand(player, "/wm set 0");
+						break;
+					}
 					case "set": {
 						final BlockInfo info = new InputParser(args.getArgs()[1]).parseBlockInfo();
 						final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info.getMaterial());
