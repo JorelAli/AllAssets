@@ -168,7 +168,8 @@ public class CommandFileBrowser implements Listener {
 					case EMPTY_MAP: {
 						player.closeInventory();
 						player.sendMessage(TextUtils.title(new ItemBuilder(item).getDisplayName()));
-						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(new ItemBuilder(item).getDisplayName()).getDescription();
+						String pluginName = new ItemBuilder(item).getDisplayName().substring(0, new ItemBuilder(item).getDisplayName().length() - 11);
+						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(pluginName).getDescription();
 						List<String> list = new ArrayList<String>();
 						String s = SeperatorType.COLON.getString();
 						list.add(Strings.HOUSE_STYLE_COLOR + "Main" + Strings.ACCENT_COLOR + s + p.getMain());
