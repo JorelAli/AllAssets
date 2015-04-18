@@ -54,9 +54,8 @@ public class Wand implements Listener {
 	public void wandUse(final PlayerInteractEvent e) {
 		e.setUseInteractedBlock(Result.ALLOW);
 		e.setUseItemInHand(Result.ALLOW);
-		WorldModifierHandler handler = new WorldModifierHandler(e.getPlayer());
-		WorldModifierData data = handler.getData();
-		if (handler.hasWorldModifierEnabled() || e.getPlayer().getItemInHand().equals(wmt))
+		WorldModifierData data = WorldModifierHandler.getData(e.getPlayer());
+		if (data.isWandActive() || e.getPlayer().getItemInHand().equals(wmt))
 			switch (e.getAction()) {
 			case LEFT_CLICK_AIR: {
 				e.setCancelled(true);
@@ -93,7 +92,7 @@ public class Wand implements Listener {
 
 	@EventHandler
 	public void zoomEvent(final PlayerMoveEvent e) {
-		if (new WorldModifierHandler(e.getPlayer()).hasWorldModifierEnabled() || e.getPlayer().getItemInHand().equals(wmt))
+		if (WorldModifierHandler.getData(e.getPlayer()).isWandActive() || e.getPlayer().getItemInHand().equals(wmt))
 			if (e.getPlayer().isSneaking())
 				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 100));
 			else

@@ -24,6 +24,7 @@ package io.github.skepter.allassets;
 import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.commandlisteners.CommandAFK;
 import io.github.skepter.allassets.commandlisteners.CommandBind;
+import io.github.skepter.allassets.commandlisteners.CommandCommandBlock;
 import io.github.skepter.allassets.commandlisteners.CommandEnchant;
 import io.github.skepter.allassets.commandlisteners.CommandFileBrowser;
 import io.github.skepter.allassets.commandlisteners.CommandFileEditor;
@@ -90,7 +91,10 @@ import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRules;
 import io.github.skepter.allassets.commands.other.CommandSeen;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
+import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
+import io.github.skepter.allassets.commands.sql.CommandBan;
+import io.github.skepter.allassets.commands.sql.CommandUnban;
 import io.github.skepter.allassets.commands.teleportation.CommandAscend;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandDescend;
@@ -103,6 +107,8 @@ import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
 import io.github.skepter.allassets.commands.teleportation.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.CommandWorld;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
+import io.github.skepter.allassets.commands.worldmodifier.WM_Methods;
+import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
@@ -127,6 +133,7 @@ import io.github.skepter.allassets.misc.EnchantGlow;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.sqlite.SQLiteLoader;
 import io.github.skepter.allassets.tasks.TPS;
+import io.github.skepter.allassets.test.SuperPickaxe;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
@@ -142,11 +149,13 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -239,20 +248,20 @@ public class AllAssets extends JavaPlugin {
 
 		//// Skepter ////
 		{
-//			//Commands
-//			new CommandTitle(framework);
-//			new CommandUnban(framework);
-//
-//			//Listeners
-//			r(new CommandBan(framework));
-//			r(new CommandCommandBlock(framework));
-//
-//			//WorldModifier
-//			r(new Wand(framework));
-//			new WM_Methods(framework);
-//
-//			//Other
-//			new SuperPickaxe(this, new ItemStack(Material.DIAMOND_PICKAXE), "SuperPickaxe");
+			//Commands
+			new CommandTitle(framework);
+			new CommandUnban(framework);
+
+			//Listeners
+			r(new CommandBan(framework));
+			r(new CommandCommandBlock(framework));
+
+			//WorldModifier
+			r(new Wand(framework));
+			new WM_Methods(framework);
+
+			//Other
+			new SuperPickaxe(this, new ItemStack(Material.DIAMOND_PICKAXE), "SuperPickaxe");
 		}
 
 	}
