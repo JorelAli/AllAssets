@@ -63,13 +63,13 @@ public class WM_Methods {
 			if (args.getArgs().length == 0)
 				data.toggleWandStatus();
 			else {
-				final int divisor = 1000;
+//				final int divisor = 1000;
 				switch (args.getArgs()[0]) {
 					case "set": {
 						final BlockInfo info = new InputParser(args.getArgs()[1]).parseBlockInfo();
 						final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info.getMaterial());
 						data.setPreviousAction(cuboid);
-						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
+						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
 //						if (blocks.size() < divisor)
 							for (final Block b : blocks) {
 								b.setType(info.getMaterial());
@@ -121,7 +121,7 @@ public class WM_Methods {
 						final Material matToReplaceWith = info2.getMaterial();
 						final List<Block> blocks = cuboid.blocksFromTwoPointsInc(mat);
 						data.setPreviousAction(cuboid);
-						player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
+						player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
 //						if (blocks.size() < divisor)
 							for (final Block b : blocks) {
 								b.setType(matToReplaceWith);
@@ -176,7 +176,7 @@ public class WM_Methods {
 						Set<Location> blockList = data.getPreviousAction().keySet();
 //						List<Location> blockList = new ArrayList<Location>();
 //						blockList.addAll(data.getPreviousAction().keySet());
-						player.sendMessage(Strings.TITLE + "Undoing..." + " (Estimate " + ((blockList.size() / divisor) / 4) + " seconds)");
+						player.sendMessage(Strings.TITLE + "Undoing..." /*+ " (Estimate " + ((blockList.size() / divisor) / 4) + " seconds)"*/);
 
 //						if (blockList.size() < divisor) {
 							for (Location loc : blockList) {
