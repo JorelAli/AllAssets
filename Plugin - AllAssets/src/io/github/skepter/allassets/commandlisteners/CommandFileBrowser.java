@@ -142,7 +142,7 @@ public class CommandFileBrowser implements Listener {
 							}
 							final List<String> list = new ArrayList<String>();
 							for (final String key : config.getKeys(true))
-								list.add(Strings.HOUSE_STYLE_COLOR + key + Strings.ACCENT_COLOR + SeperatorType.COLON + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
+								list.add(Strings.HOUSE_STYLE_COLOR + key + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
 							dataMap.put(player, list);
 						}
 						if (dataFile.getName().contains(".txt")) {
@@ -160,7 +160,7 @@ public class CommandFileBrowser implements Listener {
 							prop.load(inputStream);
 							final List<String> list = new ArrayList<String>();
 							for (final Object key : prop.keySet())
-								list.add(Strings.HOUSE_STYLE_COLOR + key.toString() + Strings.ACCENT_COLOR + SeperatorType.COLON + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
+								list.add(Strings.HOUSE_STYLE_COLOR + key.toString() + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
 							dataMap.put(player, list);
 						}
 						break;
@@ -225,7 +225,7 @@ public class CommandFileBrowser implements Listener {
 				inv.addItem(new ItemBuilder(new ItemStack(Material.BOOK, 1)).setDisplayName(file.getName()).build());
 			if (file.getName().equals("AllAssets.jar"))
 				for (Plugin p : Bukkit.getPluginManager().getPlugins())
-					inv.addItem(new ItemBuilder(new ItemStack(Material.EMPTY_MAP, 1)).setDisplayName(p.getName()).build());
+					inv.addItem(new ItemBuilder(new ItemStack(Material.EMPTY_MAP, 1)).setDisplayName(p.getName() + " plugin.yml").build());
 		}
 		if (!Arrays.asList(currentDirectory.list()).contains("server.properties"))
 			inv.setItem(inv.getSize() - 1, new ItemBuilder(new ItemStack(Material.ARROW)).setDisplayName("Go up - " + ((pName == null) || pName.equals(".") ? "Server root folder" : pName)).build());
