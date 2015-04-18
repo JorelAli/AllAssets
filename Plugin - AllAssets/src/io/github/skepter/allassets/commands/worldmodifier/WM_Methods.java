@@ -1,6 +1,5 @@
 package io.github.skepter.allassets.commands.worldmodifier;
 
-import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -16,7 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -72,37 +70,37 @@ public class WM_Methods {
 						final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info.getMaterial());
 						data.setPreviousAction(cuboid);
 						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
-						if (blocks.size() < divisor)
+//						if (blocks.size() < divisor)
 							for (final Block b : blocks) {
 								b.setType(info.getMaterial());
 								b.setData(info.getData());
 							}
-						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
-							b.setType(info.getMaterial());
-							b.setData(info.getData());
-						}
-						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-							@Override
-							public void run() {
-								try {
-									player.sendMessage(Strings.TITLE + "Complete!");
-								} catch (final Exception e) {
-									e.printStackTrace();
-								}
-							}
-						}, (blocks.size() - divisor) / divisor * 5);
-						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-							final List<Block> blocksList = blocks.subList(i, i + divisor);
-							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-								@Override
-								public void run() {
-									for (final Block b : blocksList) {
-										b.setType(info.getMaterial());
-										b.setData(info.getData());
-									}
-								}
-							}, (i / divisor) * 5);
-						}
+//						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
+//							b.setType(info.getMaterial());
+//							b.setData(info.getData());
+//						}
+//						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+//							@Override
+//							public void run() {
+//								try {
+//									player.sendMessage(Strings.TITLE + "Complete!");
+//								} catch (final Exception e) {
+//									e.printStackTrace();
+//								}
+//							}
+//						}, (blocks.size() - divisor) / divisor * 5);
+//						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
+//							final List<Block> blocksList = blocks.subList(i, i + divisor);
+//							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+//								@Override
+//								public void run() {
+//									for (final Block b : blocksList) {
+//										b.setType(info.getMaterial());
+//										b.setData(info.getData());
+//									}
+//								}
+//							}, (i / divisor) * 5);
+//						}
 						break;
 					}
 					case "regen": {
@@ -124,42 +122,42 @@ public class WM_Methods {
 						final List<Block> blocks = cuboid.blocksFromTwoPointsInc(mat);
 						data.setPreviousAction(cuboid);
 						player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
-						if (blocks.size() < divisor)
+//						if (blocks.size() < divisor)
 							for (final Block b : blocks) {
 								b.setType(matToReplaceWith);
 								b.setData(info2.getData());
 							}
-						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
-							b.setType(matToReplaceWith);
-							b.setData(info2.getData());
-						}
-
-						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
-							@Override
-							public void run() {
-								try {
-									player.sendMessage(Strings.TITLE + "Complete!");
-								} catch (final Exception e) {
-									e.printStackTrace();
-								}
-							}
-
-						}, (blocks.size() - divisor) / divisor * 5);
-						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-							final List<Block> blocksList = blocks.subList(i, i + divisor);
-
-							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-
-								@Override
-								public void run() {
-									for (final Block b : blocksList) {
-										b.setType(matToReplaceWith);
-										b.setData(info2.getData());
-									}
-								}
-							}, (i / divisor) * 5);
-						}
+//						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
+//							b.setType(matToReplaceWith);
+//							b.setData(info2.getData());
+//						}
+//
+//						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+//
+//							@Override
+//							public void run() {
+//								try {
+//									player.sendMessage(Strings.TITLE + "Complete!");
+//								} catch (final Exception e) {
+//									e.printStackTrace();
+//								}
+//							}
+//
+//						}, (blocks.size() - divisor) / divisor * 5);
+//						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
+//							final List<Block> blocksList = blocks.subList(i, i + divisor);
+//
+//							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
+//
+//								@Override
+//								public void run() {
+//									for (final Block b : blocksList) {
+//										b.setType(matToReplaceWith);
+//										b.setData(info2.getData());
+//									}
+//								}
+//							}, (i / divisor) * 5);
+//						}
 						break;
 					}
 					case "expand":
@@ -174,23 +172,24 @@ public class WM_Methods {
 						break;
 					}
 					case "undo": {
-						DoubleMap<Location, Material, Byte> map= data.getPreviousAction();
-						Set<Location> blocks = data.getPreviousAction().keySet();
-						player.sendMessage(Strings.TITLE + "Undoing..." + " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)");
-						
-						for(Location loc : blocks) {
-							loc.getBlock().setType(map.getValue1(loc));
-							loc.getBlock().setData(map.getValue2(loc));
-						}
-						
-//						if (blocks.size() < divisor) {
-//							for (final Block b : blocks)
-//								player.getWorld().getBlockAt(b.getLocation()).setType(b.getType());
-//							player.sendMessage(Strings.TITLE + "Complete!");
-//							return;
+						final DoubleMap<Location, Material, Byte> map = data.getPreviousAction();
+						Set<Location> blockList = data.getPreviousAction().keySet();
+//						List<Location> blockList = new ArrayList<Location>();
+//						blockList.addAll(data.getPreviousAction().keySet());
+						player.sendMessage(Strings.TITLE + "Undoing..." + " (Estimate " + ((blockList.size() / divisor) / 4) + " seconds)");
+
+//						if (blockList.size() < divisor) {
+							for (Location loc : blockList) {
+								loc.getBlock().setType(map.getValue1(loc));
+								loc.getBlock().setData(map.getValue2(loc));
+							}
+							return;
 //						}
-//						for (final Block b : blocks.subList(((blocks.size() + (blocks.size() % divisor)) - divisor), blocks.size()))
-//							player.getWorld().getBlockAt(b.getLocation()).setType(b.getType());
+//						for (final Location loc : (new LinkedList<Location>(blockList)).subList(((blockList.size() + (blockList.size() % divisor)) - divisor), blockList.size())) {
+//							loc.getBlock().setType(map.getValue1(loc));
+//							loc.getBlock().setData(map.getValue2(loc));
+//							blockList.remove(loc);
+//						}
 //						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 //							@Override
 //							public void run() {
@@ -200,14 +199,17 @@ public class WM_Methods {
 //									e.printStackTrace();
 //								}
 //							}
-//						}, (blocks.size() - divisor) / divisor * 5);
-//						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-//							final List<Block> blocksList = blocks.subList(i, i + divisor);
+//						}, (blockList.size() - divisor) / divisor * 5);
+//						for (int i = 0; i < blockList.size() - divisor; i += divisor) {
+//							final List<Location> bl = (new LinkedList<Location>(blockList)).subList(i, i + divisor);
 //							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
 //								@Override
 //								public void run() {
-//									for (final Block b : blocksList)
-//										player.getWorld().getBlockAt(b.getLocation()).setType(b.getType());
+//									for (final Location loc : bl) {
+//										loc.getBlock().setType(map.getValue1(loc));
+//										loc.getBlock().setData(map.getValue2(loc));
+//										bl.remove(loc);
+//									}
 //								}
 //							}, (i / divisor) * 5);
 //						}

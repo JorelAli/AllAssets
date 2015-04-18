@@ -1,6 +1,7 @@
 package io.github.skepter.allassets.api.utils;
 
 import io.github.skepter.allassets.commands.worldmodifier.WorldModifierData;
+import io.github.skepter.allassets.commands.worldmodifier.WorldModifierHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +9,17 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 
 public class Cuboid {
 
 	private Location loc1;
 	private Location loc2;
 	
-	public Cuboid(WorldModifierData data) {
+	public Cuboid(Player player) {
+		WorldModifierData data = WorldModifierHandler.getData(player);
 		loc1 = data.getPos1();
 		loc2 = data.getPos2();
-		
 	}
 	
 	public List<Block> blocksFromTwoPoints() {

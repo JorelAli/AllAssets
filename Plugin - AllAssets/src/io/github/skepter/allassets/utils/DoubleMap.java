@@ -70,6 +70,10 @@ public class DoubleMap<A, B, C> implements Cloneable, Serializable {
 		map.remove(key);
 		return;
 	}
+	
+	public int size() {
+		return map.size();
+	}
 
 	public Map<A, B> getValue1Map() {
 		final Map<A, B> tMap = new HashMap<A, B>();
