@@ -54,6 +54,7 @@ import io.github.skepter.allassets.utils.utilclasses.VectorUtils;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -73,6 +74,8 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
@@ -286,6 +289,33 @@ public class CommandDebug implements Listener {
 			final CustomInventory inv = new CustomInventory(AllAssets.instance(), "My custom inv", 1);
 			inv.addCustomItemStack(new VanishPlayersItemStack());
 			inv.open(args.getPlayer());
+		} catch (final Exception e) {
+		}
+	}
+
+	@CommandHandler(name = "debug.pig", permission = "debug", description = "Test reflection of mob following")
+	public void pig(final CommandArgs args) {
+		try {
+			final Player player = args.getPlayer();
+			final LivingEntity entity = player.getWorld().spawn(player.getLocation(), Pig.class);
+			final float f = 1.75F;
+			Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new Runnable() {
+				@Override
+				public void run() {
+					try {
+						MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
+						Object craftEntity = entity.getClass().getDeclaredMethod("getHandle").invoke(entity);
+						Object entityInsentient = utils.getNMSClass("EntityInsentient").cast(craftEntity);
+						Object navigation = entityInsentient.getClass().getDeclaredMethod("getNavigation").invoke(entityInsentient);
+						Method m = navigation.getClass().getDeclaredMethod("a", Double.class, Double.class, Double.class, Double.class);
+						m.invoke(navigation, player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), f);
+								
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//((EntityInsentient) ((CraftEntity) e).getHandle()).getNavigation().a(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), f);
+				}
+			}, 0 * 20, 2 * 20);
 		} catch (final Exception e) {
 		}
 	}
@@ -561,6 +591,7 @@ public class CommandDebug implements Listener {
 		list.add("inv");
 		list.add("gsc");
 		list.add("actionmsg");
+		list.add("pig");
 		return list;
 	}
 
