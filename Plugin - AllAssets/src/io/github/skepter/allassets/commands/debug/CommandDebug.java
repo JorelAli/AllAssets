@@ -53,6 +53,9 @@ import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 import io.github.skepter.allassets.utils.utilclasses.VectorUtils;
 
 import java.io.File;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -304,18 +307,38 @@ public class CommandDebug implements Listener {
 				public void run() {
 					try {
 						MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
+						Object craftEntity = ReflectionUtils.getPerfectField(entity, entity.getClass(), "world");
 						Object craftEntity = entity.getClass().getDeclaredMethod("getHandle").invoke(entity);
-						Object entityInsentient = utils.getNMSClass("EntityInsentient").cast(craftEntity);
-						Object navigation = entityInsentient.getClass().getDeclaredMethod("getNavigation").invoke(entityInsentient);
+						//						System.out.println("CraftEntity: " + craftEntity.getClass().getName());
+						//						Object entityInsentient = utils.getNMSClass("EntityInsentient").cast(craftEntity);
+						Class<?> eI = utils.getNMSClass("EntityInsentient");
+						Class<?> nA = utils.getNMSClass("NavigationAbstract");
+						
+						//
+						
+						Class<?> c = utils.nmsWorldClass;
+						
+						//
+						
+						
+						MethodHandle mh = MethodHandles.lookup().findSpecial(eI, "getNavigation", MethodType.methodType(nA), craftEntity.getClass());
+						Object navigation = mh.invoke(craftEntity);
+						//						System.out.println("EntityInsentient: " + entityInsentient.getClass().getName());
+						//						Object navigation = entityInsentient.getClass().getDeclaredMethod("getNavigation").invoke(entityInsentient);
 						Method m = navigation.getClass().getDeclaredMethod("a", Double.class, Double.class, Double.class, Double.class);
 						m.invoke(navigation, player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), f);
-								
+						//								
 					} catch (Exception e) {
+						//						CommandLog.addLog("Error with debug pig", LogType.ERROR);
 						e.printStackTrace();
 					}
 					//((EntityInsentient) ((CraftEntity) e).getHandle()).getNavigation().a(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), f);
+					catch (Throwable e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}, 0 * 20, 2 * 20);
+			}, 0, 40);
 		} catch (final Exception e) {
 		}
 	}
