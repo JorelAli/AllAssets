@@ -308,7 +308,7 @@ public class CommandDebug implements Listener {
 					try {
 						MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
 						Object craftEntity = ReflectionUtils.getPerfectField(entity, entity.getClass(), "world");
-						Object craftEntity = entity.getClass().getDeclaredMethod("getHandle").invoke(entity);
+//						Object craftEntity = entity.getClass().getDeclaredMethod("getHandle").invoke(entity);
 						//						System.out.println("CraftEntity: " + craftEntity.getClass().getName());
 						//						Object entityInsentient = utils.getNMSClass("EntityInsentient").cast(craftEntity);
 						Class<?> eI = utils.getNMSClass("EntityInsentient");
@@ -316,7 +316,7 @@ public class CommandDebug implements Listener {
 						
 						//
 						
-						Class<?> c = utils.nmsWorldClass;
+//						Class<?> c = utils.nmsWorldClass;
 						
 						//
 						
@@ -334,7 +334,6 @@ public class CommandDebug implements Listener {
 					}
 					//((EntityInsentient) ((CraftEntity) e).getHandle()).getNavigation().a(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), f);
 					catch (Throwable e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

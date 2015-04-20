@@ -72,7 +72,7 @@ public class WM_Methods {
 					}
 					case "set": {
 						final BlockInfo info = new InputParser(args.getArgs()[1]).parseBlockInfo();
-						final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info.getMaterial());
+						final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info);
 						data.setPreviousAction(cuboid);
 						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
 //						if (blocks.size() < divisor)

@@ -2,6 +2,7 @@ package io.github.skepter.allassets.api.utils;
 
 import io.github.skepter.allassets.commands.worldmodifier.WorldModifierData;
 import io.github.skepter.allassets.commands.worldmodifier.WorldModifierHandler;
+import io.github.skepter.allassets.items.BlockInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,8 @@ public class Cuboid {
 		return blocks;
 	}
 
-	public List<Block> blocksFromTwoPointsEx(final Material... excludedBlocks) {
+	@SuppressWarnings("deprecation")
+	public List<Block> blocksFromTwoPointsEx(final BlockInfo... excludedBlocks) {
 		final List<Block> blocks = new ArrayList<Block>();
 
 		final int topBlockX = (loc1.getBlockX() < loc2.getBlockX() ? loc2.getBlockX() : loc1.getBlockX());
@@ -57,8 +59,8 @@ public class Cuboid {
 		for (int x = bottomBlockX; x <= topBlockX; x++)
 			for (int z = bottomBlockZ; z <= topBlockZ; z++)
 				for (int y = bottomBlockY; y <= topBlockY; y++)
-					for (final Material m : excludedBlocks)
-						if (!(loc1.getWorld().getBlockAt(x, y, z).getType() == m))
+					for (final BlockInfo info : excludedBlocks)
+						if (!(loc1.getWorld().getBlockAt(x, y, z).getType() == info.getMaterial()) || !(loc1.getWorld().getBlockAt(x, y, z).getData() == info.getData()))
 							blocks.add(loc1.getWorld().getBlockAt(x, y, z));
 		return blocks;
 	}

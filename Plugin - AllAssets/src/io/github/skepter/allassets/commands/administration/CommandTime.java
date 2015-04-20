@@ -52,34 +52,31 @@ public class CommandTime {
 				ErrorUtils.notEnoughArguments(args.getSender());
 			case 1:
 				int time = 0;
-				try {
-					if (!TextUtils.isInteger(args.getArgs()[0]))
-						ErrorUtils.notAnInteger(args.getSender());
-					time = Integer.parseInt(args.getArgs()[0]);
-					args.getSender().sendMessage(Strings.TITLE + "Time set to " + args.getArgs()[0]);
-					return;
-				} catch (final NumberFormatException e) {
-					switch (args.getArgs()[0].toLowerCase()) {
-						case "day":
-							time = 1000;
-							args.getSender().sendMessage(Strings.TITLE + "Time set to day");
-							break;
-						case "midday":
-							time = 6000;
-							args.getSender().sendMessage(Strings.TITLE + "Time set to midday");
-							break;
-						case "night":
-							time = 14000;
-							args.getSender().sendMessage(Strings.TITLE + "Time set to night");
-							break;
-						case "midnight":
-							time = 18000;
-							args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
-							break;
-						default:
+				switch (args.getArgs()[0].toLowerCase()) {
+					case "day":
+						time = 1000;
+						args.getSender().sendMessage(Strings.TITLE + "Time set to day");
+						break;
+					case "midday":
+						time = 6000;
+						args.getSender().sendMessage(Strings.TITLE + "Time set to midday");
+						break;
+					case "night":
+						time = 14000;
+						args.getSender().sendMessage(Strings.TITLE + "Time set to night");
+						break;
+					case "midnight":
+						time = 18000;
+						args.getSender().sendMessage(Strings.TITLE + "Time set to midnight");
+						break;
+					default:
+						if (!TextUtils.isInteger(args.getArgs()[0])) {
 							ErrorUtils.cannotSetTime(args.getSender());
 							return;
-					}
+						}
+						time = Integer.parseInt(args.getArgs()[0]);
+						args.getSender().sendMessage(Strings.TITLE + "Time set to " + args.getArgs()[0]);
+						return;
 				}
 				for (final World world : Bukkit.getWorlds())
 					world.setTime(time);
