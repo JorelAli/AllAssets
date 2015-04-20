@@ -342,7 +342,15 @@ public enum Item {
 	GOLDEN_SHOVEL(284, 0, "Golden shovel", "golden spade", "gold shovel", "gold spade"),
 	GOLDEN_PICKAXE(285, 0, "Golden pickaxe", "golden pick", "gold pickaxe", "gold pick"),
 	GOLDEN_AXE(286, 0, "Golden axe", "gold axe"),
-	STRING(287, 0, "String")
+	STRING(287, 0, "String"),
+	FEATHER(288, 0, "Feather"),
+	GUNPOWDER(289, 0, "Gunpowder", "sulfur", "sulphur", "gpowder"),
+	WOODEN_HOE(290, 0, "Wooden hoe", "wood hoe"),
+	STONE_HOE(291, 0, "Stone hoe"),
+	IRON_HOE(292, 0, "Iron hoe"),
+	DIAMOND_HOE(293, 0, "Diamond hoe"),
+	GOLDEN_HOE(294, 0, "Golden hoe", "gold hoe"),
+	WHEAT_SEEDS(295, 0, "Wheat seeds"),
 
 	SIGN(323, 0, "Sign"),
 
