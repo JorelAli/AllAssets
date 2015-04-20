@@ -310,13 +310,39 @@ public enum Item {
 	// Items! //
 	////////////
 	
-	IRON_SHOVEL(256, 0, "Iron shovel"),
-	IRON_PICKAXE(257, 0, "Iron pickaxe"),
+	IRON_SHOVEL(256, 0, "Iron shovel", "iron spade"),
+	IRON_PICKAXE(257, 0, "Iron pickaxe", "iron pick"),
 	IRON_AXE(258, 0, "Iron axe"),
-
+	FLINT_AND_STEEL(259, 0, "Flint and steel"),
+	APPLE(260, 0, "Apple"),
+	BOW(261, 0, "Bow"),
+	ARROW(262, 0, "Arrow"),
+	COAL(263, 0, "Coal"),
+	CHARCOAL(263, 1, "Charcoal"),
 	DIAMOND(264, 0, "Diamond"),
 	IRON_INGOT(265, 0, "Iron ingot", "iron"),
 	GOLD_INGOT(266, 0, "Gold ingot", "gold"),
+	IRON_SWORD(267, 0, "Iron sword"),
+	WOODEN_SWORD(268, 0, "Wooden sword", "wood sword"),
+	WOODEN_SHOVEL(269, 0, "Wooden shovel", "wood shovel", "wooden spade", "wood spade"),
+	WOODEN_PICKAXE(270, 0, "Wooden pickaxe", "wood pickaxe", "wood pick"),
+	WOODEN_AXE(271, 0, "Wooden axe", "wood axe"),
+	STONE_SWORD(272, 0, "Stone sword"),
+	STONE_SHOVEL(273, 0, "Stone shovel", "stone spade"),
+	STONE_PICKAXE(274, 0, "Stone pickaxe", "stone pick"),
+	STONE_AXE(275, 0, "Stone axe"),
+	DIAMOND_SWORD(276, 0, "Diamond sword"),
+	DIAMOND_SHOVEL(277, 0, "Diamond shovel", "diamond spade"),
+	DIAMOND_PICKAXE(278, 0, "Diamond pickaxe", "diamond pick"),
+	DIAMOND_AXE(279, 0, "Diamond axe"),
+	STICK(280, 0, "Stick"),
+	BOWL(281, 0, "Bowl"),
+	MUSHROOM_STEW(282, 0, "Mushroom stew", "mushroom soup", "soup", "stew"),
+	GOLDEN_SWORD(283, 0, "Golden sword", "gold sword"),
+	GOLDEN_SHOVEL(284, 0, "Golden shovel", "golden spade", "gold shovel", "gold spade"),
+	GOLDEN_PICKAXE(285, 0, "Golden pickaxe", "golden pick", "gold pickaxe", "gold pick"),
+	GOLDEN_AXE(286, 0, "Golden axe", "gold axe"),
+	STRING(287, 0, "String")
 
 	SIGN(323, 0, "Sign"),
 
