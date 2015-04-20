@@ -305,6 +305,14 @@ public enum Item {
 	BLACK_STAINED_CARPET(171, 15, "Black carpet", "black carpet"),
 
 	//And here
+	
+	////////////
+	// Items! //
+	////////////
+	
+	IRON_SHOVEL(256, 0, "Iron shovel"),
+	IRON_PICKAXE(257, 0, "Iron pickaxe"),
+	IRON_AXE(258, 0, "Iron axe"),
 
 	DIAMOND(264, 0, "Diamond"),
 	IRON_INGOT(265, 0, "Iron ingot", "iron"),

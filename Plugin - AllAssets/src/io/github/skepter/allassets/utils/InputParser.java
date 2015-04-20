@@ -24,6 +24,7 @@ package io.github.skepter.allassets.utils;
 import io.github.skepter.allassets.items.BlockInfo;
 import io.github.skepter.allassets.items.Item;
 
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 public class InputParser {
@@ -34,12 +35,18 @@ public class InputParser {
 		this.inputString = inputString;
 	}
 
+	@SuppressWarnings("deprecation")
 	public BlockInfo parseBlockInfo() {
 		Item i = Item.match(inputString);
 		if (i != null)
 			return Item.match(inputString).getInfo();
-		else
-			return null;
+		else {
+			if (inputString.matches("\\d+"))
+				return new BlockInfo(Material.getMaterial(Integer.parseInt(inputString)), (byte) 0);
+			else if (inputString.matches("\\d+:\\d+"))
+				return new BlockInfo(Material.getMaterial(Integer.parseInt(inputString.split(":")[0])), Byte.parseByte(inputString.split(":")[1]));
+		}
+		return null;
 	}
 
 	public EntityType parseMob() {
