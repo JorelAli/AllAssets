@@ -32,9 +32,10 @@ import java.util.List;
 
 import org.bukkit.Achievement;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonWriter;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import com.google.gson.stream.JsonWriter;
 
 public class FancyMessage {
 

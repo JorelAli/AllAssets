@@ -34,7 +34,6 @@ import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.block.BlockState;
@@ -75,7 +74,7 @@ public class CommandChestSearch {
 					if (args.getArgs()[0].equalsIgnoreCase("hand")) {
 						if (chest.getInventory().containsAtLeast(player.getItemInHand(), 1))
 							locatedChests.add(chest.getLocation());
-					} else if (StringUtils.isNumeric(args.getArgs()[0])) {
+					} else if (TextUtils.isInteger(args.getArgs()[0])) {
 						final int i = Integer.parseInt(args.getArgs()[0]);
 						if (chest.getInventory().containsAtLeast(new ItemStack(i), 1))
 							locatedChests.add(chest.getLocation());

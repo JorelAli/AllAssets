@@ -50,6 +50,7 @@ public class UUIDAPI {
 	 *
 	 * @param playerName - The player's name
 	 * @return the player object from their name */
+	@Deprecated
 	public static Player getPlayerFromServer(final String playerName) {
 		final UUIDFetch fetch = new UUIDFetch(playerName, false);
 		return fetch.getPlayer();

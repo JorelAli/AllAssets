@@ -26,7 +26,7 @@ package io.github.skepter.allassets.libs;
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.libs.com.google.gson.stream.JsonWriter;
+import com.google.gson.stream.JsonWriter;
 
 final class MessagePart {
 

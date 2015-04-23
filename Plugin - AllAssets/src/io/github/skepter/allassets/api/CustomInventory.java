@@ -26,9 +26,8 @@ import io.github.skepter.allassets.api.utils.PlayerMap;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.server.v1_8_R1.Material;
-
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
