@@ -25,16 +25,17 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.Paginator;
 import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.serializers.LocationSerializer;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 public class CommandWarp {
@@ -43,29 +44,33 @@ public class CommandWarp {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "warps", aliases = { "warplist", "warpslist" }, permission = "warps", description = "Shows the list of warps")
+	@CommandHandler(name = "warp", permission = "warp", description = "Teleports to a certain warp")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
-		if (player != null) {
-			List<String> warps = new ArrayList<String>();
-			for (String key : ConfigHandler.warps().getKeys()) {
-				String name = ConfigHandler.warps().getString(key + ".name");
-				String description = ConfigHandler.warps().getString(key + ".description");
-				warps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.DASH.getString() + Strings.HOUSE_STYLE_COLOR + description);
-			}
-			Paginator paginator = new Paginator(warps, 10);
+		if (player != null)
 			switch (args.getArgs().length) {
 				case 0:
-					paginator.send(player, 1);
+					printHelp(player);
 					return;
 				case 1:
-					if (TextUtils.isInteger(args.getArgs()[0]))
-						paginator.send(player, Integer.parseInt(args.getArgs()[0]));
-					else
-						ErrorUtils.notAnInteger(player);
-					return;
+					ConfigurationSection s = ConfigHandler.warps().getConfigurationSection(args.getArgs()[0].toLowerCase());
+					if (s == null) {
+						ErrorUtils.warpNotFound(player);
+						return;
+					} else {
+						String warpname = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
+						String locationString = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".loc");
+						Location location = LocationSerializer.LocFromString(locationString);
+						new LocationUtils(location).teleport(player);
+						player.sendMessage(Strings.TITLE + "Teleported to " + warpname);
+						return;
+					}
 			}
-		}
 		return;
+	}
+
+	@Help(name = "Warp")
+	public void printHelp(final CommandSender sender) {
+		TextUtils.printHelp(sender, "Warp", "/warp <warpname> - Teleports to a certain warp");
 	}
 }
