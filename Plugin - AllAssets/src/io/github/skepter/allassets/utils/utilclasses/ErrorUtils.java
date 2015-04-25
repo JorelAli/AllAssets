@@ -177,4 +177,8 @@ public class ErrorUtils {
 	public static void cannotCalculateExpression(Player player) {
 		error(player, "Cannot calculate expression!");
 	}
+
+	public static void warpNotFound(Player player) {
+		error(player, "That warp doesn't exist!");		
+	}
 }

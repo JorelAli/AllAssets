@@ -23,6 +23,12 @@
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>plugin.yml</include>
+				</includes>
+			</resource>
 		</resources>
 		<plugins>
 			<plugin>
@@ -37,10 +43,12 @@
 	</build>
 
 	<repositories>
+		<!-- Bukkit Repo -->
 		<repository>
 			<id>bukkit-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
 		</repository>
+		<!-- Vault Repo -->
 		<repository>
 			<id>vault-repo</id>
 			<url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
@@ -65,7 +73,7 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-		
+		<!-- Log manager -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
@@ -73,6 +81,7 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+		<!-- JSON API -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>

@@ -336,11 +336,13 @@ public class SimpleConfig {
 		this.config.set(path, null);
 	}
 
+	/** Sets a value, then automatically saves the config */
 	public void set(final String path, final Object value) {
 		this.config.set(path, value);
 		saveConfig();
 	}
 
+	/** Sets a value, then automatically saves the config */
 	public void set(final String path, final Object value, final String comment) {
 		if (config == null)
 			return;
@@ -352,6 +354,7 @@ public class SimpleConfig {
 		saveConfig();
 	}
 
+	/** Sets a value, then automatically saves the config */
 	public void set(final String path, final Object value, final String... comment) {
 		for (final String comm : comment)
 			if (!this.config.contains(path)) {

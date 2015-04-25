@@ -93,8 +93,6 @@ import io.github.skepter.allassets.commands.other.CommandSeen;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
 import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
-import io.github.skepter.allassets.commands.sql.CommandBan;
-import io.github.skepter.allassets.commands.sql.CommandUnban;
 import io.github.skepter.allassets.commands.teleportation.CommandAscend;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
 import io.github.skepter.allassets.commands.teleportation.CommandDescend;
@@ -107,6 +105,10 @@ import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
 import io.github.skepter.allassets.commands.teleportation.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.CommandWorld;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
+import io.github.skepter.allassets.commands.teleportation.warps.CommandDelWarp;
+import io.github.skepter.allassets.commands.teleportation.warps.CommandSetWarp;
+import io.github.skepter.allassets.commands.teleportation.warps.CommandWarp;
+import io.github.skepter.allassets.commands.teleportation.warps.CommandWarps;
 import io.github.skepter.allassets.commands.worldmodifier.WM_Methods;
 import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
@@ -248,15 +250,23 @@ public class AllAssets extends JavaPlugin {
 
 		//// Skepter ////
 		{
-			//Commands
+			//Ready classes are at a standard where they can be submitted for the next build
+			
+			// [NEED IMPROVEMENT] Commands
 			new CommandTitle(framework);
-			new CommandUnban(framework);
+//			new CommandUnban(framework);
+			
+			// [NEED TESTING] Commands
+			new CommandSetWarp(framework);
+			new CommandDelWarp(framework);
+			new CommandWarp(framework);
+			new CommandWarps(framework);
 
 			//Listeners
-			r(new CommandBan(framework));
+//			r(new CommandBan(framework));
 			r(new CommandCommandBlock(framework));
 
-			//WorldModifier
+			// [READY] WorldModifier
 			r(new Wand(framework));
 			new WM_Methods(framework);
 

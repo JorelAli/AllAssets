@@ -22,7 +22,6 @@
 package io.github.skepter.allassets.config;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
 
 import java.io.File;
@@ -35,11 +34,13 @@ public class ConfigHandler {
 	private static SimpleConfigManager featuresManager;
 	private static SimpleConfigManager messagesManager;
 	private static SimpleConfigManager announcerManager;
+	private static SimpleConfigManager warpsManager;
 
 	private static SimpleConfig config;
 	private static SimpleConfig features;
 	private static SimpleConfig messages;
 	private static SimpleConfig announcer;
+	private static SimpleConfig warps;
 
 	public ConfigHandler() {
 		if (configManager == null)
@@ -50,6 +51,8 @@ public class ConfigHandler {
 			featuresManager = new SimpleConfigManager(AllAssets.instance());
 		if (announcerManager == null)
 			announcerManager = new SimpleConfigManager(AllAssets.instance());
+		if (warpsManager == null)
+			warpsManager = new SimpleConfigManager(AllAssets.instance());
 
 		/** Checks that they exist, otherwise it will replace the content */
 		if (!new File(AllAssets.instance().getDataFolder(), "config.yml").exists())
@@ -77,15 +80,9 @@ public class ConfigHandler {
 			tempFeatures.getFile().delete();
 		}
 
-		if (!new File(Files.getStorage(), "announcer.yml").exists())
-			createAnnouncer();
-		else
-			announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
-
-	}
-
-	private void createAnnouncer() {
 		announcer = announcerManager.getNewConfig("Storage" + File.separator + "announcer.yml");
+		warps = warpsManager.getNewConfig("Storage" + File.separator + "warps.yml");
+
 	}
 
 	private static void createConfig() {
@@ -262,6 +259,10 @@ public class ConfigHandler {
 
 	public static SimpleConfig announcer() {
 		return announcer;
+	}
+
+	public static SimpleConfig warps() {
+		return warps;
 	}
 
 	public static String getMsg(final String msg) {

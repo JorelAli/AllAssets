@@ -23,7 +23,6 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.libs.FancyMessage;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
@@ -46,7 +45,8 @@ public class CustomUnknownCommandListener implements Listener {
 		if ((Bukkit.getHelpMap().getHelpTopic(msg) == null) && !TextUtils.arrayContains(excludedCommands, msg)) {
 			if ((searchWithTuncater(msg) != null) && !searchWithTuncater(msg).isEmpty()) {
 				e.setCancelled(true);
-				new FancyMessage(Strings.TITLE + "Unknown command. Did you mean: ").then(Strings.HOUSE_STYLE_COLOR + searchWithTuncater(msg)).tooltip(Strings.HOUSE_STYLE_COLOR + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
+				e.getPlayer().sendMessage(Strings.TITLE + "Unknown command. Did you mean: " + Strings.HOUSE_STYLE_COLOR + searchWithTuncater(msg));
+//				new FancyMessage(Strings.TITLE + "Unknown command. Did you mean: ").then(Strings.HOUSE_STYLE_COLOR + searchWithTuncater(msg)).tooltip(Strings.HOUSE_STYLE_COLOR + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
 			}
 			return;
 		}
