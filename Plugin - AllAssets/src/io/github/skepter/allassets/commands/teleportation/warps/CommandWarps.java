@@ -51,13 +51,15 @@ public class CommandWarps {
 			for (String key : ConfigHandler.warps().getKeys()) {
 				String name = ConfigHandler.warps().getString(key + ".name");
 				String description = ConfigHandler.warps().getString(key + ".description");
+				if (description == null)
+					description = "No description available";
 				warps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.DASH.getString() + Strings.HOUSE_STYLE_COLOR + description);
 			}
-			if(warps.isEmpty()){
+			if (warps.isEmpty()) {
 				player.sendMessage(Strings.TITLE + "There are no warps available");
 				return;
 			}
-				
+
 			Paginator paginator = new Paginator(warps, 10);
 			switch (args.getArgs().length) {
 				case 0:
