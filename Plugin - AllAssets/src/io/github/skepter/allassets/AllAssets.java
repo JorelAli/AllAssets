@@ -106,9 +106,10 @@ import io.github.skepter.allassets.commands.teleportation.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.CommandWorld;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandDelWarp;
+import io.github.skepter.allassets.commands.teleportation.warps.CommandNearbyWarps;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandSetWarp;
-import io.github.skepter.allassets.commands.teleportation.warps.CommandWarps;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandWarp;
+import io.github.skepter.allassets.commands.teleportation.warps.CommandWarps;
 import io.github.skepter.allassets.commands.worldmodifier.WM_Methods;
 import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
@@ -256,11 +257,12 @@ public class AllAssets extends JavaPlugin {
 			new CommandTitle(framework);
 //			new CommandUnban(framework);
 			
-			// [NEED TESTING] Commands
+			// [READY] Commands
 			new CommandSetWarp(framework);
 			new CommandDelWarp(framework);
 			new CommandWarps(framework);
 			new CommandWarp(framework);
+			new CommandNearbyWarps(framework);
 
 			//Listeners
 //			r(new CommandBan(framework));

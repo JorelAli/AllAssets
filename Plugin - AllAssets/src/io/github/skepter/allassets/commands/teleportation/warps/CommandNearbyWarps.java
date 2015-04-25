@@ -25,53 +25,34 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.Paginator;
 import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.serializers.LocationSerializer;
 import io.github.skepter.allassets.utils.Strings;
-import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class CommandWarps {
+public class CommandNearbyWarps {
 
-	public CommandWarps(final CommandFramework framework) {
+	public CommandNearbyWarps(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "warps", aliases = { "warplist", "warpslist" }, permission = "warps", description = "Shows the list of warps")
+	@CommandHandler(name = "nearbywarps", aliases = { "nearwarps", "nearbywarp", "nearwarp" }, permission = "nearbywarp", description = "Shows a list of nearby warps")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			List<String> warps = new ArrayList<String>();
 			for (String key : ConfigHandler.warps().getKeys()) {
 				String name = ConfigHandler.warps().getString(key + ".name");
-				String description = ConfigHandler.warps().getString(key + ".description");
-				if (description == null || description.equals("null"))
-					description = "No description available";
-				warps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.DASH.getString() + Strings.HOUSE_STYLE_COLOR + description);
-			}
-			if (warps.isEmpty()) {
-				player.sendMessage(Strings.TITLE + "There are no warps available");
-				return;
+				String locationString = ConfigHandler.warps().getString(key + ".loc");
+				Location location = LocationSerializer.LocFromString(locationString);
+				double cachedDistance = player.getLocation().distance(location);
+				int distance = (int) Math.round(cachedDistance);
+				if (distance < 256)
+					player.sendMessage(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + distance + " blocks");
 			}
 
-			Paginator paginator = new Paginator(warps, 10);
-			switch (args.getArgs().length) {
-				case 0:
-					paginator.send(player, 1);
-					return;
-				case 1:
-					if (TextUtils.isInteger(args.getArgs()[0]))
-						paginator.send(player, Integer.parseInt(args.getArgs()[0]));
-					else
-						ErrorUtils.notAnInteger(player);
-					return;
-			}
 		}
 		return;
 	}

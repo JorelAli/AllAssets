@@ -85,7 +85,7 @@ public class Paginator {
 		shownPageNumber = pageNumberToShow;
 
 		if (pageNumberToShow == 0 && maxPageNumber == 0)
-			sender.sendMessage(Strings.TITLE + "Showing page " + Strings.HOUSE_STYLE_COLOR + 0 + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + 0);
+			sender.sendMessage(Strings.TITLE + "Showing page " + Strings.HOUSE_STYLE_COLOR + 1 + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + 1);
 		else
 			sender.sendMessage(Strings.TITLE + "Showing page " + Strings.HOUSE_STYLE_COLOR + pageNumberToShow + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + maxPageNumber);
 		for (final String s : pages.get(pageNumberToShow))
