@@ -65,16 +65,6 @@ public class LocationUtils {
 		final Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch());
 		player.teleport(target);
 	}
-	
-	/** Teleports a player, but uses the same pitch and yaw of the
-	 * location
-	 *
-	 * @param location
-	 * @param player */
-	public void teleportAdvanced(final Player player) {
-		final Location target = new Location(location.getWorld(), location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-		player.teleport(target);
-	}
 
 	public List<Block> getCube(final int size) {
 		final int minX = location.getBlockX() - (size / 2);
@@ -113,7 +103,7 @@ public class LocationUtils {
 	public Location getCenter() {
 		return new Location(location.getWorld(), getCenter(location.getBlockX()), getCenter(location.getBlockY()), getCenter(location.getBlockZ()));
 	}
-	
+
 	public Location getCenterForTeleporting() {
 		return new Location(location.getWorld(), getCenter(location.getBlockX()), location.getBlockY(), getCenter(location.getBlockZ()));
 	}

@@ -49,9 +49,11 @@ public class LocationSerializer {
 		final double x = Double.parseDouble(arg[1]);
 		final double y = Double.parseDouble(arg[2]);
 		final double z = Double.parseDouble(arg[3]);
-		final float pitch = Float.parseFloat(arg[4]);
-		final float yaw = Float.parseFloat(arg[5]);
+		final float yaw = Float.parseFloat(arg[4]);
+		final float pitch = Float.parseFloat(arg[5]);
 		final Location loc = new Location(world, x, y, z, yaw, pitch);
+		loc.setYaw(yaw);
+		loc.setPitch(pitch);
 		return loc;
 	}
 

@@ -30,7 +30,6 @@ import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.serializers.LocationSerializer;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
-import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import org.bukkit.Location;
@@ -61,7 +60,7 @@ public class CommandWarp {
 						String warpname = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
 						String locationString = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".loc");
 						Location location = LocationSerializer.LocFromString(locationString);
-						new LocationUtils(location).teleportAdvanced(player);
+						player.teleport(location);
 						player.sendMessage(Strings.TITLE + "Teleported to " + warpname);
 						return;
 					}
