@@ -377,7 +377,7 @@ public enum Item {
 
 	WATER_BUCKET(326, 0, "Water bucket", "water"),
 	LAVA_BUCKET(327, 0, "Lava bucket", "lava");
-
+	
 	private final int id;
 	private final int meta;
 	private final String name;
