@@ -185,4 +185,8 @@ public class ErrorUtils {
 	public static void noNearbyWarps(Player player) {
 		error(player, "There are no nearby warps near you");		
 	}
+
+	public static void cannotRepairItem(Player player) {
+		error(player, "That item cannot be repaired!");		
+	}
 }
