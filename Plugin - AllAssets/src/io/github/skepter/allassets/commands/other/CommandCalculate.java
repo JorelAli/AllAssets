@@ -56,7 +56,7 @@ public class CommandCalculate {
 				String parsedOut = msg.replace("pi", "Math.PI").replace("e", "Math.E").replace("sqrt", "Math.sqrt").replace("root", "Math.sqrt").replace("pow", "Math.pow");
 				try {
 					String out = String.valueOf(engine.eval(parsedOut));
-					player.sendMessage(Strings.HOUSE_STYLE_COLOR + msg.substring(5, msg.length()));
+					player.sendMessage(Strings.HOUSE_STYLE_COLOR + msg);
 					player.sendMessage(Strings.ACCENT_COLOR + "= " + out);
 				} catch (ScriptException e) {
 					ErrorUtils.cannotCalculateExpression(player);
