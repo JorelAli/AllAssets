@@ -28,6 +28,7 @@ package io.github.skepter.allassets.commands.teleportation.teleporting;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.PlayerGetter;
 
 import org.bukkit.Bukkit;
@@ -43,7 +44,8 @@ public class CommandTpall {
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			for(Player p : Bukkit.getOnlinePlayers()){
+			player.sendMessage(Strings.TITLE + "Teleported " + (Bukkit.getOnlinePlayers().size() - 1) + " players to you");
+			for (Player p : Bukkit.getOnlinePlayers()) {
 				p.teleport(player);
 			}
 		}
