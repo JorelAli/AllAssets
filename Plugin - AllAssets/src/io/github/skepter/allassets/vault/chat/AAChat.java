@@ -22,6 +22,7 @@
 package io.github.skepter.allassets.vault.chat;
 
 import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.api.OfflineUser;
 import io.github.skepter.allassets.reflection.VaultReflection;
 
 import java.util.logging.Logger;
@@ -94,31 +95,29 @@ public class AAChat extends Chat {
 	}
 
 	@Override
-	public String getPlayerPrefix(final String paramString1, final String paramString2) {
-
-		return null;
+	public String getPlayerPrefix(final String world, final String player) {
+		return new OfflineUser(player).getPrefix();
 	}
 
 	@Override
-	public void setPlayerPrefix(final String paramString1, final String paramString2, final String paramString3) {
-
+	public void setPlayerPrefix(final String world, final String player, final String prefix) {
+		new OfflineUser(player).setPrefix(prefix);
 	}
 
 	@Override
-	public String getPlayerSuffix(final String paramString1, final String paramString2) {
-
-		return null;
+	public String getPlayerSuffix(final String world, final String player) {
+		return new OfflineUser(player).getSuffix();
 	}
 
 	@Override
-	public void setPlayerSuffix(final String paramString1, final String paramString2, final String paramString3) {
-
+	public void setPlayerSuffix(final String world, final String player, final String suffix) {
+		new OfflineUser(player).setSuffix(suffix);
 	}
 
 	@Override
 	public String getGroupPrefix(final String paramString1, final String paramString2) {
 
-		return null;
+		return "";
 	}
 
 	@Override
@@ -129,7 +128,7 @@ public class AAChat extends Chat {
 	@Override
 	public String getGroupSuffix(final String paramString1, final String paramString2) {
 
-		return null;
+		return "";
 	}
 
 	@Override

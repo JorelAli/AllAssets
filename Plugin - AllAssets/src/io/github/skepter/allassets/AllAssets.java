@@ -136,6 +136,7 @@ import io.github.skepter.allassets.listeners.SkeletonArrowListener;
 import io.github.skepter.allassets.listeners.StopCommandListener;
 import io.github.skepter.allassets.misc.EnchantGlow;
 import io.github.skepter.allassets.misc.NotificationsBoard;
+import io.github.skepter.allassets.reflection.VaultReflection;
 import io.github.skepter.allassets.sqlite.SQLiteLoader;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.SuperPickaxe;
@@ -607,6 +608,7 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	private void postLoad() {
+		new VaultReflection().loadAAChat();
 		//		new VaultReflection().loadAAEco();
 	}
 

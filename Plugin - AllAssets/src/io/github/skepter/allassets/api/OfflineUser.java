@@ -214,4 +214,22 @@ public class OfflineUser {
 	public boolean canTp() {
 		return playerData.getDataFile().getBoolean("canTP");
 	}
+	
+	public void setPrefix(final String prefix) {
+		playerData.getDataFile().set("prefix", prefix);
+		playerData.saveDataFile();
+	}
+	
+	public String getPrefix() {
+		return playerData.getDataFile().getString("prefix");
+	}
+	
+	public void setSuffix(final String suffix) {
+		playerData.getDataFile().set("suffix", suffix);
+		playerData.saveDataFile();
+	}
+	
+	public String getSuffix() {
+		return playerData.getDataFile().getString("suffix");
+	}
 }
