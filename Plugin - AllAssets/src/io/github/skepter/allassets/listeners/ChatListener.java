@@ -23,6 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.config.ConfigHandler;
@@ -56,11 +57,20 @@ public class ChatListener implements Listener {
 
 	@EventHandler
 	public void playerNickname(final AsyncPlayerChatEvent event) {
+		String prefix = AllAssets.instance().chat.getPlayerPrefix(event.getPlayer());
+		String suffix = AllAssets.instance().chat.getPlayerSuffix(event.getPlayer());
+		if (prefix == null || prefix.equals("null"))
+			prefix = "";
+		if (suffix == null || suffix.equals("null"))
+			suffix = "";
 		if (event.getPlayer().getCustomName() != null) {
 			if (ConfigHandler.features().getBoolean("ChatColor"))
 				if (event.getPlayer().hasPermission("AllAssets.chatColor"))
 					event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
-			event.setFormat(ChatColor.WHITE + "<" + event.getPlayer().getCustomName() + ChatColor.WHITE + "> " + event.getMessage());
+
+			event.setFormat(ChatColor.WHITE + "<" + prefix + " " + event.getPlayer().getCustomName() + " " + suffix + ChatColor.WHITE + "> " + event.getMessage());
+		} else {
+			event.setFormat("<" + prefix + " %s " + suffix + "> " + "%s");
 		}
 	}
 
