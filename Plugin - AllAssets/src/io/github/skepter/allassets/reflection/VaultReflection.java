@@ -47,9 +47,9 @@ import org.bukkit.plugin.ServicesManager;
 public class VaultReflection {
 
 	/** Vault Class Locations */
-	public static final String economy = "io.github.Skepter.AllAssets.Vault.Economy.AAEco";
-	public static final String permissions = "io.github.Skepter.AllAssets.Vault.Permissions.AAPerms";
-	public static final String chat = "io.github.Skepter.AllAssets.Vault.Chat.AAChat";
+	public static final String economy = "io.github.skepter.allassets.vault.economy.AAEco";
+	public static final String permissions = "io.github.skepter.allassets.vault.permissions.AAPerms";
+	public static final String chat = "io.github.skepter.allassets.vault.chat.AAChat";
 
 	private final Vault vault;
 	private final ServicesManager sm;

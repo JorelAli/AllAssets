@@ -88,6 +88,7 @@ import io.github.skepter.allassets.commands.other.CommandMore;
 import io.github.skepter.allassets.commands.other.CommandNear;
 import io.github.skepter.allassets.commands.other.CommandPTime;
 import io.github.skepter.allassets.commands.other.CommandPWeather;
+import io.github.skepter.allassets.commands.other.CommandPrefix;
 import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRules;
 import io.github.skepter.allassets.commands.other.CommandSeen;
@@ -267,6 +268,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandNearbyWarps(framework);
 			
 			new CommandTpall(framework);
+			new CommandPrefix(framework);
 
 			//Listeners
 //			r(new CommandBan(framework));
@@ -286,8 +288,7 @@ public class AllAssets extends JavaPlugin {
 
 	/* The master switch - used for debug purposes*/
 	public static boolean masterSwitch = false;
-	public Chat chat = null;
-	public Economy economy = null;
+	
 
 	/* Other stuff */
 	public CommandFramework framework;
@@ -296,6 +297,8 @@ public class AllAssets extends JavaPlugin {
 
 	/* Vault variables */
 	public boolean hasVault = false;
+	public Chat chat = null;
+	public Economy economy = null;
 	public Permission permission = null;
 	public Map<UUID, Long> tempTimeMap;
 
