@@ -140,6 +140,6 @@ public class CommandBatch {
 
 	@Help(name = "Batch")
 	private void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Batch", "/batch - Runs a command multiple times", "/batch <number of times> (time delay) <command> - Runs <command> the <number of times> every (time delay)", "Example: /batch 5 /say hi will say 'hi' 5 times", "Example: /batch 5 10s /broadcast Welcome to my server will broadcast 'Welcome to my server' every 10 seconds, 5 times");
+		TextUtils.printHelp(sender, "Batch", "/batch - Runs a command multiple times", "/batch <number of times> (time delay) <command> - Runs <command> the <number of times> every (time delay)", "Example - /batch 5 /say hi will say 'hi' 5 times", "Example - /batch 5 10s /broadcast Welcome to my server will broadcast 'Welcome to my server' every 10 seconds, 5 times");
 	}
 }
