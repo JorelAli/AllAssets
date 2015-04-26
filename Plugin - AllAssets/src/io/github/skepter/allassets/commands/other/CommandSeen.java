@@ -56,7 +56,10 @@ public class CommandSeen {
 					if (target != null) {
 						long t = new OfflineUser(target).getTimeSinceLastPlay();
 						if (t != 0)
-							player.sendMessage(Strings.TITLE + "Last seen " + target.getName() + " " + TimeUtils.formatDate(System.currentTimeMillis() - (t)));
+							if(!target.isOnline())
+								player.sendMessage(Strings.TITLE + "Last seen " + target.getName() + " " + TimeUtils.formatDate(System.currentTimeMillis() - (t)));
+							else
+								player.sendMessage(Strings.TITLE + target.getName() + " is online");
 						else
 							ErrorUtils.playerNotFound(player, args.getArgs()[0]);
 					}

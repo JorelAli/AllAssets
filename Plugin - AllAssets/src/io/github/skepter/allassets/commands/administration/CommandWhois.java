@@ -33,7 +33,7 @@ import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.commandlisteners.CommandGod;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 
 import org.bukkit.command.CommandSender;
@@ -57,14 +57,14 @@ public class CommandWhois {
 					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 					final User user = new User(target);
 					player.sendMessage(TextUtils.title("Whois " + target.getName()));
-					TextUtils.printInformation(player, "UUID", SeperatorType.COLON, target.getUniqueId().toString());
-					TextUtils.printInformation(player, "Total time played", SeperatorType.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
-					TextUtils.printInformation(player, "Has godmode", SeperatorType.COLON, TextUtils.booleanToString(CommandGod.players.contains(target.getUniqueId())));
-					TextUtils.printInformation(player, "Is viewing console", SeperatorType.COLON, TextUtils.booleanToString(CommandConsoleLog.players.contains(target.getUniqueId())));
-					TextUtils.printInformation(player, "Has fly mode", SeperatorType.COLON, TextUtils.booleanToString(target.getAllowFlight()));
-					TextUtils.printInformation(player, "Gamemode", SeperatorType.COLON, TextUtils.capitalize(target.getGameMode().name().toLowerCase()));
-					TextUtils.printInformation(player, "Is op", SeperatorType.COLON, TextUtils.booleanToString(target.isOp()));
-					TextUtils.printInformation(player, "Is AFK", SeperatorType.COLON, TextUtils.booleanToString(user.isAFK()));
+					TextUtils.printInformation(player, "UUID", Seperator.COLON, target.getUniqueId().toString());
+					TextUtils.printInformation(player, "Total time played", Seperator.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));
+					TextUtils.printInformation(player, "Has godmode", Seperator.COLON, TextUtils.booleanToString(CommandGod.players.contains(target.getUniqueId())));
+					TextUtils.printInformation(player, "Is viewing console", Seperator.COLON, TextUtils.booleanToString(CommandConsoleLog.players.contains(target.getUniqueId())));
+					TextUtils.printInformation(player, "Has fly mode", Seperator.COLON, TextUtils.booleanToString(target.getAllowFlight()));
+					TextUtils.printInformation(player, "Gamemode", Seperator.COLON, TextUtils.capitalize(target.getGameMode().name().toLowerCase()));
+					TextUtils.printInformation(player, "Is op", Seperator.COLON, TextUtils.booleanToString(target.isOp()));
+					TextUtils.printInformation(player, "Is AFK", Seperator.COLON, TextUtils.booleanToString(user.isAFK()));
 			}
 		return;
 	}

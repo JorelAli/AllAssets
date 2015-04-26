@@ -30,7 +30,7 @@ import io.github.skepter.allassets.serializers.LocationSerializer;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class CommandNearbyWarps {
 				double cachedDistance = player.getLocation().distance(location);
 				int distance = (int) Math.round(cachedDistance);
 				if (distance < 256) {
-					nearbyWarps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + distance + " blocks away");
+					nearbyWarps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + Seperator.COLON.toString() + distance + " blocks away");
 					found = true;
 				}
 			}

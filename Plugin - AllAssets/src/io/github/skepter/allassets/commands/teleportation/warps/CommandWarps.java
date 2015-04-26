@@ -30,7 +30,7 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class CommandWarps {
 				String description = ConfigHandler.warps().getString(key + ".description");
 				if (description == null || description.equals("null"))
 					description = "No description available";
-				warps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.DASH.getString() + Strings.HOUSE_STYLE_COLOR + description);
+				warps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + Seperator.DASH.toString() + Strings.HOUSE_STYLE_COLOR + description);
 			}
 			if (warps.isEmpty()) {
 				player.sendMessage(Strings.TITLE + "There are no warps available");

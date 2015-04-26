@@ -37,7 +37,7 @@ import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 import io.github.skepter.allassets.utils.utilclasses.PluginUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -142,7 +142,7 @@ public class CommandFileBrowser implements Listener {
 							}
 							final List<String> list = new ArrayList<String>();
 							for (final String key : config.getKeys(true))
-								list.add(Strings.HOUSE_STYLE_COLOR + key + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
+								list.add(Strings.HOUSE_STYLE_COLOR + key + Strings.ACCENT_COLOR + Seperator.COLON.toString() + (config.get(key).toString().contains("MemorySection[path=") ? "" : ChatColor.translateAlternateColorCodes('&', config.getString(key))));
 							dataMap.put(player, list);
 						}
 						if (dataFile.getName().contains(".txt")) {
@@ -160,7 +160,7 @@ public class CommandFileBrowser implements Listener {
 							prop.load(inputStream);
 							final List<String> list = new ArrayList<String>();
 							for (final Object key : prop.keySet())
-								list.add(Strings.HOUSE_STYLE_COLOR + key.toString() + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
+								list.add(Strings.HOUSE_STYLE_COLOR + key.toString() + Strings.ACCENT_COLOR + Seperator.COLON.toString() + ChatColor.translateAlternateColorCodes('&', prop.get(key).toString()));
 							dataMap.put(player, list);
 						}
 						break;
@@ -171,7 +171,7 @@ public class CommandFileBrowser implements Listener {
 						String pluginName = new ItemBuilder(item).getDisplayName().substring(0, new ItemBuilder(item).getDisplayName().length() - 11);
 						PluginDescriptionFile p = Bukkit.getPluginManager().getPlugin(pluginName).getDescription();
 						List<String> list = new ArrayList<String>();
-						String s = SeperatorType.COLON.getString();
+						String s = Seperator.COLON.toString();
 						list.add(Strings.HOUSE_STYLE_COLOR + "Main" + Strings.ACCENT_COLOR + s + p.getMain());
 						list.add(Strings.HOUSE_STYLE_COLOR + "Name" + Strings.ACCENT_COLOR + s + p.getName());
 						list.add(Strings.HOUSE_STYLE_COLOR + "Version" + Strings.ACCENT_COLOR + s + p.getVersion());

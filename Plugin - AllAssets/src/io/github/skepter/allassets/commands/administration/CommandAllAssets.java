@@ -33,7 +33,7 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +58,7 @@ public class CommandAllAssets {
 		final List<String> commandList = new ArrayList<String>();
 		for (final CommandHandler command : CommandFramework.pluginCommands)
 			if (args.getSender().hasPermission(command.permission()))
-				commandList.add(Strings.HOUSE_STYLE_COLOR + " /" + command.name().toLowerCase().replace(".", " ") + Strings.ACCENT_COLOR + SeperatorType.DASH.getString() + Strings.HOUSE_STYLE_COLOR + command.description());
+				commandList.add(Strings.HOUSE_STYLE_COLOR + " /" + command.name().toLowerCase().replace(".", " ") + Strings.ACCENT_COLOR + Seperator.DASH.toString() + Strings.HOUSE_STYLE_COLOR + command.description());
 		int arg = 1;
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);

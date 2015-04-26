@@ -32,7 +32,7 @@ import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +111,7 @@ public class CommandDisguise {
 			disguises = disguises + TextUtils.capitalize(g.name().toLowerCase()) + ", ";
 		if (disguises.length() != 0)
 			disguises = disguises.substring(0, disguises.length() - 2);
-		TextUtils.printInformation(sender, "Disguises", SeperatorType.COLON, disguises);
+		TextUtils.printInformation(sender, "Disguises", Seperator.COLON, disguises);
 
 	}
 }

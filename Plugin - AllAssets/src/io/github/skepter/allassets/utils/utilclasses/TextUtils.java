@@ -247,21 +247,22 @@ public class TextUtils {
 		return overallString.replace(textPart, color + textPart);
 	}
 
-	public static void printInformation(final CommandSender sender, final String title, final SeperatorType type, final String info) {
-		sender.sendMessage(Strings.ACCENT_COLOR + title + type.getString() + Strings.HOUSE_STYLE_COLOR + info);
+	public static void printInformation(final CommandSender sender, final String title, final Seperator type, final String info) {
+		sender.sendMessage(Strings.ACCENT_COLOR + title + type.toString() + Strings.HOUSE_STYLE_COLOR + info);
 	}
 
-	public enum SeperatorType {
+	public enum Seperator {
 		DASH(" - "),
 		COLON(": ");
 
-		String str;
+		private String str;
 
-		SeperatorType(final String str) {
+		Seperator(final String str) {
 			this.str = str;
 		}
 
-		public String getString() {
+		@Override
+		public String toString() {
 			return str;
 		}
 	}

@@ -32,7 +32,7 @@ import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.utils.DoubleMap;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
-import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.Seperator;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class CommandHelp {
 			case 0:
 				args.getSender().sendMessage(TextUtils.title("Help"));
 				for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
-					TextUtils.printInformation(args.getSender(), plugin.getName(), SeperatorType.COLON, "Show information about " + plugin.getName());
+					TextUtils.printInformation(args.getSender(), plugin.getName(), Seperator.COLON, "Show information about " + plugin.getName());
 				break;
 			case 1:
 				//check plugin info
@@ -75,9 +75,9 @@ public class CommandHelp {
 							authors = authors.substring(0, authors.length() - 2);
 						else
 							authors = "undefined";
-						TextUtils.printInformation(args.getSender(), "Authors", SeperatorType.COLON, authors);
-						TextUtils.printInformation(args.getSender(), "Version", SeperatorType.COLON, plugin.getDescription().getVersion());
-						TextUtils.printInformation(args.getSender(), "Description", SeperatorType.COLON, plugin.getDescription().getDescription());
+						TextUtils.printInformation(args.getSender(), "Authors", Seperator.COLON, authors);
+						TextUtils.printInformation(args.getSender(), "Version", Seperator.COLON, plugin.getDescription().getVersion());
+						TextUtils.printInformation(args.getSender(), "Description", Seperator.COLON, plugin.getDescription().getDescription());
 						return;
 					}
 
