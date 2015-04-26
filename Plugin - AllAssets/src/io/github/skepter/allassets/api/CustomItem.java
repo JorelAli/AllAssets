@@ -59,19 +59,27 @@ public abstract class CustomItem implements Listener {
 
 	/** Return true to cancel the event (Return false if you want nothing to
 	 * happen) */
-	public abstract boolean leftClickBlock(Player player);
+	public boolean leftClickBlock(Player player) {
+		return false;
+	}
 
 	/** Return true to cancel the event (Return false if you want nothing to
 	 * happen) */
-	public abstract boolean rightClickBlock(Player player);
+	public boolean rightClickBlock(Player player) {
+		return false;
+	}
 
 	/** Return true to cancel the event (Return false if you want nothing to
 	 * happen) */
-	public abstract boolean leftClickAir(Player player);
+	public boolean leftClickAir(Player player) {
+		return false;
+	}
 
 	/** Return true to cancel the event (Return false if you want nothing to
 	 * happen) */
-	public abstract boolean rightClickAir(Player player);
+	public boolean rightClickAir(Player player) {
+		return false;
+	}
 
 	public Block getInteractedBlock(final Player player) {
 		return block;

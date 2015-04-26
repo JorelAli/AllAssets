@@ -43,20 +43,4 @@ public class SuperPickaxe extends CustomItem {
 		}
 		return true;
 	}
-
-	@Override
-	public boolean rightClickBlock(Player player) {
-		return false;
-	}
-
-	@Override
-	public boolean leftClickAir(Player player) {
-		return false;
-	}
-
-	@Override
-	public boolean rightClickAir(Player player) {
-		return false;
-	}
-
 }
