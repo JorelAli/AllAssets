@@ -23,7 +23,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands.teleportation;
+package io.github.skepter.allassets.commands.teleportation.teleporting;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;

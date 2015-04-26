@@ -23,43 +23,46 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands.teleportation;
+package io.github.skepter.allassets.commands.teleportation.teleporting;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.utils.Strings;
-import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class CommandDescend {
+public class CommandTphere {
 
-	public CommandDescend(final CommandFramework framework) {
+	public CommandTphere(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "descend", aliases = { "down" }, permission = "descend", description = "Teleports you downwards")
+	@CommandHandler(name = "tphere", aliases = { "teleporthere" }, permission = "tphere", description = "Teleport another user to you")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			final Location l = player.getLocation();
-			int i = player.getLocation().getBlockY();
-			while (i >= 0) {
-				Location l1 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ())).getCenter();
-				Location l2 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 1, l.getBlockZ())).getCenter();
-				Location l3 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 2, l.getBlockZ())).getCenter();
-				if (!l1.getBlock().getType().equals(Material.AIR) && l2.getBlock().getType().equals(Material.AIR) && l3.getBlock().getType().equals(Material.AIR)) {
-					new LocationUtils(new LocationUtils(l2).getCenterForTeleporting()).teleport(player);
-					player.sendMessage(Strings.TITLE + "Teleported to the top level");
-					break;
+			if (args.getArgs().length == 0) {
+				ErrorUtils.notEnoughArguments(player);
+				return;
+			}
+			final Player t = PlayerGetter.getTarget(player, args.getArgs()[0]);
+			if (t != null) {
+				final User user = new User(player);
+				user.setLastLoc();
+				final User target = new User(t);
+				if (target.canTp()) {
+					t.teleport(player);
+					player.sendMessage(Strings.TITLE + "Successfully teleported " + t.getName() + " to you ");
+					return;
+				} else {
+					ErrorUtils.tptoggle(player, args.getArgs()[0]);
+					return;
 				}
-				i--;
 			}
 		}
-		return;
 	}
 }

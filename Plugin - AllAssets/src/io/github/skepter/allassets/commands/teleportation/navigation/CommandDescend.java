@@ -23,31 +23,31 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands.teleportation;
+package io.github.skepter.allassets.commands.teleportation.navigation;
 
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
+import io.github.skepter.allassets.PlayerGetter;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class CommandTop {
+public class CommandDescend {
 
-	public CommandTop(final CommandFramework framework) {
+	public CommandDescend(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "top", permission = "top", description = "Teleports you to the top level")
+	@CommandHandler(name = "descend", aliases = { "down" }, permission = "descend", description = "Teleports you downwards")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			final Location l = player.getLocation();
-			int i = player.getWorld().getMaxHeight();
+			int i = player.getLocation().getBlockY();
 			while (i >= 0) {
 				Location l1 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i, l.getBlockZ())).getCenter();
 				Location l2 = new LocationUtils(new Location(player.getWorld(), l.getBlockX(), i + 1, l.getBlockZ())).getCenter();

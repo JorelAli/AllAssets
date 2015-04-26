@@ -22,6 +22,7 @@
 package io.github.skepter.allassets;
 
 import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.builders.ItemBuilder;
 import io.github.skepter.allassets.commandlisteners.CommandAFK;
 import io.github.skepter.allassets.commandlisteners.CommandBind;
 import io.github.skepter.allassets.commandlisteners.CommandCommandBlock;
@@ -93,18 +94,19 @@ import io.github.skepter.allassets.commands.other.CommandSeen;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
 import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
-import io.github.skepter.allassets.commands.teleportation.CommandAscend;
 import io.github.skepter.allassets.commands.teleportation.CommandBack;
-import io.github.skepter.allassets.commands.teleportation.CommandDescend;
 import io.github.skepter.allassets.commands.teleportation.CommandGo;
 import io.github.skepter.allassets.commands.teleportation.CommandSetSpawn;
 import io.github.skepter.allassets.commands.teleportation.CommandSpawn;
-import io.github.skepter.allassets.commands.teleportation.CommandTop;
-import io.github.skepter.allassets.commands.teleportation.CommandTp;
-import io.github.skepter.allassets.commands.teleportation.CommandTpToggle;
-import io.github.skepter.allassets.commands.teleportation.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.CommandWorld;
 import io.github.skepter.allassets.commands.teleportation.CommandWorlds;
+import io.github.skepter.allassets.commands.teleportation.navigation.CommandAscend;
+import io.github.skepter.allassets.commands.teleportation.navigation.CommandDescend;
+import io.github.skepter.allassets.commands.teleportation.navigation.CommandTop;
+import io.github.skepter.allassets.commands.teleportation.teleporting.CommandTp;
+import io.github.skepter.allassets.commands.teleportation.teleporting.CommandTpToggle;
+import io.github.skepter.allassets.commands.teleportation.teleporting.CommandTpall;
+import io.github.skepter.allassets.commands.teleportation.teleporting.CommandTphere;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandDelWarp;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandNearbyWarps;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandSetWarp;
@@ -158,7 +160,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -263,6 +264,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandWarps(framework);
 			new CommandWarp(framework);
 			new CommandNearbyWarps(framework);
+			
+			new CommandTpall(framework);
 
 			//Listeners
 //			r(new CommandBan(framework));
@@ -273,7 +276,7 @@ public class AllAssets extends JavaPlugin {
 			new WM_Methods(framework);
 
 			//Other
-			new SuperPickaxe(this, new ItemStack(Material.DIAMOND_PICKAXE), "SuperPickaxe");
+			new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
 		}
 
 	}
