@@ -63,14 +63,16 @@ public class ChatListener implements Listener {
 			prefix = "";
 		if (suffix == null || suffix.equals("null"))
 			suffix = "";
+		prefix = ChatColor.translateAlternateColorCodes('&', prefix);
+		suffix = ChatColor.translateAlternateColorCodes('&', suffix);
 		if (event.getPlayer().getCustomName() != null) {
 			if (ConfigHandler.features().getBoolean("ChatColor"))
 				if (event.getPlayer().hasPermission("AllAssets.chatColor"))
 					event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 
-			event.setFormat(ChatColor.WHITE + "<" + prefix + " " + event.getPlayer().getCustomName() + " " + suffix + ChatColor.WHITE + "> " + event.getMessage());
+			event.setFormat(ChatColor.WHITE + "<" + prefix + event.getPlayer().getCustomName() + suffix + ChatColor.WHITE + "> " + event.getMessage());
 		} else {
-			event.setFormat("<" + prefix + " %s " + suffix + "> " + "%s");
+			event.setFormat("<" + prefix + "%s" + suffix + "> " + "%s");
 		}
 	}
 
