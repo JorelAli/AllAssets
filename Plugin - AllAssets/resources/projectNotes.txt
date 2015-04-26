@@ -15,24 +15,17 @@ Command:up
 Command:down
 Command:tpa
 Command:tpahere
-Command:tpall
 Command:tpaall
-Command:go
-Command:world
 Command:tpaccept
 Command:tpdeny
 Command:tppos
-Command:setspawn
-Command:warp
-Command:setwarp
 Command:home
 Command:sethome
 Command:delhome
 
 Command:w
 Command:rules
-Command:check
-Command:seen
+Command:check ?! This does what exactly?
 Command:lookup (info?)
 Command:furnace
 Command:vanish
@@ -53,29 +46,22 @@ Command:setServermotd (setListings motd)
 Command:xp
 Command:level
 Command:worldGenerationCommands - tree etc..?
-Command:broadcast
 Command:cook
 Command:socialspy (seemessages, seemsg)
-Command:list (debug.txt)
-Command:erase
-Command:give
+Command:erase (data file)
 Command:payall
 Command:pay
-Command:take
+Command:take (balance)
 Command:set <balance>
 
 Command:ignite
-Command:hat
 Command:kill
-Command:killall (mobs)
-Command:infinite (toggle)
+Command:infinite (toggle item usage)
 Command:freeze
 Command:unfreeze
 
-Command:help
 Command:info (simple info from a yml file)
-Command:helpop
-Command:item
+Command:item (info about item in hand?)
 Command:online
 
 Command:ignore (darkGray messages)
@@ -84,12 +70,9 @@ Command:me
 Command:msg
 Command:reply
 
-Command:repair
-Command:repairall
 Command:kit (create, delete, kitName)
 
 Command:time
-
 Command:break
 Command:spawner
 
