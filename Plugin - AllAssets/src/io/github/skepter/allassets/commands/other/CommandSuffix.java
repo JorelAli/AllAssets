@@ -50,8 +50,13 @@ public class CommandSuffix {
 					return;
 				default:
 					String suffix = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
-					AllAssets.instance().chat.setPlayerSuffix(player, suffix);
-					player.sendMessage(Strings.TITLE + "Set suffix to " + ChatColor.translateAlternateColorCodes('&', suffix));
+					if (args.getArgs()[0].equalsIgnoreCase("remove")) {
+						AllAssets.instance().chat.setPlayerSuffix(player, "");
+						player.sendMessage(Strings.TITLE + "Removed your suffix");
+					} else {
+						AllAssets.instance().chat.setPlayerSuffix(player, suffix);
+						player.sendMessage(Strings.TITLE + "Set suffix to " + ChatColor.translateAlternateColorCodes('&', suffix));
+					}
 					return;
 			}
 		return;
@@ -59,6 +64,6 @@ public class CommandSuffix {
 
 	@Help(name = "Suffix")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Suffix", "/suffix <suffix> - Sets your suffix");
+		TextUtils.printHelp(sender, "Suffix", "/suffix <suffix> - Sets your suffix", "/suffix remove - Removes your suffix");
 	}
 }

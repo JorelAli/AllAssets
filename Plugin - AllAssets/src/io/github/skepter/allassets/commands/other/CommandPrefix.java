@@ -50,8 +50,13 @@ public class CommandPrefix {
 					return;
 				default:
 					String prefix = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
-					AllAssets.instance().chat.setPlayerPrefix(player, prefix);
-					player.sendMessage(Strings.TITLE + "Set prefix to " + ChatColor.translateAlternateColorCodes('&', prefix));
+					if (args.getArgs()[0].equalsIgnoreCase("remove")) {
+						AllAssets.instance().chat.setPlayerPrefix(player, "");
+						player.sendMessage(Strings.TITLE + "Removed your prefix");
+					} else {
+						AllAssets.instance().chat.setPlayerPrefix(player, prefix);
+						player.sendMessage(Strings.TITLE + "Set prefix to " + ChatColor.translateAlternateColorCodes('&', prefix));
+					}
 					return;
 			}
 		return;
@@ -59,6 +64,6 @@ public class CommandPrefix {
 
 	@Help(name = "Prefix")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Prefix", "/prefix <prefix> - Sets your prefix");
+		TextUtils.printHelp(sender, "Prefix", "/prefix <prefix> - Sets your prefix", "/prefix remove - Removes your prefix");
 	}
 }
