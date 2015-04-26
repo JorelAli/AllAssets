@@ -28,7 +28,12 @@ import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.serializers.LocationSerializer;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -43,14 +48,25 @@ public class CommandNearbyWarps {
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
+			boolean found = false;
+			List<String> nearbyWarps = new ArrayList<String>();
 			for (String key : ConfigHandler.warps().getKeys()) {
 				String name = ConfigHandler.warps().getString(key + ".name");
 				String locationString = ConfigHandler.warps().getString(key + ".loc");
 				Location location = LocationSerializer.LocFromString(locationString);
 				double cachedDistance = player.getLocation().distance(location);
 				int distance = (int) Math.round(cachedDistance);
-				if (distance < 256)
-					player.sendMessage(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + distance + " blocks");
+				if (distance < 256) {
+					nearbyWarps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + SeperatorType.COLON.getString() + distance + " blocks away");
+					found = true;
+				}
+			}
+			if (!found)
+				ErrorUtils.noNearbyWarps(player);
+			else {
+				player.sendMessage(TextUtils.title("Nearby warps"));
+				for (String str : nearbyWarps)
+					player.sendMessage(str);
 			}
 
 		}

@@ -60,7 +60,7 @@ public class CommandWarps {
 				return;
 			}
 
-			Paginator paginator = new Paginator(warps, 10);
+			Paginator paginator = new Paginator(warps, 10, "Warps");
 			switch (args.getArgs().length) {
 				case 0:
 					paginator.send(player, 1);

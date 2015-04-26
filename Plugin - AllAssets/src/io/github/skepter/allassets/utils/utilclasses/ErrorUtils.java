@@ -181,4 +181,8 @@ public class ErrorUtils {
 	public static void warpNotFound(Player player) {
 		error(player, "That warp doesn't exist!");		
 	}
+
+	public static void noNearbyWarps(Player player) {
+		error(player, "There are no nearby warps near you");		
+	}
 }

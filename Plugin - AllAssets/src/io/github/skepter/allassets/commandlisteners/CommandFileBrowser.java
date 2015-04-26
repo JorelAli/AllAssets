@@ -97,7 +97,7 @@ public class CommandFileBrowser implements Listener {
 					ErrorUtils.cannotShowNextPage(player);
 					return;
 				}
-				new Paginator(dataMap.get(player), 10).send(player, arg);
+				new Paginator(dataMap.get(player), 10, "File browser").send(player, arg);
 				return;
 		}
 
@@ -192,7 +192,7 @@ public class CommandFileBrowser implements Listener {
 					for (final String s : dataMap.get(player))
 						player.sendMessage(s);
 				else {
-					new Paginator(dataMap.get(player), 10).send(player, 1);
+					new Paginator(dataMap.get(player), 10, "File browser").send(player, 1);
 					player.sendMessage(Strings.TITLE + "Use /filebrowser <page number> to go to the next page");
 				}
 			}

@@ -63,7 +63,7 @@ public class CommandAllAssets {
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);
 		Collections.sort(commandList);
-		final Paginator p = new Paginator(commandList, 12);
+		final Paginator p = new Paginator(commandList, 12, "AllAssets Commands");
 		p.send(args.getSender(), arg);
 		//TextUtils.paginate(args.getSender(), commandList, 12, arg);
 		args.getSender().sendMessage(Strings.TITLE + "Use /allassets commands <page number> to go to the next page");

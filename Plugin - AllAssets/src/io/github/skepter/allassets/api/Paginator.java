@@ -39,6 +39,7 @@ public class Paginator {
 	private final int pageSize;
 	private int shownPageNumber;
 	private int maxPageNumber;
+	private String usage;
 
 	/* Map storing the page number and the amount of data storesd based ion that page number. */
 	private HashMap<Integer, List<String>> pages;
@@ -47,9 +48,10 @@ public class Paginator {
 	 *
 	 * @param textData - The data with text
 	 * @param pageSize - The size of the page to show to the sender */
-	public Paginator(final List<String> textData, final int pageSize) {
+	public Paginator(final List<String> textData, final int pageSize, String usage) {
 		this.textData = textData;
 		this.pageSize = pageSize;
+		this.usage = usage;
 		doPreconditions();
 	}
 
@@ -57,12 +59,13 @@ public class Paginator {
 	 *
 	 * @param textData - The data with text
 	 * @param pageSize - The size of the page to show to the sender */
-	public Paginator(final Set<String> textData, final int pageSize) {
+	public Paginator(final Set<String> textData, final int pageSize, String usage) {
 		final List<String> data = new ArrayList<String>();
 		data.addAll(textData);
 		Collections.sort(data);
 		this.textData = data;
 		this.pageSize = pageSize;
+		this.usage = usage;
 		doPreconditions();
 	}
 
@@ -85,9 +88,9 @@ public class Paginator {
 		shownPageNumber = pageNumberToShow;
 
 		if (pageNumberToShow == 0 && maxPageNumber == 0)
-			sender.sendMessage(Strings.TITLE + "Showing page " + Strings.HOUSE_STYLE_COLOR + 1 + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + 1);
+			sender.sendMessage(Strings.customTitle(usage) + "Showing page " + Strings.HOUSE_STYLE_COLOR + 1 + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + 1);
 		else
-			sender.sendMessage(Strings.TITLE + "Showing page " + Strings.HOUSE_STYLE_COLOR + pageNumberToShow + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + maxPageNumber);
+			sender.sendMessage(Strings.customTitle(usage) + "Showing page " + Strings.HOUSE_STYLE_COLOR + pageNumberToShow + Strings.ACCENT_COLOR + "/" + Strings.HOUSE_STYLE_COLOR + maxPageNumber);
 		for (final String s : pages.get(pageNumberToShow))
 			sender.sendMessage(s);
 	}

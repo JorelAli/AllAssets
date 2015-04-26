@@ -77,7 +77,7 @@ public class CommandBalancetop {
 				ErrorUtils.notAnInteger(player);
 				return;
 			}
-			new Paginator(balanceList, 10).send(player, Integer.parseInt(args.getArgs()[0]));
+			new Paginator(balanceList, 10, "Top balances").send(player, Integer.parseInt(args.getArgs()[0]));
 		}
 	}
 
