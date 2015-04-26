@@ -59,6 +59,7 @@ public class MinecraftReflectionUtils {
 	final public Class<?> minecraftServerClass;
 	final public Class<?> nmsWorldClass;
 	final public Class<?> entityHumanClass;
+	final public Class<?> craftItemStackClass;
 
 	/* Object classes (Packets) */
 	final public Object emptyChatSerializer;
@@ -71,6 +72,41 @@ public class MinecraftReflectionUtils {
 	final public Object emptyPacketPlayOutOpenWindow;
 	final public Object emptyPacketPlayOutEntityDestroy;
 	final public Object emptyPacketPlayOutGameStateChange;
+
+	public MinecraftReflectionUtils() throws Exception {
+
+		player = null;
+		worldServer = null;
+		ping = 0;
+		nmsWorldClass = null;
+		nmsPlayer = null;
+		locale = null;
+		getConnection = null;
+		entityHumanClass = null;
+		craftWorldClass = null;
+		abilities = null;
+
+		obcPackageName = Bukkit.getServer().getClass().getPackage().getName();
+		craftServer = getOBCClass("CraftServer").cast(Bukkit.getServer());
+		dedicatedServer = ReflectionUtils.getPrivateFieldValue(craftServer, "console");
+		packageName = dedicatedServer.getClass().getPackage().getName();
+
+		packetClass = getNMSClass("Packet");
+		iChatBaseComponentClass = getNMSClass("IChatBaseComponent");
+		enumClientCommandClass = getNMSClass("EnumClientCommand");
+		minecraftServerClass = dedicatedServer.getClass().getSuperclass();
+		craftItemStackClass = getOBCClass("inventory.CraftItemStack");
+
+		emptyChatSerializer = getNMSClass("ChatSerializer").newInstance();
+		emptyPacketPlayOutChat = getNMSClass("PacketPlayOutChat").newInstance();
+		emptyPacketPlayInClientCommand = getNMSClass("PacketPlayInClientCommand").newInstance();
+		emptyPacketPlayOutNamedEntitySpawn = getNMSClass("PacketPlayOutNamedEntitySpawn").newInstance();
+		emptyPacketPlayOutBed = getNMSClass("PacketPlayOutBed").newInstance();
+		emptyPacketPlayOutAnimation = getNMSClass("PacketPlayOutAnimation").newInstance();
+		emptyPacketPlayOutOpenWindow = getNMSClass("PacketPlayOutOpenWindow").newInstance();
+		emptyPacketPlayOutEntityDestroy = getNMSClass("PacketPlayOutEntityDestroy").newInstance();
+		emptyPacketPlayOutGameStateChange = getNMSClass("PacketPlayOutGameStateChange").newInstance();
+	}
 
 	/** Creates a new instance of ReflectionUtils and prepares the classes and
 	 * stuff */
@@ -105,6 +141,7 @@ public class MinecraftReflectionUtils {
 		minecraftServerClass = dedicatedServer.getClass().getSuperclass();
 		nmsWorldClass = worldServer.getClass().getSuperclass();
 		abilities = entityHumanClass.getField("abilities").get(nmsPlayer);
+		craftItemStackClass = getOBCClass("inventory.CraftItemStack");
 
 		/* Create the class instances */
 		emptyChatSerializer = getNMSClass("ChatSerializer").newInstance();

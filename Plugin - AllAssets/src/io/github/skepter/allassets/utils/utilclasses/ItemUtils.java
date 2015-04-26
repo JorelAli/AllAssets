@@ -23,12 +23,44 @@
  *******************************************************************************/
 package io.github.skepter.allassets.utils.utilclasses;
 
+import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.reflection.ReflectionUtils;
+
 import org.bukkit.inventory.ItemStack;
 
 public class ItemUtils {
 
-	public static boolean isPick(final ItemStack item) {
-		switch (item.getType()) {
+	private ItemStack is;
+
+	public ItemUtils(final ItemStack is) {
+		this.is = is;
+	}
+
+	public ItemStack addStringNBT(String key, String data) {
+		try {
+			Object nmsItem = new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asNMSCopy", ItemStack.class).invoke(null, is);
+			Object tag = ReflectionUtils.getPrivateFieldValue(nmsItem, "tag");
+			if (tag == null)
+				tag = new MinecraftReflectionUtils().getNMSClass("NBTTagCompund").newInstance();
+			tag.getClass().getDeclaredMethod("setString", String.class, String.class).invoke(tag, key, data);
+			return (ItemStack) new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asCraftMirror", nmsItem.getClass()).invoke(null, nmsItem);
+		} catch (Exception e) {
+		}
+		return is;
+	}
+
+	public String getStringNBT(String key) {
+		try {
+			Object nmsItem = new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asNMSCopy", ItemStack.class).invoke(null, is);
+			Object tag = ReflectionUtils.getPrivateFieldValue(nmsItem, "tag");
+			return (String) tag.getClass().getDeclaredMethod("getString", String.class).invoke(tag, key);
+		} catch (Exception e) {
+		}
+		return null;
+	}
+
+	public boolean isPick() {
+		switch (is.getType()) {
 			case DIAMOND_PICKAXE:
 			case IRON_PICKAXE:
 			case GOLD_PICKAXE:
@@ -40,8 +72,8 @@ public class ItemUtils {
 		}
 	}
 
-	public static boolean isAxe(final ItemStack item) {
-		switch (item.getType()) {
+	public boolean isAxe() {
+		switch (is.getType()) {
 			case DIAMOND_AXE:
 			case IRON_AXE:
 			case GOLD_AXE:
@@ -53,8 +85,8 @@ public class ItemUtils {
 		}
 	}
 
-	public static boolean isSpade(final ItemStack item) {
-		switch (item.getType()) {
+	public boolean isSpade() {
+		switch (is.getType()) {
 			case DIAMOND_SPADE:
 			case IRON_SPADE:
 			case GOLD_SPADE:
@@ -66,8 +98,8 @@ public class ItemUtils {
 		}
 	}
 
-	public static boolean isHoe(final ItemStack item) {
-		switch (item.getType()) {
+	public boolean isHoe() {
+		switch (is.getType()) {
 			case DIAMOND_HOE:
 			case IRON_HOE:
 			case GOLD_HOE:
@@ -79,8 +111,8 @@ public class ItemUtils {
 		}
 	}
 
-	public static boolean isSword(final ItemStack item) {
-		switch (item.getType()) {
+	public boolean isSword() {
+		switch (is.getType()) {
 			case DIAMOND_SWORD:
 			case IRON_SWORD:
 			case GOLD_SWORD:
@@ -92,8 +124,8 @@ public class ItemUtils {
 		}
 	}
 
-	public static boolean isArmor(final ItemStack item) {
-		switch (item.getType()) {
+	public boolean isArmor() {
+		switch (is.getType()) {
 			case DIAMOND_HELMET:
 			case IRON_HELMET:
 			case GOLD_HELMET:
