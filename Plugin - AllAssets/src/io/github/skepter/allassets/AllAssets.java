@@ -92,6 +92,7 @@ import io.github.skepter.allassets.commands.other.CommandPrefix;
 import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRules;
 import io.github.skepter.allassets.commands.other.CommandSeen;
+import io.github.skepter.allassets.commands.other.CommandSuffix;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
 import io.github.skepter.allassets.commands.other.CommandTitle;
 import io.github.skepter.allassets.commands.other.CommandWorkbench;
@@ -269,6 +270,7 @@ public class AllAssets extends JavaPlugin {
 			
 			new CommandTpall(framework);
 			new CommandPrefix(framework);
+			new CommandSuffix(framework);
 
 			//Listeners
 //			r(new CommandBan(framework));

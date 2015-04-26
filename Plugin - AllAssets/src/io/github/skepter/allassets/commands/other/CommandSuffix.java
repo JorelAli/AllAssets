@@ -34,13 +34,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandPrefix {
+public class CommandSuffix {
 
-	public CommandPrefix(final CommandFramework framework) {
+	public CommandSuffix(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "prefix", permission = "prefix", description = "Sets your prefix")
+	@CommandHandler(name = "suffix", permission = "suffix", description = "Sets your suffix")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
@@ -49,16 +49,16 @@ public class CommandPrefix {
 					printHelp(player);
 					return;
 				default:
-					String prefix = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
-					AllAssets.instance().chat.setPlayerPrefix(player, prefix);
-					player.sendMessage(Strings.TITLE + "Set prefix to " + ChatColor.translateAlternateColorCodes('&', prefix));
+					String suffix = TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length);
+					AllAssets.instance().chat.setPlayerSuffix(player, suffix);
+					player.sendMessage(Strings.TITLE + "Set suffix to " + ChatColor.translateAlternateColorCodes('&', suffix));
 					return;
 			}
 		return;
 	}
 
-	@Help(name = "Prefix")
+	@Help(name = "Suffix")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Prefix", "/prefix <prefix> - Sets your prefix");
+		TextUtils.printHelp(sender, "Suffix", "/suffix <suffix> - Sets your suffix");
 	}
 }
