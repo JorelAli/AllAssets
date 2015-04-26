@@ -33,12 +33,12 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.utils.utilclasses.TextUtils.SeperatorType;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class CommandAllAssets {
@@ -58,7 +58,7 @@ public class CommandAllAssets {
 		final List<String> commandList = new ArrayList<String>();
 		for (final CommandHandler command : CommandFramework.pluginCommands)
 			if (args.getSender().hasPermission(command.permission()))
-				commandList.add(ChatColor.BLUE + " /" + command.name().toLowerCase().replace(".", " ") + ChatColor.WHITE + " - " + ChatColor.AQUA + command.description());
+				commandList.add(Strings.HOUSE_STYLE_COLOR + " /" + command.name().toLowerCase().replace(".", " ") + Strings.ACCENT_COLOR + SeperatorType.DASH.getString() + Strings.HOUSE_STYLE_COLOR + command.description());
 		int arg = 1;
 		if (args.getArgs().length == 1)
 			arg = Integer.parseInt(args.getArgs()[0]);
@@ -75,28 +75,6 @@ public class CommandAllAssets {
 		ConfigHandler.config().reloadConfig();
 		ConfigHandler.features().reloadConfig();
 		args.getSender().sendMessage(Strings.TITLE + "Configuration reloaded");
-		//		args.getSender().sendMessage(AllAssets.title + "Reloading...");
-		//		/* We're currently in dev and dev file name isn't the same as the released name */
-		//		final File devPluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets.jar");
-		//		//		final File pluginFile = new File(AllAssets.instance().getDataFolder().getParent() + File.separator + "AllAssets-" + AllAssets.instance().getDescription().getVersion() + ".jar");
-		//		final String cachedTitle = AllAssets.title;
-		//		new Timer().schedule(new TimerTask() {
-		//
-		//			@Override
-		//			public void run() {
-		//				try {
-		//					args.getSender().sendMessage(cachedTitle + "AllAssets successfully reloaded");
-		//					Bukkit.getPluginManager().loadPlugin(devPluginFile);
-		//					//Bukkit.getPluginManager().enablePlugin(AllAssets.instance());
-		//				} catch (final UnknownDependencyException
-		//						| InvalidPluginException | InvalidDescriptionException e) {
-		//					e.printStackTrace();
-		//				}
-		//			}
-		//
-		//		}, 3000L);
-		//		Bukkit.getPluginManager().disablePlugin(AllAssets.instance());
-		//		return;
 	}
 
 	@Help(name = "AllAssets")
