@@ -146,6 +146,7 @@ import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.SuperPickaxe;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 
 import java.io.File;
@@ -325,7 +326,7 @@ public class AllAssets extends JavaPlugin {
 
 		if (!tempTimeMap.isEmpty())
 			try {
-				FileUtils.save(tempTimeMap, new File(Files.getStorage(), "tempTimeMap.bin"));
+				FileUtils.save(tempTimeMap, new File(Files.getDirectory(Directory.STORAGE), "tempTimeMap.bin"));
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
@@ -589,7 +590,7 @@ public class AllAssets extends JavaPlugin {
 		try {
 			if (new File(getDataFolder(), "tempTimeMap.bin").exists()) {
 				@SuppressWarnings("unchecked")
-				final Map<UUID, Long> m = (Map<UUID, Long>) FileUtils.load(new File(Files.getStorage(), "tempTimeMap.bin"));
+				final Map<UUID, Long> m = (Map<UUID, Long>) FileUtils.load(new File(Files.getDirectory(Directory.STORAGE), "tempTimeMap.bin"));
 				tempTimeMap = m;
 			}
 		} catch (final Exception e) {
