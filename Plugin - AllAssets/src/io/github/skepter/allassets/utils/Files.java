@@ -24,12 +24,13 @@ package io.github.skepter.allassets.utils;
 import io.github.skepter.allassets.AllAssets;
 
 import java.io.File;
+import java.util.UUID;
 
 public class Files {
 
 	/** Returns the storage folder for player data */
-	public static File getPlayerStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
+	public static File getPlayerStorage(UUID u) {
+		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Players" + File.separator + u.toString());
 		if (!file.exists())
 			file.mkdirs();
 		return file;

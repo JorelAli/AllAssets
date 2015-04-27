@@ -108,6 +108,8 @@ public class ConfigHandler {
 		config.set("randomAnnouncer", "true", "Selects announcements at random");
 		config.set("announcerTime", "300", "The delay between each announcement in seconds");
 		config.set("broadcastPrefix", "&1[&bBroadcast&1]&b", "The prefix for broadcasts");
+		config.set("currencyName", "dollars", "The name for the currency (plural)");
+		config.set("currencyNameSing", "dollar", "The name for the currency (singular)");
 	}
 
 	private static void createMessages() {
@@ -244,6 +246,7 @@ public class ConfigHandler {
 		features.set("CommandsOnJoin", "true", "Commands to run when a player joins - see config to add commands");
 
 		features.set("BlockHeads", "true", "--- Cosmetics ---", "Cosmetic features to comply with the EULA");
+		
 		//		features.set("StaffChat", "true", new String[] { "Staff chat system - see config to configure it" });
 
 	}
