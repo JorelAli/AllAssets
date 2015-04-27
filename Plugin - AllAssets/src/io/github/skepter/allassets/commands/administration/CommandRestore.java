@@ -32,6 +32,7 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.YesNoConversation;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -64,11 +65,11 @@ public class CommandRestore {
 			case 1:
 				if (args.getArgs()[0].equalsIgnoreCase("list")) {
 					args.getSender().sendMessage(TextUtils.title("List of worlds"));
-					for (final File file : Files.getWorldBackupStorage().listFiles())
+					for (final File file : Files.getDirectory(Directory.BACKUP).listFiles())
 						args.getSender().sendMessage(file.getName());
 					return;
 				} else {
-					for (final File file : Files.getWorldBackupStorage().listFiles())
+					for (final File file : Files.getDirectory(Directory.BACKUP).listFiles())
 						if (args.getArgs()[0].equalsIgnoreCase(file.getName()))
 							new YesNoConversation(args.getSender(), new RestorePrompt(args.getArgs()[0].toLowerCase()), "Are you sure you want to restore this world? Your previous world cannot be recovered!");
 					return;
@@ -79,7 +80,7 @@ public class CommandRestore {
 	@Completer(name = "restore", aliases = { "revert" })
 	public List<String> backupCompleter(final CommandArgs args) {
 		final List<String> list = new ArrayList<String>();
-		for (final File file : Files.getWorldBackupStorage().listFiles())
+		for (final File file : Files.getDirectory(Directory.BACKUP).listFiles())
 			list.add(file.getName());
 		return list;
 	}
@@ -117,7 +118,7 @@ public class CommandRestore {
 							//							utils.deleteWorld();
 							//							if (new File(world).exists())
 							//								new File(world).delete();
-							wUtils.copyWorld(new File(Files.getWorldBackupStorage(), world));
+							wUtils.copyWorld(new File(Files.getDirectory(Directory.BACKUP), world));
 							//							FileUtils.copyDirectory(new File(AllAssets.getWorldStorage(), world), new File(world));
 							Bukkit.getServer().createWorld(new WorldCreator(world));
 							context.getForWhom().sendRawMessage(Strings.TITLE + world + " was restored successfully");

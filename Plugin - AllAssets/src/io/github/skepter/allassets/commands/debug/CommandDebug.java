@@ -44,6 +44,7 @@ import io.github.skepter.allassets.test.VanishPlayersItemStack;
 import io.github.skepter.allassets.utils.EncryptionUtils;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
@@ -431,7 +432,7 @@ public class CommandDebug implements Listener {
 		}
 		final EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
 		try {
-			final File file = new File(Files.getStorage(), "data.bin");
+			final File file = new File(Files.getDirectory(Directory.STORAGE), "data.bin");
 			if (!file.exists())
 				file.createNewFile();
 			FileUtils.saveBytesSecurely(ec.encrypt(args.getArgs()[1]), file);
@@ -449,7 +450,7 @@ public class CommandDebug implements Listener {
 		}
 		final EncryptionUtils ec = new EncryptionUtils(args.getArgs()[0]);
 		try {
-			final byte[] bytes = FileUtils.loadBytesSecurely(new File(Files.getStorage(), "data.bin"));
+			final byte[] bytes = FileUtils.loadBytesSecurely(new File(Files.getDirectory(Directory.STORAGE), "data.bin"));
 			System.out.println("Decrypted message: " + ec.decrypt(bytes));
 		} catch (final Exception e) {
 			e.printStackTrace();

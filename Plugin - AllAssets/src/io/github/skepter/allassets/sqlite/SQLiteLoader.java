@@ -24,6 +24,7 @@ package io.github.skepter.allassets.sqlite;
 import io.github.skepter.allassets.utils.DoubleMap;
 import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Utils;
+import io.github.skepter.allassets.utils.Files.Directory;
 
 import java.io.File;
 
@@ -61,7 +62,7 @@ public class SQLiteLoader {
 	private SQLite getSQLite(final SQLiteType t) {
 		switch (t) {
 			case BAN:
-				return new SQLite(new File(Files.getStorage(), "bannedplayers.db"));
+				return new SQLite(new File(Files.getDirectory(Directory.STORAGE), "bannedplayers.db"));
 		}
 		return null;
 	}

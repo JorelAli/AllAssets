@@ -27,6 +27,7 @@ package io.github.skepter.allassets.config;
 
 import io.github.skepter.allassets.api.CustomConfig;
 import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Files.Directory;
 
 import java.io.File;
 
@@ -37,7 +38,7 @@ import org.bukkit.entity.Player;
 public class PlayerData extends CustomConfig {
 
 	public PlayerData(final OfflinePlayer player) {
-		super(new File(Files.getPlayerStorage(), player.getUniqueId() + ".yml"), player.getName());
+		super(new File(Files.getDirectory(Directory.PLAYERS), player.getUniqueId() + ".yml"), player.getName());
 	}
 
 	public static void saveAllPlayers() {

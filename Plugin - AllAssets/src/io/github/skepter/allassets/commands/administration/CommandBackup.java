@@ -31,6 +31,7 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.CommandFramework.Completer;
 import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.YesNoConversation;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -76,7 +77,7 @@ public class CommandBackup {
 					}
 					final World w = world;
 
-					for (final File file : Files.getWorldBackupStorage().listFiles())
+					for (final File file : Files.getDirectory(Directory.BACKUP).listFiles())
 						if (file.isDirectory())
 							if (file.getName().equals(world.getName())) {
 								args.getSender().sendMessage(Strings.TITLE + "There is already a backup for " + world.getName() + ", backing it up again will lose the previous backup");
@@ -88,7 +89,7 @@ public class CommandBackup {
 						@Override
 						public void run() {
 							try {
-								FileUtils.copyDirectory(w.getWorldFolder(), new File(Files.getWorldBackupStorage(), w.getName()));
+								FileUtils.copyDirectory(w.getWorldFolder(), new File(Files.getDirectory(Directory.BACKUP), w.getName()));
 								args.getSender().sendMessage(Strings.TITLE + w.getName() + " was backed up successfully ");
 							} catch (final IOException e) {
 								ErrorUtils.backupError(args.getSender());
@@ -130,7 +131,7 @@ public class CommandBackup {
 					@Override
 					public void run() {
 						try {
-							FileUtils.copyDirectory(world.getWorldFolder(), new File(Files.getWorldBackupStorage(), world.getName()));
+							FileUtils.copyDirectory(world.getWorldFolder(), new File(Files.getDirectory(Directory.BACKUP), world.getName()));
 						} catch (final IOException e) {
 							ErrorUtils.conversableError(context.getForWhom(), "There was an error whilst backing up the world");
 							return;

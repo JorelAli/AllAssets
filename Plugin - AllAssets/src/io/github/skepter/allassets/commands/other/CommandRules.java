@@ -27,6 +27,7 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.CustomConfig;
 import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.io.File;
@@ -75,7 +76,7 @@ public class CommandRules {
 	 * class since it's only used in this class. */
 	private class Rules extends CustomConfig {
 		public Rules() {
-			super(new File(Files.getStorage(), "rules.yml"), "rules");
+			super(new File(Files.getDirectory(Directory.STORAGE), "rules.yml"), "rules");
 		}
 	}
 }

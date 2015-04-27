@@ -26,37 +26,29 @@ import io.github.skepter.allassets.AllAssets;
 import java.io.File;
 
 public class Files {
-
-	/** Returns the storage folder for player data */
-	public static File getPlayerStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Players");
+	
+	public static File getDirectory(Directory dir) {
+		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + dir.getDirectoryName());
 		if (!file.exists())
 			file.mkdirs();
 		return file;
 	}
 
-	/** Returns the storage folder to backing up worlds */
-	public static File getWorldDataStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Worlds");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
-	}
+	public enum Directory {
+		PLAYERS("Players"),
+		WORLD("Worlds"),
+		STORAGE("Storage"),
+		BACKUP("Backups");
 
-	/** Returns the storage folder for storing data */
-	public static File getStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Storage");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
-	}
+		private String dir;
 
-	/** Returns the storage folder to backing up worlds */
-	public static File getWorldBackupStorage() {
-		final File file = new File(AllAssets.instance().getDataFolder() + File.separator + "Backups");
-		if (!file.exists())
-			file.mkdirs();
-		return file;
+		Directory(String dir) {
+			this.dir = dir;
+		}
+
+		String getDirectoryName() {
+			return dir;
+		}
 	}
 
 }

@@ -23,6 +23,7 @@ package io.github.skepter.allassets.vault.permissions;
 
 import io.github.skepter.allassets.api.CustomConfig;
 import io.github.skepter.allassets.utils.Files;
+import io.github.skepter.allassets.utils.Files.Directory;
 
 import java.io.File;
 import java.util.List;
@@ -85,7 +86,7 @@ public class PermissionDataManager extends CustomConfig {
 	 */
 
 	public PermissionDataManager() {
-		super(new File(Files.getStorage(), "PermissionData.yml"), "Permissions");
+		super(new File(Files.getDirectory(Directory.STORAGE), "PermissionData.yml"), "Permissions");
 	}
 
 	/** dataName = player or group name */
