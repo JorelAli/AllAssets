@@ -90,23 +90,23 @@ public class PermissionDataManager extends CustomConfig {
 	}
 
 	/** dataName = player or group name */
-	public List<String> getWorldPermissions(final String worldName, final GroupDataType type, final String dataName) {
+	public List<String> getWorldPermissions(final String worldName, final GroupType type, final String dataName) {
 		final String path = getPath(type, "Worlds.", worldName) + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
 	/** dataName = player or group name */
-	public List<String> getGlobalPermissions(final GroupDataType type, final String dataName) {
+	public List<String> getGlobalPermissions(final GroupType type, final String dataName) {
 		final String path = getPath(type, "Global.") + dataName + ".Permissions";
 		return getDataFile().getStringList(path);
 	}
 
-	public String getWorldAffix(final String worldName, final GroupDataType type, final String dataName, final Affix affix) {
+	public String getWorldAffix(final String worldName, final GroupType type, final String dataName, final Affix affix) {
 		final String path = getAffix(affix, getPath(type, "Worlds.", worldName) + dataName + ".");
 		return getDataFile().getString(path);
 	}
 
-	public String getGlobalAffix(final GroupDataType type, final String dataName, final Affix affix) {
+	public String getGlobalAffix(final GroupType type, final String dataName, final Affix affix) {
 		final String path = getAffix(affix, getPath(type, "Global.") + dataName + ".");
 		return getDataFile().getString(path);
 	}
@@ -123,7 +123,7 @@ public class PermissionDataManager extends CustomConfig {
 		return path;
 	}
 
-	private String getPath(final GroupDataType type, String path) {
+	private String getPath(final GroupType type, String path) {
 		switch (type) {
 			case GROUP:
 				path = path + ".Groups.";
@@ -135,7 +135,7 @@ public class PermissionDataManager extends CustomConfig {
 		return path;
 	}
 
-	private String getPath(final GroupDataType type, String path, final String worldName) {
+	private String getPath(final GroupType type, String path, final String worldName) {
 		switch (type) {
 			case GROUP:
 				path = path + worldName + ".Groups.";
@@ -147,7 +147,7 @@ public class PermissionDataManager extends CustomConfig {
 		return path;
 	}
 
-	public enum GroupDataType {
+	public enum GroupType {
 		GROUP, PLAYER;
 	}
 

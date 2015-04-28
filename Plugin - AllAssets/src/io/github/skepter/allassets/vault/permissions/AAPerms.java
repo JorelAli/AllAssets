@@ -23,6 +23,7 @@ package io.github.skepter.allassets.vault.permissions;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.reflection.VaultReflection;
+import io.github.skepter.allassets.vault.permissions.PermissionDataManager.GroupType;
 
 import java.util.logging.Logger;
 
@@ -42,6 +43,7 @@ public class AAPerms extends Permission {
 
 	private final String name = "AAPerms";
 	private AllAssets allAssetsPlugin;
+	private PermissionDataManager perms;
 
 	public AAPerms(final Plugin plugin) {
 		if (this.allAssetsPlugin == null) {
@@ -49,6 +51,7 @@ public class AAPerms extends Permission {
 			if ((allAssets != null) && (allAssets.isEnabled())) {
 				this.allAssetsPlugin = ((AllAssets) allAssets);
 				Bukkit.getServer().getPluginManager().registerEvents(new PermissionServerListener(this), plugin);
+				perms = new PermissionDataManager();
 				log.info(String.format("[%s][Permission] %s hooked.", new Object[] { "AA", name }));
 			}
 		}
@@ -101,19 +104,17 @@ public class AAPerms extends Permission {
 
 	@Override
 	public boolean groupAdd(final String world, final String group, final String permission) {
-
+		
 		return false;
 	}
 
 	@Override
 	public boolean groupHas(final String world, final String group, final String permission) {
-
-		return false;
+		return perms.getWorldPermissions(world, GroupType.GROUP, group).contains(permission);
 	}
 
 	@Override
 	public boolean groupRemove(final String world, final String group, final String permission) {
-
 		return false;
 	}
 
@@ -141,8 +142,7 @@ public class AAPerms extends Permission {
 
 	@Override
 	public boolean playerHas(final String world, final String player, final String permission) {
-
-		return false;
+		return perms.getWorldPermissions(world, GroupType.PLAYER, player).contains(permission);
 	}
 
 	@Override
