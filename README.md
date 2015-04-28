@@ -46,3 +46,7 @@ Well, this plugin is different. I'm not necessarily saying the commands - some a
 * clean ram! Using /debug clean, you can speed up your server by cleaning the ram
 * use advanced NMS coding to do unseen actions (such as instant respawning, picking up skeleton arrows, getting player UUIDS and more!)
 Of course, the list goes on, these are just a few of the many features that AllAssets contains.
+
+I'm a plugin developer, why should I be interested?
+---------------------------------------------------
+Well then, you're in luck. You can check out the [Developer documentation](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md) to get started.
