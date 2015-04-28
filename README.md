@@ -31,7 +31,7 @@ Skepter, the single developer of AllAssets hated Essentials. He hated how it was
 * A more 'user friendly' plugin which would also have advanced features
 
 Upon creation, he named his project AllInOne, until his friend told him that there was an [existing plugin by that name](http://dev.bukkit.org/bukkit-plugins/allinone/). Since then, after some help with friends (ajcozzo, Gerrie_K, amoniuszko20) he renamed his project to 'AllAssets'.
-The most unique thing about this plugin is, most large plugins such as CommandBook and Essentials for example were normally created with a collaboration of developers, however AllAssets was coded entirely (excepting the libraries) by one single developer - Skepter.
+The most unique thing about this plugin is, most large plugins such as CommandBook and Essentials for example were normally created with a collaboration of developers, however AllAssets aims to be completed by a single developer.
 
 Why choose me?
 --------------
