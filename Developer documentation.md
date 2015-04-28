@@ -3,7 +3,7 @@ AllAssets Developer Documentation
 
 API overview
 ------------
-The AllAssets API has been designed for ease of use and to allow your plugin to cooperate with AllAssets in order to give the best result possible. All of the API classes can be found in io.github.Skepter.AllAssets.API
+The AllAssets API has been designed for ease of use and to allow your plugin to cooperate with AllAssets in order to give the best result possible. All of the API classes can be found in io.github.skepter.allassets.api
 
 FireworkBuilder
 -----------------
