@@ -53,7 +53,7 @@ public class CommandAllAssets {
 		return;
 	}
 
-	@CommandHandler(name = "allassets.commands", aliases = { "aa.cmds", "allassets.cmds", "aa.commands" }, permission = "AllAssets.allassets", description = "Views plugin commands")
+	@CommandHandler(name = "allassets.commands", aliases = { "aa.cmds", "allassets.cmds", "aa.commands" }, permission = "allassets", description = "Views plugin commands")
 	public void commands(final CommandArgs args) {
 		final List<String> commandList = new ArrayList<String>();
 		for (final CommandHandler command : CommandFramework.pluginCommands)
@@ -70,7 +70,7 @@ public class CommandAllAssets {
 		return;
 	}
 
-	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "AllAssets.allassets", description = "Reloads entire plugin")
+	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "allassets", description = "Reloads entire plugin")
 	public void reload(final CommandArgs args) {
 		ConfigHandler.config().reloadConfig();
 		ConfigHandler.features().reloadConfig();
