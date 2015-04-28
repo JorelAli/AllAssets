@@ -16,15 +16,12 @@ Compiling & source code info
 Not allowed. You could do it if you want to, but I prefer you'd use the [AllAssets releases](https://github.com/Skepter/AllAssets/releases)
 
 The source code is there, feel free to explore. Those who are new to source code browsing, here's the list of file information:
-* .settings - just some boring eclipse stuff. Nothing interesting here.
-* bin - GitHub stuff. Nothing interesting here.
-* builds - downloads of the latest builds
-* resources - some files I put there for reference when coding. Not really interesting.
-* src/io/github/Skepter - code here! Check this out - it's packed with useful stuff!
-* .classpath - eclipse settings. Nothing interesting.
-* .project - see .classpath.
-* Read me.txt - This is a file which will be exported with AllAssets once it is run. It contains a bunch of useful info to get started.
-* plugin.yml - The plugin.yml file - REALLY BORING, but you can check it out if you want.
+* .settings - Just some boring eclipse stuff. Nothing interesting here.
+* resources - Some files I put there for reference when coding. Contains to do lists and future plans.
+* src/io/github/skepter/allassets - Code here! Check this out - it's packed with useful stuff!
+* .classpath - Eclipse settings. Nothing interesting.
+* .project - Eclipse settings. Nothing interesting.
+* pom.xml - Maven build script thingy.
 
 About
 -----
