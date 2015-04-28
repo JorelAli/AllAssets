@@ -13,7 +13,7 @@ Also desgined to be as light weight as possible (compared to Essentials) and sup
 
 Compiling & source code info
 ----------------------------
-Not allowed. You could do it if you want to, but I prefer you'd use the AllAssets.jar file inside the /builds/ folder (since the builds there have less bugs than these default development builds - and sometimes development builds crash. A lot!)
+Not allowed. You could do it if you want to, but I prefer you'd use the [AllAssets releases](https://github.com/Skepter/AllAssets/releases)
 
 The source code is there, feel free to explore. Those who are new to source code browsing, here's the list of file information:
 * .settings - just some boring eclipse stuff. Nothing interesting here.
