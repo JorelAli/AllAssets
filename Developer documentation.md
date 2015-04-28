@@ -72,13 +72,16 @@ AllAssets uses the custom Event LogEvent to manage logs. For example, if AllAsse
 
 CustomConfig
 ------------
-A really simple implementation of a YAML configuration system. To use, create a new instance and from there, you can reload, save or retrieve the data file.
+A really simple implementation of a YAML configuration system. To use, create a new instance and from there, you can reload, save or retrieve the data file. Example usage:
+
 ```java
 public FileConfiguration getMyDataFile() {
-return new CustomConfig(new File(plugin.getDataFolder(), "data.yml"), "data file").getDataFile();
+	return new CustomConfig(new File(plugin.getDataFolder(), "data.yml"), "data file").getDataFile();
+}
 ```
 
 * new CustomConfig(File storageLocation, String usage) - Creates a new instance. The storage location is the direct path to the file and the usage is used to note any errors.
+* 
 
 PlayerMap
 ---------
@@ -95,7 +98,8 @@ AllAssets also uses the OfflineUser class to get an instance of a user that is o
 
 UUIDAPI
 -------
-An API designed to allow UUID's to be managed easier.
+An API designed to allow UUID's to be managed easier. Example usage:
+
 ```java
 UUIDAPI.getPlayer("Skepter");
 ```
@@ -106,6 +110,53 @@ PlayerRequest
 The PlayerRequest class is used to make requests from one player to another. It has not been tested and is prone to errors.
 
 ```java
+//show example usage
 new PlayerRequest(Player from, Player to, String information, long timeout)
 //TODO Write about in documentation
+```
+
+Paginator
+---------
+The Paginator class is designed to print large amounts of information to a user, by using a page system. 
+* new Paginator(List<String> textData, int pageSize, String usage) - Creates a new paginator instance. The text data is the list containing each line of information. The page size is the size of the page (For example, a page size of 10 will display 10 elements per page). The usage is the name of the function, for example "Help index".
+* send(CommandSender sender, int pageNumber) - Sends the page number (pageNumber) to the sender.
+* getMaxPageNumber() - Returns the maximum page number
+* getPageNumberShown() - Can be used after showing a page to a user. Once a page has been shown, this value updates to the page number that was last sent to the user.
+
+```java
+List<String> infoToPrint = Arrays.asList(new String[] { "This is info 1", "This is info 2" });
+new Paginator(infoToPrint, 10, "Prints example usage").send(player, 0);
+```
+
+CustomItem
+---------------
+A class which is used to easily create custom items, which can then be spawned in with the /spawnitem command. This is an abstract class, so cannot be used on its own, however it can be extended by another class to handle the features of the item. Example usage creating a custom item:
+
+```java
+public class SuperPickaxe extends CustomItem {
+
+	//Helps create the item when this class is initialized.
+	public SuperPickaxe(Javaplugin plugin, ItemStack is, String name) {
+		super(plugin, is, name);
+	}
+	
+	@Override
+	public boolean leftClickBlock(Player player) {
+		getInteractedBlock(player).getLocation().getBlock().setType(Material.AIR);
+		return true;
+	}
+}
+```
+
+This class handles the events when the item is used. To create the actual item, you must invoke the constructor elsewhere (Often in the main class). For example (using the ItemBuilder):
+
+```java
+new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
+```
+
+If you only want to allow a player to use the item if they have a certain permission, you can use the alternative constructor:
+```java
+public SuperPickaxe(Javaplugin plugin, ItemStack is, String name, String permission) {
+	super(plugin, is, name, permission);
+}
 ```
