@@ -45,32 +45,6 @@ import org.bukkit.entity.Player;
 
 public class WM_Methods {
 
-	//LOWERCASENAME: /back
-	//CAMELCASENAME: /Back
-
-	//	@CommandHandler(name = "LOWERCASENAME", aliases = { "ALIASES" }, permission = "LOWERCASENAME", description = "DESCRIPTION")
-	//	public void onCommand(final CommandArgs args) {
-	//		Player player = PlayerGetter.getPlayer(args);
-	//		if (player != null) {
-	//			switch (args.getArgs().length) {
-	//				case 0:
-	//					printHelp(player);
-	//					return;
-	//				case 1:
-	//					Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-	//					if (target != null) {
-	//
-	//					}
-	//			}
-	//		}
-	//		return;
-	//	}
-	//
-	//	@Help(name = "CAMELCASENAME")
-	//	public void printHelp(final CommandSender sender) {
-	//		TextUtils.printHelp(sender, "CAMELCASENAME", "/LOWERCASENAME ARGUMENT - DESCRIPTION");
-	//	}
-
 	public WM_Methods(final CommandFramework framework) {
 		framework.registerCommands(this);
 	}

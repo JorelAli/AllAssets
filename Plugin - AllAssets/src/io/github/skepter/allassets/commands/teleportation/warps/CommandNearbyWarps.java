@@ -44,7 +44,7 @@ public class CommandNearbyWarps {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "nearbywarps", aliases = { "nearwarps", "nearbywarp", "nearwarp" }, permission = "nearbywarp", description = "Shows a list of nearby warps")
+	@CommandHandler(name = "nearbywarps", aliases = { "nearwarps", "nearbywarp", "nearwarp" }, permission = "nearbywarps", description = "Shows a list of nearby warps")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {

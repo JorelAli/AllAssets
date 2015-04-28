@@ -38,7 +38,7 @@ public class CommandWorkbench {
 		framework.registerCommands(this);
 	}
 
-	@CommandHandler(name = "workbench", aliases = { "wb" }, permission = "workbench", description = "Shows your ping")
+	@CommandHandler(name = "workbench", aliases = { "wb" }, permission = "workbench", description = "Opens a workbench")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
