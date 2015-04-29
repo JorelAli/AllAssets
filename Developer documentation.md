@@ -5,6 +5,21 @@ API overview
 ------------
 The AllAssets API has been designed for ease of use and to allow your plugin to cooperate with AllAssets in order to give the best result possible. All of the API classes can be found in io.github.skepter.allassets.api
 
+Index
+-----
+API
+* [FireworkBuilder](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#fireworkbuilder) - Creates fireworks
+* [ItemBuilder](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#itembuilder) - Creates items
+* [Debugger](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#debugger) - Debugs info by printing data into the console
+* [LogEvent](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#logevent) - The event fired when a new AllAssets log is created
+* [CustomConfig](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#customconfig) - A custom implementation of FileConfiguration
+* [PlayerMap](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#playermap) - A HashMap for players
+* [User](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#user) - The information about the player
+* [UUIDAPI](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#uuidapi) - Retrieve a user's UUID
+* [PlayerRequest](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#playerrequest) - Send requests with accept/decline system
+* [Paginator](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#paginator) - Send lengthy texts in pages
+* [CustomItem](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#customitem) - Creates custom item actions when clicked
+
 FireworkBuilder
 -----------------
 The firework builder is a class designed to help make fireworks in the ItemStack form. Example usage:
