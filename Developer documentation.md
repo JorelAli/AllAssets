@@ -7,7 +7,7 @@ The AllAssets API has been designed for ease of use and to allow your plugin to 
 
 Index
 -----
-API
+##### API
 * [FireworkBuilder](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#fireworkbuilder) - Creates fireworks
 * [ItemBuilder](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#itembuilder) - Creates items
 * [Debugger](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#debugger) - Debugs info by printing data into the console
@@ -34,13 +34,13 @@ Simply, use the methods to create your firework and use '.getFirework()' at the 
 Methods:
 * new FireworkBuilder(int value) - Creates a new builder with the amount of fireworks to generate
 
-* setPower(int value) - Sets the power (flight length) of the firework
-* setType(Type type) - Sets the type of firework (e.g. ball/burst)
-* addFade(Color color) - Adds a fade color to the firework, can be used more than once
-* addFlicker() - Adds flicker (use true to add flicker)
-* addTrail() - Adds a trail of particles
-* addColor(Color color) - Adds a color to the firework, can be used more than once
-* getFirework() - Returns the firework ItemStack
+* _setPower(int value)_ - Sets the power (flight length) of the firework
+* _setType(Type type)_ - Sets the type of firework (e.g. ball/burst)
+* _addFade(Color color)_ - Adds a fade color to the firework, can be used more than once
+* _addFlicker()_ - Adds flicker (use true to add flicker)
+* _addTrail()_ - Adds a trail of particles
+* _addColor(Color color)_ - Adds a color to the firework, can be used more than once
+* _getFirework()_ - Returns the firework ItemStack
 
 ItemBuilder
 -----------
@@ -53,37 +53,37 @@ public ItemStack getItem() {
 
 Simply use the chainable methods to create your custom item with '.build()' at the end
 Methods:
-* new ItemBuilder(Material material) - Sets the material for the item. The amount is 1.
-* new ItemBuilder(Material material, int amount) - Sets the material and amount for the item.
-* new ItemBuilder(Material material, short dataValue) - Sets the material and data value (e.g. wool color) for the item. The amount is 1.
-* new ItemBuilder(Material material, int amount, short dataValue) - Sets the material, data value and amount for the item.
-* new ItemBuilder(ItemStack itemStack) - Creates a new ItemBuilder from an ItemStack.
+* _new ItemBuilder(Material material)_ - Sets the material for the item. The amount is 1.
+* _new ItemBuilder(Material material, int amount)_ - Sets the material and amount for the item.
+* _new ItemBuilder(Material material, short dataValue)_ - Sets the material and data value (e.g. wool color) for the item. The amount is 1.
+* _new ItemBuilder(Material material, int amount, short dataValue)_ - Sets the material, data value and amount for the item.
+* _new ItemBuilder(ItemStack itemStack)_ - Creates a new ItemBuilder from an ItemStack.
 
-* setDisplayName(String name) - Sets the display name for the item
-* setLore(String... lore) | setLore(List<String> lore) - Sets the lore for an item
-* addLore(String... lore) - Adds the variable strings to the current lore
-* addEnchantment(Enchantment enchantment, int power) - Adds an enchantment to the item
-* removeEnchantment(Enchantment enchantment) - Removes an enchantment from the item
-* addGlow() - Adds a glowing effect without needing an enchantment
-* removeGlow() - Removes the glowing effect from the item
-* getDisplayName() - Gets the display name of the item
-* getLore() - Gets the lore of the item
-* hasGlow() - Checks if an item has a glow 
-* build() - Gets the ItemStack
+* _setDisplayName(String name)_ - Sets the display name for the item
+* _setLore(String... lore)_ | _setLore(List<String> lore)_ - Sets the lore for an item
+* _addLore(String... lore)_ - Adds the variable strings to the current lore
+* _addEnchantment(Enchantment enchantment, int power)_ - Adds an enchantment to the item
+* _removeEnchantment(Enchantment enchantment)_ - Removes an enchantment from the item
+* _addGlow()_ - Adds a glowing effect without needing an enchantment
+* _removeGlow()_ - Removes the glowing effect from the item
+* _getDisplayName()_ - Gets the display name of the item
+* _getLore()_ - Gets the lore of the item
+* _hasGlow()_ - Checks if an item has a glow 
+* _build()_ - Gets the ItemStack
 
 Debugger
 --------
 Just a little class I created to help debug issues by checking values:
 
-* printVariable(String name, Object object) - Prints a variable into the console. The name is used to describe the object
-* printList(Collection<?> list) - Prints a list into the console
-* printMap(Map<?,?> map) - Prints a map into the console
+* _printVariable(String name, Object object)_ - Prints a variable into the console. The name is used to describe the object
+* _printList(Collection<?> list)_ - Prints a list into the console
+* _printMap(Map<?,?> map)_ - Prints a map into the console
 
 LogEvent
 --------
 AllAssets uses the custom Event LogEvent to manage logs. For example, if AllAssets was to throw an error, it would add a new ErrorLog, or if someone was to report grief, it would add a GriefLog. By using the LogEvent, you can listen for these logs and make appropriate effects based on which log type it is
-* getMessage() - Returns the message from the log
-* getLogType() - Returns the log type (CHAT, ERROR, OTHER, GRIEF)
+* _getMessage()_ - Returns the message from the log
+* _getLogType()_ - Returns the log type (CHAT, ERROR, OTHER, GRIEF)
 
 CustomConfig
 ------------
@@ -95,7 +95,7 @@ public FileConfiguration getMyDataFile() {
 }
 ```
 
-* new CustomConfig(File storageLocation, String usage) - Creates a new instance. The storage location is the direct path to the file and the usage is used to note any errors.
+* _new CustomConfig(File storageLocation, String usage)_ - Creates a new instance. The storage location is the direct path to the file and the usage is used to note any errors.
 * 
 
 PlayerMap
@@ -106,9 +106,9 @@ User
 ----
 AllAssets' player data is stored using the User class. By using it, you can get data from a user and set data for that user.
 There are three ways to get User instances:
-* new User(Player);
-* new User(OfflinePlayer);
-* new User(UUID);
+* _new User(Player);_
+* _new User(OfflinePlayer);_
+* _new User(UUID);_
 AllAssets also uses the OfflineUser class to get an instance of a user that is offline. Note that some methods that are available in the User class cannot by used in the OfflineUser class (such as the users ping).
 
 UUIDAPI
@@ -133,10 +133,10 @@ new PlayerRequest(Player from, Player to, String information, long timeout)
 Paginator
 ---------
 The Paginator class is designed to print large amounts of information to a user, by using a page system. 
-* new Paginator(List<String> textData, int pageSize, String usage) - Creates a new paginator instance. The text data is the list containing each line of information. The page size is the size of the page (For example, a page size of 10 will display 10 elements per page). The usage is the name of the function, for example "Help index".
-* send(CommandSender sender, int pageNumber) - Sends the page number (pageNumber) to the sender.
-* getMaxPageNumber() - Returns the maximum page number
-* getPageNumberShown() - Can be used after showing a page to a user. Once a page has been shown, this value updates to the page number that was last sent to the user.
+* _new Paginator(List<String> textData, int pageSize, String usage)_ - Creates a new paginator instance. The text data is the list containing each line of information. The page size is the size of the page (For example, a page size of 10 will display 10 elements per page). The usage is the name of the function, for example "Help index".
+* _send(CommandSender sender, int pageNumber)_ - Sends the page number (pageNumber) to the sender.
+* _getMaxPageNumber()_ - Returns the maximum page number
+* _getPageNumberShown()_ - Can be used after showing a page to a user. Once a page has been shown, this value updates to the page number that was last sent to the user.
 
 ```java
 List<String> infoToPrint = Arrays.asList(new String[] { "This is info 1", "This is info 2" });
