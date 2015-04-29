@@ -7,7 +7,7 @@ The AllAssets API has been designed for ease of use and to allow your plugin to 
 
 Index
 -----
-##### API
+##### API - Main core external features
 * [FireworkBuilder](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#fireworkbuilder) - Creates fireworks
 * [ItemBuilder](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#itembuilder) - Creates items
 * [Debugger](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#debugger) - Debugs info by printing data into the console
@@ -19,6 +19,9 @@ Index
 * [PlayerRequest](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#playerrequest) - Send requests with accept/decline system
 * [Paginator](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#paginator) - Send lengthy texts in pages
 * [CustomItem](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#customitem) - Creates custom item actions when clicked
+
+##### Utils - Extra classes with extra functions
+* [TextUtils](https://github.com/Skepter/AllAssets/blob/master/Developer%20documentation.md#textutils)
 
 FireworkBuilder
 -----------------
@@ -144,7 +147,7 @@ new Paginator(infoToPrint, 10, "Prints example usage").send(player, 0);
 ```
 
 CustomItem
----------------
+----------
 A class which is used to easily create custom items, which can then be spawned in with the /spawnitem command. This is an abstract class, so cannot be used on its own, however it can be extended by another class to handle the features of the item. Example usage creating a custom item:
 
 ```java
@@ -175,3 +178,14 @@ public SuperPickaxe(Javaplugin plugin, ItemStack is, String name, String permiss
 	super(plugin, is, name, permission);
 }
 ```
+
+TextUtils
+---------
+The TextUtils class manages Strings and formats chat.
+* _arrayContains(String[] arr, String s)_ - Checks if an array contains a string
+* _getMsgStringFromArgs(String[] args, int indexBegin, int indexEnd)_ - Gets the message String from an array of arguments (Useful for parsing text info from a command)
+* _isInteger(String s)_ - Checks if a String is an integer
+* _join(String[] arr, String seperator)_ - Joins the array into a string using the seperator. For example: {"Hello", "World"} with seperator " + " returns "Hello + World"
+* _listToString(List<String> list)_ - Converts a list of Strings into a single string with the contents of the list
+* _booleanToString(boolean b)_ - Turns a boolean into "yes" or "no" with colour (green for yes, red for no)
+* _levenshteinDistance(String str1, String str2)_ - Calculates the [Levenshtein Distance](en.wikipedia.org/wiki/Levenshtein_distance) of two Strings
