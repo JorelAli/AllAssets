@@ -189,12 +189,12 @@ public class AAEco implements Economy {
 	@Override
 	//format into readable string
 	public String format(final double value) {
-		if(value == 1)
-			return MathUtils.toInt(value) + currencyNameSingular();
-		else if(MathUtils.isInt(value))
-			return MathUtils.toInt(value) + currencyNamePlural();
+		if (value == 1)
+			return MathUtils.toInt(value) + " " + currencyNameSingular();
+		else if (MathUtils.isInt(value))
+			return MathUtils.toInt(value) + " " + currencyNamePlural();
 		else
-			return value + currencyNamePlural();
+			return value + " " + currencyNamePlural();
 	}
 
 	@Override
