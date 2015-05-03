@@ -26,6 +26,7 @@ import io.github.skepter.allassets.api.OfflineUser;
 import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.reflection.VaultReflection;
+import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -188,7 +189,12 @@ public class AAEco implements Economy {
 	@Override
 	//format into readable string
 	public String format(final double value) {
-		return String.valueOf(value);
+		if(value == 1)
+			return MathUtils.toInt(value) + currencyNameSingular();
+		else if(MathUtils.isInt(value))
+			return MathUtils.toInt(value) + currencyNamePlural();
+		else
+			return value + currencyNamePlural();
 	}
 
 	@Override

@@ -30,6 +30,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
+import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -54,34 +55,26 @@ public class CommandSetBalance {
 					printHelp(player);
 					return;
 				case 1:
-					if(!TextUtils.isInteger(args.getArgs()[0])){
+					if (!TextUtils.isInteger(args.getArgs()[0])) {
 						ErrorUtils.notAnInteger(player);
 						return;
 					} else {
-						double current = AllAssets.instance().economy.getBalance(player);
 						double target = Integer.parseInt(args.getArgs()[0]);
-						if(target < current)
-							AllAssets.instance().economy.withdrawPlayer(player, current - target);
-						else if(target > current)
-							AllAssets.instance().economy.depositPlayer(player, current - target);
-						player.sendMessage(Strings.TITLE + "Successfully changed balance to " + target);
+						new User(player).setBalance(target);
+						player.sendMessage(Strings.TITLE + "Successfully changed balance to " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(player)));
 					}
 				case 2:
 					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 					if (target != null) {
-						double current = AllAssets.instance().economy.getBalance(player);
 						double targetBalance = Integer.parseInt(args.getArgs()[0]);
-						if(targetBalance < current)
-							AllAssets.instance().economy.withdrawPlayer(target, current - targetBalance);
-						else if(targetBalance > current)
-							AllAssets.instance().economy.depositPlayer(target, current - targetBalance);
-						player.sendMessage(Strings.TITLE + "Successfully changed balance to " + targetBalance);
+						new User(target).setBalance(targetBalance);
+						player.sendMessage(Strings.TITLE + "Successfully changed " + target.getName() + "'s balance to " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(target)));
 					}
 					return;
 			}
-			player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
+		player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
 	}
-	
+
 	@Help(name = "SetBalance")
 	public void printHelp(final CommandSender sender) {
 		TextUtils.printHelp(sender, "SetBalance", "/setbalance <balance> - Sets your balance", "/setbalance <player> <balance> - Sets another player's balance");

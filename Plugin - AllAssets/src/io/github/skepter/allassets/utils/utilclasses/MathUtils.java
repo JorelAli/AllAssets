@@ -62,7 +62,11 @@ public class MathUtils {
 	}
 
 	public static int toInt(final double value) {
-		return new Double(value).intValue();
+		return (int) value;
+	}
+
+	public static boolean isInt(final double d) {
+		return (d % 1 == 0);
 	}
 
 	/** Rounds a number to a certain amount of decimal places */

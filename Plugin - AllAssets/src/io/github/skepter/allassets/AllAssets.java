@@ -621,7 +621,7 @@ public class AllAssets extends JavaPlugin {
 
 	private void postLoad() {
 		new VaultReflection().loadAAChat();
-		//		new VaultReflection().loadAAEco();
+        new VaultReflection().loadAAEco();
 	}
 
 	/* Easy system to add listeners */
