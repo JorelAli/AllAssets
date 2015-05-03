@@ -85,7 +85,7 @@ public class OfflineUser {
 	public Location getLastLoc() {
 		return LocationSerializer.LocFromString(playerData.getDataFile().getString("lastLoc"));
 	}
-
+	
 	public void setLastLoc(final Location loc) {
 		playerData.getDataFile().set("lastLoc", LocationSerializer.LocToString(loc));
 		playerData.saveDataFile();
@@ -231,5 +231,14 @@ public class OfflineUser {
 	
 	public String getSuffix() {
 		return playerData.getDataFile().getString("suffix");
+	}
+	
+	public void setBalance(double balance) {
+		playerData.getDataFile().set("balance", balance);
+		playerData.saveDataFile();
+	}
+	
+	public double getBalance() {
+		return playerData.getDataFile().getDouble("balance");
 	}
 }

@@ -286,6 +286,14 @@ public class User {
 		return playerData.getDataFile().getString("suffix");
 	}
 	
+	public void setBalance(double balance) {
+		playerData.getDataFile().set("balance", balance);
+		playerData.saveDataFile();
+	}
+	
+	public double getBalance() {
+		return playerData.getDataFile().getDouble("balance");
+	}
 
 	/*
 	 * last play = maths with ticks lived? add feature where you can set

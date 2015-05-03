@@ -50,6 +50,7 @@ public class _CommandTemplate {
 					if (target != null) {
 
 					}
+					return;
 			}
 		return;
 	}

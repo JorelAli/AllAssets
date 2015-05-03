@@ -68,6 +68,7 @@ import io.github.skepter.allassets.commands.debug.CommandDebug;
 import io.github.skepter.allassets.commands.debug.CommandPing;
 import io.github.skepter.allassets.commands.economy.CommandBalance;
 import io.github.skepter.allassets.commands.economy.CommandBalancetop;
+import io.github.skepter.allassets.commands.economy.CommandSetBalance;
 import io.github.skepter.allassets.commands.fun.CommandDiscoArmor;
 import io.github.skepter.allassets.commands.fun.CommandDisguise;
 import io.github.skepter.allassets.commands.fun.CommandFakeDeop;
@@ -145,8 +146,8 @@ import io.github.skepter.allassets.sqlite.SQLiteLoader;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.SuperPickaxe;
 import io.github.skepter.allassets.utils.Files;
-import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.Files.Directory;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 
 import java.io.File;
@@ -276,6 +277,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandSuffix(framework);
 			new CommandRepair(framework);
 			new CommandBreak(framework);
+			new CommandSetBalance(framework);
 
 			//Listeners
 //			r(new CommandBan(framework));
