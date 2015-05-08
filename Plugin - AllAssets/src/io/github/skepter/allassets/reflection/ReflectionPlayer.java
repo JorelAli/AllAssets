@@ -23,8 +23,11 @@ package io.github.skepter.allassets.reflection;
 
 import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import org.bukkit.Location;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
 public class ReflectionPlayer {
@@ -70,6 +73,20 @@ public class ReflectionPlayer {
 			new PacketBuilder(player, PacketType.PLAY_OUT_CHAT).set("a", new MinecraftReflectionUtils(player).chatSerialize(message)).set("b", (byte) 2).send();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void openSign(Sign sign) {
+		try {
+			Field field = sign.getClass().getDeclaredField("sign");
+			field.setAccessible(true);
+			Object tileEntity = field.get(sign);
+			tileEntity.getClass().getDeclaredField("isEditable").set(tileEntity, true);
+			Location loc = sign.getLocation();
+			new PacketBuilder(player, PacketType.PLAY_OUT_OPEN_SIGN_EDITOR).set("a", new MinecraftReflectionUtils().getBlockPosition(loc)).send();
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
 	}
 

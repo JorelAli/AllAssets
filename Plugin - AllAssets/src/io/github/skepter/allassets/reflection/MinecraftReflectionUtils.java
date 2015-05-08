@@ -24,6 +24,7 @@
 package io.github.skepter.allassets.reflection;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /** ReflectionUtils created entirely by Skepter. I use this because it's easier
@@ -72,6 +73,7 @@ public class MinecraftReflectionUtils {
 	final public Object emptyPacketPlayOutOpenWindow;
 	final public Object emptyPacketPlayOutEntityDestroy;
 	final public Object emptyPacketPlayOutGameStateChange;
+	final public Object emptyPacketPlayOutOpenSignEditor;
 
 	public MinecraftReflectionUtils() throws Exception {
 
@@ -106,6 +108,7 @@ public class MinecraftReflectionUtils {
 		emptyPacketPlayOutOpenWindow = getNMSClass("PacketPlayOutOpenWindow").newInstance();
 		emptyPacketPlayOutEntityDestroy = getNMSClass("PacketPlayOutEntityDestroy").newInstance();
 		emptyPacketPlayOutGameStateChange = getNMSClass("PacketPlayOutGameStateChange").newInstance();
+		emptyPacketPlayOutOpenSignEditor = getNMSClass("PacketPlayOutGameStateChange").newInstance();
 	}
 
 	/** Creates a new instance of ReflectionUtils and prepares the classes and
@@ -154,12 +157,18 @@ public class MinecraftReflectionUtils {
 		emptyPacketPlayOutOpenWindow = getNMSClass("PacketPlayOutOpenWindow").newInstance();
 		emptyPacketPlayOutEntityDestroy = getNMSClass("PacketPlayOutEntityDestroy").newInstance();
 		emptyPacketPlayOutGameStateChange = getNMSClass("PacketPlayOutGameStateChange").newInstance();
+		emptyPacketPlayOutOpenSignEditor = getNMSClass("PacketPlayOutGameStateChange").newInstance();
 
 	}
 
 	/** Serialises a String (JSON stuff) */
 	public Object chatSerialize(final String string) throws Exception {
 		return emptyChatSerializer.getClass().getMethod("a", String.class).invoke(emptyChatSerializer, string);
+	}
+	
+	/** Converts location to blockposition*/
+	public Object getBlockPosition(final Location loc) throws Exception {
+		return getNMSClass("BlockPosition").getConstructor(double.class, double.class, double.class).newInstance(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
 	}
 
 	/** Retrieves a net.minecraft.server class by using the dynamic package from
