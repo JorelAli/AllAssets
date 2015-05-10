@@ -48,7 +48,7 @@ public class CommandSignEdit {
 	@CommandHandler(name = "signedit", aliases = { "se" }, permission = "signedit", description = "Allows you to edit signs")
 	public void command(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
-		if (player != null)
+		if (player != null) 
 			if (args.getArgs().length > 1) {
 				if (TextUtils.isInteger(args.getArgs()[0]))
 					if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {

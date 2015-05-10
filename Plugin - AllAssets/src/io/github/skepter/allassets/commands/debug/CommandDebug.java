@@ -43,8 +43,8 @@ import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.VanishPlayersItemStack;
 import io.github.skepter.allassets.utils.EncryptionUtils;
 import io.github.skepter.allassets.utils.Files;
-import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.Files.Directory;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
@@ -75,6 +75,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Sign;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -222,6 +223,18 @@ public class CommandDebug implements Listener {
 				sender.sendMessage(ChatColor.AQUA + "    " + total + "          Total");
 			}
 		});
+	}
+	
+	@CommandHandler(name = "debug.signedit", permission = "debug", description = "SignEdit packet")
+	public void signedit(final CommandArgs args) {
+		try {
+			Player player = args.getPlayer();
+			if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
+				final Sign sign = (Sign) PlayerUtils.getTargetBlock(player).getState();
+				new ReflectionPlayer(player).openSign(sign);
+			}
+		} catch (final Exception e) {
+		}
 	}
 
 	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
