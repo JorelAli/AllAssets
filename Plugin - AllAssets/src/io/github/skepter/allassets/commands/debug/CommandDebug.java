@@ -513,12 +513,12 @@ public class CommandDebug implements Listener {
 	}
 
 	/* Used to debug the Log feature */
-	//	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")
-	//	public void error(final CommandArgs args) {
-	//		final String[] arr = { "bob", "mark" };
-	//		final String s = arr[4];
-	//		AllAssets.instance().getServer().broadcastMessage(s);
-	//	}
+		@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")
+		public void error(final CommandArgs args) {
+			final String[] arr = { "bob", "mark" };
+			final String s = arr[4];
+			Bukkit.getServer().broadcastMessage(s);
+		}
 
 	//will be removed in future
 	//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test")
