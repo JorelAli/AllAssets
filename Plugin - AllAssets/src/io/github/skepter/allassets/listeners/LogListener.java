@@ -50,21 +50,19 @@ public class LogListener implements Filter {
 				final String msg1 = event.getMessage().toString();
 				final String msg = msg1.substring(22, msg1.length() - 1);
 				for (final UUID u : CommandConsoleLog.players)
-					Bukkit.getScheduler().runTask(AllAssets.instance(), new Runnable() {
-						@Override
-						public void run() {
-							Bukkit.getPlayer(u).sendMessage(Strings.customTitle("Console") + ChatColor.WHITE + " " + ChatColor.GRAY + msg);
-						}
-					});
-				if (msg.contains("at ") && msg.contains(".java:"))
+					sendConsole(u, msg);
+				if (msg.contains("at ") && msg.contains(".java:")) {
 					if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
 						return;
 					else
 						CommandLog.addLog(Strings.HOUSE_STYLE_COLOR + stringBetween(msg, "(", ")"), LogType.ERROR);
-				if (msg.contains("Exception"))
+					return;
+				} else if (msg.contains("Exception")) {
 					CommandLog.addLog(msg, LogType.ERROR);
+					return;
+				}
 			}
-		});		
+		});
 		return null;
 	}
 
@@ -72,6 +70,10 @@ public class LogListener implements Filter {
 		for (final Player p : Bukkit.getOnlinePlayers())
 			if (p.hasPermission("AllAssets.notify"))
 				p.sendMessage(s);
+	}
+
+	private void sendConsole(final UUID u, String message) {
+		Bukkit.getPlayer(u).sendMessage(Strings.customTitle("Console") + ChatColor.WHITE + " " + ChatColor.GRAY + message);
 	}
 
 	/* Sometimes it's a bit fussy and so moving it to use this method should fix that problem. */
