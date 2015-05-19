@@ -28,6 +28,7 @@ import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 
 import org.bukkit.entity.Player;
 
+@Deprecated
 public class PingTask implements Runnable {
 
 	private final Player player;

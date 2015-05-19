@@ -4,6 +4,7 @@ import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.serializers.InventorySerializer;
 import io.github.skepter.allassets.serializers.LocationSerializer;
+import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +46,16 @@ public class User implements IUser {
 		oPlayer = player;
 		playerData = new PlayerData(oPlayer);
 		isOnline = false;
+	}
+
+	public User(String playerName) {
+		OfflinePlayer p = PlayerUtils.getOfflinePlayerFromString(playerName);
+		if(p != null) {
+			player = null;
+			oPlayer = p;
+			playerData = new PlayerData(oPlayer);
+			isOnline = false;
+		}
 	}
 
 	@Override
@@ -231,6 +242,16 @@ public class User implements IUser {
 	}
 
 	@Override
+	public void setTimeSinceLastPlayed(long time) {
+		playerData.set("lastTimePlayed", time);
+	}
+
+	@Override
+	public void setTotalTimePlayed(long time) {
+		playerData.set("totalTimePlayed", time);
+	}
+
+	@Override
 	public void setPrefix(String prefix) {
 		playerData.set("prefix", prefix);
 	}
@@ -259,5 +280,4 @@ public class User implements IUser {
 	public void setBalance(double balance) {
 		playerData.set("balance", balance);
 	}
-
 }

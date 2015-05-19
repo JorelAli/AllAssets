@@ -29,7 +29,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.users.OldUser;
+import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
@@ -51,9 +51,9 @@ public class CommandTphere {
 			}
 			final Player t = PlayerGetter.getTarget(player, args.getArgs()[0]);
 			if (t != null) {
-				final OldUser user = new OldUser(player);
+				final User user = new User(player);
 				user.setLastLoc();
-				final OldUser target = new OldUser(t);
+				final User target = new User(t);
 				if (target.canTp()) {
 					t.teleport(player);
 					player.sendMessage(Strings.TITLE + "Successfully teleported " + t.getName() + " to you ");
@@ -62,6 +62,9 @@ public class CommandTphere {
 					ErrorUtils.tptoggle(player, args.getArgs()[0]);
 					return;
 				}
+			} else {
+				ErrorUtils.playerNotFound(player, args.getArgs()[0]);
+				return;
 			}
 		}
 	}

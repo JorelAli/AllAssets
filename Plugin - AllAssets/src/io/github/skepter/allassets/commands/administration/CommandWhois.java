@@ -29,7 +29,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.users.OldUser;
+import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.commandlisteners.CommandGod;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -55,7 +55,7 @@ public class CommandWhois {
 					return;
 				case 1:
 					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
-					final OldUser user = new OldUser(target);
+					final User user = new User(target);
 					player.sendMessage(TextUtils.title("Whois " + target.getName()));
 					TextUtils.printInformation(player, "UUID", Seperator.COLON, target.getUniqueId().toString());
 					TextUtils.printInformation(player, "Total time played", Seperator.COLON, TimeUtils.formatDate(user.getTotalTimePlayed()));

@@ -25,12 +25,11 @@ package io.github.skepter.allassets.listeners;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
-import io.github.skepter.allassets.api.users.OldUser;
+import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.UUIDData;
 import io.github.skepter.allassets.misc.NotificationsBoard;
-import io.github.skepter.allassets.serializers.InventorySerializer;
 import io.github.skepter.allassets.tasks.AnyLeashTask;
 import io.github.skepter.allassets.tasks.InstantRespawnTask;
 import io.github.skepter.allassets.utils.Strings;
@@ -85,18 +84,18 @@ public class PlayerListener implements Listener {
 
 		UUIDData.setData(event.getPlayer());
 
-		final OldUser user = new OldUser(event.getPlayer());
+		final User user = new User(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
-		user.setCanTP(true);
-		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
-			final List<String> ips = user.IPs();
+		user.setTpStatus(true);
+		if (!user.getStoredIps().contains(event.getPlayer().getAddress().getHostName())) {
+			final List<String> ips = user.getStoredIps();
 			if (!ips.isEmpty())
 				CommandLog.addLog(event.getPlayer().getName() + " joined with a new IP", LogType.OTHER);
 			ips.add(event.getPlayer().getAddress().getHostName());
-			user.setIPs(ips);
+			user.setIps(ips);
 		}
 
-		user.refreshPing();
+		user.getPing();
 
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 
@@ -127,8 +126,8 @@ public class PlayerListener implements Listener {
 	public static void leaveAction(Player player) {
 		player.resetPlayerTime();
 		player.resetPlayerWeather();
-		final OldUser user = new OldUser(player);
-		user.setTimeSinceLastPlay(System.currentTimeMillis());
+		final User user = new User(player);
+		user.setTimeSinceLastPlayed(System.currentTimeMillis());
 		final Map<UUID, Long> map = AllAssets.instance().tempTimeMap;
 		if (map.containsKey(player.getUniqueId())) {
 			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - map.get(player.getUniqueId())));
@@ -155,17 +154,17 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void playerTeleport(final PlayerTeleportEvent event) {
-		final OldUser user = new OldUser(event.getPlayer());
+		final User user = new User(event.getPlayer());
 		user.setLastLoc(event.getFrom());
 	}
 
 	@EventHandler
 	public void playerDeath(final PlayerDeathEvent event) {
-		final OldUser user = new OldUser(event.getEntity());
+		final User user = new User(event.getEntity());
 		user.setLastLoc(event.getEntity().getLocation());
 
 		final Inventory inv = event.getEntity().getInventory();
-		user.setLastInventory(InventorySerializer.toString(inv));
+		user.setLastInventory(inv);
 
 		if (ConfigHandler.features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();

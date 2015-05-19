@@ -72,7 +72,11 @@ public interface IUser {
 	
 	long getTimeSinceLastPlay();
 	
+	void setTimeSinceLastPlayed(long time);
+	
 	long getTotalTimePlayed();
+	
+	void setTotalTimePlayed(long time);
 	
 	//Chat
 	

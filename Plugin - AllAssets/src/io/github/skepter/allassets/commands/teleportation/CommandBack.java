@@ -29,7 +29,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.users.OldUser;
+import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.utils.Strings;
 
 import org.bukkit.Location;
@@ -45,7 +45,7 @@ public class CommandBack {
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			final OldUser user = new OldUser(player);
+			final User user = new User(player);
 			final Location l = player.getLocation();
 			player.teleport(user.getLastLoc());
 			user.setLastLoc(l);

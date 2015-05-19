@@ -22,8 +22,7 @@
 package io.github.skepter.allassets.vault.economy;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.api.users.OldOfflineUser;
-import io.github.skepter.allassets.api.users.OldUser;
+import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.reflection.VaultReflection;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
@@ -163,7 +162,7 @@ public class AAEco implements Economy {
 
 	@Override
 	public EconomyResponse depositPlayer(final OfflinePlayer playerName, final double value) {
-		new OldOfflineUser(playerName).setBalance(new OldOfflineUser(playerName).getBalance() + value);
+		new User(playerName).setBalance(new User(playerName).getBalance() + value);
 		return new EconomyResponse(value, getBalance(playerName), ResponseType.SUCCESS, name + " Error!");
 	}
 
@@ -173,10 +172,9 @@ public class AAEco implements Economy {
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public EconomyResponse depositPlayer(final String playerName, final double value) {
-		new OldUser(playerName).setBalance(new OldUser(playerName).getBalance() + value);
+		new User(playerName).setBalance(new User(playerName).getBalance() + value);
 		return new EconomyResponse(value, getBalance(playerName), ResponseType.SUCCESS, name + " Error!");
 	}
 
@@ -204,7 +202,7 @@ public class AAEco implements Economy {
 
 	@Override
 	public double getBalance(final OfflinePlayer playerName) {
-		return new OldOfflineUser(playerName).getBalance();
+		return new User(playerName).getBalance();
 	}
 
 	@Override
@@ -213,10 +211,9 @@ public class AAEco implements Economy {
 		return 0;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public double getBalance(final String playerName) {
-		return new OldUser(playerName).getBalance();
+		return new User(playerName).getBalance();
 	}
 
 	@Override
@@ -317,7 +314,7 @@ public class AAEco implements Economy {
 
 	@Override
 	public EconomyResponse withdrawPlayer(final OfflinePlayer playerName, final double value) {
-		new OldOfflineUser(playerName).setBalance(new OldOfflineUser(playerName).getBalance() - value);
+		new User(playerName).setBalance(new User(playerName).getBalance() - value);
 		return new EconomyResponse(value, getBalance(playerName), ResponseType.SUCCESS, name + " Error!");
 	}
 
@@ -327,10 +324,9 @@ public class AAEco implements Economy {
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public EconomyResponse withdrawPlayer(final String playerName, final double value) {
-		new OldUser(playerName).setBalance(new OldUser(playerName).getBalance() - value);
+		new User(playerName).setBalance(new User(playerName).getBalance() - value);
 		return new EconomyResponse(value, getBalance(playerName), ResponseType.SUCCESS, name + " Error!");
 	}
 
