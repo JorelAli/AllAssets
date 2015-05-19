@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.api.OfflineUser;
+import io.github.skepter.allassets.api.users.OldOfflineUser;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.UUIDData;
 
@@ -42,7 +42,7 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void multiplayerPing(final ServerListPingEvent event) {
 		for (final UUID u : UUIDData.getValues()) {
-			final OfflineUser user = new OfflineUser(Bukkit.getOfflinePlayer(u));
+			final OldOfflineUser user = new OldOfflineUser(Bukkit.getOfflinePlayer(u));
 			try {
 				if (user.IPs().contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 					final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
@@ -61,7 +61,7 @@ public class ServerListingListener implements Listener {
 		final String save = event.getAddress().toString().substring(1, event.getAddress().toString().length());
 
 		for (final UUID u : UUIDData.getValues()) {
-			final OfflineUser user = new OfflineUser(Bukkit.getOfflinePlayer(u));
+			final OldOfflineUser user = new OldOfflineUser(Bukkit.getOfflinePlayer(u));
 			try {
 				if (user.getPlayer().getName().equals(event.getName()))
 					user.setIPs(Arrays.asList(new String[] { save }));

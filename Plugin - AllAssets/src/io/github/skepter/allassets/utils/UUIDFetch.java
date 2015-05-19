@@ -24,7 +24,7 @@
 package io.github.skepter.allassets.utils;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.tasks.UUIDFetchTask;
 
 import java.util.HashMap;
@@ -70,8 +70,8 @@ public class UUIDFetch {
 		return Bukkit.getPlayer(uuid);
 	}
 
-	public User getUser() {
-		return new User(uuid);
+	public OldUser getUser() {
+		return new OldUser(uuid);
 	}
 
 	public static void cacheData() {

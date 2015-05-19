@@ -24,10 +24,10 @@ package io.github.skepter.allassets.commandlisteners;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.api.OfflineUser;
 import io.github.skepter.allassets.api.PlayerRequest;
 import io.github.skepter.allassets.api.PlayerRequest.PlayerRequestEvent;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldOfflineUser;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.Utils;
@@ -71,10 +71,10 @@ public class CommandFriend implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		final User user = new User(player);
+		final OldUser user = new OldUser(player);
 		final Set<UUID> friends = user.getFriendList();
 		for (final UUID u : friends) {
-			final OfflineUser offlineFriend = new OfflineUser(u);
+			final OldOfflineUser offlineFriend = new OldOfflineUser(u);
 			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " + offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
 		}
 	}
@@ -100,7 +100,7 @@ public class CommandFriend implements Listener {
 	@EventHandler
 	public void onAccept(final PlayerRequestEvent event) {
 		if (event.getResult()) {
-			final User user = new User(event.getFrom());
+			final OldUser user = new OldUser(event.getFrom());
 			if (!user.getFriendList().isEmpty())
 				user.setFriendList((Set<UUID>) Utils.add(user.getFriendList(), event.getTo().getUniqueId()));
 			else

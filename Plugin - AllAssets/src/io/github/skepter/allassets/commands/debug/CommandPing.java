@@ -29,7 +29,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.utils.Strings;
 
 import org.bukkit.entity.Player;
@@ -44,7 +44,7 @@ public class CommandPing {
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
-			player.sendMessage(Strings.TITLE + "Your ping is " + new User(player).getPing() + "ms");
+			player.sendMessage(Strings.TITLE + "Your ping is " + new OldUser(player).getPing() + "ms");
 		return;
 	}
 }

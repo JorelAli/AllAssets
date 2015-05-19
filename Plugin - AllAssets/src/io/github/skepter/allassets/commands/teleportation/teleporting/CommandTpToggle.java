@@ -29,7 +29,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.utils.Strings;
 
 import org.bukkit.entity.Player;
@@ -44,7 +44,7 @@ public class CommandTpToggle {
 	public void command(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			final User user = new User(player);
+			final OldUser user = new OldUser(player);
 			if (user.canTp()) {
 				user.setCanTP(false);
 				player.sendMessage(Strings.TITLE + "TpToggle off. Players can not teleport to you");

@@ -19,7 +19,7 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-package io.github.skepter.allassets.api;
+package io.github.skepter.allassets.api.users;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.config.PlayerData;
@@ -38,17 +38,17 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
 
-public class OfflineUser {
+public class OldOfflineUser {
 
 	OfflinePlayer player;
 	PlayerData playerData;
 
-	public OfflineUser(final OfflinePlayer p) {
+	public OldOfflineUser(final OfflinePlayer p) {
 		player = p;
 		playerData = new PlayerData(p);
 	}
 
-	public OfflineUser(final String s) {
+	public OldOfflineUser(final String s) {
 		try {
 			player = PlayerUtils.getOfflinePlayerFromStringExact(s);
 		} catch (final Exception e) {
@@ -57,7 +57,7 @@ public class OfflineUser {
 		playerData = new PlayerData(player);
 	}
 
-	public OfflineUser(final UUID u) {
+	public OldOfflineUser(final UUID u) {
 		try {
 			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 				if (u.equals(p.getUniqueId())) {
@@ -75,10 +75,10 @@ public class OfflineUser {
 	}
 
 	/** Gets a list of every user's file and loads then as OfflineUsers */
-	public static List<OfflineUser> offlineUsers() {
-		final List<OfflineUser> userList = new ArrayList<OfflineUser>();
+	public static List<OldOfflineUser> offlineUsers() {
+		final List<OldOfflineUser> userList = new ArrayList<OldOfflineUser>();
 		for (final String s : PlayerUtils.getAllOfflinePlayerNames())
-			userList.add(new OfflineUser(s));
+			userList.add(new OldOfflineUser(s));
 		return userList;
 	}
 

@@ -22,7 +22,7 @@
 package io.github.skepter.allassets.vault.chat;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.api.OfflineUser;
+import io.github.skepter.allassets.api.users.OldOfflineUser;
 import io.github.skepter.allassets.reflection.VaultReflection;
 
 import java.util.logging.Logger;
@@ -96,22 +96,22 @@ public class AAChat extends Chat {
 
 	@Override
 	public String getPlayerPrefix(final String world, final String player) {
-		return new OfflineUser(player).getPrefix();
+		return new OldOfflineUser(player).getPrefix();
 	}
 
 	@Override
 	public void setPlayerPrefix(final String world, final String player, final String prefix) {
-		new OfflineUser(player).setPrefix(prefix);
+		new OldOfflineUser(player).setPrefix(prefix);
 	}
 
 	@Override
 	public String getPlayerSuffix(final String world, final String player) {
-		return new OfflineUser(player).getSuffix();
+		return new OldOfflineUser(player).getSuffix();
 	}
 
 	@Override
 	public void setPlayerSuffix(final String world, final String player, final String suffix) {
-		new OfflineUser(player).setSuffix(suffix);
+		new OldOfflineUser(player).setSuffix(suffix);
 	}
 
 	@Override

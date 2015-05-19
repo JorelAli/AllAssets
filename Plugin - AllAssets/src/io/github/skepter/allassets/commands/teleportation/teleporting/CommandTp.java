@@ -29,8 +29,8 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.OfflineUser;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldOfflineUser;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
@@ -58,8 +58,8 @@ public class CommandTp {
 				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
 				return;
 			}
-			final User user = new User(player);
-			final OfflineUser target = new OfflineUser(offlineTarget);
+			final OldUser user = new OldUser(player);
+			final OldOfflineUser target = new OldOfflineUser(offlineTarget);
 			if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
 				user.setLastLoc();
 				if (onlineTarget == null) {

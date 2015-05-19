@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.tasks;
 
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 
 import org.bukkit.entity.Player;
@@ -39,7 +39,7 @@ public class PingTask implements Runnable {
 	@Override
 	public void run() {
 		try {
-			User.ping = new MinecraftReflectionUtils(player).ping;
+			OldUser.ping = new MinecraftReflectionUtils(player).ping;
 		} catch (final Throwable t) {
 			t.printStackTrace();
 		}

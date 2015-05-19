@@ -24,8 +24,8 @@
 package io.github.skepter.allassets.listeners;
 
 import io.github.skepter.allassets.AllAssets;
-import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.UUIDData;
@@ -85,7 +85,7 @@ public class PlayerListener implements Listener {
 
 		UUIDData.setData(event.getPlayer());
 
-		final User user = new User(event.getPlayer());
+		final OldUser user = new OldUser(event.getPlayer());
 		user.setJoinCount(user.getJoinCount() + 1);
 		user.setCanTP(true);
 		if (!user.IPs().contains(event.getPlayer().getAddress().getHostName())) {
@@ -127,7 +127,7 @@ public class PlayerListener implements Listener {
 	public static void leaveAction(Player player) {
 		player.resetPlayerTime();
 		player.resetPlayerWeather();
-		final User user = new User(player);
+		final OldUser user = new OldUser(player);
 		user.setTimeSinceLastPlay(System.currentTimeMillis());
 		final Map<UUID, Long> map = AllAssets.instance().tempTimeMap;
 		if (map.containsKey(player.getUniqueId())) {
@@ -155,13 +155,13 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void playerTeleport(final PlayerTeleportEvent event) {
-		final User user = new User(event.getPlayer());
+		final OldUser user = new OldUser(event.getPlayer());
 		user.setLastLoc(event.getFrom());
 	}
 
 	@EventHandler
 	public void playerDeath(final PlayerDeathEvent event) {
-		final User user = new User(event.getEntity());
+		final OldUser user = new OldUser(event.getEntity());
 		user.setLastLoc(event.getEntity().getLocation());
 
 		final Inventory inv = event.getEntity().getInventory();

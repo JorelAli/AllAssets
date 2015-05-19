@@ -21,8 +21,8 @@
  ******************************************************************************/
 package io.github.skepter.allassets;
 
-import io.github.skepter.allassets.api.User;
 import io.github.skepter.allassets.api.builders.ItemBuilder;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.commandlisteners.CommandAFK;
 import io.github.skepter.allassets.commandlisteners.CommandBind;
 import io.github.skepter.allassets.commandlisteners.CommandCommandBlock;
@@ -577,7 +577,7 @@ public class AllAssets extends JavaPlugin {
 		/* Update NotificationsBoard for all admins */
 		NotificationsBoard.updateAll();
 
-		for (final User user : User.onlineUsers())
+		for (final OldUser user : OldUser.onlineUsers())
 			user.refreshPing();
 
 		/* Update UUIDData file */

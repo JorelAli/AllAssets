@@ -25,7 +25,7 @@ import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -53,7 +53,7 @@ public class CommandAFK implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		final User user = new User(player);
+		final OldUser user = new OldUser(player);
 		if (!user.isAFK()) {
 			AllAssets.instance().getServer().broadcastMessage(Strings.TITLE + player.getName() + " is now AFK");
 			user.setAFK(true);
@@ -69,7 +69,7 @@ public class CommandAFK implements Listener {
 		//TODO add to the features file
 		final StringBuilder builder = new StringBuilder();
 		for (final Player player : Bukkit.getOnlinePlayers())
-			if (new User(player).isAFK())
+			if (new OldUser(player).isAFK())
 				builder.append(player.getName() + ", ");
 		if (!builder.toString().isEmpty())
 			event.getPlayer().sendMessage(Strings.TITLE + "List of AFK players: " + builder.toString().substring(0, builder.toString().length() - 2));
@@ -79,7 +79,7 @@ public class CommandAFK implements Listener {
 	public void playerHurt(final EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player) event.getEntity();
-			final User user = new User(player);
+			final OldUser user = new OldUser(player);
 			if (ConfigHandler.config().getBoolean("afkProtect") && user.isAFK()) {
 				event.setDamage(0.0D);
 				event.setCancelled(false);
@@ -90,7 +90,7 @@ public class CommandAFK implements Listener {
 	@EventHandler
 	public void playerMove(final PlayerMoveEvent event) {
 		final Player player = event.getPlayer();
-		final User user = new User(player);
+		final OldUser user = new OldUser(player);
 		if (user.isAFK()) {
 			AllAssets.instance().getServer().broadcastMessage(Strings.TITLE + player.getName() + " is no longer AFK");
 			user.setAFK(false);

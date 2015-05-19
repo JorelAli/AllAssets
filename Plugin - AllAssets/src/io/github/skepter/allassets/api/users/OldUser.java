@@ -19,7 +19,7 @@
  * You cannot:
  * * Hold us liable for your actions
  ******************************************************************************/
-package io.github.skepter.allassets.api;
+package io.github.skepter.allassets.api.users;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
@@ -43,13 +43,13 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class User {
+public class OldUser {
 
 	Player player;
 	PlayerData playerData;
 	public static int ping;
 
-	public User(final Player p) {
+	public OldUser(final Player p) {
 		player = p;
 
 		try {
@@ -60,7 +60,7 @@ public class User {
 	}
 
 	@Deprecated
-	public User(final String s) {
+	public OldUser(final String s) {
 		try {
 			player = PlayerUtils.getOnlinePlayerFromString(s);
 		} catch (final Exception e) {
@@ -68,7 +68,7 @@ public class User {
 		playerData = new PlayerData(player);
 	}
 
-	public User(final UUID u) {
+	public OldUser(final UUID u) {
 		try {
 			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 				if (u.equals(p.getUniqueId())) {
@@ -98,9 +98,9 @@ public class User {
 
 	/** Returns the language that is selected in the player's settings (thus
 	 * giving their language) */
-	public String getLanguage(final Player p) {
+	public String getLanguage() {
 		try {
-			switch (new MinecraftReflectionUtils(p).locale.toLowerCase()) {
+			switch (new MinecraftReflectionUtils(player).locale.toLowerCase()) {
 				case "de_de":
 					return "de";
 				case "sv_se":
@@ -117,10 +117,10 @@ public class User {
 	}
 
 	/** Gets a list of every user's file and loads them as OfflineUsers */
-	public static List<User> onlineUsers() {
-		final List<User> userList = new ArrayList<User>();
+	public static List<OldUser> onlineUsers() {
+		final List<OldUser> userList = new ArrayList<OldUser>();
 		for (final Player player : Bukkit.getOnlinePlayers())
-			userList.add(new User(player));
+			userList.add(new OldUser(player));
 		return userList;
 	}
 
@@ -160,11 +160,13 @@ public class User {
 		playerData.saveDataFile();
 	}
 
-	public Location getWaypoint(final Location loc) {
+	//Compass
+	public Location getWaypoint() {
 		final String s = playerData.getDataFile().getString("waypoint");
 		return LocationSerializer.LocFromString(s);
 	}
 
+	//Compass
 	public void setWaypoint(final Location loc) {
 		playerData.getDataFile().set("waypoint", LocationSerializer.LocToString(loc));
 		playerData.saveDataFile();

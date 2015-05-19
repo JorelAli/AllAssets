@@ -30,7 +30,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.User;
+import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -60,14 +60,14 @@ public class CommandSetBalance {
 						return;
 					} else {
 						double target = Integer.parseInt(args.getArgs()[0]);
-						new User(player).setBalance(target);
+						new OldUser(player).setBalance(target);
 						player.sendMessage(Strings.TITLE + "Successfully changed balance to " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(player)));
 					}
 				case 2:
 					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 					if (target != null) {
 						double targetBalance = Integer.parseInt(args.getArgs()[0]);
-						new User(target).setBalance(targetBalance);
+						new OldUser(target).setBalance(targetBalance);
 						player.sendMessage(Strings.TITLE + "Successfully changed " + target.getName() + "'s balance to " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(target)));
 					}
 					return;

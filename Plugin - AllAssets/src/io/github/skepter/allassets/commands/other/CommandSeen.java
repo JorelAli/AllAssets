@@ -25,7 +25,7 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.api.OfflineUser;
+import io.github.skepter.allassets.api.users.OldOfflineUser;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -54,7 +54,7 @@ public class CommandSeen {
 				case 1:
 					OfflinePlayer target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 					if (target != null) {
-						long t = new OfflineUser(target).getTimeSinceLastPlay();
+						long t = new OldOfflineUser(target).getTimeSinceLastPlay();
 						if (t != 0)
 							if(!target.isOnline())
 								player.sendMessage(Strings.TITLE + "Last seen " + target.getName() + " " + TimeUtils.formatDate(System.currentTimeMillis() - (t)));
