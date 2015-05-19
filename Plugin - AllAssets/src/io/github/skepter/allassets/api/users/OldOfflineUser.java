@@ -38,6 +38,10 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.Inventory;
 
+/**
+ * @Deprecated Use the User class
+ */
+@Deprecated
 public class OldOfflineUser {
 
 	OfflinePlayer player;

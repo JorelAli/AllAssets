@@ -43,6 +43,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+/**
+ * @Deprecated Use the User class
+ */
+@Deprecated
 public class OldUser {
 
 	Player player;
