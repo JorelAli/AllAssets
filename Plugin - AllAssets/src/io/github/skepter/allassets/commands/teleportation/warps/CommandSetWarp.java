@@ -51,13 +51,13 @@ public class CommandSetWarp {
 				case 1:
 					//Name is stored differently to the actual name due to capitals and stuff.
 					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.LocToString(player.getLocation()));
+					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
 					player.sendMessage(Strings.TITLE + "Warp " + args.getArgs()[0] + " created successfully");
 					return;
 				default:
 					String description = TextUtils.getMsgStringFromArgs(args.getArgs(), 1, args.getArgs().length);
 					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.LocToString(player.getLocation()));
+					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
 					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".description", description);
 					player.sendMessage(Strings.TITLE + "Warp " + args.getArgs()[0] + " created successfully");
 					return;

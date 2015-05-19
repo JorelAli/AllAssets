@@ -14,9 +14,7 @@ public interface IUser {
 	int getPing();
 	
 	String getLanguage();
-	
-	List<IUser> onlineUsers();
-	
+		
 	Location getLastLoc();
 	
 	void setLastLoc();

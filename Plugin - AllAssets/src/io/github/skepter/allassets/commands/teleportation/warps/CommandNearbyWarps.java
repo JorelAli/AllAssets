@@ -53,7 +53,7 @@ public class CommandNearbyWarps {
 			for (String key : ConfigHandler.warps().getKeys()) {
 				String name = ConfigHandler.warps().getString(key + ".name");
 				String locationString = ConfigHandler.warps().getString(key + ".loc");
-				Location location = LocationSerializer.LocFromString(locationString);
+				Location location = LocationSerializer.locFromString(locationString);
 				double cachedDistance = player.getLocation().distance(location);
 				int distance = (int) Math.round(cachedDistance);
 				if (distance < 256) {

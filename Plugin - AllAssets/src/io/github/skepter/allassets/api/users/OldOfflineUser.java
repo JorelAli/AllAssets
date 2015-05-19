@@ -83,17 +83,17 @@ public class OldOfflineUser {
 	}
 
 	public Location getLastLoc() {
-		return LocationSerializer.LocFromString(playerData.getDataFile().getString("lastLoc"));
+		return LocationSerializer.locFromString(playerData.getDataFile().getString("lastLoc"));
 	}
 	
 	public void setLastLoc(final Location loc) {
-		playerData.getDataFile().set("lastLoc", LocationSerializer.LocToString(loc));
+		playerData.getDataFile().set("lastLoc", LocationSerializer.locToString(loc));
 		playerData.saveDataFile();
 	}
 
 	public Location getHome(final String name) {
 		final String s = playerData.getDataFile().getString("home." + name);
-		return LocationSerializer.LocFromString(s);
+		return LocationSerializer.locFromString(s);
 	}
 
 	public Long getTimeSinceLastPlay() {
@@ -105,17 +105,17 @@ public class OldOfflineUser {
 	}
 
 	public void setHome(final Location loc, final String name) {
-		playerData.getDataFile().set("home." + name, LocationSerializer.LocToString(loc));
+		playerData.getDataFile().set("home." + name, LocationSerializer.locToString(loc));
 		playerData.saveDataFile();
 	}
 
 	public Location getWaypoint(final Location loc) {
 		final String s = playerData.getDataFile().getString("waypoint");
-		return LocationSerializer.LocFromString(s);
+		return LocationSerializer.locFromString(s);
 	}
 
 	public void setWaypoint(final Location loc) {
-		playerData.getDataFile().set("waypoint", LocationSerializer.LocToString(loc));
+		playerData.getDataFile().set("waypoint", LocationSerializer.locToString(loc));
 		playerData.saveDataFile();
 	}
 

@@ -45,4 +45,9 @@ public class PlayerData extends CustomConfig {
 		for (final Player player : Bukkit.getOnlinePlayers())
 			new PlayerData(player).saveDataFile();
 	}
+	
+	public void set(String key, Object value) {
+		getDataFile().set(key, value);
+		saveDataFile();
+	}
 }

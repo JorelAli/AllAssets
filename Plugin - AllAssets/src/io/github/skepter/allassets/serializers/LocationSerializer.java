@@ -32,7 +32,7 @@ import org.bukkit.World;
 public class LocationSerializer {
 
 	/** Converts a Location to a String */
-	public static String LocToString(final Location loc) {
+	public static String locToString(final Location loc) {
 		final String world = loc.getWorld().getName();
 		final double x = MathUtils.round(loc.getX(), 2);
 		final double y = MathUtils.round(loc.getY(), 2);
@@ -43,7 +43,7 @@ public class LocationSerializer {
 	}
 
 	/** Converts a String to a Location */
-	public static Location LocFromString(final String s) {
+	public static Location locFromString(final String s) {
 		final String[] arg = s.split(":");
 		final World world = Bukkit.getWorld(arg[0]);
 		final double x = Double.parseDouble(arg[1]);
@@ -58,7 +58,7 @@ public class LocationSerializer {
 	}
 
 	/** Converts a Location to a String, but doesn't do pitch and yaw */
-	public static String SimpleLocToString(final Location loc) {
+	public static String simpleLocToString(final Location loc) {
 		final String world = loc.getWorld().getName();
 		final double x = loc.getX();
 		final double y = loc.getY();
@@ -67,7 +67,7 @@ public class LocationSerializer {
 	}
 
 	/** Converts a String to a Location, but doesn't do pitch and yaw */
-	public static Location SimpleLocFromString(final String s) {
+	public static Location simpleLocFromString(final String s) {
 		final String[] arg = s.split(":");
 		final World world = Bukkit.getWorld(arg[0]);
 		final double x = Double.parseDouble(arg[1]);

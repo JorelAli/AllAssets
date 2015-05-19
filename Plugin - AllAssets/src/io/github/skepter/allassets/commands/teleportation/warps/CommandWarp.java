@@ -59,7 +59,7 @@ public class CommandWarp {
 					} else {
 						String warpname = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
 						String locationString = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".loc");
-						Location location = LocationSerializer.LocFromString(locationString);
+						Location location = LocationSerializer.locFromString(locationString);
 						player.teleport(location);
 						player.sendMessage(Strings.TITLE + "Teleported to " + warpname);
 						return;
