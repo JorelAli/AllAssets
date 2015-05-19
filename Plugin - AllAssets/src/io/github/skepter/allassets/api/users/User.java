@@ -2,34 +2,55 @@ package io.github.skepter.allassets.api.users;
 
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
+import io.github.skepter.allassets.serializers.InventorySerializer;
 import io.github.skepter.allassets.serializers.LocationSerializer;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public class User implements IUser{
+public class User implements IUser {
 
-	Player player;
-	PlayerData playerData;
-	
+	private Player player;
+	private OfflinePlayer oPlayer;
+	private PlayerData playerData;
+	private boolean isOnline;
+
 	public User(Player player) {
 		this.player = player;
+		oPlayer = Bukkit.getOfflinePlayer(player.getUniqueId());
 		playerData = new PlayerData(player);
+		isOnline = true;
 	}
-	
+
 	public User(UUID uuid) {
-		player = Bukkit.getPlayer(uuid);
+		oPlayer = Bukkit.getOfflinePlayer(uuid);
+		player = null;
+		if (oPlayer.isOnline()) {
+			isOnline = true;
+			player = Bukkit.getPlayer(uuid);
+		}
 		playerData = new PlayerData(player);
 	}
-	
+
+	public User(OfflinePlayer player) {
+		player = null;
+		oPlayer = player;
+		playerData = new PlayerData(oPlayer);
+		isOnline = false;
+	}
+
 	@Override
 	public int getPing() {
+		if (!isOnline)
+			return 0;
 		try {
 			return new MinecraftReflectionUtils(player).ping;
 		} catch (Exception e) {
@@ -39,6 +60,8 @@ public class User implements IUser{
 
 	@Override
 	public String getLanguage() {
+		if (!isOnline)
+			return "en";
 		try {
 			switch (new MinecraftReflectionUtils(player).locale.toLowerCase()) {
 				case "de_de":
@@ -63,199 +86,178 @@ public class User implements IUser{
 
 	@Override
 	public void setLastLoc() {
+		if (!isOnline)
+			return;
 		playerData.set("lastLoc", LocationSerializer.locToString(player.getLocation()));
 	}
 
 	@Override
 	public void setLastLoc(Location location) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("lastLoc", LocationSerializer.locToString(location));
 	}
 
 	@Override
 	public Location getHome(String homeName) {
-		// TODO Auto-generated method stub
-		return null;
+		return LocationSerializer.locFromString(playerData.getDataFile().getString("home." + homeName));
 	}
 
 	@Override
 	public void setHome(Location location, String homeName) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("home." + homeName, LocationSerializer.locToString(location));
 	}
 
 	@Override
 	public Location getWaypoint() {
-		// TODO Auto-generated method stub
-		return null;
+		return LocationSerializer.locFromString(playerData.getDataFile().getString("waypoint"));
 	}
 
 	@Override
 	public void setWaypoint(Location location) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("waypoint", LocationSerializer.locToString(location));
+		if (!isOnline)
+			return;
+		player.setCompassTarget(location);
 	}
 
 	@Override
 	public void setTpStatus(boolean canTp) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("canTP", canTp);
 	}
 
 	@Override
 	public boolean canTp() {
-		// TODO Auto-generated method stub
-		return false;
+		return playerData.getDataFile().getBoolean("canTP");
 	}
 
 	@Override
 	public int getAttackStrength() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getInt("attackStrength");
 	}
 
 	@Override
 	public void setAttackStrength(int attackStrength) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("attackStrength", attackStrength);
 	}
 
 	@Override
 	public int getJumpPower() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getInt("jumpPower");
 	}
 
 	@Override
 	public void setJumpPower(int jumpPower) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("jumpPower", jumpPower);
 	}
 
 	@Override
 	public Inventory getLastInventory() {
-		// TODO Auto-generated method stub
-		return null;
+		return InventorySerializer.fromString(playerData.getDataFile().getString("lastInv"));
 	}
 
 	@Override
 	public void setLastInventory(Inventory inventory) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("lastInv", InventorySerializer.toString(inventory));
 	}
 
 	@Override
 	public int getDeathCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getInt("deathCount");
 	}
 
 	@Override
 	public void setDeathCount(int deathCount) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("deathCount", deathCount);
 	}
 
 	@Override
 	public int getJoinCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getInt("joinCount");
 	}
 
 	@Override
 	public void setJoinCount(int joinCount) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("joinCount", joinCount);
 	}
 
 	@Override
 	public List<String> getStoredIps() {
-		// TODO Auto-generated method stub
-		return null;
+		return playerData.getDataFile().getStringList("ips");
 	}
 
 	@Override
 	public void setIps(List<String> ips) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("ips", ips);
 	}
 
 	@Override
 	public void setAFKStatus(boolean afk) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("afk", afk);
 	}
 
 	@Override
 	public boolean isAFK() {
-		// TODO Auto-generated method stub
-		return false;
+		return playerData.getDataFile().getBoolean("afk");
 	}
 
 	@Override
 	public Set<UUID> getFriendList() {
-		// TODO Auto-generated method stub
-		return null;
+		final List<String> str = playerData.getDataFile().getStringList("friends");
+		final Set<UUID> list = new HashSet<UUID>();
+		for (final String s : str)
+			list.add(UUID.fromString(s));
+		return list;
 	}
 
 	@Override
 	public void setFriendList(Set<UUID> friendList) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("friends", friendList);
 	}
 
 	@Override
 	public Player getPlayer() {
-		// TODO Auto-generated method stub
-		return null;
+		if (!isOnline)
+			return null;
+		return player;
 	}
 
 	@Override
 	public long getTimeSinceLastPlay() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getLong("lastTimePlayed");
 	}
 
 	@Override
 	public long getTotalTimePlayed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getLong("totalTimePlayed");
 	}
 
 	@Override
 	public void setPrefix(String prefix) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("prefix", prefix);
 	}
 
 	@Override
 	public String getPrefix() {
-		// TODO Auto-generated method stub
-		return null;
+		return playerData.getDataFile().getString("prefix");
 	}
 
 	@Override
 	public void setSuffix(String suffix) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("suffix", suffix);
 	}
 
 	@Override
 	public String getSuffix() {
-		// TODO Auto-generated method stub
-		return null;
+		return playerData.getDataFile().getString("suffix");
 	}
 
 	@Override
 	public double getBalance() {
-		// TODO Auto-generated method stub
-		return 0;
+		return playerData.getDataFile().getDouble("balance");
 	}
 
 	@Override
 	public void setBalance(double balance) {
-		// TODO Auto-generated method stub
-		
+		playerData.set("balance", balance);
 	}
 
 }
