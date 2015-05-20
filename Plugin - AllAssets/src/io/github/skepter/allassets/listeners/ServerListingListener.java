@@ -59,7 +59,6 @@ public class ServerListingListener implements Listener {
 	@EventHandler
 	public void playerLogin(final AsyncPlayerPreLoginEvent event) {
 		final String save = event.getAddress().toString().substring(1, event.getAddress().toString().length());
-
 		for (final UUID u : UUIDData.getValues()) {
 			final User user = new User(Bukkit.getOfflinePlayer(u));
 			try {

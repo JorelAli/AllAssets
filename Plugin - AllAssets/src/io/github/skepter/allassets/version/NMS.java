@@ -1,5 +1,6 @@
 package io.github.skepter.allassets.version;
 
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
 /*
@@ -16,6 +17,8 @@ public interface NMS {
 	void setInvunerability(Player player, boolean invunerable);
 	
 	void openAnvil(Player player);
+	
+	void openSign(Player player, Sign sign);
 	
 //	String getLocale(Player player);
 }

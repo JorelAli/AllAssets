@@ -10,6 +10,7 @@ import net.minecraft.server.v1_8_R3.Container;
 import net.minecraft.server.v1_8_R3.EntityHuman;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 
+import org.bukkit.block.Sign;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -55,6 +56,12 @@ public class V1_8_R3 implements NMS{
 		} catch (Exception e) {
 		}
 		human.activeContainer.addSlotListener(ePlayer);
+	}
+
+	@Override
+	public void openSign(Player player, Sign sign) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

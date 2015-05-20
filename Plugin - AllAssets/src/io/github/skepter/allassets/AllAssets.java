@@ -396,6 +396,8 @@ public class AllAssets extends JavaPlugin {
 					break;
 			}
 		}
+		
+		Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|AdvCdm", new PluginMessageListenerImplementation());
 
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
@@ -586,7 +588,6 @@ public class AllAssets extends JavaPlugin {
 		r(new SignListener());
 		r(new PlayerListener());
 		r(new CustomUnknownCommandListener());
-//		r(new AnvilListener());
 		r(new BlockPoweredListener());
 		r(new CustomLogListener());
 

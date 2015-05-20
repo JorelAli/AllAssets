@@ -90,10 +90,24 @@
 		</dependency>
 		<dependency>
 			<groupId>org.craftbukkit</groupId>
-			<artifactId>x</artifactId>
+			<artifactId>craftbukkit2</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
 			<systemPath>C:\External Jars\craftbukkit-1.8.3-R0.1-SNAPSHOT-latest.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.craftbukkit</groupId>
+			<artifactId>craftbukkit3</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\External Jars\craftbukkit-1.8.4-R0.1-SNAPSHOT-latest.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.craftbukkit</groupId>
+			<artifactId>craftbukkit1</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\External Jars\craftbukkit-1.8-R0.1-SNAPSHOT-latest.jar</systemPath>
 		</dependency>
 	</dependencies>
 

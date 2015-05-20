@@ -8,8 +8,11 @@ import net.minecraft.server.v1_8_R1.BlockPosition;
 import net.minecraft.server.v1_8_R1.Container;
 import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
+import net.minecraft.server.v1_8_R1.PacketPlayOutOpenSignEditor;
 import net.minecraft.server.v1_8_R1.TileEntityContainerAnvil;
+import net.minecraft.server.v1_8_R1.TileEntitySign;
 
+import org.bukkit.block.Sign;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -55,6 +58,25 @@ public class V1_8_R1 implements NMS {
 		} catch (Exception e) {
 		}
 		human.activeContainer.addSlotListener(ePlayer);
+	}
+
+	@Override
+	public void openSign(Player player, Sign sign) {
+		TileEntitySign teSign = null;
+		try {
+			Field field = sign.getClass().getDeclaredField("sign");
+			field.setAccessible(true);
+			teSign = (TileEntitySign) field.get(sign);
+		} catch (Exception e) {
+		}
+		
+		teSign.isEditable = true;
+
+		BlockPosition blockPosition = new BlockPosition(sign.getLocation().getBlockX(), sign.getLocation().getBlockY(), sign.getLocation().getBlockZ());
+
+		PacketPlayOutOpenSignEditor packet = new PacketPlayOutOpenSignEditor(blockPosition);
+
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 
 }
