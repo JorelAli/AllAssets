@@ -1,5 +1,6 @@
 package io.github.skepter.allassets.api.users;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.serializers.InventorySerializer;
@@ -63,7 +64,7 @@ public class User implements IUser {
 		if (!isOnline)
 			return 0;
 		try {
-			return new MinecraftReflectionUtils(player).ping;
+			return AllAssets.instance().getNMS().getPing(player);
 		} catch (Exception e) {
 			return 0;
 		}

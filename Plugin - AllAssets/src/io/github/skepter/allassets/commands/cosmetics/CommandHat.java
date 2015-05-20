@@ -34,6 +34,7 @@ public class CommandHat {
 		framework.registerCommands(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "hat", permission = "hat", description = "Puts the item in your hand on your head")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);

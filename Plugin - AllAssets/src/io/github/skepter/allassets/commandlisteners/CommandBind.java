@@ -64,6 +64,7 @@ public class CommandBind implements Listener {
 		return;
 	}
 
+	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "bind.add", permission = "bind", description = "Adds a command to the binded item")
 	public void addBind(final CommandArgs args) {
 		Player player = null;

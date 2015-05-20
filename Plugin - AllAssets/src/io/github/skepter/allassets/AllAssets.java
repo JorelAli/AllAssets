@@ -149,6 +149,10 @@ import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
+import io.github.skepter.allassets.version.NMS;
+import io.github.skepter.allassets.version.V1_8_R1;
+import io.github.skepter.allassets.version.V1_8_R2;
+import io.github.skepter.allassets.version.V1_8_R3;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -260,18 +264,18 @@ public class AllAssets extends JavaPlugin {
 		//// Skepter ////
 		{
 			//Ready classes are at a standard where they can be submitted for the next build
-			
+
 			// [NEED IMPROVEMENT] Commands
 			new CommandTitle(framework);
-//			new CommandUnban(framework);
-			
+			//			new CommandUnban(framework);
+
 			// [READY] Commands
 			new CommandSetWarp(framework);
 			new CommandDelWarp(framework);
 			new CommandWarps(framework);
 			new CommandWarp(framework);
 			new CommandNearbyWarps(framework);
-			
+
 			new CommandTpall(framework);
 			new CommandPrefix(framework);
 			new CommandSuffix(framework);
@@ -280,7 +284,7 @@ public class AllAssets extends JavaPlugin {
 			new CommandSetBalance(framework);
 
 			//Listeners
-//			r(new CommandBan(framework));
+			//			r(new CommandBan(framework));
 			r(new CommandCommandBlock(framework));
 
 			// [READY] WorldModifier
@@ -297,7 +301,6 @@ public class AllAssets extends JavaPlugin {
 
 	/* The master switch - used for debug purposes*/
 	public static boolean masterSwitch = false;
-	
 
 	/* Other stuff */
 	public CommandFramework framework;
@@ -310,6 +313,9 @@ public class AllAssets extends JavaPlugin {
 	public Economy economy = null;
 	public Permission permission = null;
 	public Map<UUID, Long> tempTimeMap;
+
+	/* NMS :) */
+	private NMS nms;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -365,6 +371,26 @@ public class AllAssets extends JavaPlugin {
 		} else {
 			hasVault = true;
 			setupVault();
+		}
+
+		if (nms == null) {
+			getLogger().info("Hooking into NMS version dependant system...");
+			String p = getServer().getClass().getPackage().getName();
+			String version = p.substring(p.lastIndexOf('.') + 1);
+			getLogger().info("Version " + version + " found");
+			switch (version) {
+				case "v1_8_R1":
+					nms = new V1_8_R1(this);
+					break;
+				case "v1_8_R2":
+					nms = new V1_8_R2(this);
+					break;
+				case "v1_8_R3":
+					nms = new V1_8_R3(this);
+					break;
+				default:
+					break;
+			}
 		}
 
 		ghostFactory = new ComphenixsGhostFactory(this);
@@ -621,7 +647,7 @@ public class AllAssets extends JavaPlugin {
 
 	private void postLoad() {
 		new VaultReflection().loadAAChat();
-        new VaultReflection().loadAAEco();
+		new VaultReflection().loadAAEco();
 	}
 
 	/* Easy system to add listeners */
@@ -631,6 +657,10 @@ public class AllAssets extends JavaPlugin {
 				if (method.getAnnotation(EventHandler.class) != null)
 					getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
+	}
+
+	public NMS getNMS() {
+		return nms;
 	}
 
 	private void setupVault() {

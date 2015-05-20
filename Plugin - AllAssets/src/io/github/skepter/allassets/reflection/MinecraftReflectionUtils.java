@@ -42,6 +42,7 @@ public class MinecraftReflectionUtils {
 	final public Object craftServer;
 
 	/* Fields */
+	@Deprecated
 	final public int ping;
 	final public String locale;
 	final public Object abilities;

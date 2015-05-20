@@ -46,6 +46,7 @@ public class CommandHead {
 		framework.registerCommands(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "head", permission = "head", description = "Spawns in a head")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
