@@ -25,13 +25,13 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.administration;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.utils.Strings;
-import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
+import io.github.skepter.allassets.version.NMS;
 
 import org.bukkit.entity.Player;
 
@@ -44,21 +44,16 @@ public class CommandNMSGod {
 	@CommandHandler(name = "god", aliases = { "invincible", "invunerable" }, permission = "god", description = "Makes you invincible")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
-		if (player != null)
-			try {
-				new MinecraftReflectionUtils(args.getPlayer());
-				final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(args.getPlayer());
-				if (utils.abilities.getClass().getField("isInvulnerable").getBoolean(utils.abilities)) {
-					utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, false);
-					player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");
-				} else {
-					utils.abilities.getClass().getField("isInvulnerable").setBoolean(utils.abilities, true);
-					player.sendMessage(Strings.TITLE + "A higher power falls upon you");
-				}
-			} catch (final Exception t) {
-				ErrorUtils.generalCommandError(player);
+		if (player != null) {
+			NMS nms = AllAssets.instance().getNMS();
+			if (nms.isInvunerable(player)) {
+				nms.setInvunerability(player, false);
+				player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");
+			} else {
+				nms.setInvunerability(player, true);
+				player.sendMessage(Strings.TITLE + "A higher power falls upon you");
 			}
+		}
 		return;
 	}
-
 }

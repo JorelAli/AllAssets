@@ -45,6 +45,7 @@ public class MinecraftReflectionUtils {
 	@Deprecated
 	final public int ping;
 	final public String locale;
+	@Deprecated
 	final public Object abilities;
 
 	/* Misc & other objects */

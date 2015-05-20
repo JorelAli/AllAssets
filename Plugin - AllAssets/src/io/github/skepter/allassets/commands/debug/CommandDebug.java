@@ -473,7 +473,8 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.anvil", permission = "debug", description = "Unloads a world")
 	public void openAnvil(final CommandArgs args) {
 		try {
-			new ReflectionPlayer(args.getPlayer()).openAnvil();
+			AllAssets.instance().getNMS().openAnvil(args.getPlayer());
+			//new ReflectionPlayer(args.getPlayer()).openAnvil();
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

@@ -381,14 +381,19 @@ public class AllAssets extends JavaPlugin {
 			switch (version) {
 				case "v1_8_R1":
 					nms = new V1_8_R1(this);
+					getLogger().info("Version " + version + " implemented!");
 					break;
 				case "v1_8_R2":
 					nms = new V1_8_R2(this);
+					getLogger().info("Version " + version + " implemented!");
 					break;
 				case "v1_8_R3":
 					nms = new V1_8_R3(this);
+					getLogger().info("Version " + version + " implemented!");
 					break;
 				default:
+					//shut down plugin
+					getLogger().info("Version " + version + " is not supported!");
 					break;
 			}
 		}
