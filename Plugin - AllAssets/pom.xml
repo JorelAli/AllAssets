@@ -88,6 +88,13 @@
 			<version>2.3.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.craftbukkit</groupId>
+			<artifactId>x</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\External Jars\craftbukkit-1.8.3-R0.1-SNAPSHOT-latest.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 </project>
