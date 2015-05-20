@@ -123,7 +123,6 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
 import io.github.skepter.allassets.libs.ComphenixsGhostFactory;
-import io.github.skepter.allassets.listeners.AnvilListener;
 import io.github.skepter.allassets.listeners.BlockPoweredListener;
 import io.github.skepter.allassets.listeners.ChatListener;
 import io.github.skepter.allassets.listeners.CommandCooldownListener;
@@ -587,7 +586,7 @@ public class AllAssets extends JavaPlugin {
 		r(new SignListener());
 		r(new PlayerListener());
 		r(new CustomUnknownCommandListener());
-		r(new AnvilListener());
+//		r(new AnvilListener());
 		r(new BlockPoweredListener());
 		r(new CustomLogListener());
 

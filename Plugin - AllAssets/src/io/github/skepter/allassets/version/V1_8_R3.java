@@ -1,12 +1,14 @@
 package io.github.skepter.allassets.version;
 
 import io.github.skepter.allassets.AllAssets;
+
+import java.lang.reflect.Field;
+
+import net.minecraft.server.v1_8_R3.BlockAnvil.TileEntityContainerAnvil;
 import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.ChatMessage;
-import net.minecraft.server.v1_8_R3.ContainerAnvil;
+import net.minecraft.server.v1_8_R3.Container;
 import net.minecraft.server.v1_8_R3.EntityHuman;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
-import net.minecraft.server.v1_8_R3.PacketPlayOutOpenWindow;
 
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -37,17 +39,21 @@ public class V1_8_R3 implements NMS{
 	
 	@Override
 	public void openAnvil(Player player) {
-		BlockPosition bp = new BlockPosition(0, 0, 0);
-
+		BlockPosition blockPosition = new BlockPosition(0, 0, 0);
 		EntityHuman human = (EntityHuman) ((CraftPlayer) player).getHandle();
 		EntityPlayer ePlayer = (EntityPlayer) ((CraftPlayer) player).getHandle();
-		ContainerAnvil anvil = new ContainerAnvil(human.inventory, human.world, bp, human);
-		anvil.checkReachable = false;
 
-		int cc = ePlayer.nextContainerCounter();
-		ePlayer.playerConnection.sendPacket(new PacketPlayOutOpenWindow(cc, "minecraft:anvil", new ChatMessage("Repairing", new Object[]{}), 9));
-		human.activeContainer = anvil;
-		human.activeContainer.windowId = ePlayer.nextContainerCounter();
+		TileEntityContainerAnvil anv = new TileEntityContainerAnvil(ePlayer.world, blockPosition);
+		Container container = anv.createContainer(ePlayer.inventory, human);
+		container.checkReachable = false;
+		ePlayer.openTileEntity(anv);
+		human.activeContainer = container;
+		try {
+			Field f = ePlayer.getClass().getDeclaredField("containerCounter");
+			f.setAccessible(true);
+			human.activeContainer.windowId = f.getInt(ePlayer);
+		} catch (Exception e) {
+		}
 		human.activeContainer.addSlotListener(ePlayer);
 	}
 

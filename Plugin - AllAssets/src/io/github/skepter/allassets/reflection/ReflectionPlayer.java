@@ -90,6 +90,7 @@ public class ReflectionPlayer {
 		}
 	}
 
+	@Deprecated
 	public void openAnvil() {
 		try {
 			final MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);

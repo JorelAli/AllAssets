@@ -474,11 +474,10 @@ public class CommandDebug implements Listener {
 	public void openAnvil(final CommandArgs args) {
 		try {
 			AllAssets.instance().getNMS().openAnvil(args.getPlayer());
-			//new ReflectionPlayer(args.getPlayer()).openAnvil();
 		} catch (final Exception e) {
 			e.printStackTrace();
-		}
-	}
+		}}
+	
 
 	@SuppressWarnings("unchecked")
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
