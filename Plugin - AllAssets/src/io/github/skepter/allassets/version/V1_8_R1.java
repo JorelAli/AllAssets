@@ -104,70 +104,70 @@ public class V1_8_R1 implements NMS {
 	}
 
 //	@SuppressWarnings("deprecation")
-	private boolean a(Chunk that, int i, int j, int k, Block block, int l, Location location) {
+	private boolean a(Chunk that, int x, int y, int z, Block block, int blockData, Location location) {
 		try {
-			int i1 = k << 4 | i;
-			if (j >= ((int[]) ReflectionUtils.getPrivateFieldValue(that, "f"))[i1] - 1) {
+			int x1 = z << 4 | x;
+			if (y >= ((int[]) ReflectionUtils.getPrivateFieldValue(that, "f"))[x1] - 1) {
 				int[] arr = (int[]) ReflectionUtils.getPrivateFieldValue(that, "f");
-				arr[i1] = -999;
+				arr[x1] = -999;
 				ReflectionUtils.setFinalPrivateField(that, "f", arr);
 			}
 
-			int j1 = that.heightMap[i1];
+			int y1 = that.heightMap[x1];
 
 			Method getType = that.getClass().getDeclaredMethod("getType", int.class, int.class, int.class);
 			getType.setAccessible(true);
-			Block block1 = (Block) getType.invoke(that, i, j, k);
+			Block oldBlock = (Block) getType.invoke(that, x, y, z);
 
 			/* getData method */
 
-			int k1;
+			int oldBlockData;
 
-			if (j >> 4 >= that.getSections().length) {
-				k1 = 0;
+			if (y >> 4 >= that.getSections().length) {
+				oldBlockData = 0;
 			}
-			ChunkSection cs = that.getSections()[(j >> 4)];
-			k1 = ((cs != null) ? cs.c(i, j & 0xF, k) : 0);
+			ChunkSection cs = that.getSections()[(y >> 4)];
+			oldBlockData = ((cs != null) ? cs.c(x, y & 0xF, z) : 0);
 
 			/* End of getData method */
 
-			if (block1 == block && k1 == l) {
+			if (oldBlock == block && oldBlockData == blockData) {
 				return false;
 			} else {
 				boolean flag = false;
-				ChunkSection chunksection = that.getSections()[j >> 4];
+				ChunkSection chunksection = that.getSections()[y >> 4];
 
 				if (chunksection == null) {
 					if (block == Blocks.AIR) {
 						return false;
 					}
 					boolean e = (boolean) ReflectionUtils.getPrivateFieldValue(that.world.worldProvider, "e");
-					chunksection = that.getSections()[j >> 4] = new ChunkSection(j >> 4 << 4, !e);
-					flag = j >= j1;
+					chunksection = that.getSections()[y >> 4] = new ChunkSection(y >> 4 << 4, !e);
+					flag = y >= y1;
 				}
 
-				int l1 = that.locX * 16 + i;
-				int i2 = that.locZ * 16 + k;
+				int chunkX = that.locX * 16 + x;
+				int chunkZ = that.locZ * 16 + z;
 
 				if (!that.world.isStatic) {
-					block1.f(that.world, new BlockPosition(l1, j, i2));
+					oldBlock.f(that.world, new BlockPosition(chunkX, y, chunkZ));
 					//block1.f(that.world, l1, j, i2, k1);
 				}
 
 				// CraftBukkit start - Delay removing containers until after they're cleaned up
-				if (!(block1 instanceof IContainer)) {
-					chunksection.setType(i, j & 15, k, block.getBlockData());
+				if (!(oldBlock instanceof IContainer)) {
+					chunksection.setType(x, y & 15, z, block.getBlockData());
 					//				chunksection.setTypeId(i, j & 15, k, block);
 				}
 				// CraftBukkit end
 
 				if (!that.world.isStatic) {
-					block1.remove(that.world, new BlockPosition(l1, j, i2), block1.fromLegacyData(k1));
-				} else if (block1 instanceof IContainer && block1 != block) {
+					oldBlock.remove(that.world, new BlockPosition(chunkX, y, chunkZ), oldBlock.fromLegacyData(oldBlockData));
+				} else if (oldBlock instanceof IContainer && oldBlock != block) {
 
 					/* p method */
 
-					TileEntity tileentity = that.world.getTileEntity(new BlockPosition(l1, j, i2));
+					TileEntity tileentity = that.world.getTileEntity(new BlockPosition(chunkX, y, chunkZ));
 					if ((tileentity != null) && ((boolean) ReflectionUtils.getPrivateFieldValue(that.world, "L"))) {
 						ReflectionUtils.setPrivateField(tileentity, "d", true);
 						@SuppressWarnings("rawtypes")
@@ -183,33 +183,33 @@ public class V1_8_R1 implements NMS {
 							that.world.tileEntityList.remove(tileentity);
 						}
 
-						Chunk chunk = that.world.getChunkAt(i >> 4, k >> 4);
+						Chunk chunk = that.world.getChunkAt(x >> 4, z >> 4);
 
 						if (chunk != null)
-							chunk.f(new BlockPosition(i & 0xF, j, k & 0xF));
+							chunk.f(new BlockPosition(x & 0xF, y, z & 0xF));
 					}
 
 					/* End of p method*/
 				}
 
 				// CraftBukkit start - Remove containers now after cleanup
-				if (block1 instanceof IContainer) {
-					chunksection.setType(i, j & 15, k, block.getBlockData());
+				if (oldBlock instanceof IContainer) {
+					chunksection.setType(x, y & 15, z, block.getBlockData());
 				}
 								
 				// CraftBukkit end
 
-				if (chunksection.getType(i, j & 15, k) != block.getBlockData()) {
+				if (chunksection.getType(x, y & 15, z) != block.getBlockData()) {
 					return false;
 				} else {
-					chunksection.setType(i, j & 15, k, block.fromLegacyData(l));
+					chunksection.setType(x, y & 15, z, block.fromLegacyData(blockData));
 					if (flag) {
 						that.initLighting();
 					}
 					TileEntity tileentity;
 
-					if (block1 instanceof IContainer) {
-						tileentity = that.a(new BlockPosition(i, j, k), EnumTileEntityState.IMMEDIATE);
+					if (oldBlock instanceof IContainer) {
+						tileentity = that.a(new BlockPosition(x, y, z), EnumTileEntityState.IMMEDIATE);
 						if (tileentity != null) {
 							tileentity.u();
 						}
@@ -217,22 +217,22 @@ public class V1_8_R1 implements NMS {
 
 					// CraftBukkit - Don't place while processing the BlockPlaceEvent, unless it's a BlockContainer
 					if (!that.world.isStatic && (!that.world.captureBlockStates || (block instanceof BlockContainer))) {
-						block.onPlace(that.world, new BlockPosition(l1, j, i2), null);
+						block.onPlace(that.world, new BlockPosition(chunkX, y, chunkZ), null);
 					}
 
 					if (block instanceof IContainer) {
 						// CraftBukkit start - Don't create tile entity if placement failed
 						Method m = that.getClass().getDeclaredMethod("getType", int.class, int.class, int.class);
 						m.setAccessible(true);
-						if ((Block) m.invoke(that, i, j, k) != block) {
+						if ((Block) m.invoke(that, x, y, z) != block) {
 							return false;
 						}
 						// CraftBukkit end
 
-						tileentity = that.a(new BlockPosition(i, j, k), EnumTileEntityState.IMMEDIATE);
+						tileentity = that.a(new BlockPosition(x, y, z), EnumTileEntityState.IMMEDIATE);
 						if (tileentity == null) {
-							tileentity = ((IContainer) block).a(that.world, l);
-							that.world.setTileEntity(new BlockPosition(l1, j, i2), tileentity);
+							tileentity = ((IContainer) block).a(that.world, blockData);
+							that.world.setTileEntity(new BlockPosition(chunkX, y, chunkZ), tileentity);
 						}
 
 						if (tileentity != null) {
