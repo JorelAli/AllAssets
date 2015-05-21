@@ -18,6 +18,7 @@ import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EntityPlayer;
 import net.minecraft.server.v1_8_R1.EnumTileEntityState;
 import net.minecraft.server.v1_8_R1.IContainer;
+import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PacketPlayOutOpenSignEditor;
 import net.minecraft.server.v1_8_R1.TileEntity;
 import net.minecraft.server.v1_8_R1.TileEntityContainerAnvil;
@@ -105,7 +106,7 @@ public class NMS_V1_8_R1 implements NMS {
 		return a(chunk, x & 0x0f, y, z & 0x0f, Block.getById(blockId), data, loc);
 	}
 
-//	@SuppressWarnings("deprecation")
+	//	@SuppressWarnings("deprecation")
 	private boolean a(Chunk that, int x, int y, int z, Block block, int blockData, Location location) {
 		try {
 			int x1 = z << 4 | x;
@@ -198,7 +199,7 @@ public class NMS_V1_8_R1 implements NMS {
 				if (oldBlock instanceof IContainer) {
 					chunksection.setType(x, y & 15, z, block.getBlockData());
 				}
-								
+
 				// CraftBukkit end
 
 				if (chunksection.getType(x, y & 15, z) != block.getBlockData()) {
@@ -256,5 +257,19 @@ public class NMS_V1_8_R1 implements NMS {
 	public String nmsName(ItemStack itemStack) {
 		return CraftItemStack.asNMSCopy(itemStack).a();
 	}
-	
+
+	@Override
+	public ItemStack addStringNBT(ItemStack itemStack, String key, String value) {
+		net.minecraft.server.v1_8_R1.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
+		if (is.getTag() == null)
+			is.setTag(new NBTTagCompound());
+		is.getTag().setString(key, value);
+		return CraftItemStack.asCraftMirror(is);
+	}
+
+	@Override
+	public String getStringNBT(ItemStack itemStack, String key) {
+		net.minecraft.server.v1_8_R1.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
+		return is.getTag().getString(key);
+	}
 }

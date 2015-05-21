@@ -19,6 +19,7 @@ import net.minecraft.server.v1_8_R2.Container;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityPlayer;
 import net.minecraft.server.v1_8_R2.IContainer;
+import net.minecraft.server.v1_8_R2.NBTTagCompound;
 import net.minecraft.server.v1_8_R2.TileEntity;
 
 import org.bukkit.Location;
@@ -240,4 +241,18 @@ public class NMS_V1_8_R2 implements NMS{
 		return CraftItemStack.asNMSCopy(itemStack).a();
 	}
 	
+	@Override
+	public ItemStack addStringNBT(ItemStack itemStack, String key, String value) {
+		net.minecraft.server.v1_8_R2.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
+		if (is.getTag() == null)
+			is.setTag(new NBTTagCompound());
+		is.getTag().setString(key, value);
+		return CraftItemStack.asCraftMirror(is);
+	}
+
+	@Override
+	public String getStringNBT(ItemStack itemStack, String key) {
+		net.minecraft.server.v1_8_R2.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
+		return is.getTag().getString(key);
+	}
 }

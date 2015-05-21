@@ -28,5 +28,9 @@ public interface NMS {
 	
 	String nmsName(ItemStack itemStack);
 	
+	ItemStack addStringNBT(ItemStack itemStack, String key, String value);
+	
+	String getStringNBT(ItemStack itemStack, String key);
+	
 //	String getLocale(Player player);
 }

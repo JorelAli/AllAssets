@@ -28,6 +28,7 @@ import io.github.skepter.allassets.reflection.ReflectionUtils;
 
 import org.bukkit.inventory.ItemStack;
 
+@SuppressWarnings("deprecation")
 public class ItemUtils {
 
 	private ItemStack is;
@@ -36,6 +37,7 @@ public class ItemUtils {
 		this.is = is;
 	}
 
+	@Deprecated
 	public ItemStack addStringNBT(String key, String data) {
 		try {
 			Object nmsItem = new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asNMSCopy", ItemStack.class).invoke(null, is);
@@ -49,6 +51,7 @@ public class ItemUtils {
 		return is;
 	}
 
+	@Deprecated
 	public String getStringNBT(String key) {
 		try {
 			Object nmsItem = new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asNMSCopy", ItemStack.class).invoke(null, is);

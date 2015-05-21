@@ -54,11 +54,7 @@ import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 import io.github.skepter.allassets.utils.utilclasses.VectorUtils;
 
 import java.io.File;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
 import java.lang.management.ManagementFactory;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -75,12 +71,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Sign;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
@@ -224,17 +217,6 @@ public class CommandDebug implements Listener {
 			}
 		});
 	}
-	
-	@CommandHandler(name = "debug.signedit", permission = "debug", description = "SignEdit packet")
-	public void signedit(final CommandArgs args) {
-		try {
-			Player player = args.getPlayer();
-			if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
-				final Sign sign = (Sign) PlayerUtils.getTargetBlock(player).getState();
-			}
-		} catch (final Exception e) {
-		}
-	}
 
 	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
 	public void gsc(final CommandArgs args) {
@@ -374,7 +356,7 @@ public class CommandDebug implements Listener {
 	public void ram(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		sender.sendMessage(TextUtils.title("RAM"));
-		sender.sendMessage("Maximum RAM: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + "MB");
+		sender.sendMessage("Maximum RAM: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + "MB");	
 		sender.sendMessage("Total RAM: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Free RAM: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
@@ -384,7 +366,7 @@ public class CommandDebug implements Listener {
 	public void actionmsg(final CommandArgs args) {
 		try {
 			String msg = JSON.getJSON(TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length));
-			new ReflectionPlayer(args.getPlayer()).sendActionBar(msg);
+			AllAssets.instance().getPacketHandler().sendActionBarMessage(args.getPlayer(), msg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

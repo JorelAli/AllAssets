@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.minecraft.server.v1_8_R3.Block;
 import net.minecraft.server.v1_8_R3.BlockAnvil.TileEntityContainerAnvil;
 import net.minecraft.server.v1_8_R3.BlockContainer;
@@ -240,4 +241,19 @@ public class NMS_V1_8_R3 implements NMS{
 		return CraftItemStack.asNMSCopy(itemStack).a();
 	}
 
+	@Override
+	public ItemStack addStringNBT(ItemStack itemStack, String key, String value) {
+		net.minecraft.server.v1_8_R3.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
+		if (is.getTag() == null)
+			is.setTag(new NBTTagCompound());
+		is.getTag().setString(key, value);
+		return CraftItemStack.asCraftMirror(is);
+	}
+
+	@Override
+	public String getStringNBT(ItemStack itemStack, String key) {
+		net.minecraft.server.v1_8_R3.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
+		return is.getTag().getString(key);
+	}
+	
 }
