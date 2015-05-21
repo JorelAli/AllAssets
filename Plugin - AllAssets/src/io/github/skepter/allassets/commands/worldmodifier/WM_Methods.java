@@ -72,11 +72,17 @@ public class WM_Methods {
 						data.setPreviousAction(cuboid);
 						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
 //						if (blocks.size() < divisor)
+						Set<Chunk> chunks = new HashSet<Chunk>();
 							for (final Block b : blocks) {
 								AllAssets.instance().getNMS().setBlock(b.getLocation(), info.getMaterial().getId(), info.getData());
+								chunks.add(b.getChunk());
 //								b.setType(info.getMaterial());
 //								b.setData(info.getData());
 							}
+							player.sendMessage(Strings.TITLE + "Blocks set successfully, refreshing...");
+							for(Chunk c : chunks)
+								player.getWorld().refreshChunk(c.getX(), c.getX());
+							player.sendMessage(Strings.TITLE + "Refresh complete");
 //						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
 //							b.setType(info.getMaterial());
 //							b.setData(info.getData());
