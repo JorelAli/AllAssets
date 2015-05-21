@@ -100,13 +100,13 @@ public class V1_8_R1 implements NMS {
 		int z = loc.getBlockZ();
 		net.minecraft.server.v1_8_R1.World w = ((CraftWorld) world).getHandle();
 		Chunk chunk = w.getChunkAt(x >> 4, z >> 4);
-		return a(chunk, x & 0x0f, y, z & 0x0f, Block.getById(blockId), data);
+		return a(chunk, x & 0x0f, y, z & 0x0f, Block.getById(blockId), data, loc);
 	}
 
-	private boolean a(Chunk that, int i, int j, int k, Block block, int l) {
+//	@SuppressWarnings("deprecation")
+	private boolean a(Chunk that, int i, int j, int k, Block block, int l, Location location) {
 		try {
 			int i1 = k << 4 | i;
-
 			if (j >= ((int[]) ReflectionUtils.getPrivateFieldValue(that, "f"))[i1] - 1) {
 				int[] arr = (int[]) ReflectionUtils.getPrivateFieldValue(that, "f");
 				arr[i1] = -999;
@@ -115,7 +115,8 @@ public class V1_8_R1 implements NMS {
 
 			int j1 = that.heightMap[i1];
 
-			Method getType = that.getClass().getDeclaredMethod("getType", Integer.class, Integer.class, Integer.class);
+			Method getType = that.getClass().getDeclaredMethod("getType", int.class, int.class, int.class);
+			getType.setAccessible(true);
 			Block block1 = (Block) getType.invoke(that, i, j, k);
 
 			/* getData method */
@@ -195,6 +196,7 @@ public class V1_8_R1 implements NMS {
 				if (block1 instanceof IContainer) {
 					chunksection.setType(i, j & 15, k, block.getBlockData());
 				}
+								
 				// CraftBukkit end
 
 				if (chunksection.getType(i, j & 15, k) != block.getBlockData()) {
@@ -220,7 +222,9 @@ public class V1_8_R1 implements NMS {
 
 					if (block instanceof IContainer) {
 						// CraftBukkit start - Don't create tile entity if placement failed
-						if ((Block) that.getClass().getDeclaredMethod("getType", Integer.class, Integer.class, Integer.class).invoke(that, i, j, k) != block) {
+						Method m = that.getClass().getDeclaredMethod("getType", int.class, int.class, int.class);
+						m.setAccessible(true);
+						if ((Block) m.invoke(that, i, j, k) != block) {
 							return false;
 						}
 						// CraftBukkit end
