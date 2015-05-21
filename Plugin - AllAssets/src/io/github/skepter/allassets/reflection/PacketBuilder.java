@@ -121,15 +121,6 @@ public class PacketBuilder {
 		return builder;
 	}
 
-	public PacketBuilder setEnum(final String fieldName, final String enumClassName, final String enumName) {
-		try {
-			set(fieldName, ReflectionUtils.getEnum(utils.getNMSClass(enumClassName), enumName));
-		} catch (final Exception e) {
-			CommandLog.addLog("Error finding enumeration", LogType.ERROR);
-		}
-		return builder;
-	}
-
 	public void send() {
 		try {
 			if (direction.equals(PacketDirection.SERVER_TO_CLIENT))

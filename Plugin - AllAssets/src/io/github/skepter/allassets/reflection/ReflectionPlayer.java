@@ -72,6 +72,7 @@ public class ReflectionPlayer {
 		}
 	}
 
+	@Deprecated
 	public void doAnimation(final AnimationType type) {
 		try {
 			final PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_ANIMATION);
@@ -131,6 +132,7 @@ public class ReflectionPlayer {
 		new PacketBuilder(player, PacketType.PLAY_OUT_BED).set("a", player.getEntityId()).setLocation("b", "c", "d", player.getLocation()).send();
 	}
 
+	@Deprecated
 	public void awakeFromBed() {
 		doAnimation(AnimationType.LEAVE_BED);
 	}

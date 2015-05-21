@@ -26,14 +26,24 @@ public class PacketEnums {
 	}
 	
 	public enum AnimationType {
-		SWING_ARM,
-		DAMAGE,
-		LEAVE_BED,
-		EAT_FOOD,
-		CRITICAL_EFFECT,
-		MAGIC_EFFECT,
-		CROUCH,
-		UNCROUCH;
+		SWING_ARM(0),
+		DAMAGE(1),
+		LEAVE_BED(2),
+		EAT_FOOD(3),
+		CRITICAL_EFFECT(4),
+		MAGIC_EFFECT(5),
+		CROUCH(104),
+		UNCROUCH(105);
+
+		private final int id;
+		
+		AnimationType(int id) {
+			this.id = id;
+		}
+		
+		public int getId() {
+			return id;
+		}
 	}
 	
 }

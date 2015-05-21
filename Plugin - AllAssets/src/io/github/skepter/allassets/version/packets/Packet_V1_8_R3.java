@@ -1,9 +1,11 @@
 package io.github.skepter.allassets.version.packets;
 
 import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.version.packets.PacketEnums.AnimationType;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand;
 import net.minecraft.server.v1_8_R3.PacketPlayInClientCommand.EnumClientCommand;
+import net.minecraft.server.v1_8_R3.PacketPlayOutAnimation;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -29,5 +31,11 @@ public class Packet_V1_8_R3 implements Packet {
 	public void instantRespawn(Player player) {
 		PacketPlayInClientCommand packet = new PacketPlayInClientCommand(EnumClientCommand.PERFORM_RESPAWN);
 		((CraftPlayer) player).getHandle().playerConnection.a(packet);
+	}
+	
+	@Override
+	public void doAnimation(Player player, AnimationType type) {
+		PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), type.getId());
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 }
