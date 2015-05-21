@@ -109,6 +109,13 @@
 			<scope>system</scope>
 			<systemPath>C:\External Jars\craftbukkit-1.8-R0.1-SNAPSHOT-latest.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>org.craftbukkit</groupId>
+			<artifactId>craftbukkit0</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>C:\External Jars\craftbukkit-1.7.9-R0.2-SNAPSHOT.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 </project>
