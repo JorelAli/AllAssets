@@ -6,4 +6,6 @@ public interface Packet {
 
 	public boolean sendActionBarMessage(Player player, String message);
 	
+	public void instantRespawn(Player player);
+	
 }

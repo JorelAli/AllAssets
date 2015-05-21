@@ -68,6 +68,7 @@ public class ReflectionPlayer {
 		this.player = player;
 	}
 
+	@Deprecated
 	public void sendActionBar(String message) {
 		try {
 			new PacketBuilder(player, PacketType.PLAY_OUT_CHAT).set("a", new MinecraftReflectionUtils(player).chatSerialize(message)).set("b", (byte) 2).send();

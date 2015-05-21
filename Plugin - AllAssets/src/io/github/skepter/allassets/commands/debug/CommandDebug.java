@@ -231,7 +231,6 @@ public class CommandDebug implements Listener {
 			Player player = args.getPlayer();
 			if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
 				final Sign sign = (Sign) PlayerUtils.getTargetBlock(player).getState();
-				new ReflectionPlayer(player).openSign(sign);
 			}
 		} catch (final Exception e) {
 		}

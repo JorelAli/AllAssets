@@ -31,7 +31,6 @@ import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.UUIDData;
 import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.tasks.AnyLeashTask;
-import io.github.skepter.allassets.tasks.InstantRespawnTask;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.FireworkUtils;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
@@ -168,7 +167,7 @@ public class PlayerListener implements Listener {
 
 		if (ConfigHandler.features().getBoolean("InstantDeathRespawn")) {
 			final Player p = event.getEntity();
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new InstantRespawnTask(p), 1L);
+			AllAssets.instance().getPacketHandler().instantRespawn(p);
 		}
 
 		if (ConfigHandler.features().getBoolean("DeathCount")) {

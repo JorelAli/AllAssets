@@ -1,7 +1,10 @@
 package io.github.skepter.allassets.version.packets;
 
 import io.github.skepter.allassets.AllAssets;
+import net.minecraft.server.v1_7_R3.EnumClientCommand;
+import net.minecraft.server.v1_7_R3.PacketPlayInClientCommand;
 
+import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -17,6 +20,12 @@ public class Packet_V1_7_R3 implements Packet {
 	public boolean sendActionBarMessage(Player player, String message) {
 		//Not supported
 		return false;
+	}
+
+	@Override
+	public void instantRespawn(Player player) {
+		PacketPlayInClientCommand packet = new PacketPlayInClientCommand(EnumClientCommand.PERFORM_RESPAWN);
+		((CraftPlayer) player).getHandle().playerConnection.a(packet);
 	}
 
 }
