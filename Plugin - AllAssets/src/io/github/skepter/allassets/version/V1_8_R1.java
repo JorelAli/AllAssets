@@ -1,8 +1,10 @@
 package io.github.skepter.allassets.version;
 
 import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.reflection.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import net.minecraft.server.v1_8_R1.Block;
 import net.minecraft.server.v1_8_R1.BlockContainer;
@@ -22,7 +24,6 @@ import net.minecraft.server.v1_8_R1.TileEntitySign;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_8_R1.CraftChunk;
 import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -102,17 +103,30 @@ public class V1_8_R1 implements NMS {
 
 	private boolean a(Chunk that, int i, int j, int k, Block block, int l) {
 		int i1 = k << 4 | i;
-
-		//reflect. Private. Final
-		if (j >= that.f[i1] - 1) {
-			that.f[i1] = -999;
+		
+		if(j >= ((int[]) ReflectionUtils.getPrivateFieldValue(that, "f"))[i1] -1 ) {
+			int[] arr = (int[]) ReflectionUtils.getPrivateFieldValue(that, "f");
+			arr[i1] = -999;
+			ReflectionUtils.setFinalPrivateField(that, "f", arr);
 		}
 
 		int j1 = that.heightMap[i1];
-		//reflect. Private
-		Block block1 = that.getType(i, j, k);
-		int k1 = that.getData(i, j, k);
-
+		
+		Method getType = that.getClass().getDeclaredMethod("getType", Integer.class, Integer.class, Integer.class);
+		Block block1 = (Block) getType.invoke(that, i, j, k);
+		
+		/* getData method */
+		
+		int k1;
+		
+		if(j >> 4 >= that.getSections().length) {
+			k1 = 0;
+		}
+		ChunkSection cs = that.getSections()[(j >> 4)];
+		k1 = ((cs != null) ? cs.c(i, j & 0xF, k) : 0);
+		
+		/* End of getData method */
+		
 		if (block1 == block && k1 == l) {
 			return false;
 		} else {
@@ -123,8 +137,8 @@ public class V1_8_R1 implements NMS {
 				if (block == Blocks.AIR) {
 					return false;
 				}
-
-				chunksection = that.getSections()[j >> 4] = new ChunkSection(j >> 4 << 4, !that.world.worldProvider.g);
+				boolean e = (boolean) ReflectionUtils.getPrivateFieldValue(that.world.worldProvider, "e");
+				chunksection = that.getSections()[j >> 4] = new ChunkSection(j >> 4 << 4, !e);
 				flag = j >= j1;
 			}
 
@@ -132,18 +146,26 @@ public class V1_8_R1 implements NMS {
 			int i2 = that.locZ * 16 + k;
 
 			if (!that.world.isStatic) {
-				block1.f(that.world, l1, j, i2, k1);
+				block1.f(that.world, new BlockPosition(l1, j, i2));
+				//block1.f(that.world, l1, j, i2, k1);
 			}
 
 			// CraftBukkit start - Delay removing containers until after they're cleaned up
 			if (!(block1 instanceof IContainer)) {
-				chunksection.setTypeId(i, j & 15, k, block);
+				chunksection.setType(i, j & 15, k, block.getBlockData());
+//				chunksection.setTypeId(i, j & 15, k, block);
 			}
 			// CraftBukkit end
 
 			if (!that.world.isStatic) {
-				block1.remove(that.world, l1, j, i2, block1, k1);
+				block1.remove(that.world, new BlockPosition(l1, j, i2), block1.fromLegacyData(k1));
 			} else if (block1 instanceof IContainer && block1 != block) {
+				
+				/* p method */
+				
+				/* End of p method*/
+				
+				
 				that.world.p(l1, j, i2);
 			}
 
@@ -192,7 +214,7 @@ public class V1_8_R1 implements NMS {
 					}
 				}
 
-				that.q = true;
+				ReflectionUtils.setPrivateField(that, "q", true);
 				return true;
 			}
 		}

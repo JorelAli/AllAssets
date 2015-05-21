@@ -98,5 +98,17 @@ public class ReflectionUtils {
 
 		field.set(null, data);
 	}
+	
+	/** Sets the value of a final static field */
+	public static void setFinalPrivateField(final Object object, final String fieldName, final Object data) throws Exception {
+		Field field = getPrivateField(object, fieldName);
+		field.setAccessible(true);
+
+		final Field modifiersField = Field.class.getDeclaredField("modifiers");
+		modifiersField.setAccessible(true);
+		modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+
+		field.set(object, data);
+	}
 
 }
