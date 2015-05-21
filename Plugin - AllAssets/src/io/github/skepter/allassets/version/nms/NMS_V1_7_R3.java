@@ -1,4 +1,4 @@
-package io.github.skepter.allassets.version;
+package io.github.skepter.allassets.version.nms;
 
 import io.github.skepter.allassets.AllAssets;
 
@@ -24,11 +24,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-public class V1_7_R3 implements NMS {
+public class NMS_V1_7_R3 implements NMS {
 
 	Plugin plugin;
 
-	public V1_7_R3(AllAssets allAssets) {
+	public NMS_V1_7_R3(AllAssets allAssets) {
 		this.plugin = allAssets;
 	}
 

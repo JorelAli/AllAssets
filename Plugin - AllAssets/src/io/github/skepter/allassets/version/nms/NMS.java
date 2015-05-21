@@ -1,4 +1,4 @@
-package io.github.skepter.allassets.version;
+package io.github.skepter.allassets.version.nms;
 
 import org.bukkit.Location;
 import org.bukkit.block.Sign;

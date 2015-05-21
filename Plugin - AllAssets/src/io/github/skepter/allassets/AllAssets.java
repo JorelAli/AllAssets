@@ -148,10 +148,16 @@ import io.github.skepter.allassets.utils.Files;
 import io.github.skepter.allassets.utils.Files.Directory;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.FileUtils;
-import io.github.skepter.allassets.version.NMS;
-import io.github.skepter.allassets.version.V1_8_R1;
-import io.github.skepter.allassets.version.V1_8_R2;
-import io.github.skepter.allassets.version.V1_8_R3;
+import io.github.skepter.allassets.version.nms.NMS;
+import io.github.skepter.allassets.version.nms.NMS_V1_7_R3;
+import io.github.skepter.allassets.version.nms.NMS_V1_8_R1;
+import io.github.skepter.allassets.version.nms.NMS_V1_8_R2;
+import io.github.skepter.allassets.version.nms.NMS_V1_8_R3;
+import io.github.skepter.allassets.version.packets.Packet;
+import io.github.skepter.allassets.version.packets.Packet_V1_7_R3;
+import io.github.skepter.allassets.version.packets.Packet_V1_8_R1;
+import io.github.skepter.allassets.version.packets.Packet_V1_8_R2;
+import io.github.skepter.allassets.version.packets.Packet_V1_8_R3;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -315,6 +321,7 @@ public class AllAssets extends JavaPlugin {
 
 	/* NMS :) */
 	private NMS nms;
+	private Packet packet;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -378,16 +385,24 @@ public class AllAssets extends JavaPlugin {
 			String version = p.substring(p.lastIndexOf('.') + 1);
 			getLogger().info("Version " + version + " found");
 			switch (version) {
+				case "v1_7_R3":
+					nms = new NMS_V1_7_R3(this);
+					packet = new Packet_V1_7_R3(this);
+					getLogger().info("Version " + version + " implemented!");
+					break;
 				case "v1_8_R1":
-					nms = new V1_8_R1(this);
+					nms = new NMS_V1_8_R1(this);
+					packet = new Packet_V1_8_R1(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
 				case "v1_8_R2":
-					nms = new V1_8_R2(this);
+					nms = new NMS_V1_8_R2(this);
+					packet = new Packet_V1_8_R2(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
 				case "v1_8_R3":
-					nms = new V1_8_R3(this);
+					nms = new NMS_V1_8_R3(this);
+					packet = new Packet_V1_8_R3(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
 				default:
@@ -666,6 +681,10 @@ public class AllAssets extends JavaPlugin {
 
 	public NMS getNMS() {
 		return nms;
+	}
+	
+	public Packet getPacketHandler() {
+		return packet;
 	}
 
 	private void setupVault() {

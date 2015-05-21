@@ -33,6 +33,7 @@ import org.bukkit.entity.Player;
 //way to generate NMS GameProfile objects
 //add nmsWorld
 //play with playerAbilities in EntityHuman
+@Deprecated
 public class MinecraftReflectionUtils {
 
 	/* Main objects */

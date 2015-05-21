@@ -309,53 +309,7 @@ public class CommandDebug implements Listener {
 		} catch (final Exception e) {
 		}
 	}
-
-	@CommandHandler(name = "debug.pig", permission = "debug", description = "Test reflection of mob following")
-	public void pig(final CommandArgs args) {
-		try {
-			final Player player = args.getPlayer();
-			final LivingEntity entity = player.getWorld().spawn(player.getLocation(), Pig.class);
-			final float f = 1.75F;
-			Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new Runnable() {
-				@Override
-				public void run() {
-					try {
-						MinecraftReflectionUtils utils = new MinecraftReflectionUtils(player);
-						Object craftEntity = ReflectionUtils.getPerfectField(entity, entity.getClass(), "world");
-//						Object craftEntity = entity.getClass().getDeclaredMethod("getHandle").invoke(entity);
-						//						System.out.println("CraftEntity: " + craftEntity.getClass().getName());
-						//						Object entityInsentient = utils.getNMSClass("EntityInsentient").cast(craftEntity);
-						Class<?> eI = utils.getNMSClass("EntityInsentient");
-						Class<?> nA = utils.getNMSClass("NavigationAbstract");
-						
-						//
-						
-//						Class<?> c = utils.nmsWorldClass;
-						
-						//
-						
-						
-						MethodHandle mh = MethodHandles.lookup().findSpecial(eI, "getNavigation", MethodType.methodType(nA), craftEntity.getClass());
-						Object navigation = mh.invoke(craftEntity);
-						//						System.out.println("EntityInsentient: " + entityInsentient.getClass().getName());
-						//						Object navigation = entityInsentient.getClass().getDeclaredMethod("getNavigation").invoke(entityInsentient);
-						Method m = navigation.getClass().getDeclaredMethod("a", Double.class, Double.class, Double.class, Double.class);
-						m.invoke(navigation, player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ(), f);
-						//								
-					} catch (Exception e) {
-						//						CommandLog.addLog("Error with debug pig", LogType.ERROR);
-						e.printStackTrace();
-					}
-					//((EntityInsentient) ((CraftEntity) e).getHandle()).getNavigation().a(p.getLocation().getX(), p.getLocation().getY(), p.getLocation().getZ(), f);
-					catch (Throwable e) {
-						e.printStackTrace();
-					}
-				}
-			}, 0, 40);
-		} catch (final Exception e) {
-		}
-	}
-
+	
 	@CommandHandler(name = "debug.velocity", permission = "debug", description = "Tests the velocity")
 	public void velocity(final CommandArgs args) {
 		try {
