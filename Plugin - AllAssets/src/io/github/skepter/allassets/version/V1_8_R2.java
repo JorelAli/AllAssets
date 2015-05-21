@@ -10,6 +10,7 @@ import net.minecraft.server.v1_8_R2.Container;
 import net.minecraft.server.v1_8_R2.EntityHuman;
 import net.minecraft.server.v1_8_R2.EntityPlayer;
 
+import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.craftbukkit.v1_8_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -62,6 +63,12 @@ public class V1_8_R2 implements NMS{
 	public void openSign(Player player, Sign sign) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean setBlock(Location loc, int blockId, byte data) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.worldmodifier;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -72,8 +73,9 @@ public class WM_Methods {
 						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
 //						if (blocks.size() < divisor)
 							for (final Block b : blocks) {
-								b.setType(info.getMaterial());
-								b.setData(info.getData());
+								AllAssets.instance().getNMS().setBlock(b.getLocation(), info.getMaterial().getId(), info.getData());
+//								b.setType(info.getMaterial());
+//								b.setData(info.getData());
 							}
 //						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
 //							b.setType(info.getMaterial());
