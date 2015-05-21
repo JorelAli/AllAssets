@@ -19,7 +19,9 @@ import org.bukkit.World;
 import org.bukkit.block.Sign;
 import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 public class V1_7_R3 implements NMS {
@@ -189,4 +191,9 @@ public class V1_7_R3 implements NMS {
         }
 	}
 
+	@Override
+	public String nmsName(ItemStack itemStack) {
+		return CraftItemStack.asNMSCopy(itemStack).a();
+	}
+	
 }

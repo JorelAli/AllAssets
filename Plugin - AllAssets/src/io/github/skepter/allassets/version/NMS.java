@@ -3,6 +3,7 @@ package io.github.skepter.allassets.version;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /*
  * See
@@ -24,6 +25,8 @@ public interface NMS {
 	void openSign(Player player, Sign sign);
 	
 	boolean setBlock(Location loc, int blockId, byte data);
+	
+	String nmsName(ItemStack itemStack);
 	
 //	String getLocale(Player player);
 }
