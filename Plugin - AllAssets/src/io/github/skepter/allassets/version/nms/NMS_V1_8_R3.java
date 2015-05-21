@@ -32,10 +32,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-public class NMS_V1_8_R3 implements NMS{
+public class NMS_V1_8_R3 implements NMS {
 
 	Plugin plugin;
-	
+
 	public NMS_V1_8_R3(AllAssets allAssets) {
 		this.plugin = allAssets;
 	}
@@ -44,17 +44,17 @@ public class NMS_V1_8_R3 implements NMS{
 	public int getPing(Player player) {
 		return ((CraftPlayer) player).getHandle().ping;
 	}
-	
+
 	@Override
 	public void setInvunerability(Player player, boolean invunerable) {
 		((CraftPlayer) player).getHandle().abilities.isInvulnerable = invunerable;
 	}
-	
+
 	@Override
 	public boolean isInvunerable(Player player) {
 		return ((CraftPlayer) player).getHandle().abilities.isInvulnerable;
 	}
-	
+
 	@Override
 	public void openAnvil(Player player) {
 		BlockPosition blockPosition = new BlockPosition(0, 0, 0);
@@ -78,7 +78,7 @@ public class NMS_V1_8_R3 implements NMS{
 	@Override
 	public void openSign(Player player, Sign sign) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class NMS_V1_8_R3 implements NMS{
 		Chunk chunk = w.getChunkAt(x >> 4, z >> 4);
 		return a(chunk, x & 0x0f, y, z & 0x0f, Block.getById(blockId), data, loc);
 	}
-	
+
 	private boolean a(Chunk that, int x, int y, int z, Block block, int blockData, Location location) {
 		try {
 			int x1 = z << 4 | x;
@@ -182,7 +182,7 @@ public class NMS_V1_8_R3 implements NMS{
 				if (oldBlock instanceof IContainer) {
 					chunksection.setType(x, y & 15, z, block.getBlockData());
 				}
-								
+
 				// CraftBukkit end
 
 				if (chunksection.getType(x, y & 15, z) != block.getBlockData()) {
@@ -235,7 +235,7 @@ public class NMS_V1_8_R3 implements NMS{
 		}
 		return false;
 	}
-	
+
 	@Override
 	public String nmsName(ItemStack itemStack) {
 		return CraftItemStack.asNMSCopy(itemStack).a();
@@ -255,5 +255,14 @@ public class NMS_V1_8_R3 implements NMS{
 		net.minecraft.server.v1_8_R3.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
 		return is.getTag().getString(key);
 	}
-	
+
+	@Override
+	public String getLocale(Player player) {
+		EntityPlayer p = ((CraftPlayer) player).getHandle();
+		try {
+			return (String) ReflectionUtils.getPrivateFieldValue(p, "locale");
+		} catch (Exception e) {
+		}
+		return "en";
+	}
 }

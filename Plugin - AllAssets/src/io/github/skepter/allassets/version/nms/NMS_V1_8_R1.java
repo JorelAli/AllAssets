@@ -272,4 +272,14 @@ public class NMS_V1_8_R1 implements NMS {
 		net.minecraft.server.v1_8_R1.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
 		return is.getTag().getString(key);
 	}
+
+	@Override
+	public String getLocale(Player player) {
+		EntityPlayer p = ((CraftPlayer) player).getHandle();
+		try {
+			return (String) ReflectionUtils.getPrivateFieldValue(p, "locale");
+		} catch (Exception e) {
+		}
+		return "en";
+	}
 }

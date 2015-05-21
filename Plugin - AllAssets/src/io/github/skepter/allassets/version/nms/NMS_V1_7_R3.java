@@ -1,6 +1,7 @@
 package io.github.skepter.allassets.version.nms;
 
 import io.github.skepter.allassets.AllAssets;
+import io.github.skepter.allassets.reflection.ReflectionUtils;
 
 import java.lang.reflect.Field;
 
@@ -9,6 +10,7 @@ import net.minecraft.server.v1_7_R3.BlockContainer;
 import net.minecraft.server.v1_7_R3.Blocks;
 import net.minecraft.server.v1_7_R3.Chunk;
 import net.minecraft.server.v1_7_R3.ChunkSection;
+import net.minecraft.server.v1_7_R3.EntityPlayer;
 import net.minecraft.server.v1_7_R3.IContainer;
 import net.minecraft.server.v1_7_R3.NBTTagCompound;
 import net.minecraft.server.v1_7_R3.PacketPlayOutOpenSignEditor;
@@ -210,6 +212,17 @@ public class NMS_V1_7_R3 implements NMS {
 	public String getStringNBT(ItemStack itemStack, String key) {
 		net.minecraft.server.v1_7_R3.ItemStack is = CraftItemStack.asNMSCopy(itemStack);
 		return is.tag.getString(key);
+	}
+
+	
+	@Override
+	public String getLocale(Player player) {
+		EntityPlayer p = ((CraftPlayer) player).getHandle();
+		try {
+			return (String) ReflectionUtils.getPrivateFieldValue(p, "locale");
+		} catch (Exception e) {
+		}
+		return "en";
 	}
 
 }

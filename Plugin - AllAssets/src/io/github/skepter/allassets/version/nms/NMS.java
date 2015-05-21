@@ -32,5 +32,5 @@ public interface NMS {
 	
 	String getStringNBT(ItemStack itemStack, String key);
 	
-//	String getLocale(Player player);
+	String getLocale(Player player);
 }

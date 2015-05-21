@@ -23,12 +23,10 @@
  *******************************************************************************/
 package io.github.skepter.allassets.utils.utilclasses;
 
-import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
-import io.github.skepter.allassets.reflection.ReflectionUtils;
+import io.github.skepter.allassets.AllAssets;
 
 import org.bukkit.inventory.ItemStack;
 
-@SuppressWarnings("deprecation")
 public class ItemUtils {
 
 	private ItemStack is;
@@ -36,30 +34,13 @@ public class ItemUtils {
 	public ItemUtils(final ItemStack is) {
 		this.is = is;
 	}
-
-	@Deprecated
+	
 	public ItemStack addStringNBT(String key, String data) {
-		try {
-			Object nmsItem = new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asNMSCopy", ItemStack.class).invoke(null, is);
-			Object tag = ReflectionUtils.getPrivateFieldValue(nmsItem, "tag");
-			if (tag == null)
-				tag = new MinecraftReflectionUtils().getNMSClass("NBTTagCompund").newInstance();
-			tag.getClass().getDeclaredMethod("setString", String.class, String.class).invoke(tag, key, data);
-			return (ItemStack) new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asCraftMirror", nmsItem.getClass()).invoke(null, nmsItem);
-		} catch (Exception e) {
-		}
-		return is;
+		return AllAssets.instance().getNMS().addStringNBT(is, key, data);
 	}
 
-	@Deprecated
 	public String getStringNBT(String key) {
-		try {
-			Object nmsItem = new MinecraftReflectionUtils().craftItemStackClass.getDeclaredMethod("asNMSCopy", ItemStack.class).invoke(null, is);
-			Object tag = ReflectionUtils.getPrivateFieldValue(nmsItem, "tag");
-			return (String) tag.getClass().getDeclaredMethod("getString", String.class).invoke(tag, key);
-		} catch (Exception e) {
-		}
-		return null;
+		return AllAssets.instance().getNMS().getStringNBT(is, key);
 	}
 
 	public boolean isPick() {

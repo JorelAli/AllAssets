@@ -2,7 +2,6 @@ package io.github.skepter.allassets.api.users;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.config.PlayerData;
-import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
 import io.github.skepter.allassets.serializers.InventorySerializer;
 import io.github.skepter.allassets.serializers.LocationSerializer;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
@@ -74,21 +73,7 @@ public class User implements IUser {
 	public String getLanguage() {
 		if (!isOnline)
 			return "en";
-		try {
-			switch (new MinecraftReflectionUtils(player).locale.toLowerCase()) {
-				case "de_de":
-					return "de";
-				case "sv_se":
-					return "sv";
-				case "nl_nl":
-					return "nl";
-				case "fr_fr":
-					return "fr";
-			}
-		} catch (final Exception e) {
-			return "en";
-		}
-		return "en";
+		return AllAssets.instance().getNMS().getLocale(player);
 	}
 
 	@Override
