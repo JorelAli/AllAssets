@@ -2,9 +2,11 @@ package io.github.skepter.allassets.version.packets;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.version.packets.PacketEnums.AnimationType;
+import net.minecraft.server.v1_7_R3.EntityHuman;
 import net.minecraft.server.v1_7_R3.EnumClientCommand;
 import net.minecraft.server.v1_7_R3.PacketPlayInClientCommand;
 import net.minecraft.server.v1_7_R3.PacketPlayOutAnimation;
+import net.minecraft.server.v1_7_R3.PacketPlayOutBed;
 
 import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -33,6 +35,12 @@ public class Packet_V1_7_R3 implements Packet {
 	@Override
 	public void doAnimation(Player player, AnimationType type) {
 		PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), type.getId());
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	}
+
+	@Override
+	public void putToBed(Player player) {
+		PacketPlayOutBed packet = new PacketPlayOutBed((EntityHuman)((CraftPlayer) player).getHandle(), (int) player.getLocation().getX(), (int) player.getLocation().getY(), (int) player.getLocation().getZ());
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 

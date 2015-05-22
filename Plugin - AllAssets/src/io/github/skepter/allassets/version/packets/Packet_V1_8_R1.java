@@ -2,10 +2,13 @@ package io.github.skepter.allassets.version.packets;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.version.packets.PacketEnums.AnimationType;
+import net.minecraft.server.v1_8_R1.BlockPosition;
 import net.minecraft.server.v1_8_R1.ChatSerializer;
+import net.minecraft.server.v1_8_R1.EntityHuman;
 import net.minecraft.server.v1_8_R1.EnumClientCommand;
 import net.minecraft.server.v1_8_R1.PacketPlayInClientCommand;
 import net.minecraft.server.v1_8_R1.PacketPlayOutAnimation;
+import net.minecraft.server.v1_8_R1.PacketPlayOutBed;
 import net.minecraft.server.v1_8_R1.PacketPlayOutChat;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
@@ -36,6 +39,13 @@ public class Packet_V1_8_R1 implements Packet {
 	@Override
 	public void doAnimation(Player player, AnimationType type) {
 		PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), type.getId());
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	}
+	
+	@Override
+	public void putToBed(Player player) {
+		BlockPosition blockPosition = new BlockPosition((int) player.getLocation().getX(), (int) player.getLocation().getY(), (int) player.getLocation().getZ());
+		PacketPlayOutBed packet = new PacketPlayOutBed((EntityHuman)((CraftPlayer) player).getHandle(), blockPosition);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 

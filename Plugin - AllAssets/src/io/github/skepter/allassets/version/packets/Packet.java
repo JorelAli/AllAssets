@@ -12,4 +12,6 @@ public interface Packet {
 	
 	public void doAnimation(Player player, AnimationType type);
 	
+	public void putToBed(Player player);
+	
 }
