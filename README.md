@@ -9,7 +9,7 @@ What it is
 Pretty simply put - this plugin is aimed to be the 'best plugin a server could ever need'
 It is designed with speed, simplicity and ease of use in mind, so even brand new server owners can get to grips with it.
 
-Also desgined to be as light weight as possible (compared to Essentials) and supposed to be really easy to use.
+Also designed to be as light weight as possible (compared to Essentials) and supposed to be really easy to use.
 
 Compiling & source code info
 ----------------------------
