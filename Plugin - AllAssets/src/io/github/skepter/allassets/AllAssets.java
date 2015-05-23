@@ -122,6 +122,9 @@ import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
+import io.github.skepter.allassets.db.DatabasesHandler;
+import io.github.skepter.allassets.db.DatabasesHandler.DatabaseType;
+import io.github.skepter.allassets.db.DatabasesHandler.ObjectType;
 import io.github.skepter.allassets.libs.ComphenixsGhostFactory;
 import io.github.skepter.allassets.listeners.BlockPoweredListener;
 import io.github.skepter.allassets.listeners.ChatListener;
@@ -197,6 +200,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @GitHub RainoBoy97 - SimpleScoreboard
  * @GitHub Kezz101 - MySQL-WTFAIR
  * @GitHub atesin - TabText
+ * @GitHub gpotter2 - DatabasesAPI
  *
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
@@ -261,44 +265,36 @@ public class AllAssets extends JavaPlugin {
 
 	private void devRegister(final CommandFramework framework) {
 
-		//// Tundraboy ////
-		{
+		//Ready classes are at a standard where they can be submitted for the next build
 
-		}
+		// [NEED IMPROVEMENT] Commands
+		new CommandTitle(framework);
+		//			new CommandUnban(framework);
 
-		//// Skepter ////
-		{
-			//Ready classes are at a standard where they can be submitted for the next build
+		// [READY] Commands
+		new CommandSetWarp(framework);
+		new CommandDelWarp(framework);
+		new CommandWarps(framework);
+		new CommandWarp(framework);
+		new CommandNearbyWarps(framework);
 
-			// [NEED IMPROVEMENT] Commands
-			new CommandTitle(framework);
-			//			new CommandUnban(framework);
+		new CommandTpall(framework);
+		new CommandPrefix(framework);
+		new CommandSuffix(framework);
+		new CommandRepair(framework);
+		new CommandBreak(framework);
+		new CommandSetBalance(framework);
 
-			// [READY] Commands
-			new CommandSetWarp(framework);
-			new CommandDelWarp(framework);
-			new CommandWarps(framework);
-			new CommandWarp(framework);
-			new CommandNearbyWarps(framework);
+		//Listeners
+		//			r(new CommandBan(framework));
+		r(new CommandCommandBlock(framework));
 
-			new CommandTpall(framework);
-			new CommandPrefix(framework);
-			new CommandSuffix(framework);
-			new CommandRepair(framework);
-			new CommandBreak(framework);
-			new CommandSetBalance(framework);
+		// [READY] WorldModifier
+		r(new Wand(framework));
+		new WM_Methods(framework);
 
-			//Listeners
-			//			r(new CommandBan(framework));
-			r(new CommandCommandBlock(framework));
-
-			// [READY] WorldModifier
-			r(new Wand(framework));
-			new WM_Methods(framework);
-
-			//Other
-			new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
-		}
+		//Other
+		new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
 
 	}
 
@@ -322,6 +318,8 @@ public class AllAssets extends JavaPlugin {
 	/* NMS :) */
 	private NMS nms;
 	private Packet packet;
+
+	private DatabasesHandler dbHandler;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -379,7 +377,7 @@ public class AllAssets extends JavaPlugin {
 			setupVault();
 		}
 
-		if (nms == null) {
+		if (nms == null && packet == null) {
 			getLogger().info("Hooking into NMS version dependant system...");
 			String p = getServer().getClass().getPackage().getName();
 			String version = p.substring(p.lastIndexOf('.') + 1);
@@ -411,7 +409,24 @@ public class AllAssets extends JavaPlugin {
 					break;
 			}
 		}
+
+		//See http://bukkit.org/threads/databases-api.360907/#post-3114863
+		//banID, banner, bannedPlayer, banMessage, time
+		boolean useMySQL = false;
+		if (useMySQL) {
+			dbHandler = new DatabasesHandler(DatabaseType.MYSQL, "bannedPlayers");
+			dbHandler.init("host", "user", "password", "bannedPlayers", "port (default:3306)", "banID");
+		} else {
+			dbHandler = new DatabasesHandler(DatabaseType.SQLITE, "bannedPlayers", Files.getDirectory(Directory.STORAGE).getAbsolutePath() + File.separator + "bannedPlayers.db");
+			dbHandler.init(null, null, null, "bannedPlayers", null, "banID");
+		}
 		
+		dbHandler.addColumn("banID", ObjectType.BIGINT);
+		dbHandler.addColumn("banner", ObjectType.VARCHAR);
+		dbHandler.addColumn("bannedPlayer", ObjectType.VARCHAR);
+		dbHandler.addColumn("banMessage", ObjectType.VARCHAR);
+		dbHandler.addColumn("time", ObjectType.BIGINT);
+
 		Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|AdvCdm", new PluginMessageListenerImplementation());
 
 		ghostFactory = new ComphenixsGhostFactory(this);
@@ -682,7 +697,7 @@ public class AllAssets extends JavaPlugin {
 	public NMS getNMS() {
 		return nms;
 	}
-	
+
 	public Packet getPacketHandler() {
 		return packet;
 	}
