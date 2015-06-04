@@ -28,6 +28,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /** A simplish way to create packets - does not work for EVERY one! */
+@Deprecated
 public class PacketBuilder {
 
 	public enum PacketType {

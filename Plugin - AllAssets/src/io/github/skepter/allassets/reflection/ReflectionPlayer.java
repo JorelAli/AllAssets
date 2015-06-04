@@ -25,18 +25,13 @@ import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
 
 import org.bukkit.entity.Player;
 
-public class ReflectionPlayer {
+/**
+ * @deprecated Use NMS and Packets instead
+ * 
+ */
 
-	public enum AnimationType {
-		SWING_ARM,
-		DAMAGE,
-		LEAVE_BED,
-		EAT_FOOD,
-		CRITICAL_EFFECT,
-		MAGIC_EFFECT,
-		CROUCH,
-		UNCROUCH;
-	}
+@Deprecated
+public class ReflectionPlayer {
 
 	public enum GameStateEffects {
 		INVALID_BED(0),
@@ -63,62 +58,22 @@ public class ReflectionPlayer {
 		this.player = player;
 	}
 
-	@Deprecated
-	public void sendActionBar(String message) {
-		try {
-			new PacketBuilder(player, PacketType.PLAY_OUT_CHAT).set("a", new MinecraftReflectionUtils(player).chatSerialize(message)).set("b", (byte) 2).send();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Deprecated
-	public void doAnimation(final AnimationType type) {
-		try {
-			final PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_ANIMATION);
-			int animationID = 0;
-			switch (type) {
-				case CRITICAL_EFFECT:
-					animationID = 4;
-					break;
-				case CROUCH:
-					animationID = 104;
-					break;
-				case DAMAGE:
-					animationID = 1;
-					break;
-				case EAT_FOOD:
-					animationID = 3;
-					break;
-				case LEAVE_BED:
-					animationID = 2;
-					break;
-				case MAGIC_EFFECT:
-					animationID = 5;
-					break;
-				case SWING_ARM:
-					animationID = 0;
-					break;
-				case UNCROUCH:
-					animationID = 105;
-					break;
-				default:
-					break;
-			}
-			packet.set("a", player.getUniqueId()).setInt("b", animationID).send();
-		} catch (final Exception exception) {
-		}
-	}
-
-	/** Take case when setting values! Use 0 if no value is required:
+	/**
+	 * Take case when setting values! Use 0 if no value is required:
 	 * 
-	 * @param effect The game effect to use
-	 * @param value CHANGE_GAMEMODE: 0 = survival, 1 = creative, 2 = adventure,
-	 * 3 = spectator
-	 * @param value DEMO_MESSAGE: 0 = welcome screen, 101 = controls, 102 = jump
-	 * control, 103 = inventory control
-	 * @param value FADE_VALUE: 1 = dark, 0 = bright;
-	 * @param value FADE_TIME: ticks for the sky to fade */
+	 * @param effect
+	 *            The game effect to use
+	 * @param value
+	 *            CHANGE_GAMEMODE: 0 = survival, 1 = creative, 2 = adventure, 3
+	 *            = spectator
+	 * @param value
+	 *            DEMO_MESSAGE: 0 = welcome screen, 101 = controls, 102 = jump
+	 *            control, 103 = inventory control
+	 * @param value
+	 *            FADE_VALUE: 1 = dark, 0 = bright;
+	 * @param value
+	 *            FADE_TIME: ticks for the sky to fade
+	 */
 	public void doGameStateChange(final GameStateEffects effect, final int value) {
 		try {
 			final PacketBuilder packet = new PacketBuilder(player, PacketType.PLAY_OUT_GAME_STATE_CHANGE);
@@ -126,15 +81,6 @@ public class ReflectionPlayer {
 			packet.setInt("b", effectCode).set("c", Float.valueOf(value)).send();
 		} catch (final Exception exception) {
 		}
-	}
-
-	public void putToBed() {
-		new PacketBuilder(player, PacketType.PLAY_OUT_BED).set("a", player.getEntityId()).setLocation("b", "c", "d", player.getLocation()).send();
-	}
-
-	@Deprecated
-	public void awakeFromBed() {
-		doAnimation(AnimationType.LEAVE_BED);
 	}
 
 }

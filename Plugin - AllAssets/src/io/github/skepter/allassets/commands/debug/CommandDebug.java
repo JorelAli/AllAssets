@@ -34,10 +34,6 @@ import io.github.skepter.allassets.api.CustomInventory;
 import io.github.skepter.allassets.api.utils.Debugger;
 import io.github.skepter.allassets.libs.JSON;
 import io.github.skepter.allassets.reflection.MinecraftReflectionUtils;
-import io.github.skepter.allassets.reflection.PacketBuilder;
-import io.github.skepter.allassets.reflection.PacketBuilder.PacketType;
-import io.github.skepter.allassets.reflection.ReflectionPlayer;
-import io.github.skepter.allassets.reflection.ReflectionPlayer.GameStateEffects;
 import io.github.skepter.allassets.reflection.ReflectionUtils;
 import io.github.skepter.allassets.tasks.TPS;
 import io.github.skepter.allassets.test.VanishPlayersItemStack;
@@ -75,20 +71,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.help.HelpTopic;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
+@SuppressWarnings("deprecation")
 public class CommandDebug implements Listener {
 
 	int taskID = 0;
@@ -218,17 +211,6 @@ public class CommandDebug implements Listener {
 		});
 	}
 
-	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Invoked GameStateChange packet")
-	public void gsc(final CommandArgs args) {
-		try {
-			final ReflectionPlayer p = new ReflectionPlayer(args.getPlayer());
-			final GameStateEffects eff = GameStateEffects.valueOf(args.getArgs()[0]);
-
-			p.doGameStateChange(eff, Integer.parseInt(args.getArgs()[1]));
-		} catch (final Exception e) {
-		}
-	}
-
 	@CommandHandler(name = "debug.regen", permission = "debug", description = "Regenerate a chunk")
 	public void regen(final CommandArgs args) {
 		try {
@@ -241,24 +223,6 @@ public class CommandDebug implements Listener {
 	private final Set<UUID> items = new HashSet<UUID>();
 	private final Map<UUID, Material> itemMap = new HashMap<UUID, Material>();
 
-	@EventHandler
-	public void onMove(final PlayerMoveEvent event) {
-		if (items.contains(event.getPlayer().getUniqueId())) {
-			final WitherSkull base = event.getPlayer().getLocation().getWorld().spawn(event.getPlayer().getLocation(), WitherSkull.class);
-			base.setDirection(new Vector(0, 0, 0));
-			base.setVelocity(new Vector(0, 0, 0));
-			final Entity e = event.getPlayer().getLocation().getWorld().dropItem(event.getPlayer().getLocation(), new ItemStack(itemMap.get(event.getPlayer().getUniqueId())));
-			base.setPassenger(e);
-
-			for (final Player p : Bukkit.getServer().getOnlinePlayers()) {
-				final PacketBuilder builder = new PacketBuilder(p, PacketType.PLAY_OUT_ENTITY_DESTROY);
-				builder.set("a", new int[] { base.getEntityId() });
-				builder.send();
-			}
-		}
-	}
-
-	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "debug.item", permission = "debug", description = "Makes items follow you")
 	public void item(final CommandArgs args) {
 		try {
@@ -299,7 +263,6 @@ public class CommandDebug implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@CommandHandler(name = "debug.set", permission = "debug", description = "Does something........")
 	public void set(final CommandArgs args) {
 		try {
@@ -416,6 +379,7 @@ public class CommandDebug implements Listener {
 
 	@SuppressWarnings("unchecked")
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
+	@Deprecated
 	public void unloadWorld(final CommandArgs args) {
 		try {
 			final Player player = args.getPlayer();
