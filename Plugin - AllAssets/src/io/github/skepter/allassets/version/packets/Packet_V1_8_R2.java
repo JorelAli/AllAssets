@@ -48,4 +48,10 @@ public class Packet_V1_8_R2 implements Packet {
 		PacketPlayOutBed packet = new PacketPlayOutBed((EntityHuman)((CraftPlayer) player).getHandle(), blockPosition);
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
+	
+	@Override
+	public void sendJSON(Player player, String jsonMessage) {
+		PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a(jsonMessage));
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	}
 }

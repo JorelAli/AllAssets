@@ -14,4 +14,5 @@ public interface Packet {
 	
 	public void putToBed(Player player);
 	
+	public void sendJSON(Player player, String jsonMessage);
 }

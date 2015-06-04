@@ -49,4 +49,10 @@ public class Packet_V1_8_R1 implements Packet {
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 
+	@Override
+	public void sendJSON(Player player, String jsonMessage) {
+		PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a(jsonMessage));
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	}
+
 }

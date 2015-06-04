@@ -22,7 +22,7 @@ public class Packet_V1_8_R3 implements Packet {
 	public Packet_V1_8_R3(AllAssets allAssets) {
 		plugin = allAssets;
 	}
-	
+
 	@Override
 	public boolean sendActionBarMessage(Player player, String message) {
 		PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a(message), (byte) 2);
@@ -35,17 +35,23 @@ public class Packet_V1_8_R3 implements Packet {
 		PacketPlayInClientCommand packet = new PacketPlayInClientCommand(EnumClientCommand.PERFORM_RESPAWN);
 		((CraftPlayer) player).getHandle().playerConnection.a(packet);
 	}
-	
+
 	@Override
 	public void doAnimation(Player player, AnimationType type) {
 		PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), type.getId());
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
-	
+
 	@Override
 	public void putToBed(Player player) {
 		BlockPosition blockPosition = new BlockPosition((int) player.getLocation().getX(), (int) player.getLocation().getY(), (int) player.getLocation().getZ());
-		PacketPlayOutBed packet = new PacketPlayOutBed((EntityHuman)((CraftPlayer) player).getHandle(), blockPosition);
+		PacketPlayOutBed packet = new PacketPlayOutBed((EntityHuman) ((CraftPlayer) player).getHandle(), blockPosition);
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	}
+
+	@Override
+	public void sendJSON(Player player, String jsonMessage) {
+		PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a(jsonMessage));
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 }
