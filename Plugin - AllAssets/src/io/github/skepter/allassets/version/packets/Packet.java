@@ -1,6 +1,7 @@
 package io.github.skepter.allassets.version.packets;
 
 import io.github.skepter.allassets.version.packets.PacketEnums.AnimationType;
+import io.github.skepter.allassets.version.packets.PacketEnums.GameStateEffect;
 
 import org.bukkit.entity.Player;
 
@@ -15,4 +16,6 @@ public interface Packet {
 	public void putToBed(Player player);
 	
 	public void sendJSON(Player player, String jsonMessage);
+	
+	public void doGameStateChange(Player player, GameStateEffect effect);
 }

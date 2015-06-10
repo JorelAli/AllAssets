@@ -2,6 +2,7 @@ package io.github.skepter.allassets.version.packets;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.version.packets.PacketEnums.AnimationType;
+import io.github.skepter.allassets.version.packets.PacketEnums.GameStateEffect;
 import net.minecraft.server.v1_8_R1.BlockPosition;
 import net.minecraft.server.v1_8_R1.ChatSerializer;
 import net.minecraft.server.v1_8_R1.EntityHuman;
@@ -10,6 +11,7 @@ import net.minecraft.server.v1_8_R1.PacketPlayInClientCommand;
 import net.minecraft.server.v1_8_R1.PacketPlayOutAnimation;
 import net.minecraft.server.v1_8_R1.PacketPlayOutBed;
 import net.minecraft.server.v1_8_R1.PacketPlayOutChat;
+import net.minecraft.server.v1_8_R1.PacketPlayOutGameStateChange;
 
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -55,4 +57,9 @@ public class Packet_V1_8_R1 implements Packet {
 		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 	}
 
+	@Override
+	public void doGameStateChange(Player player, GameStateEffect effect) {
+		PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(effect.getId(), effect.getDataValue());
+		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	}
 }

@@ -25,12 +25,12 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.administration;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.reflection.ReflectionPlayer;
-import io.github.skepter.allassets.reflection.ReflectionPlayer.GameStateEffects;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.version.packets.PacketEnums.GameStateEffect;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -62,7 +62,7 @@ public class CommandWeather {
 					case "sun":
 						player.getWorld().setStorm(false);
 						player.getWorld().setThundering(false);
-						new ReflectionPlayer(player).doGameStateChange(GameStateEffects.END_RAINING, 0);
+						AllAssets.instance().getPacketHandler().doGameStateChange(player, GameStateEffect.END_RAINING);
 						player.sendMessage(Strings.TITLE + "Weather set to clear");
 						break;
 					case "thunder":
@@ -112,7 +112,7 @@ public class CommandWeather {
 			}
 			player.getWorld().setStorm(false);
 			player.getWorld().setThundering(false);
-			new ReflectionPlayer(player).doGameStateChange(GameStateEffects.END_RAINING, 0);
+			AllAssets.instance().getPacketHandler().doGameStateChange(player, GameStateEffect.END_RAINING);
 			player.sendMessage(Strings.TITLE + "Weather set to clear");
 		} else
 			for (final World world : Bukkit.getWorlds()) {
