@@ -1,4 +1,3 @@
-package io.github.skepter.allassets.db;
 /*
  *  Copyright (C) 2015 Gabriel POTTER (gpotter2)
  *
@@ -17,10 +16,6 @@ package io.github.skepter.allassets.db;
  * 
  */
 
-import io.github.skepter.allassets.db.DatabasesUtil.DataObject;
-import io.github.skepter.allassets.db.DatabasesUtil.MySQL;
-import io.github.skepter.allassets.db.DatabasesUtil.SQLite;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.ConnectException;
@@ -31,12 +26,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import DatabasesUtil.DataObject;
+import DatabasesUtil.UtilMySQL;
+import DatabasesUtil.UtilSQLite;
+
 /**
  * 
  * The DatabasesHandler main class:<br/>
  * The simple api to use MySQL and SQLite !!
  * 
  * @author gpotter2
+ * @version 1.3
  *
  */
 
@@ -108,6 +108,7 @@ public class DatabasesHandler {
 	 * @param port The port of the database. Null for SQLite
 	 * @param primary_key_name The name of the primary key (this key musn't never be used somewhere else)
 	 * @return True if the database was initied, of false if the connection was impossible
+	 * @author gpotter2
 	 * 
 	 */
 	
@@ -157,18 +158,23 @@ public class DatabasesHandler {
 				return false;
 			}
 			System.out.println("Checking connexion...");
-			if(createTable()){
-				if(!sqllite_useable()){
-					System.err.println("SQLite is not installed !");
-					return false;
+			if(sqllite_installed()){
+				if(createTable()){
+					if(!sqllite_useable()){
+						System.err.println("SQLite is not useable !");
+						return false;
+					} else {
+						init = true;
+						long done_in = System.currentTimeMillis() - start_time;
+						System.out.println("Database loaded ! Done in " + done_in + "ms !");
+						return true;
+					}
 				} else {
-					init = true;
-					long done_in = System.currentTimeMillis() - start_time;
-					System.out.println("Database loaded ! Done in " + done_in + "ms !");
-					return true;
+					System.err.println("Cannot check for a table !");
+					return false;
 				}
 			} else {
-				System.err.println("Cannot check for a table !");
+				System.err.println("SQLite is not installed !");
 				return false;
 			}
 		} else {
@@ -177,6 +183,13 @@ public class DatabasesHandler {
 		}
 	}
 	
+	/**
+	 * 
+	 * An util class used to create a condition
+	 * 
+	 * @author gpotter2
+	 *
+	 */
 	public static class Condition {
 		String key;
 		String column_key;
@@ -195,6 +208,11 @@ public class DatabasesHandler {
 		}
 	}
 	
+	/**
+	 * The different types of objects
+	 * @author gpotter2
+	 *
+	 */
 	public enum ObjectType {
 		/**
 		 * Represent a normal Integer:<br/>
@@ -259,6 +277,7 @@ public class DatabasesHandler {
 	 * @param column_key The column name were the key will be used.
 	 * @param key The key in the column
 	 * @return The object or null if it doesn`t exist
+	 * @author gpotter2
 	 */
 	
 	public List<Object> getValues(String data, Condition... conditions){
@@ -282,6 +301,7 @@ public class DatabasesHandler {
 	 * @param column The column name
 	 * @param type The ObjectType used
 	 * @param primary If the PRIMARY KEY is set for this key
+	 * @author gpotter2
 	 * 
 	 */
 	
@@ -306,7 +326,7 @@ public class DatabasesHandler {
 		} else if(database_used.equals(DatabaseType.SQLITE)) {
 			main = "INSERT OR REPLACE INTO `" + table + "` (";
 		}
-        for(String key : keys){
+		for(String key : keys){
         	if(main.endsWith("`")){
         		main = main + ", `" + key + "`";
         	} else {
@@ -314,11 +334,11 @@ public class DatabasesHandler {
         	}
         }
         main = main + ") VALUES (";
-        for(Object value : values){
-        	if(main.endsWith("'")){
-        		main = main + ", '" + value + "'";
+        for(int i = 0; i < values.size(); i++){
+        	if(main.endsWith("?")){
+        		main = main + ", ?";
         	} else {
-        		main = main + "'" + value + "'";
+        		main = main + "?";
         	}
         }
         main = main + ");";
@@ -344,8 +364,8 @@ public class DatabasesHandler {
 		        	main = main + ", `" + key + "`";
 		        }
 		        main = main + ") VALUES (" + actual_primary_key.toString();
-		        for(Object value : values){
-		        	main = main + ", '" + value + "'";	
+		        for(int i = 0; i < values.size(); i++){
+		        	main = main + ", ?";	
 		        }
 		        main = main + ")";
 		        commands.add(main);
@@ -361,10 +381,28 @@ public class DatabasesHandler {
 	 * 
 	 * @param objects A list of DataObject to set on a line
 	 * @deprecated
+	 * @author gpotter2
 	 * 
 	 */
 	
-	public void insertValueForce(DataObject[] objects){
+	public void InsertValueForce(List<DataObject> objects){
+		DataObject[] array = objects.toArray(new DataObject[objects.size()]);
+		InsertValueForce(array);
+	}
+	
+	/**
+	 * 
+	 * Force insert a value in the database.<br/>
+	 * Will not replace any old value<br/>
+	 * 
+	 * @param objects An array of DataObject to set on a line
+	 * @deprecated
+	 * @author gpotter2
+	 * 
+	 */
+	
+	@SuppressWarnings("unchecked")
+	public void InsertValueForce(DataObject[] objects){
 		if(init){
 			ArrayList<String> keys = new ArrayList<String>(objects.length + 1);
 			ArrayList<Object> values = new ArrayList<Object>(objects.length + 1);
@@ -373,37 +411,22 @@ public class DatabasesHandler {
 				values.add(d.getData());
 			}
 			if(database_used.equals(DatabaseType.MYSQL)){
-				MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+				UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
 				try {
 					db.open(false);
-					if(!db.checkTable(table)){
-						createTable();
-					}
+					String command = getValueCommandStringSet(keys, values);
+	                db.update(command, values);
 				} catch (SQLException | ConnectException e) {
-					System.err.println("Error while checking and creating databse !");
-				}
-	            try {
-	            	String command = getValueCommandStringSet(keys, values);
-	                db.update(command);
-	            } catch (SQLException ex) {
-	            	ex.printStackTrace();
-	            	System.err.println("Error while setting a value in MySQL !");
-	            } finally {
+					System.err.println("Error while setting a value in MySQL !");
+				} finally {
 	                db.close();
 	            }
 			} else if(database_used.equals(DatabaseType.SQLITE)){
-				SQLite db = new SQLite();
-				try {
-					if(!db.checkTable(table)){
-						createTable();
-					}
-				} catch (SQLException e) {
-					System.err.println("Error while checking and creating databse !");
-				}
+				UtilSQLite db = new UtilSQLite();
                 try {
                 	String command = getValueCommandStringSet(keys, values);
                     db.open(path, false);
-                    db.update(command);
+                    db.update(command, values);
                 } catch (SQLException ex) {
                 	ex.printStackTrace();
                 	System.err.println("Error while setting a value in SQLite !");
@@ -426,12 +449,30 @@ public class DatabasesHandler {
 	 * Insert or replace a value in the database.<br/>
 	 * It will replace all the values if the condition is true<br/>
 	 * 
-	 * @param condition The condition where the data will be replaced
+	 * @param condition The conditions where the data will be replaced
 	 * @param objects A list of DataObject to set on a line
+	 * @author gpotter2
 	 * 
 	 */
 	
-	public void insertOrUpdateValue(DataObject[] objects, Condition... condition){
+	public void InsertOrUpdateValue(List<DataObject> objects, Condition... conditions){
+		DataObject[] array = objects.toArray(new DataObject[objects.size()]);
+		InsertOrUpdateValue(array, conditions);
+	}
+	
+	/**
+	 * 
+	 * Insert or replace a value in the database.<br/>
+	 * It will replace all the values if the condition is true<br/>
+	 * 
+	 * @param condition The conditions where the data will be replaced
+	 * @param objects An array of DataObject to set on a line
+	 * @author gpotter2
+	 * 
+	 */
+	
+	@SuppressWarnings("unchecked")
+	public void InsertOrUpdateValue(DataObject[] objects, Condition... conditions){
 		if(init){
 			ArrayList<String> keys = new ArrayList<String>(objects.length + 1);
 			ArrayList<Object> values = new ArrayList<Object>(objects.length + 1);
@@ -440,12 +481,12 @@ public class DatabasesHandler {
 				values.add(d.getData());
 			}
 			if(database_used.equals(DatabaseType.MYSQL)){
-				MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+				UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
 	            try {
 	            	db.open(false);
-	            	List<String> all_commands = getValueCommandStringUpdate(keys, values, condition);
+	            	List<String> all_commands = getValueCommandStringUpdate(keys, values, conditions);
 	            	for(String command : all_commands){
-	            		db.update(command);
+	            		db.update(command, values);
 	            	}
 	            } catch (SQLException | ConnectException ex) {
 	            	ex.printStackTrace();
@@ -454,12 +495,12 @@ public class DatabasesHandler {
 	                db.close();
 	            }
 			} else if(database_used.equals(DatabaseType.SQLITE)){
-				SQLite db = new SQLite();
+				UtilSQLite db = new UtilSQLite();
                 try {
-                	List<String> all_commands = getValueCommandStringUpdate(keys, values, condition);
+                	List<String> all_commands = getValueCommandStringUpdate(keys, values, conditions);
                 	db.open(path, false);
                 	for(String command : all_commands){
-	            		db.update(command);
+	            		db.update(command, values);
 	            	}
                 } catch (SQLException ex) {
                 	ex.printStackTrace();
@@ -478,17 +519,47 @@ public class DatabasesHandler {
 		return;
 	}
 	
-	public void existInTable(String column, String key){
+	/**
+	 * 
+	 * Return if an object exist in the table with those conditions
+	 * 
+	 * @param conditions The conditions to check the tablewith
+	 * @return True if the object exist, otherwise false
+	 * @author gpotter2
+	 */
+	public boolean existInTable(Condition... conditions){
+		return (numberObjectsInTable(conditions) > 0);
+	}
+	
+	/**
+	 * 
+	 * Return the number of objects existing in the table with those conditions
+	 * 
+	 * @param conditions The conditions to check the table with
+	 * @return 0 if there are no objects with those conditions, otherwise the number of objects with those conditions
+	 * @author gpotter2
+	 */
+	public int numberObjectsInTable(Condition... conditions){
 		if(init){
-			String command = "IF EXISTS (SELECT * FROM TABLE WHERE " + column + "='" + key + "')";
+			String command = null;
+			for(Condition c : conditions){
+				if(command == null){
+					command = "SELECT count(*) FROM " + table + " WHERE " + c.column_key + "=? ";
+				} else {
+					command = command + "AND " + c.column_key + "=? ";
+				}
+			}
 			if(database_used.equals(DatabaseType.MYSQL)){
-				MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+				UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
 	            try {
 	                db.open(false);
-	                ResultSet result = db.query(command);
-                    if (result.next()) {
-                    	result.getObject(1);
-                    }
+	                ResultSet result = db.query(command, conditions);
+	                byte i = 0;
+	    	        if (result.next()) {
+	    	            i = result.getByte(1);
+	    	        }
+	    	        result.close();
+	    	        return i;
 	            } catch (SQLException | ConnectException ex) {
 	            	ex.printStackTrace();
 	            	System.err.println("Error while testing a value in MySQL !");
@@ -496,13 +567,16 @@ public class DatabasesHandler {
 	                db.close();
 	            }
 			} else if(database_used.equals(DatabaseType.SQLITE)){
-				SQLite db = new SQLite();
+				UtilSQLite db = new UtilSQLite();
                 try {
                     db.open(path, false);
-                    ResultSet result = db.query(command);
-                    if (result.next()) {
-                    	result.getObject(1);
-                    }
+                    ResultSet result = db.query(command, conditions);
+                    byte i = 0;
+	    	        if (result.next()) {
+	    	            i = result.getByte(1);
+	    	        }
+	    	        result.close();
+	    	        return i;
                 } catch (SQLException ex) {
                 	ex.printStackTrace();
                 	System.err.println("Error while testing a value in SQLite !");
@@ -511,12 +585,13 @@ public class DatabasesHandler {
                 }
 			} else {
 				new NullPointerException().printStackTrace();
-				return;
+				return 0;
 			}
 		} else {
 			new IllegalStateException("The DatabaseHandler wasn`t init !").printStackTrace();
-			return;
+			return 0;
 		}
+		return 0;
 	}
 	
 	/**
@@ -524,6 +599,7 @@ public class DatabasesHandler {
 	 * Create the table if does not exist
 	 * 
 	 * @return True if the table was successfuly created or there was no table to create
+	 * @author gpotter2
 	 */
 	private boolean createTable(){
 		if(database_used.equals(DatabaseType.MYSQL)){
@@ -531,7 +607,7 @@ public class DatabasesHandler {
 		} else if(database_used.equals(DatabaseType.SQLITE)){
 			return createTableSQLite();
 		} else {
-			new NullPointerException().printStackTrace();
+			new NullPointerException().printStackTrace(); 
 			return false;
 		}
 	}
@@ -540,9 +616,11 @@ public class DatabasesHandler {
 	/**
 	 * 
 	 * Empty the table
+	 * @author gpotter2
 	 * 
 	 */
 	
+	@SuppressWarnings("deprecation")
 	public void clearTable(){
 		if(init){
 			String command_clear = "DELETE FROM " + table;
@@ -555,7 +633,7 @@ public class DatabasesHandler {
 				return;
 			}
 			if(database_used.equals(DatabaseType.MYSQL)){
-				MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+				UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
 				try {
 	                db.open(false);
 	                db.update(command_clear);
@@ -567,7 +645,7 @@ public class DatabasesHandler {
 	                db.close();
 	            }
 			} else if(database_used.equals(DatabaseType.SQLITE)){
-				SQLite db = new SQLite();
+				UtilSQLite db = new UtilSQLite();
 				try {
 	                db.open(path, false);
 	                db.update(command_clear);
@@ -587,7 +665,63 @@ public class DatabasesHandler {
 			return;
 		}
 	}
-
+	
+	
+	private String getValueCommandStringDelete(Condition... conditions){
+		String result = "DELETE FROM `" + table + "` WHERE ";
+		for(int i = 0; i < conditions.length; i++){			
+			Condition c = conditions[i];
+			if(conditions.length > (i + 1)){
+				result = result + c.column_key + "=? AND ";
+			} else {
+				result = result + c.column_key + "=?";
+			}
+		}
+        return result;
+	}
+	
+	/**
+	 * 
+	 * Delete all the objects with the conditions
+	 * 
+	 * @param conditions
+	 * @author gpotter2
+	 */
+	public void deleteObject(Condition... conditions){
+		if(init){
+			if(database_used.equals(DatabaseType.MYSQL)){
+				UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
+				try {
+					db.open(false);
+					String command = getValueCommandStringDelete(conditions);
+	                db.update(command, conditions);
+				} catch (SQLException | ConnectException e) {
+					System.err.println("Error while setting a value in MySQL !");
+				} finally {
+	                db.close();
+	            }
+			} else if(database_used.equals(DatabaseType.SQLITE)){
+				UtilSQLite db = new UtilSQLite();
+                try {
+                	String command = getValueCommandStringDelete(conditions);
+                    db.open(path, false);
+                    db.update(command, conditions);
+                } catch (SQLException ex) {
+                	ex.printStackTrace();
+                	System.err.println("Error while setting a value in SQLite !");
+                } finally {
+                    db.close();
+                }
+			} else {
+				new NullPointerException().printStackTrace();
+				return;
+			}
+		} else {
+			new IllegalStateException("The DatabaseHandler wasn`t init !").printStackTrace();
+			return;
+		}
+		return;
+	}
 	
 	private boolean mysql_installed(){
 		try {
@@ -599,9 +733,9 @@ public class DatabasesHandler {
 	}
 	
 	private boolean mysql_useable(){
-		MySQL db = null;
+		UtilMySQL db = null;
 		try {
-			db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+			db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
 			db.open(true);
 		    if(db.checkTable(table)){
 		    	db.close();
@@ -619,19 +753,25 @@ public class DatabasesHandler {
 		return false;
 	}
 	
-	private boolean sqllite_useable(){
-		SQLite db = null;
+	private boolean sqllite_installed(){
 		try {
 			Class.forName("org.sqlite.JDBC");
-			db = new SQLite();
+			return true;
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
+	}
+	
+	private boolean sqllite_useable(){
+		UtilSQLite db = null;
+		try {
+			db = new UtilSQLite();
 			db.open(path, false);
 		    if(db.checkTable(table)){
 		    	db.close();
 		    	return true;
 		    }
 		    System.err.println("The table couldn't be created !");
-		} catch (ClassNotFoundException e) {
-			System.err.println("SQLite is not installed !");
 		} catch (SQLException e) {
 			System.err.println("Cannot connect to the SQLite database :");
 			System.err.println(e.getMessage());
@@ -646,8 +786,9 @@ public class DatabasesHandler {
 	 * 
 	 */
 	
+	@SuppressWarnings("deprecation")
 	private boolean createTableSQLite() {
-		SQLite db = new SQLite();
+		UtilSQLite db = new UtilSQLite();
 		File f = new File(path);
         try {
         	if(!f.getParentFile().exists()){
@@ -685,18 +826,18 @@ public class DatabasesHandler {
     }
 	
 	private List<Object> getValueSQLite(String data, Condition... conditions) {
-		SQLite db = new SQLite();
+		UtilSQLite db = new UtilSQLite();
 		List<Object> ret = new LinkedList<Object>();
         try {
             db.open(path, false);
             String command = "SELECT * FROM `" + table + "` WHERE ";
             for(int i = 0; i < conditions.length; i++){
             	Condition con = conditions[i];
-            	if(i == 0) command = command + con.column_key + "='" + con.key + "' ";
-            	else command = command + "AND " + con.column_key + "='" + con.key + "' ";
+            	if(i == 0) command = command + con.column_key + "=? ";
+            	else command = command + "AND " + con.column_key + "=? ";
             }
             command = command + ";";
-            ResultSet result = db.query(command);
+            ResultSet result = db.query(command, conditions);
             while(result.next()){
                 ret.add(result.getObject(data));
             }
@@ -709,8 +850,9 @@ public class DatabasesHandler {
         return ret;
     }
 	
+	@SuppressWarnings("deprecation")
 	private boolean columnExistSQLite(String column){
-		SQLite db = new SQLite();
+		UtilSQLite db = new UtilSQLite();
         try {
             db.open(path, false);
             if (db.checkTable(table)) {
@@ -724,8 +866,9 @@ public class DatabasesHandler {
         return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void addColumnSQLite(String column, ObjectType type) {
-		SQLite db = new SQLite();
+		UtilSQLite db = new UtilSQLite();
         try {
             db.open(path, false);
             if (db.checkTable(table)) {
@@ -746,8 +889,9 @@ public class DatabasesHandler {
 	 * 
 	 */
 	
+	@SuppressWarnings("deprecation")
 	private boolean createTableMySQL(){
-		MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+		UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
         try {
             db.open(false);
             if (db.checkConnection()) {
@@ -767,18 +911,18 @@ public class DatabasesHandler {
 	}
 	
 	private List<Object> getValueMySQL(String data, Condition... conditions) {
-			MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+			UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
 			List<Object> ret = new LinkedList<Object>();
 	        try {
 	            db.open(false);
 	            String command = "SELECT * FROM `" + table + "` WHERE ";
 	            for(int i = 0; i < conditions.length; i++){
 	            	Condition con = conditions[i];
-	            	if(i == 0) command = command + con.column_key + "='" + con.key + "' ";
-	            	else command = command + "AND " + con.column_key + "='" + con.key + "' ";
+	            	if(i == 0) command = command + con.column_key + "=? ";
+	            	else command = command + "AND " + con.column_key + "=? ";
 	            }
 	            command = command + ";";
-	            ResultSet result = db.query(command);
+	            ResultSet result = db.query(command, conditions);
 	            while(result.next()){
 	                ret.add(result.getObject(data));
 	            }
@@ -791,8 +935,9 @@ public class DatabasesHandler {
 	        return ret;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private boolean columnExistMySQL(String column){
-		MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+		UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
         try {
         	db.open(false);
             if (db.checkTable(table)) {
@@ -806,8 +951,9 @@ public class DatabasesHandler {
         return true;
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void addColumnMySQL(String column, ObjectType type) {
-		MySQL db = new MySQL(HOST, USER, PASS, DATABASE, PORT);
+		UtilMySQL db = new UtilMySQL(HOST, USER, PASS, DATABASE, PORT);
         try {
             db.open(false);
             if (db.checkConnection()) {
