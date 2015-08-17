@@ -9,7 +9,7 @@ public class PluginMessageListenerImplementation implements PluginMessageListene
 	@Override
 	public void onPluginMessageReceived(String channel, Player player, byte[] message) {
 		player.sendMessage(message.toString());
-        Bukkit.getLogger().info("Got Plugin Message on " + channel + " from " + player.getName() + " messge was: " + message.toString());
+        Bukkit.getLogger().info("Got Plugin Message on " + channel + " from " + player.getName() + " message was: " + message.toString());
 	}
 
 }

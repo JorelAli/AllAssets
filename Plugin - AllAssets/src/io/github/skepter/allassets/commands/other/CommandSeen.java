@@ -52,6 +52,7 @@ public class CommandSeen {
 					printHelp(player);
 					return;
 				case 1:
+					//TODO: Special case if user is online
 					OfflinePlayer target = PlayerUtils.getOfflinePlayerFromString(args.getArgs()[0]);
 					if (target != null) {
 						long t = new User(target).getTimeSinceLastPlay();

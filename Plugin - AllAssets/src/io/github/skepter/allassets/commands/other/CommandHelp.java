@@ -75,6 +75,8 @@ public class CommandHelp {
 							authors = authors.substring(0, authors.length() - 2);
 						else
 							authors = "undefined";
+						
+						// TODO: Add if description is empty
 						TextUtils.printInformation(args.getSender(), "Authors", Seperator.COLON, authors);
 						TextUtils.printInformation(args.getSender(), "Version", Seperator.COLON, plugin.getDescription().getVersion());
 						TextUtils.printInformation(args.getSender(), "Description", Seperator.COLON, plugin.getDescription().getDescription());
