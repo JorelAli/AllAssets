@@ -122,9 +122,6 @@ import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
-import io.github.skepter.allassets.db.DatabasesHandler;
-import io.github.skepter.allassets.db.DatabasesHandler.DatabaseType;
-import io.github.skepter.allassets.db.DatabasesHandler.ObjectType;
 import io.github.skepter.allassets.libs.ComphenixsGhostFactory;
 import io.github.skepter.allassets.listeners.BlockPoweredListener;
 import io.github.skepter.allassets.listeners.ChatListener;
@@ -182,7 +179,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** AllAssets plugin, version 0.7.2 Alpha
+/**
+ * AllAssets plugin, version 0.7.2 Alpha
  *
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -205,57 +203,47 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  *
- * @authors Skepter, Tundra */
+ * @authors Skepter
+ */
 
 /*
  * Explore the ResourceBundle for setting Locale
- *
- * Add more methods to IDReader
- * Move it to API perhaps?
- * Add methods to retrieve the ID as an integer
- * Use it with that other tool ITemNames or something to send debug messages
- * add it to the config
- * fix up CommandGive because only having 3 variables isn't good enough!
- *
+ * 
+ * Add more methods to IDReader Move it to API perhaps? Add methods to retrieve
+ * the ID as an integer Use it with that other tool ITemNames or something to
+ * send debug messages add it to the config fix up CommandGive because only
+ * having 3 variables isn't good enough!
+ * 
  * Color customisation -
- *
- * normalColor: 9
- * emphasisColor: b
+ * 
+ * normalColor: 9 emphasisColor: b
+ * 
  * @ajcozzo
- *
- * recent players command - like seen, but for recent players
- * do YesNo conversation for payments etc. (/pay
- * friend list to find friends etc.
- * a way to parse PARTS  of a player's name in commands
- * play with UUIDs AGAIN - GameProfile OF entity, UserCache, player.uniqueID, UUIDData
- * work on documentation - ensure EVERYTHING is REALLY clear.
- *
+ * 
+ * recent players command - like seen, but for recent players do YesNo
+ * conversation for payments etc. (/pay friend list to find friends etc. a way
+ * to parse PARTS of a player's name in commands play with UUIDs AGAIN -
+ * GameProfile OF entity, UserCache, player.uniqueID, UUIDData work on
+ * documentation - ensure EVERYTHING is REALLY clear.
+ * 
  * - Things NOT to export when releasing Alpha version - Permissions
  * ExperienceUtils ItemNames MessagePart Fanciful IPUtils Reflections (All of
  * the Libs) TabText Resources Builds
- *
- * Climb vines
- * check out commandBin
- * recipes command
- * insta-mine command
- * disposal chest
- * custom swords with poison perhaps & arrows perhaps
- * jail
- *
- * highlight text utility
- * When a player says your username, send you (message) that message,
- * but with your username highlighted.
- *
- * e.g. Skepter says "Hello amoniuszko20"
- * on amon's screen, the word "amoniuszko20" is in bold yellow (for example)
- * but on Skepter's screen, it's totally normal
- *
- * A data accessing class which caches all of the data for each player
- * and then saves NEW data.
- * When using /reload (for aa), it then recaches all of the data - hence
- * making super speedy data delivery.
- * When a player leaves, remove them from the data?
- *
+ * 
+ * Climb vines check out commandBin recipes command insta-mine command disposal
+ * chest custom swords with poison perhaps & arrows perhaps jail
+ * 
+ * highlight text utility When a player says your username, send you (message)
+ * that message, but with your username highlighted.
+ * 
+ * e.g. Skepter says "Hello amoniuszko20" on amon's screen, the word
+ * "amoniuszko20" is in bold yellow (for example) but on Skepter's screen, it's
+ * totally normal
+ * 
+ * A data accessing class which caches all of the data for each player and then
+ * saves NEW data. When using /reload (for aa), it then recaches all of the data
+ * - hence making super speedy data delivery. When a player leaves, remove them
+ * from the data?
  */
 @SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
@@ -265,11 +253,12 @@ public class AllAssets extends JavaPlugin {
 
 	private void devRegister(final CommandFramework framework) {
 
-		//Ready classes are at a standard where they can be submitted for the next build
+		// Ready classes are at a standard where they can be submitted for the
+		// next build
 
 		// [NEED IMPROVEMENT] Commands
 		new CommandTitle(framework);
-		//			new CommandUnban(framework);
+		// new CommandUnban(framework);
 
 		// [READY] Commands
 		new CommandSetWarp(framework);
@@ -285,22 +274,22 @@ public class AllAssets extends JavaPlugin {
 		new CommandBreak(framework);
 		new CommandSetBalance(framework);
 
-		//Listeners
-		//			r(new CommandBan(framework));
+		// Listeners
+		// r(new CommandBan(framework));
 		r(new CommandCommandBlock(framework));
 
 		// [READY] WorldModifier
 		r(new Wand(framework));
 		new WM_Methods(framework);
 
-		//Other
+		// Other
 		new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
 
 	}
 
 	/***********************************************************************/
 
-	/* The master switch - used for debug purposes*/
+	/* The master switch - used for debug purposes */
 	public static boolean masterSwitch = false;
 
 	/* Other stuff */
@@ -319,7 +308,7 @@ public class AllAssets extends JavaPlugin {
 	private NMS nms;
 	private Packet packet;
 
-	private DatabasesHandler dbHandler;
+//	private DatabasesHandler dbHandler;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -360,17 +349,27 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
 
-		/* Some names will be removed - depends on whatever is in the Libs package */
-		getLogger().info("AllAssets, created by Skepter and Tundra");
+		/*
+		 * Some names will be removed - depends on whatever is in the Libs
+		 * package
+		 */
+		getLogger().info("AllAssets, created by Skepter");
 
 		/* A method of dealing with console errors and stuff ... I hope */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
 
-		/* Used to check if vault is available. If not, then disable the vault-specific commands such as /balance etc. */
+		/*
+		 * Used to check if vault is available. If not, then disable the
+		 * vault-specific commands such as /balance etc.
+		 */
 		if ((Bukkit.getPluginManager().getPlugin("Vault") == null) || !Bukkit.getPluginManager().getPlugin("Vault").isEnabled()) {
 			getLogger().warning("Vault not found, so some features may not be available");
 			getLogger().info("To fully maximize AllAssets' potential (Economy, Permissions, Chat, Give commands), download Vault from http://dev.bukkit.org/bukkit-plugins/vault/");
-			/* I put this here because if the plugin reloads, it may be set to true, however the owner of a server could have removed vault, thus some features would crash */
+			/*
+			 * I put this here because if the plugin reloads, it may be set to
+			 * true, however the owner of a server could have removed vault,
+			 * thus some features would crash
+			 */
 			hasVault = false;
 		} else {
 			hasVault = true;
@@ -404,28 +403,35 @@ public class AllAssets extends JavaPlugin {
 					getLogger().info("Version " + version + " implemented!");
 					break;
 				default:
-					//shut down plugin
+					// shut down plugin
 					getLogger().info("Version " + version + " is not supported!");
 					break;
 			}
 		}
 
-		//See http://bukkit.org/threads/databases-api.360907/#post-3114863
-		//banID, banner, bannedPlayer, banMessage, time
-		boolean useMySQL = false;
-		if (useMySQL) {
-			dbHandler = new DatabasesHandler(DatabaseType.MYSQL, "bannedPlayers");
-			dbHandler.init("host", "user", "password", "bannedPlayers", "port (default:3306)", "banID");
-		} else {
-			dbHandler = new DatabasesHandler(DatabaseType.SQLITE, "bannedPlayers", Files.getDirectory(Directory.STORAGE).getAbsolutePath() + File.separator + "bannedPlayers.db");
-			dbHandler.init(null, null, null, "bannedPlayers", null, "banID");
-		}
-		
-		dbHandler.addColumn("banID", ObjectType.BIGINT);
-		dbHandler.addColumn("banner", ObjectType.VARCHAR);
-		dbHandler.addColumn("bannedPlayer", ObjectType.VARCHAR);
-		dbHandler.addColumn("banMessage", ObjectType.VARCHAR);
-		dbHandler.addColumn("time", ObjectType.BIGINT);
+		// See http://bukkit.org/threads/databases-api.360907/#post-3114863
+		// banID, banner, bannedPlayer, banMessage, time
+		/* Feature is buggy, temporarily disabled to make further testing easier */
+
+		// boolean useMySQL = false;
+		// if (useMySQL) {
+		// dbHandler = new DatabasesHandler(DatabaseType.MYSQL,
+		// "bannedPlayers");
+		// dbHandler.init("host", "user", "password", "bannedPlayers",
+		// "port (default:3306)", "banID");
+		// } else {
+		// dbHandler = new DatabasesHandler(DatabaseType.SQLITE,
+		// "bannedPlayers",
+		// Files.getDirectory(Directory.STORAGE).getAbsolutePath() +
+		// File.separator + "bannedPlayers.db");
+		// dbHandler.init(null, null, null, "bannedPlayers", null, "banID");
+		// }
+		//
+		// dbHandler.addColumn("banID", ObjectType.BIGINT);
+		// dbHandler.addColumn("banner", ObjectType.VARCHAR);
+		// dbHandler.addColumn("bannedPlayer", ObjectType.VARCHAR);
+		// dbHandler.addColumn("banMessage", ObjectType.VARCHAR);
+		// dbHandler.addColumn("time", ObjectType.BIGINT);
 
 		Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|AdvCdm", new PluginMessageListenerImplementation());
 
@@ -434,7 +440,10 @@ public class AllAssets extends JavaPlugin {
 
 		/* All variables should have been initialised now */
 
-		/* This is the features.yml file which enables/disables features according to the users will */
+		/*
+		 * This is the features.yml file which enables/disables features
+		 * according to the users will
+		 */
 		getLogger().info("Initializing commands according to features.yml");
 		if (ConfigHandler.features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
@@ -559,8 +568,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandRemove(framework);
 		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
-		//		if (ConfigHandler.features().getBoolean("Restore"))
-		//			new CommandRestore(framework);
+		// if (ConfigHandler.features().getBoolean("Restore"))
+		// new CommandRestore(framework);
 		if (ConfigHandler.features().getBoolean("Rules"))
 			new CommandRules(framework);
 		if (ConfigHandler.features().getBoolean("Seen"))
@@ -602,9 +611,11 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.features().getBoolean("Workbench"))
 			new CommandWorkbench(framework);
 
-		/* Vault commands. Only loads them if Vault is enabled so that:
-		 * [1] Unused commands aren't loaded
-		 * [2] It's pointless having commands which don't work */
+		/*
+		 * Vault commands. Only loads them if Vault is enabled so that: [1]
+		 * Unused commands aren't loaded [2] It's pointless having commands
+		 * which don't work
+		 */
 		if (hasVault) {
 			if (ConfigHandler.features().getBoolean("Balance"))
 				new CommandBalance(framework);
@@ -681,8 +692,10 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	private void postLoad() {
-		new VaultReflection().loadAAChat();
-		new VaultReflection().loadAAEco();
+		if (hasVault) {
+			new VaultReflection().loadAAChat();
+			new VaultReflection().loadAAEco();
+		}
 	}
 
 	/* Easy system to add listeners */
