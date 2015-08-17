@@ -106,23 +106,4 @@ public class LogListener implements Filter {
 	public Result getOnMismatch() {
 		return null;
 	}
-
-	@Override
-	public boolean isStarted() {
-		return false;
-	}
-
-	@Override
-	public boolean isStopped() {
-		return false;
-	}
-
-	@Override
-	public void start() {
-	}
-
-	@Override
-	public void stop() {
-	}
-
 }
