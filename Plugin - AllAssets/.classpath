@@ -12,10 +12,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/GitHub/AllAssets/Plugin - AllAssets/libs/bukkit-1.8.8-R0.1-SNAPSHOT-latest.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/GitHub/AllAssets/Plugin - AllAssets/libs/craftbukkit-1.7.9-1.7.9.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/GitHub/AllAssets/Plugin - AllAssets/libs/craftbukkit-1.8.3-1.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/GitHub/AllAssets/Plugin - AllAssets/libs/craftbukkit-1.8.4-1.8.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/GitHub/AllAssets/Plugin - AllAssets/libs/craftbukkit-1.8-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jorel/Documents/GitHub/AllAssets/Plugin - AllAssets/libs/Vault.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
