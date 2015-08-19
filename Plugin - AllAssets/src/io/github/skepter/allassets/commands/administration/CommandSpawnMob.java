@@ -36,6 +36,7 @@ import io.github.skepter.allassets.utils.utilclasses.LocationUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -64,6 +65,13 @@ public class CommandSpawnMob {
 					else
 						ErrorUtils.notAnInteger(player);
 					return;
+				case 5:
+					if (TextUtils.isInteger(args.getArgs()[1]) && TextUtils.isInteger(args.getArgs()[2]) && TextUtils.isInteger(args.getArgs()[3]) && TextUtils.isInteger(args.getArgs()[4]))
+						for (int i = 0; i < Integer.parseInt(args.getArgs()[1]); i++)
+							spawnmob(player, args.getArgs()[0], new Location(player.getWorld(), Integer.parseInt(args.getArgs()[2]), Integer.parseInt(args.getArgs()[3]), Integer.parseInt(args.getArgs()[4])));
+					else
+						ErrorUtils.notAnInteger(player);
+					return;
 			}
 			ErrorUtils.tooManyArguments(player);
 			return;
@@ -75,9 +83,13 @@ public class CommandSpawnMob {
 		final Block spawnLocation = b.getRelative(b.getFace(PlayerUtils.getLastTwoTargetBlocks(player).get(0)));
 		player.getWorld().spawnEntity(new LocationUtils(spawnLocation.getLocation()).getCenter(), new InputParser(mob).parseMob());
 	}
+	
+	private void spawnmob(final Player player, final String mob, final Location loc) {
+		player.getWorld().spawnEntity(new LocationUtils(loc).getCenter(), new InputParser(mob).parseMob());
+	}
 
 	@Help(name = "Spawnmob")
 	public void printHelp(final CommandSender sender) {
-		TextUtils.printHelp(sender, "Spawnmob", "/spawnmob <mob> - spawns a mob", "/spawnmob <mob> <amount> - spawns <amount> of mobs");
+		TextUtils.printHelp(sender, "Spawnmob", "/spawnmob <mob> - spawns a mob", "/spawnmob <mob> <amount> - spawns <amount> of mobs", "/spawnmob <mob> <amount> <x> <y> <z> - spawns <amount> of mobs at <x> <y> <z>");
 	}
 }
