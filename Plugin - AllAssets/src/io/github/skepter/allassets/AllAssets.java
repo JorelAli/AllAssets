@@ -252,42 +252,22 @@ public class AllAssets extends JavaPlugin {
 	/** Put new commands in here **/
 
 	private void devRegister(final CommandFramework framework) {
-		
-		//
-		
-		new CommandTest(framework);
-		
-		//
-		
 
-		// Ready classes are at a standard where they can be submitted for the
-		// next build
+		//
+
+		new CommandTest(framework);
+
+		//
 
 		// [NEED IMPROVEMENT] Commands
 		new CommandTitle(framework);
-		// new CommandUnban(framework);
+		new WM_Methods(framework);
 
-		// [READY] Commands
-		new CommandSetWarp(framework);
-		new CommandDelWarp(framework);
-		new CommandWarps(framework);
-		new CommandWarp(framework);
-		new CommandNearbyWarps(framework);
-
-		new CommandTpall(framework);
-		new CommandPrefix(framework);
-		new CommandSuffix(framework);
-		new CommandRepair(framework);
-		new CommandBreak(framework);
-		new CommandSetBalance(framework);
+		// [READY] Commands (For release in new builds)
 
 		// Listeners
-		// r(new CommandBan(framework));
 		r(new CommandCommandBlock(framework));
-
-		// [READY] WorldModifier
 		r(new Wand(framework));
-		new WM_Methods(framework);
 
 		// Other
 		new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
@@ -297,7 +277,7 @@ public class AllAssets extends JavaPlugin {
 	/***********************************************************************/
 
 	/* The master switch - used for debug purposes */
-	public static boolean masterSwitch = false;
+	public static boolean masterSwitch = true;
 
 	/* Other stuff */
 	public CommandFramework framework;
@@ -315,7 +295,7 @@ public class AllAssets extends JavaPlugin {
 	private NMS nms;
 	private Packet packet;
 
-//	private DatabasesHandler dbHandler;
+	// private DatabasesHandler dbHandler;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
@@ -410,7 +390,7 @@ public class AllAssets extends JavaPlugin {
 					getLogger().info("Version " + version + " implemented!");
 					break;
 				default:
-					// shut down plugin
+					// shut down plugin??
 					getLogger().info("Version " + version + " is not supported!");
 					break;
 			}
@@ -468,6 +448,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandBatch(framework);
 		if (ConfigHandler.features().getBoolean("Bind"))
 			r(new CommandBind(framework));
+		if (ConfigHandler.features().getBoolean("Break"))
+			new CommandBreak(framework);
 		if (ConfigHandler.features().getBoolean("Broadcast"))
 			new CommandBroadcast(framework);
 		if (ConfigHandler.features().getBoolean("Butcher"))
@@ -486,6 +468,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandConsoleLog(framework);
 		if (ConfigHandler.features().getBoolean("Debug"))
 			r(new CommandDebug(framework));
+		if (ConfigHandler.features().getBoolean("DelWarp"))
+			new CommandDelWarp(framework);
 		if (ConfigHandler.features().getBoolean("Descend"))
 			new CommandDescend(framework);
 		if (ConfigHandler.features().getBoolean("Disable"))
@@ -557,6 +541,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandMore(framework);
 		if (ConfigHandler.features().getBoolean("Near"))
 			new CommandNear(framework);
+		if (ConfigHandler.features().getBoolean("NearbyWarps"))
+			new CommandNearbyWarps(framework);
 		if (ConfigHandler.features().getBoolean("Nickname"))
 			new CommandNickname(framework);
 		if (ConfigHandler.features().getBoolean("Oplist"))
@@ -565,6 +551,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandPing(framework);
 		if (ConfigHandler.features().getBoolean("Plugins"))
 			r(new PluginsCommandListener());
+		if (ConfigHandler.features().getBoolean("Prefix"))
+			new CommandPrefix(framework);
 		if (ConfigHandler.features().getBoolean("PTime"))
 			new CommandPTime(framework);
 		if (ConfigHandler.features().getBoolean("PWeather"))
@@ -575,14 +563,21 @@ public class AllAssets extends JavaPlugin {
 			new CommandRemove(framework);
 		if (ConfigHandler.features().getBoolean("Rename"))
 			new CommandRename(framework);
+		if (ConfigHandler.features().getBoolean("Repair"))
+			new CommandRepair(framework);
+
 		// if (ConfigHandler.features().getBoolean("Restore"))
 		// new CommandRestore(framework);
 		if (ConfigHandler.features().getBoolean("Rules"))
 			new CommandRules(framework);
 		if (ConfigHandler.features().getBoolean("Seen"))
 			new CommandSeen(framework);
+		if (ConfigHandler.features().getBoolean("SetBalance"))
+			new CommandSetBalance(framework);
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
+		if (ConfigHandler.features().getBoolean("SetWarp"))
+			new CommandSetWarp(framework);
 		if (ConfigHandler.features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
 		if (ConfigHandler.features().getBoolean("Silence"))
@@ -595,6 +590,8 @@ public class AllAssets extends JavaPlugin {
 			new CommandSpawnItem(framework);
 		if (ConfigHandler.features().getBoolean("SpawnMob"))
 			new CommandSpawnMob(framework);
+		if (ConfigHandler.features().getBoolean("Suffix"))
+			new CommandSuffix(framework);
 		if (ConfigHandler.features().getBoolean("Suicide"))
 			new CommandSuicide(framework);
 		if (ConfigHandler.features().getBoolean("Time"))
@@ -603,10 +600,16 @@ public class AllAssets extends JavaPlugin {
 			new CommandTop(framework);
 		if (ConfigHandler.features().getBoolean("Tp"))
 			new CommandTp(framework);
+		if (ConfigHandler.features().getBoolean("Tpall"))
+			new CommandTpall(framework);
 		if (ConfigHandler.features().getBoolean("Tphere"))
 			new CommandTphere(framework);
 		if (ConfigHandler.features().getBoolean("TpToggle"))
 			new CommandTpToggle(framework);
+		if (ConfigHandler.features().getBoolean("Warp"))
+			new CommandWarp(framework);
+		if (ConfigHandler.features().getBoolean("Warps"))
+			new CommandWarps(framework);
 		if (ConfigHandler.features().getBoolean("Weather"))
 			new CommandWeather(framework);
 		if (ConfigHandler.features().getBoolean("Whois"))
@@ -646,9 +649,10 @@ public class AllAssets extends JavaPlugin {
 			r(new MultiCommandListener());
 		if (ConfigHandler.features().getBoolean("PickupSkeletonArrows"))
 			r(new SkeletonArrowListener());
-		//Was being fussy. Needs fixing/updating
-//		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
-//			r(new ServerListingListener());
+		// Was being fussy. Needs fixing/updating
+		// if
+		// (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
+		// r(new ServerListingListener());
 
 		devRegister(framework);
 

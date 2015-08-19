@@ -137,6 +137,7 @@ public class ConfigHandler {
 		features.set("Balancetop", "true");
 		features.set("Batch", "true");
 		features.set("Bind", "true");
+		features.set("Break", "true");
 		features.set("Broadcast", "true");
 		features.set("Butcher", "true");
 		features.set("Calculate", "true");
@@ -146,6 +147,7 @@ public class ConfigHandler {
 		features.set("Collect", "true");
 		features.set("ConsoleLog", "true");
 		features.set("Debug", "true");
+		features.set("DelWarp", "true");
 		features.set("Descend", "true");
 		features.set("Disable", "true");
 		features.set("DiscoArmor", "true");
@@ -180,10 +182,12 @@ public class ConfigHandler {
 		features.set("Log", "true");
 		features.set("More", "true");
 		features.set("Near", "true");
+		features.set("NearbyWarps", "true");
 		features.set("Nickname", "true");
 		features.set("Oplist", "true");
 		features.set("Ping", "true");
 		features.set("Plugins", "true");
+		features.set("Prefix", "true");
 		features.set("PTime", "true");
 		features.set("PWeather", "true");
 		// work on this feature more - still a bit buggy and kinda unreliable
@@ -191,21 +195,28 @@ public class ConfigHandler {
 		features.set("Remove", "true");
 		features.set("Rename", "true");
 		//		features.set("Restore", "true");
+		features.set("Repair", "true");
 		features.set("Rules", "true");
 		features.set("Seen", "true");
+		features.set("SetBalance", "true");
 		features.set("SetSpawn", "true");
+		features.set("SetWarp", "true");
 		features.set("SignEdit", "true");
 		features.set("Silence", "true");
 		features.set("Spawn", "true");
 		features.set("SpawnItem", "true");
 		features.set("SpawnMob", "true");
 		features.set("StaffChat", "true");
+		features.set("Suffix", "true");
 		features.set("Suicide", "true");
 		features.set("Time", "true"); // includes day/midday/night/midnight etc.
 		features.set("Top", "true");
 		features.set("Tp", "true");
+		features.set("Tpall", "true");
 		features.set("Tphere", "true");
 		features.set("TpToggle", "true");
+		features.set("Warp", "true");
+		features.set("Warps", "true");
 		features.set("Weather", "true");
 		features.set("Whois", "true");
 		features.set("World", "true");
