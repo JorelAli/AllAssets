@@ -15,6 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+@SuppressWarnings("deprecation")
 public class ComphenixsGhostFactory {
 	/** Team of ghosts and people who can see ghosts. */
 	private final String GHOST_TEAM_NAME = "Ghosts";
