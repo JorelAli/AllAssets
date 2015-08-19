@@ -34,6 +34,7 @@ import io.github.skepter.allassets.commandlisteners.CommandFriend;
 import io.github.skepter.allassets.commandlisteners.CommandGod;
 import io.github.skepter.allassets.commandlisteners.CommandSilence;
 import io.github.skepter.allassets.commandlisteners.CommandStaffChat;
+import io.github.skepter.allassets.commands.CommandTest;
 import io.github.skepter.allassets.commands.administration.CommandAllAssets;
 import io.github.skepter.allassets.commands.administration.CommandAnnouncer;
 import io.github.skepter.allassets.commands.administration.CommandBackup;
@@ -203,7 +204,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  *
- * @authors Skepter
+ * @authors Skepter, MCSpartans
  */
 
 /*
@@ -252,6 +253,13 @@ public class AllAssets extends JavaPlugin {
 	/** Put new commands in here **/
 
 	private void devRegister(final CommandFramework framework) {
+		
+		//
+		
+		new CommandTest(framework);
+		
+		//
+		
 
 		// Ready classes are at a standard where they can be submitted for the
 		// next build
