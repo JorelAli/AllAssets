@@ -7,7 +7,13 @@ whena  palyer joins, tell them when they last joined
 when a player joins, tell them which players left/were on recently
 AFKMEssage - send a message to a person when they are no longer afk
 
-title command thingy 1.8 yeah massive awesome
+title command 1.8
+
+* Ticket system
+* Staff - show list of staff
+* Website - show website info
+* Vote - show voting website (maybe top voters as well?)
+* Donate - show donation info
 
 Commands:
 //Ascend/Descend
@@ -25,8 +31,6 @@ Command:delhome
 
 Command:w
 Command:rules
-Command:check ?! This does what exactly?
-Command:lookup (info?)
 Command:furnace
 Command:vanish
 Command:rvanish
@@ -61,10 +65,9 @@ Command:freeze
 Command:unfreeze
 
 Command:info (simple info from a yml file)
-Command:item (info about item in hand?)
 Command:online
 
-Command:ignore (darkGray messages)
+Command:ignore (darkGray messages - configurable)
 Command:mail
 Command:me
 Command:msg
