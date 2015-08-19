@@ -245,6 +245,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * - hence making super speedy data delivery. When a player leaves, remove them
  * from the data?
  */
+
 @SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
 
@@ -253,18 +254,16 @@ public class AllAssets extends JavaPlugin {
 
 	private void devRegister(final CommandFramework framework) {
 
-		//
-
+		// [TESTING] Commands
 		new CommandTest(framework);
-
-		//
 
 		// [NEED IMPROVEMENT] Commands
 		new CommandTitle(framework);
 		new WM_Methods(framework);
 
 		// [READY] Commands (For release in new builds)
-
+		//None at the moment!
+		
 		// Listeners
 		r(new CommandCommandBlock(framework));
 		r(new Wand(framework));
@@ -281,7 +280,7 @@ public class AllAssets extends JavaPlugin {
 
 	/* Other stuff */
 	public CommandFramework framework;
-
+	public Map<UUID, Long> tempTimeMap;
 	public ComphenixsGhostFactory ghostFactory;
 
 	/* Vault variables */
@@ -289,9 +288,8 @@ public class AllAssets extends JavaPlugin {
 	public Chat chat = null;
 	public Economy economy = null;
 	public Permission permission = null;
-	public Map<UUID, Long> tempTimeMap;
 
-	/* NMS :) */
+	/* NMS */
 	private NMS nms;
 	private Packet packet;
 
@@ -336,13 +334,9 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
 
-		/*
-		 * Some names will be removed - depends on whatever is in the Libs
-		 * package
-		 */
 		getLogger().info("AllAssets, created by Skepter");
 
-		/* A method of dealing with console errors and stuff ... I hope */
+		/* ConsoleLog logger */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
 
 		/*
