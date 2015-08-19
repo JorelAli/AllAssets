@@ -275,7 +275,7 @@ public class AllAssets extends JavaPlugin {
 
 	/***********************************************************************/
 
-	/* The master switch - used for debug purposes */
+	/* The master switch - prints out dats such as listeners and commands when loaded */
 	public static boolean masterSwitch = true;
 
 	/* Other stuff */
@@ -333,8 +333,7 @@ public class AllAssets extends JavaPlugin {
 	public void onEnable() {
 		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
-
-		getLogger().info("AllAssets, created by Skepter");
+		getLogger().info("AllAssets, created by Skepter and MCSpartans");
 
 		/* ConsoleLog logger */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
@@ -357,6 +356,7 @@ public class AllAssets extends JavaPlugin {
 			setupVault();
 		}
 
+		/* NMS version dependant system */
 		if (nms == null && packet == null) {
 			getLogger().info("Hooking into NMS version dependant system...");
 			String p = getServer().getClass().getPackage().getName();
@@ -565,9 +565,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.features().getBoolean("Rules"))
 			new CommandRules(framework);
 		if (ConfigHandler.features().getBoolean("Seen"))
-			new CommandSeen(framework);
-		if (ConfigHandler.features().getBoolean("SetBalance"))
-			new CommandSetBalance(framework);
+			new CommandSeen(framework);		
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SetWarp"))
@@ -625,6 +623,8 @@ public class AllAssets extends JavaPlugin {
 				new CommandBalance(framework);
 			if (ConfigHandler.features().getBoolean("Balancetop"))
 				new CommandBalancetop(framework);
+			if (ConfigHandler.features().getBoolean("SetBalance"))
+				new CommandSetBalance(framework);
 		}
 
 		/* Listeners */
@@ -697,6 +697,7 @@ public class AllAssets extends JavaPlugin {
 
 	}
 
+	/* Loaded after the onEnable() method */
 	private void postLoad() {
 		if (hasVault) {
 			new VaultReflection().loadAAChat();
@@ -722,17 +723,17 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	private void setupVault() {
-		final RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+		final RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(Economy.class);
 		if (economyProvider != null) {
 			economy = economyProvider.getProvider();
 			getLogger().info("Vault Economy system hooked");
 		}
-		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+		final RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(Permission.class);
 		if (permissionProvider != null) {
 			permission = permissionProvider.getProvider();
 			getLogger().info("Vault Permission system hooked");
 		}
-		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
+		final RegisteredServiceProvider<Chat> chatProvider = getServer().getServicesManager().getRegistration(Chat.class);
 		if (chatProvider != null) {
 			chat = chatProvider.getProvider();
 			getLogger().info("Vault Chat system hooked");

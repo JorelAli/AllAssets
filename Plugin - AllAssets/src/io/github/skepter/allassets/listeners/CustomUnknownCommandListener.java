@@ -26,9 +26,6 @@ package io.github.skepter.allassets.listeners;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,7 +43,6 @@ public class CustomUnknownCommandListener implements Listener {
 			if ((searchWithTuncater(msg) != null) && !searchWithTuncater(msg).isEmpty()) {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(Strings.TITLE + "Unknown command. Did you mean: " + Strings.HOUSE_STYLE_COLOR + searchWithTuncater(msg));
-//				new FancyMessage(Strings.TITLE + "Unknown command. Did you mean: ").then(Strings.HOUSE_STYLE_COLOR + searchWithTuncater(msg)).tooltip(Strings.HOUSE_STYLE_COLOR + "Click to execute " + searchWithTuncater(msg)).command(searchWithTuncater(msg)).send(e.getPlayer());
 			}
 			return;
 		}
@@ -58,17 +54,5 @@ public class CustomUnknownCommandListener implements Listener {
 				if (topic.getName().contains(s))
 					return topic.getName();
 		return null;
-	}
-
-	@SuppressWarnings("unused")
-	private List<String> searchListWithTuncater(final String topicString) {
-		final List<String> listOfCommands = new ArrayList<String>();
-		for (final String s : TextUtils.truncater(topicString))
-			for (final HelpTopic topic : Bukkit.getHelpMap().getHelpTopics())
-				if (topic.getName().contains(s)) {
-					listOfCommands.add(topic.getName());
-					break;
-				}
-		return listOfCommands;
 	}
 }
