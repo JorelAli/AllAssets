@@ -57,22 +57,25 @@ public class ChatListener implements Listener {
 
 	@EventHandler
 	public void playerNickname(final AsyncPlayerChatEvent event) {
-		String prefix = AllAssets.instance().chat.getPlayerPrefix(event.getPlayer());
-		String suffix = AllAssets.instance().chat.getPlayerSuffix(event.getPlayer());
-		if (prefix == null || prefix.equals("null"))
-			prefix = "";
-		if (suffix == null || suffix.equals("null"))
-			suffix = "";
-		prefix = ChatColor.translateAlternateColorCodes('&', prefix);
-		suffix = ChatColor.translateAlternateColorCodes('&', suffix);
-		if (event.getPlayer().getCustomName() != null) {
-			if (ConfigHandler.features().getBoolean("ChatColor"))
-				if (event.getPlayer().hasPermission("AllAssets.chatColor"))
-					event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+		if (AllAssets.instance().hasVault) {
+			String prefix = AllAssets.instance().chat.getPlayerPrefix(event.getPlayer());
+			String suffix = AllAssets.instance().chat.getPlayerSuffix(event.getPlayer());
+			if (prefix == null || prefix.equals("null"))
+				prefix = "";
+			if (suffix == null || suffix.equals("null"))
+				suffix = "";
+			prefix = ChatColor.translateAlternateColorCodes('&', prefix);
+			suffix = ChatColor.translateAlternateColorCodes('&', suffix);
 
-			event.setFormat(ChatColor.WHITE + "<" + prefix + event.getPlayer().getCustomName() + suffix + ChatColor.WHITE + "> " + event.getMessage());
-		} else {
-			event.setFormat("<" + prefix + "%s" + suffix + "> " + "%s");
+			if (event.getPlayer().getCustomName() != null) {
+				if (ConfigHandler.features().getBoolean("ChatColor"))
+					if (event.getPlayer().hasPermission("AllAssets.chatColor"))
+						event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+
+				event.setFormat(ChatColor.WHITE + "<" + prefix + event.getPlayer().getCustomName() + suffix + ChatColor.WHITE + "> " + event.getMessage());
+			} else {
+				event.setFormat("<" + prefix + "%s" + suffix + "> " + "%s");
+			}
 		}
 	}
 
@@ -83,5 +86,5 @@ public class ChatListener implements Listener {
 				event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
 	}
 
-	//TODO add to features/config
+	// TODO add to features/config
 }

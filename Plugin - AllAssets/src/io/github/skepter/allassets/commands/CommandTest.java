@@ -168,6 +168,12 @@ public class CommandTest {
 					} catch(Exception e) {
 					}
 					
+					if(amount > 100) {
+						player.sendMessage("There's a limit of 100 on here!");
+						return;
+					}
+						
+					
 					///////////////////////////
 					
 					//Gets the coordinates by using the system above to get the amount
