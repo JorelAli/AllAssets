@@ -48,6 +48,7 @@ import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 import io.github.skepter.allassets.utils.utilclasses.VectorUtils;
+import io.github.skepter.allassets.version.packets.PacketEnums.GameStateEffect;
 
 import java.io.File;
 import java.lang.management.ManagementFactory;
@@ -254,7 +255,7 @@ public class CommandDebug implements Listener {
 		} catch (final Exception e) {
 		}
 	}
-	
+
 	@CommandHandler(name = "debug.velocity", permission = "debug", description = "Tests the velocity")
 	public void velocity(final CommandArgs args) {
 		try {
@@ -298,28 +299,35 @@ public class CommandDebug implements Listener {
 	}
 
 	/* Not been fully tested yet */
-	//	@CommandHandler(name = "debug.rclean", permission = "debug", description = "Cleans RAM at a regular interval")
-	//	public void rClean(final CommandArgs args) {
-	//		if (taskID == 0) {
-	//			int length = 0;
-	//			if ((args.getArgs().length == 1) && TextUtils.isInteger(args.getArgs()[0]))
-	//				length = Integer.parseInt(args.getArgs()[0]);
-	//			taskID = Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(), new Runnable() {
-	//				@Override
-	//				public void run() {
-	//					System.gc();
-	//				}
-	//			}, 0, (20 * length) == 0 ? 30 : length).getTaskId();
-	//			args.getSender().sendMessage(AllAssets.title + "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ? 30 : length));
-	//		} else
-	//			ErrorUtils.error(args.getSender(), "The interval cleaning is already running!");
-	//	}
+	// @CommandHandler(name = "debug.rclean", permission = "debug", description
+	// = "Cleans RAM at a regular interval")
+	// public void rClean(final CommandArgs args) {
+	// if (taskID == 0) {
+	// int length = 0;
+	// if ((args.getArgs().length == 1) &&
+	// TextUtils.isInteger(args.getArgs()[0]))
+	// length = Integer.parseInt(args.getArgs()[0]);
+	// taskID =
+	// Bukkit.getServer().getScheduler().runTaskTimerAsynchronously(AllAssets.instance(),
+	// new Runnable() {
+	// @Override
+	// public void run() {
+	// System.gc();
+	// }
+	// }, 0, (20 * length) == 0 ? 30 : length).getTaskId();
+	// args.getSender().sendMessage(AllAssets.title +
+	// "Cleaning RAM on a regular basis with an invertal of " + (length == 0 ?
+	// 30 : length));
+	// } else
+	// ErrorUtils.error(args.getSender(),
+	// "The interval cleaning is already running!");
+	// }
 
 	@CommandHandler(name = "debug.ram", permission = "debug", description = "Displays RAM information")
 	public void ram(final CommandArgs args) {
 		final CommandSender sender = args.getSender();
 		sender.sendMessage(TextUtils.title("RAM"));
-		sender.sendMessage("Maximum RAM: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + "MB");	
+		sender.sendMessage("Maximum RAM: " + (Runtime.getRuntime().maxMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Total RAM: " + (Runtime.getRuntime().totalMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Free RAM: " + (Runtime.getRuntime().freeMemory() / 1024 / 1024) + "MB");
 		sender.sendMessage("Available processors (cores): " + Runtime.getRuntime().availableProcessors());
@@ -374,8 +382,17 @@ public class CommandDebug implements Listener {
 			AllAssets.instance().getNMS().openAnvil(args.getPlayer());
 		} catch (final Exception e) {
 			e.printStackTrace();
-		}}
+		}
+	}
 	
+	@CommandHandler(name = "debug.gsc", permission = "debug", description = "Activates game state change packet")
+	public void gsc(final CommandArgs args) {
+		try {
+			AllAssets.instance().getPacketHandler().doGameStateChange(args.getPlayer(), GameStateEffect.valueOf(args.getArgs()[0]));
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	@CommandHandler(name = "debug.unloadworld", permission = "debug", description = "Unloads a world")
@@ -412,27 +429,30 @@ public class CommandDebug implements Listener {
 	}
 
 	/* Used to debug the Log feature */
-		@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")
-		public void error(final CommandArgs args) {
-			final String[] arr = { "bob", "mark" };
-			final String s = arr[4];
-			Bukkit.getServer().broadcastMessage(s);
-		}
+	@CommandHandler(name = "debug.error", permission = "debug", description = "Creates an error")
+	public void error(final CommandArgs args) {
+		final String[] arr = { "bob", "mark" };
+		final String s = arr[4];
+		Bukkit.getServer().broadcastMessage(s);
+	}
 
-	//will be removed in future
-	//	@CommandHandler(name = "debug.test", permission = "debug", description = "Runs a test")
-	//	public void test(final CommandArgs args) {
-	//		String multilineString = "Plugin                        `Thread\n";
+	// will be removed in future
+	// @CommandHandler(name = "debug.test", permission = "debug", description =
+	// "Runs a test")
+	// public void test(final CommandArgs args) {
+	// String multilineString = "Plugin                        `Thread\n";
 	//
-	//		multilineString += "AllInOne`30\n";
-	//		multilineString += "Essentials`491";
-	//		final TabText tt = new TabText(multilineString);
-	//		tt.setPageHeight(10); // set page height and get number of pages
-	//		tt.setTabs(16, 22, 20); // horizontal tabs positions
-	//		tt.sortByFields(-2, 1); // sort by second column descending, then by first
-	//		final String printedText = tt.getPage(0, false); // get your formatted page, for console or chat area
-	//		AllAssets.instance().getServer().broadcastMessage(printedText);
-	//	}
+	// multilineString += "AllInOne`30\n";
+	// multilineString += "Essentials`491";
+	// final TabText tt = new TabText(multilineString);
+	// tt.setPageHeight(10); // set page height and get number of pages
+	// tt.setTabs(16, 22, 20); // horizontal tabs positions
+	// tt.sortByFields(-2, 1); // sort by second column descending, then by
+	// first
+	// final String printedText = tt.getPage(0, false); // get your formatted
+	// page, for console or chat area
+	// AllAssets.instance().getServer().broadcastMessage(printedText);
+	// }
 
 	@CommandHandler(name = "debug.conflicts", permission = "debug", description = "Finds plugin conflicts", isListed = false)
 	public void test1(final CommandArgs args) {

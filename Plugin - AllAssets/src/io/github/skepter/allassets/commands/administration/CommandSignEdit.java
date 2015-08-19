@@ -49,6 +49,10 @@ public class CommandSignEdit {
 	public void command(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) 
+			if(args.getArgs().length == 0){
+				ErrorUtils.wrongConstruction(player, "/signedit <line number> <text>");
+				return;
+			}
 			if (args.getArgs().length > 1) {
 				if (TextUtils.isInteger(args.getArgs()[0]))
 					if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
@@ -64,7 +68,6 @@ public class CommandSignEdit {
 					sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, "");
 					sign.update();
 				}
-			} else
-				ErrorUtils.wrongConstruction(player, "/signedit <line number> <text>");
+			}
 	}
 }
