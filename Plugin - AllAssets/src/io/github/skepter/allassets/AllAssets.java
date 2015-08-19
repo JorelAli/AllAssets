@@ -135,7 +135,6 @@ import io.github.skepter.allassets.listeners.MultiCommandListener;
 import io.github.skepter.allassets.listeners.PlayerListener;
 import io.github.skepter.allassets.listeners.PluginsCommandListener;
 import io.github.skepter.allassets.listeners.ReloadCommandListener;
-import io.github.skepter.allassets.listeners.ServerListingListener;
 import io.github.skepter.allassets.listeners.SignListener;
 import io.github.skepter.allassets.listeners.SkeletonArrowListener;
 import io.github.skepter.allassets.listeners.StopCommandListener;
@@ -647,8 +646,9 @@ public class AllAssets extends JavaPlugin {
 			r(new MultiCommandListener());
 		if (ConfigHandler.features().getBoolean("PickupSkeletonArrows"))
 			r(new SkeletonArrowListener());
-		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
-			r(new ServerListingListener());
+		//Was being fussy. Needs fixing/updating
+//		if (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
+//			r(new ServerListingListener());
 
 		devRegister(framework);
 
