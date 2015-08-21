@@ -78,6 +78,10 @@ public interface IUser {
 	
 	void setTotalTimePlayed(long time);
 	
+	boolean canSocialSpy();
+	
+	void setSocialSpy(boolean socialspy);
+	
 	//Chat
 	
 	void setPrefix(String prefix);

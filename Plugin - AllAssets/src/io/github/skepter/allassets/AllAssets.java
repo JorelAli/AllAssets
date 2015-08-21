@@ -262,8 +262,8 @@ public class AllAssets extends JavaPlugin {
 		new WM_Methods(framework);
 
 		// [READY] Commands (For release in new builds)
-		//None at the moment!
-		
+		// None at the moment!
+
 		// Listeners
 		r(new CommandCommandBlock(framework));
 		r(new Wand(framework));
@@ -275,7 +275,10 @@ public class AllAssets extends JavaPlugin {
 
 	/***********************************************************************/
 
-	/* The master switch - prints out dats such as listeners and commands when loaded */
+	/*
+	 * The master switch - prints out dats such as listeners and commands when
+	 * loaded
+	 */
 	public static boolean masterSwitch = true;
 
 	/* Other stuff */
@@ -363,26 +366,31 @@ public class AllAssets extends JavaPlugin {
 			String version = p.substring(p.lastIndexOf('.') + 1);
 			getLogger().info("Version " + version + " found");
 			switch (version) {
+			/* Version 1.7.9 */
 				case "v1_7_R3":
 					nms = new NMS_V1_7_R3(this);
 					packet = new Packet_V1_7_R3(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
+				/* Version 1.8 */
 				case "v1_8_R1":
 					nms = new NMS_V1_8_R1(this);
 					packet = new Packet_V1_8_R1(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
+				/* Version 1.8.3 */
 				case "v1_8_R2":
 					nms = new NMS_V1_8_R2(this);
 					packet = new Packet_V1_8_R2(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
+				/* Versions 1.8.4 to 1.8.8 */
 				case "v1_8_R3":
 					nms = new NMS_V1_8_R3(this);
 					packet = new Packet_V1_8_R3(this);
 					getLogger().info("Version " + version + " implemented!");
 					break;
+				/* Unsupported version */
 				default:
 					// shut down plugin??
 					getLogger().info("Version " + version + " is not supported!");
@@ -565,7 +573,7 @@ public class AllAssets extends JavaPlugin {
 		if (ConfigHandler.features().getBoolean("Rules"))
 			new CommandRules(framework);
 		if (ConfigHandler.features().getBoolean("Seen"))
-			new CommandSeen(framework);		
+			new CommandSeen(framework);
 		if (ConfigHandler.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
 		if (ConfigHandler.features().getBoolean("SetWarp"))

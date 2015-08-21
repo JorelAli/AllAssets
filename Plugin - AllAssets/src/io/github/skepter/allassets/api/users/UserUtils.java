@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class UserUtils {
 
-	public List<User> onlineUsers() {
+	public static List<User> onlineUsers() {
 		List<User> onlineUsers = new ArrayList<User>();
 		for(Player p : Bukkit.getOnlinePlayers()) {
 			onlineUsers.add(new User(p));

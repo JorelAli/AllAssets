@@ -266,4 +266,14 @@ public class User implements IUser {
 	public void setBalance(double balance) {
 		playerData.set("balance", balance);
 	}
+
+	@Override
+	public boolean canSocialSpy() {
+		return playerData.getDataFile().getBoolean("socialspy");
+	}
+
+	@Override
+	public void setSocialSpy(boolean socialspy) {
+		playerData.set("socialspy", socialspy);
+	}
 }
