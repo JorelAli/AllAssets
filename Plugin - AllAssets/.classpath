@@ -18,6 +18,5 @@
 	<classpathentry kind="lib" path="libs/craftbukkit-1.8-R0.1-SNAPSHOT-latest.jar"/>
 	<classpathentry kind="lib" path="libs/craftbukkit-1.8.3-R0.1-SNAPSHOT-latest.jar"/>
 	<classpathentry kind="lib" path="libs/craftbukkit-1.8.4-R0.1-SNAPSHOT-latest.jar"/>
-	<classpathentry kind="lib" path="libs/craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

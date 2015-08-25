@@ -1,0 +1,49 @@
+[18:28:46] [Server thread/INFO]: Starting minecraft server version 1.8.8
+[18:28:46] [Server thread/INFO]: Loading properties
+[18:28:46] [Server thread/INFO]: Default game type: SURVIVAL
+[18:28:46] [Server thread/INFO]: Generating keypair
+[18:28:46] [Server thread/INFO]: Starting Minecraft server on *:25565
+[18:28:46] [Server thread/INFO]: Using default channel type
+[18:28:46] [Server thread/INFO]: This server is running CraftBukkit version git-Bukkit-53fac9f (MC: 1.8.8) (Implementing API version 1.8.8-R0.1-SNAPSHOT)
+[18:28:47] [Server thread/INFO]: [AllAssets] Loading AllAssets v0.7.3 Alpha
+[18:28:47] [Server thread/INFO]: [AllAssets] +-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+[18:28:47] [Server thread/INFO]: [AllAssets] Preparing AllAssets for enabling...
+[18:28:47] [Server thread/INFO]: [AllAssets] Creating new file config.yml
+[18:28:47] [Server thread/INFO]: [AllAssets] Creating new file messages.yml
+[18:28:47] [Server thread/INFO]: [AllAssets] Creating new file features.yml
+[18:28:47] [Server thread/INFO]: [AllAssets] Creating new file Storage\announcer.yml
+[18:28:47] [Server thread/INFO]: [AllAssets] Creating new file Storage\warps.yml
+[18:28:47] [Server thread/INFO]: Opening database bannedplayers.db
+[18:28:48] [Server thread/INFO]: [AllAssets] +-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+[18:28:48] [Server thread/INFO]: Preparing level "world"
+[18:28:48] [Server thread/INFO]: Preparing start region for level 0 (Seed: 3129719071954140071)
+[18:28:49] [Server thread/INFO]: Preparing spawn area: 35%
+[18:28:50] [Server thread/INFO]: Preparing start region for level 1 (Seed: 3129719071954140071)
+[18:28:51] [Server thread/INFO]: Preparing spawn area: 49%
+[18:28:51] [Server thread/INFO]: Preparing start region for level 2 (Seed: 3129719071954140071)
+[18:28:51] [Server thread/INFO]: [AllAssets] Enabling AllAssets v0.7.3 Alpha
+[18:28:51] [Server thread/INFO]: [AllAssets] +-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+[18:28:51] [Server thread/INFO]: [AllAssets] Enabling AllAssets version 0.7.3 Alpha
+[18:28:51] [Server thread/INFO]: [AllAssets] AllAssets, created by Skepter and MCSpartans
+[18:28:51] [Server thread/WARN]: [AllAssets] Vault not found, so some features may not be available
+[18:28:51] [Server thread/INFO]: [AllAssets] To fully maximize AllAssets' potential (Economy, Permissions, Chat, Give commands), download Vault from http://dev.bukkit.org/bukkit-plugins/vault/
+[18:28:51] [Server thread/INFO]: [AllAssets] Hooking into NMS version dependant system...
+[18:28:51] [Server thread/INFO]: [AllAssets] Version v1_8_R3 found
+[18:28:51] [Server thread/INFO]: [AllAssets] Version v1_8_R3 implemented!
+[18:28:51] [Server thread/INFO]: [AllAssets] Initializing commands according to features.yml
+[18:28:52] [Server thread/ERROR]: Error occurred while enabling AllAssets v0.7.3 Alpha (Is it up to date?)
+java.lang.NullPointerException
+	at io.github.skepter.allassets.AllAssets.onEnable(AllAssets.java:443) ~[?:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:321) ~[craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at org.bukkit.plugin.java.JavaPluginLoader.enablePlugin(JavaPluginLoader.java:332) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:404) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at org.bukkit.craftbukkit.v1_8_R3.CraftServer.loadPlugin(CraftServer.java:342) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at org.bukkit.craftbukkit.v1_8_R3.CraftServer.enablePlugins(CraftServer.java:314) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at net.minecraft.server.v1_8_R3.MinecraftServer.s(MinecraftServer.java:406) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at net.minecraft.server.v1_8_R3.MinecraftServer.k(MinecraftServer.java:370) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at net.minecraft.server.v1_8_R3.MinecraftServer.a(MinecraftServer.java:325) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at net.minecraft.server.v1_8_R3.DedicatedServer.init(DedicatedServer.java:235) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at net.minecraft.server.v1_8_R3.MinecraftServer.run(MinecraftServer.java:503) [craftbukkit-1.8.8-R0.1-SNAPSHOT-latest.jar:git-Bukkit-53fac9f]
+	at java.lang.Thread.run(Thread.java:745) [?:1.8.0_45]
+[18:28:52] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[18:28:52] [Server thread/INFO]: Done (4.087s)! For help, type "help" or "?"

@@ -1,0 +1,10 @@
+# +----------------------------------------------------+
+# <                    [AllAssets]                     >
+# <              Copyright 2014 - Skepter              >
+# <                All Rights Reserved                 >
+# +----------------------------------------------------+
+
+# Error messages
+cantEnchant: You cannot enchant that item!
+notANumber: That is not a number!
+serverListMOTD: '''&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'''
