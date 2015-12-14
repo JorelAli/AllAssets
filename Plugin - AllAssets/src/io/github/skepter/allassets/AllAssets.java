@@ -309,6 +309,7 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		getLogger().info("Preparing to disable...");
 		PlayerData.saveAllPlayers();
 		CommandConsoleLog.players.clear();
 		getServer().getScheduler().cancelTasks(this);
@@ -434,6 +435,11 @@ public class AllAssets extends JavaPlugin {
 		 * according to the users will
 		 */
 		getLogger().info("Initializing commands according to features.yml");
+		
+		/*
+		 * If this is running for the first time, skip all of this
+		 */
+		
 		if (ConfigHandler.features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
 		if (ConfigHandler.features().getBoolean("AllAssets"))

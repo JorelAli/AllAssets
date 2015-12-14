@@ -263,6 +263,14 @@ public class CommandDebug implements Listener {
 		} catch (final Exception e) {
 		}
 	}
+	
+	@CommandHandler(name = "debug.reload", permission = "debug", description = "Tries to reload the server...")
+	public void reload(final CommandArgs args) {
+		try {
+			Bukkit.reload();
+		} catch (final Exception e) {
+		}
+	}
 
 	@CommandHandler(name = "debug.set", permission = "debug", description = "Does something........")
 	public void set(final CommandArgs args) {
