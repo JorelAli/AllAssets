@@ -21,6 +21,8 @@
  ******************************************************************************/
 package io.github.skepter.allassets.sqlite;
 
+import io.github.skepter.allassets.AllAssets;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,8 +32,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import org.bukkit.Bukkit;
 
 /** SQLite class taken straight from NecessaryExtrasCore Good thing that Skepter
  * owns that xD */
@@ -67,7 +67,7 @@ public class SQLite {
 	public void open() {
 		try {
 			Connection = DriverManager.getConnection(DatabaseURL);
-			Bukkit.getLogger().info("Opening database " + databaseFile.getName());
+			AllAssets.instance().getLogger().info("Opening database " + databaseFile.getName());
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}

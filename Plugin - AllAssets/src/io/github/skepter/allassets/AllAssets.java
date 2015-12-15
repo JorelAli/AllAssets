@@ -335,9 +335,8 @@ public class AllAssets extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
-		getLogger().info("Enabling AllAssets version " + getDescription().getVersion());
-		getLogger().info("AllAssets, created by Skepter and MCSpartans");
+		Bukkit.getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
+		getLogger().info("AllAssets, created by Skepter");
 
 		/* ConsoleLog logger */
 		((org.apache.logging.log4j.core.Logger) org.apache.logging.log4j.LogManager.getRootLogger()).addFilter(new LogListener());
@@ -693,15 +692,15 @@ public class AllAssets extends JavaPlugin {
 			e.printStackTrace();
 		}
 
-		getLogger().info(Strings.NO_COLOR_TITLE + "AllAssets has been enabled successfully");
+		getLogger().info("AllAssets has been enabled successfully");
 		Bukkit.broadcast(Strings.TITLE + "Plugin reloaded!", "AllAssets.allassets");
-		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
+		Bukkit.getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		postLoad();
 	}
 
 	@Override
 	public void onLoad() {
-		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
+		Bukkit.getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 		getLogger().info("Preparing AllAssets for enabling...");
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
@@ -709,7 +708,7 @@ public class AllAssets extends JavaPlugin {
 		
 		/* Too buggy to be worth testing */
 		new SQLiteLoader().init();
-		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
+		Bukkit.getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
 
 	}
 
@@ -726,7 +725,7 @@ public class AllAssets extends JavaPlugin {
 		if (masterSwitch)
 			for (final Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)
-					getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
+					Bukkit.getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
 		getServer().getPluginManager().registerEvents(l, this);
 	}
 
