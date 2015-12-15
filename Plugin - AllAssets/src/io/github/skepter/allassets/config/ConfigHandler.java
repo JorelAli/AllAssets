@@ -30,17 +30,17 @@ import java.util.Map.Entry;
 
 public class ConfigHandler {
 
-	private static SimpleConfigManager configManager;
-	private static SimpleConfigManager featuresManager;
-	private static SimpleConfigManager messagesManager;
-	private static SimpleConfigManager announcerManager;
-	private static SimpleConfigManager warpsManager;
+	private SimpleConfigManager configManager;
+	private SimpleConfigManager featuresManager;
+	private SimpleConfigManager messagesManager;
+	private SimpleConfigManager announcerManager;
+	private SimpleConfigManager warpsManager;
 
-	private static SimpleConfig config;
-	private static SimpleConfig features;
-	private static SimpleConfig messages;
-	private static SimpleConfig announcer;
-	private static SimpleConfig warps;
+	private SimpleConfig config;
+	private SimpleConfig features;
+	private SimpleConfig messages;
+	private SimpleConfig announcer;
+	private SimpleConfig warps;
 
 	public ConfigHandler() {
 		if (configManager == null)
@@ -85,7 +85,7 @@ public class ConfigHandler {
 
 	}
 
-	private static void createConfig() {
+	private void createConfig() {
 		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Config.yml - File to store plugin configuration" };
 
 		config = configManager.getNewConfig("config.yml", header);
@@ -112,7 +112,7 @@ public class ConfigHandler {
 		config.set("currencyNameSing", "dollar", "The name for the currency (singular)");
 	}
 
-	private static void createMessages() {
+	private void createMessages() {
 		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Messages.yml - File to store and retrive messages used throughout the plugin" };
 
 		messages = messagesManager.getNewConfig("messages.yml", header);
@@ -122,7 +122,7 @@ public class ConfigHandler {
 		messages.set("serverListMOTD", "'&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'");
 	}
 
-	private static void createFeatures(final String fileName, SimpleConfig features, final SimpleConfigManager featuresManager) {
+	private void createFeatures(final String fileName, SimpleConfig features, final SimpleConfigManager featuresManager) {
 		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
 		features = featuresManager.getNewConfig(fileName, header);
@@ -262,7 +262,7 @@ public class ConfigHandler {
 
 	}
 
-	public static SimpleConfig config() {
+	public SimpleConfig config() {
 		if (config != null)
 			return config;
 		else {
@@ -271,15 +271,15 @@ public class ConfigHandler {
 		}
 	}
 
-	public static SimpleConfig announcer() {
+	public SimpleConfig announcer() {
 		return announcer;
 	}
 
-	public static SimpleConfig warps() {
+	public SimpleConfig warps() {
 		return warps;
 	}
 
-	public static String getMsg(final String msg) {
+	public String getMsg(final String msg) {
 		if (messages != null)
 			return messages.getString(msg);
 		else {
@@ -288,7 +288,7 @@ public class ConfigHandler {
 		}
 	}
 
-	public static String getSpecialMsg(final String msg) {
+	public String getSpecialMsg(final String msg) {
 		if (messages != null)
 			return messages.getSpecialString(msg);
 		else {
@@ -297,7 +297,7 @@ public class ConfigHandler {
 		}
 	}
 
-	public static SimpleConfig features() {
+	public SimpleConfig features() {
 		if (features != null)
 			return features;
 		else {

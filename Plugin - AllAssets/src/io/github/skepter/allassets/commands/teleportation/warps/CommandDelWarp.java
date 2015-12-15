@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.teleportation.warps;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -44,19 +45,20 @@ public class CommandDelWarp {
 	@CommandHandler(name = "delwarp", aliases = { "remwarp", "deletewarp" }, permission = "delwarp", description = "Deletes a warp")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
+		ConfigHandler config = AllAssets.instance().getAAConfig();
 		if (player != null)
 			switch (args.getArgs().length) {
 				case 0:
 					printHelp(player);
 					return;
 				case 1:
-					ConfigurationSection s = ConfigHandler.warps().getConfigurationSection(args.getArgs()[0].toLowerCase());
+					ConfigurationSection s = config.warps().getConfigurationSection(args.getArgs()[0].toLowerCase());
 					if (s == null) {
 						ErrorUtils.warpNotFound(player);
 						return;
 					} else {
-						String cachedName = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
-						ConfigHandler.warps().set(args.getArgs()[0], null);
+						String cachedName = config.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
+						config.warps().set(args.getArgs()[0], null);
 						player.sendMessage(Strings.TITLE + "Warp " + cachedName + " deleted successfully");
 						return;
 					}

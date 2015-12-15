@@ -25,11 +25,11 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.other;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 
 import org.bukkit.entity.Player;
@@ -45,7 +45,7 @@ public class CommandClear {
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
-			if (ConfigHandler.config().getBoolean("clearArmor")) {
+			if (AllAssets.instance().getAAConfig().config().getBoolean("clearArmor")) {
 				if (args.getArgs().length == 0)
 					player.getInventory().clear();
 				else if (args.getArgs().length == 1) {

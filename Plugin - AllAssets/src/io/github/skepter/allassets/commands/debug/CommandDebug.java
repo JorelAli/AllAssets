@@ -267,7 +267,10 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.reload", permission = "debug", description = "Tries to reload the server...")
 	public void reload(final CommandArgs args) {
 		try {
-			Bukkit.reload();
+			AllAssets.instance().onDisable();
+			
+			//Bukkit.getPluginManager().disablePlugin(AllAssets.instance());
+			//Bukkit.reload();
 		} catch (final Exception e) {
 		}
 	}

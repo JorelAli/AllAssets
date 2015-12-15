@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.utils.CommandCooldown;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
@@ -35,11 +35,11 @@ public class CommandCooldownListener implements Listener {
 
 	@EventHandler
 	public void onCommand(final PlayerCommandPreprocessEvent e) {
-		if (ConfigHandler.config().getInt("commandCooldown") != 0)
+		if (AllAssets.instance().getAAConfig().config().getInt("commandCooldown") != 0)
 			if (CommandCooldown.isOnCooldown(e.getPlayer(), e.getMessage().split(" ")[0])) {
 				ErrorUtils.onCooldown(e.getPlayer(), CommandCooldown.getTimeLeft(e.getPlayer()));
 				e.setCancelled(true);
 			} else
-				new CommandCooldown(e.getPlayer(), ConfigHandler.config().getInt("commandCooldown"), e.getMessage().split(" ")[0]);
+				new CommandCooldown(e.getPlayer(), AllAssets.instance().getAAConfig().config().getInt("commandCooldown"), e.getMessage().split(" ")[0]);
 	}
 }

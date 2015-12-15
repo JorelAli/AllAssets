@@ -23,7 +23,6 @@ package io.github.skepter.allassets.vault.economy;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.users.User;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.reflection.VaultReflection;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
@@ -147,12 +146,12 @@ public class AAEco implements Economy {
 
 	@Override
 	public String currencyNamePlural() {
-		return ConfigHandler.config().getString("currencyName");
+		return AllAssets.instance().getAAConfig().config().getString("currencyName");
 	}
 
 	@Override
 	public String currencyNameSingular() {
-		return ConfigHandler.config().getString("currencyNameSing");
+		return AllAssets.instance().getAAConfig().config().getString("currencyNameSing");
 	}
 
 	@Override

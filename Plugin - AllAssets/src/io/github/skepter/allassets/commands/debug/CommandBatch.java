@@ -90,8 +90,9 @@ public class CommandBatch {
 				return;
 			}
 			//limit in config
-			if (amount > ConfigHandler.config().getInt("batchLimit")) {
-				ErrorUtils.batchLimit(player, ConfigHandler.config().getInt("batchLimit"));
+			ConfigHandler config = AllAssets.instance().getAAConfig();
+			if (amount > config.config().getInt("batchLimit")) {
+				ErrorUtils.batchLimit(player, config.config().getInt("batchLimit"));
 				return;
 			}
 

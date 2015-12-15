@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.tasks;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.MathUtils;
 
@@ -30,15 +31,17 @@ import org.bukkit.ChatColor;
 public class AnnouncerTask implements Runnable {
 
 	private int count;
+	private ConfigHandler config;
 
 	public AnnouncerTask() {
 		count = 0;
+		config = AllAssets.instance().getAAConfig();
 	}
 
 	@Override
 	public void run() {
-		if (ConfigHandler.config().getBoolean("randomAnnouncer"))
-			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, ConfigHandler.announcer().getKeys().size())));
+		if (config.config().getBoolean("randomAnnouncer"))
+			Bukkit.broadcastMessage(getAnnouncer(MathUtils.randomBetween(1, config.announcer().getKeys().size())));
 		else
 			try {
 				Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', getAnnouncer(count)));
@@ -52,7 +55,7 @@ public class AnnouncerTask implements Runnable {
 	}
 
 	private String getAnnouncer(final int ID) {
-		return ConfigHandler.announcer().getString(String.valueOf(ID));
+		return config.announcer().getString(String.valueOf(ID));
 	}
 
 }

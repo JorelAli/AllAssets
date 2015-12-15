@@ -21,10 +21,10 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.other;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
@@ -44,7 +44,7 @@ public class CommandBroadcast {
 			printHelp(args.getSender());
 			return;
 		} else
-			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', ConfigHandler.config().getString("broadcastPrefix").trim() + " " + TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
+			Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', AllAssets.instance().getAAConfig().config().getString("broadcastPrefix").trim() + " " + TextUtils.getMsgStringFromArgs(args.getArgs(), 0, args.getArgs().length)));
 		return;
 	}
 

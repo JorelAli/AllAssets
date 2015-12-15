@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.PluginUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -56,7 +56,7 @@ public class PluginsCommandListener implements Listener {
 					event.getPlayer().sendMessage(Strings.TITLE + "There are currently " + (Bukkit.getPluginManager().getPlugins().length) + " plugins:");
 					final List<String> pluginList = new ArrayList<String>();
 					for (final Plugin plugin : Bukkit.getPluginManager().getPlugins())
-						if (ConfigHandler.config().getBoolean("pluginsShowAuthors")) {
+						if (AllAssets.instance().getAAConfig().config().getBoolean("pluginsShowAuthors")) {
 							String authors = PluginUtils.getAuthors(plugin);
 							if (plugin.isEnabled())
 								pluginList.add(ChatColor.GREEN + plugin.getName() + ChatColor.WHITE + ": v" + plugin.getDescription().getVersion() + "\n " + ChatColor.GRAY + "Authors: " + authors);

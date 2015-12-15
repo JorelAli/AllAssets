@@ -25,6 +25,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.debug;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -44,6 +45,7 @@ public class CommandConfig {
 		 * /config view <file> /config set <config/features> <key> <value>
 		 *
 		 * - */
+		ConfigHandler config = AllAssets.instance().getAAConfig();
 		switch (args.getArgs().length) {
 			case 0:
 			case 3:
@@ -60,8 +62,8 @@ public class CommandConfig {
 						args.getSender().sendMessage(Strings.TITLE + "Config, Features");
 					case "view":
 						args.getSender().sendMessage(TextUtils.title("Config"));
-						for (final String key : ConfigHandler.config().getKeys())
-							args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
+						for (final String key : config.config().getKeys())
+							args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(config.config().get(key)));
 				}
 				return;
 			case 2:
@@ -69,12 +71,12 @@ public class CommandConfig {
 					switch (args.getArgs()[1].toLowerCase()) {
 						case "config":
 							args.getSender().sendMessage(TextUtils.title("Config"));
-							for (final String key : ConfigHandler.config().getKeys())
-								args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.config().get(key)));
+							for (final String key : config.config().getKeys())
+								args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(config.config().get(key)));
 						case "features":
 							args.getSender().sendMessage(TextUtils.title("Features"));
-							for (final String key : ConfigHandler.features().getKeys())
-								args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(ConfigHandler.features().get(key)));
+							for (final String key : config.features().getKeys())
+								args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + ": " + String.valueOf(config.features().get(key)));
 					}
 				return;
 			case 4:

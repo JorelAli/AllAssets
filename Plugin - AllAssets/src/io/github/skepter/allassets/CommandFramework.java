@@ -22,7 +22,6 @@
 package io.github.skepter.allassets;
 
 import io.github.skepter.allassets.commands.other.CommandHelp;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
@@ -119,7 +118,7 @@ public class CommandFramework {
 				try {
 					final long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
-					if (ConfigHandler.config().getBoolean("debugMode") || AllAssets.masterSwitch)
+					if (AllAssets.instance().getAAConfig().config().getBoolean("debugMode") || AllAssets.masterSwitch)
 						sender.sendMessage(Strings.TITLE + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
 				} catch (final Exception e) {
 					e.printStackTrace();

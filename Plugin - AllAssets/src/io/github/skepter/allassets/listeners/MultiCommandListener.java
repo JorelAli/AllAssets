@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.config.ConfigHandler;
+import io.github.skepter.allassets.AllAssets;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -35,8 +35,8 @@ public class MultiCommandListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void playerCommand(final PlayerCommandPreprocessEvent event) {
-		if (event.getMessage().startsWith("/") && event.getMessage().contains(ConfigHandler.config().getString("multiCommandSeparator"))) {
-			final String[] commands = event.getMessage().split(ConfigHandler.config().getString("multiCommandSeparator"));
+		if (event.getMessage().startsWith("/") && event.getMessage().contains(AllAssets.instance().getAAConfig().config().getString("multiCommandSeparator"))) {
+			final String[] commands = event.getMessage().split(AllAssets.instance().getAAConfig().config().getString("multiCommandSeparator"));
 			for (String command : commands) {
 				if (!command.startsWith("/"))
 					command = "/" + command;

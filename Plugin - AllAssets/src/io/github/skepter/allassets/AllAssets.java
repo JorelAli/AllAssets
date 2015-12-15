@@ -171,8 +171,6 @@ import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -295,17 +293,19 @@ public class AllAssets extends JavaPlugin {
 	/* NMS */
 	private NMS nms;
 	private Packet packet;
+	
+	private ConfigHandler config;
 
 	// private DatabasesHandler dbHandler;
 
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
 	}
-
-	@Override
-	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-		return framework.handleCommand(sender, label, command, args);
-	}
+//
+//	@Override
+//	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+//		return framework.handleCommand(sender, label, command, args);
+//	}
 
 	@Override
 	public void onDisable() {
@@ -440,191 +440,191 @@ public class AllAssets extends JavaPlugin {
 		 * If this is running for the first time, skip all of this
 		 */
 		
-		if (ConfigHandler.features().getBoolean("AFK"))
+		if (config.features().getBoolean("AFK"))
 			r(new CommandAFK(framework));
-		if (ConfigHandler.features().getBoolean("AllAssets"))
+		if (config.features().getBoolean("AllAssets"))
 			new CommandAllAssets(framework);
-		if (ConfigHandler.features().getBoolean("Announcer"))
+		if (config.features().getBoolean("Announcer"))
 			new CommandAnnouncer(framework);
-		if (ConfigHandler.features().getBoolean("Ascend"))
+		if (config.features().getBoolean("Ascend"))
 			new CommandAscend(framework);
-		if (ConfigHandler.features().getBoolean("Back"))
+		if (config.features().getBoolean("Back"))
 			new CommandBack(framework);
-		if (ConfigHandler.features().getBoolean("Backup"))
+		if (config.features().getBoolean("Backup"))
 			new CommandBackup(framework);
-		if (ConfigHandler.features().getBoolean("Batch"))
+		if (config.features().getBoolean("Batch"))
 			new CommandBatch(framework);
-		if (ConfigHandler.features().getBoolean("Bind"))
+		if (config.features().getBoolean("Bind"))
 			r(new CommandBind(framework));
-		if (ConfigHandler.features().getBoolean("Break"))
+		if (config.features().getBoolean("Break"))
 			new CommandBreak(framework);
-		if (ConfigHandler.features().getBoolean("Broadcast"))
+		if (config.features().getBoolean("Broadcast"))
 			new CommandBroadcast(framework);
-		if (ConfigHandler.features().getBoolean("Butcher"))
+		if (config.features().getBoolean("Butcher"))
 			new CommandButcher(framework);
-		if (ConfigHandler.features().getBoolean("Calculate"))
+		if (config.features().getBoolean("Calculate"))
 			new CommandCalculate(framework);
-		if (ConfigHandler.features().getBoolean("ChestSearch"))
+		if (config.features().getBoolean("ChestSearch"))
 			new CommandChestSearch(framework);
-		if (ConfigHandler.features().getBoolean("Clear"))
+		if (config.features().getBoolean("Clear"))
 			new CommandClear(framework);
-		if (ConfigHandler.features().getBoolean("ClearChat"))
+		if (config.features().getBoolean("ClearChat"))
 			new CommandClearchat(framework);
-		if (ConfigHandler.features().getBoolean("Collect"))
+		if (config.features().getBoolean("Collect"))
 			new CommandCollect(framework);
-		if (ConfigHandler.features().getBoolean("ConsoleLog"))
+		if (config.features().getBoolean("ConsoleLog"))
 			new CommandConsoleLog(framework);
-		if (ConfigHandler.features().getBoolean("Debug"))
+		if (config.features().getBoolean("Debug"))
 			r(new CommandDebug(framework));
-		if (ConfigHandler.features().getBoolean("DelWarp"))
+		if (config.features().getBoolean("DelWarp"))
 			new CommandDelWarp(framework);
-		if (ConfigHandler.features().getBoolean("Descend"))
+		if (config.features().getBoolean("Descend"))
 			new CommandDescend(framework);
-		if (ConfigHandler.features().getBoolean("Disable"))
+		if (config.features().getBoolean("Disable"))
 			new CommandDisable(framework);
-		if (ConfigHandler.features().getBoolean("DiscoArmor"))
+		if (config.features().getBoolean("DiscoArmor"))
 			new CommandDiscoArmor(framework);
-		if (ConfigHandler.features().getBoolean("Disguise"))
+		if (config.features().getBoolean("Disguise"))
 			new CommandDisguise(framework);
-		if (ConfigHandler.features().getBoolean("Enable"))
+		if (config.features().getBoolean("Enable"))
 			new CommandEnable(framework);
-		if (ConfigHandler.features().getBoolean("Enchant"))
+		if (config.features().getBoolean("Enchant"))
 			r(new CommandEnchant(framework));
-		if (ConfigHandler.features().getBoolean("Enderchest"))
+		if (config.features().getBoolean("Enderchest"))
 			new CommandEnderchest(framework);
-		if (ConfigHandler.features().getBoolean("Extinguish"))
+		if (config.features().getBoolean("Extinguish"))
 			new CommandExtinguish(framework);
-		if (ConfigHandler.features().getBoolean("FakeDeop"))
+		if (config.features().getBoolean("FakeDeop"))
 			new CommandFakeDeop(framework);
-		if (ConfigHandler.features().getBoolean("FakeOp"))
+		if (config.features().getBoolean("FakeOp"))
 			new CommandFakeOp(framework);
-		if (ConfigHandler.features().getBoolean("FileBrowser"))
+		if (config.features().getBoolean("FileBrowser"))
 			r(new CommandFileBrowser(framework));
-		if (ConfigHandler.features().getBoolean("FileEditor"))
+		if (config.features().getBoolean("FileEditor"))
 			r(new CommandFileEditor(framework));
-		if (ConfigHandler.features().getBoolean("Firework"))
+		if (config.features().getBoolean("Firework"))
 			r(new CommandFirework(framework));
-		if (ConfigHandler.features().getBoolean("Fly"))
+		if (config.features().getBoolean("Fly"))
 			new CommandFly(framework);
-		if (ConfigHandler.features().getBoolean("ForceChat"))
+		if (config.features().getBoolean("ForceChat"))
 			new CommandForceChat(framework);
-		if (ConfigHandler.features().getBoolean("ForceCommand"))
+		if (config.features().getBoolean("ForceCommand"))
 			new CommandForceCommand(framework);
-		if (ConfigHandler.features().getBoolean("Friend"))
+		if (config.features().getBoolean("Friend"))
 			new CommandFriend(framework);
-		if (ConfigHandler.features().getBoolean("Gamemode"))
+		if (config.features().getBoolean("Gamemode"))
 			new CommandGamemode(framework);
-		if (ConfigHandler.features().getBoolean("Ghost"))
+		if (config.features().getBoolean("Ghost"))
 			new CommandGhost(framework);
-		if (ConfigHandler.features().getBoolean("Give"))
+		if (config.features().getBoolean("Give"))
 			new CommandGive(framework);
-		if (ConfigHandler.features().getBoolean("Glow"))
+		if (config.features().getBoolean("Glow"))
 			new CommandGlow(framework);
-		if (ConfigHandler.features().getBoolean("Go"))
+		if (config.features().getBoolean("Go"))
 			new CommandGo(framework);
-		if (ConfigHandler.features().getBoolean("God"))
-			if (ConfigHandler.config().getBoolean("useNMSGod"))
+		if (config.features().getBoolean("God"))
+			if (config.config().getBoolean("useNMSGod"))
 				new CommandNMSGod(framework);
 			else
 				r(new CommandGod(framework));
-		if (ConfigHandler.features().getBoolean("Grief"))
+		if (config.features().getBoolean("Grief"))
 			new CommandGrief(framework);
-		if (ConfigHandler.features().getBoolean("Hat"))
+		if (config.features().getBoolean("Hat"))
 			new CommandHat(framework);
-		if (ConfigHandler.features().getBoolean("Head"))
+		if (config.features().getBoolean("Head"))
 			new CommandHead(framework);
-		if (ConfigHandler.features().getBoolean("Heal"))
+		if (config.features().getBoolean("Heal"))
 			new CommandHeal(framework);
-		if (ConfigHandler.features().getBoolean("Help"))
+		if (config.features().getBoolean("Help"))
 			new CommandHelp(framework);
-		if (ConfigHandler.features().getBoolean("Helpop"))
+		if (config.features().getBoolean("Helpop"))
 			new CommandHelpop(framework);
-		if (ConfigHandler.features().getBoolean("Inventory"))
+		if (config.features().getBoolean("Inventory"))
 			new CommandInventory(framework);
-		if (ConfigHandler.features().getBoolean("Launch"))
+		if (config.features().getBoolean("Launch"))
 			new CommandLaunch(framework);
-		if (ConfigHandler.features().getBoolean("Log"))
+		if (config.features().getBoolean("Log"))
 			new CommandLog(framework);
-		if (ConfigHandler.features().getBoolean("More"))
+		if (config.features().getBoolean("More"))
 			new CommandMore(framework);
-		if (ConfigHandler.features().getBoolean("Near"))
+		if (config.features().getBoolean("Near"))
 			new CommandNear(framework);
-		if (ConfigHandler.features().getBoolean("NearbyWarps"))
+		if (config.features().getBoolean("NearbyWarps"))
 			new CommandNearbyWarps(framework);
-		if (ConfigHandler.features().getBoolean("Nickname"))
+		if (config.features().getBoolean("Nickname"))
 			new CommandNickname(framework);
-		if (ConfigHandler.features().getBoolean("Oplist"))
+		if (config.features().getBoolean("Oplist"))
 			new CommandOplist(framework);
-		if (ConfigHandler.features().getBoolean("Ping"))
+		if (config.features().getBoolean("Ping"))
 			new CommandPing(framework);
-		if (ConfigHandler.features().getBoolean("Plugins"))
+		if (config.features().getBoolean("Plugins"))
 			r(new PluginsCommandListener());
-		if (ConfigHandler.features().getBoolean("Prefix"))
+		if (config.features().getBoolean("Prefix"))
 			new CommandPrefix(framework);
-		if (ConfigHandler.features().getBoolean("PTime"))
+		if (config.features().getBoolean("PTime"))
 			new CommandPTime(framework);
-		if (ConfigHandler.features().getBoolean("PWeather"))
+		if (config.features().getBoolean("PWeather"))
 			new CommandPWeather(framework);
-		if (ConfigHandler.features().getBoolean("Reload"))
+		if (config.features().getBoolean("Reload"))
 			r(new ReloadCommandListener());
-		if (ConfigHandler.features().getBoolean("Remove"))
+		if (config.features().getBoolean("Remove"))
 			new CommandRemove(framework);
-		if (ConfigHandler.features().getBoolean("Rename"))
+		if (config.features().getBoolean("Rename"))
 			new CommandRename(framework);
-		if (ConfigHandler.features().getBoolean("Repair"))
+		if (config.features().getBoolean("Repair"))
 			new CommandRepair(framework);
 
-		// if (ConfigHandler.features().getBoolean("Restore"))
+		// if (config.features().getBoolean("Restore"))
 		// new CommandRestore(framework);
-		if (ConfigHandler.features().getBoolean("Rules"))
+		if (config.features().getBoolean("Rules"))
 			new CommandRules(framework);
-		if (ConfigHandler.features().getBoolean("Seen"))
+		if (config.features().getBoolean("Seen"))
 			new CommandSeen(framework);
-		if (ConfigHandler.features().getBoolean("SetSpawn"))
+		if (config.features().getBoolean("SetSpawn"))
 			new CommandSetSpawn(framework);
-		if (ConfigHandler.features().getBoolean("SetWarp"))
+		if (config.features().getBoolean("SetWarp"))
 			new CommandSetWarp(framework);
-		if (ConfigHandler.features().getBoolean("SignEdit"))
+		if (config.features().getBoolean("SignEdit"))
 			new CommandSignEdit(framework);
-		if (ConfigHandler.features().getBoolean("Silence"))
+		if (config.features().getBoolean("Silence"))
 			r(new CommandSilence(framework));
-		if (ConfigHandler.features().getBoolean("StaffChat"))
+		if (config.features().getBoolean("StaffChat"))
 			r(new CommandStaffChat(framework));
-		if (ConfigHandler.features().getBoolean("Spawn"))
+		if (config.features().getBoolean("Spawn"))
 			new CommandSpawn(framework);
-		if (ConfigHandler.features().getBoolean("SpawnItem"))
+		if (config.features().getBoolean("SpawnItem"))
 			new CommandSpawnItem(framework);
-		if (ConfigHandler.features().getBoolean("SpawnMob"))
+		if (config.features().getBoolean("SpawnMob"))
 			new CommandSpawnMob(framework);
-		if (ConfigHandler.features().getBoolean("Suffix"))
+		if (config.features().getBoolean("Suffix"))
 			new CommandSuffix(framework);
-		if (ConfigHandler.features().getBoolean("Suicide"))
+		if (config.features().getBoolean("Suicide"))
 			new CommandSuicide(framework);
-		if (ConfigHandler.features().getBoolean("Time"))
+		if (config.features().getBoolean("Time"))
 			new CommandTime(framework);
-		if (ConfigHandler.features().getBoolean("Top"))
+		if (config.features().getBoolean("Top"))
 			new CommandTop(framework);
-		if (ConfigHandler.features().getBoolean("Tp"))
+		if (config.features().getBoolean("Tp"))
 			new CommandTp(framework);
-		if (ConfigHandler.features().getBoolean("Tpall"))
+		if (config.features().getBoolean("Tpall"))
 			new CommandTpall(framework);
-		if (ConfigHandler.features().getBoolean("Tphere"))
+		if (config.features().getBoolean("Tphere"))
 			new CommandTphere(framework);
-		if (ConfigHandler.features().getBoolean("TpToggle"))
+		if (config.features().getBoolean("TpToggle"))
 			new CommandTpToggle(framework);
-		if (ConfigHandler.features().getBoolean("Warp"))
+		if (config.features().getBoolean("Warp"))
 			new CommandWarp(framework);
-		if (ConfigHandler.features().getBoolean("Warps"))
+		if (config.features().getBoolean("Warps"))
 			new CommandWarps(framework);
-		if (ConfigHandler.features().getBoolean("Weather"))
+		if (config.features().getBoolean("Weather"))
 			new CommandWeather(framework);
-		if (ConfigHandler.features().getBoolean("Whois"))
+		if (config.features().getBoolean("Whois"))
 			new CommandWhois(framework);
-		if (ConfigHandler.features().getBoolean("World"))
+		if (config.features().getBoolean("World"))
 			new CommandWorld(framework);
-		if (ConfigHandler.features().getBoolean("Worlds"))
+		if (config.features().getBoolean("Worlds"))
 			new CommandWorlds(framework);
-		if (ConfigHandler.features().getBoolean("Workbench"))
+		if (config.features().getBoolean("Workbench"))
 			new CommandWorkbench(framework);
 
 		/*
@@ -633,14 +633,16 @@ public class AllAssets extends JavaPlugin {
 		 * which don't work
 		 */
 		if (hasVault) {
-			if (ConfigHandler.features().getBoolean("Balance"))
+			if (config.features().getBoolean("Balance"))
 				new CommandBalance(framework);
-			if (ConfigHandler.features().getBoolean("Balancetop"))
+			if (config.features().getBoolean("Balancetop"))
 				new CommandBalancetop(framework);
-			if (ConfigHandler.features().getBoolean("SetBalance"))
+			if (config.features().getBoolean("SetBalance"))
 				new CommandSetBalance(framework);
 		}
 
+		framework.registerHelp();
+		
 		/* Listeners */
 		r(new CommandCooldownListener());
 		r(new ChatListener());
@@ -651,15 +653,15 @@ public class AllAssets extends JavaPlugin {
 		r(new CustomLogListener());
 
 		r(new StopCommandListener());
-		if (ConfigHandler.features().getBoolean("ConsoleSay"))
+		if (config.features().getBoolean("ConsoleSay"))
 			r(new ConsoleSayListener());
-		if (ConfigHandler.features().getBoolean("MultiCommands"))
+		if (config.features().getBoolean("MultiCommands"))
 			r(new MultiCommandListener());
-		if (ConfigHandler.features().getBoolean("PickupSkeletonArrows"))
+		if (config.features().getBoolean("PickupSkeletonArrows"))
 			r(new SkeletonArrowListener());
 		// Was being fussy. Needs fixing/updating
 		// if
-		// (ConfigHandler.features().getBoolean("ServerListMOTDCustomisation"))
+		// (config.features().getBoolean("ServerListMOTDCustomisation"))
 		// r(new ServerListingListener());
 
 		devRegister(framework);
@@ -703,8 +705,8 @@ public class AllAssets extends JavaPlugin {
 		getLogger().info("Preparing AllAssets for enabling...");
 		tempTimeMap = new HashMap<UUID, Long>();
 		framework = new CommandFramework(this);
-		new ConfigHandler();
-
+		config = new ConfigHandler();
+		
 		/* Too buggy to be worth testing */
 		new SQLiteLoader().init();
 		getLogger().info("+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+");
@@ -734,6 +736,10 @@ public class AllAssets extends JavaPlugin {
 
 	public Packet getPacketHandler() {
 		return packet;
+	}
+	
+	public ConfigHandler getAAConfig() {
+		return config;
 	}
 
 	private void setupVault() {

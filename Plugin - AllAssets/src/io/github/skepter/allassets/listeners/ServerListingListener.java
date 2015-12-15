@@ -23,8 +23,8 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.users.User;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.UUIDData;
 
 import java.util.Arrays;
@@ -46,11 +46,11 @@ public class ServerListingListener implements Listener {
 			try {
 				if (user.getStoredIps().contains(event.getAddress().toString().substring(1, event.getAddress().toString().length()))) {
 					final String playerName = UUIDData.getReversedUUIDMap().get(Bukkit.getOfflinePlayer(u).getUniqueId());
-					event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
+					event.setMotd(ChatColor.translateAlternateColorCodes('&', AllAssets.instance().getAAConfig().getSpecialMsg("serverListMOTD")).replace("{PLAYERNAME}", playerName).replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 					return;
 				}
 			} catch (final Exception e) {
-				event.setMotd(ChatColor.translateAlternateColorCodes('&', ConfigHandler.getSpecialMsg("serverListMOTD")).replace(" {PLAYERNAME}", "").replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
+				event.setMotd(ChatColor.translateAlternateColorCodes('&', AllAssets.instance().getAAConfig().getSpecialMsg("serverListMOTD")).replace(" {PLAYERNAME}", "").replace("{JOINCOUNT}", String.valueOf(user.getJoinCount())));
 				return;
 			}
 		}
