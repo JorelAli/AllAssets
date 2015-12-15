@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.teleportation.warps;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -47,12 +48,13 @@ public class CommandNearbyWarps {
 	@CommandHandler(name = "nearbywarps", aliases = { "nearwarps", "nearbywarp", "nearwarp" }, permission = "nearbywarps", description = "Shows a list of nearby warps")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
+		ConfigHandler config = AllAssets.instance().getAAConfig();
 		if (player != null) {
 			boolean found = false;
 			List<String> nearbyWarps = new ArrayList<String>();
-			for (String key : ConfigHandler.warps().getKeys()) {
-				String name = ConfigHandler.warps().getString(key + ".name");
-				String locationString = ConfigHandler.warps().getString(key + ".loc");
+			for (String key : config.warps().getKeys()) {
+				String name = config.warps().getString(key + ".name");
+				String locationString = config.warps().getString(key + ".loc");
 				Location location = LocationSerializer.locFromString(locationString);
 				double cachedDistance = player.getLocation().distance(location);
 				int distance = (int) Math.round(cachedDistance);

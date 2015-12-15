@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.teleportation.warps;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -46,11 +47,12 @@ public class CommandWarps {
 	@CommandHandler(name = "warps", aliases = { "warplist", "warpslist" }, permission = "warps", description = "Shows the list of warps")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
+		ConfigHandler config = AllAssets.instance().getAAConfig();
 		if (player != null) {
 			List<String> warps = new ArrayList<String>();
-			for (String key : ConfigHandler.warps().getKeys()) {
-				String name = ConfigHandler.warps().getString(key + ".name");
-				String description = ConfigHandler.warps().getString(key + ".description");
+			for (String key : config.warps().getKeys()) {
+				String name = config.warps().getString(key + ".name");
+				String description = config.warps().getString(key + ".description");
 				if (description == null || description.equals("null"))
 					description = "No description available";
 				warps.add(Strings.HOUSE_STYLE_COLOR + name + Strings.ACCENT_COLOR + Seperator.DASH.toString() + Strings.HOUSE_STYLE_COLOR + description);

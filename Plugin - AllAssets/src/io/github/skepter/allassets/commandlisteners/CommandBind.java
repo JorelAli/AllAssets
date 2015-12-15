@@ -25,11 +25,11 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commandlisteners;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.api.builders.ItemBuilder;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -116,7 +116,7 @@ public class CommandBind implements Listener {
 
 	@EventHandler
 	public void playerInteract(final PlayerInteractEvent event) {
-		if (ConfigHandler.config().getBoolean("bindRight"))
+		if (AllAssets.instance().getAAConfig().config().getBoolean("bindRight"))
 			if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 				performAction(event.getPlayer());
 			else if (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))

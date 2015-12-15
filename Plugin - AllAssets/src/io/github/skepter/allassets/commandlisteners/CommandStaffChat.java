@@ -25,10 +25,10 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commandlisteners;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
@@ -73,7 +73,7 @@ public class CommandStaffChat implements Listener {
 		if (players.contains(event.getPlayer().getUniqueId())) {
 			event.setCancelled(true);
 			for (final UUID uuid : players) {
-				final String format = ConfigHandler.config().getSpecialString("staffChat");
+				final String format = AllAssets.instance().getAAConfig().config().getSpecialString("staffChat");
 				final String format1 = format.replace("{MESSAGE}", event.getMessage());
 				final String format2 = format1.replace("{PLAYERNAME}", event.getPlayer().getName());
 				Bukkit.getPlayer(uuid).sendMessage(ChatColor.translateAlternateColorCodes('&', format2));

@@ -25,6 +25,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.administration;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -72,8 +73,9 @@ public class CommandAllAssets {
 
 	@CommandHandler(name = "allassets.reload", aliases = { "aa.reload" }, permission = "allassets", description = "Reloads entire plugin")
 	public void reload(final CommandArgs args) {
-		ConfigHandler.config().reloadConfig();
-		ConfigHandler.features().reloadConfig();
+		ConfigHandler config = AllAssets.instance().getAAConfig();
+		config.config().reloadConfig();
+		config.features().reloadConfig();
 		args.getSender().sendMessage(Strings.TITLE + "Configuration reloaded");
 	}
 

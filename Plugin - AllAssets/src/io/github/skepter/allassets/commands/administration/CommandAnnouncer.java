@@ -29,7 +29,6 @@ import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.tasks.AnnouncerTask;
 import io.github.skepter.allassets.utils.Strings;
@@ -55,7 +54,7 @@ public class CommandAnnouncer {
 
 	@CommandHandler(name = "announcer.start", permission = "announcer", description = "Start the announcer")
 	public void startAnnouncer(final CommandArgs args) {
-		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new AnnouncerTask(), 0, ConfigHandler.config().getInt("announcerTime"));
+		taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(AllAssets.instance(), new AnnouncerTask(), 0, AllAssets.instance().getAAConfig().config().getInt("announcerTime"));
 		args.getSender().sendMessage(Strings.TITLE + "The announcer has started");
 		return;
 	}
@@ -70,8 +69,8 @@ public class CommandAnnouncer {
 	@CommandHandler(name = "announcer.list", permission = "announcer", description = "List all announcements")
 	public void listAnnouncements(final CommandArgs args) {
 		args.getSender().sendMessage(TextUtils.title("Announcer list"));
-		for (final String key : ConfigHandler.announcer().getKeys())
-			args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + " " + ChatColor.translateAlternateColorCodes('&', ConfigHandler.announcer().getString(key)));
+		for (final String key : AllAssets.instance().getAAConfig().announcer().getKeys())
+			args.getSender().sendMessage(Strings.HOUSE_STYLE_COLOR + key + " " + ChatColor.translateAlternateColorCodes('&', AllAssets.instance().getAAConfig().announcer().getString(key)));
 	}
 
 	@CommandHandler(name = "announcer.add", permission = "announcer", description = "Add a new announcement")
@@ -84,17 +83,17 @@ public class CommandAnnouncer {
 	@CommandHandler(name = "announcer.remove", permission = "announcer", description = "Remove an announcement")
 	public void removeAnnouncement(final CommandArgs args) {
 		if (TextUtils.isInteger(args.getArgs()[0]))
-			ConfigHandler.announcer().removeKey(String.valueOf(args.getArgs()[0]));
+			AllAssets.instance().getAAConfig().announcer().removeKey(String.valueOf(args.getArgs()[0]));
 	}
 
 	private void setAnnouncer(final String data) {
 		int ID = 1;
 		try {
-			ID = ConfigHandler.announcer().getKeys().size() + 1;
+			ID = AllAssets.instance().getAAConfig().announcer().getKeys().size() + 1;
 		} catch (final Exception e) {
 			//Catch nothing since if it fails, the ID will default to 1 anyway
 		}
-		ConfigHandler.announcer().set(String.valueOf(ID), data);
+		AllAssets.instance().getAAConfig().announcer().set(String.valueOf(ID), data);
 	}
 
 	@Help(name = "Announcer")

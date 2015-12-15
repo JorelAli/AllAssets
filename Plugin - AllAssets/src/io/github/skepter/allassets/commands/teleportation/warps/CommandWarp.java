@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.teleportation.warps;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -46,19 +47,20 @@ public class CommandWarp {
 	@CommandHandler(name = "warp", permission = "warp", description = "Teleports to a certain warp")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
+		ConfigHandler config = AllAssets.instance().getAAConfig();
 		if (player != null)
 			switch (args.getArgs().length) {
 				case 0:
 					printHelp(player);
 					return;
 				case 1:
-					ConfigurationSection s = ConfigHandler.warps().getConfigurationSection(args.getArgs()[0].toLowerCase());
+					ConfigurationSection s = config.warps().getConfigurationSection(args.getArgs()[0].toLowerCase());
 					if (s == null) {
 						ErrorUtils.warpNotFound(player);
 						return;
 					} else {
-						String warpname = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
-						String locationString = ConfigHandler.warps().getString(args.getArgs()[0].toLowerCase() + ".loc");
+						String warpname = config.warps().getString(args.getArgs()[0].toLowerCase() + ".name");
+						String locationString = config.warps().getString(args.getArgs()[0].toLowerCase() + ".loc");
 						Location location = LocationSerializer.locFromString(locationString);
 						player.teleport(location);
 						player.sendMessage(Strings.TITLE + "Teleported to " + warpname);

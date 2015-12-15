@@ -26,7 +26,6 @@ import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.api.users.User;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 
@@ -80,7 +79,7 @@ public class CommandAFK implements Listener {
 		if (event.getEntity() instanceof Player) {
 			final Player player = (Player) event.getEntity();
 			final User user = new User(player);
-			if (ConfigHandler.config().getBoolean("afkProtect") && user.isAFK()) {
+			if (AllAssets.instance().getAAConfig().config().getBoolean("afkProtect") && user.isAFK()) {
 				event.setDamage(0.0D);
 				event.setCancelled(false);
 			}

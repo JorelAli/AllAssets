@@ -25,12 +25,12 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.administration;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.api.events.LogEvent;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class CommandLog {
 	public CommandLog(final CommandFramework framework) {
 		framework.registerCommands(this);
 		try {
-			max = ConfigHandler.config().getInt("maxLogAmount");
+			max = AllAssets.instance().getAAConfig().config().getInt("maxLogAmount");
 		} catch (final Exception e) {
 			max = 20;
 		}

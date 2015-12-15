@@ -25,11 +25,11 @@
  *******************************************************************************/
 package io.github.skepter.allassets.commands.administration;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
-import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
@@ -58,7 +58,7 @@ public class CommandSignEdit {
 					if (PlayerUtils.getTargetBlock(player).getType().equals(Material.SIGN_POST) || PlayerUtils.getTargetBlock(player).getType().equals(Material.WALL_SIGN)) {
 						final Sign sign = (Sign) PlayerUtils.getTargetBlock(player).getState();
 						final String s = TextUtils.join(TextUtils.getMsgFromArgs(args.getArgs(), 1, args.getArgs().length), " ");
-						sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, ConfigHandler.features().getBoolean("ChatColor") ? ChatColor.translateAlternateColorCodes('&', s.substring(0, s.length() - 1)) : s.substring(0, s.length() - 1));
+						sign.setLine(Integer.valueOf(args.getArgs()[0]) - 1, AllAssets.instance().getAAConfig().features().getBoolean("ChatColor") ? ChatColor.translateAlternateColorCodes('&', s.substring(0, s.length() - 1)) : s.substring(0, s.length() - 1));
 						sign.update();
 
 					}

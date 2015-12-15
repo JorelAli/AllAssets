@@ -21,6 +21,7 @@
  ******************************************************************************/
 package io.github.skepter.allassets.commands.teleportation.warps;
 
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
 import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
@@ -43,6 +44,7 @@ public class CommandSetWarp {
 	@CommandHandler(name = "setwarp", permission = "setwarp", description = "Sets a warp")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
+		ConfigHandler config = AllAssets.instance().getAAConfig();
 		if (player != null)
 			switch (args.getArgs().length) {
 				case 0:
@@ -50,15 +52,15 @@ public class CommandSetWarp {
 					return;
 				case 1:
 					//Name is stored differently to the actual name due to capitals and stuff.
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
+					config.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
+					config.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
 					player.sendMessage(Strings.TITLE + "Warp " + args.getArgs()[0] + " created successfully");
 					return;
 				default:
 					String description = TextUtils.getMsgStringFromArgs(args.getArgs(), 1, args.getArgs().length);
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
-					ConfigHandler.warps().set(args.getArgs()[0].toLowerCase() + ".description", description);
+					config.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
+					config.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
+					config.warps().set(args.getArgs()[0].toLowerCase() + ".description", description);
 					player.sendMessage(Strings.TITLE + "Warp " + args.getArgs()[0] + " created successfully");
 					return;
 			}

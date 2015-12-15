@@ -23,7 +23,7 @@
  *******************************************************************************/
 package io.github.skepter.allassets.utils.utilclasses;
 
-import static io.github.skepter.allassets.config.ConfigHandler.getMsg;
+import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
 import io.github.skepter.allassets.utils.Strings;
@@ -37,6 +37,10 @@ public class ErrorUtils {
 
 	//Externalise Strings next.
 
+	private static String getMsg(String msg) {
+		return AllAssets.instance().getAAConfig().getMsg(msg);
+	}
+	
 	public static void cantEnchant(final Player player) {
 		error(player, getMsg("cantEnchant"));
 	}
