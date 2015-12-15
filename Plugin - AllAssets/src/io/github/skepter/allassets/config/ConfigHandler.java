@@ -60,20 +60,23 @@ public class ConfigHandler {
 		else
 			config = configManager.getNewConfig("config.yml");
 
+		/* Same of messages */
 		if (!new File(AllAssets.instance().getDataFolder(), "messages.yml").exists())
 			createMessages();
 		else
 			messages = messagesManager.getNewConfig("messages.yml");
 
+		/* If the features doesn't exist, create some new features*/
 		if (!new File(AllAssets.instance().getDataFolder(), "features.yml").exists())
-			createFeatures("features.yml", features, featuresManager);
+			createFeatures("features.yml", featuresManager);
 		else {
 			features = featuresManager.getNewConfig("features.yml");
-			/** Auto update Features.yml */
+			
+			/* Auto update Features.yml */
 			SimpleConfig tempFeatures;
 			final SimpleConfigManager tempFeaturesManager = new SimpleConfigManager(AllAssets.instance());
 			tempFeatures = tempFeaturesManager.getNewConfig("tempFeatures.yml");
-			createFeatures("tempFeatures.yml", tempFeatures, tempFeaturesManager);
+			createFeatures("tempFeatures.yml", tempFeaturesManager);
 			for (final Entry<String, Object> entry : tempFeatures.getValues().entrySet())
 				if (!features.contains(entry.getKey()))
 					features.set(entry.getKey(), entry.getValue());
@@ -122,10 +125,10 @@ public class ConfigHandler {
 		messages.set("serverListMOTD", "'&bWelcome {PLAYERNAME}! You have joined {JOINCOUNT} times!'");
 	}
 
-	private void createFeatures(final String fileName, SimpleConfig features, final SimpleConfigManager featuresManager) {
+	private void createFeatures(final String fileName, SimpleConfigManager manager) {
 		final String[] header = { Strings.NO_COLOR_TITLE, "Copyright 2014 - Skepter", "All Rights Reserved", "Features.yml - Control all aspects of what the plugin does" };
 
-		features = featuresManager.getNewConfig(fileName, header);
+		features = manager.getNewConfig(fileName, header);
 
 		features.set("AFK", "true", "--- Commands ---", "Enable commands by setting the value to true", "Disable commands by setting the value to false");
 		features.set("AllAssets", "true");
@@ -301,7 +304,7 @@ public class ConfigHandler {
 		if (features != null)
 			return features;
 		else {
-			createFeatures("features.yml", features, featuresManager);
+			createFeatures("features.yml", featuresManager);
 			return features;
 		}
 	}
