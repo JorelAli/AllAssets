@@ -103,6 +103,7 @@ public class CommandLaunch {
 						default:
 							break;
 					}
+					break;
 				case 2:
 					if (TextUtils.isInteger(args.getArgs()[1]) || TextUtils.isFloat(args.getArgs()[1])) {
 						final float m = Float.parseFloat(args.getArgs()[1]);
@@ -153,7 +154,7 @@ public class CommandLaunch {
 								break;
 						}
 					}
-
+					break;
 			}
 	}
 

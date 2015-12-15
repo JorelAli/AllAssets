@@ -171,6 +171,8 @@ import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -301,11 +303,11 @@ public class AllAssets extends JavaPlugin {
 	public static AllAssets instance() {
 		return JavaPlugin.getPlugin(AllAssets.class);
 	}
-//
-//	@Override
-//	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
-//		return framework.handleCommand(sender, label, command, args);
-//	}
+
+	@Override
+	public boolean onCommand(final CommandSender sender, final Command command, final String label, final String[] args) {
+		return framework.handleCommand(sender, label, command, args);
+	}
 
 	@Override
 	public void onDisable() {
