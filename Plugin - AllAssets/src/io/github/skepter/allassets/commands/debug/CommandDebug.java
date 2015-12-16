@@ -557,7 +557,6 @@ public class CommandDebug implements Listener {
 		list.add("inv");
 		list.add("gsc");
 		list.add("actionmsg");
-		list.add("pig");
 		return list;
 	}
 

@@ -23,7 +23,6 @@
  *******************************************************************************/
 package io.github.skepter.allassets.listeners;
 
-import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandConsoleLog;
 import io.github.skepter.allassets.commands.administration.CommandLog;
@@ -40,29 +39,30 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+@SuppressWarnings("unused")
 public class LogListener implements Filter {
 
 	@Override
 	public Result filter(final LogEvent event) {
-		Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
-			@Override
-			public void run() {
-				final String msg1 = event.getMessage().toString();
-				final String msg = msg1.substring(22, msg1.length() - 1);
-				for (final UUID u : CommandConsoleLog.players)
-					sendConsole(u, msg);
-				if (msg.contains("at ") && msg.contains(".java:")) {
-					if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
-						return;
-					else
-						CommandLog.addLog(Strings.HOUSE_STYLE_COLOR + stringBetween(msg, "(", ")"), LogType.ERROR);
-					return;
-				} else if (msg.contains("Exception")) {
-					CommandLog.addLog(msg, LogType.ERROR);
-					return;
-				}
-			}
-		});
+//		Bukkit.getScheduler().runTaskAsynchronously(AllAssets.instance(), new Runnable() {
+//			@Override
+//			public void run() {
+//				final String msg1 = event.getMessage().toString();
+//				final String msg = msg1.substring(22, msg1.length() - 1);
+//				for (final UUID u : CommandConsoleLog.players)
+//					sendConsole(u, msg);
+//				if (msg.contains("at ") && msg.contains(".java:")) {
+//					if (msg.contains("net.minecraft.server.") || msg.contains("org.bukkit.") || msg.contains("sun.reflect.") || msg.contains("java."))
+//						return;
+//					else
+//						CommandLog.addLog(Strings.HOUSE_STYLE_COLOR + stringBetween(msg, "(", ")"), LogType.ERROR);
+//					return;
+//				} else if (msg.contains("Exception")) {
+//					CommandLog.addLog(msg, LogType.ERROR);
+//					return;
+//				}
+//			}
+//		});
 		return null;
 	}
 

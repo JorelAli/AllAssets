@@ -118,8 +118,6 @@ import io.github.skepter.allassets.commands.teleportation.warps.CommandNearbyWar
 import io.github.skepter.allassets.commands.teleportation.warps.CommandSetWarp;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandWarp;
 import io.github.skepter.allassets.commands.teleportation.warps.CommandWarps;
-import io.github.skepter.allassets.commands.worldmodifier.WM_Methods;
-import io.github.skepter.allassets.commands.worldmodifier.Wand;
 import io.github.skepter.allassets.config.ConfigHandler;
 import io.github.skepter.allassets.config.PlayerData;
 import io.github.skepter.allassets.config.UUIDData;
@@ -259,14 +257,14 @@ public class AllAssets extends JavaPlugin {
 
 		// [NEED IMPROVEMENT] Commands
 		new CommandTitle(framework);
-		new WM_Methods(framework);
+		//new WM_Methods(framework);
 
 		// [READY] Commands (For release in new builds)
 		// None at the moment!
 
 		// Listeners
 		r(new CommandCommandBlock(framework));
-		r(new Wand(framework));
+		//r(new Wand(framework));
 
 		// Other
 		new SuperPickaxe(this, new ItemBuilder(Material.DIAMOND_PICKAXE).addGlow().build(), "SuperPickaxe");
@@ -424,7 +422,7 @@ public class AllAssets extends JavaPlugin {
 		// dbHandler.addColumn("banMessage", ObjectType.VARCHAR);
 		// dbHandler.addColumn("time", ObjectType.BIGINT);
 
-		Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|AdvCdm", new PluginMessageListenerImplementation());
+//		Bukkit.getMessenger().registerIncomingPluginChannel(this, "MC|AdvCdm", new PluginMessageListenerImplementation());
 
 		ghostFactory = new ComphenixsGhostFactory(this);
 		framework.registerCommands(this);
