@@ -193,4 +193,8 @@ public class ErrorUtils {
 	public static void cannotRepairItem(Player player) {
 		error(player, "That item cannot be repaired!");		
 	}
+
+	public static void unsupportedNMS(CommandSender sender) {
+		error(sender, "NMS is not supported with this version of Minecraft!");
+	}
 }

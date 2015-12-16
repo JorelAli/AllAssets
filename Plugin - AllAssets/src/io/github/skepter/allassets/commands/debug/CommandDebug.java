@@ -48,6 +48,7 @@ import io.github.skepter.allassets.utils.utilclasses.PlayerUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 import io.github.skepter.allassets.utils.utilclasses.TimeUtils;
 import io.github.skepter.allassets.utils.utilclasses.VectorUtils;
+import io.github.skepter.allassets.version.nms.NMS;
 import io.github.skepter.allassets.version.packets.PacketEnums.GameStateEffect;
 
 import java.io.File;
@@ -389,8 +390,13 @@ public class CommandDebug implements Listener {
 
 	@CommandHandler(name = "debug.anvil", permission = "debug", description = "Unloads a world")
 	public void openAnvil(final CommandArgs args) {
+		NMS nms = AllAssets.instance().getNMS();
+		if(nms == null) {
+			ErrorUtils.unsupportedNMS(args.getSender());
+			return;
+		}
 		try {
-			AllAssets.instance().getNMS().openAnvil(args.getPlayer());
+			nms	.openAnvil(args.getPlayer());
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}

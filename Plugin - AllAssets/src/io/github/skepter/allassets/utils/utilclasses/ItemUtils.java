@@ -36,10 +36,14 @@ public class ItemUtils {
 	}
 	
 	public ItemStack addStringNBT(String key, String data) {
+		if(AllAssets.instance().getNMS() == null)
+			return is;
 		return AllAssets.instance().getNMS().addStringNBT(is, key, data);
 	}
 
 	public String getStringNBT(String key) {
+		if(AllAssets.instance().getNMS() == null)
+			return null;
 		return AllAssets.instance().getNMS().getStringNBT(is, key);
 	}
 

@@ -31,6 +31,7 @@ import io.github.skepter.allassets.CommandFramework.CommandArgs;
 import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.version.nms.NMS;
 
 import org.bukkit.entity.Player;
@@ -46,6 +47,10 @@ public class CommandNMSGod {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			NMS nms = AllAssets.instance().getNMS();
+			if(nms == null) {
+				ErrorUtils.unsupportedNMS(args.getSender());
+				return;
+			}
 			if (nms.isInvunerable(player)) {
 				nms.setInvunerability(player, false);
 				player.sendMessage(Strings.TITLE + "You suddenly feel much more vunerable");

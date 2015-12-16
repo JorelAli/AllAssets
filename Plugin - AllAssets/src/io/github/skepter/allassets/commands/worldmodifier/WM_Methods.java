@@ -31,7 +31,9 @@ import io.github.skepter.allassets.items.BlockInfo;
 import io.github.skepter.allassets.utils.DoubleMap;
 import io.github.skepter.allassets.utils.InputParser;
 import io.github.skepter.allassets.utils.Strings;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
+import io.github.skepter.allassets.version.nms.NMS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -56,11 +58,12 @@ public class WM_Methods {
 		final Player player = PlayerGetter.getPlayer(args);
 		final WorldModifierData data = WorldModifierHandler.getData(player);
 		Cuboid cuboid = new Cuboid(player);
+
 		if (player != null) {
 			if (args.getArgs().length == 0)
 				data.toggleWandStatus();
 			else {
-//				final int divisor = 1000;
+				// final int divisor = 1000;
 				switch (args.getArgs()[0]) {
 					case "cut": {
 						Bukkit.dispatchCommand(player, "/wm set 0");
@@ -70,45 +73,60 @@ public class WM_Methods {
 						final BlockInfo info = new InputParser(args.getArgs()[1]).parseBlockInfo();
 						final List<Block> blocks = cuboid.blocksFromTwoPointsEx(info);
 						data.setPreviousAction(cuboid);
-						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to " + TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
-//						if (blocks.size() < divisor)
+						player.sendMessage(Strings.TITLE + "Setting " + blocks.size() + " blocks to "
+								+ TextUtils.capitalize(info.getMaterial().name().toLowerCase().replace('_', ' ')));
+						/*
+						 * + " (Estimate " + ( ( blocks . size ( ) / divisor ) /
+						 * 4 ) + " seconds)"
+						 */
+						// if (blocks.size() < divisor)
 						Set<Chunk> chunks = new HashSet<Chunk>();
-							for (final Block b : blocks) {
-								AllAssets.instance().getNMS().setBlock(b.getLocation(), info.getMaterial().getId(), info.getData());
-								chunks.add(b.getChunk());
-//								b.setType(info.getMaterial());
-//								b.setData(info.getData());
-							}
-							player.sendMessage(Strings.TITLE + "Blocks set successfully, refreshing...");
-							for(Chunk c : chunks)
-								player.getWorld().refreshChunk(c.getX(), c.getX());
-							player.sendMessage(Strings.TITLE + "Refresh complete");
-//						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
-//							b.setType(info.getMaterial());
-//							b.setData(info.getData());
-//						}
-//						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-//							@Override
-//							public void run() {
-//								try {
-//									player.sendMessage(Strings.TITLE + "Complete!");
-//								} catch (final Exception e) {
-//									e.printStackTrace();
-//								}
-//							}
-//						}, (blocks.size() - divisor) / divisor * 5);
-//						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-//							final List<Block> blocksList = blocks.subList(i, i + divisor);
-//							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-//								@Override
-//								public void run() {
-//									for (final Block b : blocksList) {
-//										b.setType(info.getMaterial());
-//										b.setData(info.getData());
-//									}
-//								}
-//							}, (i / divisor) * 5);
-//						}
+						NMS nms = AllAssets.instance().getNMS();
+						if (nms == null) {
+							ErrorUtils.unsupportedNMS(args.getSender());
+							return;
+						}
+						for (final Block b : blocks) {
+							nms.setBlock(b.getLocation(), info.getMaterial().getId(), info.getData());
+							chunks.add(b.getChunk());
+							// b.setType(info.getMaterial());
+							// b.setData(info.getData());
+						}
+						player.sendMessage(Strings.TITLE + "Blocks set successfully, refreshing...");
+						for (Chunk c : chunks)
+							player.getWorld().refreshChunk(c.getX(), c.getX());
+						player.sendMessage(Strings.TITLE + "Refresh complete");
+						// for (final Block b : blocks.subList(blocks.size() /
+						// divisor, blocks.size())) {
+						// b.setType(info.getMaterial());
+						// b.setData(info.getData());
+						// }
+						// Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(),
+						// new Runnable() {
+						// @Override
+						// public void run() {
+						// try {
+						// player.sendMessage(Strings.TITLE + "Complete!");
+						// } catch (final Exception e) {
+						// e.printStackTrace();
+						// }
+						// }
+						// }, (blocks.size() - divisor) / divisor * 5);
+						// for (int i = 0; i < blocks.size() - divisor; i +=
+						// divisor) {
+						// final List<Block> blocksList = blocks.subList(i, i +
+						// divisor);
+						// Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(),
+						// new Runnable() {
+						// @Override
+						// public void run() {
+						// for (final Block b : blocksList) {
+						// b.setType(info.getMaterial());
+						// b.setData(info.getData());
+						// }
+						// }
+						// }, (i / divisor) * 5);
+						// }
 						break;
 					}
 					case "regen": {
@@ -129,43 +147,68 @@ public class WM_Methods {
 						final Material matToReplaceWith = info2.getMaterial();
 						final List<Block> blocks = cuboid.blocksFromTwoPointsInc(mat);
 						data.setPreviousAction(cuboid);
-						player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to " + TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) /*+ " (Estimate " + ((blocks.size() / divisor) / 4) + " seconds)"*/);
-//						if (blocks.size() < divisor)
-							for (final Block b : blocks) {
-								b.setType(matToReplaceWith);
-								b.setData(info2.getData());
-							}
-//						for (final Block b : blocks.subList(blocks.size() / divisor, blocks.size())) {
-//							b.setType(matToReplaceWith);
-//							b.setData(info2.getData());
-//						}
-//
-//						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-//
-//							@Override
-//							public void run() {
-//								try {
-//									player.sendMessage(Strings.TITLE + "Complete!");
-//								} catch (final Exception e) {
-//									e.printStackTrace();
-//								}
-//							}
-//
-//						}, (blocks.size() - divisor) / divisor * 5);
-//						for (int i = 0; i < blocks.size() - divisor; i += divisor) {
-//							final List<Block> blocksList = blocks.subList(i, i + divisor);
-//
-//							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-//
-//								@Override
-//								public void run() {
-//									for (final Block b : blocksList) {
-//										b.setType(matToReplaceWith);
-//										b.setData(info2.getData());
-//									}
-//								}
-//							}, (i / divisor) * 5);
-//						}
+						player.sendMessage(Strings.TITLE + "Replacing " + blocks.size() + " blocks to "
+								+ TextUtils.capitalize(matToReplaceWith.name().toLowerCase()) /*
+																							 * +
+																							 * " (Estimate "
+																							 * +
+																							 * (
+																							 * (
+																							 * blocks
+																							 * .
+																							 * size
+																							 * (
+																							 * )
+																							 * /
+																							 * divisor
+																							 * )
+																							 * /
+																							 * 4
+																							 * )
+																							 * +
+																							 * " seconds)"
+																							 */);
+						// if (blocks.size() < divisor)
+						for (final Block b : blocks) {
+							b.setType(matToReplaceWith);
+							b.setData(info2.getData());
+						}
+						// for (final Block b : blocks.subList(blocks.size() /
+						// divisor, blocks.size())) {
+						// b.setType(matToReplaceWith);
+						// b.setData(info2.getData());
+						// }
+						//
+						// Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(),
+						// new Runnable() {
+						//
+						// @Override
+						// public void run() {
+						// try {
+						// player.sendMessage(Strings.TITLE + "Complete!");
+						// } catch (final Exception e) {
+						// e.printStackTrace();
+						// }
+						// }
+						//
+						// }, (blocks.size() - divisor) / divisor * 5);
+						// for (int i = 0; i < blocks.size() - divisor; i +=
+						// divisor) {
+						// final List<Block> blocksList = blocks.subList(i, i +
+						// divisor);
+						//
+						// Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(),
+						// new Runnable() {
+						//
+						// @Override
+						// public void run() {
+						// for (final Block b : blocksList) {
+						// b.setType(matToReplaceWith);
+						// b.setData(info2.getData());
+						// }
+						// }
+						// }, (i / divisor) * 5);
+						// }
 						break;
 					}
 					case "expand":
@@ -182,46 +225,66 @@ public class WM_Methods {
 					case "undo": {
 						final DoubleMap<Location, Material, Byte> map = data.getPreviousAction();
 						Set<Location> blockList = data.getPreviousAction().keySet();
-//						List<Location> blockList = new ArrayList<Location>();
-//						blockList.addAll(data.getPreviousAction().keySet());
-						player.sendMessage(Strings.TITLE + "Undoing..." /*+ " (Estimate " + ((blockList.size() / divisor) / 4) + " seconds)"*/);
+						// List<Location> blockList = new ArrayList<Location>();
+						// blockList.addAll(data.getPreviousAction().keySet());
+						player.sendMessage(Strings.TITLE + "Undoing..." /*
+																		 * +
+																		 * " (Estimate "
+																		 * + ((
+																		 * blockList
+																		 * .
+																		 * size(
+																		 * ) /
+																		 * divisor
+																		 * ) /
+																		 * 4) +
+																		 * " seconds)"
+																		 */);
 
-//						if (blockList.size() < divisor) {
-							for (Location loc : blockList) {
-								loc.getBlock().setType(map.getValue1(loc));
-								loc.getBlock().setData(map.getValue2(loc));
-							}
-							return;
-//						}
-//						for (final Location loc : (new LinkedList<Location>(blockList)).subList(((blockList.size() + (blockList.size() % divisor)) - divisor), blockList.size())) {
-//							loc.getBlock().setType(map.getValue1(loc));
-//							loc.getBlock().setData(map.getValue2(loc));
-//							blockList.remove(loc);
-//						}
-//						Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-//							@Override
-//							public void run() {
-//								try {
-//									player.sendMessage(Strings.TITLE + "Complete!");
-//								} catch (final Exception e) {
-//									e.printStackTrace();
-//								}
-//							}
-//						}, (blockList.size() - divisor) / divisor * 5);
-//						for (int i = 0; i < blockList.size() - divisor; i += divisor) {
-//							final List<Location> bl = (new LinkedList<Location>(blockList)).subList(i, i + divisor);
-//							Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new Runnable() {
-//								@Override
-//								public void run() {
-//									for (final Location loc : bl) {
-//										loc.getBlock().setType(map.getValue1(loc));
-//										loc.getBlock().setData(map.getValue2(loc));
-//										bl.remove(loc);
-//									}
-//								}
-//							}, (i / divisor) * 5);
-//						}
-//						break;
+						// if (blockList.size() < divisor) {
+						for (Location loc : blockList) {
+							loc.getBlock().setType(map.getValue1(loc));
+							loc.getBlock().setData(map.getValue2(loc));
+						}
+						return;
+						// }
+						// for (final Location loc : (new
+						// LinkedList<Location>(blockList)).subList(((blockList.size()
+						// + (blockList.size() % divisor)) - divisor),
+						// blockList.size())) {
+						// loc.getBlock().setType(map.getValue1(loc));
+						// loc.getBlock().setData(map.getValue2(loc));
+						// blockList.remove(loc);
+						// }
+						// Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(),
+						// new Runnable() {
+						// @Override
+						// public void run() {
+						// try {
+						// player.sendMessage(Strings.TITLE + "Complete!");
+						// } catch (final Exception e) {
+						// e.printStackTrace();
+						// }
+						// }
+						// }, (blockList.size() - divisor) / divisor * 5);
+						// for (int i = 0; i < blockList.size() - divisor; i +=
+						// divisor) {
+						// final List<Location> bl = (new
+						// LinkedList<Location>(blockList)).subList(i, i +
+						// divisor);
+						// Bukkit.getScheduler().scheduleSyncDelayedTask(AllAssets.instance(),
+						// new Runnable() {
+						// @Override
+						// public void run() {
+						// for (final Location loc : bl) {
+						// loc.getBlock().setType(map.getValue1(loc));
+						// loc.getBlock().setData(map.getValue2(loc));
+						// bl.remove(loc);
+						// }
+						// }
+						// }, (i / divisor) * 5);
+						// }
+						// break;
 					}
 				}
 			}

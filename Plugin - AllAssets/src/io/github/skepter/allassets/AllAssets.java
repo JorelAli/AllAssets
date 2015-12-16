@@ -394,7 +394,7 @@ public class AllAssets extends JavaPlugin {
 					break;
 				/* Unsupported version */
 				default:
-					// shut down plugin??
+					/* Do not shut down plugin, just disable all NMS/Packet systems */
 					getLogger().info("Version " + version + " is not supported!");
 					break;
 			}
