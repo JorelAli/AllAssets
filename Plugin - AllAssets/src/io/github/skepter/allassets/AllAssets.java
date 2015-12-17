@@ -180,7 +180,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * AllAssets plugin, version 0.7.2 Alpha
+ * AllAssets plugin, version 0.7.4 Alpha
  *
  * Thanks to (Yes, I give you guys credit here - this couldn't have been done
  * without you and for that I am very grateful for your hard work!):
@@ -279,7 +279,7 @@ public class AllAssets extends JavaPlugin {
 	 * The master switch - prints out dats such as listeners and commands when
 	 * loaded
 	 */
-	public static boolean masterSwitch = true;
+	public static boolean masterSwitch = false;
 
 	/* Other stuff */
 	public CommandFramework framework;
