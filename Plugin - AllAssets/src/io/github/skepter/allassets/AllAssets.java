@@ -26,6 +26,7 @@ import io.github.skepter.allassets.api.users.OldUser;
 import io.github.skepter.allassets.commandlisteners.CommandAFK;
 import io.github.skepter.allassets.commandlisteners.CommandBind;
 import io.github.skepter.allassets.commandlisteners.CommandCommandBlock;
+import io.github.skepter.allassets.commandlisteners.CommandDiscoArmor;
 import io.github.skepter.allassets.commandlisteners.CommandEnchant;
 import io.github.skepter.allassets.commandlisteners.CommandFileBrowser;
 import io.github.skepter.allassets.commandlisteners.CommandFileEditor;
@@ -70,7 +71,6 @@ import io.github.skepter.allassets.commands.debug.CommandPing;
 import io.github.skepter.allassets.commands.economy.CommandBalance;
 import io.github.skepter.allassets.commands.economy.CommandBalancetop;
 import io.github.skepter.allassets.commands.economy.CommandSetBalance;
-import io.github.skepter.allassets.commands.fun.CommandDiscoArmor;
 import io.github.skepter.allassets.commands.fun.CommandDisguise;
 import io.github.skepter.allassets.commands.fun.CommandFakeDeop;
 import io.github.skepter.allassets.commands.fun.CommandFakeOp;
@@ -484,7 +484,7 @@ public class AllAssets extends JavaPlugin {
 		if (config.features().getBoolean("Disable"))
 			new CommandDisable(framework);
 		if (config.features().getBoolean("DiscoArmor"))
-			new CommandDiscoArmor(framework);
+			r(new CommandDiscoArmor(framework));
 		if (config.features().getBoolean("Disguise"))
 			new CommandDisguise(framework);
 		if (config.features().getBoolean("Enable"))

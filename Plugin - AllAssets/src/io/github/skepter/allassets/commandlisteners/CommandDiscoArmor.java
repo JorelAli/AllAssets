@@ -23,7 +23,7 @@
  *******************************************************************************/
 /*******************************************************************************
  *******************************************************************************/
-package io.github.skepter.allassets.commands.fun;
+package io.github.skepter.allassets.commandlisteners;
 
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.CommandFramework;
@@ -38,10 +38,14 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 
-public class CommandDiscoArmor {
+public class CommandDiscoArmor implements Listener {
 
 	private static DoubleMap<UUID, Integer, ItemStack[]> map = new DoubleMap<UUID, Integer, ItemStack[]>();
 
@@ -56,7 +60,14 @@ public class CommandDiscoArmor {
 			toggleArmor(player);
 		return;
 	}
-
+	
+	@EventHandler
+	public void onRemoveArmor(InventoryClickEvent event) {
+		if(event.getSlotType().equals(SlotType.ARMOR) && hasArmor((Player) event.getWhoClicked())) {
+			event.setCancelled(true);
+		}
+	}
+	
 	/** Checks if the player has disco armor enabled */
 	public static boolean hasArmor(final Player player) {
 		return map.containsKey(player.getUniqueId());

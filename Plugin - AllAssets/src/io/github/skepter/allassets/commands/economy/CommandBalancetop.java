@@ -66,9 +66,11 @@ public class CommandBalancetop {
 			final Map<String, Double> map = new HashMap<String, Double>();
 			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
 				map.put(p.getName(), AllAssets.instance().economy.getBalance(p.getName()));
+			
 			final ValueComparator bvc = new ValueComparator(map);
 			final TreeMap<String, Double> sortedMap = new TreeMap<String, Double>(bvc);
 			sortedMap.putAll(map);
+			
 			player.sendMessage(TextUtils.title("Top balances"));
 			final List<String> balanceList = new ArrayList<String>();
 			for (final Entry<String, Double> e : sortedMap.entrySet())

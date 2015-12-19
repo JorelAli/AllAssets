@@ -61,14 +61,14 @@ public class CommandSetBalance {
 					} else {
 						double target = Integer.parseInt(args.getArgs()[0]);
 						new User(player).setBalance(target);
-						player.sendMessage(Strings.TITLE + "Successfully changed balance to " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(player)));
+						player.sendMessage(Strings.TITLE + "Successfully changed balance to " + AllAssets.instance().economy.getBalance(player));
 					}
 				case 2:
 					final Player target = PlayerGetter.getTarget(player, args.getArgs()[0]);
 					if (target != null) {
 						double targetBalance = Integer.parseInt(args.getArgs()[0]);
 						new User(target).setBalance(targetBalance);
-						player.sendMessage(Strings.TITLE + "Successfully changed " + target.getName() + "'s balance to " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(target)));
+						player.sendMessage(Strings.TITLE + "Successfully changed " + target.getName() + "'s balance to " + AllAssets.instance().economy.getBalance(target));
 					}
 					return;
 			}

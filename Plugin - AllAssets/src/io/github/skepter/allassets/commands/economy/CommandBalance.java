@@ -45,6 +45,6 @@ public class CommandBalance {
 		//other balance
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null)
-			player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.format(AllAssets.instance().economy.getBalance(player)));
+			player.sendMessage(Strings.TITLE + "Balance: " + AllAssets.instance().economy.getBalance(player));
 	}
 }
