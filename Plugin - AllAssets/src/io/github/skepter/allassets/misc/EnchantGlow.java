@@ -86,7 +86,18 @@ public class EnchantGlow extends EnchantmentWrapper {
 		}
 		name = cname;
 		glow = new EnchantGlow(70);
-		Enchantment.registerEnchantment(glow);
+		
+		try {
+			final Field f = Enchantment.class.getDeclaredField("byId");
+			f.setAccessible(true);
+			final HashMap<Integer, Enchantment> byIDMap = (HashMap<Integer, Enchantment>) f.get(null);
+			if (!byIDMap.containsKey(id))
+				Enchantment.registerEnchantment(glow);
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Enchantment.registerEnchantment(glow);
 		return glow;
 	}
 
