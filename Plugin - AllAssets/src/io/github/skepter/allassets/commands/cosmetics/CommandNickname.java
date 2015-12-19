@@ -50,6 +50,11 @@ public class CommandNickname {
 		if (player != null) {
 			switch (args.getArgs().length) {
 				case 0:
+					if(player.getCustomName() == null) {
+						player.setCustomName(player.getName());
+						player.sendMessage(Strings.TITLE + "Removed your nickname");
+						return;
+					}
 					if (!player.getCustomName().equals(player.getName())) {
 						player.setCustomName(player.getName());
 						player.sendMessage(Strings.TITLE + "Removed your nickname");

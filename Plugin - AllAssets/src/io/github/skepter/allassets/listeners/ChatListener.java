@@ -57,6 +57,8 @@ public class ChatListener implements Listener {
 	@EventHandler
 	public void playerNickname(final AsyncPlayerChatEvent event) {
 		if (AllAssets.instance().hasVault) {
+			if(AllAssets.instance().chat == null)
+				return;
 			String prefix = AllAssets.instance().chat.getPlayerPrefix(event.getPlayer());
 			String suffix = AllAssets.instance().chat.getPlayerSuffix(event.getPlayer());
 			if (prefix == null || prefix.equals("null"))
