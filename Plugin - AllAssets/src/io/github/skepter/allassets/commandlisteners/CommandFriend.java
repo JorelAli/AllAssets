@@ -71,10 +71,10 @@ public class CommandFriend implements Listener {
 			return;
 		}
 		final User user = new User(player);
-		final Set<UUID> friends = user.getFriendList();
-		for (final UUID u : friends) {
+		for (final UUID u : user.getFriendList()) {
 			final User offlineFriend = new User(u);
-			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - " + offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
+			player.sendMessage(Strings.HOUSE_STYLE_COLOR + offlineFriend.getPlayer().getName() + " - "
+					+ offlineFriend.getLastLoc().distance(player.getLocation()) + " blocks away");
 		}
 	}
 

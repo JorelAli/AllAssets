@@ -90,6 +90,8 @@ public class EnchantGlow extends EnchantmentWrapper {
 		try {
 			final Field f = Enchantment.class.getDeclaredField("byId");
 			f.setAccessible(true);
+			@SuppressWarnings("unchecked")
+			//Static access therefore, f.get(null)
 			final HashMap<Integer, Enchantment> byIDMap = (HashMap<Integer, Enchantment>) f.get(null);
 			if (!byIDMap.containsKey(id))
 				Enchantment.registerEnchantment(glow);
