@@ -96,6 +96,7 @@ import io.github.skepter.allassets.commands.other.CommandRename;
 import io.github.skepter.allassets.commands.other.CommandRepair;
 import io.github.skepter.allassets.commands.other.CommandRules;
 import io.github.skepter.allassets.commands.other.CommandSeen;
+import io.github.skepter.allassets.commands.other.CommandSpawner;
 import io.github.skepter.allassets.commands.other.CommandSuffix;
 import io.github.skepter.allassets.commands.other.CommandSuicide;
 import io.github.skepter.allassets.commands.other.CommandTitle;
@@ -256,6 +257,7 @@ public class AllAssets extends JavaPlugin {
 
 		// [TESTING] Commands
 		new CommandTest(framework);
+		new CommandSpawner(framework);
 
 		// [NEED IMPROVEMENT] Commands
 		new CommandTitle(framework);

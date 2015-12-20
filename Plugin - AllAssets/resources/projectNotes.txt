@@ -3,7 +3,7 @@ Project notes:
 Potion GUI
 dump cosmetic features - heads/block head/trails etc.
 
-whena  palyer joins, tell them when they last joined
+When a player joins, tell them when they last joined
 when a player joins, tell them which players left/were on recently
 AFKMEssage - send a message to a person when they are no longer afk
 
@@ -75,11 +75,8 @@ Command:reply
 
 Command:kit (create, delete, kitName)
 
-Command:time
-Command:break
 Command:spawner
 
-Command:stop
 */
 
 /*
