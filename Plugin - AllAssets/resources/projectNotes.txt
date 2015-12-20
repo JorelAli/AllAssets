@@ -52,7 +52,9 @@ Command:level
 Command:worldGenerationCommands - tree etc..?
 Command:cook
 Command:socialspy (seemessages, seemsg)
-Command:erase (data file)
+
+Command:erase (data file) (Remove this idea?)
+
 Command:payall
 Command:pay
 Command:take (balance)
@@ -70,12 +72,9 @@ Command:online
 Command:ignore (darkGray messages - configurable)
 Command:mail
 Command:me
-Command:msg
 Command:reply
 
 Command:kit (create, delete, kitName)
-
-Command:spawner
 
 */
 
