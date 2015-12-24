@@ -69,6 +69,7 @@ public class CommandSetWarp {
 
 	@Help(name = "SetWarp")
 	public void printHelp(final CommandSender sender) {
+		//TODO prevent it setting the warp when you update the description
 		TextUtils.printHelp(sender, "SetWarp", "/setwarp <warpname> - Sets a new warp", "/setwarp <warpname> <description> - Sets a new warp with a description", "/setwarp <warpname> <description> - Update the description of an existing warp");
 	}
 }
