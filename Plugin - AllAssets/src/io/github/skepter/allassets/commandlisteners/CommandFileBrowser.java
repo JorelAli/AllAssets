@@ -108,9 +108,10 @@ public class CommandFileBrowser implements Listener {
 		try {
 			if (!event.getAction().equals(InventoryAction.PICKUP_ALL) || (event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 				return;
-			event.setCancelled(true);
+			
 			/* If they open a file inventory */
 			if (event.getInventory().getName().startsWith(ChatColor.BLUE + "File - ")) {
+				event.setCancelled(true);
 				final ItemStack item = event.getInventory().getItem(event.getSlot());
 				final Player player = (Player) event.getWhoClicked();
 				final String dM = directoryMap.get(player);

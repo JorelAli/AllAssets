@@ -31,9 +31,9 @@ import io.github.skepter.allassets.misc.Help;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.io.File;
+import java.util.Arrays;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -82,8 +82,9 @@ public class CommandConvertEssentials {
 		for(File userFile : essUserData.listFiles()) {
 			if(userFile.getName().endsWith(".yml")) {
 				YamlConfiguration config = YamlConfiguration.loadConfiguration(userFile);
+				User user = new User(userFile.getName().substring(0, userFile.getName().length() - 4));
+				user.setIps(Arrays.asList(new String[] {config.getString("ipAddress")}));
 				
-				config.get("");
 			}
 		}
 		
