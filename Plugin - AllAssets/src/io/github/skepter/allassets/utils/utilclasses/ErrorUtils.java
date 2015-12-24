@@ -53,8 +53,12 @@ public class ErrorUtils {
 		sender.sendMessage(Strings.customError(title) + msg);
 	}
 	
-	public static void conversionError(final CommandSender sender, String file) {
-		error(sender, "There was an error converting ");
+	public static void conversionErrorUser(final CommandSender sender, String file) {
+		error(sender, "There was an error converting " + file + "'s data file");
+	}
+	
+	public static void conversionErrorWarp(final CommandSender sender, String file) {
+		error(sender, "There was an error converting the " + file + " warp file");
 	}
 
 	public static void cannotLeashMob(final Player player) {

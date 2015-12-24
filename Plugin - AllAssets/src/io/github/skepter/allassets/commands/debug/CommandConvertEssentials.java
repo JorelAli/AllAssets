@@ -28,6 +28,8 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.serializers.LocationSerializer;
+import io.github.skepter.allassets.utils.Strings;
 import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
@@ -83,6 +85,7 @@ public class CommandConvertEssentials {
 		for (File folder : essFolder.listFiles())
 			if (folder.isDirectory() && folder.getName().equals("userdata"))
 				essUserData = folder;
+		sender.sendMessage(Strings.TITLE + "Converting userdata...");
 		for (File userFile : essUserData.listFiles()) {
 			if (userFile.getName().endsWith(".yml")) {
 				try {
@@ -99,11 +102,35 @@ public class CommandConvertEssentials {
 					float pitch = new Double(config.getDouble("lastlocation.pitch")).floatValue();
 					user.setLastLoc(new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch));
 				} catch (Exception e) {
-					ErrorUtils.conversionError(sender, userFile.getName().substring(0, userFile.getName().length() - 4));
+					ErrorUtils.conversionErrorUser(sender, userFile.getName().substring(0, userFile.getName().length() - 4));
 				}
 			}
 		}
-
+		File essWarps = null;
+		for (File folder : essFolder.listFiles())
+			if (folder.isDirectory() && folder.getName().equals("warps"))
+				essWarps = folder;
+		sender.sendMessage(Strings.TITLE + "Converting warps...");
+		for (File warpFile : essWarps.listFiles()) {
+			if (warpFile.getName().endsWith(".yml")) {
+				String name = warpFile.getName().substring(0, warpFile.getName().length() - 4);
+				try {
+					YamlConfiguration config = YamlConfiguration.loadConfiguration(warpFile);
+					
+					AllAssets.instance().getAAConfig().warps().set(name + ".name", config.getString("name"));
+					String world = config.getString("world");
+					double x = config.getDouble("x");
+					double y = config.getDouble("y");
+					double z = config.getDouble("z");
+					float yaw = new Double(config.getDouble("yaw")).floatValue();
+					float pitch = new Double(config.getDouble("pitch")).floatValue();
+					AllAssets.instance().getAAConfig().warps().set(name + ".loc", LocationSerializer.locToString(new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch)));
+				} catch (Exception e) {
+					ErrorUtils.conversionErrorWarp(sender, name);
+				}
+			}
+		}
+		sender.sendMessage(Strings.TITLE + "Conversion finished!");
 	}
 
 	@Help(name = "ConvertEssentials")

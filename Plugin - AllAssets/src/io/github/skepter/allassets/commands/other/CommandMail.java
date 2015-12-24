@@ -37,6 +37,7 @@ public class CommandMail {
 		framework.registerCommands(this);
 	}
 
+	//TODO
 	@CommandHandler(name = "mail", permission = "mail", description = "Sends mail & shows help")
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
