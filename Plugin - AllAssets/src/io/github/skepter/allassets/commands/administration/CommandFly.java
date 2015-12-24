@@ -42,6 +42,7 @@ public class CommandFly {
 
 	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly")
 	public void command(final CommandArgs args) {
+		//TODO: if console and args[1], then allow flying 
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			switch (args.getArgs().length) {

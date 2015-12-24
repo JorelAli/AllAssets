@@ -28,11 +28,14 @@ import io.github.skepter.allassets.CommandFramework.CommandHandler;
 import io.github.skepter.allassets.PlayerGetter;
 import io.github.skepter.allassets.api.users.User;
 import io.github.skepter.allassets.misc.Help;
+import io.github.skepter.allassets.utils.utilclasses.ErrorUtils;
 import io.github.skepter.allassets.utils.utilclasses.TextUtils;
 
 import java.io.File;
 import java.util.Arrays;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -54,40 +57,53 @@ public class CommandConvertEssentials {
 				case 1:
 					switch (args.getArgs()[0].toLowerCase()) {
 						case "start":
-							convert(0);
+							convert(args.getSender(), 0);
 							return;
 						case "delete":
-							convert(1);
+							convert(args.getSender(), 1);
 							return;
 					}
 					return;
 			}
 		return;
 	}
-	
-	/** Converts the data.
-	 * Mode 0 converts everything normally 
-	 * Mode 1 converts everything and deletes the Essentiald data */
-	private void convert(int mode) {
+
+	/**
+	 * Converts the data. Mode 0 converts everything normally Mode 1 converts
+	 * everything and deletes the Essentiald data
+	 */
+	private void convert(CommandSender sender, int mode) {
 		File aaFolder = AllAssets.instance().getDataFolder();
 		File pluginsFolder = aaFolder.getParentFile();
 		File essFolder = null;
-		for(File folder : pluginsFolder.listFiles())
-			if(folder.isDirectory() && folder.getName().equals("Essentials"))
+		for (File folder : pluginsFolder.listFiles())
+			if (folder.isDirectory() && folder.getName().equals("Essentials"))
 				essFolder = folder;
 		File essUserData = null;
-		for(File folder : essFolder.listFiles()) 
-			if(folder.isDirectory() && folder.getName().equals("userdata"))
+		for (File folder : essFolder.listFiles())
+			if (folder.isDirectory() && folder.getName().equals("userdata"))
 				essUserData = folder;
-		for(File userFile : essUserData.listFiles()) {
-			if(userFile.getName().endsWith(".yml")) {
-				YamlConfiguration config = YamlConfiguration.loadConfiguration(userFile);
-				User user = new User(userFile.getName().substring(0, userFile.getName().length() - 4));
-				user.setIps(Arrays.asList(new String[] {config.getString("ipAddress")}));
-				
+		for (File userFile : essUserData.listFiles()) {
+			if (userFile.getName().endsWith(".yml")) {
+				try {
+					YamlConfiguration config = YamlConfiguration.loadConfiguration(userFile);
+					User user = new User(userFile.getName().substring(0, userFile.getName().length() - 4));
+					user.setIps(Arrays.asList(new String[] { config.getString("ipAddress") }));
+					user.setAFKStatus(config.getBoolean("afk"));
+					user.setBalance(config.getInt("money"));
+					String world = config.getString("lastlocation.world");
+					double x = config.getDouble("lastlocation.x");
+					double y = config.getDouble("lastlocation.y");
+					double z = config.getDouble("lastlocation.z");
+					float yaw = new Double(config.getDouble("lastlocation.yaw")).floatValue();
+					float pitch = new Double(config.getDouble("lastlocation.pitch")).floatValue();
+					user.setLastLoc(new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch));
+				} catch (Exception e) {
+					ErrorUtils.conversionError(sender, userFile.getName().substring(0, userFile.getName().length() - 4));
+				}
 			}
 		}
-		
+
 	}
 
 	@Help(name = "ConvertEssentials")

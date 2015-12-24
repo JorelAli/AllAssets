@@ -52,6 +52,10 @@ public class ErrorUtils {
 	private static void error(final CommandSender sender, final String title, final String msg) {
 		sender.sendMessage(Strings.customError(title) + msg);
 	}
+	
+	public static void conversionError(final CommandSender sender, String file) {
+		error(sender, "There was an error converting ");
+	}
 
 	public static void cannotLeashMob(final Player player) {
 		error(player, "You cannot put a leash on that mob");
