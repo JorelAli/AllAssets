@@ -42,7 +42,6 @@ public class PingTask implements Runnable {
 		try {
 			OldUser.ping = new MinecraftReflectionUtils(player).ping;
 		} catch (final Throwable t) {
-			t.printStackTrace();
 		}
 	}
 

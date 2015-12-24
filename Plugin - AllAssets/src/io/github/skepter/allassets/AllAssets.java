@@ -66,6 +66,7 @@ import io.github.skepter.allassets.commands.cosmetics.CommandHat;
 import io.github.skepter.allassets.commands.cosmetics.CommandHead;
 import io.github.skepter.allassets.commands.cosmetics.CommandNickname;
 import io.github.skepter.allassets.commands.debug.CommandBatch;
+import io.github.skepter.allassets.commands.debug.CommandConvertEssentials;
 import io.github.skepter.allassets.commands.debug.CommandDebug;
 import io.github.skepter.allassets.commands.debug.CommandPing;
 import io.github.skepter.allassets.commands.economy.CommandBalance;
@@ -204,7 +205,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @SpecialThanks EssentialsTeam - Plugin which this idea was based on
  * @SpecialThanks BukkitTeam - Making the entire thing possible
  *
- * @authors Skepter, MCSpartans
+ * @authors Skepter
  */
 
 /*
@@ -256,6 +257,7 @@ public class AllAssets extends JavaPlugin {
 	private void devRegister(final CommandFramework framework) {
 
 		// [TESTING] Commands
+		new CommandConvertEssentials(framework);
 		new CommandTest(framework);
 		new CommandSpawner(framework);
 

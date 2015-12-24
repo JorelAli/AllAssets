@@ -42,7 +42,7 @@ public class User implements IUser {
 	}
 
 	public User(OfflinePlayer player) {
-		player = null;
+		this.player = null;
 		oPlayer = player;
 		playerData = new PlayerData(oPlayer);
 		isOnline = false;
