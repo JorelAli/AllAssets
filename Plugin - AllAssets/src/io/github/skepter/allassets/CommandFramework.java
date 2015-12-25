@@ -58,14 +58,16 @@ import org.bukkit.help.IndexHelpTopic;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.SimplePluginManager;
 
-/** Command Framework - CommandFramework <br>
+/**
+ * Command Framework - CommandFramework <br>
  * The main command framework class used for controlling the framework.
  *
  * Some features have been added/modified for the use of AllAssets However,
  * minnymin3 deserves pretty much all of the credit since he (or she) wrote the
  * majority of the class.
  *
- * @author minnymin3 (and Skepter) */
+ * @author minnymin3 (and Skepter)
+ */
 public class CommandFramework {
 
 	private final Map<String, Entry<Method, Object>> commandMap = new HashMap<String, Entry<Method, Object>>();
@@ -75,9 +77,11 @@ public class CommandFramework {
 	public static Set<CommandHandler> pluginCommands = new HashSet<CommandHandler>();
 	private final Set<String> cmds = new HashSet<String>();
 
-	/** Initializes the command framework and sets up the command maps
+	/**
+	 * Initializes the command framework and sets up the command maps
 	 *
-	 * @param plugin */
+	 * @param plugin
+	 */
 	public CommandFramework(final Plugin plugin) {
 		this.plugin = plugin;
 		if (plugin.getServer().getPluginManager() instanceof SimplePluginManager) {
@@ -86,21 +90,26 @@ public class CommandFramework {
 				final Field field = SimplePluginManager.class.getDeclaredField("commandMap");
 				field.setAccessible(true);
 				map = (CommandMap) field.get(manager);
-			} catch (IllegalArgumentException | NoSuchFieldException
-					| IllegalAccessException | SecurityException e) {
+			} catch (IllegalArgumentException | NoSuchFieldException | IllegalAccessException | SecurityException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	/** Handles commands. Used in the onCommand method in your JavaPlugin class
+	/**
+	 * Handles commands. Used in the onCommand method in your JavaPlugin class
 	 *
-	 * @param sender The {@link org.bukkit.command.CommandSender} parsed from
-	 * onCommand
-	 * @param label The label parsed from onCommand
-	 * @param cmd The {@link org.bukkit.command.Command} parsed from onCommand
-	 * @param args The arguments parsed from onCommand
-	 * @return Always returns true for simplicity's sake in onCommand */
+	 * @param sender
+	 *            The {@link org.bukkit.command.CommandSender} parsed from
+	 *            onCommand
+	 * @param label
+	 *            The label parsed from onCommand
+	 * @param cmd
+	 *            The {@link org.bukkit.command.Command} parsed from onCommand
+	 * @param args
+	 *            The arguments parsed from onCommand
+	 * @return Always returns true for simplicity's sake in onCommand
+	 */
 	public boolean handleCommand(final CommandSender sender, final String label, final org.bukkit.command.Command cmd, final String[] args) {
 		for (int i = args.length; i >= 0; i--) {
 			final StringBuilder buffer = new StringBuilder();
@@ -111,14 +120,14 @@ public class CommandFramework {
 			if (commandMap.containsKey(cmdLabel)) {
 				final Entry<Method, Object> entry = commandMap.get(cmdLabel);
 				final CommandHandler command = entry.getKey().getAnnotation(CommandHandler.class);
-				if (!sender.hasPermission("AllAssets." + command.permission().toLowerCase())) { //Nav
+				if (!sender.hasPermission("AllAssets." + command.permission().toLowerCase())) { // Nav
 					sender.sendMessage(noPerm);
 					return true;
 				}
 				try {
 					final long before = System.currentTimeMillis();
 					entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, cmd, label, args, cmdLabel.split("\\.").length - 1));
-					if (AllAssets.instance().getAAConfig().config().getBoolean("debugMode") || AllAssets.masterSwitch)
+					if (AllAssets.instance().getAAConfig().config().getBoolean("debugMode") || AllAssets.PRINT_COMMAND_EXECUTION_TIME)
 						sender.sendMessage(Strings.TITLE + "Command took " + (System.currentTimeMillis() - before) + " milliseconds to execute");
 				} catch (final Exception e) {
 					e.printStackTrace();
@@ -131,12 +140,16 @@ public class CommandFramework {
 		return true;
 	}
 
-	/** Registers all command and completer methods inside of the object. Similar
+	/**
+	 * Registers all command and completer methods inside of the object. Similar
 	 * to Bukkit's registerEvents method.
 	 *
-	 * @param obj The object to register the commands of */
+	 * @param obj
+	 *            The object to register the commands of
+	 */
 	public void registerCommands(final Object obj) {
-		for (final Method m : obj.getClass().getMethods())
+		Set<String> missingCommands = new HashSet<String>();
+		for (final Method m : obj.getClass().getMethods()) {
 			if (m.getAnnotation(CommandHandler.class) != null) {
 				final CommandHandler command = m.getAnnotation(CommandHandler.class);
 				if ((m.getParameterTypes().length > 1) || (m.getParameterTypes()[0] != CommandArgs.class)) {
@@ -159,9 +172,16 @@ public class CommandFramework {
 				registerCompleter(comp.name(), m, obj);
 				for (final String alias : comp.aliases())
 					registerCompleter(alias, m, obj);
-			} else if (m.getAnnotation(Help.class) != null)
-				//Nav
+			} else if (m.getAnnotation(Help.class) != null) {
+				// Nav
 				CommandHelp.register(m.getAnnotation(Help.class).name(), m, obj);
+			} else if (m.getAnnotation(Help.class) == null) {
+				missingCommands.add(obj.getClass().getSimpleName());
+			}
+		}
+		if (AllAssets.PRINT_MISSING_COMMAND_HELP) {
+			AllAssets.instance().getLogger().info("Missing command help for: " + obj.getClass().getName());
+		}
 	}
 
 	/** Registers all the commands under the plugin's help */
@@ -173,14 +193,15 @@ public class CommandFramework {
 				final HelpTopic topic = new GenericCommandHelpTopic(cmd);
 				help.add(topic);
 			}
-		final IndexHelpTopic topic = new IndexHelpTopic(plugin.getName(), "All commands for " + plugin.getName(), null, help, "Below is a list of all " + plugin.getName() + " commands:");
+		final IndexHelpTopic topic = new IndexHelpTopic(plugin.getName(), "All commands for " + plugin.getName(), null, help,
+				"Below is a list of all " + plugin.getName() + " commands:");
 		Bukkit.getServer().getHelpMap().addTopic(topic);
 	}
 
 	private void registerCommand(final CommandHandler command, final String label, final Method m, final Object obj) {
 		final Entry<Method, Object> entry = new AbstractMap.SimpleEntry<Method, Object>(m, obj);
 		commandMap.put(label.toLowerCase(), entry);
-		if (AllAssets.masterSwitch && !cmds.contains(command.name())) {
+		if (AllAssets.PRINT_COMMAND_REGISTRATION && !cmds.contains(command.name())) {
 			cmds.add(command.name());
 			Bukkit.getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added command: /" + command.name().replace(".", " "));
 		}
@@ -221,13 +242,15 @@ public class CommandFramework {
 					final BukkitCompleter completer = (BukkitCompleter) field.get(command);
 					completer.addCompleter(label, m, obj);
 				} else
-					System.out.println("Unable to register tab completer " + m.getName() + ". A tab completer is already registered for that command!");
+					System.out.println("Unable to register tab completer " + m.getName()
+							+ ". A tab completer is already registered for that command!");
 			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}
 	}
 
-	/** Command Framework - Command <br>
+	/**
+	 * Command Framework - Command <br>
 	 * The command annotation used to designate methods as commands. All methods
 	 * should have a single CommandArgs argument
 	 *
@@ -236,86 +259,109 @@ public class CommandFramework {
 	 * aliases - command aliases description - command description usage -
 	 * command usage
 	 *
-	 * @author minnymin3 */
+	 * @author minnymin3
+	 */
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface CommandHandler {
 
-		/** The name of the command. If it is a sub command then its values would
+		/**
+		 * The name of the command. If it is a sub command then its values would
 		 * be separated by periods. ie. a command that would be a subcommand of
 		 * test would be 'test.subcommandname'
 		 *
-		 * @return */
+		 * @return
+		 */
 		public String name();
 
-		/** Gets the required permission of the command
+		/**
+		 * Gets the required permission of the command
 		 *
-		 * @return */
+		 * @return
+		 */
 		public String permission() default "";
 
-		/** A list of alternate names that the command is executed under. See
+		/**
+		 * A list of alternate names that the command is executed under. See
 		 * name() for details on how names work
 		 *
-		 * @return */
+		 * @return
+		 */
 		public String[] aliases() default {};
 
-		/** The description that will appear in /help of the command
+		/**
+		 * The description that will appear in /help of the command
 		 *
-		 * @return */
+		 * @return
+		 */
 		public String description() default "";
 
-		/** The usage that will appear in /help (commandname)
+		/**
+		 * The usage that will appear in /help (commandname)
 		 *
-		 * @return */
+		 * @return
+		 */
 		public String usage() default "Use <command>";
 
-		/** A custom annotation that decides weather or not the command is listed
-		 * in /aio commands or not
+		/**
+		 * A custom annotation that decides weather or not the command is listed
+		 * in /aa commands or not
 		 *
-		 * @return */
-		public boolean isListed() default true; //Nav
+		 * @return
+		 */
+		public boolean isListed() default true; // Nav
 	}
 
-	/** Command Framework - Completer <br>
+	/**
+	 * Command Framework - Completer <br>
 	 * The completer annotation used to designate methods as command completers.
 	 * All methods should have a single CommandArgs argument and return a String
 	 * List object
 	 *
-	 * @author minnymin3 */
+	 * @author minnymin3
+	 */
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface Completer {
 
-		/** The command that this completer completes. If it is a sub command
+		/**
+		 * The command that this completer completes. If it is a sub command
 		 * then its values would be separated by periods. ie. a command that
 		 * would be a subcommand of test would be 'test.subcommandname'
 		 *
-		 * @return */
+		 * @return
+		 */
 		String name();
 
-		/** A list of alternate names that the completer is executed under. See
+		/**
+		 * A list of alternate names that the completer is executed under. See
 		 * name() for details on how names work
 		 *
-		 * @return */
+		 * @return
+		 */
 		String[] aliases() default {};
 
 	}
 
-	/** Command Framework - BukkitCommand <br>
+	/**
+	 * Command Framework - BukkitCommand <br>
 	 * An implementation of Bukkit's Command class allowing for registering of
 	 * commands without plugin.yml
 	 *
-	 * @author minnymin3 */
+	 * @author minnymin3
+	 */
 	class BukkitCommand extends org.bukkit.command.Command {
 
 		private final Plugin owningPlugin;
 		protected BukkitCompleter completer;
 		private final CommandExecutor executor;
 
-		/** A slimmed down PluginCommand
+		/**
+		 * A slimmed down PluginCommand
 		 *
 		 * @param label
-		 * @param owner */
+		 * @param owner
+		 */
 		protected BukkitCommand(final String label, final Plugin owner) {
 			super(label);
 			this.executor = owner;
@@ -336,8 +382,10 @@ public class CommandFramework {
 			try {
 				success = executor.onCommand(sender, this, commandLabel, args);
 			} catch (final Throwable ex) {
-				//Nav - try and sort this part out :)
-				Bukkit.getLogger().severe("Unhandled exception executing command '" + commandLabel + "' in plugin " + owningPlugin.getDescription().getFullName() + " - " + ex.getCause().getMessage());
+				// Nav - try and sort this part out :)
+				Bukkit.getLogger().severe(
+						"Unhandled exception executing command '" + commandLabel + "' in plugin " + owningPlugin.getDescription().getFullName()
+								+ " - " + ex.getCause().getMessage());
 				ErrorUtils.generalCommandError(sender);
 				return true;
 			}
@@ -350,7 +398,8 @@ public class CommandFramework {
 		}
 
 		@Override
-		public List<String> tabComplete(final CommandSender sender, final String alias, final String[] args) throws CommandException, IllegalArgumentException {
+		public List<String> tabComplete(final CommandSender sender, final String alias, final String[] args) throws CommandException,
+				IllegalArgumentException {
 			Validate.notNull(sender, "Sender cannot be null");
 			Validate.notNull(args, "Arguments cannot be null");
 			Validate.notNull(alias, "Alias cannot be null");
@@ -377,11 +426,13 @@ public class CommandFramework {
 
 	}
 
-	/** Command Framework - BukkitCompleter <br>
+	/**
+	 * Command Framework - BukkitCompleter <br>
 	 * An implementation of the TabCompleter class allowing for multiple tab
 	 * completers per command
 	 *
-	 * @author minnymin3 */
+	 * @author minnymin3
+	 */
 	class BukkitCompleter implements TabCompleter {
 
 		private final Map<String, Entry<Method, Object>> completers = new HashMap<String, Entry<Method, Object>>();
@@ -392,7 +443,8 @@ public class CommandFramework {
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public List<String> onTabComplete(final CommandSender sender, final org.bukkit.command.Command command, final String label, final String[] args) {
+		public List<String> onTabComplete(final CommandSender sender, final org.bukkit.command.Command command, final String label,
+				final String[] args) {
 			for (int i = args.length; i >= 0; i--) {
 				final StringBuilder buffer = new StringBuilder();
 				buffer.append(label.toLowerCase());
@@ -403,9 +455,9 @@ public class CommandFramework {
 				if (completers.containsKey(cmdLabel)) {
 					final Entry<Method, Object> entry = completers.get(cmdLabel);
 					try {
-						return (List<String>) entry.getKey().invoke(entry.getValue(), new CommandArgs(sender, command, label, args, cmdLabel.split("\\.").length - 1));
-					} catch (IllegalArgumentException | IllegalAccessException
-							| InvocationTargetException e) {
+						return (List<String>) entry.getKey().invoke(entry.getValue(),
+								new CommandArgs(sender, command, label, args, cmdLabel.split("\\.").length - 1));
+					} catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
 						e.printStackTrace();
 					}
 				}
@@ -414,11 +466,13 @@ public class CommandFramework {
 		}
 	}
 
-	/** Command Framework - CommandArgs <br>
+	/**
+	 * Command Framework - CommandArgs <br>
 	 * This class is passed to the command methods and contains various
 	 * utilities as well as the command info.
 	 *
-	 * @author minnymin3 */
+	 * @author minnymin3
+	 */
 	public class CommandArgs {
 
 		private final CommandSender sender;
@@ -426,7 +480,8 @@ public class CommandFramework {
 		private final String label;
 		private final String[] args;
 
-		protected CommandArgs(final CommandSender sender, final org.bukkit.command.Command command, final String label, final String[] args, final int subCommand) {
+		protected CommandArgs(final CommandSender sender, final org.bukkit.command.Command command, final String label, final String[] args,
+				final int subCommand) {
 			final String[] modArgs = new String[args.length - subCommand];
 			System.arraycopy(args, 0 + subCommand, modArgs, 0, args.length - subCommand);
 
@@ -441,33 +496,41 @@ public class CommandFramework {
 			this.args = modArgs;
 		}
 
-		/** Gets the command sender
+		/**
+		 * Gets the command sender
 		 *
-		 * @return sender */
+		 * @return sender
+		 */
 		public CommandSender getSender() {
 			return sender;
 		}
 
-		/** Gets the original command object
+		/**
+		 * Gets the original command object
 		 *
-		 * @return */
+		 * @return
+		 */
 		public org.bukkit.command.Command getCommand() {
 			return command;
 		}
 
-		/** Gets the label including sub command labels of this command
+		/**
+		 * Gets the label including sub command labels of this command
 		 *
-		 * @return Something like 'test.subcommand' */
+		 * @return Something like 'test.subcommand'
+		 */
 		public String getLabel() {
 			return label;
 		}
 
-		/** Gets all the arguments after the command's label. ie. if the command
+		/**
+		 * Gets all the arguments after the command's label. ie. if the command
 		 * label was test.subcommand and the arguments were subcommand foo foo,
 		 * it would only return 'foo foo' because 'subcommand' is part of the
 		 * command
 		 *
-		 * @return */
+		 * @return
+		 */
 		public String[] getArgs() {
 			return args;
 		}

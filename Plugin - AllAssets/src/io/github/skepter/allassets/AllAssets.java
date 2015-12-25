@@ -250,6 +250,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 @SuppressWarnings("deprecation")
 public class AllAssets extends JavaPlugin {
 
+	public static boolean PRINT_LISTENER_REGISTRATION = false;
+	public static boolean PRINT_COMMAND_REGISTRATION = false;
+	public static boolean PRINT_COMMAND_EXECUTION_TIME = false;
+	public static boolean PRINT_MISSING_COMMAND_HELP = true;
+	
+	
 	/***********************************************************************/
 	/** Put new commands in here **/
 
@@ -277,12 +283,6 @@ public class AllAssets extends JavaPlugin {
 	}
 
 	/***********************************************************************/
-
-	/*
-	 * The master switch - prints out dats such as listeners and commands when
-	 * loaded
-	 */
-	public static boolean masterSwitch = false;
 
 	/* Other stuff */
 	public CommandFramework framework;
@@ -727,7 +727,7 @@ public class AllAssets extends JavaPlugin {
 
 	/* Easy system to add listeners */
 	private void r(final Listener l) {
-		if (masterSwitch)
+		if (PRINT_LISTENER_REGISTRATION)
 			for (final Method method : l.getClass().getMethods())
 				if (method.getAnnotation(EventHandler.class) != null)
 					Bukkit.getLogger().info(Strings.SHORT_NO_COLOR_TITLE + "Added event: " + l.getClass().getSimpleName() + " - " + method.getName());
