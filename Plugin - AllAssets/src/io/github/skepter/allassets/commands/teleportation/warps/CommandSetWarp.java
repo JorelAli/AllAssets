@@ -51,12 +51,17 @@ public class CommandSetWarp {
 					printHelp(player);
 					return;
 				case 1:
-					//Name is stored differently to the actual name due to capitals and stuff.
 					config.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
 					config.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
 					player.sendMessage(Strings.TITLE + "Warp " + args.getArgs()[0] + " created successfully");
 					return;
-				default:
+				default: 
+					if(args.getArgs()[0].equalsIgnoreCase("description")) {
+						String description = TextUtils.getMsgStringFromArgs(args.getArgs(), 2, args.getArgs().length);
+						config.warps().set(args.getArgs()[1].toLowerCase() + ".description", description);
+						player.sendMessage(Strings.TITLE + "Warp " + args.getArgs()[1] + "'s description has been updated successfully");
+						return;
+					}
 					String description = TextUtils.getMsgStringFromArgs(args.getArgs(), 1, args.getArgs().length);
 					config.warps().set(args.getArgs()[0].toLowerCase() + ".name", args.getArgs()[0]);
 					config.warps().set(args.getArgs()[0].toLowerCase() + ".loc", LocationSerializer.locToString(player.getLocation()));
@@ -69,7 +74,6 @@ public class CommandSetWarp {
 
 	@Help(name = "SetWarp")
 	public void printHelp(final CommandSender sender) {
-		//TODO prevent it setting the warp when you update the description
-		TextUtils.printHelp(sender, "SetWarp", "/setwarp <warpname> - Sets a new warp", "/setwarp <warpname> <description> - Sets a new warp with a description", "/setwarp <warpname> <description> - Update the description of an existing warp");
+		TextUtils.printHelp(sender, "SetWarp", "/setwarp <warpname> - Sets a new warp", "/setwarp <warpname> <description> - Sets a new warp with a description", "/setwarp description <warpname> <description> - Update the description of an existing warp");
 	}
 }
