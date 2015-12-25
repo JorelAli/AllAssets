@@ -41,7 +41,7 @@ import org.bukkit.inventory.ItemStack;
 public class EnchantmentInventories {
 
 	//PUT UNBREAKING!
-	public static Inventory page1() {
+	public static Inventory armor() {
 		final Map<Integer, ItemStack> map = new HashMap<Integer, ItemStack>();
 		for (int i = 1; i < 5; i++)
 			map.put(i - 1, new ItemBuilder(Material.DIAMOND_CHESTPLATE).addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1).build());
@@ -96,7 +96,7 @@ public class EnchantmentInventories {
 		return inv1;
 	}
 
-	public static Inventory page2() {
+	public static Inventory tools() {
 		final Map<Integer, ItemStack> map = new HashMap<Integer, ItemStack>();
 		for (int i = 1; i < 6; i++) {
 			final ItemStack is = new ItemStack(Material.DIAMOND_PICKAXE);

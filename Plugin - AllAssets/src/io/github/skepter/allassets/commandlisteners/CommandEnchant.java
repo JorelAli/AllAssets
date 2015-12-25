@@ -56,7 +56,7 @@ public class CommandEnchant implements Listener {
 			ErrorUtils.playerOnly(args.getSender());
 			return;
 		}
-		player.openInventory(EnchantmentInventories.page1());
+		player.openInventory(EnchantmentInventories.armor());
 		return;
 	}
 
@@ -69,11 +69,11 @@ public class CommandEnchant implements Listener {
 				switch (event.getInventory().getName()) {
 					case "Enchant - Armor":
 						if (event.getSlot() == 53) {
-							player.openInventory(EnchantmentInventories.page2()); // page
+							player.openInventory(EnchantmentInventories.tools()); // page
 																					// 2
 							return;
 						} else if (event.getSlot() == 52) {
-							player.openInventory(EnchantmentInventories.page1()); // page
+							player.openInventory(EnchantmentInventories.armor()); // page
 																					// 4
 							return;
 						}
@@ -81,11 +81,11 @@ public class CommandEnchant implements Listener {
 						return;
 					case "Enchant - Tools":
 						if (event.getSlot() == 26) {
-							player.openInventory(EnchantmentInventories.page2()); // page
+							player.openInventory(EnchantmentInventories.tools()); // page
 																					// 3
 							return;
 						} else if (event.getSlot() == 25) {
-							player.openInventory(EnchantmentInventories.page1()); // page
+							player.openInventory(EnchantmentInventories.armor()); // page
 																					// 1
 							return;
 						}
@@ -93,11 +93,11 @@ public class CommandEnchant implements Listener {
 						return;
 					case "Enchant - Weapons":
 						if (event.getSlot() == 53) {
-							player.openInventory(EnchantmentInventories.page2()); // page
+							player.openInventory(EnchantmentInventories.tools()); // page
 																					// 4
 							return;
 						} else if (event.getSlot() == 52) {
-							player.openInventory(EnchantmentInventories.page1()); // page
+							player.openInventory(EnchantmentInventories.armor()); // page
 																					// 2
 							return;
 						}

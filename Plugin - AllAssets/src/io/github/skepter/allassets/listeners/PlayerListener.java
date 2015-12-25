@@ -74,8 +74,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerListener implements Listener {
 
-	//ensure that if the plugin was added WHEN the player is ALREADY online
-	//some data will not be initialized, so ensure that data is fixed and run for each player online.
+	// ensure that if the plugin was added WHEN the player is ALREADY online
+	// some data will not be initialized, so ensure that data is fixed and run
+	// for each player online.
 
 	@EventHandler
 	public void playerJoin(final PlayerJoinEvent event) {
@@ -111,15 +112,16 @@ public class PlayerListener implements Listener {
 
 		AllAssets.instance().ghostFactory.addPlayer(event.getPlayer());
 
-		new NotificationsBoard(event.getPlayer()).updateBoard();
-		//TODO - see NotificationsBoard
+		if (event.getPlayer().isOp())
+			new NotificationsBoard(event.getPlayer()).updateBoard();
+		// TODO - see NotificationsBoard
 	}
 
 	@EventHandler
 	public void playerLeave(final PlayerQuitEvent event) {
 		leaveAction(event.getPlayer());
 	}
-	
+
 	public static void leaveAction(Player player) {
 		player.resetPlayerTime();
 		player.resetPlayerWeather();
@@ -130,15 +132,17 @@ public class PlayerListener implements Listener {
 			user.setTotalTimePlayed(user.getTotalTimePlayed() + (System.currentTimeMillis() - map.get(player.getUniqueId())));
 			map.remove(player.getUniqueId());
 		} else {
-			//error! it should be there because it was added on player join...
-			//this shouldn't be possible so -.- yeah
+			// error! it should be there because it was added on player join...
+			// this shouldn't be possible so -.- yeah
 		}
 	}
 
 	@EventHandler
 	public void playerPlaceBlockOnHead(final InventoryClickEvent event) {
-		if (((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE)) || event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
-			if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING) && AllAssets.instance().getAAConfig().features().getBoolean("BlockHeads")) {
+		if (((event.isLeftClick() || event.isRightClick()) && event.getAction().equals(InventoryAction.PLACE_ONE))
+				|| event.getAction().equals(InventoryAction.PLACE_ALL) || event.getAction().equals(InventoryAction.PLACE_SOME))
+			if ((event.getSlot() == 39) && event.getInventory().getType().equals(InventoryType.CRAFTING)
+					&& AllAssets.instance().getAAConfig().features().getBoolean("BlockHeads")) {
 				event.getWhoClicked().getInventory().setHelmet(event.getCursor());
 				new BukkitRunnable() {
 					@Override
@@ -162,7 +166,7 @@ public class PlayerListener implements Listener {
 
 		final Inventory inv = event.getEntity().getInventory();
 		user.setLastInventory(inv);
-		
+
 		ConfigHandler config = AllAssets.instance().getAAConfig();
 
 		if (config.features().getBoolean("InstantDeathRespawn")) {
@@ -186,7 +190,8 @@ public class PlayerListener implements Listener {
 			sign.setLine(3, new SimpleDateFormat("hh:mm a").format(new Date()));
 			sign.update();
 
-			final BlockPlaceEvent blockEvent = new BlockPlaceEvent(sign.getBlock(), sign.getBlock().getState(), sign.getBlock().getRelative(BlockFace.DOWN), null, user.getPlayer(), false);
+			final BlockPlaceEvent blockEvent = new BlockPlaceEvent(sign.getBlock(), sign.getBlock().getState(), sign.getBlock().getRelative(
+					BlockFace.DOWN), null, user.getPlayer(), false);
 			if (blockEvent.canBuild())
 				blockEvent.setCancelled(true);
 			Bukkit.getServer().getPluginManager().callEvent(blockEvent);
@@ -199,14 +204,16 @@ public class PlayerListener implements Listener {
 		final ItemStack i = player.getInventory().getItem(event.getNewSlot());
 		if ((i == null) || (i.getType() == Material.AIR))
 			return;
-		//Work on this TODO
-		//		final Set<Entry<Enchantment, Integer>> entrySet = i.getEnchantments().entrySet();
-		//		for (final Entry<Enchantment, Integer> e : entrySet)
-		//			if (e.getValue() > 5)
-		//				if (!player.hasPermission("AllAssets.illegalitems")) {
-		//					player.setItemInHand(null);
-		//					CommandLog.addOtherLog(ChatColor.BLUE + player.getName() + ChatColor.WHITE + " had an illegal item!");
-		//				}
+		// Work on this TODO
+		// final Set<Entry<Enchantment, Integer>> entrySet =
+		// i.getEnchantments().entrySet();
+		// for (final Entry<Enchantment, Integer> e : entrySet)
+		// if (e.getValue() > 5)
+		// if (!player.hasPermission("AllAssets.illegalitems")) {
+		// player.setItemInHand(null);
+		// CommandLog.addOtherLog(ChatColor.BLUE + player.getName() +
+		// ChatColor.WHITE + " had an illegal item!");
+		// }
 	}
 
 	@EventHandler
@@ -221,16 +228,20 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void playerUseEnderpearl(final PlayerInteractEvent event) {
 		if (AllAssets.instance().getAAConfig().features().getBoolean("CreativeEnderpearl"))
-			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL))
+			if (event.getPlayer().getGameMode().equals(GameMode.CREATIVE)
+					&& (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
+					&& event.getPlayer().getItemInHand().getType().equals(Material.ENDER_PEARL))
 				event.getPlayer().launchProjectile(EnderPearl.class);
 	}
 
 	@EventHandler
 	public void playerAddLeash(final PlayerInteractEntityEvent event) {
 		if (AllAssets.instance().getAAConfig().features().getBoolean("AnyLeash"))
-			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash") && (event.getRightClicked() instanceof LivingEntity)) {
+			if (event.getPlayer().getItemInHand().getType().equals(Material.LEASH) && event.getPlayer().hasPermission("AllAssets.anyleash")
+					&& (event.getRightClicked() instanceof LivingEntity)) {
 				event.setCancelled(true);
-				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AllAssets.instance(), new AnyLeashTask(event.getPlayer(), event.getRightClicked()), 1L);
+				Bukkit.getServer().getScheduler()
+						.scheduleSyncDelayedTask(AllAssets.instance(), new AnyLeashTask(event.getPlayer(), event.getRightClicked()), 1L);
 			}
 	}
 }

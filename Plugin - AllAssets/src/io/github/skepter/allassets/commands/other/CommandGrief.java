@@ -72,7 +72,6 @@ public class CommandGrief {
 			return YesNoConversation.getPromptText();
 		}
 
-		@SuppressWarnings("deprecation")
 		@Override
 		protected Prompt acceptValidatedInput(final ConversationContext context, final boolean b) {
 			if (context.getForWhom() instanceof Player)

@@ -51,7 +51,6 @@ public class NotificationsBoard {
 		this.player = player;
 	}
 
-	@Deprecated
 	public static void updateAll() {
 		for (final Player p : Bukkit.getOnlinePlayers())
 			new NotificationsBoard(p).updateBoard();

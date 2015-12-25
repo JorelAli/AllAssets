@@ -26,6 +26,7 @@ package io.github.skepter.allassets.utils.utilclasses;
 import io.github.skepter.allassets.AllAssets;
 import io.github.skepter.allassets.api.events.LogEvent.LogType;
 import io.github.skepter.allassets.commands.administration.CommandLog;
+import io.github.skepter.allassets.misc.NotificationsBoard;
 import io.github.skepter.allassets.utils.Strings;
 
 import org.bukkit.Bukkit;
@@ -154,6 +155,8 @@ public class ErrorUtils {
 	}
 
 	public static void tptoggle(final Player player, final String target) {
+		NotificationsBoard.someoneTriedToTPButGotDenied(player.getName());
+		NotificationsBoard.updateAll();
 		error(player, target + " has turned teleporting off");
 	}
 
