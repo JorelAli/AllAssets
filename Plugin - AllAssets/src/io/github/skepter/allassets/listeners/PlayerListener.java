@@ -94,8 +94,6 @@ public class PlayerListener implements Listener {
 			user.setIps(ips);
 		}
 
-		user.getPing();
-
 		AllAssets.instance().tempTimeMap.put(event.getPlayer().getUniqueId(), System.currentTimeMillis());
 		ConfigHandler config = AllAssets.instance().getAAConfig();
 		if (config.features().getBoolean("JoinActions")) {

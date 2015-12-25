@@ -50,23 +50,17 @@ public class CommandTp {
 				ErrorUtils.notEnoughArguments(player);
 				return;
 			}
-			final Player onlineTarget = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
-//			final OfflinePlayer offlineTarget = PlayerUtils.getOfflinePlayerFromStringExact(args.getArgs()[0]);
-			if (/*offlineTarget == null && */onlineTarget == null) {
+			final Player targetPlayer = PlayerUtils.getOnlinePlayerFromString(args.getArgs()[0]);
+			if (targetPlayer == null) {
 				ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
 				return;
 			}
+			final User target = new User(targetPlayer);
 			final User user = new User(player);
-			//final User target = new User(offlineTarget);
-			if (user.canTp()) {//TODO sort this out - user can tp? target can tp? which one?!
+			if (target.hasTPEnabled()) {
 				user.setLastLoc();
-//				if (onlineTarget == null) {
-//					player.teleport(target.getLastLoc());
-//					player.sendMessage(Strings.TITLE + "Successfully teleported to " + offlineTarget.getName());
-//				} else {
-					player.teleport(onlineTarget);
-					player.sendMessage(Strings.TITLE + "Successfully teleported to " + onlineTarget.getName());
-//				}
+				player.teleport(targetPlayer);
+				player.sendMessage(Strings.TITLE + "Successfully teleported to " + targetPlayer.getName());
 				return;
 			} else {
 				ErrorUtils.tptoggle(player, args.getArgs()[0]);

@@ -31,7 +31,7 @@ public interface IUser {
 	
 	void setTpStatus(boolean canTp);
 	
-	boolean canTp();
+	boolean hasTPEnabled();
 	
 	int getAttackStrength();
 	

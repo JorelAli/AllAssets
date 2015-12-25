@@ -45,7 +45,7 @@ public class CommandTpToggle {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
 			final User user = new User(player);
-			if (user.canTp()) {
+			if (user.hasTPEnabled()) {
 				user.setTpStatus(false);
 				player.sendMessage(Strings.TITLE + "TpToggle off. Players can not teleport to you");
 			} else {

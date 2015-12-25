@@ -49,14 +49,14 @@ public class CommandTphere {
 				ErrorUtils.notEnoughArguments(player);
 				return;
 			}
-			final Player t = PlayerGetter.getTarget(player, args.getArgs()[0]);
-			if (t != null) {
+			final Player targetPlayer = PlayerGetter.getTarget(player, args.getArgs()[0]);
+			if (targetPlayer != null) {
 				final User user = new User(player);
-				user.setLastLoc();
-				final User target = new User(t);
-				if (target.canTp()) {
-					t.teleport(player);
-					player.sendMessage(Strings.TITLE + "Successfully teleported " + t.getName() + " to you ");
+				final User target = new User(targetPlayer);
+				if (target.hasTPEnabled()) {
+					user.setLastLoc();
+					targetPlayer.teleport(player);
+					player.sendMessage(Strings.TITLE + "Successfully teleported " + targetPlayer.getName() + " to you ");
 					return;
 				} else {
 					ErrorUtils.tptoggle(player, args.getArgs()[0]);
