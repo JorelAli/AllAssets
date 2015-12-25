@@ -123,6 +123,8 @@ public class User implements IUser {
 
 	@Override
 	public boolean hasTPEnabled() {
+		if(!playerData.getDataFile().contains("canTP"))
+			return true;
 		return playerData.getDataFile().getBoolean("canTP");
 	}
 
