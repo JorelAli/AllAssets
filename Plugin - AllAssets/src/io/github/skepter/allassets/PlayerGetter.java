@@ -41,6 +41,19 @@ public class PlayerGetter {
 		return player;
 	}
 
+	public static Player getPlayer(final CommandArgs args, Runnable function) {
+		Player player = null;
+		try {
+			player = args.getPlayer();
+		} catch (final Exception e) {
+			if (function != null)
+				function.run();
+			else
+				ErrorUtils.playerOnly(args.getSender());
+		}
+		return player;
+	}
+
 	public static Player getTarget(final CommandSender player, final String playerName) {
 		Player target = null;
 		try {

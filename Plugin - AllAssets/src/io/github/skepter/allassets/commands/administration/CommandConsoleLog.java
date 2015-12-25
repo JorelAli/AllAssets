@@ -43,8 +43,6 @@ public class CommandConsoleLog {
 		framework.registerCommands(this);
 	}
 
-	//TODO this should be a commandListener..........?
-
 	public static Set<UUID> players = new HashSet<UUID>();
 
 	@CommandHandler(name = "consolelog", aliases = { "clog" }, permission = "consolelog", description = "Toggles the log of the console")

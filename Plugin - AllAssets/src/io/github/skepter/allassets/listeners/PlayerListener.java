@@ -61,13 +61,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -198,23 +196,23 @@ public class PlayerListener implements Listener {
 		}
 	}
 
-	@EventHandler
-	public void playerSwitchItemInHand(final PlayerItemHeldEvent event) {
-		final Player player = event.getPlayer();
-		final ItemStack i = player.getInventory().getItem(event.getNewSlot());
-		if ((i == null) || (i.getType() == Material.AIR))
-			return;
-		// Work on this TODO
-		// final Set<Entry<Enchantment, Integer>> entrySet =
-		// i.getEnchantments().entrySet();
-		// for (final Entry<Enchantment, Integer> e : entrySet)
-		// if (e.getValue() > 5)
-		// if (!player.hasPermission("AllAssets.illegalitems")) {
-		// player.setItemInHand(null);
-		// CommandLog.addOtherLog(ChatColor.BLUE + player.getName() +
-		// ChatColor.WHITE + " had an illegal item!");
-		// }
-	}
+//	@EventHandler
+//	public void playerSwitchItemInHand(final PlayerItemHeldEvent event) {
+//		final Player player = event.getPlayer();
+//		final ItemStack i = player.getInventory().getItem(event.getNewSlot());
+//		if ((i == null) || (i.getType() == Material.AIR))
+//			return;
+//		// Work on this TODO
+//		// final Set<Entry<Enchantment, Integer>> entrySet =
+//		// i.getEnchantments().entrySet();
+//		// for (final Entry<Enchantment, Integer> e : entrySet)
+//		// if (e.getValue() > 5)
+//		// if (!player.hasPermission("AllAssets.illegalitems")) {
+//		// player.setItemInHand(null);
+//		// CommandLog.addOtherLog(ChatColor.BLUE + player.getName() +
+//		// ChatColor.WHITE + " had an illegal item!");
+//		// }
+//	}
 
 	@EventHandler
 	public void playerMove(final PlayerMoveEvent event) {

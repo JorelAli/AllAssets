@@ -42,8 +42,33 @@ public class CommandFly {
 
 	@CommandHandler(name = "fly", aliases = { "soar" }, permission = "fly", description = "Allows you to fly")
 	public void command(final CommandArgs args) {
-		//TODO: if console and args[1], then allow flying 
-		final Player player = PlayerGetter.getPlayer(args);
+
+		final Player player = PlayerGetter.getPlayer(args, new Runnable() {
+
+			@Override
+			public void run() {
+				switch (args.getArgs().length) {
+					case 1:
+						final Player target = PlayerGetter.getTarget(args.getSender(), args.getArgs()[0]);
+						if (target != null) {
+							if (target.getAllowFlight()) {
+								target.setAllowFlight(false);
+								target.setFlying(false);
+								target.sendMessage(Strings.TITLE + "Flying disabled");
+							} else {
+								target.setAllowFlight(true);
+								target.sendMessage(Strings.TITLE + "Flying enabled");
+							}
+							return;
+						} else
+							ErrorUtils.playerNotFound(args.getSender(), args.getArgs()[0]);
+						return;
+					default:
+						ErrorUtils.tooManyArguments(args.getSender());
+				}
+			}
+
+		});
 		if (player != null) {
 			switch (args.getArgs().length) {
 				case 0:
@@ -62,7 +87,7 @@ public class CommandFly {
 					if (target != null) {
 						if (target.getAllowFlight()) {
 							target.setAllowFlight(false);
-							player.setFlying(false);
+							target.setFlying(false);
 							target.sendMessage(Strings.TITLE + "Flying disabled");
 						} else {
 							target.setAllowFlight(true);

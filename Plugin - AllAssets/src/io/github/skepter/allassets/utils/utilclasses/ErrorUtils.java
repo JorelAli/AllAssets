@@ -150,8 +150,8 @@ public class ErrorUtils {
 		error(player, "Couldn't find the plugin " + plugin + "!");
 	}
 
-	public static void tooManyArguments(final Player player) {
-		error(player, "Too many arguments - use /help <command>!");
+	public static void tooManyArguments(final CommandSender commandSender) {
+		error(commandSender, "Too many arguments - use /help <command>!");
 	}
 
 	public static void tptoggle(final Player player, final String target) {
