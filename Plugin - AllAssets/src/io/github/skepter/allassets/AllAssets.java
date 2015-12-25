@@ -161,6 +161,8 @@ import io.github.skepter.allassets.version.packets.Packet_V1_8_R2;
 import io.github.skepter.allassets.version.packets.Packet_V1_8_R3;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -320,8 +322,11 @@ public class AllAssets extends JavaPlugin {
 		getServer().getScheduler().cancelTasks(this);
 
 		if (!tempTimeMap.isEmpty())
-			try {
-				FileUtils.save(tempTimeMap, new File(Files.getDirectory(Directory.STORAGE), "tempTimeMap.bin"));
+			try {				
+				final ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(Files.getDirectory(Directory.STORAGE), "tempTimeMap.bin"), true));
+				oos.writeObject(tempTimeMap);
+				oos.flush();
+				oos.close();
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}

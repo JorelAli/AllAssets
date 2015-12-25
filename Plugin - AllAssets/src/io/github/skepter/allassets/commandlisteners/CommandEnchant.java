@@ -63,40 +63,53 @@ public class CommandEnchant implements Listener {
 	@EventHandler
 	public void inventoryClick(final InventoryClickEvent event) {
 		final Player player = (Player) event.getWhoClicked();
-		if (event.getAction().equals(InventoryAction.PICKUP_SOME))
-			switch (event.getInventory().getName()) {
-				case "Enchant - Armor":
-					if (event.getSlot() == 53) {
-						player.openInventory(EnchantmentInventories.page2()); // page 2
+		if (event.getInventory().getName().equals("Enchant - Armor") || event.getInventory().getName().equals("Enchant - Tools")
+				|| event.getInventory().getName().equals("Enchant - Weapons")) {
+			if (event.getAction().equals(InventoryAction.PICKUP_ALL))
+				switch (event.getInventory().getName()) {
+					case "Enchant - Armor":
+						if (event.getSlot() == 53) {
+							player.openInventory(EnchantmentInventories.page2()); // page
+																					// 2
+							return;
+						} else if (event.getSlot() == 52) {
+							player.openInventory(EnchantmentInventories.page1()); // page
+																					// 4
+							return;
+						}
+						doEnchant(player, event);
 						return;
-					} else if (event.getSlot() == 52) {
-						player.openInventory(EnchantmentInventories.page1()); // page 4
+					case "Enchant - Tools":
+						if (event.getSlot() == 26) {
+							player.openInventory(EnchantmentInventories.page2()); // page
+																					// 3
+							return;
+						} else if (event.getSlot() == 25) {
+							player.openInventory(EnchantmentInventories.page1()); // page
+																					// 1
+							return;
+						}
+						doEnchant(player, event);
 						return;
-					}
-					doEnchant(player, event);
-				case "Enchant - Tools":
-					if (event.getSlot() == 26) {
-						player.openInventory(EnchantmentInventories.page2()); // page 3
+					case "Enchant - Weapons":
+						if (event.getSlot() == 53) {
+							player.openInventory(EnchantmentInventories.page2()); // page
+																					// 4
+							return;
+						} else if (event.getSlot() == 52) {
+							player.openInventory(EnchantmentInventories.page1()); // page
+																					// 2
+							return;
+						}
+						doEnchant(player, event);
 						return;
-					} else if (event.getSlot() == 25) {
-						player.openInventory(EnchantmentInventories.page1()); // page 1
-						return;
-					}
-					doEnchant(player, event);
-				case "Enchant - Weapons":
-					if (event.getSlot() == 53) {
-						player.openInventory(EnchantmentInventories.page2()); // page 4
-						return;
-					} else if (event.getSlot() == 52) {
-						player.openInventory(EnchantmentInventories.page1()); // page 2
-						return;
-					}
-			}
+				}
+		}
+
 	}
 
 	private void doEnchant(final Player player, final InventoryClickEvent event) {
-		if (!event.getAction().equals(InventoryAction.PICKUP_ONE))
-			event.setCancelled(true);
+		event.setCancelled(true);
 		if ((event.getSlot() == -999) || (event.getInventory().getItem(event.getSlot()) == null))
 			return;
 		if (((event.getSlot() != (event.getInventory().getSize() - 2)) || (event.getSlot() != (event.getInventory().getSize() - 1)))) {
@@ -112,17 +125,17 @@ public class CommandEnchant implements Listener {
  * Protection 1-4 Armour FireProtection 1-4 Armour Thorns 1-3 Armour
  * BlastProtection 1-4 Armour ProjProtection 1-4 Armour Respiration 1-3 Helmet
  * AquaAffinity 1 Helmet FeatherFalling 1-4 Boots
- *
+ * 
  * Sharpness 1-5 Sword/Axe Smite 1-5 Sword/Axe BaneOfArthropods 1-5 Sword/Axe
  * Knock back 1-2 Sword Fire Aspect 1-2 Sword Looting 1-3 Sword
- *
+ * 
  * Efficiency 1-5 Pick/Shovel/Axe/Shears Silk Touch 1 Pick/Shovel/Axe/Shears
  * Fortune 1-3 Pick/Shovel/Axe Unbreaking 1-3 Pick/Shovel/Axe/Shears
  * Sword/FishingRod/Bow Hoe/Flint-Steel/CarrotStick
- *
+ * 
  * Power 1-5 Bow Punch 1-2 Bow Flame 1 Bow Infinity 1 Bow
- *
+ * 
  * Luck of the Sea 1-3 FishingRod Lure 1-3 FishingRod
- *
+ * 
  * 24 enchantments (4x6 enchantments - doublechest size)
  */
