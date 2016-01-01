@@ -58,10 +58,8 @@ public class CommandBalancetop {
 	public void onCommand(final CommandArgs args) {
 		final Player player = PlayerGetter.getPlayer(args);
 		if (player != null) {
-			if (args.getArgs().length != 1) {
-				ErrorUtils.notEnoughArguments(player);
-				return;
-			}
+			int pageNumber = 1;
+			
 			/* I'm certain that there's a MUCH MORE simple method of doing this -.- */
 			final Map<String, Double> map = new HashMap<String, Double>();
 			for (final OfflinePlayer p : Bukkit.getOfflinePlayers())
@@ -75,11 +73,14 @@ public class CommandBalancetop {
 			final List<String> balanceList = new ArrayList<String>();
 			for (final Entry<String, Double> e : sortedMap.entrySet())
 				balanceList.add(Strings.HOUSE_STYLE_COLOR + e.getKey() + ": " + e.getValue());
-			if (!TextUtils.isInteger(args.getArgs()[0])) {
-				ErrorUtils.notAnInteger(player);
-				return;
+			if (args.getArgs().length == 1) {
+				if (!TextUtils.isInteger(args.getArgs()[0])) {
+					ErrorUtils.notAnInteger(player);
+					return;
+				}
+				pageNumber = Integer.parseInt(args.getArgs()[0]);
 			}
-			new Paginator(balanceList, 10, "Top balances").send(player, Integer.parseInt(args.getArgs()[0]));
+			new Paginator(balanceList, 10, "Top balances").send(player, pageNumber);
 		}
 	}
 
