@@ -221,6 +221,15 @@ public class CommandDebug implements Listener {
 		} catch (final Exception e) {
 		}
 	}
+	
+	@CommandHandler(name = "debug.speed", permission = "debug", description = "Changes your speed")
+	public void speed(final CommandArgs args) {
+		try {
+			args.getPlayer().setFlySpeed(1.0F);;
+
+		} catch (final Exception e) {
+		}
+	}
 
 	private final Set<UUID> items = new HashSet<UUID>();
 	private final Map<UUID, Material> itemMap = new HashMap<UUID, Material>();
@@ -563,6 +572,7 @@ public class CommandDebug implements Listener {
 		list.add("inv");
 		list.add("gsc");
 		list.add("actionmsg");
+		list.add("speed");
 		return list;
 	}
 
