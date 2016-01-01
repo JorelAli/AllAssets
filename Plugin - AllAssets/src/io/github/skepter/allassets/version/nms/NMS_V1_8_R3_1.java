@@ -267,4 +267,12 @@ public class NMS_V1_8_R3_1 implements NMS {
 		}
 		return "en";
 	}
+	
+	@Override
+	public void setSpeed(Player player, float value) {
+		EntityPlayer p = ((CraftPlayer) player).getHandle();
+		p.abilities.flySpeed = (value / 2.0F);
+		p.abilities.walkSpeed = (value / 2.0F);
+		p.updateAbilities();
+	}
 }

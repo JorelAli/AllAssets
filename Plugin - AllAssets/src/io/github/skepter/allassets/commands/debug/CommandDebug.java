@@ -225,8 +225,9 @@ public class CommandDebug implements Listener {
 	@CommandHandler(name = "debug.speed", permission = "debug", description = "Changes your speed")
 	public void speed(final CommandArgs args) {
 		try {
-			args.getPlayer().setFlySpeed(1.0F);;
-
+			float speed = Float.parseFloat(args.getArgs()[0]) / 10;
+			AllAssets.instance().getNMS().setSpeed(args.getPlayer(), speed);
+			args.getPlayer().sendMessage(Strings.TITLE + "Speed set to " + speed);
 		} catch (final Exception e) {
 		}
 	}

@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.minecraft.server.v1_8_R3.Block;
 import net.minecraft.server.v1_8_R3.BlockAnvil.TileEntityContainerAnvil;
 import net.minecraft.server.v1_8_R3.BlockContainer;
@@ -20,6 +19,7 @@ import net.minecraft.server.v1_8_R3.Container;
 import net.minecraft.server.v1_8_R3.EntityHuman;
 import net.minecraft.server.v1_8_R3.EntityPlayer;
 import net.minecraft.server.v1_8_R3.IContainer;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.minecraft.server.v1_8_R3.TileEntity;
 
 import org.bukkit.Location;
@@ -264,5 +264,13 @@ public class NMS_V1_8_R3 implements NMS {
 		} catch (Exception e) {
 		}
 		return "en";
+	}
+
+	@Override
+	public void setSpeed(Player player, float value) {
+		EntityPlayer p = ((CraftPlayer) player).getHandle();
+		p.abilities.flySpeed = (value / 2.0F);
+		p.abilities.walkSpeed = (value / 2.0F);
+		p.updateAbilities();
 	}
 }

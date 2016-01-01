@@ -33,4 +33,6 @@ public interface NMS {
 	String getStringNBT(ItemStack itemStack, String key);
 	
 	String getLocale(Player player);
+	
+	void setSpeed(Player player, float value);
 }
