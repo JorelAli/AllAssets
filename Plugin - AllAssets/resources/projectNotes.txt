@@ -1,5 +1,9 @@
 Project notes:
 
+undo command:
+undoes home setting, inventory clearing, butchering? etc.
+
+
 Potion GUI
 dump cosmetic features - heads/block head/trails etc.
 
