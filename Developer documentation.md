@@ -103,7 +103,7 @@ public FileConfiguration getMyDataFile() {
 
 PlayerMap
 ---------
-The PlayerMap class is a customer Map which is designed for players. This map automatically removes players when they logout in order to reduce memory leaks. Use it in the normal form of a HashMap.
+The PlayerMap class is a custom Map implementation which is designed for players. This map automatically removes players when they logout in order to reduce memory leaks. Use it in the normal form of a HashMap.
 
 User
 ----
