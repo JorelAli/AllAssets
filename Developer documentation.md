@@ -188,4 +188,4 @@ The TextUtils class manages Strings and formats chat.
 * _join(String[] arr, String seperator)_ - Joins the array into a string using the seperator. For example: {"Hello", "World"} with seperator " + " returns "Hello + World"
 * _listToString(List<String> list)_ - Converts a list of Strings into a single string with the contents of the list
 * _booleanToString(boolean b)_ - Turns a boolean into "yes" or "no" with colour (green for yes, red for no)
-* _levenshteinDistance(String str1, String str2)_ - Calculates the [Levenshtein Distance](en.wikipedia.org/wiki/Levenshtein_distance) of two Strings
+* _levenshteinDistance(String str1, String str2)_ - Calculates the [Levenshtein Distance](https://en.wikipedia.org/wiki/Levenshtein_distance) of two Strings
